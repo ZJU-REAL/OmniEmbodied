@@ -115,80 +115,40 @@ class Coordinator(BaseAgent):
         Returns:
             str: 格式化后的提示词
         """
-        # 获取智能体状态
-        agents_status = []
-        for agent_id, worker in self.workers.items():
-            state = worker.get_state()
-            location = state.get('location', {}).get('name', 'unknown')
-            inventory = ", ".join([item.get('name', item.get('id', 'unknown')) 
-                                 for item in state.get('inventory', [])]) or "空"
-            
-            # 添加可交互物体信息
-            near_objects = ""
-            near_objects_list = state.get('near_objects', [])
-            if near_objects_list:
-                near_objects_str = ", ".join([item.get('name', item.get('id', 'unknown')) 
-                                           for item in near_objects_list])
-                near_objects = f", 可交互物体={near_objects_str}"
-            
-            # 格式化智能体状态
-            agent_status = self.prompt_manager.get_formatted_prompt(
-                self.mode,
-                "agent_status_template",
-                f"- {agent_id}: 位置={location}, 库存={inventory}{near_objects}",
-                agent_id=agent_id,
-                location=location,
-                inventory=inventory,
-                near_objects=near_objects
-            )
-            agents_status.append(agent_status)
-        
-        # 获取最近行动
-        recent_actions = []
-        for agent_id, worker in self.workers.items():
-            history = worker.get_history()[-3:] if worker.get_history() else []
-            if history:
-                action_entries = []
-                for entry in history:
-                    action = entry.get('action', '')
-                    result = entry.get('result', {})
-                    status = result.get('status', '')
-                    message = result.get('message', '')
-                    
-                    # 格式化行动条目
-                    action_entry = self.prompt_manager.get_formatted_prompt(
-                        self.mode,
-                        "action_entry_template",
-                        f"  * 动作: {action}, 结果: {status}, 消息: {message}",
-                        action=action,
-                        status=status,
-                        message=message
-                    )
-                    action_entries.append(action_entry)
-                
-                # 格式化智能体行动
-                agent_actions = self.prompt_manager.get_formatted_prompt(
-                    self.mode,
-                    "agent_actions_template",
-                    f"- {agent_id}的最近行动:\n" + "\n".join(action_entries),
-                    agent_id=agent_id,
-                    action_entries="\n".join(action_entries)
-                )
-                recent_actions.append(agent_actions)
-        
         # 准备智能体输出格式
         agents_format = "\n".join([f"{agent_id}: <行动指令>" for agent_id in self.workers.keys()])
         
+        # 获取环境描述
+        env_description = ""
+        env_config = self.config.get('env_description', {})
+        if not isinstance(env_config, dict):
+            env_config = {}
+            
+        # 默认使用完整环境描述
+        if self.bridge:
+            try:
+                detail_level = env_config.get('detail_level', 'full')
+                
+                # 协调器可以查看完整环境
+                env_description = self.bridge.describe_environment_natural_language(
+                    sim_config={
+                        'nlp_show_object_properties': env_config.get('show_object_properties', False),
+                        'nlp_only_show_discovered': env_config.get('only_show_discovered', False)
+                    }
+                )
+            except Exception as e:
+                logger.warning(f"获取环境描述时出错: {e}")
+        
         # 使用提示词管理器格式化完整提示词
-        return self.prompt_manager.get_formatted_prompt(
+        prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
             "coordinator_template",
-            default_value="当前任务: {task_description}\n\n请为每个智能体规划下一步行动。",
             task_description=self.task_description,
-            agents_status="\n".join(agents_status),
-            recent_actions="\n".join(recent_actions),
-            agents_format=agents_format
+            agents_format=agents_format,
+            environment_description=env_description
         )
+        
+        return prompt
     
     def decide_action(self) -> str:
         """

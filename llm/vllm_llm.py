@@ -108,10 +108,10 @@ class VLLMLLM(BaseLLM):
             return f"错误: {str(e)}"
     
     def generate_chat(self, 
-                      messages: List[Dict[str, str]],
-                      temperature: Optional[float] = None,
-                      max_tokens: Optional[int] = None,
-                      **kwargs) -> str:
+                     messages: List[Dict[str, str]],
+                     temperature: Optional[float] = None,
+                     max_tokens: Optional[int] = None,
+                     **kwargs) -> str:
         """
         生成多轮对话响应
         
@@ -124,6 +124,32 @@ class VLLMLLM(BaseLLM):
         Returns:
             str: 生成的文本响应
         """
+        # 根据配置决定是否发送历史消息
+        send_history = kwargs.get("send_history", self.send_history)
+        if not send_history and len(messages) > 1:
+            # 如果不发送历史，只保留system消息（如果有）和最后一条用户消息
+            system_msg = None
+            last_user_msg = None
+            
+            # 查找system消息和最后一条用户消息
+            for msg in messages:
+                if msg.get("role") == "system":
+                    system_msg = msg
+                elif msg.get("role") == "user":
+                    last_user_msg = msg
+            
+            # 重建消息列表
+            filtered_messages = []
+            if system_msg:
+                filtered_messages.append(system_msg)
+            if last_user_msg:
+                filtered_messages.append(last_user_msg)
+            
+            messages = filtered_messages
+            
+            if logger.level <= logging.DEBUG:
+                logger.debug("已禁用历史消息发送，只发送system消息和最后一条用户消息")
+        
         # 构造聊天格式的提示词
         full_prompt = ""
         

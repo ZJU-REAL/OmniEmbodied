@@ -17,6 +17,11 @@ class BaseLLM(ABC):
         self.model = config.get('model', '')
         self.temperature = config.get('temperature', 0.7)
         self.max_tokens = config.get('max_tokens', 1024)
+        
+        # 从parameters获取其他参数
+        parameters = config.get('parameters', {})
+        # 是否发送历史消息，默认为False
+        self.send_history = parameters.get('send_history', False)
     
     @abstractmethod
     def generate(self, 

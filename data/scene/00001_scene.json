@@ -1,0 +1,434 @@
+{
+  "rooms": [
+    {
+      "id": "main_assembly",
+      "name": "主装配区",
+      "properties": {
+        "type": "clean_room",
+        "lighting": "2000lux"
+      },
+      "connected_to_room_ids": [
+        "precision_testing",
+        "component_storage"
+      ]
+    },
+    {
+      "id": "precision_testing",
+      "name": "精密测试区",
+      "properties": {
+        "type": "soundproof_room",
+        "temperature": "23±1℃"
+      },
+      "connected_to_room_ids": [
+        "calibration_room"
+      ]
+    },
+    {
+      "id": "component_storage",
+      "name": "元件仓储区",
+      "properties": {
+        "type": "warehouse",
+        "humidity": "40%RH"
+      },
+      "connected_to_room_ids": [
+        "calibration_room",
+        "repair_corner"
+      ]
+    },
+    {
+      "id": "calibration_room",
+      "name": "校准室",
+      "properties": {
+        "type": "temperature_controlled",
+        "stability": "±0.5℃"
+      },
+      "connected_to_room_ids": [
+        "precision_testing"
+      ]
+    },
+    {
+      "id": "repair_corner",
+      "name": "故障维修角",
+      "properties": {
+        "type": "workshop",
+        "ventilation": "forced_air"
+      },
+      "connected_to_room_ids": [
+        "component_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "anti_static_bench_1",
+      "name": "防静电工作台",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly",
+      "properties": {
+        "size": [
+          3.0,
+          1.2,
+          0.8
+        ],
+        "weight": 32.5,
+        "is_container": true,
+        "material": "epoxy_resin",
+        "resistance": "1E9Ω"
+      }
+    },
+    {
+      "id": "spectrum_analyzer_1",
+      "name": "频谱分析仪",
+      "type": "FURNITURE",
+      "location_id": "in:precision_testing",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 48.7,
+        "is_container": false,
+        "frequency_range": "10Hz-26.5GHz"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "storage_shelf_a1",
+      "name": "仓储货架A1",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage",
+      "properties": {
+        "size": [
+          2.4,
+          0.8,
+          3.0
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "load_capacity": 500.0
+      }
+    },
+    {
+      "id": "calibration_cabinet_1",
+      "name": "校准文件柜",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_room",
+      "properties": {
+        "size": [
+          0.9,
+          0.5,
+          1.8
+        ],
+        "weight": 28.3,
+        "is_container": true,
+        "fireproof_level": "class1"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_rack_1",
+      "name": "工具架",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly",
+      "properties": {
+        "size": [
+          1.5,
+          0.4,
+          2.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "magnetic_surface": true
+      }
+    },
+    {
+      "id": "vibration_isolator_1",
+      "name": "隔震平台",
+      "type": "FURNITURE",
+      "location_id": "in:precision_testing",
+      "properties": {
+        "size": [
+          1.2,
+          1.0,
+          0.3
+        ],
+        "weight": 42.8,
+        "is_container": false,
+        "natural_frequency": "2Hz"
+      }
+    },
+    {
+      "id": "filter_kit_red_1",
+      "name": "红色滤波器套件",
+      "type": "ITEM",
+      "location_id": "in:storage_shelf_a1",
+      "properties": {
+        "weight": 4.2,
+        "color": "red",
+        "impedance": "50Ω±1%",
+        "batch": "QC-2045A",
+        "capacity": "100MHz"
+      }
+    },
+    {
+      "id": "filter_kit_blue_2",
+      "name": "蓝色滤波器套件",
+      "type": "ITEM",
+      "location_id": "in:storage_shelf_a1",
+      "properties": {
+        "weight": 4.5,
+        "color": "blue",
+        "impedance": "75Ω±2%",
+        "batch": "QC-2045B",
+        "shielding": "double_layer"
+      }
+    },
+    {
+      "id": "calibration_cert_1",
+      "name": "校准证书",
+      "type": "ITEM",
+      "location_id": "in:calibration_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "document_id": "CAL-2307-889",
+        "valid_until": "2024-12-31",
+        "stamp_color": "gold"
+      }
+    },
+    {
+      "id": "emi_shield_green_1",
+      "name": "EMI绿色屏蔽罩",
+      "type": "ITEM",
+      "location_id": "on:anti_static_bench_1",
+      "properties": {
+        "weight": 1.8,
+        "material": "beryllium_copper",
+        "frequency_range": "1-6GHz",
+        "marking": "fluorescent_green"
+      }
+    },
+    {
+      "id": "fuse_10a_1",
+      "name": "10A保险丝",
+      "type": "ITEM",
+      "location_id": "in:soldering_station_1",
+      "properties": {
+        "weight": 0.05,
+        "rating": "10A/250V",
+        "package": "transparent_case",
+        "response_speed": "fast_blow"
+      }
+    },
+    {
+      "id": "fuse_15a_2",
+      "name": "15A保险丝",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 0.07,
+        "rating": "15A/250V",
+        "package": "black_case",
+        "certification": "UL"
+      }
+    },
+    {
+      "id": "torque_screwdriver_1",
+      "name": "扭矩螺丝刀",
+      "type": "ITEM",
+      "location_id": "on:anti_static_bench_1",
+      "properties": {
+        "weight": 0.7,
+        "range": "0.1-3N·m",
+        "bit_type": "PH1",
+        "calibration_due": "2024-06-30"
+      }
+    },
+    {
+      "id": "gold_plated_connector_1",
+      "name": "镀金连接器",
+      "type": "ITEM",
+      "location_id": "in:storage_shelf_a1",
+      "properties": {
+        "weight": 0.3,
+        "contact_material": "gold_nickel",
+        "impedance": "75Ω",
+        "plating_thickness": "1.27μm"
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "红外热像仪",
+      "type": "ITEM",
+      "location_id": "on:anti_static_bench_1",
+      "properties": {
+        "weight": 2.1,
+        "resolution": "640x480",
+        "sensitivity": "50mK",
+        "battery_level": 85
+      }
+    },
+    {
+      "id": "esd_mat_1",
+      "name": "防静电垫",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.005
+        ],
+        "weight": 3.2,
+        "is_container": true,
+        "surface_resistance": "1E6-1E9Ω"
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "电子显微镜",
+      "type": "FURNITURE",
+      "location_id": "in:repair_corner",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.7
+        ],
+        "weight": 18.9,
+        "is_container": false,
+        "magnification": "1000X"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "signal_generator_1",
+      "name": "标准信号发生器",
+      "type": "FURNITURE",
+      "location_id": "in:precision_testing",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 22.1,
+        "is_container": false,
+        "frequency_accuracy": "±1ppm"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "component_tray_1",
+      "name": "元件托盘",
+      "type": "FURNITURE",
+      "location_id": "on:anti_static_bench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.05
+        ],
+        "weight": 1.2,
+        "is_container": true,
+        "compartment_count": 24
+      }
+    },
+    {
+      "id": "solder_wire_1",
+      "name": "焊锡丝",
+      "type": "ITEM",
+      "location_id": "in:component_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "diameter": "0.8mm",
+        "flux_content": "2.2%",
+        "alloy_type": "Sn63/Pb37"
+      }
+    },
+    {
+      "id": "ceramic_tweezers_1",
+      "name": "陶瓷镊子",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 0.15,
+        "tip_type": "angled",
+        "length": "120mm",
+        "esd_safe": true
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "数字万用表",
+      "type": "ITEM",
+      "location_id": "on:anti_static_bench_1",
+      "properties": {
+        "weight": 0.9,
+        "measurement_range": "0-1000V",
+        "accuracy_class": "0.5",
+        "auto_ranging": true
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "放大镜台灯",
+      "type": "FURNITURE",
+      "location_id": "in:repair_corner",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.6
+        ],
+        "weight": 5.8,
+        "is_container": false,
+        "magnification": "5X"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "test_probe_kit_1",
+      "name": "测试探针组",
+      "type": "ITEM",
+      "location_id": "in:tool_rack_1",
+      "properties": {
+        "weight": 0.6,
+        "tip_count": 12,
+        "voltage_rating": "300V",
+        "shielding_type": "full"
+      }
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "焊接工作站",
+      "type": "FURNITURE",
+      "location_id": "in:repair_corner",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 12.5,
+        "is_container": true,
+        "has_temperature_control": true,
+        "max_temperature": "450°C"
+      },
+      "states": {
+        "is_on": false,
+        "temperature": "25°C"
+      }
+    }
+  ]
+}

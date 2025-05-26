@@ -10,6 +10,7 @@ from ...config import ConfigManager
 from ...llm import BaseLLM, create_llm_from_config
 from ...utils.prompt_manager import PromptManager
 
+# 确保logger使用正确的名称，与文件路径一致
 logger = logging.getLogger(__name__)
 
 class LLMAgent(BaseAgent):
@@ -51,14 +52,40 @@ class LLMAgent(BaseAgent):
         self.chat_history = []
         self.max_chat_history = self.config.get('max_chat_history', 10)
         
-        # 任务描述
-        self.task_description = self.config.get('task_description', "探索环境并与物体交互")
+        # 任务描述 - 从bridge获取而不是从配置中获取
+        try:
+            self.task_description = self.bridge.get_task_description()
+            if not self.task_description:
+                # 如果bridge没有返回任务描述，则使用配置或默认值
+                self.task_description = self.config.get('task_description', "探索环境并与物体交互")
+                logger.warning("无法从模拟器获取任务描述，使用默认值: %s", self.task_description)
+        except Exception as e:
+            self.task_description = self.config.get('task_description', "探索环境并与物体交互")
+            logger.warning("获取任务描述时出错: %s，使用默认值: %s", e, self.task_description)
+        
+        # 记录任务描述
+        if logger.level <= logging.DEBUG:
+            logger.debug("当前任务: %s", self.task_description)
         
         # 是否使用思考链
         self.use_cot = self.config.get('use_cot', True)
         
         # 最大尝试次数
         self.max_attempts = self.config.get('max_attempts', 3)
+        
+        # 调试级别日志时记录完整的提示词和回复
+        self._log_init_debug_info()
+    
+    def _log_init_debug_info(self) -> None:
+        """记录初始化调试信息"""
+        if logger.level <= logging.DEBUG:
+            logger.debug("=== LLMAgent初始化信息 ===")
+            logger.debug("智能体ID: %s", self.agent_id)
+            logger.debug("LLM提供商: %s", self.llm_config.get('provider', '未指定'))
+            logger.debug("系统提示词: %s", self.system_prompt)
+            logger.debug("使用思考链: %s", self.use_cot)
+            logger.debug("最大尝试次数: %d", self.max_attempts)
+            logger.debug("========================")
     
     def set_task(self, task_description: str) -> None:
         """
@@ -68,6 +95,8 @@ class LLMAgent(BaseAgent):
             task_description: 任务描述文本
         """
         self.task_description = task_description
+        if logger.level <= logging.DEBUG:
+            logger.debug("设置新任务: %s", task_description)
     
     def _format_object_list(self, objects: List[Dict[str, Any]]) -> str:
         """格式化物体列表为可读字符串"""
@@ -96,11 +125,10 @@ class LLMAgent(BaseAgent):
         Returns:
             str: 格式化后的提示词
         """
-        state = self.get_state()
-        nearby_objects = self._get_nearby_objects()
+        # 初始化历史记录摘要
+        history_summary = ""
         
         # 格式化历史记录
-        history_summary = ""
         if self.history:
             history_summary = self.prompt_manager.format_history(self.mode, self.history)
         
@@ -110,19 +138,55 @@ class LLMAgent(BaseAgent):
             "thinking_prompt" if self.use_cot else "action_prompt"
         )
         
+        # 获取环境描述
+        env_description = ""
+        env_config = self.config.get('env_description', {})
+        if not isinstance(env_config, dict):
+            env_config = {}
+            
+        # 默认使用房间级别的描述
+        if self.bridge:
+            try:
+                agent_info = self.bridge.get_agent_info(self.agent_id)
+                if agent_info and 'location_id' in agent_info:
+                    room_id = agent_info.get('location_id')
+                    
+                    detail_level = env_config.get('detail_level', 'room')
+                    
+                    # 根据详细程度选择不同的描述
+                    if detail_level == 'full':
+                        # 完整环境描述
+                        env_description = self.bridge.describe_environment_natural_language(
+                            sim_config={
+                                'nlp_show_object_properties': env_config.get('show_object_properties', False),
+                                'nlp_only_show_discovered': env_config.get('only_show_discovered', True),
+                                'nlp_detail_level': detail_level
+                            }
+                        )
+                    elif detail_level == 'room':
+                        # 当前房间描述
+                        env_description = self.bridge.describe_room_natural_language(room_id)
+                    else:
+                        # 简要描述
+                        env_description = self.bridge.describe_agent_natural_language(self.agent_id)
+                    
+                    # 记录调试级别的环境描述
+                    if logger.level <= logging.DEBUG:
+                        logger.debug("=== 当前环境描述(%s) ===\n%s\n===================", detail_level, env_description)
+            except Exception as e:
+                logger.warning(f"获取环境描述时出错: {e}")
+        
         # 使用提示词管理器格式化提示词
-        return self.prompt_manager.get_formatted_prompt(
+        prompt = self.prompt_manager.get_formatted_prompt(
             self.mode, 
             "task_template",
-            default_value="当前任务：{task_description}\n请告诉我接下来应该执行什么动作？",
             task_description=self.task_description,
-            current_location=state.get('location', {}).get('name', 'unknown'),
-            nearby_objects=self._format_object_list(nearby_objects),
-            near_objects=self._format_object_list(state.get('near_objects', [])),
-            inventory=self._format_object_list(state.get('inventory', [])),
             history_summary=history_summary,
-            thinking_prompt=thinking_prompt
+            thinking_prompt=thinking_prompt,
+            environment_description=env_description
         )
+        
+        return prompt
     
     def decide_action(self) -> str:
         """
@@ -131,8 +195,16 @@ class LLMAgent(BaseAgent):
         Returns:
             str: 动作命令字符串
         """
+        # 记录完整的对话历史（在调试模式下）
+        if logger.level <= logging.DEBUG:
+            self._log_chat_history()
+        
         # 构建提示词
         prompt = self._parse_prompt()
+        
+        # 记录调试级别的提示词
+        if logger.level <= logging.DEBUG:
+            logger.debug("=== 发送给LLM的提示词 ===\n%s\n===================", prompt)
         
         # 记录到对话历史
         self.chat_history.append({"role": "user", "content": prompt})
@@ -145,11 +217,23 @@ class LLMAgent(BaseAgent):
             # 调用LLM生成响应
             response = self.llm.generate_chat(self.chat_history, system_message=self.system_prompt)
             
+            # 记录调试级别的LLM完整响应
+            if logger.level <= logging.DEBUG:
+                logger.debug("=== LLM原始响应 ===\n%s\n===================", response)
+            
             # 解析响应中的动作命令
             action = self._extract_action(response)
             
+            # 记录调试级别的解析后动作
+            if logger.level <= logging.DEBUG:
+                logger.debug("解析出的动作命令: %s", action)
+            
             # 记录LLM响应到对话历史
             self.chat_history.append({"role": "assistant", "content": response})
+            
+            # 记录更新后的对话历史（在调试模式下）
+            if logger.level <= logging.DEBUG:
+                self._log_chat_history(is_after_response=True)
             
             return action
             
@@ -191,12 +275,88 @@ class LLMAgent(BaseAgent):
                     if len(parts) > 1:
                         # 提取出动作部分
                         action = word + " " +parts[1].split('。')[0].split('，')[0].strip()
+                        
+                        # 调试级别记录动作提取过程
+                        if logger.level <= logging.DEBUG:
+                            logger.debug("动作提取: 在'%s'中找到动作词'%s'，提取为'%s'", line, word, action)
+                        
                         return action
         
         # 如果没找到明确的动作，返回原始文本的最后一行（非空）
         for line in reversed(lines):
             if line.strip():
+                if logger.level <= logging.DEBUG:
+                    logger.debug("动作提取: 未找到明确动作词，使用最后一行非空文本'%s'", line.strip())
                 return line.strip()
                 
         # 保底返回
-        return response.strip() 
+        if logger.level <= logging.DEBUG:
+            logger.debug("动作提取: 使用整个响应的去空白版本")
+        return response.strip()
+    
+    def step(self) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
+        """
+        执行一步智能体行为（重写BaseAgent的step方法，增加调试信息）
+        
+        Returns:
+            Tuple: (执行状态, 反馈消息, 结果数据)
+        """
+        # 决定要执行的动作
+        action = self.decide_action()
+        
+        # 记录执行命令日志 - 使用根日志器确保显示
+        root_logger = logging.getLogger("single_agent_example")
+        root_logger.info("执行命令: %s", action)
+        
+        # 调试日志使用本模块的日志器
+        if logger.level <= logging.DEBUG:
+            logger.debug("准备执行动作: %s", action)
+        
+        # 执行动作
+        status, message, result = self.bridge.process_command(self.agent_id, action)
+        
+        # 记录调试级别的执行结果
+        if logger.level <= logging.DEBUG:
+            logger.debug("动作执行结果: 状态=%s, 消息=%s", status, message)
+            if result:
+                logger.debug("详细结果数据: %s", json.dumps(result, ensure_ascii=False, indent=2))
+            
+            # 执行后获取更新的环境描述
+            try:
+                agent_info = self.bridge.get_agent_info(self.agent_id)
+                if agent_info and 'location_id' in agent_info:
+                    room_id = agent_info.get('location_id')
+                    room_desc = self.bridge.describe_room_natural_language(room_id)
+                    logger.debug("=== 执行后房间状态 ===\n%s\n===================", room_desc)
+            except Exception as e:
+                logger.debug("获取执行后环境描述出错: %s", e)
+        
+        # 记录历史
+        self.record_action(action, {"status": status, "message": message, "result": result})
+        
+        # 更新连续失败计数
+        if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
+            self.consecutive_failures += 1
+            if logger.level <= logging.DEBUG:
+                logger.debug("连续失败次数增加到: %d", self.consecutive_failures)
+        else:
+            self.consecutive_failures = 0
+        
+        return status, message, result 
+
+    def _log_chat_history(self, is_after_response: bool = False) -> None:
+        """
+        记录完整的聊天历史（仅在DEBUG模式下）
+        
+        Args:
+            is_after_response: 是否在获取响应后记录
+        """
+        if logger.level <= logging.DEBUG:
+            logger.debug("=== 当前聊天历史 %s ===", "（响应后）" if is_after_response else "（请求前）")
+            for i, message in enumerate(self.chat_history):
+                role = message.get("role", "unknown")
+                content = message.get("content", "")
+                # 为不同角色使用不同前缀，便于区分
+                prefix = "系统" if role == "system" else "用户" if role == "user" else "AI"
+                logger.debug(f"[{i}] {prefix}: {content[:150]}..." if len(content) > 150 else f"[{i}] {prefix}: {content}")
+            logger.debug("===================") 

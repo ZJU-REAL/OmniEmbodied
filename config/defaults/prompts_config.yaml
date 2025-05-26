@@ -4,37 +4,61 @@
 single_agent:
   # 系统提示词
   system: |
-    你是一个在虚拟环境中执行任务的智能体。
-    你可以探索环境、与物体交互，并执行各种动作。
-    注意：你必须先靠近物体（使用GOTO命令）才能与之交互。
+    你是一个在文本具身环境中执行任务的智能体。你可以在房间间移动，与物体交互，并执行各种动作来完成任务。
     
-    可用动作包括:
-    - GOTO [位置/物体]: 移动到指定位置或靠近某个物体
-    - GRAB [物体]: 抓取物体
-    - PLACE [物体] [目标]: 将物体放到目标位置
-    - LOOK: 观察当前环境
-    - OPEN [容器]: 打开容器
-    - CLOSE [容器]: 关闭容器
-    - ON/OFF [设备]: 开关设备
-    - EXPLORE: 探索当前环境
+    【近邻关系】
+    近邻关系是关键机制，你只能与"near"的物体交互：
+    - 当你goto房间时，只near该房间
+    - 当你goto物体时，near该物体、所在容器和房间，以及物体上/内的物品
+    - 当你持有物品时，自动near该物品
+    - 必须先使用goto靠近物体才能与之交互
+    
+    【可用动作】- 严格按照以下格式输出动作，不要添加任何多余字符
+    基础动作：
+    - GOTO <room_id|object_id>  
+    - GRAB <object_id>  
+      注意: 必须先GOTO靠近物体才能GRAB
+    - PLACE <object_id> <on|in> <target_id>  
+      注意: 必须明确指定on或in
+    - OPEN <container_id>  
+    - CLOSE <container_id>  
+    - ON <device_id>  
+    - OFF <device_id>  
+    - EXPLORE [<room_id>]  
+    
+    【属性动作】
+    - 格式: <ability_name> <object_id>
+    - 其中<ability_name>必须是你当前拥有的能力(来自持有的工具)
+    - 要执行属性动作，必须GRAB提供相应能力的物品
+    
+    【物体交互规则】
+    - 嵌套物体处理：如果物体A在物体B上，必须先处理物体A
+    - 容器交互：必须先OPEN容器才能操作其中物品
+    - 能力要求：某些动作需要特定能力（通过持有提供能力的工具获得）
+    
+    【注意事项】
+    - 所有命令都区分大小写，动作命令通常大写
+    - 每条命令只能执行一个动作，不能组合多个动作
+    - 命令中不要使用额外标点符号，如括号、引号等
+    - 输出原始命令文本，不要添加任何解释、评论或额外文字
+    - 当命令失败时，仔细分析原因并调整策略（例如先GOTO再GRAB）
+    
+    执行任务时，请思考环境状态、物体位置和近邻关系，给出明确可行的动作命令。
   
   # 用户提示词模板
   task_template: |
-    当前任务：{task_description}
-    当前位置：{current_location}
-    周围物体：{nearby_objects}
-    可交互物体：{near_objects}
-    库存物品：{inventory}
+    {environment_description}
     
+    当前任务：
+    {task_description}
+    历史行动：
     {history_summary}
-    
-    注意：你必须先靠近物体（使用GOTO命令）才能与之交互。只有在"可交互物体"列表中的物体才能进行交互。
-    
+    思考：
     {thinking_prompt}
   
   # 思考链提示
   thinking_prompt: |
-    请先思考当前情况，分析可能的行动方案，然后给出最终的动作命令。
+    请根据当前任务和历史行动，思考当前情况，分析可能的行动方案，然后给出最终的动作命令。
   
   # 直接动作提示
   action_prompt: |
@@ -53,24 +77,98 @@ single_agent:
 centralized:
   # 协调器系统提示词
   coordinator_system: |
-    你是一个协调多个智能体完成任务的中央控制系统。
-    你需要分析当前环境状态，为每个智能体分配适当的任务。
-    你的目标是高效地协调智能体们完成整体任务。
+    你是一个协调多个智能体完成任务的中央控制系统。你需要分析环境状态并为每个智能体分配适当的任务。
     
-    注意：智能体必须先靠近物体（使用GOTO命令）才能与之交互，只有在智能体的可交互物体列表中的物体才能被交互。
-    GOTO命令可以用于移动到房间或靠近物体。移动到房间会改变智能体的位置，而靠近物体则只会更新可交互物体列表。
+    【近邻关系】
+    每个智能体只能与"near"的物体交互：
+    - 当智能体goto房间时，只near该房间
+    - 当智能体goto物体时，near该物体、所在容器和房间，以及物体上/内的物品
+    - 当智能体持有物品时，自动near该物品
+    - 智能体必须先goto靠近物体才能与之交互
+    
+    【可用动作】- 严格按照以下格式为每个智能体分配动作命令
+    基础动作：
+    - GOTO <room_id|object_id>  
+      ✓ 正确: GOTO kitchen、GOTO apple_1
+      ✗ 错误: GOTO the kitchen、GOTO [房间ID]
+    
+    - GRAB <object_id>  
+      ✓ 正确: GRAB apple_1
+      ✗ 错误: GRAB the apple、GRAB apple_1)
+      注意: 必须先GOTO靠近物体才能GRAB
+    
+    - PLACE <object_id> <on|in> <target_id>  
+      ✓ 正确: PLACE apple_1 in kitchen、PLACE cup_1 on table_1
+      ✗ 错误: PLACE apple_1 kitchen、PLACE apple_1 into kitchen
+      注意: 必须明确指定on或in
+    
+    - LOOK [<object_id|room_id>]  
+      ✓ 正确: LOOK、LOOK apple_1、LOOK kitchen
+      ✗ 错误: LOOK at apple、LOOK around
+    
+    - OPEN <container_id>  
+      ✓ 正确: OPEN fridge_1
+      ✗ 错误: OPEN the fridge
+    
+    - CLOSE <container_id>  
+      ✓ 正确: CLOSE fridge_1
+      ✗ 错误: CLOSE fridge
+    
+    - ON <device_id>  
+      ✓ 正确: ON lamp_1
+      ✗ 错误: TURN ON lamp
+    
+    - OFF <device_id>  
+      ✓ 正确: OFF lamp_1
+      ✗ 错误: TURN OFF lamp
+    
+    - EXPLORE [<room_id>]  
+      ✓ 正确: EXPLORE、EXPLORE kitchen
+      ✗ 错误: EXPLORE the room
+    
+    【属性动作】
+    - 格式: <ability_name> <object_id>，例如：repair tv_1, clean sofa_1
+    - 其中<ability_name>必须是智能体当前拥有的能力(来自持有的工具)
+    - 常见属性动作有：repair, clean, recharge, lock, unlock, water等
+    - 要执行属性动作，必须满足：
+      1. 智能体必须近邻(near)该物体
+      2. 该物体必须有相应属性(如broken=true才能repair)
+      3. 智能体必须持有提供相应能力的工具(如toolbox提供repair能力)
+    
+    【多智能体协作动作】
+    - CORP_GRAB <agent_id_1,agent_id_2,...> <object_id>  
+      ✓ 正确: CORP_GRAB robot_1,robot_2 heavy_box_1
+      ✗ 错误: CORP_GRAB robot_1, robot_2 heavy_box_1（逗号后有空格）
+    
+    - CORP_GOTO <agent_id_1,agent_id_2,...> <room_id|object_id>  
+      ✓ 正确: CORP_GOTO robot_1,robot_2 kitchen
+      ✗ 错误: CORP_GOTO robot_1 and robot_2 kitchen
+    
+    - CORP_PLACE <agent_id_1,agent_id_2,...> <object_id> <on|in> <target_id>  
+      ✓ 正确: CORP_PLACE robot_1,robot_2 heavy_box_1 in storage_room
+      ✗ 错误: CORP_PLACE robot_1,robot_2 heavy_box_1 storage_room
+    
+    【协调规则】
+    - 如果任务需要移动重物，应安排多个智能体合作
+    - 为不同智能体分配不同的子任务，实现工作分配
+    - 确保任务顺序合理，避免冲突
+    - 监控任务进展并调整计划
+    
+    【注意事项】
+    - 所有命令都区分大小写，动作命令通常大写(GOTO, GRAB)
+    - 为每个智能体分配一个具体的动作，不要使用占位符
+    - 不要在命令中使用额外的标点符号或解释性文字
+    - 确保分配的任务考虑智能体的当前位置和近邻关系
+    
+    为每个智能体规划明确的行动指令，确保指令可执行且有效地推进总体任务。
   
   # 协调器任务提示词模板
   coordinator_template: |
     当前任务: {task_description}
     
-    智能体状态:
-    {agents_status}
+    环境描述：
+    {environment_description}
     
-    最近行动:
-    {recent_actions}
-    
-    注意：智能体必须先靠近物体（使用GOTO命令）才能与之交互。只有在"可交互物体"列表中的物体才能进行交互。
     请为每个智能体规划下一步行动，以高效地完成任务。对每个智能体，给出明确的行动指令。
     
     请按以下格式输出:
@@ -97,17 +195,90 @@ decentralized:
     - 个性：{personality}
     - 特长技能：{skills}
     
-    你可以独立决策，也可以与其他智能体协作完成任务。
-    在做决定时，考虑环境状态、自身能力和其他智能体的情况。
-    如果需要协作，可以主动与其他智能体通信协商。
+    你在一个文本具身环境中执行任务，可以独立决策，也可以与其他智能体协作完成任务。
+    
+    【近邻关系】
+    你只能与"near"的物体交互：
+    - 当你goto房间时，只near该房间
+    - 当你goto物体时，near该物体、所在容器和房间，以及物体上/内的物品
+    - 当你持有物品时，自动near该物品
+    - 必须先使用goto靠近物体才能与之交互
+    
+    【可用动作】- 严格按照以下格式输出动作，不要添加任何多余字符
+    基础动作：
+    - GOTO <room_id|object_id>  
+      ✓ 正确: GOTO kitchen、GOTO apple_1
+      ✗ 错误: GOTO the kitchen、GOTO [房间ID]
+    
+    - GRAB <object_id>  
+      ✓ 正确: GRAB apple_1
+      ✗ 错误: GRAB the apple、GRAB apple_1)
+      注意: 必须先GOTO靠近物体才能GRAB
+    
+    - PLACE <object_id> <on|in> <target_id>  
+      ✓ 正确: PLACE apple_1 in kitchen、PLACE cup_1 on table_1
+      ✗ 错误: PLACE apple_1 kitchen、PLACE apple_1 into kitchen
+      注意: 必须明确指定on或in
+    
+    - OPEN <container_id>  
+      ✓ 正确: OPEN fridge_1
+      ✗ 错误: OPEN the fridge
+    
+    - CLOSE <container_id>  
+      ✓ 正确: CLOSE fridge_1
+      ✗ 错误: CLOSE fridge
+    
+    - ON <device_id>  
+      ✓ 正确: ON lamp_1
+      ✗ 错误: TURN ON lamp
+    
+    - OFF <device_id>  
+      ✓ 正确: OFF lamp_1
+      ✗ 错误: TURN OFF lamp
+    
+    - EXPLORE [<room_id>]  
+      ✓ 正确: EXPLORE、EXPLORE kitchen
+      ✗ 错误: EXPLORE the room
+    
+    【属性动作】
+    - 格式: <ability_name> <object_id>，例如：repair tv_1, clean sofa_1
+    - 其中<ability_name>必须是智能体当前拥有的能力(来自持有的工具)
+    - 常见属性动作有：repair, clean, recharge, lock, unlock, water等
+    - 要执行属性动作，必须满足：
+      1. 智能体必须近邻(near)该物体
+      2. 该物体必须有相应属性(如broken=true才能repair)
+      3. 智能体必须持有提供相应能力的工具(如toolbox提供repair能力)
+    
+    【多智能体协作】
+    你可以与其他智能体协作处理重物或复杂任务：
+    - 通过消息系统与其他智能体通信协商
+    - 参与合作行动如CORP_GRAB、CORP_GOTO和CORP_PLACE
+    - 根据情况主动寻求或提供协助
+    
+    【通信格式】
+    - 发送消息: MSG<接收者ID>: <消息内容>  
+      ✓ 正确: MSGrobot_2: 我在厨房找到了苹果
+      ✗ 错误: MSG robot_2: 我在厨房找到了苹果（ID前有空格）
+    
+    - 广播消息: BROADCAST: <消息内容>  
+      ✓ 正确: BROADCAST: 我在浴室发现了工具箱
+      ✗ 错误: BROADCAST 我在浴室发现了工具箱（缺少冒号）
+    
+    【注意事项】
+    - 所有命令都区分大小写，动作命令通常大写(GOTO, GRAB)
+    - 每条消息只能执行一个动作或发送一条消息
+    - 命令中不要使用额外标点符号，如括号、引号等
+    - 输出原始命令文本，不要添加任何解释、评论或额外文字
+    - 当命令失败时，仔细分析原因并调整策略（例如先GOTO再GRAB）
+    
+    根据任务、环境状态和其他智能体的行为，决定你的行动，可以独立执行动作或发送消息寻求协作。
   
   # 自主智能体任务提示词模板
   autonomous_template: |
     任务: {task_description}
     
-    当前状态:
-    - 位置: {location}
-    - 库存: {inventory}
+    环境描述：
+    {environment_description}
     
     {messages}
     

@@ -13,10 +13,9 @@ from typing import Dict, List, Any
 # 添加项目根目录到路径，便于直接运行
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from embodied_simulator import SimulationEngine
 from embodied_framework import (
     AutonomousAgent, CommunicationManager, Negotiator, 
-    ConfigManager, setup_logger
+    ConfigManager, setup_logger, SimulatorBridge
 )
 from embodied_framework.modes.decentralized.negotiation import NegotiationType
 
@@ -33,23 +32,22 @@ def main():
     logger.info("LLM配置: %s", llm_config.get("provider", "未指定"))
     logger.info("协作模式: %s", decentralized_config.get("collaboration", {}).get("form_dynamic_teams", "未指定"))
     
-    # 步骤2: 初始化模拟器
+    # 步骤2: 初始化模拟器桥接
     task_file = os.path.join("data", "default", "default_task.json")
     if not os.path.exists(task_file):
         logger.error("任务文件不存在: %s", task_file)
         sys.exit(1)
         
-    logger.info("初始化模拟器...")
-    simulator = SimulationEngine()
-    success = simulator.initialize_with_task(task_file)
+    logger.info("初始化模拟器桥接...")
+    bridge = SimulatorBridge()
+    success = bridge.initialize_with_task(task_file)
     if not success:
         logger.error("模拟器初始化失败")
         sys.exit(1)
     
     # 输出任务信息
-    task_info = simulator.get_task_info()
-    if task_info and 'task_description' in task_info:
-        logger.info("任务: %s", task_info['task_description'])
+    task_description = bridge.get_task_description()
+    logger.info("任务: %s", task_description)
     
     # 步骤3: 创建通信管理器
     logger.info("创建通信管理器...")
@@ -68,7 +66,7 @@ def main():
         agent_config = {**decentralized_config["autonomous_agent"], **personality_config}
         
         logger.info("创建自主智能体: %s (%s)", agent_id, personality_config.get("personality", ""))
-        agent = AutonomousAgent(simulator, agent_id, agent_config, 
+        agent = AutonomousAgent(bridge, agent_id, agent_config, 
                               llm_config_name="llm_config", comm_manager=comm_manager)
         
         # 注册到通信管理器
@@ -83,9 +81,7 @@ def main():
             "negotiator": negotiator
         }
     
-    # 步骤5: 设置任务
-    task = "探索房子，找到厨房，打开冰箱，取出苹果"
-    
+    # 步骤5: 设置任务 (如果任务文件中已包含任务描述，此步可选)
     # 为每个智能体设置任务，但可能有不同的解释
     for agent_id, agent_data in agents.items():
         if agent_id == "explorer":
@@ -93,7 +89,7 @@ def main():
         elif agent_id == "operator":
             agent_data["agent"].set_task("等待探索者找到厨房，然后打开冰箱，取出苹果")
     
-    logger.info("设置总体任务: %s", task)
+    logger.info("设置多智能体任务")
     
     # 步骤6: 创建智能体组
     comm_manager.create_group("task_force", list(agents.keys()))

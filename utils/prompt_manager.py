@@ -150,4 +150,59 @@ class PromptManager:
         message_entries = "\n".join(entries)
         
         # 返回完整消息历史
-        return self.format_template(history_template, message_entries=message_entries) 
+        return self.format_template(history_template, message_entries=message_entries)
+    
+    def add_environment_description(self, prompt: str, agent_id: str, bridge, config: Optional[Dict[str, Any]] = None) -> str:
+        """
+        为提示词添加环境描述部分
+        
+        Args:
+            prompt: 原始提示词
+            agent_id: 智能体ID
+            bridge: 模拟器桥接实例
+            config: 环境描述配置，可选
+                - show_object_properties: 是否显示物体属性
+                - only_show_discovered: 是否只显示已发现的内容
+                - detail_level: 详细程度 'full'/'room'/'brief'
+                
+        Returns:
+            str: 添加了环境描述的提示词
+        """
+        if bridge is None:
+            return prompt
+        
+        config = config or {}
+        detail_level = config.get('detail_level', 'room')
+        
+        description = ""
+        
+        try:
+            # 获取智能体当前所在房间
+            agent_info = bridge.get_agent_info(agent_id)
+            if agent_info and 'location_id' in agent_info:
+                room_id = agent_info.get('location_id')
+                
+                # 根据详细程度选择不同的描述
+                if detail_level == 'full':
+                    # 完整环境描述
+                    description = bridge.describe_environment_natural_language(
+                        sim_config={
+                            'nlp_show_object_properties': config.get('show_object_properties', False),
+                            'nlp_only_show_discovered': config.get('only_show_discovered', True)
+                        }
+                    )
+                elif detail_level == 'room':
+                    # 当前房间描述
+                    description = bridge.describe_room_natural_language(room_id)
+                else:
+                    # 简要描述
+                    description = bridge.describe_agent_natural_language(agent_id)
+        except Exception as e:
+            logger.warning(f"获取环境描述时出错: {e}")
+            return prompt
+        
+        # 将环境描述直接作为插值参数传递，而不是尝试找插入点
+        if description:
+            return self.format_template(prompt, environment_description=description)
+        
+        return prompt 

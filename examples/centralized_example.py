@@ -13,8 +13,7 @@ from typing import Dict, List, Any
 # 添加项目根目录到路径，便于直接运行
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from embodied_simulator import SimulationEngine
-from embodied_framework import Coordinator, WorkerAgent, ConfigManager, setup_logger
+from embodied_framework import Coordinator, WorkerAgent, ConfigManager, setup_logger, SimulatorBridge
 
 # 设置日志
 logger = setup_logger("centralized_example", logging.INFO)
@@ -29,28 +28,27 @@ def main():
     logger.info("LLM配置: %s", llm_config.get("provider", "未指定"))
     logger.info("协调模式: %s", centralized_config.get("collaboration", {}).get("mode", "未指定"))
     
-    # 步骤2: 初始化模拟器
+    # 步骤2: 初始化模拟器桥接
     task_file = os.path.join("data", "default", "default_task.json")
     if not os.path.exists(task_file):
         logger.error("任务文件不存在: %s", task_file)
         sys.exit(1)
         
-    logger.info("初始化模拟器...")
-    simulator = SimulationEngine()
-    success = simulator.initialize_with_task(task_file)
+    logger.info("初始化模拟器桥接...")
+    bridge = SimulatorBridge()
+    success = bridge.initialize_with_task(task_file)
     if not success:
         logger.error("模拟器初始化失败")
         sys.exit(1)
     
     # 输出任务信息
-    task_info = simulator.get_task_info()
-    if task_info and 'task_description' in task_info:
-        logger.info("任务: %s", task_info['task_description'])
+    task_description = bridge.get_task_description()
+    logger.info("任务: %s", task_description)
     
     # 步骤3: 创建协调器
     coordinator_id = "coordinator"
     logger.info("创建中央协调器...")
-    coordinator = Coordinator(simulator, coordinator_id, centralized_config.get("coordinator"))
+    coordinator = Coordinator(bridge, coordinator_id, centralized_config.get("coordinator"))
     
     # 步骤4: 创建工作智能体
     worker_ids = ["worker_1", "worker_2"]
@@ -58,15 +56,15 @@ def main():
     
     for worker_id in worker_ids:
         logger.info("创建工作智能体: %s", worker_id)
-        worker = WorkerAgent(simulator, worker_id, centralized_config.get("worker_agents"))
+        worker = WorkerAgent(bridge, worker_id, centralized_config.get("worker_agents"))
         worker_agents[worker_id] = worker
         # 将工作智能体添加到协调器
         coordinator.add_worker(worker)
     
-    # 步骤5: 设置任务
-    task = "探索房子，找到厨房，一个智能体打开冰箱，另一个智能体取出苹果"
-    coordinator.set_task(task)
-    logger.info("设置任务: %s", task)
+    # 步骤5: 设置任务 (如果任务文件中已包含任务描述，此步可选)
+    # task = "探索房子，找到厨房，一个智能体打开冰箱，另一个智能体取出苹果"
+    # coordinator.set_task(task)
+    # logger.info("设置任务: %s", task)
     
     # 步骤6: 运行协调系统
     logger.info("开始执行任务...")

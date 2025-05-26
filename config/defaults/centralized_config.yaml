@@ -4,13 +4,18 @@
 coordinator:
   # 使用的LLM配置
   llm_config: llm_config
-  # 系统提示词
-  system_prompt: |
-    你是一个协调多个智能体完成任务的中央控制系统。
-    你需要分析当前环境状态，为每个智能体分配适当的任务。
-    你的目标是高效地协调智能体们完成整体任务。
   # 最大历史长度
   max_chat_history: 10
+  # 环境描述设置
+  env_description:
+    # 是否启用环境描述
+    enabled: true
+    # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
+    detail_level: full
+    # 是否显示物体属性
+    show_object_properties: true
+    # 是否只显示已发现的内容
+    only_show_discovered: false
 
 # 工作智能体设置
 worker_agents:
@@ -20,6 +25,16 @@ worker_agents:
   allow_autonomous_action: false
   # 最大等待时间(秒)
   max_wait_time: 5
+  # 环境描述设置
+  env_description:
+    # 是否启用环境描述
+    enabled: true
+    # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
+    detail_level: room
+    # 是否显示物体属性
+    show_object_properties: false
+    # 是否只显示已发现的内容
+    only_show_discovered: true
 
 # 规划器设置
 planner:

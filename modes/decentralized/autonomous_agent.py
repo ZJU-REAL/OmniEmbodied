@@ -57,15 +57,6 @@ class AutonomousAgent(BaseAgent):
         self.system_prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
             "autonomous_system",
-            f"""
-            你是一个自主智能体，ID为{agent_id}，拥有以下特点：
-            - 个性：{self.personality}
-            - 特长技能：{', '.join(self.skills)}
-            
-            你可以独立决策，也可以与其他智能体协作完成任务。
-            在做决定时，考虑环境状态、自身能力和其他智能体的情况。
-            如果需要协作，可以主动与其他智能体通信协商。
-            """,
             agent_id=agent_id,
             personality=self.personality,
             skills=", ".join(self.skills)
@@ -143,12 +134,6 @@ class AutonomousAgent(BaseAgent):
         Returns:
             str: 格式化后的提示词
         """
-        state = self.get_state()
-        
-        # 格式化库存
-        inventory = ", ".join([item.get('name', item.get('id', 'unknown')) 
-                             for item in state.get('inventory', [])]) or "空"
-        
         # 格式化消息历史
         messages = self.prompt_manager.format_messages(self.mode, self.message_queue)
         
@@ -157,17 +142,50 @@ class AutonomousAgent(BaseAgent):
         if self.history:
             history = self.prompt_manager.format_history(self.mode, self.history)
         
+        # 获取环境描述
+        env_description = ""
+        env_config = self.config.get('env_description', {})
+        if not isinstance(env_config, dict):
+            env_config = {}
+            
+        # 自主智能体通常只能看到自己所在的房间
+        if self.bridge:
+            try:
+                agent_info = self.bridge.get_agent_info(self.agent_id)
+                if agent_info and 'location_id' in agent_info:
+                    room_id = agent_info.get('location_id')
+                    
+                    detail_level = env_config.get('detail_level', 'room')
+                    
+                    # 根据详细程度选择不同的描述
+                    if detail_level == 'full':
+                        # 完整环境描述
+                        env_description = self.bridge.describe_environment_natural_language(
+                            sim_config={
+                                'nlp_show_object_properties': env_config.get('show_object_properties', True),
+                                'nlp_only_show_discovered': env_config.get('only_show_discovered', True)
+                            }
+                        )
+                    elif detail_level == 'room':
+                        # 当前房间描述
+                        env_description = self.bridge.describe_room_natural_language(room_id)
+                    else:
+                        # 简要描述
+                        env_description = self.bridge.describe_agent_natural_language(self.agent_id)
+            except Exception as e:
+                logger.warning(f"获取环境描述时出错: {e}")
+        
         # 使用提示词管理器格式化完整提示词
-        return self.prompt_manager.get_formatted_prompt(
+        prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
             "autonomous_template",
-            default_value="任务: {task_description}\n\n请决定下一步行动。",
             task_description=self.task_description,
-            location=state.get('location', {}).get('name', 'unknown'),
-            inventory=inventory,
             messages=messages,
-            history=history
+            history=history,
+            environment_description=env_description
         )
+        
+        return prompt
     
     def decide_action(self) -> str:
         """

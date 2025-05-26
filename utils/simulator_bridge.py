@@ -176,9 +176,64 @@ class SimulatorBridge:
             command: 命令字符串
             
         Returns:
-            Tuple: (执行状态, 反馈消息, 结果数据)
+            Tuple: (状态, 消息, 结果数据)
         """
-        return self.simulator.process_command(agent_id, command)
+        if logger.level <= logging.DEBUG:
+            logger.debug("处理命令 - 智能体: %s, 命令: '%s'", agent_id, command)
+            # 记录命令前的智能体状态
+            agent_info = self.get_agent_info(agent_id)
+            if agent_info:
+                location_id = agent_info.get('location_id', '未知')
+                location_name = self.get_room_info(location_id).get('name', '未知') if location_id else '未知'
+                inventory = agent_info.get('inventory', [])
+                logger.debug("命令前状态 - 位置: %s(%s), 库存: %s", location_name, location_id, inventory)
+        
+        # 尝试解析和执行命令
+        try:
+            # 这里我们应该区分不同类型的命令，例如基础动作和属性动作
+            # 目前我们简单地转发给模拟器
+            result = self.simulator.process_command(agent_id, command)
+            
+            # 检查返回值类型是否为tuple，表示老版本API
+            if isinstance(result, tuple) and len(result) == 3:
+                status, message, data = result
+            else:
+                # 新版本API返回字典
+                status = result.get('status', ActionStatus.FAILURE)
+                message = result.get('message', '')
+                data = result.get('data', {})
+            
+            if logger.level <= logging.DEBUG:
+                logger.debug("命令处理结果 - 状态: %s, 消息: %s", status, message)
+                
+                # 记录命令后的智能体状态变化
+                agent_info_after = self.get_agent_info(agent_id)
+                if agent_info_after:
+                    location_id = agent_info_after.get('location_id', '未知')
+                    location_name = self.get_room_info(location_id).get('name', '未知') if location_id else '未知'
+                    inventory = agent_info_after.get('inventory', [])
+                    logger.debug("命令后状态 - 位置: %s(%s), 库存: %s", location_name, location_id, inventory)
+                
+                # 尝试分析命令和结果之间的关系
+                if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
+                    command_parts = command.split()
+                    command_type = command_parts[0].upper() if command_parts else ''
+                    
+                    # 检测常见错误模式
+                    if command_type == 'GOTO' and 'must be near' in message:
+                        logger.debug("GOTO命令失败原因分析: 智能体尝试移动到不可达位置")
+                    elif command_type == 'GRAB' and 'must be near' in message:
+                        logger.debug("GRAB命令失败原因分析: 智能体尝试抓取不在近邻范围内的物体")
+                    elif command_type == 'PLACE' and 'does not have' in message:
+                        logger.debug("PLACE命令失败原因分析: 智能体尝试放置未持有的物体")
+                    elif 'invalid command' in message.lower():
+                        logger.debug("命令失败原因分析: 无效命令格式")
+            
+            return status, message, data
+            
+        except Exception as e:
+            logger.exception(f"处理命令时出错: {e}")
+            return ActionStatus.ERROR, f"处理命令出错: {str(e)}", None
     
     def find_objects_by_name(self, name: str) -> List[Dict[str, Any]]:
         """
@@ -315,6 +370,7 @@ class SimulatorBridge:
             sim_config: 模拟器配置
                 - nlp_show_object_properties: 是否输出家具和物品的详细属性
                 - nlp_only_show_discovered: 只描述已发现内容
+                - nlp_detail_level: 详细程度 'full'/'room'/'brief'
                 
         Returns:
             str: 环境和智能体描述文本
@@ -322,5 +378,26 @@ class SimulatorBridge:
         if hasattr(self.simulator, 'world_state'):
             if agents is None:
                 agents = self.get_all_agents()
+            
+            # 检查是否指定了详细级别
+            sim_config = sim_config or {}
+            detail_level = sim_config.get('nlp_detail_level', 'full')
+            
+            # 根据详细级别决定返回什么样的描述
+            if detail_level == 'room' and agents:
+                # 如果是room级别且有智能体，则只描述智能体所在的房间
+                first_agent_id = next(iter(agents))
+                agent_info = agents[first_agent_id]
+                room_id = agent_info.get('location_id', '')
+                if room_id:
+                    return self.describe_room_natural_language(room_id, agents, sim_config)
+            elif detail_level == 'brief' and agents:
+                # 如果是brief级别，则只描述智能体状态
+                descriptions = []
+                for agent_id, agent_data in agents.items():
+                    descriptions.append(self.describe_agent_natural_language(agent_id, agent_data))
+                return "\n\n".join(descriptions)
+            
+            # 默认返回完整环境描述（full级别）
             return self.simulator.world_state.describe_environment_natural_language(agents, sim_config)
         return "无法描述环境，世界状态不可用" 

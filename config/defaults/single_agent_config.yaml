@@ -31,26 +31,17 @@ basic_agent:
     - "GRAB apple"
     - "PLACE apple"
 
-# 提示词设置
-prompts:
-  # 系统提示词
-  system: |
-    你是一个在虚拟环境中执行任务的智能体。你可以探索环境、与物体交互，并执行各种动作。
-    你的目标是完成给定的任务。请思考每一步行动，并给出明确的指令。
-    可用动作包括: GOTO, GRAB, PLACE, LOOK, OPEN, CLOSE, ON, OFF, EXPLORE 等。
-
-  # 任务提示词模板
-  task_template: |
-    当前任务：{task_description}
-    当前位置：{current_location}
-    周围物体：{nearby_objects}
-    库存物品：{inventory}
-
-    请告诉我接下来应该执行什么动作？
+# 环境描述设置
+env_description:
+  # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
+  detail_level: full
+  # 是否显示物体属性
+  show_object_properties: true
+  # 是否只显示已发现的内容
+  only_show_discovered: true
 
 # 日志设置
 logging:
-  enabled: true
   level: info  # 可选: debug, info, warning, error
   log_file: "agent.log"
   log_to_console: true

@@ -10,6 +10,16 @@ autonomous_agent:
   autonomy_level: "high"  # 可选: low, medium, high
   # 是否启用主动协商
   enable_proactive_negotiation: true
+  # 环境描述设置
+  env_description:
+    # 是否启用环境描述
+    enabled: true
+    # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
+    detail_level: room
+    # 是否显示物体属性
+    show_object_properties: true
+    # 是否只显示已发现的内容
+    only_show_discovered: true
 
 # 智能体个性化设置
 agent_personalities:
@@ -17,28 +27,31 @@ agent_personalities:
   explorer:
     personality: "好奇、冒险、细心"
     skills: ["探索", "发现", "记忆地图"]
-    system_prompt: |
-      你是一个专注于探索环境的智能体。
-      你擅长发现新区域、记忆地图布局，并寻找重要物品。
-      在团队中，你应该主动探索未知区域，并与队友分享你的发现。
+    # 探索者的环境描述设置 - 可看到更多细节
+    env_description:
+      detail_level: room
+      show_object_properties: true
+      only_show_discovered: false
   
   # 操作者
   operator:
     personality: "谨慎、精确、专注"
     skills: ["操作物体", "精细动作", "解决难题"]
-    system_prompt: |
-      你是一个专注于操作物体的智能体。
-      你擅长精细操作、开关设备、拿取物品等需要精确动作的任务。
-      在团队中，你应该主动承担需要精细操作的任务。
+    # 操作者的环境描述设置 - 更关注物体细节
+    env_description:
+      detail_level: room
+      show_object_properties: true
+      only_show_discovered: true
   
   # 协调者
   coordinator:
     personality: "合作、组织、全局思考"
     skills: ["规划", "协调", "沟通"]
-    system_prompt: |
-      你是一个专注于协调团队的智能体。
-      你擅长整体规划、任务分配和团队协调。
-      在团队中，你应该帮助组织其他智能体的活动，但不要强制指挥他们。
+    # 协调者的环境描述设置 - 可看到更多全局信息
+    env_description:
+      detail_level: full
+      show_object_properties: false
+      only_show_discovered: false
 
 # 通信设置
 communication:
