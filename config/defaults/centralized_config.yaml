@@ -1,0 +1,57 @@
+# 中心化多智能体配置
+
+# 协调器设置
+coordinator:
+  # 使用的LLM配置
+  llm_config: llm_config
+  # 系统提示词
+  system_prompt: |
+    你是一个协调多个智能体完成任务的中央控制系统。
+    你需要分析当前环境状态，为每个智能体分配适当的任务。
+    你的目标是高效地协调智能体们完成整体任务。
+  # 最大历史长度
+  max_chat_history: 10
+
+# 工作智能体设置
+worker_agents:
+  # 默认行为
+  default_behavior: "wait_for_instruction"  # 可选: wait_for_instruction, explore, random
+  # 是否允许在没有指令时自主行动
+  allow_autonomous_action: false
+  # 最大等待时间(秒)
+  max_wait_time: 5
+
+# 规划器设置
+planner:
+  # 是否启用规划器
+  enabled: true
+  # 规划粒度
+  granularity: "medium"  # 可选: fine, medium, coarse
+  # 重规划触发条件
+  replan_on_failure: true
+  replan_interval: 5  # 每执行5步后重新规划
+
+# 任务分配策略
+task_allocation:
+  # 分配策略
+  strategy: "specialized"  # 可选: specialized, balanced, dynamic
+  # 是否考虑智能体能力差异
+  consider_capabilities: true
+  # 是否允许任务重新分配
+  allow_reassignment: true
+
+# 协作模式
+collaboration:
+  # 协作模式
+  mode: "hierarchical"  # 可选: hierarchical, cooperative
+  # 是否共享观察结果
+  share_observations: true
+  # 是否共享发现的物体
+  share_discoveries: true
+
+# 日志设置
+logging:
+  enabled: true
+  level: info  # 可选: debug, info, warning, error
+  log_file: "centralized_agents.log"
+  log_to_console: true 

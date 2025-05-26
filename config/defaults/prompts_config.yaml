@@ -1,0 +1,128 @@
+# 提示词模板配置
+
+# 单智能体模式的提示词
+single_agent:
+  # 系统提示词
+  system: |
+    你是一个在虚拟环境中执行任务的智能体。
+    你可以探索环境、与物体交互，并执行各种动作。
+    注意：你必须先靠近物体（使用GOTO命令）才能与之交互。
+    
+    可用动作包括:
+    - GOTO [位置/物体]: 移动到指定位置或靠近某个物体
+    - GRAB [物体]: 抓取物体
+    - PLACE [物体] [目标]: 将物体放到目标位置
+    - LOOK: 观察当前环境
+    - OPEN [容器]: 打开容器
+    - CLOSE [容器]: 关闭容器
+    - ON/OFF [设备]: 开关设备
+    - EXPLORE: 探索当前环境
+  
+  # 用户提示词模板
+  task_template: |
+    当前任务：{task_description}
+    当前位置：{current_location}
+    周围物体：{nearby_objects}
+    可交互物体：{near_objects}
+    库存物品：{inventory}
+    
+    {history_summary}
+    
+    注意：你必须先靠近物体（使用GOTO命令）才能与之交互。只有在"可交互物体"列表中的物体才能进行交互。
+    
+    {thinking_prompt}
+  
+  # 思考链提示
+  thinking_prompt: |
+    请先思考当前情况，分析可能的行动方案，然后给出最终的动作命令。
+  
+  # 直接动作提示
+  action_prompt: |
+    请直接给出下一步的动作命令。
+    
+  # 历史记录模板
+  history_template: |
+    最近的动作历史：
+    {history_entries}
+    
+  # 历史记录条目模板
+  history_entry_template: |
+    {index}. 动作：{action}，结果：{status}，消息：{message}
+
+# 中心化多智能体模式的提示词
+centralized:
+  # 协调器系统提示词
+  coordinator_system: |
+    你是一个协调多个智能体完成任务的中央控制系统。
+    你需要分析当前环境状态，为每个智能体分配适当的任务。
+    你的目标是高效地协调智能体们完成整体任务。
+    
+    注意：智能体必须先靠近物体（使用GOTO命令）才能与之交互，只有在智能体的可交互物体列表中的物体才能被交互。
+    GOTO命令可以用于移动到房间或靠近物体。移动到房间会改变智能体的位置，而靠近物体则只会更新可交互物体列表。
+  
+  # 协调器任务提示词模板
+  coordinator_template: |
+    当前任务: {task_description}
+    
+    智能体状态:
+    {agents_status}
+    
+    最近行动:
+    {recent_actions}
+    
+    注意：智能体必须先靠近物体（使用GOTO命令）才能与之交互。只有在"可交互物体"列表中的物体才能进行交互。
+    请为每个智能体规划下一步行动，以高效地完成任务。对每个智能体，给出明确的行动指令。
+    
+    请按以下格式输出:
+    {agents_format}
+  
+  # 智能体状态条目模板
+  agent_status_template: |
+    - {agent_id}: 位置={location}, 库存={inventory}{near_objects}
+    
+  # 智能体近期行动模板
+  agent_actions_template: |
+    - {agent_id}的最近行动:
+    {action_entries}
+    
+  # 行动条目模板
+  action_entry_template: |
+    * 动作: {action}, 结果: {status}, 消息: {message}
+
+# 去中心化多智能体模式的提示词
+decentralized:
+  # 自主智能体系统提示词模板
+  autonomous_system: |
+    你是一个自主智能体，ID为{agent_id}，拥有以下特点：
+    - 个性：{personality}
+    - 特长技能：{skills}
+    
+    你可以独立决策，也可以与其他智能体协作完成任务。
+    在做决定时，考虑环境状态、自身能力和其他智能体的情况。
+    如果需要协作，可以主动与其他智能体通信协商。
+  
+  # 自主智能体任务提示词模板
+  autonomous_template: |
+    任务: {task_description}
+    
+    当前状态:
+    - 位置: {location}
+    - 库存: {inventory}
+    
+    {messages}
+    
+    {history}
+    
+    请根据当前情况，决定下一步行动。你可以执行环境动作，也可以发送消息给其他智能体。
+    如需执行环境动作，直接输出动作命令(如GOTO kitchen)。
+    如需发送消息，使用格式: MSG<接收者ID>: <消息内容>
+    如需广播消息，使用格式: BROADCAST: <消息内容>
+  
+  # 消息历史模板
+  message_history_template: |
+    收到的消息:
+    {message_entries}
+    
+  # 消息条目模板
+  message_entry_template: |
+    - 来自{sender_id}: {content} 

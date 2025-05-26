@@ -1,0 +1,40 @@
+# 默认LLM配置
+
+# LLM推理方式设置
+mode: "api"  # 可选值: "api" 或 "vllm"
+
+# API调用方式配置
+api:
+  provider: "custom"  # 可选值: "openai" 或 "custom"（自定义端点）
+  
+  # OpenAI API配置
+  openai:
+    model: "gpt-3.5-turbo"  # 或 "gpt-4" 等
+    temperature: 0.7
+    max_tokens: 1024
+    api_key: ""  # 建议使用环境变量OPENAI_API_KEY而不是硬编码在这里
+    
+  # 自定义端点API配置
+  custom:
+    model: "deepseek-chat"  # 模型名称
+    temperature: 0.7
+    max_tokens: 1024
+    api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 自定义API密钥，或使用环境变量CUSTOM_LLM_API_KEY
+    endpoint: "https://api.deepseek.com"  # 自定义API端点URL
+    
+# VLLM本地推理配置
+vllm:
+  model_path: ""  # 模型路径，如 "/path/to/llama-7b" 或 Hugging Face模型ID
+  temperature: 0.7
+  max_tokens: 1024
+  tensor_parallel_size: 1  # GPU并行数量
+  gpu_memory_utilization: 0.9  # GPU内存利用率
+
+# 通用LLM参数
+parameters:
+  # 对话历史最大长度
+  max_history_length: 10
+  # 是否记录上下文
+  keep_context: true
+  # 系统提示词
+  system_prompt: "你是一个智能助手，正在控制模拟环境中的智能体。请根据当前环境状态，给出明确、简洁的行动指令。" 

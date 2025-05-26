@@ -1,0 +1,62 @@
+# 单智能体配置
+
+# 智能体类型设置
+agent_type: llm  # 可选值: llm, basic, rule_based
+
+# LLM智能体设置
+llm_agent:
+  # 使用的LLM配置
+  llm_config: llm_config
+  # 最大尝试次数
+  max_attempts: 3
+  # 思考链 (Chain of Thought) 设置
+  use_cot: true
+  # 动作验证
+  validate_actions: true
+
+# 基本智能体设置
+basic_agent:
+  # 随机性程度 (0-1)
+  randomness: 0.3
+  # 预定义动作列表
+  available_actions:
+    - "LOOK"
+    - "EXPLORE"
+    - "GOTO kitchen"
+    - "GOTO bedroom"
+    - "GOTO livingroom"
+    - "GOTO bathroom"
+    - "OPEN fridge"
+    - "CLOSE fridge"
+    - "GRAB apple"
+    - "PLACE apple"
+
+# 提示词设置
+prompts:
+  # 系统提示词
+  system: |
+    你是一个在虚拟环境中执行任务的智能体。你可以探索环境、与物体交互，并执行各种动作。
+    你的目标是完成给定的任务。请思考每一步行动，并给出明确的指令。
+    可用动作包括: GOTO, GRAB, PLACE, LOOK, OPEN, CLOSE, ON, OFF, EXPLORE 等。
+
+  # 任务提示词模板
+  task_template: |
+    当前任务：{task_description}
+    当前位置：{current_location}
+    周围物体：{nearby_objects}
+    库存物品：{inventory}
+
+    请告诉我接下来应该执行什么动作？
+
+# 日志设置
+logging:
+  enabled: true
+  level: info  # 可选: debug, info, warning, error
+  log_file: "agent.log"
+  log_to_console: true
+
+# 历史记录设置
+history:
+  save_history: true
+  max_history_length: 50
+  history_file: "agent_history.json" 

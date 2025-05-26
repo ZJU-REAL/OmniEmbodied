@@ -1,0 +1,82 @@
+# 去中心化多智能体配置
+
+# 自主智能体通用设置
+autonomous_agent:
+  # 使用的LLM配置
+  llm_config: llm_config
+  # 最大历史长度
+  max_chat_history: 10
+  # 自主程度
+  autonomy_level: "high"  # 可选: low, medium, high
+  # 是否启用主动协商
+  enable_proactive_negotiation: true
+
+# 智能体个性化设置
+agent_personalities:
+  # 探索者
+  explorer:
+    personality: "好奇、冒险、细心"
+    skills: ["探索", "发现", "记忆地图"]
+    system_prompt: |
+      你是一个专注于探索环境的智能体。
+      你擅长发现新区域、记忆地图布局，并寻找重要物品。
+      在团队中，你应该主动探索未知区域，并与队友分享你的发现。
+  
+  # 操作者
+  operator:
+    personality: "谨慎、精确、专注"
+    skills: ["操作物体", "精细动作", "解决难题"]
+    system_prompt: |
+      你是一个专注于操作物体的智能体。
+      你擅长精细操作、开关设备、拿取物品等需要精确动作的任务。
+      在团队中，你应该主动承担需要精细操作的任务。
+  
+  # 协调者
+  coordinator:
+    personality: "合作、组织、全局思考"
+    skills: ["规划", "协调", "沟通"]
+    system_prompt: |
+      你是一个专注于协调团队的智能体。
+      你擅长整体规划、任务分配和团队协调。
+      在团队中，你应该帮助组织其他智能体的活动，但不要强制指挥他们。
+
+# 通信设置
+communication:
+  # 消息传递延迟(秒)
+  message_delay: 0.5
+  # 消息丢失概率
+  message_loss_probability: 0.05
+  # 通信范围限制
+  range_limited: false
+  max_range: 100.0
+  # 消息处理频率(秒)
+  processing_interval: 1.0
+
+# 协商设置
+negotiation:
+  # 默认超时时间(秒)
+  default_timeout: 30
+  # 协商策略
+  strategy: "cooperative"  # 可选: cooperative, competitive, balanced
+  # 是否启用反提议
+  enable_counter_offers: true
+  # 最大协商轮次
+  max_negotiation_rounds: 3
+
+# 协作模式
+collaboration:
+  # 是否共享观察结果
+  share_observations: true
+  # 共享频率(步数)
+  sharing_frequency: 3
+  # 是否共享任务进度
+  share_task_progress: true
+  # 是否形成动态团队
+  form_dynamic_teams: true
+
+# 日志设置
+logging:
+  enabled: true
+  level: info  # 可选: debug, info, warning, error
+  log_file: "decentralized_agents.log"
+  log_to_console: true 
