@@ -130,7 +130,10 @@ class LLMAgent(BaseAgent):
         
         # 格式化历史记录
         if self.history:
-            history_summary = self.prompt_manager.format_history(self.mode, self.history)
+            # 获取历史记录设置
+            history_config = self.config.get('history', {})
+            max_history_in_prompt = history_config.get('max_history_in_prompt', 50)  # 默认显示50条历史记录
+            history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_history_in_prompt)
         
         # 确定思考提示词
         thinking_prompt = self.prompt_manager.get_prompt_template(
@@ -273,14 +276,19 @@ class LLMAgent(BaseAgent):
                     # 可能找到了动作，进一步清理
                     parts = line.split(word, 1)
                     if len(parts) > 1:
-                        # 提取出动作部分
-                        action = word + " " +parts[1].split('。')[0].split('，')[0].strip()
+                        # 提取参数部分并去除标点符号
+                        param_part = parts[1].split('。')[0].split('，')[0].strip()
+                        # 只有当参数非空时才添加空格，避免尾随空格
+                        action = word if not param_part else word + " " + param_part
                         
                         # 调试级别记录动作提取过程
                         if logger.level <= logging.DEBUG:
                             logger.debug("动作提取: 在'%s'中找到动作词'%s'，提取为'%s'", line, word, action)
                         
                         return action
+                    else:
+                        # 如果只有动作词没有参数，直接返回动作词
+                        return word
         
         # 如果没找到明确的动作，返回原始文本的最后一行（非空）
         for line in reversed(lines):
@@ -303,6 +311,9 @@ class LLMAgent(BaseAgent):
         """
         # 决定要执行的动作
         action = self.decide_action()
+        
+        # 确保动作命令两端没有多余空格
+        action = action.strip()
         
         # 记录执行命令日志 - 使用根日志器确保显示
         root_logger = logging.getLogger("single_agent_example")
