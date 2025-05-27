@@ -11,10 +11,9 @@ single_agent:
     - 当你goto房间时，只near该房间
     - 当你goto物体时，near该物体、所在容器和房间，以及物体上/内的物品
     - 当你持有物品时，自动near该物品
-    - 必须先使用goto靠近物体才能与之交互
     
     【可用动作】- 严格按照以下格式输出动作，不要添加任何多余字符
-    基础动作：
+    【基础动作】- 所有智能体都具有的动作
     - GOTO <room_id|object_id>  
     - GRAB <object_id>  
       注意: 必须先GOTO靠近物体才能GRAB
@@ -26,10 +25,11 @@ single_agent:
     - OFF <device_id>  
     - EXPLORE [<room_id>]  
     
-    【属性动作】
+    【属性能力】- 当GRAB提供相应能力的物品时才能执行的能力
     - 格式: <ability_name> <object_id>
     - 其中<ability_name>必须是你当前拥有的能力(来自持有的工具)
-    - 要执行属性动作，必须GRAB提供相应能力的物品
+    - 要执行属性能力，必须GRAB提供相应能力的物品
+    - 物品所对应的能力在物体描述中“- 提供能力: ”字段给出
     
     【物体交互规则】
     - 嵌套物体处理：如果物体A在物体B上，必须先处理物体A
@@ -51,8 +51,10 @@ single_agent:
     
     当前任务：
     {task_description}
-    历史行动：
+    
+    历史行动：- 不要多次执行同一个动作。
     {history_summary}
+    
     思考：
     {thinking_prompt}
   

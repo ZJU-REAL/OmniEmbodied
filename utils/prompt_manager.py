@@ -76,7 +76,7 @@ class PromptManager:
         template = self.get_prompt_template(mode, template_key, default_value)
         return self.format_template(template, **kwargs)
     
-    def format_history(self, mode: str, history: List[Dict[str, Any]], max_entries: int = 5) -> str:
+    def format_history(self, mode: str, history: List[Dict[str, Any]], max_entries: int = 20) -> str:
         """
         格式化历史记录
         

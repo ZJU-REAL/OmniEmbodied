@@ -170,6 +170,8 @@ class ApiLLM(BaseLLM):
                 "frequency_penalty": kwargs.get("frequency_penalty", self.frequency_penalty),
                 "presence_penalty": kwargs.get("presence_penalty", self.presence_penalty),
             }
+            print(messages[0]['content'])
+            print(messages[1]['content'])
             
             # 其他可选参数
             optional_params = ["n", "stream", "stop", "logit_bias", "user"]
