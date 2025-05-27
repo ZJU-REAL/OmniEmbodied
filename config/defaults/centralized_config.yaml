@@ -6,6 +6,10 @@ coordinator:
   llm_config: llm_config
   # 最大历史长度
   max_chat_history: 10
+  # 思考链 (Chain of Thought) 设置
+  use_cot: true
+  # 动作验证
+  validate_actions: true
   # 环境描述设置
   env_description:
     # 是否启用环境描述
@@ -25,6 +29,10 @@ worker_agents:
   allow_autonomous_action: false
   # 最大等待时间(秒)
   max_wait_time: 5
+  # 思考链 (Chain of Thought) 设置
+  use_cot: true
+  # 动作验证
+  validate_actions: true
   # 环境描述设置
   env_description:
     # 是否启用环境描述
@@ -69,4 +77,19 @@ logging:
   enabled: true
   level: info  # 可选: debug, info, warning, error
   log_file: "centralized_agents.log"
-  log_to_console: true 
+  log_to_console: true
+
+# 历史记录设置
+history:
+  # 协调器历史记录
+  coordinator:
+    save_history: true
+    max_history_length: 500
+    max_history_in_prompt: 50  # 控制提示词中显示的历史记录数量
+    history_file: "coordinator_history.json"
+  # 工作智能体历史记录
+  workers:
+    save_history: true
+    max_history_length: 300
+    max_history_in_prompt: 30  # 控制提示词中显示的历史记录数量
+    history_file: "worker_history.json" 

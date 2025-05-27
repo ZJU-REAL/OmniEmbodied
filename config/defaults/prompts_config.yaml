@@ -29,7 +29,7 @@ single_agent:
     - 格式: <ability_name> <object_id>
     - 其中<ability_name>必须是你当前拥有的能力(来自持有的工具)
     - 要执行属性能力，必须GRAB提供相应能力的物品
-    - 物品所对应的能力在物体描述中“- 提供能力: ”字段给出
+    - 物品所对应的能力在物体描述中"- 提供能力: "字段给出
     
     【物体交互规则】
     - 嵌套物体处理：如果物体A在物体B上，必须先处理物体A
@@ -171,11 +171,25 @@ centralized:
     环境描述：
     {environment_description}
     
+    历史行动：
+    {history_summary}
+    
     请为每个智能体规划下一步行动，以高效地完成任务。对每个智能体，给出明确的行动指令。
+    
+    思考：
+    {thinking_prompt}
     
     请按以下格式输出:
     {agents_format}
   
+  # 思考链提示
+  thinking_prompt: |
+    请根据当前任务、历史行动和环境状态，思考当前情况，分析可能的行动方案，考虑智能体之间的协作，然后为每个智能体给出最终的动作命令。
+  
+  # 直接动作提示
+  action_prompt: |
+    请直接给出每个智能体的下一步动作命令。
+    
   # 智能体状态条目模板
   agent_status_template: |
     - {agent_id}: 位置={location}, 库存={inventory}{near_objects}
@@ -188,6 +202,15 @@ centralized:
   # 行动条目模板
   action_entry_template: |
     * 动作: {action}, 结果: {status}, 消息: {message}
+    
+  # 历史记录模板
+  history_template: |
+    最近的协调行动历史：
+    {history_entries}
+    
+  # 历史记录条目模板
+  history_entry_template: |
+    {index}. 协调动作：{action}，结果：{status}，消息：{message}
 
 # 去中心化多智能体模式的提示词
 decentralized:
@@ -277,20 +300,38 @@ decentralized:
   
   # 自主智能体任务提示词模板
   autonomous_template: |
-    任务: {task_description}
+    当前任务: {task_description}
     
     环境描述：
     {environment_description}
     
-    {messages}
+    历史行动：
+    {history_summary}
     
-    {history}
+    收到的消息：
+    {messages_summary}
     
-    请根据当前情况，决定下一步行动。你可以执行环境动作，也可以发送消息给其他智能体。
-    如需执行环境动作，直接输出动作命令(如GOTO kitchen)。
-    如需发送消息，使用格式: MSG<接收者ID>: <消息内容>
-    如需广播消息，使用格式: BROADCAST: <消息内容>
+    思考：
+    {thinking_prompt}
   
+  # 思考链提示
+  thinking_prompt: |
+    请根据当前任务、历史行动、收到的消息和环境状态，思考当前情况，分析可能的行动方案，然后给出最终的动作命令。
+    如果需要与其他智能体沟通，可以使用通信动作。
+  
+  # 直接动作提示
+  action_prompt: |
+    请直接给出下一步的动作命令。如果需要与其他智能体沟通，可以使用通信动作。
+    
+  # 历史记录模板
+  history_template: |
+    最近的动作历史：
+    {history_entries}
+    
+  # 历史记录条目模板
+  history_entry_template: |
+    {index}. 动作：{action}，结果：{status}，消息：{message}
+    
   # 消息历史模板
   message_history_template: |
     收到的消息:
