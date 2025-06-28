@@ -51,6 +51,9 @@ class BaseAgent(ABC):
         # 决定要执行的动作
         action = self.decide_action()
         
+        # 确保动作命令两端没有多余空格
+        action = action.strip()
+        
         # 执行动作
         status, message, result = self.bridge.process_command(self.agent_id, action)
         

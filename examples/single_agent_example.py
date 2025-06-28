@@ -111,6 +111,33 @@ def main():
         if agent.history and len(agent.history) > 0:
             last_action = agent.history[-1].get('action', '未知')
         
+        # 处理EXPLORE命令返回PARTIAL的情况（需要继续探索直到完成）
+        if last_action.startswith("EXPLORE") and status == ActionStatus.PARTIAL:
+            logger.info("探索未完成，继续探索...")
+            
+            # 最多尝试5次探索
+            max_explore_attempts = 5
+            for attempt in range(1, max_explore_attempts + 1):
+                # 继续执行相同的EXPLORE命令
+                explore_status, explore_message, explore_result = bridge.process_command(agent_id, last_action)
+                
+                # 记录到历史
+                agent.record_action(last_action, {"status": explore_status, "message": explore_message, "result": explore_result})
+                
+                logger.info("额外探索 #%d 结果: %s", attempt, explore_message)
+                
+                # 如果不再是PARTIAL状态，就退出循环
+                if explore_status != ActionStatus.PARTIAL:
+                    status = explore_status
+                    message = explore_message
+                    result = explore_result
+                    break
+                
+                # 暂停一下，避免请求过快
+                time.sleep(0.5)
+            else:
+                logger.info("达到最大探索尝试次数，继续下一步操作")
+        
         # 打印结果
         logger.info("动作结果: %s", message)
         

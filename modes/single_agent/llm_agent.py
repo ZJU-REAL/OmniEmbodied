@@ -287,8 +287,14 @@ class LLMAgent(BaseAgent):
                         
                         return action
                     else:
-                        # 如果只有动作词没有参数，直接返回动作词
-                        return word
+                        # 如果是没有参数的动作词，也正常返回
+                        action = word
+                        
+                        # 调试级别记录动作提取过程
+                        if logger.level <= logging.DEBUG:
+                            logger.debug("动作提取: 在'%s'中找到无参数动作词'%s'", line, word)
+                        
+                        return action
         
         # 如果没找到明确的动作，返回原始文本的最后一行（非空）
         for line in reversed(lines):

@@ -47,7 +47,7 @@ class WorkerAgent(BaseAgent):
         
         # 如果没有预设动作，执行默认行为
         if self.waiting_for_instruction:
-            return "WAIT"  # 等待指令
+            return "EXPLORE"  # 默认使用EXPLORE代替WAIT
         
-        # 兜底行为：查看当前环境
-        return "LOOK" 
+        # 兜底行为：探索当前环境
+        return "EXPLORE" 

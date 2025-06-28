@@ -139,13 +139,30 @@ class Coordinator(BaseAgent):
             except Exception as e:
                 logger.warning(f"获取环境描述时出错: {e}")
         
+        # 格式化历史记录
+        history_summary = ""
+        if self.history:
+            # 获取历史记录设置
+            history_config = self.config.get('history', {}).get('coordinator', {})
+            max_history_in_prompt = history_config.get('max_history_in_prompt', 50)  # 默认显示50条历史记录
+            history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_history_in_prompt)
+        
+        # 获取思考提示
+        thinking_prompt = ""
+        if self.config.get('use_cot', True):
+            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "thinking_prompt", "")
+        else:
+            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "action_prompt", "")
+        
         # 使用提示词管理器格式化完整提示词
         prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
             "coordinator_template",
             task_description=self.task_description,
             agents_format=agents_format,
-            environment_description=env_description
+            environment_description=env_description,
+            history_summary=history_summary,
+            thinking_prompt=thinking_prompt
         )
         
         return prompt

@@ -116,7 +116,7 @@ class PromptManager:
         # 返回完整历史记录
         return self.format_template(history_template, history_entries=history_entries)
     
-    def format_messages(self, mode: str, messages: List[Dict[str, Any]], max_entries: int = 5) -> str:
+    def format_messages(self, mode: str, messages: List[Dict[str, Any]], max_entries: int = 20) -> str:
         """
         格式化消息记录
         
