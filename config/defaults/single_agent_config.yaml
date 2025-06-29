@@ -1,35 +1,18 @@
-# 单智能体配置
-
-# 智能体类型设置
-agent_type: llm  # 可选值: llm, basic, rule_based
+# 单智能体配置文件
+# 包含LLM智能体的完整配置参数
 
 # LLM智能体设置
 llm_agent:
-  # 使用的LLM配置
+  # 使用的LLM配置文件名
   llm_config: llm_config
+  # 使用的提示词配置文件名
+  prompts_config: prompts_config
   # 最大尝试次数
   max_attempts: 3
   # 思考链 (Chain of Thought) 设置
   use_cot: true
   # 动作验证
   validate_actions: true
-
-# 基本智能体设置
-basic_agent:
-  # 随机性程度 (0-1)
-  randomness: 0.3
-  # 预定义动作列表
-  available_actions:
-    - "LOOK"
-    - "EXPLORE"
-    - "GOTO kitchen"
-    - "GOTO bedroom"
-    - "GOTO livingroom"
-    - "GOTO bathroom"
-    - "OPEN fridge"
-    - "CLOSE fridge"
-    - "GRAB apple"
-    - "PLACE apple"
 
 # 环境描述设置
 env_description:
@@ -38,17 +21,16 @@ env_description:
   # 是否显示物体属性
   show_object_properties: true
   # 是否只显示已发现的内容
-  only_show_discovered: true
-
-# 日志设置
-logging:
-  level: info  # 可选: debug, info, warning, error
-  log_file: "agent.log"
-  log_to_console: true
+  only_show_discovered: false
+  # 是否包含动态动作描述
+  include_dynamic_actions: true
 
 # 历史记录设置
 history:
-  save_history: true
   max_history_length: 500
-  max_history_in_prompt: 50  # 控制提示词中显示的历史记录数量
-  history_file: "agent_history.json" 
+  max_history_in_prompt: 10  # 控制提示词中显示的历史记录数量
+
+# 任务执行设置
+execution:
+  max_steps: 50  # 最大执行步数
+  step_timeout: 60  # 单步超时时间(秒)

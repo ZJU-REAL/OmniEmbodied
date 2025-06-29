@@ -303,6 +303,39 @@ formatted_prompt = prompt_manager.get_formatted_prompt(
 )
 ```
 
+### 环境信息注入
+
+提示词系统会自动将环境描述注入到提示词中，通过`{environment_description}`占位符实现：
+
+```yaml
+# 在 prompts_config.yaml 中
+single_agent:
+  task_template: |
+    {environment_description}
+
+    当前任务：
+    {task_description}
+
+    历史行动：
+    {history_summary}
+```
+
+环境描述的详细程度由配置文件控制，确保LLM获得适当的环境上下文信息。
+
+### 动态动作注入
+
+系统提示词中的`{dynamic_actions_description}`会自动注入当前可用的动作列表：
+
+```yaml
+single_agent:
+  system: |
+    你是一个在文本具身环境中执行任务的智能体。
+
+    {dynamic_actions_description}
+
+    请根据当前环境状态选择合适的动作。
+```
+
 ### 自定义提示词
 
 要自定义提示词，只需修改`config/defaults/prompts_config.yaml`文件中的相应模板，而无需修改代码。这使得提示词调优变得更加简单和灵活。
@@ -445,13 +478,56 @@ decentralized:
 
 ### 环境描述配置
 
-支持灵活的环境描述配置，可根据需要调整详细程度：
+框架支持灵活的环境描述配置，直接影响提示词中注入的房间信息完整性：
 
 ```yaml
 env_description:
-  detail_level: "room"  # full/room/brief
+  detail_level: "full"  # full/room/brief - 控制房间信息范围
+  show_object_properties: true  # 是否显示物体详细属性
+  only_show_discovered: false   # 是否只显示已发现的内容
+```
+
+#### 详细程度说明
+
+- **`detail_level: "full"`** - 完整环境描述
+  - 显示**所有房间**的信息
+  - 包含环境概述、房间详情和智能体状态
+  - 适用于需要全局规划的任务
+
+- **`detail_level: "room"`** - 当前房间描述（默认）
+  - 只显示**智能体当前所在房间**的信息
+  - 减少提示词长度，适用于局部操作任务
+
+- **`detail_level: "brief"`** - 简要描述
+  - 只显示智能体自身状态
+  - 最简化的环境信息
+
+#### 物体信息控制
+
+- **`show_object_properties: true`** - 显示物体的详细属性（尺寸、重量、品牌等）
+- **`only_show_discovered: false`** - 显示所有物体，包括未探索发现的
+- **`only_show_discovered: true`** - 只显示已发现的物体（更符合现实探索场景）
+
+#### 配置示例
+
+```yaml
+# 全知视角配置 - 适用于规划任务
+env_description:
+  detail_level: "full"
   show_object_properties: true
   only_show_discovered: false
+
+# 探索模式配置 - 适用于探索任务
+env_description:
+  detail_level: "room"
+  show_object_properties: true
+  only_show_discovered: true
+
+# 轻量模式配置 - 适用于简单任务
+env_description:
+  detail_level: "brief"
+  show_object_properties: false
+  only_show_discovered: true
 ```
 
 ### 自定义智能体行为
