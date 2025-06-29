@@ -6,23 +6,22 @@ mode: "api"  # 可选值: "api" 或 "vllm"
 # API调用方式配置
 api:
   provider: "custom"  # 可选值: "openai" 或 "custom"（自定义端点）
-  
+
   # OpenAI API配置
   openai:
     model: "gpt-3.5-turbo"  # 或 "gpt-4" 等
     temperature: 0.7
     max_tokens: 1024
     api_key: ""  # 建议使用环境变量OPENAI_API_KEY而不是硬编码在这里
-    
+
   # 自定义端点API配置
   custom:
     model: "deepseek-chat"  # 模型名称
-    # model: "deepseek-reasoner"  # 模型名称
-    temperature: 0.3
+    temperature: 0.1
     max_tokens: 4096
     api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 自定义API密钥，或使用环境变量CUSTOM_LLM_API_KEY
     endpoint: "https://api.deepseek.com"  # 自定义API端点URL
-    
+
 # VLLM本地推理配置
 vllm:
   model_path: ""  # 模型路径，如 "/path/to/llama-7b" 或 Hugging Face模型ID
@@ -39,4 +38,3 @@ parameters:
   keep_context: true
   # 是否在API请求中发送历史消息
   send_history: false
-  # 注意：系统提示词应在prompts_config.yaml中配置，LLMAgent会从那里获取 

@@ -1,189 +1,141 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-单智能体示例 - 展示如何使用基于大模型的智能体与模拟器交互
+优化后的单智能体示例 - 使用框架中的LLMAgent
+- 数据通过data文件夹导入
+- 提示词完全从config目录的配置文件导入
+- 支持动态动作描述插入
 """
 
 import os
 import sys
 import time
 import logging
-from typing import Dict, Any
 
-# 添加项目根目录到路径，便于直接运行
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+# 添加项目根目录到路径
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from embodied_framework import LLMAgent, ConfigManager, setup_logger, SimulatorBridge
-from embodied_framework.utils import create_env_description_config
+from config import ConfigManager
+from utils.logger import setup_logger
+from utils.simulator_bridge import SimulatorBridge
+from utils.data_loader import DataLoader
 from embodied_simulator.core import ActionStatus
+from modes.single_agent.llm_agent import LLMAgent
+
 
 def main():
-    # 根据配置设置日志级别
-    config_manager = ConfigManager()
-    agent_config = config_manager.get_config("single_agent_config")
-    
-    log_level = logging.INFO
-    logging_config = agent_config.get('logging', {})
-    level_str = logging_config.get('level', 'info').lower()
-    
-    if level_str == 'debug':
-        log_level = logging.DEBUG
-    elif level_str == 'info':
-        log_level = logging.INFO
-    elif level_str == 'warning':
-        log_level = logging.WARNING
-    elif level_str == 'error':
-        log_level = logging.ERROR
-    
+    """主函数"""
     # 设置日志
-    logger = setup_logger("single_agent_example", log_level, propagate_to_root=True)
-    logger.info("日志级别设置为: %s", level_str.upper())
-    
-    # 步骤1: 加载配置
-    llm_config = config_manager.get_config("llm_config")
-    
-    # 显示配置信息
-    logger.info("LLM配置: %s", llm_config.get("provider", "未指定"))
-    logger.info("智能体类型: %s", agent_config.get("agent_type", "未指定"))
-    
-    # 步骤2: 初始化模拟器桥接
-    task_file = os.path.join("data", "default", "default_task.json")
-    if not os.path.exists(task_file):
-        logger.error("任务文件不存在: %s", task_file)
-        sys.exit(1)
-        
-    logger.info("初始化模拟器桥接...")
-    bridge = SimulatorBridge()
-    success = bridge.initialize_with_task(task_file)
-    if not success:
-        logger.error("模拟器初始化失败")
-        sys.exit(1)
-    
-    # 输出任务信息
-    task_description = bridge.get_task_description()
-    logger.info("任务: %s", task_description)
-    
-    # 使用配置文件中定义的环境描述设置，而不是覆盖它
-    env_config = agent_config.get('env_description', {})
-    detail_level = env_config.get('detail_level', 'room')
-    
-    # 记录实际使用的环境描述配置
-    logger.info("使用环境描述级别: %s", detail_level)
-    
-    # 步骤3: 创建智能体
-    agent_id = "agent_1"  # 使用默认的第一个智能体
-    logger.info("创建LLM智能体...")
-    agent = LLMAgent(bridge, agent_id, agent_config)
-    
-    # 测试环境描述 - 添加detail_level参数
-    test_env_desc = bridge.describe_environment_natural_language(
-        sim_config={
-            'nlp_show_object_properties': env_config.get('show_object_properties', True),
-            'nlp_only_show_discovered': env_config.get('only_show_discovered', False),
-            'nlp_detail_level': detail_level  # 传递detail_level参数
-        }
-    )
-    
-    # 根据日志级别显示不同长度的环境描述
-    if log_level <= logging.DEBUG:
-        logger.info("=== 环境描述示例 ===\n%s\n===============", test_env_desc)
-    else:
-        logger.info("=== 环境描述示例 ===\n%s\n===============", test_env_desc[:300] + "...")
-    
-    # 步骤4: 运行智能体
-    logger.info("开始执行任务...")
-    max_steps = 15
-    for step in range(1, max_steps + 1):
-        logger.info("==== 步骤 %d ====", step)
-        
-        if log_level <= logging.DEBUG:
-            # 在调试模式下，获取并输出当前智能体状态
-            agent_state = agent.get_state()
-            location = agent_state.get('location', {}).get('name', '未知位置')
-            inventory = [item.get('name', item.get('id', '未知')) for item in agent_state.get('inventory', [])]
-            logger.debug("当前位置: %s, 库存: %s", location, inventory)
-        
-        # 执行一步
-        status, message, result = agent.step()
-        
-        # 获取执行的动作
-        last_action = "未知"
-        if agent.history and len(agent.history) > 0:
-            last_action = agent.history[-1].get('action', '未知')
-        
-        # 处理EXPLORE命令返回PARTIAL的情况（需要继续探索直到完成）
-        if last_action.startswith("EXPLORE") and status == ActionStatus.PARTIAL:
-            logger.info("探索未完成，继续探索...")
-            
-            # 最多尝试5次探索
-            max_explore_attempts = 5
-            for attempt in range(1, max_explore_attempts + 1):
-                # 继续执行相同的EXPLORE命令
-                explore_status, explore_message, explore_result = bridge.process_command(agent_id, last_action)
-                
-                # 记录到历史
-                agent.record_action(last_action, {"status": explore_status, "message": explore_message, "result": explore_result})
-                
-                logger.info("额外探索 #%d 结果: %s", attempt, explore_message)
-                
-                # 如果不再是PARTIAL状态，就退出循环
-                if explore_status != ActionStatus.PARTIAL:
-                    status = explore_status
-                    message = explore_message
-                    result = explore_result
-                    break
-                
-                # 暂停一下，避免请求过快
-                time.sleep(0.5)
-            else:
-                logger.info("达到最大探索尝试次数，继续下一步操作")
-        
-        # 打印结果
-        logger.info("动作结果: %s", message)
-        
-        # 在调试模式下显示详细的结果数据
-        if log_level <= logging.DEBUG and result:
-            import json
-            logger.debug("详细结果: %s", json.dumps(result, ensure_ascii=False, indent=2))
-        
-        # 检查任务是否完成
-        if check_task_completion(agent):
-            logger.info("任务成功完成！")
-            break
-            
-        # 暂停一下，便于观察
-        time.sleep(1)
-    else:
-        logger.info("已达到最大步骤数 (%d)，任务未完成。", max_steps)
-    
-    # 步骤5: 输出执行历史
-    logger.info("==== 执行历史 ====")
-    for i, entry in enumerate(agent.get_history()):
-        action = entry.get('action', '')
-        result = entry.get('result', {})
-        status = result.get('status', '')
-        message = result.get('message', '')
-        logger.info("%d. 动作: %s, 状态: %s, 消息: %s", i+1, action, status, message)
+    setup_logger(log_level=logging.INFO)
+    logger = logging.getLogger(__name__)
 
-def check_task_completion(agent: LLMAgent) -> bool:
-    """
-    检查任务是否完成的自定义逻辑
-    
-    Args:
-        agent: 智能体实例
-        
-    Returns:
-        bool: 任务是否完成
-    """
-    # 获取智能体状态
-    state = agent.get_state()
-    
-    # 根据任务目标检查完成情况，这里以抓取苹果为例
-    inventory = [item.get("id") for item in state.get("inventory", [])]
-    if "apple_1" in inventory:
-        return True
-    
-    return False
+    logger.info("🚀 启动单智能体示例")
+
+    try:
+        # 创建模拟器桥接
+        bridge = SimulatorBridge()
+        logger.info("✅ 模拟器桥接创建成功")
+
+        # 初始化场景
+        scenario_id = "00001"
+        logger.info(f"🔄 正在初始化场景: {scenario_id}")
+
+        if not bridge.initialize_with_scenario(scenario_id):
+            logger.error("❌ 模拟器初始化失败")
+            return 1
+
+        # 验证智能体是否存在
+        if not hasattr(bridge.simulator, 'agent_manager') or not bridge.simulator.agent_manager:
+            logger.error("❌ 智能体管理器不存在")
+            return 1
+
+        agents = bridge.simulator.agent_manager.get_all_agents()
+        if not agents:
+            logger.error("❌ 没有找到任何智能体")
+            return 1
+
+        agent_id = list(agents.keys())[0]
+        logger.info(f"🤖 找到智能体: {agent_id}")
+
+        # 加载配置
+        config_manager = ConfigManager()
+        config = config_manager.get_config("single_agent_config")
+
+        # 获取任务描述
+        data_loader = DataLoader()
+        result = data_loader.load_complete_scenario(scenario_id)
+        if not result:
+            logger.error("❌ 无法加载场景数据")
+            return 1
+        _, task_data = result
+
+        task_background = task_data.get('task_background', '执行实验室任务')
+        first_task = task_data.get('tasks', [{}])[0]
+        task_description = first_task.get('task_description', task_background)
+
+        logger.info(f"🎯 任务描述: {task_description}")
+
+        # 创建LLM智能体
+        simulator = bridge.simulator
+        agent = LLMAgent(simulator, agent_id, config)
+        agent.set_task(task_description)
+
+        # 执行配置
+        exec_config = config.get('execution', {})
+        max_steps = exec_config.get('max_steps', 50)
+
+        # 执行统计
+        stats = {
+            'total_actions': 0,
+            'successful_actions': 0,
+            'start_time': time.time()
+        }
+
+        # 执行任务
+        logger.info(f"🎬 开始执行任务，最大步数: {max_steps}")
+        for step in range(1, max_steps + 1):
+            logger.info(f"\n📍 步骤 {step}/{max_steps}")
+
+            try:
+                # 执行一步
+                status, message, _ = agent.step()
+
+                # 更新统计
+                stats['total_actions'] += 1
+                if status == ActionStatus.SUCCESS:
+                    stats['successful_actions'] += 1
+                    logger.info(f"✅ 动作成功: {message}")
+                else:
+                    logger.warning(f"⚠️ 动作失败: {message}")
+
+                # 检查是否完成任务（简单检查）
+                if "完成" in message or "成功" in message:
+                    logger.info("🎉 任务可能已完成")
+                    break
+
+            except Exception as e:
+                logger.error(f"❌ 执行动作时出错: {e}")
+                break
+
+        # 计算最终统计
+        runtime = time.time() - stats['start_time']
+        success_rate = (stats['successful_actions'] / stats['total_actions']
+                       if stats['total_actions'] > 0 else 0)
+
+        # 输出统计信息
+        logger.info("\n📊 执行统计:")
+        logger.info(f"总动作数: {stats['total_actions']}")
+        logger.info(f"成功动作数: {stats['successful_actions']}")
+        logger.info(f"成功率: {success_rate:.2%}")
+        logger.info(f"运行时间: {runtime:.2f}秒")
+
+        logger.info("🎉 程序执行完成")
+        return 0
+
+    except Exception as e:
+        logger.exception(f"❌ 程序执行失败: {e}")
+        return 1
+
 
 if __name__ == "__main__":
-    main() 
+    exit(main())

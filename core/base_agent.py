@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Any, Tuple
 
 from embodied_simulator import SimulationEngine, ActionStatus
-from ..utils.simulator_bridge import SimulatorBridge
+from utils.simulator_bridge import SimulatorBridge
 
 logger = logging.getLogger(__name__)
 

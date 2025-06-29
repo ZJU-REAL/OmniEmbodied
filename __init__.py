@@ -8,7 +8,7 @@ from .modes.decentralized import AutonomousAgent, CommunicationManager, Negotiat
 
 from .llm import BaseLLM, create_llm_from_config
 from .config import ConfigManager
-from .utils import setup_logger, DataLoader, load_scene, load_task
+from .utils import setup_logger, DataLoader, load_scene, load_task, get_task_scene, load_complete_scenario
 from .utils.simulator_bridge import SimulatorBridge
 
 __version__ = "0.1.0"
@@ -44,6 +44,8 @@ __all__ = [
     'DataLoader',
     'load_scene',
     'load_task',
+    'get_task_scene',
+    'load_complete_scenario',
     'SimulatorBridge',
     
     # Version

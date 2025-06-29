@@ -6,14 +6,8 @@ coordinator:
   llm_config: llm_config
   # 最大历史长度
   max_chat_history: 10
-  # 思考链 (Chain of Thought) 设置
-  use_cot: true
-  # 动作验证
-  validate_actions: true
   # 环境描述设置
   env_description:
-    # 是否启用环境描述
-    enabled: true
     # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
     detail_level: full
     # 是否显示物体属性
@@ -25,18 +19,8 @@ coordinator:
 worker_agents:
   # 默认行为
   default_behavior: "wait_for_instruction"  # 可选: wait_for_instruction, explore, random
-  # 是否允许在没有指令时自主行动
-  allow_autonomous_action: false
-  # 最大等待时间(秒)
-  max_wait_time: 5
-  # 思考链 (Chain of Thought) 设置
-  use_cot: true
-  # 动作验证
-  validate_actions: true
   # 环境描述设置
   env_description:
-    # 是否启用环境描述
-    enabled: true
     # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
     detail_level: room
     # 是否显示物体属性
@@ -44,52 +28,11 @@ worker_agents:
     # 是否只显示已发现的内容
     only_show_discovered: true
 
-# 规划器设置
-planner:
-  # 是否启用规划器
-  enabled: true
-  # 规划粒度
-  granularity: "medium"  # 可选: fine, medium, coarse
-  # 重规划触发条件
-  replan_on_failure: true
-  replan_interval: 5  # 每执行5步后重新规划
-
-# 任务分配策略
-task_allocation:
-  # 分配策略
-  strategy: "specialized"  # 可选: specialized, balanced, dynamic
-  # 是否考虑智能体能力差异
-  consider_capabilities: true
-  # 是否允许任务重新分配
-  allow_reassignment: true
-
 # 协作模式
 collaboration:
   # 协作模式
   mode: "hierarchical"  # 可选: hierarchical, cooperative
-  # 是否共享观察结果
-  share_observations: true
-  # 是否共享发现的物体
-  share_discoveries: true
 
 # 日志设置
 logging:
-  enabled: true
   level: info  # 可选: debug, info, warning, error
-  log_file: "centralized_agents.log"
-  log_to_console: true
-
-# 历史记录设置
-history:
-  # 协调器历史记录
-  coordinator:
-    save_history: true
-    max_history_length: 500
-    max_history_in_prompt: 50  # 控制提示词中显示的历史记录数量
-    history_file: "coordinator_history.json"
-  # 工作智能体历史记录
-  workers:
-    save_history: true
-    max_history_length: 300
-    max_history_in_prompt: 30  # 控制提示词中显示的历史记录数量
-    history_file: "worker_history.json" 

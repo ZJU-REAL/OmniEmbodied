@@ -6,18 +6,8 @@ autonomous_agent:
   llm_config: llm_config
   # 最大历史长度
   max_chat_history: 10
-  # 思考链 (Chain of Thought) 设置
-  use_cot: true
-  # 动作验证
-  validate_actions: true
-  # 自主程度
-  autonomy_level: "high"  # 可选: low, medium, high
-  # 是否启用主动协商
-  enable_proactive_negotiation: true
   # 环境描述设置
   env_description:
-    # 是否启用环境描述
-    enabled: true
     # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
     detail_level: room
     # 是否显示物体属性
@@ -31,89 +21,37 @@ agent_personalities:
   explorer:
     personality: "好奇、冒险、细心"
     skills: ["探索", "发现", "记忆地图"]
-    # 思考链 (Chain of Thought) 设置
-    use_cot: true
     # 探索者的环境描述设置 - 可看到更多细节
     env_description:
       detail_level: room
       show_object_properties: true
       only_show_discovered: false
-  
+
   # 操作者
   operator:
     personality: "谨慎、精确、专注"
     skills: ["操作物体", "精细动作", "解决难题"]
-    # 思考链 (Chain of Thought) 设置
-    use_cot: true
     # 操作者的环境描述设置 - 更关注物体细节
     env_description:
       detail_level: room
       show_object_properties: true
       only_show_discovered: true
-  
+
   # 协调者
   coordinator:
     personality: "合作、组织、全局思考"
     skills: ["规划", "协调", "沟通"]
-    # 思考链 (Chain of Thought) 设置
-    use_cot: true
     # 协调者的环境描述设置 - 可看到更多全局信息
     env_description:
       detail_level: full
       show_object_properties: false
       only_show_discovered: false
 
-# 通信设置
-communication:
-  # 消息传递延迟(秒)
-  message_delay: 0.5
-  # 消息丢失概率
-  message_loss_probability: 0.05
-  # 通信范围限制
-  range_limited: false
-  max_range: 100.0
-  # 消息处理频率(秒)
-  processing_interval: 1.0
-
-# 协商设置
-negotiation:
-  # 默认超时时间(秒)
-  default_timeout: 30
-  # 协商策略
-  strategy: "cooperative"  # 可选: cooperative, competitive, balanced
-  # 是否启用反提议
-  enable_counter_offers: true
-  # 最大协商轮次
-  max_negotiation_rounds: 3
-
 # 协作模式
 collaboration:
-  # 是否共享观察结果
-  share_observations: true
-  # 共享频率(步数)
-  sharing_frequency: 3
-  # 是否共享任务进度
-  share_task_progress: true
   # 是否形成动态团队
   form_dynamic_teams: true
 
 # 日志设置
 logging:
-  enabled: true
   level: info  # 可选: debug, info, warning, error
-  log_file: "decentralized_agents.log"
-  log_to_console: true
-
-# 历史记录设置
-history:
-  # 通用历史记录设置
-  save_history: true
-  max_history_length: 500
-  max_history_in_prompt: 50  # 控制提示词中显示的历史记录数量
-  history_file: "agent_history.json"
-  # 消息历史记录设置
-  messages:
-    save_messages: true
-    max_messages_length: 100
-    max_messages_in_prompt: 20  # 控制提示词中显示的消息数量
-    messages_file: "agent_messages.json" 

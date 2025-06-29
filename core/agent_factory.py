@@ -1,9 +1,9 @@
 from typing import Dict, Any, Optional
 
-from ..core.base_agent import BaseAgent
-from ..modes.single_agent.llm_agent import LLMAgent
-from ..modes.centralized.coordinator import Coordinator
-from ..modes.decentralized.autonomous_agent import AutonomousAgent
+from core.base_agent import BaseAgent
+from modes.single_agent.llm_agent import LLMAgent
+from modes.centralized.coordinator import Coordinator
+from modes.decentralized.autonomous_agent import AutonomousAgent
 
 def create_agent(agent_type: str, simulator, agent_id: str, config: Optional[Dict[str, Any]] = None) -> BaseAgent:
     """

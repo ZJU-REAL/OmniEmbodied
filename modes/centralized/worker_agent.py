@@ -2,7 +2,7 @@ from typing import Dict, List, Optional, Any, Tuple
 
 from embodied_simulator import SimulationEngine
 from embodied_simulator.core import ActionStatus
-from ...core.base_agent import BaseAgent
+from core.base_agent import BaseAgent
 
 class WorkerAgent(BaseAgent):
     """

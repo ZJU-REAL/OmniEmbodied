@@ -4,10 +4,10 @@ import logging
 from embodied_simulator import SimulationEngine
 from embodied_simulator.core import ActionStatus
 
-from ...core.base_agent import BaseAgent
-from ...llm import BaseLLM, create_llm_from_config
-from ...config import ConfigManager
-from ...utils.prompt_manager import PromptManager
+from core.base_agent import BaseAgent
+from llm import BaseLLM, create_llm_from_config
+from config import ConfigManager
+from utils.prompt_manager import PromptManager
 from .worker_agent import WorkerAgent
 from .planner import Planner
 

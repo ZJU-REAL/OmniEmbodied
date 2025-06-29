@@ -5,10 +5,10 @@ from typing import Dict, List, Optional, Any, Tuple
 from embodied_simulator import SimulationEngine
 from embodied_simulator.core import ActionStatus
 
-from ...core.base_agent import BaseAgent
-from ...config import ConfigManager
-from ...llm import BaseLLM, create_llm_from_config
-from ...utils.prompt_manager import PromptManager
+from core.base_agent import BaseAgent
+from config import ConfigManager
+from llm import BaseLLM, create_llm_from_config
+from utils.prompt_manager import PromptManager
 
 # 确保logger使用正确的名称，与文件路径一致
 logger = logging.getLogger(__name__)
@@ -44,9 +44,13 @@ class LLMAgent(BaseAgent):
         # 模式名称
         self.mode = "single_agent"
         
-        # 从配置中获取系统提示词
-        self.system_prompt = self.prompt_manager.get_prompt_template(self.mode, "system", 
-            "你是一个在虚拟环境中执行任务的智能体。你可以探索环境、与物体交互，并执行各种动作。注意：你必须先靠近物体才能与之交互。")
+        # 从配置中获取系统提示词（包含动态动作描述）
+        self.system_prompt = self.prompt_manager.get_system_prompt_with_actions(
+            mode=self.mode,
+            agent_id=self.agent_id,
+            bridge=None,  # 暂时为None，稍后更新
+            default_value="你是一个在虚拟环境中执行任务的智能体。你可以探索环境、与物体交互，并执行各种动作。注意：你必须先靠近物体才能与之交互。"
+        )
         
         # 对话历史
         self.chat_history = []
@@ -90,13 +94,37 @@ class LLMAgent(BaseAgent):
     def set_task(self, task_description: str) -> None:
         """
         设置任务描述
-        
+
         Args:
             task_description: 任务描述文本
         """
         self.task_description = task_description
         if logger.level <= logging.DEBUG:
             logger.debug("设置新任务: %s", task_description)
+
+        # 如果有模拟器实例，更新系统提示词以包含动态动作描述
+        if hasattr(self, 'simulator') and self.simulator:
+            self._update_system_prompt()
+
+    def _update_system_prompt(self) -> None:
+        """更新系统提示词，包含动态动作描述"""
+        try:
+            # 创建一个简单的桥接对象来传递给prompt_manager
+            class SimpleBridge:
+                def __init__(self, simulator):
+                    self.simulator = simulator
+
+            bridge = SimpleBridge(self.simulator)
+            self.system_prompt = self.prompt_manager.get_system_prompt_with_actions(
+                mode=self.mode,
+                agent_id=self.agent_id,
+                bridge=bridge,
+                default_value=self.system_prompt
+            )
+            logger.debug("系统提示词已更新，包含动态动作描述")
+        except Exception as e:
+            logger.warning(f"更新系统提示词失败: {e}")
+            # 保持原有的系统提示词
     
     def _format_object_list(self, objects: List[Dict[str, Any]]) -> str:
         """格式化物体列表为可读字符串"""

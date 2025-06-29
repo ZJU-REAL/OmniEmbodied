@@ -17,7 +17,7 @@ from embodied_framework import (
     AutonomousAgent, CommunicationManager, Negotiator, 
     ConfigManager, setup_logger, SimulatorBridge
 )
-from embodied_framework.utils import create_env_description_config
+from embodied_framework.utils import create_env_description_config, load_complete_scenario
 from embodied_framework.modes.decentralized.negotiation import NegotiationType
 from embodied_simulator.core import ActionStatus
 
@@ -51,14 +51,28 @@ def main():
     logger.info("协作模式: %s", decentralized_config.get("collaboration", {}).get("form_dynamic_teams", "未指定"))
     
     # 步骤2: 初始化模拟器桥接
-    task_file = os.path.join("data", "default", "default_task.json")
-    if not os.path.exists(task_file):
-        logger.error("任务文件不存在: %s", task_file)
-        sys.exit(1)
-        
     logger.info("初始化模拟器桥接...")
-    bridge = SimulatorBridge()
-    success = bridge.initialize_with_task(task_file)
+
+    # 创建模拟器配置
+    sim_config = {
+        'visualization': {'enabled': False},
+        'explore_mode': 'thorough'
+    }
+
+    bridge = SimulatorBridge(config=sim_config)
+
+    # 尝试使用新的场景ID初始化方式
+    success = bridge.initialize_with_scenario("00001")
+
+    if not success:
+        # 回退到旧的任务文件初始化方式
+        logger.info("尝试使用任务文件初始化...")
+        task_file = os.path.join("data", "default", "default_task.json")
+        if not os.path.exists(task_file):
+            logger.error("任务文件不存在: %s", task_file)
+            sys.exit(1)
+        success = bridge.initialize_with_task(task_file)
+
     if not success:
         logger.error("模拟器初始化失败")
         sys.exit(1)

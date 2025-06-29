@@ -1,6 +1,6 @@
 import logging
 from typing import Dict, List, Any, Optional, Union
-from ..config import ConfigManager
+from config.config_manager import ConfigManager
 
 logger = logging.getLogger(__name__)
 
@@ -99,11 +99,19 @@ class PromptManager:
         entries = []
         for i, entry in enumerate(history[-max_entries:]):
             action = entry.get('action', '')
-            result = entry.get('result', {})
-            status = result.get('status', '')
-            message = result.get('message', '')
-            
-            formatted_entry = self.format_template(entry_template, 
+
+            # 支持两种格式：新格式（直接包含status和message）和旧格式（嵌套在result中）
+            if 'result' in entry:
+                # 旧格式
+                result = entry.get('result', {})
+                status = result.get('status', '')
+                message = result.get('message', '')
+            else:
+                # 新格式
+                status = entry.get('status', '')
+                message = entry.get('message', '')
+
+            formatted_entry = self.format_template(entry_template,
                                                   index=i+1,
                                                   action=action,
                                                   status=status,
@@ -204,5 +212,69 @@ class PromptManager:
         # 将环境描述直接作为插值参数传递，而不是尝试找插入点
         if description:
             return self.format_template(prompt, environment_description=description)
-        
-        return prompt 
+
+        return prompt
+
+    def get_system_prompt_with_actions(self, mode: str, agent_id: str, bridge, default_value: str = "") -> str:
+        """
+        获取包含动态动作描述的系统提示词
+
+        Args:
+            mode: 模式名称 (single_agent, centralized, decentralized)
+            agent_id: 智能体ID
+            bridge: 模拟器桥接实例
+            default_value: 默认值，如果找不到模板则返回此值
+
+        Returns:
+            str: 包含动态动作描述的系统提示词
+        """
+        # 获取系统提示词模板
+        system_template = self.get_prompt_template(mode, "system", default_value)
+
+        # 获取通用配置
+        common_config = self.prompts_config.get('common', {})
+        proximity_rules = common_config.get('proximity_rules', '')
+        interaction_rules = common_config.get('interaction_rules', '')
+        general_notes = common_config.get('general_notes', '')
+
+        # 获取动态动作描述
+        dynamic_actions = self._get_dynamic_actions_description(agent_id, bridge)
+
+        # 格式化模板，插入所有必要的配置
+        try:
+            return self.format_template(system_template,
+                                      dynamic_actions_description=dynamic_actions,
+                                      proximity_rules=proximity_rules,
+                                      interaction_rules=interaction_rules,
+                                      general_notes=general_notes)
+        except KeyError as e:
+            logger.warning(f"格式化系统提示词时缺少参数: {e}")
+            return system_template
+        except Exception as e:
+            logger.exception(f"格式化系统提示词时出错: {e}")
+            return system_template
+
+    def _get_dynamic_actions_description(self, agent_id: str, bridge) -> str:
+        """
+        获取智能体的动态动作描述
+
+        Args:
+            agent_id: 智能体ID
+            bridge: 模拟器桥接实例
+
+        Returns:
+            str: 动作描述字符串
+        """
+        if bridge is None:
+            return "【可用动作】\n动作信息暂时不可用。"
+
+        try:
+            # 使用模拟器桥接获取动作描述
+            actions_description = bridge.get_agent_supported_actions_description(agent_id)
+            if actions_description:
+                return f"【可用动作】\n{actions_description}"
+            else:
+                return "【可用动作】\n动作信息暂时不可用。"
+        except Exception as e:
+            logger.warning(f"获取动态动作描述时出错: {e}")
+            return "【可用动作】\n动作信息暂时不可用。"

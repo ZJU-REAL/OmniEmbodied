@@ -3,6 +3,7 @@ import logging
 from typing import Dict, List, Any, Optional, Tuple
 
 from embodied_simulator import SimulationEngine, ActionStatus
+from .data_loader import default_loader as framework_data_loader
 
 logger = logging.getLogger(__name__)
 
@@ -11,36 +12,115 @@ class SimulatorBridge:
     模拟器桥接类 - 为框架提供对模拟器功能的统一访问接口
     简化架构，避免重复实现模拟器已有的功能
     """
-    
-    def __init__(self, simulator: Optional[SimulationEngine] = None):
+
+    def __init__(self, simulator: Optional[SimulationEngine] = None, config: Optional[Dict[str, Any]] = None):
         """
         初始化模拟器桥接
-        
+
         Args:
             simulator: 模拟引擎实例，如果为None则创建新实例
+            config: 模拟器配置字典
         """
-        self.simulator = simulator or SimulationEngine()
+        self.config = config or {}
+        self.simulator = simulator or SimulationEngine(config=self.config)
         
     def initialize_with_task(self, task_file: str) -> bool:
         """
         使用任务文件初始化模拟器
-        
+
         Args:
             task_file: 任务文件路径
-            
+
         Returns:
             bool: 是否成功初始化
         """
         return self.simulator.initialize_with_task(task_file)
+
+    def initialize_with_data(self, data: Dict[str, Any]) -> bool:
+        """
+        使用数据字典初始化模拟器（新API）
+
+        Args:
+            data: 包含场景、任务和验证数据的字典
+                  格式: {
+                      'scene': scene_data,
+                      'task': task_data,
+                      'verify': verify_data (可选)
+                  }
+
+        Returns:
+            bool: 是否成功初始化
+        """
+        return self.simulator.initialize_with_data(data)
+
+    def initialize_with_scenario(self, scenario_id: str) -> bool:
+        """
+        使用场景ID初始化模拟器（推荐，新数据结构）
+
+        Args:
+            scenario_id: 场景ID（如'00001'）
+
+        Returns:
+            bool: 是否成功初始化
+        """
+        try:
+            # 使用框架的数据加载器加载完整场景数据
+            result = framework_data_loader.load_complete_scenario(scenario_id)
+            if result is None:
+                logger.error(f"无法加载场景数据: {scenario_id}")
+                return False
+
+            # 解包结果（可能是2元组或3元组）
+            if len(result) == 2:
+                scene_data, task_data = result
+                verify_data = None
+            else:
+                scene_data, task_data, verify_data = result
+
+            # 从场景数据中提取abilities（新的数据结构）
+            scene_abilities = scene_data.get('abilities', [])
+            if scene_abilities:
+                # 重新创建带有scene_abilities的模拟器
+                self.simulator = SimulationEngine(config=self.config, scene_abilities=scene_abilities)
+
+            # 构建数据字典
+            data = {
+                'scene': scene_data,
+                'task': task_data
+            }
+            if verify_data:
+                data['verify'] = verify_data
+
+            # 使用新的initialize_with_data方法
+            success = self.initialize_with_data(data)
+
+            # 确保任务验证器正确传递到action_handler，支持DONE命令
+            if success and hasattr(self.simulator, 'action_handler') and hasattr(self.simulator, 'task_verifier'):
+                if self.simulator.action_handler and self.simulator.task_verifier:
+                    self.simulator.action_handler.task_verifier = self.simulator.task_verifier
+                    logger.debug("已将任务验证器设置到action_handler，支持DONE命令")
+
+            return success
+
+        except Exception as e:
+            logger.exception(f"使用场景ID初始化失败: {e}")
+            return False
     
     def get_task_info(self) -> Optional[Dict[str, Any]]:
         """
         获取当前任务信息
-        
+
         Returns:
             Dict: 任务信息字典
         """
-        return self.simulator.get_task_info()
+        # 适配新API：如果有task_config属性则使用，否则尝试旧方法
+        if hasattr(self.simulator, 'task_config') and self.simulator.task_config:
+            return self.simulator.task_config
+        elif hasattr(self.simulator, 'get_task_info'):
+            return self.simulator.get_task_info()
+        else:
+            logger.warning("无法获取任务信息，模拟器可能未正确初始化")
+            return None
     
     def get_task_description(self) -> str:
         """
@@ -170,11 +250,11 @@ class SimulatorBridge:
     def process_command(self, agent_id: str, command: str) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
         """
         处理智能体命令
-        
+
         Args:
             agent_id: 智能体ID
             command: 命令字符串
-            
+
         Returns:
             Tuple: (状态, 消息, 结果数据)
         """
@@ -187,25 +267,45 @@ class SimulatorBridge:
                 location_name = self.get_room_info(location_id).get('name', '未知') if location_id else '未知'
                 inventory = agent_info.get('inventory', [])
                 logger.debug("命令前状态 - 位置: %s(%s), 库存: %s", location_name, location_id, inventory)
-        
+
         # 尝试解析和执行命令
         try:
-            # 这里我们应该区分不同类型的命令，例如基础动作和属性动作
-            # 目前我们简单地转发给模拟器
-            result = self.simulator.process_command(agent_id, command)
-            
-            # 检查返回值类型是否为tuple，表示老版本API
+            # 检查模拟器是否已初始化
+            if not hasattr(self.simulator, 'action_handler') and not hasattr(self.simulator, 'process_command'):
+                logger.warning("模拟器未正确初始化")
+                return ActionStatus.FAILURE, "模拟器未初始化", None
+
+            # 适配新API：使用action_handler处理命令
+            if hasattr(self.simulator, 'action_handler') and self.simulator.action_handler:
+                result = self.simulator.action_handler.process_command(agent_id, command)
+            else:
+                # 回退到旧API
+                if hasattr(self.simulator, 'process_command'):
+                    result = self.simulator.process_command(agent_id, command)
+                else:
+                    logger.warning("模拟器没有可用的命令处理方法")
+                    return ActionStatus.FAILURE, "模拟器未初始化", None
+
+            # 检查返回值
+            if result is None:
+                logger.warning("模拟器返回None，可能未正确初始化")
+                return ActionStatus.FAILURE, "模拟器未初始化", None
+
+            # 检查返回值类型
             if isinstance(result, tuple) and len(result) == 3:
                 status, message, data = result
-            else:
-                # 新版本API返回字典
+            elif isinstance(result, dict):
+                # 新版本API可能返回字典
                 status = result.get('status', ActionStatus.FAILURE)
                 message = result.get('message', '')
                 data = result.get('data', {})
-            
+            else:
+                logger.warning(f"模拟器返回了未知格式的结果: {type(result)}")
+                return ActionStatus.FAILURE, f"未知返回格式: {type(result)}", None
+
             if logger.level <= logging.DEBUG:
                 logger.debug("命令处理结果 - 状态: %s, 消息: %s", status, message)
-                
+
                 # 记录命令后的智能体状态变化
                 agent_info_after = self.get_agent_info(agent_id)
                 if agent_info_after:
@@ -213,12 +313,12 @@ class SimulatorBridge:
                     location_name = self.get_room_info(location_id).get('name', '未知') if location_id else '未知'
                     inventory = agent_info_after.get('inventory', [])
                     logger.debug("命令后状态 - 位置: %s(%s), 库存: %s", location_name, location_id, inventory)
-                
+
                 # 尝试分析命令和结果之间的关系
                 if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
                     command_parts = command.split()
                     command_type = command_parts[0].upper() if command_parts else ''
-                    
+
                     # 检测常见错误模式
                     if command_type == 'GOTO' and 'must be near' in message:
                         logger.debug("GOTO命令失败原因分析: 智能体尝试移动到不可达位置")
@@ -228,12 +328,12 @@ class SimulatorBridge:
                         logger.debug("PLACE命令失败原因分析: 智能体尝试放置未持有的物体")
                     elif 'invalid command' in message.lower():
                         logger.debug("命令失败原因分析: 无效命令格式")
-            
+
             return status, message, data
-            
+
         except Exception as e:
             logger.exception(f"处理命令时出错: {e}")
-            return ActionStatus.ERROR, f"处理命令出错: {str(e)}", None
+            return ActionStatus.FAILURE, f"处理命令出错: {str(e)}", None
     
     def find_objects_by_name(self, name: str) -> List[Dict[str, Any]]:
         """
@@ -309,10 +409,10 @@ class SimulatorBridge:
     def get_objects_on_furniture(self, furniture_id: str) -> List[Dict[str, Any]]:
         """
         获取家具上的所有物体
-        
+
         Args:
             furniture_id: 家具ID
-            
+
         Returns:
             List: 物体信息列表
         """
@@ -323,6 +423,102 @@ class SimulatorBridge:
             if location_id.startswith('on:') and location_id[3:] == furniture_id:
                 result.append(obj)
         return result
+
+    def get_available_actions(self, agent_id: str) -> List[str]:
+        """
+        获取指定智能体的所有可执行动作
+
+        Args:
+            agent_id: 智能体ID
+
+        Returns:
+            List[str]: 可执行动作名称列表
+        """
+        if not hasattr(self.simulator, 'action_handler') or not self.simulator.action_handler:
+            logger.warning("Action handler未初始化")
+            return []
+
+        action_manager = self.simulator.action_handler.action_manager
+
+        # 获取全局动作
+        all_actions = set(action_manager.action_classes.keys())
+
+        # 获取智能体特定动作
+        agent_actions = action_manager.agent_action_classes.get(agent_id, {})
+        all_actions.update(agent_actions.keys())
+
+        return sorted(list(all_actions))
+
+    def get_basic_actions(self) -> List[str]:
+        """
+        获取基础动作列表（不包括属性动作和协作动作）
+
+        Returns:
+            List[str]: 基础动作名称列表
+        """
+        basic_actions = ['GOTO', 'GRAB', 'PLACE', 'LOOK', 'EXPLORE', 'DONE']
+        return basic_actions
+
+    def get_attribute_actions(self, agent_id: str) -> List[str]:
+        """
+        获取智能体的属性动作列表
+
+        Args:
+            agent_id: 智能体ID
+
+        Returns:
+            List[str]: 属性动作名称列表
+        """
+        all_actions = self.get_available_actions(agent_id)
+
+        # 过滤出属性动作（排除基础动作和协作动作）
+        basic_actions = set(self.get_basic_actions())
+        attribute_actions = []
+
+        for action in all_actions:
+            if action not in basic_actions and not action.startswith('CORP_'):
+                attribute_actions.append(action)
+
+        return attribute_actions
+
+    def get_collaborative_actions(self, agent_id: str) -> List[str]:
+        """
+        获取智能体的协作动作列表
+
+        Args:
+            agent_id: 智能体ID
+
+        Returns:
+            List[str]: 协作动作名称列表
+        """
+        all_actions = self.get_available_actions(agent_id)
+
+        # 过滤出协作动作（以CORP_开头）
+        collaborative_actions = [action for action in all_actions if action.startswith('CORP_')]
+
+        return collaborative_actions
+
+    def get_agent_supported_actions_description(self, agent_id: str) -> str:
+        """
+        获取智能体支持的动作的完整描述（使用模拟器提供的新API）
+
+        Args:
+            agent_id: 智能体ID
+
+        Returns:
+            str: 动作描述字符串，包含所有支持的动作和使用说明
+        """
+        if not hasattr(self.simulator, 'action_handler') or not self.simulator.action_handler:
+            logger.warning("Action handler未初始化")
+            return ""
+
+        try:
+            # 使用模拟器提供的新API获取动作描述
+            description = self.simulator.action_handler.get_agent_supported_actions_description(agent_id)
+            return description
+        except Exception as e:
+            logger.error(f"获取动作描述失败: {e}")
+            return ""
     
     def describe_agent_natural_language(self, agent_id: str, agent: Dict = None) -> str:
         """
