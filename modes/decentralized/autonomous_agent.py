@@ -56,7 +56,7 @@ class AutonomousAgent(BaseAgent):
         # 系统提示词
         self.system_prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
-            "autonomous_system",
+            "system_prompt",
             agent_id=agent_id,
             personality=self.personality,
             skills=", ".join(self.skills)
@@ -64,7 +64,9 @@ class AutonomousAgent(BaseAgent):
         
         # 对话历史
         self.chat_history = []
-        self.max_chat_history = self.config.get('max_chat_history', 10)
+        max_chat_history = self.config.get('max_chat_history', 10)
+        # -1 表示不限制历史长度
+        self.max_chat_history = None if max_chat_history == -1 else max_chat_history
         
         # 任务描述
         self.task_description = self.config.get('task_description', "完成目标")
@@ -179,22 +181,14 @@ class AutonomousAgent(BaseAgent):
             except Exception as e:
                 logger.warning(f"获取环境描述时出错: {e}")
         
-        # 获取思考提示
-        thinking_prompt = ""
-        if self.config.get('use_cot', True):
-            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "thinking_prompt", "")
-        else:
-            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "action_prompt", "")
-        
         # 使用提示词管理器格式化完整提示词
         prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
-            "autonomous_template",
+            "user_prompt",
             task_description=self.task_description,
             messages_summary=messages_summary,
             history_summary=history_summary,
-            environment_description=env_description,
-            thinking_prompt=thinking_prompt
+            environment_description=env_description
         )
         
         return prompt
@@ -213,7 +207,7 @@ class AutonomousAgent(BaseAgent):
         self.chat_history.append({"role": "user", "content": prompt})
         
         # 控制对话历史长度
-        if len(self.chat_history) > self.max_chat_history * 2:
+        if self.max_chat_history is not None and len(self.chat_history) > self.max_chat_history * 2:
             self.chat_history = self.chat_history[-self.max_chat_history*2:]
         
         try:

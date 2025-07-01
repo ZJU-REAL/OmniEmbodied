@@ -498,12 +498,14 @@ class SimulatorBridge:
 
         return collaborative_actions
 
-    def get_agent_supported_actions_description(self, agent_id: str) -> str:
+    def get_agent_supported_actions_description(self, agent_ids) -> str:
         """
         获取智能体支持的动作的完整描述（使用模拟器提供的新API）
 
         Args:
-            agent_id: 智能体ID
+            agent_ids: 智能体ID或智能体ID列表
+                      - 如果是字符串，会自动转换为单元素列表
+                      - 如果是列表，直接使用
 
         Returns:
             str: 动作描述字符串，包含所有支持的动作和使用说明
@@ -513,8 +515,15 @@ class SimulatorBridge:
             return ""
 
         try:
+            # 兼容旧API：如果传入的是字符串，转换为列表
+            if isinstance(agent_ids, str):
+                agent_ids = [agent_ids]
+            elif not isinstance(agent_ids, list):
+                logger.error(f"agent_ids必须是字符串或列表，收到: {type(agent_ids)}")
+                return ""
+
             # 使用模拟器提供的新API获取动作描述
-            description = self.simulator.action_handler.get_agent_supported_actions_description(agent_id)
+            description = self.simulator.action_handler.get_agent_supported_actions_description(agent_ids)
             return description
         except Exception as e:
             logger.error(f"获取动作描述失败: {e}")

@@ -52,14 +52,16 @@ class Coordinator(BaseAgent):
         
         # 系统提示词
         self.system_prompt = self.prompt_manager.get_prompt_template(
-            self.mode, 
-            "coordinator_system",
+            self.mode,
+            "system_prompt",
             "你是一个协调多个智能体完成任务的中央控制系统。你需要分析当前环境状态，为每个智能体分配适当的任务。"
         )
         
         # 对话历史
         self.chat_history = []
-        self.max_chat_history = self.config.get('max_chat_history', 10)
+        max_chat_history = self.config.get('max_chat_history', 10)
+        # -1 表示不限制历史长度
+        self.max_chat_history = None if max_chat_history == -1 else max_chat_history
         
         # 任务描述
         self.task_description = self.config.get('task_description', "协作完成任务")
@@ -147,22 +149,14 @@ class Coordinator(BaseAgent):
             max_history_in_prompt = history_config.get('max_history_in_prompt', 50)  # 默认显示50条历史记录
             history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_history_in_prompt)
         
-        # 获取思考提示
-        thinking_prompt = ""
-        if self.config.get('use_cot', True):
-            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "thinking_prompt", "")
-        else:
-            thinking_prompt = self.prompt_manager.get_prompt_template(self.mode, "action_prompt", "")
-        
         # 使用提示词管理器格式化完整提示词
         prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
-            "coordinator_template",
+            "user_prompt",
             task_description=self.task_description,
-            agents_format=agents_format,
+            agents_status=agents_format,
             environment_description=env_description,
-            history_summary=history_summary,
-            thinking_prompt=thinking_prompt
+            history_summary=history_summary
         )
         
         return prompt
@@ -184,7 +178,7 @@ class Coordinator(BaseAgent):
         self.chat_history.append({"role": "user", "content": prompt})
         
         # 控制对话历史长度
-        if len(self.chat_history) > self.max_chat_history * 2:
+        if self.max_chat_history is not None and len(self.chat_history) > self.max_chat_history * 2:
             self.chat_history = self.chat_history[-self.max_chat_history*2:]
         
         try:

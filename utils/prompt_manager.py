@@ -99,6 +99,7 @@ class PromptManager:
         entries = []
         for i, entry in enumerate(history[-max_entries:]):
             action = entry.get('action', '')
+            llm_response = entry.get('llm_response', '')  # 获取完整的LLM回复
 
             # 支持两种格式：新格式（直接包含status和message）和旧格式（嵌套在result中）
             if 'result' in entry:
@@ -111,11 +112,17 @@ class PromptManager:
                 status = entry.get('status', '')
                 message = entry.get('message', '')
 
-            formatted_entry = self.format_template(entry_template,
-                                                  index=i+1,
-                                                  action=action,
-                                                  status=status,
-                                                  message=message)
+            # 如果有LLM回复，优先显示完整回复；否则只显示动作
+            if llm_response:
+                # 显示完整的LLM回复（包含思考和动作）
+                formatted_entry = f"{i+1}. {llm_response}\n   执行结果：{status} - {message}"
+            else:
+                # 回退到原有格式
+                formatted_entry = self.format_template(entry_template,
+                                                      index=i+1,
+                                                      action=action,
+                                                      status=status,
+                                                      message=message)
             entries.append(formatted_entry)
         
         # 组合所有条目
@@ -269,7 +276,7 @@ class PromptManager:
             return "【可用动作】\n动作信息暂时不可用。"
 
         try:
-            # 使用模拟器桥接获取动作描述
+            # 使用模拟器桥接获取动作描述（传入单个智能体ID）
             actions_description = bridge.get_agent_supported_actions_description(agent_id)
             if actions_description:
                 return f"【可用动作】\n{actions_description}"

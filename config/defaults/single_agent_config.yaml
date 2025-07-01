@@ -1,36 +1,165 @@
 # 单智能体配置文件
-# 包含LLM智能体的完整配置参数
-
-# LLM智能体设置
-llm_agent:
-  # 使用的LLM配置文件名
-  llm_config: llm_config
-  # 使用的提示词配置文件名
-  prompts_config: prompts_config
-  # 最大尝试次数
-  max_attempts: 3
-  # 思考链 (Chain of Thought) 设置
-  use_cot: true
-  # 动作验证
-  validate_actions: true
-
-# 环境描述设置
-env_description:
-  # 详细程度: full(完整环境), room(当前房间), brief(简要描述)
-  detail_level: full
-  # 是否显示物体属性
-  show_object_properties: true
-  # 是否只显示已发现的内容
-  only_show_discovered: false
-  # 是否包含动态动作描述
-  include_dynamic_actions: true
-
-# 历史记录设置
-history:
-  max_history_length: 500
-  max_history_in_prompt: 10  # 控制提示词中显示的历史记录数量
 
 # 任务执行设置
 execution:
-  max_steps: 50  # 最大执行步数
-  step_timeout: 60  # 单步超时时间(秒)
+  max_total_steps: 200  # 最大总执行步数
+
+# 任务评测器设置
+task_evaluator:
+  max_steps_per_task: 20  # 每个子任务的最大步数
+
+# 环境描述设置
+environment_description:
+  # 详细程度: 'room' (仅当前房间), 'full' (所有房间), 'brief' (仅智能体状态)
+  detail_level: 'full'
+
+  # 是否显示物体详细属性（如颜色、重量、状态等）
+  show_object_properties: true
+
+  # 是否只显示已发现的物体（false表示全知模式，显示所有物体）
+  only_show_discovered: true
+
+  # 是否包含其他智能体信息
+  include_other_agents: true
+
+  # 环境描述更新频率（每N步更新一次环境描述，0表示每步都更新）
+  update_frequency: 0
+
+# 历史信息设置
+history:
+  # 提示词中包含的历史信息最大数量（-1表示不限制历史记录数量）
+  max_history_length: -1
+
+# 评测模式设置
+evaluation:
+  # 评测类型: 'sequential' (逐个评测) 或 'combined' (混合评测) 或 'independent' (独立评测)
+  task_type: 'independent'
+
+  # 默认场景设置
+  default_scenario: '00001'
+
+  # 运行设置
+  run_settings:
+    # 默认运行后缀
+    default_suffix: 'demo'
+    # 日志级别: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
+    log_level: 'INFO'
+
+  # 输出设置
+  output:
+    # 输出目录
+    base_dir: 'output'
+    # 是否保存轨迹文件
+    save_trajectory: true
+    # 是否保存紧凑轨迹文件
+    save_compact_trajectory: true
+    # 是否生成评测报告
+    generate_report: true
+
+  # 任务执行配置
+  execution:
+    # 任务超时时间（秒）
+    timeout_seconds: 900
+
+    # 逐个评测模式配置
+    sequential:
+      # 是否在子任务失败时继续执行下一个任务
+      continue_on_failure: true
+      # 是否在每个子任务开始前清空历史记录
+      clear_history_between_tasks: true
+      # 子任务间的延迟时间（秒）
+      delay_between_tasks: 1.0
+      # 是否显示子任务进度
+      show_task_progress: true
+
+    # 混合评测模式配置
+    combined:
+      # 任务描述之间的分隔符
+      task_separator: "\n\n下一个任务：\n"
+      # 是否在任务描述前添加序号
+      add_task_numbers: true
+      # 是否显示任务分隔信息
+      show_task_separator: true
+
+    # 独立评测模式配置
+    independent:
+      # 是否在子任务失败时继续执行下一个任务
+      continue_on_failure: true
+
+      # 子任务间延迟时间（秒）- 用于资源清理
+      delay_between_subtasks: 1.0
+
+      # 是否显示子任务执行进度
+      show_subtask_progress: true
+
+      # 输出管理配置
+      output_management:
+        # 子任务输出目录命名模式
+        subtask_dir_pattern: 'subtask_{index:03d}_{hash}'
+
+        # 是否保存每个子任务的详细日志
+        save_individual_logs: true
+
+        # 是否生成子任务级别的轨迹文件
+        generate_subtask_trajectories: true
+
+        # 主轨迹文件格式: 'unified' (统一) 或 'aggregated' (聚合)
+        main_trajectory_format: 'unified'
+
+      # 结果分析配置
+      analysis:
+        # 是否进行子任务间的性能对比
+        compare_subtask_performance: true
+
+        # 是否分析任务类别的成功率
+        analyze_category_success_rate: true
+
+        # 是否生成执行时间分布图
+        generate_timing_analysis: false
+
+
+
+# 并行评测配置
+parallel_evaluation:
+  # 是否启用并行评测
+  enabled: false
+
+  # 并行执行模式: 'thread' (线程) 或 'process' (进程)
+  execution_mode: 'thread'
+
+  # 最大并行任务数量 (0表示使用CPU核心数)
+  max_parallel_tasks: 2
+
+  # 任务范围配置
+  task_selection:
+    # 任务选择模式: 'all' (所有任务), 'range' (范围), 'list' (指定列表), 'category' (按类别)
+    mode: 'range'
+
+    # 范围模式配置 (mode='range'时使用)
+    range:
+      start_index: 0  # 起始任务索引
+      end_index: 1   # 结束任务索引 (测试用，只评测前3个任务)
+
+    # 列表模式配置 (mode='list'时使用)
+    task_indices: [0, 2, 4, 6]  # 指定任务索引列表
+
+    # 类别模式配置 (mode='category'时使用)
+    categories: ['direct_command', 'tool_use']  # 指定任务类别
+
+  # 任务间延迟启动时间(秒)，避免同时初始化造成资源竞争
+  startup_delay: 2.0
+
+  # 任务超时时间(秒)
+  task_timeout: 1800
+
+  # 故障处理
+  failure_handling:
+    # 单个任务失败时是否继续其他任务
+    continue_on_task_failure: true
+
+    # 最大重试次数
+    max_retries: 1
+
+    # 重试延迟时间(秒)
+    retry_delay: 5.0
+

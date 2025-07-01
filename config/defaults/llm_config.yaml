@@ -1,40 +1,43 @@
-# 默认LLM配置
+# LLM配置
 
 # LLM推理方式设置
-mode: "api"  # 可选值: "api" 或 "vllm"
+mode: "api"
 
 # API调用方式配置
 api:
-  provider: "custom"  # 可选值: "openai" 或 "custom"（自定义端点）
+  provider: "custom"  # 可选值: "openai" 或 "custom"
 
   # OpenAI API配置
   openai:
-    model: "gpt-3.5-turbo"  # 或 "gpt-4" 等
+    model: "gpt-3.5-turbo"
     temperature: 0.7
     max_tokens: 1024
-    api_key: ""  # 建议使用环境变量OPENAI_API_KEY而不是硬编码在这里
+    api_key: ""  # 使用环境变量OPENAI_API_KEY
 
   # 自定义端点API配置
   custom:
-    model: "deepseek-chat"  # 模型名称
+    model: "deepseek-chat"
     temperature: 0.1
     max_tokens: 4096
-    api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 自定义API密钥，或使用环境变量CUSTOM_LLM_API_KEY
-    endpoint: "https://api.deepseek.com"  # 自定义API端点URL
+    api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 或使用环境变量CUSTOM_LLM_API_KEY
+    endpoint: "https://api.deepseek.com"
 
-# VLLM本地推理配置
+# VLLM本地推理配置（当mode为"vllm"时使用）
 vllm:
-  model_path: ""  # 模型路径，如 "/path/to/llama-7b" 或 Hugging Face模型ID
-  temperature: 0.7
-  max_tokens: 1024
-  tensor_parallel_size: 1  # GPU并行数量
+  model_path: ""  # VLLM模型路径，例如: "/path/to/model" 或 "meta-llama/Llama-2-13b-chat"
+  temperature: 0.1
+  max_tokens: 4096
+  tensor_parallel_size: 1  # 张量并行大小
   gpu_memory_utilization: 0.9  # GPU内存利用率
 
-# 通用LLM参数
+# LLM参数配置
 parameters:
-  # 对话历史最大长度
-  max_history_length: 10
-  # 是否记录上下文
-  keep_context: true
-  # 是否在API请求中发送历史消息
+  # 是否发送完整的对话历史给LLM
+  # true: 发送完整的chat_history（包含所有历史对话）
+  #       - 优点：LLM能看到完整的对话上下文，理解更准确
+  #       - 缺点：消耗更多token，可能超出上下文长度限制
+  # false: 只发送system消息和最新的用户消息，历史信息通过history_summary在提示词中传递
+  #        - 优点：节省token，避免上下文长度问题
+  #        - 缺点：LLM只能看到历史摘要，可能丢失细节信息
+  # 默认值：false（推荐设置，平衡性能和效果）
   send_history: false

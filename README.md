@@ -213,32 +213,40 @@ print(f"环境描述: {env_description}")
 在`config/defaults/llm_config.yaml`中配置LLM提供商：
 
 ```yaml
-# 使用OpenAI
-provider: openai
-openai:
-  model: gpt-3.5-turbo
-  api_key: "sk-..." # 最好使用环境变量OPENAI_API_KEY
-  temperature: 0.7
-  max_tokens: 1000
-  request_timeout: 60
+# LLM推理方式设置
+mode: "api"  # 可选值: "api" 或 "vllm"
 
-# 使用Azure OpenAI
-provider: azure_openai
-azure_openai:
-  resource_name: "your-resource"
-  deployment_id: "your-deployment"
-  api_key: "..." # 最好使用环境变量AZURE_OPENAI_API_KEY
-  temperature: 0.7
-  max_tokens: 1000
-  request_timeout: 60
+# API调用方式配置
+api:
+  provider: "openai"  # 可选值: "openai" 或 "custom"
 
-# 使用本地vLLM服务
-provider: vllm
+  # 使用OpenAI
+  openai:
+    model: "gpt-3.5-turbo"
+    api_key: "sk-..."  # 最好使用环境变量OPENAI_API_KEY
+    temperature: 0.7
+    max_tokens: 1000
+
+  # 使用自定义端点（如DeepSeek、通义千问等）
+  custom:
+    model: "deepseek-chat"
+    api_key: "sk-..."  # 或使用环境变量CUSTOM_LLM_API_KEY
+    endpoint: "https://api.deepseek.com"
+    temperature: 0.1
+    max_tokens: 4096
+
+# VLLM本地推理配置
 vllm:
-  endpoint: "http://localhost:8000/v1"
-  model: "meta-llama/Llama-2-13b-chat"
-  temperature: 0.7
-  max_tokens: 1000
+  model_path: "/path/to/model"  # 本地模型路径
+  temperature: 0.1
+  max_tokens: 4096
+  tensor_parallel_size: 1
+  gpu_memory_utilization: 0.9
+
+# LLM参数配置
+parameters:
+  # 是否发送完整的对话历史给LLM
+  send_history: false  # true=发送完整历史，false=只发送摘要
 ```
 
 ### 智能体配置
@@ -366,7 +374,6 @@ embodied_framework/
 │   ├── agent_factory.py    # 智能体工厂函数
 ├── modes/                  # 不同模式的实现
 │   ├── single_agent/       # 单智能体模式
-│       ├── basic_agent.py  # 基本智能体
 │       ├── llm_agent.py    # 基于LLM的智能体
 │   ├── centralized/        # 中心化多智能体
 │       ├── coordinator.py  # 中央协调器
@@ -573,12 +580,35 @@ class MyCustomAgent(BaseAgent):
 - 思维链推理提示
 - 不同模式的专用提示词模板
 
+### 如何配置历史消息发送？
+
+框架支持两种历史信息传递方式，通过`config/defaults/llm_config.yaml`中的`parameters.send_history`配置：
+
+**方式1：发送完整对话历史（`send_history: true`）**
+- LLM能看到完整的对话上下文，包括所有历史的用户输入和助手回复
+- 优点：理解更准确，上下文连贯性更好
+- 缺点：消耗更多token，可能超出模型上下文长度限制
+- 适用场景：短对话、需要精确上下文理解的任务
+
+**方式2：发送历史摘要（`send_history: false`，默认）**
+- 只发送system消息和最新的用户消息，历史信息通过`history_summary`在提示词中传递
+- 优点：节省token，避免上下文长度问题，性能更好
+- 缺点：可能丢失部分历史细节
+- 适用场景：长对话、token预算有限、大部分任务场景
+
+```yaml
+# 在 llm_config.yaml 中配置
+parameters:
+  send_history: false  # 推荐设置
+```
+
 ### 如何调试智能体行为？
 
 1. 调整日志级别到DEBUG：在配置文件中设置`logging.level: debug`
 2. 使用环境描述功能查看智能体感知的环境状态
 3. 查看执行历史记录分析决策过程
 4. 利用思维链推理功能了解智能体的推理过程
+5. 启用`send_history: true`查看LLM是否需要更多历史上下文
 
 ## 更新日志
 
