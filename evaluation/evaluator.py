@@ -24,36 +24,45 @@ project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_root)
 
 from utils.task_evaluator import TaskEvaluator
-from utils.parallel_task_evaluator import ParallelTaskEvaluator
 from config import ConfigManager
 
 
 def parse_arguments():
     """解析命令行参数"""
     parser = argparse.ArgumentParser(
-        description="任务评测器 - 支持六种评测模式",
+        description="任务评测器 - 支持单场景和并行场景评测模式",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 评测模式说明:
-  single_sequential   - 单智能体逐个评测：只加载agent1，每个子任务独立执行
-  single_combined     - 单智能体混合评测：只加载agent1，所有子任务拼接执行
-  single_independent  - 单智能体独立评测：只加载agent1，每个子任务在全新环境中执行
-  multi_sequential    - 多智能体逐个评测：加载所有智能体，每个子任务独立执行
-  multi_combined      - 多智能体混合评测：加载所有智能体，所有子任务拼接执行
-  multi_independent   - 多智能体独立评测：加载所有智能体，每个子任务在全新环境中执行
+  单场景评测模式:
+    single_sequential   - 单智能体逐个评测：只加载agent1，每个子任务独立执行
+    single_combined     - 单智能体混合评测：只加载agent1，所有子任务拼接执行
+    single_independent  - 单智能体独立评测：只加载agent1，每个子任务在全新环境中执行
+    multi_sequential    - 多智能体逐个评测：加载所有智能体，每个子任务独立执行
+    multi_combined      - 多智能体混合评测：加载所有智能体，所有子任务拼接执行
+    multi_independent   - 多智能体独立评测：加载所有智能体，每个子任务在全新环境中执行
+
+  并行场景评测模式:
+    parallel_single_sequential   - 单智能体场景级并行逐个评测
+    parallel_single_combined     - 单智能体场景级并行混合评测
+    parallel_single_independent  - 单智能体场景级并行独立评测
+    parallel_multi_sequential    - 多智能体场景级并行逐个评测
+    parallel_multi_combined      - 多智能体场景级并行混合评测
+    parallel_multi_independent   - 多智能体场景级并行独立评测
 
 示例:
   python evaluator.py --mode single_sequential --scenario 00001
-  python evaluator.py --mode single_independent --scenario 00001
+  python evaluator.py --mode parallel_single_sequential --suffix test
   python evaluator.py --mode multi_combined --scenario 00002 --config my_config.yaml
-  python evaluator.py --list-modes
         """
     )
     
     parser.add_argument(
         '--mode', '-m',
         choices=['single_sequential', 'single_combined', 'single_independent',
-                'multi_sequential', 'multi_combined', 'multi_independent', 'parallel'],
+                'multi_sequential', 'multi_combined', 'multi_independent',
+                'parallel_single_sequential', 'parallel_single_combined', 'parallel_single_independent',
+                'parallel_multi_sequential', 'parallel_multi_combined', 'parallel_multi_independent'],
         help='评测模式'
     )
     
@@ -119,8 +128,23 @@ def list_evaluation_modes():
 def parse_mode(mode: str) -> tuple:
     """解析评测模式"""
     # 并行模式
-    if mode == 'parallel':
-        return 'single', 'sequential', 'single_agent_config', True
+    if mode.startswith('parallel_'):
+        # 解析并行模式: parallel_single_sequential -> single, sequential
+        parts = mode.split('_')
+        if len(parts) != 3:
+            raise ValueError(f"无效的并行评测模式: {mode}")
+
+        agent_type = parts[1]  # single 或 multi
+        task_type = parts[2]   # sequential, combined, independent
+
+        if agent_type == 'single':
+            config_file = 'single_agent_config'
+        elif agent_type == 'multi':
+            config_file = 'centralized_config'
+        else:
+            raise ValueError(f"无效的智能体类型: {agent_type}")
+
+        return agent_type, task_type, config_file, True
 
     # 常规模式
     if mode.startswith('single_'):
@@ -214,16 +238,30 @@ def main():
         logger.info(f"🚀 启动任务评测器 - 模式: {args.mode}")
 
         if is_parallel:
-            # 并行评测模式
-            evaluator = ParallelTaskEvaluator(
-                config_file=config_file,
-                agent_type=agent_type,
-                task_type=task_type,
-                scenario_id=args.scenario,
-                custom_suffix=args.suffix
-            )
-            # 运行并行评测
-            results = evaluator.run_parallel_evaluation()
+            # 场景级并行评测模式 - 调用单智能体示例脚本
+            import subprocess
+            import sys
+
+            script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples', 'single_agent_example.py')
+            cmd = [
+                sys.executable, script_path,
+                '--mode', task_type,
+                '--config', config_file,
+                '--parallel'
+            ]
+
+            if args.suffix:
+                cmd.extend(['--suffix', args.suffix])
+
+            logger.info(f"🚀 启动并行评测: {' '.join(cmd)}")
+            result = subprocess.run(cmd, cwd=os.path.dirname(os.path.dirname(__file__)))
+
+            if result.returncode == 0:
+                print(f"\n🎉 并行评测成功完成!")
+                return 0
+            else:
+                print(f"\n❌ 并行评测失败，返回码: {result.returncode}")
+                return result.returncode
         else:
             # 常规评测模式
             evaluator = TaskEvaluator(
@@ -236,13 +274,15 @@ def main():
             # 运行评测
             results = evaluator.run_evaluation(args.scenario)
 
-        # 显示结果摘要
+        # 显示结果摘要（仅单场景评测）
         summary = results['summary']
         print(f"\n🎉 评测完成!")
         print(f"🏃 运行名称: {results['run_name']}")
         print(f"📊 完成率: {summary['completion_rate']:.1%} ({summary['completed_tasks']}/{summary['total_tasks']})")
         print(f"📊 总步数: {summary['total_steps']}")
         print(f"📊 耗时: {results['total_duration']:.2f}秒")
+
+        # 显示输出文件信息
         print(f"📁 输出文件:")
         print(f"   轨迹: {results['output_files']['trajectory_file']}")
         print(f"   日志: {results['output_files']['log_file']}")

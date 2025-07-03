@@ -82,10 +82,23 @@ class TaskEvaluator:
         eval_config = self.config.get('evaluation', {})
         output_config = eval_config.get('output', {})
         base_output_dir = output_config.get('output_directory', 'output')
-        self.output_dir = RunNamingManager.generate_output_directory(base_output_dir, self.run_name)
+
+        # 检查是否有环境变量指定的输出目录（用于并行评测）
+        scenario_output_dir = os.environ.get('SCENARIO_OUTPUT_DIR')
+        disable_auto_output = os.environ.get('DISABLE_AUTO_OUTPUT_DIR') == 'true'
+
+        if scenario_output_dir and disable_auto_output:
+            # 并行评测模式：使用指定的输出目录，不创建新目录
+            self.output_dir = scenario_output_dir
+        elif scenario_output_dir:
+            # 兼容模式：使用指定的输出目录
+            self.output_dir = scenario_output_dir
+        else:
+            # 正常模式：自动生成输出目录
+            self.output_dir = RunNamingManager.generate_output_directory(base_output_dir, self.run_name)
 
         # 初始化轨迹记录器
-        self.trajectory_recorder = TrajectoryRecorder(self.output_dir, self.run_name)
+        self.trajectory_recorder = TrajectoryRecorder(self.output_dir, self.run_name, scenario_id)
 
         # 初始化组件
         self.bridge = None
@@ -258,6 +271,10 @@ class TaskEvaluator:
 
         # 创建LLM智能体（使用当前配置）
         agent = LLMAgent(self.bridge.simulator, agent_id, self.config)
+
+        # 设置轨迹记录器引用，用于记录LLM QA
+        agent.set_trajectory_recorder(self.trajectory_recorder)
+
         self.agents[agent_id] = agent
 
         # 记录智能体信息
@@ -542,10 +559,7 @@ class TaskEvaluator:
 
             # 更新输出文件信息
             trajectory_summary = self.trajectory_recorder.get_trajectory_summary()
-            self.results['output_files'] = {
-                'trajectory_file': trajectory_summary['trajectory_file'],
-                'log_file': trajectory_summary['log_file']
-            }
+            self.results['output_files'] = trajectory_summary.get('output_files', {})
 
             # 保存结果报告
             eval_config = self.config.get('evaluation', {})
@@ -796,7 +810,7 @@ class TaskEvaluator:
             # 记录模拟器的客观反馈（不影响任务完成判断）
             if self._is_subtask_completed(subtask):
                 # 记录模拟器认为任务已完成，但不结束任务
-                self._record_simulator_completion(subtask, step_count)
+                self._record_simulator_completion(subtask, step_count, task_index)
                 logger.info(f"📊 模拟器检测到子任务状态满足条件（第 {step_count} 步），但等待大模型DONE命令")
 
             # 调试暂停
@@ -1106,33 +1120,53 @@ class TaskEvaluator:
         logger.info(f"   总耗时: {self.results['total_duration']:.2f}秒")
 
     def _save_results(self):
-        """保存评测结果"""
+        """保存评测结果（合并report和summary为一个meta文件）"""
         try:
-            # 保存到输出目录
-            report_path = os.path.join(self.output_dir, f"{self.run_name}_report.json")
+            # 只保存一个包含关键meta信息的文件
+            meta_path = os.path.join(self.output_dir, f"{self.run_name}_meta.json")
 
-            with open(report_path, 'w', encoding='utf-8') as f:
-                json.dump(self.results, f, ensure_ascii=False, indent=2)
-
-            logger.info(f"📄 评测报告已保存: {report_path}")
-
-            # 同时保存一个简化的摘要
-            summary_path = os.path.join(self.output_dir, f"{self.run_name}_summary.json")
-            summary_data = {
-                'run_name': self.run_name,
-                'evaluation_mode': self.results['evaluation_mode'],
+            # 提取关键meta信息
+            meta_data = {
                 'scenario_id': self.results['scenario_id'],
-                'summary': self.results['summary'],
-                'start_time': self.results['start_time'],
-                'end_time': self.results['end_time'],
-                'total_duration': self.results['total_duration'],
+                'evaluation_mode': self.results['evaluation_mode'],
+                'execution_info': {
+                    'start_time': self.results['start_time'],
+                    'end_time': self.results['end_time'],
+                    'total_duration': self.results['total_duration']
+                },
+                'task_completion': {
+                    'total_tasks': self.results['summary']['total_tasks'],
+                    'completed_tasks': self.results['summary']['completed_tasks'],
+                    'failed_tasks': self.results['summary']['failed_tasks'],
+                    'completion_rate': self.results['summary']['completion_rate']
+                },
+                'execution_stats': {
+                    'total_steps': self.results['summary']['total_steps'],
+                    'average_steps_per_task': self.results['summary']['average_steps_per_task']
+                },
                 'output_files': self.results['output_files']
             }
 
-            with open(summary_path, 'w', encoding='utf-8') as f:
-                json.dump(summary_data, f, ensure_ascii=False, indent=2)
+            # 对于independent模式，添加子任务详细信息
+            if self.task_type == 'independent':
+                subtask_stats = []
+                for task_result in self.results.get('task_results', []):
+                    if 'subtask_results' in task_result:
+                        for subtask in task_result['subtask_results']:
+                            subtask_stats.append({
+                                'subtask_index': subtask.get('subtask_index', 0),
+                                'task_description': subtask.get('task_description', ''),
+                                'task_category': subtask.get('task_category', ''),
+                                'completed': subtask.get('completed', False),
+                                'steps_taken': subtask.get('steps_taken', 0),
+                                'duration': subtask.get('duration', 0)
+                            })
+                meta_data['subtask_details'] = subtask_stats
 
-            logger.info(f"📊 评测摘要已保存: {summary_path}")
+            with open(meta_path, 'w', encoding='utf-8') as f:
+                json.dump(meta_data, f, ensure_ascii=False, indent=2)
+
+            logger.info(f"📊 场景meta信息已保存: {meta_path}")
 
         except Exception as e:
             logger.exception(f"❌ 保存评测报告失败: {e}")

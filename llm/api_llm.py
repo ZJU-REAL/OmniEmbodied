@@ -33,6 +33,9 @@ class ApiLLM(BaseLLM):
         if self.provider == 'openai':
             self.api_key = provider_config.get('api_key') or os.environ.get('OPENAI_API_KEY', '')
             self.endpoint = "https://api.openai.com/v1"
+        elif self.provider == 'volcengine':
+            self.api_key = provider_config.get('api_key') or os.environ.get('VOLCENGINE_API_KEY', '')
+            self.endpoint = provider_config.get('endpoint', '')
         else:  # 自定义端点
             self.api_key = provider_config.get('api_key') or os.environ.get('CUSTOM_LLM_API_KEY', '')
             self.endpoint = provider_config.get('endpoint', '')
@@ -41,15 +44,19 @@ class ApiLLM(BaseLLM):
             logger.warning(f"{self.provider.capitalize()} API密钥未设置")
             
         # 配置OpenAI客户端
+        client_kwargs = {}
         if self.api_key:
-            openai.api_key = self.api_key
-            
+            client_kwargs['api_key'] = self.api_key
+
         if self.endpoint and self.provider != 'openai':
-            openai.base_url = self.endpoint
-            
+            client_kwargs['base_url'] = self.endpoint
+
         # 设置组织ID（如果有）
         if provider_config.get('organization'):
-            openai.organization = provider_config.get('organization')
+            client_kwargs['organization'] = provider_config.get('organization')
+
+        # 创建OpenAI客户端实例
+        self.client = openai.OpenAI(**client_kwargs)
 
         # 存储其他参数
         self.top_p = provider_config.get('top_p', 1.0)
@@ -182,8 +189,8 @@ class ApiLLM(BaseLLM):
             # 调用API
             if logger.level <= logging.DEBUG:
                 logger.debug(f"发送API请求，参数: {json.dumps({k: v for k, v in params.items() if k != 'messages'}, ensure_ascii=False)}")
-                
-            response = openai.chat.completions.create(**params)
+
+            response = self.client.chat.completions.create(**params)
             
             # 记录API响应细节
             if logger.level <= logging.DEBUG:

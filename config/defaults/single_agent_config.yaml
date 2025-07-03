@@ -36,7 +36,7 @@ evaluation:
   task_type: 'independent'
 
   # 默认场景设置
-  default_scenario: '00001'
+  default_scenario: '00002'
 
   # 运行设置
   run_settings:
@@ -97,14 +97,14 @@ evaluation:
         # 子任务输出目录命名模式
         subtask_dir_pattern: 'subtask_{index:03d}_{hash}'
 
+        # 是否创建子任务独立目录（设为false避免目录冗余）
+        create_subtask_directories: false
+
         # 是否保存每个子任务的详细日志
         save_individual_logs: true
 
         # 是否生成子任务级别的轨迹文件
         generate_subtask_trajectories: true
-
-        # 主轨迹文件格式: 'unified' (统一) 或 'aggregated' (聚合)
-        main_trajectory_format: 'unified'
 
       # 结果分析配置
       analysis:
@@ -122,44 +122,30 @@ evaluation:
 # 并行评测配置
 parallel_evaluation:
   # 是否启用并行评测
-  enabled: false
+  enabled: true
 
-  # 并行执行模式: 'thread' (线程) 或 'process' (进程)
-  execution_mode: 'thread'
+  # 场景级并行配置
+  scenario_parallelism:
+    # 最大并行场景数
+    max_parallel_scenarios: 2
 
-  # 最大并行任务数量 (0表示使用CPU核心数)
-  max_parallel_tasks: 2
-
-  # 任务范围配置
-  task_selection:
-    # 任务选择模式: 'all' (所有任务), 'range' (范围), 'list' (指定列表), 'category' (按类别)
+  # 场景选择配置
+  scenario_selection:
+    # 场景选择模式: 'all' (所有场景), 'range' (范围), 'list' (指定列表)
     mode: 'range'
 
     # 范围模式配置 (mode='range'时使用)
     range:
-      start_index: 0  # 起始任务索引
-      end_index: 1   # 结束任务索引 (测试用，只评测前3个任务)
+      start: '00009'  # 起始场景ID
+      end: '00010'    # 结束场景ID (测试用，只评测2个场景)
 
     # 列表模式配置 (mode='list'时使用)
-    task_indices: [0, 2, 4, 6]  # 指定任务索引列表
+    # list: ['00001', '00003', '00005']
 
-    # 类别模式配置 (mode='category'时使用)
-    categories: ['direct_command', 'tool_use']  # 指定任务类别
-
-  # 任务间延迟启动时间(秒)，避免同时初始化造成资源竞争
-  startup_delay: 2.0
-
-  # 任务超时时间(秒)
-  task_timeout: 1800
-
-  # 故障处理
-  failure_handling:
-    # 单个任务失败时是否继续其他任务
-    continue_on_task_failure: true
-
-    # 最大重试次数
-    max_retries: 1
-
-    # 重试延迟时间(秒)
-    retry_delay: 5.0
+  # 输出配置
+  output:
+    # 是否保存各场景的详细轨迹
+    save_individual_trajectories: true
+    # 是否生成汇总报告
+    generate_summary_report: true
 

@@ -83,6 +83,7 @@ class IndependentTaskExecutor:
         # 输出管理配置
         output_config = self.independent_config.get('output_management', {})
         self.subtask_dir_pattern = output_config.get('subtask_dir_pattern', 'subtask_{index:03d}_{hash}')
+        self.create_subtask_directories = output_config.get('create_subtask_directories', False)
         self.save_individual_logs = output_config.get('save_individual_logs', True)
         self.generate_subtask_trajectories = output_config.get('generate_subtask_trajectories', True)
         
@@ -204,14 +205,20 @@ class IndependentTaskExecutor:
         Returns:
             Dict: 子任务执行结果
         """
-        # 创建子任务输出目录
-        subtask_hash = hash(subtask.get('task_description', '')) % 10000
-        subtask_dir_name = self.subtask_dir_pattern.format(
-            index=subtask_index,
-            hash=f"{subtask_hash:04d}"
-        )
-        subtask_output_dir = os.path.join(self.output_dir, subtask_dir_name)
-        os.makedirs(subtask_output_dir, exist_ok=True)
+        # 根据配置决定是否创建子任务独立目录
+        if self.create_subtask_directories:
+            # 创建子任务输出目录
+            subtask_hash = hash(subtask.get('task_description', '')) % 10000
+            subtask_dir_name = self.subtask_dir_pattern.format(
+                index=subtask_index,
+                hash=f"{subtask_hash:04d}"
+            )
+            subtask_output_dir = os.path.join(self.output_dir, subtask_dir_name)
+            os.makedirs(subtask_output_dir, exist_ok=True)
+        else:
+            # 使用主输出目录，不创建子任务独立目录
+            subtask_output_dir = self.output_dir
+            subtask_dir_name = f"subtask_{subtask_index:03d}"
 
         # 初始化结果结构
         subtask_result = {
@@ -251,17 +258,30 @@ class IndependentTaskExecutor:
             # 记录实例创建开始时间
             instance_start_time = time.time()
 
+            # 设置环境变量，防止TaskEvaluator创建自己的输出目录和重复日志
+            os.environ['SCENARIO_OUTPUT_DIR'] = subtask_output_dir
+            os.environ['DISABLE_AUTO_OUTPUT_DIR'] = 'true'
+            os.environ['DISABLE_SUBTASK_LOGGING'] = 'true'  # 禁用子任务独立日志
+
             # 创建独立的TaskEvaluator实例
-            subtask_suffix = f"{self.custom_suffix}_subtask_{subtask_index:03d}"
+            subtask_suffix = f"subtask_{subtask_index:03d}"
             task_evaluator = TaskEvaluator(
                 config_file=self.config_file,
                 agent_type=self.agent_type,
                 task_type='independent',  # 使用independent模式，但实际上会被单独处理
-                scenario_id=self.scenario_id,
-                custom_suffix=subtask_suffix
+                scenario_id=f"{self.scenario_id}_{subtask_suffix}",  # 为每个子任务提供唯一的scenario_id
+                custom_suffix=None  # 不使用后缀，避免自动生成独立目录
             )
 
-            # 设置子任务专用的输出目录
+            # 清理环境变量
+            if 'SCENARIO_OUTPUT_DIR' in os.environ:
+                del os.environ['SCENARIO_OUTPUT_DIR']
+            if 'DISABLE_AUTO_OUTPUT_DIR' in os.environ:
+                del os.environ['DISABLE_AUTO_OUTPUT_DIR']
+            if 'DISABLE_SUBTASK_LOGGING' in os.environ:
+                del os.environ['DISABLE_SUBTASK_LOGGING']
+
+            # 强制设置子任务专用的输出目录
             task_evaluator.output_dir = subtask_output_dir
             task_evaluator.run_name = subtask_dir_name
 
@@ -542,31 +562,46 @@ class IndependentTaskExecutor:
             aggregated_tasks = []
 
             # 遍历所有子任务结果，收集compact_trajectory数据
-            for subtask_result in self.subtask_results:
+            logger.debug(f"🔍 开始遍历 {len(self.subtask_results)} 个子任务结果")
+            for i, subtask_result in enumerate(self.subtask_results):
                 subtask_output_dir = subtask_result.get('execution_info', {}).get('output_dir')
+                logger.debug(f"🔍 子任务 {i+1} 输出目录: {subtask_output_dir}")
+
                 if not subtask_output_dir or not os.path.exists(subtask_output_dir):
+                    logger.debug(f"⚠️ 子任务 {i+1} 输出目录不存在或为空")
                     continue
 
-                compact_trajectory_file = os.path.join(subtask_output_dir, 'compact_trajectory.json')
+                # 子任务的compact_trajectory文件路径
+                # 每个子任务都有唯一的scenario_id，格式为：原scenario_id_subtask_xxx
+                subtask_index = subtask_result.get('subtask_index', i+1)
+                subtask_scenario_id = f"{self.scenario_id}_subtask_{subtask_index:03d}"
+                compact_trajectory_file = os.path.join(subtask_output_dir, 'trajectories', f'{subtask_scenario_id}_compact_trajectory.json')
+                logger.debug(f"🔍 查找轨迹文件: {compact_trajectory_file}")
+
                 if os.path.exists(compact_trajectory_file):
+                    logger.debug(f"✅ 找到轨迹文件: {compact_trajectory_file}")
                     try:
                         with open(compact_trajectory_file, 'r', encoding='utf-8') as f:
                             subtask_compact_trajectory = json.load(f)
 
                         # 提取子任务的轨迹数据
-                        subtask_tasks = subtask_compact_trajectory.get('tasks', [])
-                        for task in subtask_tasks:
+                        subtask_executions = subtask_compact_trajectory.get('task_executions', [])
+                        logger.debug(f"📊 子任务 {i+1} 包含 {len(subtask_executions)} 个任务执行记录")
+
+                        for task in subtask_executions:
                             # 为每个任务添加子任务索引信息
-                            task['subtask_index'] = subtask_result.get('subtask_index', 0)
+                            task['subtask_index'] = subtask_result.get('subtask_index', i+1)
                             task['subtask_output_dir'] = os.path.basename(subtask_output_dir)
                             aggregated_tasks.append(task)
 
                     except Exception as e:
                         logger.warning(f"⚠️ 读取子任务compact_trajectory失败: {compact_trajectory_file}, 错误: {e}")
+                else:
+                    logger.debug(f"❌ 轨迹文件不存在: {compact_trajectory_file}")
 
             # 更新主轨迹记录器的compact_trajectory
             if aggregated_tasks:
-                main_trajectory_recorder.compact_trajectory['tasks'] = aggregated_tasks
+                main_trajectory_recorder.compact_trajectory['task_executions'] = aggregated_tasks
                 logger.info(f"✅ 成功聚合了 {len(aggregated_tasks)} 个子任务的轨迹数据")
             else:
                 logger.warning("⚠️ 没有找到可聚合的子任务轨迹数据")

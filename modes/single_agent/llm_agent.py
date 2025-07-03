@@ -42,6 +42,9 @@ class LLMAgent(BaseAgent):
             "你是一个在虚拟环境中执行任务的智能体。"
         )
 
+        # 轨迹记录器引用（用于记录LLM QA）
+        self.trajectory_recorder = None
+
         # 对话历史
         self.chat_history = []
 
@@ -66,6 +69,12 @@ class LLMAgent(BaseAgent):
         # 环境描述缓存和更新计数
         self.env_description_cache = ""
         self.step_count = 0
+
+    def set_trajectory_recorder(self, trajectory_recorder):
+        """设置轨迹记录器引用"""
+        self.trajectory_recorder = trajectory_recorder
+        logger.debug(f"🔗 智能体 {self.agent_id} 已连接轨迹记录器")
+
     def set_task(self, task_description: str) -> None:
         """设置任务描述"""
         self.task_description = task_description
@@ -183,6 +192,14 @@ class LLMAgent(BaseAgent):
         # 调用LLM生成响应，使用动态系统提示词
         system_prompt = self._get_system_prompt()
         response = self.llm.generate_chat(self.chat_history, system_message=system_prompt)
+
+        # 记录LLM QA到轨迹记录器
+        if self.trajectory_recorder:
+            self.trajectory_recorder.record_llm_qa(
+                instruction=prompt,
+                output=response,
+                system=system_prompt
+            )
 
         # 解析响应中的动作命令
         action = self._extract_action(response)

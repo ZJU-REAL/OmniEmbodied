@@ -1,0 +1,578 @@
+{
+  "description": "A high-stakes Dakar Rally pit stop and emergency repair station in the desert, featuring a mechanical bay, navigation tent, and supply cache under extreme conditions.",
+  "rooms": [
+    {
+      "id": "mechanical_bay",
+      "name": "Mechanical Bay",
+      "properties": {
+        "type": "industrial",
+        "temperature": 45.0,
+        "condition": "sandstorm"
+      },
+      "connected_to_room_ids": [
+        "navigation_tent",
+        "supply_cache"
+      ]
+    },
+    {
+      "id": "navigation_tent",
+      "name": "Navigation & Strategy Tent",
+      "properties": {
+        "type": "command",
+        "temperature": 47.0,
+        "condition": "shaded"
+      },
+      "connected_to_room_ids": [
+        "mechanical_bay",
+        "supply_cache"
+      ]
+    },
+    {
+      "id": "supply_cache",
+      "name": "Supply Cache",
+      "properties": {
+        "type": "storage",
+        "temperature": 50.0,
+        "condition": "exposed"
+      },
+      "connected_to_room_ids": [
+        "mechanical_bay",
+        "navigation_tent"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "bike_lift_1",
+      "name": "Hydraulic Bike Lift",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "model": "ProLift 3000"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "bike_lift_2",
+      "name": "Hydraulic Bike Lift",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "model": "ProLift 3000"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "honda_crf450_1",
+      "name": "Honda CRF450 Rally Bike",
+      "type": "FURNITURE",
+      "location_id": "on:bike_lift_1",
+      "properties": {
+        "size": [
+          2.2,
+          0.8,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "color": "red",
+        "brand": "Honda"
+      },
+      "states": {
+        "is_engine_on": false,
+        "is_buckled": true
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "exhaust_pipe_1",
+      "name": "Warped Titanium Exhaust Pipe",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "length": 55.0,
+        "material": "titanium",
+        "condition": "warped",
+        "temperature": 85.0
+      },
+      "states": {}
+    },
+    {
+      "id": "wiring_harness_1",
+      "name": "Melted Wiring Harness",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "length": 120.0,
+        "material": "copper",
+        "condition": "melted"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_laptop_1",
+      "name": "Diagnostic Laptop",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Latitude 5420",
+        "condition": "cracked_screen",
+        "provides_abilities": [
+          "format",
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false,
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "CO2 Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "weight": 5.0,
+        "type": "CO2",
+        "pressure": 50.0,
+        "brand": "Amerex"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "greasy"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 3.0,
+        "sizes": "8mm-24mm",
+        "material": "chrome_vanadium",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 2.5,
+        "torque": 110.0,
+        "unit": "Nm",
+        "brand": "Snap-on",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grease_gun_1",
+      "name": "Grease Gun",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.8,
+        "fill_level": 50.0,
+        "brand": "Lincoln"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Parts Bin",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fuel_pump_1",
+      "name": "Honda OEM Fuel Pump",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Honda",
+        "model": "CRF-2024",
+        "color": "black",
+        "label": "HRC"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "industrial_fan_1",
+      "name": "Industrial Fan",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "bent_blade"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "folding_table_1",
+      "name": "Folding Aluminum Table",
+      "type": "FURNITURE",
+      "location_id": "in:navigation_tent",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          0.7
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "aluminum",
+        "condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "satellite_dish_1",
+      "name": "Satellite Uplink Dish",
+      "type": "FURNITURE",
+      "location_id": "in:navigation_tent",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.5
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "brand": "Thuraya",
+        "status": "amber"
+      },
+      "states": {}
+    },
+    {
+      "id": "gps_tracker_1",
+      "name": "GPS Tracker",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Garmin",
+        "model": "GPSMAP 66i",
+        "battery_level": 20.0,
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "rally_notes_1",
+      "name": "Printed Rally Notes",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.3,
+        "pages": 15,
+        "condition": "highlighted"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:navigation_tent",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "weather_radio_1",
+      "name": "Weather Radio",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.0,
+        "brand": "Midland",
+        "condition": "static",
+        "temperature_display": 47.0
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "binoculars_1",
+      "name": "Binoculars",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.7,
+        "brand": "Nikon",
+        "magnification": "10x",
+        "condition": "sand_grains"
+      },
+      "states": {
+        "is_inserted": true
+      }
+    },
+    {
+      "id": "cargo_trailer_1",
+      "name": "Locked Cargo Trailer",
+      "type": "FURNITURE",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "lock_type": "combination",
+        "combination": "unknown"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "water_jug_1",
+      "name": "20L Water Jug",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 22.0,
+        "volume": 20.0,
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_jug_2",
+      "name": "20L Water Jug",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 22.0,
+        "volume": 20.0,
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_fuel_tank_1",
+      "name": "Spare Fuel Tank",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 15.0,
+        "capacity": 10.0,
+        "condition": "dented",
+        "seal": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 2.0,
+        "contents": "incomplete",
+        "expiry": "expired"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_bars_1",
+      "name": "Desert Berry Energy Bars",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 0.5,
+        "quantity": 12,
+        "flavor": "Desert Berry"
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_shovel_1",
+      "name": "Folding Shovel",
+      "type": "ITEM",
+      "location_id": "in:supply_cache",
+      "properties": {
+        "weight": 1.2,
+        "material": "steel",
+        "condition": "mud_caked"
+      },
+      "states": {}
+    },
+    {
+      "id": "solar_charger_1",
+      "name": "Solar Charger",
+      "type": "ITEM",
+      "location_id": "in:cargo_trailer_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Goal Zero",
+        "model": "Sherpa 100",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "grit": 120,
+        "brand": "3M"
+      },
+      "states": {}
+    },
+    {
+      "id": "ignition_key_1",
+      "name": "Ignition Key",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "brand": "Honda",
+        "provides_abilities": [
+          "start_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "marker_1",
+      "name": "Permanent Marker",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.03,
+        "color": "black",
+        "brand": "Sharpie",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "eject",
+    "format",
+    "label",
+    "loosen",
+    "open",
+    "recharge",
+    "start_engine",
+    "start_process",
+    "unbuckle",
+    "close"
+  ]
+}

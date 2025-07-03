@@ -83,63 +83,29 @@ parallel_evaluation:
   # 是否启用并行评测
   enabled: false
 
-  # 并行执行模式: 'thread' (线程) 或 'process' (进程)
-  execution_mode: 'thread'
+  # 场景级并行配置
+  scenario_parallelism:
+    # 最大并行场景数
+    max_parallel_scenarios: 4
 
-  # 最大并行任务数量 (0表示使用CPU核心数)
-  max_parallel_tasks: 4
-
-  # 任务范围配置
-  task_selection:
-    # 任务选择模式: 'all' (所有任务), 'range' (范围), 'list' (指定列表), 'category' (按类别)
-    mode: 'all'
+  # 场景选择配置
+  scenario_selection:
+    # 场景选择模式: 'all' (所有场景), 'range' (范围), 'list' (指定列表)
+    mode: 'range'
 
     # 范围模式配置 (mode='range'时使用)
     range:
-      start_index: 0  # 起始任务索引
-      end_index: -1   # 结束任务索引 (-1表示到最后)
+      start: '00001'  # 起始场景ID
+      end: '00010'    # 结束场景ID
 
     # 列表模式配置 (mode='list'时使用)
-    task_indices: [0, 2, 4, 6]  # 指定任务索引列表
+    # list: ['00001', '00003', '00005']
 
-    # 类别模式配置 (mode='category'时使用)
-    categories: ['direct_command', 'tool_use']  # 指定任务类别
-
-  # 任务间延迟启动时间(秒)，避免同时初始化造成资源竞争
-  startup_delay: 2.0
-
-  # 任务超时时间(秒)
-  task_timeout: 1800
-
-  # 故障处理
-  failure_handling:
-    # 单个任务失败时是否继续其他任务
-    continue_on_task_failure: true
-
-    # 最大重试次数
-    max_retries: 1
-
-    # 重试延迟时间(秒)
-    retry_delay: 5.0
-
-  # 结果统计和输出配置
+  # 输出配置
   output:
-    # 是否保存详细的执行轨迹
-    save_trajectory: true
-    # 是否保存详细日志
-    save_detailed_logs: true
-    # 输出目录
-    output_directory: 'output'
-    # 是否生成评测报告
-    generate_report: true
-
-  # 调试配置
-  debug:
-    # 是否启用详细日志
-    verbose_logging: true
-    # 日志级别: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
-    log_level: 'INFO'
-    # 是否在每步后暂停（用于调试）
-    pause_between_steps: false
+    # 是否保存各场景的详细轨迹
+    save_individual_trajectories: true
+    # 是否生成汇总报告
+    generate_summary_report: true
     # 暂停时间（秒）
     pause_duration: 1.0
