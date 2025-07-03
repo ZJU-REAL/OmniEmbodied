@@ -22,7 +22,7 @@ class PromptManager:
         
         # 确保配置加载成功
         if not self.prompts_config:
-            logger.warning(f"无法加载提示词配置: {config_name}，将使用默认提示词")
+            logger.warning(f"Unable to load prompt config: {config_name}, using default prompts")
             self.prompts_config = {}
     
     def get_prompt_template(self, mode: str, template_key: str, default_value: str = "") -> str:
@@ -92,8 +92,8 @@ class PromptManager:
             return ""
         
         # 获取历史记录模板
-        history_template = self.get_prompt_template(mode, "history_template", "最近的动作历史：\n{history_entries}")
-        entry_template = self.get_prompt_template(mode, "history_entry_template", "{index}. 动作：{action}，结果：{status}，消息：{message}")
+        history_template = self.get_prompt_template(mode, "history_template", "Recent Action History:\n{history_entries}")
+        entry_template = self.get_prompt_template(mode, "history_entry_template", "{index}. Action: {action}, Result: {status}, Message: {message}")
         
         # 格式化历史条目
         entries = []
@@ -115,7 +115,7 @@ class PromptManager:
             # 如果有LLM回复，优先显示完整回复；否则只显示动作
             if llm_response:
                 # 显示完整的LLM回复（包含思考和动作）
-                formatted_entry = f"{i+1}. {llm_response}\n   执行结果：{status} - {message}"
+                formatted_entry = f"{i+1}. {llm_response}\n   Execution Result: {status} - {message}"
             else:
                 # 回退到原有格式
                 formatted_entry = self.format_template(entry_template,
@@ -144,11 +144,11 @@ class PromptManager:
             str: 格式化后的消息记录
         """
         if not messages:
-            return "无新消息"
-        
+            return "No new messages"
+
         # 获取消息历史模板
-        history_template = self.get_prompt_template(mode, "message_history_template", "收到的消息:\n{message_entries}")
-        entry_template = self.get_prompt_template(mode, "message_entry_template", "- 来自{sender_id}: {content}")
+        history_template = self.get_prompt_template(mode, "message_history_template", "Received Messages:\n{message_entries}")
+        entry_template = self.get_prompt_template(mode, "message_entry_template", "- From {sender_id}: {content}")
         
         # 格式化消息条目
         entries = []

@@ -216,16 +216,18 @@ class LLMAgent(BaseAgent):
         """从LLM响应中提取动作命令"""
         lines = response.split('\n')
 
-        # 直接匹配"动作："格式，提取后面的命令
+        # 直接匹配"Action:"格式，提取后面的命令
         for line in lines:
             line = line.strip()
             if not line:
                 continue
 
-            # 匹配"动作："或"动作:"格式
-            if line.startswith('动作：') or line.startswith('动作:'):
+            # 匹配"Action:"格式（支持中英文）
+            if line.startswith('Action:') or line.startswith('动作：') or line.startswith('动作:'):
                 # 提取冒号后的内容作为动作命令
-                if line.startswith('动作：'):
+                if line.startswith('Action:'):
+                    action = line[7:].strip()  # 去掉"Action:"前缀
+                elif line.startswith('动作：'):
                     action = line[3:].strip()  # 去掉"动作："前缀
                 else:
                     action = line[3:].strip()  # 去掉"动作:"前缀
@@ -236,7 +238,7 @@ class LLMAgent(BaseAgent):
                 if action:
                     return action
 
-        # 如果没找到"动作："格式，返回最后一行非空文本作为回退
+        # 如果没找到"Action:"或"动作："格式，返回最后一行非空文本作为回退
         for line in reversed(lines):
             if line.strip():
                 return line.strip()
@@ -274,7 +276,7 @@ class LLMAgent(BaseAgent):
         action = action.strip()
 
         # 记录执行命令
-        logger.info("执行命令: %s", action)
+        logger.info("Executing command: %s", action)
 
         # 执行动作
         status, message, result = self.bridge.process_command(self.agent_id, action)
