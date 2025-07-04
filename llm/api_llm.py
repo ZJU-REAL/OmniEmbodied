@@ -36,6 +36,9 @@ class ApiLLM(BaseLLM):
         elif self.provider == 'volcengine':
             self.api_key = provider_config.get('api_key') or os.environ.get('VOLCENGINE_API_KEY', '')
             self.endpoint = provider_config.get('endpoint', '')
+        elif self.provider == 'bailian':
+            self.api_key = provider_config.get('api_key') or os.environ.get('BAILIAN_API_KEY', '')
+            self.endpoint = provider_config.get('endpoint', '')
         else:  # 自定义端点
             self.api_key = provider_config.get('api_key') or os.environ.get('CUSTOM_LLM_API_KEY', '')
             self.endpoint = provider_config.get('endpoint', '')
@@ -62,12 +65,17 @@ class ApiLLM(BaseLLM):
         self.top_p = provider_config.get('top_p', 1.0)
         self.frequency_penalty = provider_config.get('frequency_penalty', 0.0)
         self.presence_penalty = provider_config.get('presence_penalty', 0.0)
-        
+
+        # 存储 enable_thinking 参数（如果配置中有的话）
+        self.enable_thinking = provider_config.get('enable_thinking')
+
         # 是否发送历史消息
         parameters = config.get('parameters', {})
         self.send_history = parameters.get('send_history', False)
         if logger.level <= logging.DEBUG:
             logger.debug("是否发送历史消息: %s", self.send_history)
+            if self.enable_thinking is not None:
+                logger.debug("enable_thinking 配置: %s", self.enable_thinking)
         
     def generate(self, 
                  prompt: str, 
@@ -179,12 +187,16 @@ class ApiLLM(BaseLLM):
             }
             print(messages[0]['content'])
             print(messages[1]['content'])
-            
+
             # 其他可选参数
             optional_params = ["n", "stream", "stop", "logit_bias", "user"]
             for param in optional_params:
                 if param in kwargs and kwargs[param] is not None:
                     params[param] = kwargs[param]
+
+            # 如果是 bailian provider 且配置中有 enable_thinking，则添加到 extra_body 中
+            if self.provider == 'bailian' and self.enable_thinking is not None:
+                params["extra_body"] = {"enable_thinking": self.enable_thinking}
             
             # 调用API
             if logger.level <= logging.DEBUG:
