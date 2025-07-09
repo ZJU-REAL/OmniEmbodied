@@ -13,7 +13,7 @@ from typing import Dict, Any
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from modes.decentralized import AutonomousAgent, CommunicationManager, Negotiator
-from embodied_simulator.core import ActionStatus
+from utils.embodied_simulator import ActionStatus
 from common_utils import setup_example_environment, get_task_description, check_apple_task_completion
 
 def main():

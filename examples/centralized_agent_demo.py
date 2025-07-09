@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-单智能体示例 - 使用任务验证器执行任务
+中心化双智能体示例 - 使用任务验证器执行中心化协调任务
 
-这个示例展示了如何使用任务验证器来执行单智能体任务。
+这个示例展示了如何使用任务验证器来执行中心化双智能体任务。
+中心化模式使用单个LLM协调器同时规划两个智能体的动作。
 任务验证器提供了完整的日志记录、轨迹记录和评测功能。
 
 主要功能：
@@ -12,11 +13,12 @@
 3. 自动记录执行轨迹和日志
 4. 生成详细的评测报告
 5. 支持命令行参数覆盖配置文件设置
+6. 使用中心化协调器同时控制两个智能体
 
 使用方法：
-python examples/single_agent_example.py --mode sequential --scenario 00001 --suffix demo
-python examples/single_agent_example.py --mode combined --scenario 00001 --suffix test
-python examples/single_agent_example.py --config my_config.yaml
+python examples/centralized_agent_demo.py --mode sequential --scenario 00001 --suffix demo
+python examples/centralized_agent_demo.py --mode combined --scenario 00001 --suffix test
+python examples/centralized_agent_demo.py --config centralized_config
 """
 
 import os
@@ -46,7 +48,7 @@ from config import ConfigManager
 
 def parse_args():
     """解析命令行参数"""
-    parser = argparse.ArgumentParser(description='单智能体任务执行示例')
+    parser = argparse.ArgumentParser(description='中心化双智能体任务执行示例')
     parser.add_argument('--mode', type=str,
                         choices=['sequential', 'combined', 'independent'],
                         help='评测模式: sequential (逐个评测), combined (混合评测), independent (独立评测)')
@@ -54,8 +56,8 @@ def parse_args():
                         help='场景ID')
     parser.add_argument('--suffix', type=str,
                         help='运行后缀')
-    parser.add_argument('--config', type=str, default='single_agent_config',
-                        help='配置文件名 (默认: single_agent_config)')
+    parser.add_argument('--config', type=str, default='centralized_config',
+                        help='配置文件名 (默认: centralized_config)')
     parser.add_argument('--log-level', type=str,
                         choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
                         help='日志级别')
@@ -104,16 +106,16 @@ def execute_single_scenario(args_tuple):
         setup_logger(log_level=logging.INFO)
         scenario_logger = logging.getLogger(f"scenario_{scenario_id}")
 
-        scenario_logger.info(f"🚀 启动场景 {scenario_id} 评测（进程内执行）")
+        scenario_logger.info(f"🚀 启动场景 {scenario_id} 中心化评测（进程内执行）")
 
         # 设置环境变量，让TaskEvaluator使用指定的输出目录
         os.environ['SCENARIO_OUTPUT_DIR'] = scenario_output_dir
         os.environ['DISABLE_AUTO_OUTPUT_DIR'] = 'true'  # 禁用自动输出目录创建
 
-        # 创建TaskEvaluator实例，不使用custom_suffix避免自动生成目录
+        # 创建TaskEvaluator实例，使用multi agent_type和centralized配置
         evaluator = TaskEvaluator(
             config_file=config_file,
-            agent_type='single',
+            agent_type='multi',  # 使用多智能体模式
             task_type=mode,
             scenario_id=scenario_id,
             custom_suffix=None  # 不使用后缀，避免自动生成独立目录
@@ -135,11 +137,11 @@ def execute_single_scenario(args_tuple):
             del os.environ['DISABLE_AUTO_OUTPUT_DIR']
 
         # 运行评测
-        scenario_logger.info(f"📋 开始执行场景 {scenario_id} 的任务评测")
+        scenario_logger.info(f"📋 开始执行场景 {scenario_id} 的中心化任务评测")
         results = evaluator.run_evaluation(scenario_id)
 
         # 处理评测结果
-        scenario_logger.info(f"✅ 场景 {scenario_id} 评测执行完成")
+        scenario_logger.info(f"✅ 场景 {scenario_id} 中心化评测执行完成")
 
         # 构建场景结果
         summary = results.get('summary', {})
@@ -252,7 +254,7 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
 
     # 生成运行名称和输出目录
     run_name = RunNamingManager.generate_run_name(
-        agent_type='single',
+        agent_type='multi',  # 使用multi表示中心化多智能体
         task_type=f"parallel_{mode}",
         scenario_id="multi",
         config_name=config_file,
@@ -264,7 +266,7 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
     output_dir = RunNamingManager.generate_output_directory(base_output_dir, run_name)
     os.makedirs(output_dir, exist_ok=True)
 
-    logger.info(f"🚀 开始场景级并行评测 - 模式: single_{mode}")
+    logger.info(f"🚀 开始场景级并行评测 - 模式: centralized_{mode}")
     logger.info(f"📁 输出目录: {output_dir}")
 
     start_time = time.time()
@@ -304,10 +306,10 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
                     else:
                         failed_scenarios += 1
 
-                    logger.info(f"✅ 场景 {scenario_id} 评测完成")
+                    logger.info(f"✅ 场景 {scenario_id} 中心化评测完成")
 
                 except Exception as e:
-                    logger.exception(f"❌ 场景 {scenario_id} 评测失败: {e}")
+                    logger.exception(f"❌ 场景 {scenario_id} 中心化评测失败: {e}")
                     failed_scenarios += 1
 
                     # 记录失败场景
@@ -333,7 +335,7 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
         results = {
             'run_info': {
                 'run_name': run_name,
-                'agent_type': 'single',
+                'agent_type': 'multi',
                 'evaluation_type': mode,
                 'config_file': config_file,
                 'output_dir': output_dir,
@@ -362,7 +364,7 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
         save_parallel_results(results, output_dir, mode)
 
         # 显示结果
-        logger.info(f"🎯 并行评测完成")
+        logger.info(f"🎯 中心化并行评测完成")
         logger.info(f"📊 总场景数: {len(scenario_list)}")
         logger.info(f"✅ 成功场景: {successful_scenarios}")
         logger.info(f"❌ 失败场景: {failed_scenarios}")
@@ -373,7 +375,7 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
         return 0
 
     except Exception as e:
-        logger.exception(f"❌ 并行评测执行失败: {e}")
+        logger.exception(f"❌ 中心化并行评测执行失败: {e}")
         return 1
 
 
@@ -505,7 +507,7 @@ def save_parallel_results(results, output_dir, evaluation_type):
             json.dump(meta_data, f, ensure_ascii=False, indent=2)
 
         logger = logging.getLogger(__name__)
-        logger.info(f"📊 并行评测meta信息已保存: {meta_file}")
+        logger.info(f"📊 中心化并行评测meta信息已保存: {meta_file}")
 
     except Exception as e:
         logger = logging.getLogger(__name__)
@@ -534,7 +536,7 @@ def main():
     setup_logger(log_level=getattr(logging, log_level))
     logger = logging.getLogger(__name__)
 
-    logger.info("🚀 启动单智能体示例（使用任务验证器）")
+    logger.info("🚀 启动中心化双智能体示例（使用任务验证器）")
     logger.info(f"📋 评测模式: {mode}")
     logger.info(f"🏠 场景ID: {scenario}")
     logger.info(f"🏷️ 运行后缀: {suffix}")
@@ -560,19 +562,21 @@ def main():
     task_evaluator_config = config.get('task_evaluator', {})
     env_desc_config = config.get('environment_description', {})
     history_config = config.get('history', {})
+    coordinator_config = config.get('coordinator', {})
 
     logger.info("⚙️ 配置信息:")
-    logger.info(f"  - 最大总步数: {execution_config.get('max_total_steps', 200)}")
-    logger.info(f"  - 每任务最大步数: {task_evaluator_config.get('max_steps_per_task', 20)}")
+    logger.info(f"  - 最大总步数: {execution_config.get('max_total_steps', 300)}")
+    logger.info(f"  - 每任务最大步数: {task_evaluator_config.get('max_steps_per_task', 30)}")
     logger.info(f"  - 环境描述级别: {env_desc_config.get('detail_level', 'full')}")
     logger.info(f"  - 历史记录长度: {history_config.get('max_history_length', -1)}")
     logger.info(f"  - 任务超时时间: {execution_config.get('timeout_seconds', 900)}秒")
+    logger.info(f"  - 协调器历史长度: {coordinator_config.get('max_chat_history', -1)}")
 
     try:
-        # 创建任务验证器
+        # 创建任务验证器 - 使用multi agent_type启用中心化模式
         evaluator = TaskEvaluator(
             config_file=args.config,
-            agent_type='single',
+            agent_type='multi',  # 关键：使用multi启用中心化多智能体模式
             task_type=mode,
             scenario_id=scenario,
             custom_suffix=suffix
@@ -587,17 +591,17 @@ def main():
             evaluator.trajectory_recorder = TrajectoryRecorder(scenario_output_dir, evaluator.run_name, scenario)
             logger.info(f"📁 使用指定输出目录: {scenario_output_dir}")
 
-        logger.info("✅ 任务验证器初始化成功")
+        logger.info("✅ 中心化任务验证器初始化成功")
         logger.info(f"📁 输出目录: {evaluator.output_dir}")
         logger.info(f"📝 轨迹文件: {evaluator.trajectory_recorder.trajectory_file}")
         logger.info(f"📄 日志文件: {evaluator.trajectory_recorder.log_file}")
 
         # 执行评测
-        logger.info("🎬 开始执行任务评测...")
+        logger.info("🎬 开始执行中心化任务评测...")
         results = evaluator.run_evaluation(scenario)
 
         # 显示结果
-        logger.info("\n🎉 任务评测完成！")
+        logger.info("\n🎉 中心化任务评测完成！")
 
         # 获取汇总信息
         summary = results.get('summary', {})
@@ -617,16 +621,16 @@ def main():
         # 显示性能评价
         completion_rate = summary.get('completion_rate', 0)
         if completion_rate >= 0.8:
-            logger.info("🎊 评测结果优秀！")
+            logger.info("🎊 中心化评测结果优秀！")
         elif completion_rate >= 0.6:
-            logger.info("👍 评测结果良好！")
+            logger.info("👍 中心化评测结果良好！")
         else:
-            logger.info("📈 还有改进空间")
+            logger.info("📈 中心化模式还有改进空间")
 
         return 0
 
     except Exception as e:
-        logger.error(f"❌ 执行过程中发生错误: {e}")
+        logger.error(f"❌ 中心化执行过程中发生错误: {e}")
         import traceback
         logger.error(f"错误详情:\n{traceback.format_exc()}")
         return 1
