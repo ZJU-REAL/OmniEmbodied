@@ -1,7 +1,7 @@
 from typing import Dict, List, Any, Optional
 import logging
 
-from embodied_simulator import SimulationEngine
+from utils.embodied_simulator import SimulationEngine
 from .base_agent import BaseAgent
 from .agent_factory import create_agent
 

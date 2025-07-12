@@ -1,0 +1,309 @@
+{
+  "execution_info": {
+    "run_name": "20250706_210807_multi_sequential_scenario_00001_test",
+    "start_time": "2025-07-06T21:08:07.940395",
+    "end_time": "2025-07-06T21:10:03.500993",
+    "total_duration_seconds": 115.560598,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "multi",
+    "task_type": "sequential",
+    "config_file": "centralized_config",
+    "scenario_id": "00001",
+    "config_data": {
+      "coordinator": {
+        "llm_config": "llm_config",
+        "max_chat_history": -1
+      },
+      "worker_agents": {
+        "llm_config": "llm_config",
+        "max_chat_history": -1
+      },
+      "execution": {
+        "max_total_steps": 300
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 30
+      },
+      "evaluation": {
+        "task_type": "sequential",
+        "default_scenario": "00001",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": false,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 4
+        },
+        "scenario_selection": {
+          "mode": "range",
+          "range": {
+            "start": "00001",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true,
+          "pause_duration": 1.0
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00001",
+    "initialization_time": "2025-07-06T21:08:07.957606"
+  },
+  "agent_info": {
+    "agent_type": "multi_centralized",
+    "coordinator": "agent_1",
+    "workers": [
+      "agent_2"
+    ],
+    "agents": {
+      "agent_1": {
+        "type": "Coordinator",
+        "config": "centralized_config"
+      },
+      "agent_2": {
+        "type": "WorkerAgent",
+        "config": "centralized_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the DSP Laboratory for an important demonstration of fixed-point FIR filter capabilities, ensuring all equipment is functional, organized, and ready for collaborative work.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 25.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "filter_simulation_station"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 25.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "filter_simulation_station"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the oscilloscope probe set with id 'oscilloscope_probe_set_1' onto the 'rack_mounted_signal_analyzer_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "oscilloscope_probe_set_1",
+            "location_id": "on:rack_mounted_signal_analyzer_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Turn on the dual-arm magnifying lamp that is uniquely located on the steel workbench.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "dual_arm_magnifying_lamp_1",
+            "is_on": true
+          }
+        ]
+      },
+      {
+        "task_description": "Find the heaviest, metal object on the steel workbench and place it in the storage component shelves.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "calibration_jig_1",
+            "location_id": "in:storage_component_shelves"
+          }
+        ]
+      },
+      {
+        "task_description": "Locate the only paper item with coffee stains in the main workbench area and move it to the filter simulation station.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "coffee_stained_schematic_1",
+            "location_id": "in:filter_simulation_station"
+          }
+        ]
+      },
+      {
+        "task_description": "Use the keycard to unlock the calibration jig on the steel workbench.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "calibration_jig_1",
+            "is_locked": false
+          }
+        ]
+      },
+      {
+        "task_description": "Find the only blinking soldering iron station on the steel workbench and turn it off.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "soldering_iron_station_1",
+            "is_on": false
+          }
+        ]
+      },
+      {
+        "task_description": "Have robot_1 and robot_2 cooperate to connect the overhead power strip in the main workbench area.",
+        "task_category": "explicit_collaboration",
+        "validation_checks": [
+          {
+            "id": "overhead_power_strip_1",
+            "is_connected": true
+          }
+        ]
+      },
+      {
+        "task_description": "Have robot_1 and robot_2 work together to open the RF shielding cage in the signal generation testing bay.",
+        "task_category": "explicit_collaboration",
+        "validation_checks": [
+          {
+            "id": "rf_shielding_cage_1",
+            "is_open": true
+          }
+        ]
+      },
+      {
+        "task_description": "Move the server rack to the signal generation testing bay.",
+        "task_category": "implicit_collaboration",
+        "validation_checks": [
+          {
+            "id": "server_rack_1",
+            "location_id": "in:signal_generation_testing_bay"
+          }
+        ]
+      },
+      {
+        "task_description": "Relocate the heavy-duty shelving unit to the main workbench area.",
+        "task_category": "implicit_collaboration",
+        "validation_checks": [
+          {
+            "id": "heavy_duty_shelving_unit_1",
+            "location_id": "in:main_workbench_area"
+          }
+        ]
+      },
+      {
+        "task_description": "Cooperatively move the mini fridge to the storage component shelves and ensure it is turned off.",
+        "task_category": "compound_collaboration",
+        "validation_checks": [
+          {
+            "id": "mini_fridge_1",
+            "location_id": "in:storage_component_shelves"
+          },
+          {
+            "id": "mini_fridge_1",
+            "is_on": false
+          }
+        ]
+      },
+      {
+        "task_description": "Work together to move the triple-monitor setup to the main workbench area and connect the external HDD.",
+        "task_category": "compound_collaboration",
+        "validation_checks": [
+          {
+            "id": "triple_monitor_setup_1",
+            "location_id": "in:main_workbench_area"
+          },
+          {
+            "id": "external_hdd_1",
+            "is_connected": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00001"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the oscilloscope probe set with id 'oscilloscope_probe_set_1' onto the 'rack_mounted_signal_analyzer_1'.",
+      "task_type": "subtask",
+      "start_time": "2025-07-06T21:08:08.051804",
+      "end_time": "2025-07-06T21:08:59.757930",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 2,
+      "task_description": "Turn on the dual-arm magnifying lamp that is uniquely located on the steel workbench.",
+      "task_type": "subtask",
+      "start_time": "2025-07-06T21:08:59.759990",
+      "end_time": "2025-07-06T21:09:43.284684",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 3,
+      "task_description": "Find the heaviest, metal object on the steel workbench and place it in the storage component shelves.",
+      "task_type": "subtask",
+      "start_time": "2025-07-06T21:09:43.285245",
+      "end_time": "2025-07-06T21:10:03.486851",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 3,
+    "completed_tasks": 0,
+    "failed_tasks": 3,
+    "completion_rate": 0.0,
+    "total_actions": 0,
+    "average_actions_per_task": 0.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 3,
+        "completed": 0,
+        "completion_rate": 0.0
+      }
+    },
+    "action_type_stats": {}
+  }
+}

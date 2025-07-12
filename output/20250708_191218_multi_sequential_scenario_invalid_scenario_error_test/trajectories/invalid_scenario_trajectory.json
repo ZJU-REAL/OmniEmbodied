@@ -1,0 +1,91 @@
+{
+  "execution_info": {
+    "run_name": "20250708_191218_multi_sequential_scenario_invalid_scenario_error_test",
+    "start_time": "2025-07-08T19:12:18.658669",
+    "end_time": "2025-07-08T19:12:18.662556",
+    "total_duration_seconds": 0.003887,
+    "evaluation_mode": null
+  },
+  "configuration": {
+    "agent_type": "multi",
+    "task_type": "sequential",
+    "config_file": "centralized_config",
+    "scenario_id": "invalid_scenario",
+    "config_data": {
+      "coordinator": {
+        "llm_config": "llm_config",
+        "max_chat_history": -1
+      },
+      "worker_agents": {
+        "llm_config": "llm_config",
+        "max_chat_history": -1
+      },
+      "execution": {
+        "max_total_steps": 300
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 30
+      },
+      "evaluation": {
+        "task_type": "sequential",
+        "default_scenario": "00001",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": false,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 4
+        },
+        "scenario_selection": {
+          "mode": "range",
+          "range": {
+            "start": "00001",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true,
+          "pause_duration": 1.0
+        }
+      }
+    }
+  },
+  "scenario_info": {},
+  "agent_info": {},
+  "task_info": {},
+  "task_executions": [],
+  "execution_statistics": {
+    "total_tasks": 0,
+    "completed_tasks": 0,
+    "failed_tasks": 0,
+    "completion_rate": 0.0,
+    "total_actions": 0,
+    "average_actions_per_task": 0.0,
+    "task_category_stats": {},
+    "action_type_stats": {}
+  }
+}

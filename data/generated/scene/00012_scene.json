@@ -1,0 +1,983 @@
+{
+  "description": "A bustling computer refurbishment and repair workshop with multiple interconnected zones for diagnostics, repair, refurbishment, and inventory management.",
+  "rooms": [
+    {
+      "id": "incoming_inspection",
+      "name": "Incoming Inspection & Intake Area",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_repair"
+      ]
+    },
+    {
+      "id": "diagnostic_repair",
+      "name": "Diagnostic & Repair Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "incoming_inspection",
+        "refurbishment_assembly",
+        "storage_parts"
+      ]
+    },
+    {
+      "id": "refurbishment_assembly",
+      "name": "Refurbishment & Assembly Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_repair",
+        "storage_parts"
+      ]
+    },
+    {
+      "id": "storage_parts",
+      "name": "Storage & Parts Inventory",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_repair",
+        "refurbishment_assembly"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "heavy_duty_workbench_1",
+      "name": "Heavy-duty metal workbench",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_inspection",
+      "properties": {
+        "size": [
+          200.0,
+          80.0,
+          90.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scuffed"
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_cart_1",
+      "name": "Rolling inventory cart",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_inspection",
+      "properties": {
+        "size": [
+          60.0,
+          40.0,
+          90.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "problematic_imac_1",
+      "name": "Problematic iMac (2013 model)",
+      "type": "FURNITURE",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "size": [
+          52.0,
+          45.0,
+          20.0
+        ],
+        "weight": 9.8,
+        "is_container": false,
+        "brand": "Apple",
+        "model": "iMac 2013",
+        "condition": "cracked screen"
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "dell_aio_1",
+      "name": "Dell all-in-one PC (OptiPlex 7480)",
+      "type": "FURNITURE",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "size": [
+          54.0,
+          46.0,
+          18.0
+        ],
+        "weight": 10.2,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "OptiPlex 7480",
+        "issue": "Printer sharing issue"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "weighing_scale_1",
+      "name": "Weighing scale (digital, max 30kg)",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "white",
+        "brand": "Tanita",
+        "max_capacity": 30.0,
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label printer",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Brother",
+        "issue": "out of paper"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox (open)",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "Stanley",
+        "is_container": true,
+        "contents": "screwdrivers, pliers, spudger"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "usb_hub_1",
+      "name": "USB hub (7-port, powered)",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Anker",
+        "ports_active": 1
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "esd_poster_1",
+      "name": "Faded 'ESD Safe Zone' poster",
+      "type": "ITEM",
+      "location_id": "in:incoming_inspection",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "pc_world_magazines_1",
+      "name": "Stack of old PC World magazines",
+      "type": "ITEM",
+      "location_id": "in:incoming_inspection",
+      "properties": {
+        "weight": 3.0,
+        "color": "multicolor",
+        "years": "2010-2015",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "adjustable_workbench_1",
+      "name": "Adjustable-height workbench",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair",
+      "properties": {
+        "size": [
+          180.0,
+          80.0,
+          90.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "issue": "loose outlet"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Overhead magnifying lamp",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair",
+      "properties": {
+        "size": [
+          40.0,
+          30.0,
+          150.0
+        ],
+        "weight": 3.5,
+        "is_container": false,
+        "type": "LED",
+        "issue": "slight flicker"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "macbook_air_1",
+      "name": "MacBook Air (2015, open on repair stand)",
+      "type": "FURNITURE",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "size": [
+          32.0,
+          22.0,
+          1.7
+        ],
+        "weight": 1.35,
+        "is_container": false,
+        "brand": "Apple",
+        "model": "MacBook Air 2015",
+        "issue": "boot loop after liquid spill"
+      },
+      "states": {
+        "is_open": true,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "hp_aio_1",
+      "name": "HP Touchscreen AIO (broken hinge)",
+      "type": "FURNITURE",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "size": [
+          54.0,
+          46.0,
+          18.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "HP",
+        "issue": "broken hinge"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "yellow",
+        "brand": "Fluke",
+        "mode": "continuity",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_wrist_strap_1",
+      "name": "Anti-static wrist strap",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Rosewill",
+        "issue": "not connected to ground"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "Soldering station",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "brand": "Hakko",
+        "issue": "sponge dry",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "external_hdd_1",
+      "name": "External HDD (WD 2TB)",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "brand": "Western Digital",
+        "label": "OS Recovery Images"
+      },
+      "states": {}
+    },
+    {
+      "id": "no_food_sign_1",
+      "name": "'No Food or Drink' sign",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_repair",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Half-empty energy drink can",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "brand": "Red Bull",
+        "state": "half-empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "crt_monitor_1",
+      "name": "Dusty old CRT monitor",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair",
+      "properties": {
+        "size": [
+          40.0,
+          40.0,
+          35.0
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "brand": "Sony",
+        "condition": "dusty",
+        "use": "makeshift stand"
+      },
+      "states": {}
+    },
+    {
+      "id": "clean_work_mat_1",
+      "name": "Clean work mat (anti-static, blue)",
+      "type": "FURNITURE",
+      "location_id": "in:refurbishment_assembly",
+      "properties": {
+        "size": [
+          100.0,
+          60.0,
+          0.5
+        ],
+        "weight": 1.5,
+        "is_container": true,
+        "material": "rubber",
+        "condition": "slightly frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Rolling tool cabinet (12 drawers)",
+      "type": "FURNITURE",
+      "location_id": "in:refurbishment_assembly",
+      "properties": {
+        "size": [
+          60.0,
+          40.0,
+          120.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lenovo_thinkpad_1",
+      "name": "Freshly wiped Lenovo ThinkPad",
+      "type": "FURNITURE",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "size": [
+          33.0,
+          23.0,
+          2.0
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "brand": "Lenovo",
+        "model": "ThinkPad",
+        "status": "awaiting RAM upgrade"
+      },
+      "states": {}
+    },
+    {
+      "id": "ram_sticks_1",
+      "name": "Two 8GB RAM sticks",
+      "type": "ITEM",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "green",
+        "brand": "Crucial",
+        "capacity": "8GB",
+        "quantity": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_c_dock_1",
+      "name": "USB-C docking station",
+      "type": "ITEM",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Dell",
+        "issue": "missing one port cover"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Sealed box of thermal paste",
+      "type": "ITEM",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "Arctic Silver",
+        "expiry": "next month"
+      },
+      "states": {}
+    },
+    {
+      "id": "air_duster_1",
+      "name": "Air duster can",
+      "type": "ITEM",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "brand": "Dust-Off",
+        "state": "half-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "rgb_keyboard_1",
+      "name": "RGB mechanical keyboard (for testing)",
+      "type": "ITEM",
+      "location_id": "on:clean_work_mat_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "Corsair",
+        "purpose": "testing",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "keycap_puller_1",
+      "name": "Keycap puller",
+      "type": "ITEM",
+      "location_id": "on:rgb_keyboard_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_certificate_1",
+      "name": "'Employee of the Month' certificate",
+      "type": "ITEM",
+      "location_id": "in:refurbishment_assembly",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "year": "2018",
+        "condition": "crookedly hung"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky note on wall",
+      "type": "ITEM",
+      "location_id": "in:refurbishment_assembly",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "message": "Remember: Check BIOS settings before sealing!"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server rack chassis",
+      "type": "FURNITURE",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "size": [
+          60.0,
+          100.0,
+          200.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "requires": "dolly and coordination"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Shelving unit",
+      "type": "FURNITURE",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "size": [
+          120.0,
+          40.0,
+          180.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bins_1",
+      "name": "Labeled bins",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "various",
+        "labels": "spare components, cables, peripherals",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "material": "metal",
+        "purpose": "transport heavy objects"
+      },
+      "states": {}
+    },
+    {
+      "id": "phillips_screwdriver_1",
+      "name": "Phillips-head screwdriver",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "brand": "Craftsman",
+        "size": "#2",
+        "provides_abilities": [
+          "damage",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "flathead_screwdriver_1",
+      "name": "Flathead screwdriver",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "brand": "Craftsman",
+        "size": "1/4 inch",
+        "provides_abilities": [
+          "damage",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pliers_1",
+      "name": "Pliers",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Channellock",
+        "provides_abilities": [
+          "damage",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spudger_1",
+      "name": "Spudger",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_cable_1",
+      "name": "USB cable",
+      "type": "ITEM",
+      "location_id": "in:labeled_bins_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "type": "USB-A to USB-B",
+        "length": "1.8m"
+      },
+      "states": {}
+    },
+    {
+      "id": "hdmi_cable_1",
+      "name": "HDMI cable",
+      "type": "ITEM",
+      "location_id": "in:labeled_bins_1",
+      "properties": {
+        "weight": 0.15,
+        "color": "black",
+        "length": "2m",
+        "version": "1.4"
+      },
+      "states": {}
+    },
+    {
+      "id": "power_cord_1",
+      "name": "Power cord",
+      "type": "ITEM",
+      "location_id": "in:labeled_bins_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "type": "IEC C13",
+        "length": "1.5m"
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_bags_1",
+      "name": "Anti-static bags",
+      "type": "ITEM",
+      "location_id": "on:inventory_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "plastic",
+        "quantity": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode scanner",
+      "type": "ITEM",
+      "location_id": "on:inventory_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "brand": "Zebra"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with intake forms",
+      "type": "ITEM",
+      "location_id": "on:inventory_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "wood",
+        "contents": "intake forms"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Half-drank coffee mug",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "contents": "coffee",
+        "state": "half-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "wifi_password_note_1",
+      "name": "Wi-Fi password sticky note",
+      "type": "ITEM",
+      "location_id": "on:rgb_keyboard_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "message": "Wi-Fi: TechWorkshop2023, Password: Repair123!"
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Swingline",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping paper roll",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "paper",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_tape_1",
+      "name": "Packing tape",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "brand": "Scotch",
+        "provides_abilities": [
+          "wrap",
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cardboard_box_1",
+      "name": "Cardboard box",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "size": "medium",
+        "is_container": true,
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure gauge",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "brand": "Milton",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "key_ring_1",
+      "name": "Key ring with workshop keys",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "keys": "workshop, storage, front door",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "instrument_tuner_1",
+      "name": "Instrument tuner",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.15,
+        "color": "black",
+        "brand": "Korg",
+        "provides_abilities": [
+          "tune_instrument"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "laptop_charger_1",
+      "name": "Laptop charger",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Lenovo",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding torch",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "brand": "Lincoln Electric",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_tape_1",
+      "name": "Measuring tape",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "brand": "Stanley",
+        "length": "25ft",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_shaker_1",
+      "name": "Seasoning shaker",
+      "type": "ITEM",
+      "location_id": "in:storage_parts",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "contents": "salt",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "close",
+    "damage",
+    "measure",
+    "open",
+    "pack",
+    "plug_in",
+    "recharge",
+    "repair",
+    "season",
+    "staple",
+    "tune_instrument",
+    "turn_off",
+    "turn_on",
+    "unlock",
+    "unplug",
+    "weld",
+    "wrap"
+  ]
+}

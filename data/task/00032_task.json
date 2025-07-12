@@ -1,0 +1,118 @@
+{
+  "task_background": "Prepare the quantum materials research lab for a critical symmetry-breaking experiment by configuring equipment, handling sensitive materials, and ensuring operational readiness.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place quantum_interference_device_1 on cryogenic_sample_stage_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "quantum_interference_device_1",
+          "location_id": "on:cryogenic_sample_stage_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the spectrometer in the instrumentation bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "spectrometer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Open the argon-purged glovebox workstation in the cleanroom annex.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "glovebox_workstation_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Close the laminar airflow fume hood in the storage prep zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the heavy sash of the laminar airflow fume hood.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryogenic sample stage to the instrumentation bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_sample_stage_1",
+          "location_id": "in:instrumentation_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hazmat cabinet to the main lab floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazmat_cabinet_1",
+          "location_id": "in:main_lab_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the active-damping vibration table with 150kg load capacity to the cleanroom annex.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vibration_damped_table_1",
+          "location_id": "in:cleanroom_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the argon-purged glovebox workstation with two glove ports to the data hub.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_workstation_1",
+          "location_id": "in:data_hub"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00032"
+}

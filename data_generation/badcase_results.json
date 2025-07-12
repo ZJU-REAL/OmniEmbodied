@@ -1,0 +1,215 @@
+{
+  "timestamp": "2025-07-09 15:23:59",
+  "sample_size": 10,
+  "statistics": {
+    "total": 10,
+    "issue_type_unclear": 3,
+    "r1_failed": 8,
+    "issue_type_good_quality": 2,
+    "r1_success": 2,
+    "issue_type_data_quality_issue": 4,
+    "issue_type_r1_planning_error": 1
+  },
+  "results": [
+    {
+      "scene_id": "00015",
+      "task_index": 4,
+      "task_description": "Repair the broken baler_machine_1.",
+      "task_category": "tool_use",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task \"Repair the broken baler_machine_1\" with category \"tool_use\" and validation check for `is_broken: false` has critical feasibility issues. The baler machine requires repair, but no viable repair tool exists that meets the agent's constraints. The wrench_1 and pallet_jack_handle_1 both provide \"repair\" ability but are located in backroom_storage, which is only accessible through main_sorting_floor. However, the pallet_jack_1 (required to move heavy objects blocking access/path) is broken and cannot be repaired without its handle (pallet_jack_handle_1), creating a circular dependency. Additionally, the toolbox_1 (another repair tool) is in backroom_storage but requires opening first (no key/crowbar available in that room), and robots cannot carry objects exceeding their max_size [1,1,1] (e.g., toolbox_1 or baler components). Agent capabilities (max_weight=50, max_size constraints) prevent manipulating large machinery like the baler_machine_1 (size [2.5,1.8,2.0], weight 800kg).\n\nVERDICT: INVALID\n\nISSUES: \n1. No accessible repair tools due to path/access blockers (broken pallet_jack_1) \n2. Agents cannot carry required oversized tools/objects \n3. Circular dependency: Repair needs tools in inaccessible location \n4. Missing key/openers for toolbox_1 in backroom_storage \n5. Baler machine exceeds agent interaction capacity\n\nCONFIDENCE: 1.0\n\nISSUE_TYPE: multiple_issues (infeasible_task + missing_prerequisites)",
+      "r1_error": "",
+      "issue_type": "unclear",
+      "confidence": 1.0,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Manual review required",
+        "Collect more data for analysis",
+        "Consider hybrid validation approach"
+      ]
+    },
+    {
+      "scene_id": "00020",
+      "task_index": 7,
+      "task_description": "Find the tube amplifier with the faint ozone smell and turn it on.",
+      "task_category": "compound_reasoning",
+      "r1_success": true,
+      "r1_response": "ANALYSIS: The task requires finding a tube amplifier with a faint ozone smell and turning it on. The scene contains one tube amplifier (tube_amplifier_1) that matches this description exactly (properties: \"smell\": \"faint_ozone\"). The validation check correctly verifies the end state (\"is_on\": true). Agents have the required \"turn_on\" ability, and the amplifier's weight (12.0 kg) and size are within agent limits. The amplifier is accessible in the main_recording_room, and no prerequisites (e.g., tools or keys) are needed for turning it on. The \"compound_reasoning\" category fits since agents must identify the correct object using sensory properties (smell) before acting. No logical gaps exist.\n\nVERDICT: VALID  \nISSUES: None  \nCONFIDENCE: 1.0  \nISSUE_TYPE: N/A (valid task)",
+      "r1_error": "",
+      "issue_type": "good_quality",
+      "confidence": 1.0,
+      "specific_issues": [],
+      "recommendations": [
+        "Task appears valid - good quality data"
+      ]
+    },
+    {
+      "scene_id": "00015",
+      "task_index": 10,
+      "task_description": "Move the hazardous_waste_barrel_1 to the break_room.",
+      "task_category": "implicit_collaboration",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task requires moving hazardous_waste_barrel_1 (200kg weight, 1.2m height) to the break_room. Both robots have a 50kg weight limit and 1.0m max size in all dimensions. The barrel exceeds individual robot capabilities in both weight (200kg > 50kg) and size (z-dimension 1.2m > 1.0m). Collaborative carrying isn't supported by the agent configuration or abilities. Alternative methods fail: the pallet jack is broken and exceeds robot size/weight limits; the electromagnet crane is non-portable and cannot access the break_room. No objects enable indirect movement (e.g., conveyor belts don't connect to the break_room). The validation check aligns with the task, and the implicit_collaboration category fits, but the task is fundamentally impossible due to agent limitations.\n\nVERDICT: INVALID\n\nISSUES: \n1. Barrel weight (200kg) exceeds individual robot capacity (50kg)\n2. Barrel height (1.2m) exceeds max graspable size (1.0m z-dimension)\n3. No feasible tools for indirect transport (broken pallet jack, fixed crane)\n4. Collaborative carrying not supported by agent capabilities\n\nCONFIDENCE: 0.95 (High certainty; physical constraints are explicit)\n\nISSUE_TYPE: infeasible_task",
+      "r1_error": "",
+      "issue_type": "data_quality_issue",
+      "confidence": 0.5,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Review task generation prompts for this category",
+        "Improve validation check generation logic",
+        "Add more examples to training data",
+        "Focus on implicit_collaboration category improvements"
+      ]
+    },
+    {
+      "scene_id": "00020",
+      "task_index": 12,
+      "task_description": "Cooperatively move the false_bookshelf_1 to reveal the hidden_safe_room and open it.",
+      "task_category": "compound_collaboration",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task requires moving the false_bookshelf_1 to reveal the hidden_safe_room and opening it. However, there are critical issues:\n\n1. **Task-Validation Mismatch**:  \n   The validation only checks if the bookshelf is open (`false_bookshelf_1.is_open=true`), but ignores the requirement to \"move\" the bookshelf to reveal the room. The bookshelf's `hidden_compartment` property indicates it conceals the safe room entrance, but moving it is not validated.\n\n2. **Infeasible Task**:  \n   - **Size/Weight Constraints**: The false_bookshelf_1 weighs 80kg (exceeding both robots' 50kg max_weight) and has dimensions [1.8, 0.3, 2.0] (exceeds max_size [1.5,1.5,1.5] in length and height).  \n   - **Trigger Mechanism**: The bookshelf opens via a trigger mechanism (\"pull_The_Communist_Manifesto\"), not by moving it. The task misinterprets its function.  \n   - **Location**: The bookshelf is already in the hidden_safe_room. Moving it wouldn’t \"reveal\" the room, as the room is accessible via gear_storage_workshop.\n\n3. **Missing Prerequisites**:  \n   No tools (e.g., dollies, straps) exist to facilitate moving a heavy object cooperatively. The robots lack strength/size to lift it even collaboratively.\n\n4. **Logical Inconsistencies**:  \n   - The hidden_safe_room is already revealed (connected to gear_storage_workshop).  \n   - The bookshelf’s purpose is to conceal a compartment via a trigger book, not to block room access.  \n   - \"Moving\" contradicts its design (fixed trigger mechanism).\n\n5. **Category Mismatch**:  \n   \"Compound_collaboration\" fits (requires coordination), but the task is fundamentally flawed due to infeasibility.\n\nVERDICT: INVALID  \nISSUES:  \n- Bookshelf exceeds robots' weight/size limits.  \n- Bookshelf cannot be \"moved\" to reveal the room (already accessible).  \n- Validation ignores \"moving\" requirement.  \n- Task misinterprets bookshelf's trigger-based mechanism.  \nCONFIDENCE: 1.0  \nISSUE_TYPE: multiple_issues (primary: infeasible_task + logical_inconsistency)",
+      "r1_error": "",
+      "issue_type": "unclear",
+      "confidence": 1.0,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Manual review required",
+        "Collect more data for analysis",
+        "Consider hybrid validation approach"
+      ]
+    },
+    {
+      "scene_id": "00018",
+      "task_index": 6,
+      "task_description": "Find the only object with a smudged ink condition, use the eraser_1 to clean it, and place it in the field_prep_room.",
+      "task_category": "compound_reasoning",
+      "r1_success": false,
+      "r1_response": "ANALYSIS:\n1. **Task-Validation Mismatch**: The validation check requires lab_notebook_1 to have \"is_written_on\": false, but this state doesn't exist in the object definition. The notebook only has \"is_open\" and \"is_signed\" states. This creates a verification gap since the task's success condition references a non-existent property.\n\n2. **Infeasible Task**: \n   - The task requires modifying the immutable property \"ink_condition\" (a fixed characteristic, not a state). Properties like \"ink_condition\" cannot be altered through actions, only states can change.\n   - Eraser_1 has \"erase\" ability, but this typically applies to pencil marks. Lab_notebook_1 has \"ink_condition\": \"smudged\", indicating pen ink which cannot be erased with a standard rubber eraser.\n\n3. **Missing Prerequisites**: \n   - No object exists that can modify ink smudges (e.g., ink correction fluid).\n   - The notebook's \"ink_condition\" is a permanent property, not a modifiable state.\n\n4. **Logical Inconsistencies**: \n   - Cleaning \"smudged ink\" with an eraser contradicts real-world physics (erasers remove graphite, not ink).\n   - The validation check uses an undefined state (\"is_written_on\") while ignoring the actual smudge-cleaning goal.\n\n5. **Category Mismatch**: The task fits \"compound_reasoning\" (requiring object identification, tool use, and relocation), so no mismatch here.\n\nVERDICT: INVALID\n\nISSUES: \n1. Validation references non-existent state (\"is_written_on\") \n2. Cannot alter immutable properties (\"ink_condition\") \n3. Physical impossibility: eraser cannot clean ink smudges \n4. Validation doesn't verify ink condition improvement\n\nCONFIDENCE: 1.0\n\nISSUE_TYPE: multiple_issues",
+      "r1_error": "",
+      "issue_type": "unclear",
+      "confidence": 1.0,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Manual review required",
+        "Collect more data for analysis",
+        "Consider hybrid validation approach"
+      ]
+    },
+    {
+      "scene_id": "00020",
+      "task_index": 6,
+      "task_description": "Use the scissors_1 to unwrap the censorship_manual_1 and place it on the folding_table_1.",
+      "task_category": "compound_reasoning",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task requires using scissors_1 to unwrap censorship_manual_1 and place it on folding_table_1. However, censorship_manual_1 is initially located \"in:false_bookshelf_1\", which has its state \"is_open\": false. The false bookshelf requires pulling \"communist_manifesto_book_1\" to open, but this book is inside the closed bookshelf, creating an unsolvable dependency loop. Additionally, the unwrap ability requires direct access to the manual, which is impossible while it remains locked inside the unopenable container. The validation checks appropriately verify the end state (unwrapped manual on table), but the task itself is fundamentally unachievable due to the containment paradox.\n\nVERDICT: INVALID\n\nISSUES: \n1. censorship_manual_1 is inaccessible inside false_bookshelf_1, which cannot be opened because its trigger mechanism (communist_manifesto_book_1) is contained within the sealed compartment.\n2. Missing prerequisite step to access the manual due to logical containment inconsistency in scene design.\n\nCONFIDENCE: 0.98 (Scene data explicitly shows nested containment with no accessible trigger mechanism)\n\nISSUE_TYPE: infeasible_task",
+      "r1_error": "",
+      "issue_type": "data_quality_issue",
+      "confidence": 0.5,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Review task generation prompts for this category",
+        "Improve validation check generation logic",
+        "Add more examples to training data",
+        "Focus on compound_reasoning category improvements"
+      ]
+    },
+    {
+      "scene_id": "00014",
+      "task_index": 13,
+      "task_description": "Cooperatively move the heavy live_release_tank_1 that is closed to the sponsor_media_tent.",
+      "task_category": "compound_collaboration",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task requires moving the live_release_tank_1 (80kg) to the sponsor_media_tent. Key observations:\n1. **Weight issue**: The tank weighs 80kg, exceeding each agent's max_weight (30kg) and combined max_weight (60kg). Agents cannot lift it cooperatively within their weight limits.\n2. **Size/mobility issue**: As FURNITURE (1.5x1.5x1.0m), it requires specialized handling equipment not present (e.g., dollies, forklifts). Agents lack abilities to manipulate large containers.\n3. **Path issue**: The sponsor_media_tent is only connected to contestant_prep_area, which may not accommodate large object transit. No doors/gates are specified for movement.\n4. **State conflict**: The task specifies \"closed\" state, but validation doesn't verify this critical requirement for fish safety during transport.\n\nVERDICT: INVALID\n\nISSUES: \n- Object weight (80kg) exceeds combined agent capacity (60kg)\n- No mechanisms for cooperative heavy lifting in abilities/objects\n- Path constraints for large object movement not addressed\n- Validation fails to check \"closed\" state requirement\n\nCONFIDENCE: 0.98 (Explicit weight limits and lack of collaborative lifting mechanics make failure unambiguous)\n\nISSUE_TYPE: infeasible_task",
+      "r1_error": "",
+      "issue_type": "data_quality_issue",
+      "confidence": 0.5,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Review task generation prompts for this category",
+        "Improve validation check generation logic",
+        "Add more examples to training data",
+        "Focus on compound_collaboration category improvements"
+      ]
+    },
+    {
+      "scene_id": "00013",
+      "task_index": 0,
+      "task_description": "Place the chipped_worlds_best_mum_mug_1 on the sticker_clad_coffee_table_1.",
+      "task_category": "direct_command",
+      "r1_success": true,
+      "r1_response": "ANALYSIS: \n1. **Task-Validation Mismatch**: The validation check correctly verifies task completion by confirming the mug's final location on the coffee table.  \n2. **Infeasible Task**: The task is feasible. Both robots can grasp the mug (weight: 0.4kg ≤ max_grasp_limit: 1.0kg; size assumed <1.0m). The mug is accessible (on cluttered_breakfast_bar_1), and the coffee table is reachable via connected rooms.  \n3. **Missing Prerequisites**: All required objects exist:  \n   - Mug is present on the breakfast bar.  \n   - Coffee table is in the living room.  \n   - No tools or special conditions are needed for basic placement.  \n4. **Logical Inconsistencies**: None. Mug placement doesn’t conflict with object states (e.g., mug isn’t broken or contained in a locked space).  \n5. **Category Mismatch**: Correctly categorized as \"direct_command\" (simple object relocation without multi-step reasoning or collaboration).  \n\nVERDICT: VALID  \nISSUES: None  \nCONFIDENCE: 1.0  \nISSUE_TYPE: N/A (valid task)",
+      "r1_error": "",
+      "issue_type": "good_quality",
+      "confidence": 1.0,
+      "specific_issues": [],
+      "recommendations": [
+        "Task appears valid - good quality data"
+      ]
+    },
+    {
+      "scene_id": "00015",
+      "task_index": 6,
+      "task_description": "Use the toolbox_1 to repair the only flashing red device on the conveyor_belt_1.",
+      "task_category": "compound_reasoning",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task requires using \"toolbox_1\" to repair \"the only flashing red device on conveyor_belt_1.\" Validation checks for \"emergency_stop_button_1\" to no longer be broken.  \n\nKey observations:  \n1. **Task-Validation Match**: The validation correctly targets repairing \"emergency_stop_button_1\" – the only red device on \"conveyor_belt_1\" (per object properties/placement).  \n2. **Feasibility**:  \n   - \"toolbox_1",
+      "r1_error": "",
+      "issue_type": "r1_planning_error",
+      "confidence": 0.5,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "R1 may have insufficient context or reasoning capability",
+        "Consider manual review of this task",
+        "Verify R1 prompt clarity",
+        "Test with different reasoning approach"
+      ]
+    },
+    {
+      "scene_id": "00015",
+      "task_index": 5,
+      "task_description": "Repair the broken pallet_jack_1.",
+      "task_category": "tool_use",
+      "r1_success": false,
+      "r1_response": "ANALYSIS: The task \"Repair the broken pallet_jack_1\" is invalid due to missing prerequisites. While the validation check correctly targets the pallet_jack_1's broken state, the scene lacks essential repair tools accessible to the agents. The pallet_jack_handle_1 (which provides \"repair\" ability) is present in the main_sorting_floor, but the pallet_jack_1 weighs 120.0 kg, exceeding both agents' max_weight capacity of 50.0 kg. Agents cannot lift or manipulate the pallet jack to perform repairs. Additionally, no alternative repair tools (e.g., toolbox_1 or wrench_1) are located in the same room as the pallet jack, and agents lack the ability to move heavy objects to access them. The \"tool_use\" category is appropriate, but task feasibility is compromised by object weight constraints and tool accessibility.\n\nVERDICT: INVALID\n\nISSUES: \n1. Agents cannot lift pallet_jack_1 (120.0 kg > 50.0 kg max_weight limit).\n2. Repair tools (wrench_1, toolbox_1) are in backroom_storage, while pallet_jack_1 is in main_sorting_floor; no path exists for agents to relocate the pallet jack or bring tools without exceeding capabilities.\n3. No objects in the main_sorting_floor provide \"repair\" ability except pallet_jack_handle_1, which is insufficient for repairing the main unit.\n\nCONFIDENCE: 0.98\n\nISSUE_TYPE: missing_prerequisites",
+      "r1_error": "",
+      "issue_type": "data_quality_issue",
+      "confidence": 0.98,
+      "specific_issues": [
+        ""
+      ],
+      "recommendations": [
+        "Review task generation prompts for this category",
+        "Improve validation check generation logic",
+        "Add more examples to training data",
+        "Focus on tool_use category improvements"
+      ]
+    }
+  ],
+  "quality_assessment": {
+    "ready": false,
+    "confidence": 0.6,
+    "reason": "Mixed results require further investigation",
+    "good_quality_rate": 20.0,
+    "data_issue_rate": 40.0,
+    "r1_error_rate": 10.0
+  },
+  "recommendations": [
+    "❌ Not ready for batch generation",
+    "Address data quality issues before scaling up",
+    "Focus on improving these categories: compound_reasoning, implicit_collaboration, tool_use, compound_collaboration"
+  ]
+}

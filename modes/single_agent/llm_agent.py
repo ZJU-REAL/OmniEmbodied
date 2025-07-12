@@ -2,8 +2,7 @@ import json
 import logging
 from typing import Dict, List, Optional, Any, Tuple
 
-from embodied_simulator import SimulationEngine
-from embodied_simulator.core import ActionStatus
+from utils.embodied_simulator import SimulationEngine, ActionStatus
 
 from core.base_agent import BaseAgent
 from config import ConfigManager

@@ -7,17 +7,41 @@ autonomous_agent:
   # 最大历史长度
   max_chat_history: 10
 
-# 智能体个性化设置
+# 智能体个性化设置 - 参考CoELA的Alice/Bob设计
 agent_personalities:
-  # 探索者
+  # 探索者 - Alice
   explorer:
-    personality: "好奇、冒险、细心"
-    skills: ["探索", "发现", "记忆地图"]
+    personality: "好奇、冒险、细心、主动沟通"
+    skills: ["探索", "发现", "记忆地图", "信息收集"]
+    communication_preference: "详细描述"
+    collaboration_style: "主导型"
 
-  # 操作者
+  # 操作者 - Bob
   operator:
-    personality: "谨慎、精确、专注"
-    skills: ["操作物体", "精细动作", "解决难题"]
+    personality: "谨慎、精确、专注、善于执行"
+    skills: ["操作物体", "精细动作", "解决难题", "任务执行"]
+    communication_preference: "简洁高效"
+    collaboration_style: "配合型"
+
+# 通信系统设置
+communication:
+  # 消息队列设置
+  message_queue:
+    max_size: 100
+    timeout_seconds: 30
+
+  # 广播设置
+  broadcast:
+    enabled: true
+    max_recipients: 10
+
+  # 消息类型
+  message_types:
+    - "info_sharing"      # 信息分享
+    - "task_coordination" # 任务协调
+    - "help_request"      # 求助请求
+    - "status_update"     # 状态更新
+    - "strategy_discussion" # 策略讨论
 
 # 任务执行设置
 execution:

@@ -8,7 +8,7 @@
 import os
 import sys
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,9 +18,9 @@ from utils.logger import setup_logger
 from utils.simulator_bridge import SimulatorBridge
 
 
-def setup_example_environment(example_name: str, config_name: str, 
-                            scenario_id: str = "00001", 
-                            log_level: int = logging.INFO) -> tuple[logging.Logger, ConfigManager, SimulatorBridge, Dict[str, Any]]:
+def setup_example_environment(example_name: str, config_name: str,
+                            scenario_id: str = "00001",
+                            log_level: int = logging.INFO) -> Tuple[logging.Logger, ConfigManager, SimulatorBridge, Dict[str, Any]]:
     """
     设置示例运行环境的公共函数
     

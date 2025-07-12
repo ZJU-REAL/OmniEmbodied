@@ -1,0 +1,156 @@
+{
+  "task_background": "Resolve critical technical failures across the expo hall to restore operations before the grand reopening.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 150.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 150.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the usb_drive_1 onto the shredder_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:shredder_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the duct_tape_1 in the utility_corridor.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "duct_tape_1",
+          "location_id": "in:utility_corridor"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the only red USB drive in the shredder.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:shredder_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the uniquely blue access badge onto the executive desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "access_badge_1",
+          "location_id": "on:executive_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Disconnect the tangled power strip to prevent electrical hazards.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tangled_power_strip_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the red screwdriver to unscrew the maintenance tools in the utility corridor.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "maintenance_tools_1",
+          "is_screwed_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard to type on the only yellow label maker in the tech hub.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_typed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the prototype arcade cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "prototype_arcade_cabinet_1",
+          "is_typed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 200kg server cage to the main demo hall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_server_cage_1",
+          "location_id": "in:main_demo_hall"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the 300kg prototype arcade cabinet to the utility corridor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "prototype_arcade_cabinet_1",
+          "location_id": "in:utility_corridor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked server cage to the main hall and unlock it using the blue access badge.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_server_cage_1",
+          "location_id": "in:main_demo_hall"
+        },
+        {
+          "id": "locked_server_cage_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central LED tower to the tech hub and repair its connection using the SATA adapter.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_led_tower_1",
+          "location_id": "in:tech_support_hub"
+        },
+        {
+          "id": "central_led_tower_1",
+          "is_connected": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00028"
+}

@@ -1,5 +1,5 @@
 from .autonomous_agent import AutonomousAgent
 from .communication import CommunicationManager
-from .negotiation import Negotiator
+from .negotiation import Negotiator, NegotiationType, NegotiationStatus
 
-__all__ = ['AutonomousAgent', 'CommunicationManager', 'Negotiator'] 
+__all__ = ['AutonomousAgent', 'CommunicationManager', 'Negotiator', 'NegotiationType', 'NegotiationStatus']

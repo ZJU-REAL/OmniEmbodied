@@ -1,0 +1,2358 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00013",
+    "start_time": "2025-07-11T19:41:51.245489",
+    "end_time": "2025-07-11T19:42:41.759572",
+    "total_duration_seconds": 50.514083,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00013",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00013",
+    "initialization_time": "2025-07-11T19:41:51.253433"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the pediatric orthopedic clinic for the next day's patients by organizing, repairing, and cleaning all areas.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "id": "agent_1",
+        "location_id": "reception_desk"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "id": "agent_2",
+        "location_id": "reception_desk"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the tiny_sneaker_1 on the reception_counter_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "tiny_sneaker_1",
+            "location_id": "on:reception_counter_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the pen_1 on the reception_counter_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "pen_1",
+            "location_id": "on:reception_counter_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Put the only green plush toy into the lost_and_found_bin_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "plush_dinosaur_1",
+            "location_id": "in:lost_and_found_bin_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the only partially deflated bouncy ball on the play_table_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "bouncy_ball_1",
+            "location_id": "on:play_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the computer_1 using the screwdriver_1.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "computer_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Fix the label_printer_1 using the screwdriver_1.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "label_printer_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the only broken adult chair in the waiting area using the screwdriver_1.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "adult_chair_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Use the key_1 to lock the medication_cabinet_1.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "medication_cabinet_1",
+            "is_locked": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00013"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the tiny_sneaker_1 on the reception_counter_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:41:51.278314",
+      "end_time": "2025-07-11T19:42:40.102613",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Reception Desk and discovered 12 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:41:56.788039",
+          "detailed_result": {
+            "room_id": "reception_desk",
+            "discovered_objects": [
+              {
+                "id": "reception_counter_1",
+                "name": "L-shaped Counter",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "filing_cabinet_1",
+                "name": "Filing Cabinet",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "plexiglass_divider_1",
+                "name": "Scratched Plexiglass Divider",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "sign_in_clipboard_1",
+                "name": "Sign-in Clipboard",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "intake_forms_1",
+                "name": "Stack of Intake Forms",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "computer_1",
+                "name": "Computer",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "label_printer_1",
+                "name": "Label Printer",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "appointment_logbook_1",
+                "name": "Appointment Logbook",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "coffee_maker_1",
+                "name": "Coffee Maker",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "stapler_1",
+                "name": "Stapler",
+                "type": "ITEM",
+                "container_info": "（在L-shaped Counter上）"
+              },
+              {
+                "id": "tongue_depressors_1",
+                "name": "Unopened Package of Tongue Depressors",
+                "type": "ITEM",
+                "container_info": "（在Filing Cabinet中）"
+              },
+              {
+                "id": "tape_1",
+                "name": "Label Printer Tape",
+                "type": "ITEM",
+                "container_info": "（在Filing Cabinet中）"
+              }
+            ],
+            "discovery_count": 12,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO waiting_area",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Waiting Area",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:02.849118",
+          "detailed_result": {
+            "new_location_id": "waiting_area",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Main Waiting Area and discovered 23 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:07.977347",
+          "detailed_result": {
+            "room_id": "waiting_area",
+            "discovered_objects": [
+              {
+                "id": "child_chair_1",
+                "name": "Child-sized Chair",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "child_chair_2",
+                "name": "Child-sized Chair",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "adult_chair_1",
+                "name": "Adult Chair",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "adult_chair_2",
+                "name": "Adult Chair",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "play_table_1",
+                "name": "Low Wooden Play Table",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "toy_shelf_1",
+                "name": "Large Wooden Toy Shelf",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "lost_and_found_bin_1",
+                "name": "Lost and Found Bin",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "vending_machine_1",
+                "name": "Broken Vending Machine",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "magazine_rack_1",
+                "name": "Magazine Rack",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "wheelchair_1",
+                "name": "Wheelchair",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "duplo_blocks_1",
+                "name": "Duplo Blocks",
+                "type": "ITEM",
+                "container_info": "（在Low Wooden Play Table上）"
+              },
+              {
+                "id": "puzzle_1",
+                "name": "Partially Completed Puzzle",
+                "type": "ITEM",
+                "container_info": "（在Low Wooden Play Table上）"
+              },
+              {
+                "id": "plush_dinosaur_1",
+                "name": "Chewed-on Plush Dinosaur",
+                "type": "ITEM",
+                "container_info": "（在Low Wooden Play Table上）"
+              },
+              {
+                "id": "bouncy_ball_1",
+                "name": "Partially Deflated Bouncy Ball",
+                "type": "ITEM",
+                "container_info": "（在Large Wooden Toy Shelf上）"
+              },
+              {
+                "id": "board_books_1",
+                "name": "Stack of Board Books",
+                "type": "ITEM",
+                "container_info": "（在Large Wooden Toy Shelf上）"
+              },
+              {
+                "id": "bubble_machine_1",
+                "name": "Battery-operated Bubble Machine",
+                "type": "ITEM",
+                "container_info": "（在Large Wooden Toy Shelf上）"
+              },
+              {
+                "id": "batteries_1",
+                "name": "Dead Batteries",
+                "type": "ITEM",
+                "container_info": "（在Battery-operated Bubble Machine中）"
+              },
+              {
+                "id": "tiny_sneaker_1",
+                "name": "Tiny Sneaker (Size 5, Left Foot)",
+                "type": "ITEM",
+                "container_info": "（在Lost and Found Bin中）"
+              },
+              {
+                "id": "pacifier_1",
+                "name": "Pacifier with Chewed Teat",
+                "type": "ITEM",
+                "container_info": "（在Lost and Found Bin中）"
+              },
+              {
+                "id": "pen_1",
+                "name": "Missing Pen",
+                "type": "ITEM",
+                "container_info": "（在Lost and Found Bin中）"
+              },
+              {
+                "id": "pretzel_bag_1",
+                "name": "Stuck Bag of Pretzels",
+                "type": "ITEM",
+                "container_info": "（在Broken Vending Machine中）"
+              },
+              {
+                "id": "parenting_magazine_1",
+                "name": "Outdated Parenting Magazine",
+                "type": "ITEM",
+                "container_info": "（在Magazine Rack中）"
+              },
+              {
+                "id": "goodnight_moon_1",
+                "name": "Dog-eared Copy of Goodnight Moon",
+                "type": "ITEM",
+                "container_info": "（在Magazine Rack中）"
+              }
+            ],
+            "discovery_count": 23,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO lost_and_found_bin_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Lost and Found Bin (in Main Waiting Area)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:16.306870",
+          "detailed_result": {
+            "near_object_id": "lost_and_found_bin_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "OPEN lost_and_found_bin_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully performed open on Lost and Found Bin, is_open changed from False to True",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:20.236730",
+          "detailed_result": {
+            "object_id": "lost_and_found_bin_1",
+            "attribute": "is_open",
+            "old_value": false,
+            "new_value": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB tiny_sneaker_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Tiny Sneaker (Size 5, Left Foot)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:28.238040",
+          "detailed_result": {
+            "object_id": "tiny_sneaker_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO reception_counter_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "请先前往Reception Desk，再靠近L-shaped Counter",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:34.490422",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO reception_desk",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "处理命令出错: [Errno 5] Input/output error",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.069455"
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.072795",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.075025",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.077222",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.079679",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.082200",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.084805",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.087369",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.089941",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.092820",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.096141",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.099070",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.102069",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 2,
+      "task_description": "Place the pen_1 on the reception_counter_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:40.102731",
+      "end_time": "2025-07-11T19:42:40.200446",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.105297",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.109162",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.113186",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.117761",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.122677",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.127052",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.131552",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.135898",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.140678",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.146595",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.151748",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.156830",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.161762",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.166776",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.171939",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.177267",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.182560",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.187811",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.193471",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.199118",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 3,
+      "task_description": "Put the only green plush toy into the lost_and_found_bin_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:40.200569",
+      "end_time": "2025-07-11T19:42:40.369203",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.204797",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.211328",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.217501",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.224079",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.230443",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.237079",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.272429",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.279618",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.286413",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.293254",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.300440",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.307368",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.314331",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.321443",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.328500",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.336807",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.344427",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.352142",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.359638",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.367368",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 4,
+      "task_description": "Place the only partially deflated bouncy ball on the play_table_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:40.369328",
+      "end_time": "2025-07-11T19:42:40.560417",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.375330",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.389258",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.397717",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.406205",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.414603",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.424135",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.432781",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.441360",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.450593",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.460930",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.470038",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.479239",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.489038",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.498491",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.508928",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.518660",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.528911",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.538796",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.548380",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.558120",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 5,
+      "task_description": "Repair the computer_1 using the screwdriver_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:40.560535",
+      "end_time": "2025-07-11T19:42:40.788289",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.568553",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.578988",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.589927",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.601120",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.611707",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.623356",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.634075",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.644664",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.656276",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.667501",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.678420",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.689522",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.701036",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.713360",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.725005",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.736892",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.748929",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.761101",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.773001",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.785395",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 6,
+      "task_description": "Fix the label_printer_1 using the screwdriver_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:40.788415",
+      "end_time": "2025-07-11T19:42:41.068109",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.797882",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.810866",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.823410",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.835795",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.850889",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.864710",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.877385",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.890811",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.904453",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.917432",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.932100",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.946503",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.961094",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.976530",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:40.991445",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.006695",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.020613",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.035068",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.049315",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.064165",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 7,
+      "task_description": "Repair the only broken adult chair in the waiting area using the screwdriver_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:41.068241",
+      "end_time": "2025-07-11T19:42:41.395334",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.080836",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.097552",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.113845",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.130370",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.147593",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.163171",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.178205",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.193353",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.208583",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.224215",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.239948",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.256340",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.272131",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.287895",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.303545",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.321822",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.339408",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.357856",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.375330",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.391470",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 8,
+      "task_description": "Use the key_1 to lock the medication_cabinet_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-11T19:42:41.395457",
+      "end_time": "2025-07-11T19:42:41.759391",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.407721",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.425053",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.443083",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.460345",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.478169",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.495337",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.512540",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.530993",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.548174",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.567616",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.586425",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.604819",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.623387",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.641972",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.660140",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.679792",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.698165",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.717179",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.735534",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "错误: [Errno 5] Input/output error",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: 错误:",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-11T19:42:41.754830",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 8,
+    "completed_tasks": 0,
+    "failed_tasks": 8,
+    "completion_rate": 0.0,
+    "total_actions": 160,
+    "average_actions_per_task": 20.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 8,
+        "completed": 0,
+        "completion_rate": 0.0
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 2,
+        "success": 2,
+        "success_rate": 1.0
+      },
+      "GOTO waiting_area": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO lost_and_found_bin_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "OPEN lost_and_found_bin_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GRAB tiny_sneaker_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO reception_counter_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GOTO reception_desk": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "错误: [Errno 5] Input/output error": {
+        "total": 152,
+        "success": 0,
+        "success_rate": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "task_background": "Prepare the dental research lab for an emergency clinical trial and concurrent ethics audit by ensuring equipment functionality, sterilization compliance, and evidence organization.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Close autoclave_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Deactivate overhead_camera_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "overhead_camera_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fluoride vial with smudged expiration date and pink residue to the instrument sterilization room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fluoride_vial_3",
+          "location_id": "in:instrument_sterilization_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Deactivate the autoclave that is beeping.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "autoclave_2",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the diagnodent scanner.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "diagnodent_scanner_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the sealed evidence bag.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sealed_evidence_bag_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the robotic drill arm that has error code E-47.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "robotic_drill_arm_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the evidence bag labeled 'PATIENT #114 – CONFLICT'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sealed_evidence_bag_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the beeping autoclave.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_2",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence cabinet to the main testing bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_cabinet_1",
+          "location_id": "in:main_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the chemical storage fridge to the supply storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_storage_fridge_1",
+          "location_id": "in:supply_storage"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00038"
+}

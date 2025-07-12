@@ -1,8 +1,7 @@
 from typing import Dict, List, Optional, Any, Tuple
 import logging
 
-from embodied_simulator import SimulationEngine
-from embodied_simulator.core import ActionStatus
+from utils.embodied_simulator import SimulationEngine, ActionStatus
 
 from core.base_agent import BaseAgent
 from llm import BaseLLM, create_llm_from_config
@@ -62,9 +61,14 @@ class Coordinator(BaseAgent):
         max_chat_history = self.config.get('max_chat_history', 10)
         # -1 表示不限制历史长度
         self.max_chat_history = None if max_chat_history == -1 else max_chat_history
-        
+
         # 任务描述
         self.task_description = self.config.get('task_description', "协作完成任务")
+
+        # 循环检测
+        self.consecutive_failures = 0
+        self.max_consecutive_failures = 3
+        self.last_assignments = None
     
     def add_worker(self, worker_agent: WorkerAgent) -> None:
         """
@@ -184,60 +188,150 @@ class Coordinator(BaseAgent):
         try:
             # 调用LLM生成响应
             response = self.llm.generate_chat(self.chat_history, system_message=self.system_prompt)
-            
+
             # 记录LLM响应到对话历史
             self.chat_history.append({"role": "assistant", "content": response})
-            
+
             # 解析响应，为各工作智能体分配任务
             assignments = self._parse_assignments(response)
+
+            # 检查是否解析成功
+            if not assignments:
+                self.consecutive_failures += 1
+                logger.warning(f"解析任务分配失败 (连续失败次数: {self.consecutive_failures})")
+
+                if self.consecutive_failures >= self.max_consecutive_failures:
+                    logger.error("连续解析失败次数过多，使用默认策略")
+                    # 使用默认策略：让所有智能体探索
+                    assignments = {agent_id: "EXPLORE" for agent_id in self.workers.keys()}
+                    self.consecutive_failures = 0  # 重置计数器
+            else:
+                self.consecutive_failures = 0  # 重置失败计数器
+
+            # 检查是否与上次分配相同（避免无限循环）
+            if assignments == self.last_assignments:
+                logger.warning("检测到重复的任务分配，添加随机性")
+                # 为其中一个智能体分配不同的动作
+                agent_ids = list(assignments.keys())
+                if agent_ids:
+                    import random
+                    random_agent = random.choice(agent_ids)
+                    alternative_actions = ["EXPLORE", "LOOK", "DONE"]
+                    current_action = assignments[random_agent]
+                    alternative_actions = [a for a in alternative_actions if a != current_action]
+                    if alternative_actions:
+                        assignments[random_agent] = random.choice(alternative_actions)
+                        logger.debug(f"为 {random_agent} 分配替代动作: {assignments[random_agent]}")
+
+            self.last_assignments = assignments.copy()
             self._assign_tasks(assignments)
-            
+
             return "COORDINATION_COMPLETE"
-            
+
         except Exception as e:
             logger.exception(f"协调器决策时出错: {e}")
+            self.consecutive_failures += 1
             return "COORDINATION_ERROR"
     
     def _parse_assignments(self, response: str) -> Dict[str, str]:
         """
         从LLM响应中解析任务分配
-        
+
         Args:
             response: LLM响应文本
-            
+
         Returns:
             Dict[str, str]: 智能体ID到任务指令的映射
         """
         assignments = {}
         lines = response.strip().split('\n')
-        
+
+        logger.debug(f"解析LLM响应: {response}")
+
         for line in lines:
             line = line.strip()
             if not line:
                 continue
-                
-            # 尝试解析"agent_id: action"格式
-            parts = line.split(':', 1)
-            if len(parts) == 2:
-                agent_id = parts[0].strip()
-                action = parts[1].strip()
-                
-                if agent_id in self.workers:
-                    assignments[agent_id] = action
-        
+
+            # 尝试解析"agent_X_动作：action"格式（中文格式）
+            if '：' in line and ('agent_1_动作' in line or 'agent_2_动作' in line):
+                parts = line.split('：', 1)
+                if len(parts) == 2:
+                    key = parts[0].strip()
+                    action = parts[1].strip()
+
+                    # 映射到实际的智能体ID
+                    if 'agent_1' in key:
+                        agent_id = 'agent_1'
+                    elif 'agent_2' in key:
+                        agent_id = 'agent_2'
+                    else:
+                        continue
+
+                    if agent_id in self.workers:
+                        assignments[agent_id] = action
+                        logger.debug(f"解析到任务分配: {agent_id} -> {action}")
+
+            # 尝试解析"agent_X_动作: action"格式（英文冒号）
+            elif ':' in line and ('agent_1_动作' in line or 'agent_2_动作' in line):
+                parts = line.split(':', 1)
+                if len(parts) == 2:
+                    key = parts[0].strip()
+                    action = parts[1].strip()
+
+                    # 映射到实际的智能体ID
+                    if 'agent_1' in key:
+                        agent_id = 'agent_1'
+                    elif 'agent_2' in key:
+                        agent_id = 'agent_2'
+                    else:
+                        continue
+
+                    if agent_id in self.workers:
+                        assignments[agent_id] = action
+                        logger.debug(f"解析到任务分配: {agent_id} -> {action}")
+
+            # 尝试解析"agent_id: action"格式（兼容旧格式）
+            elif ':' in line:
+                parts = line.split(':', 1)
+                if len(parts) == 2:
+                    agent_id = parts[0].strip()
+                    action = parts[1].strip()
+
+                    if agent_id in self.workers:
+                        assignments[agent_id] = action
+                        logger.debug(f"解析到任务分配: {agent_id} -> {action}")
+
+        logger.debug(f"最终解析结果: {assignments}")
         return assignments
     
     def _assign_tasks(self, assignments: Dict[str, str]) -> None:
         """
         将任务分配给工作智能体
-        
+
         Args:
             assignments: 智能体ID到任务指令的映射
         """
+        if not assignments:
+            logger.warning("没有解析到任何任务分配，为所有智能体分配默认动作")
+            # 如果没有解析到任务，给所有智能体分配探索动作
+            for agent_id, worker in self.workers.items():
+                worker.set_next_action("EXPLORE")
+            return
+
         for agent_id, action in assignments.items():
             if agent_id in self.workers:
                 worker = self.workers[agent_id]
                 worker.set_next_action(action)
+                logger.debug(f"为智能体 {agent_id} 分配任务: {action}")
+            else:
+                logger.warning(f"未找到智能体 {agent_id}")
+
+        # 为没有分配任务的智能体分配默认动作
+        for agent_id, worker in self.workers.items():
+            if agent_id not in assignments:
+                worker.set_next_action("EXPLORE")
+                logger.debug(f"为智能体 {agent_id} 分配默认任务: EXPLORE")
     
     def step(self) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
         """

@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the coastal marine research station for a critical law enforcement inspection by securing evidence, repairing equipment, and organizing the facilities.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the object with id 'jar_1' on the dissection table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "jar_1",
+          "location_id": "on:dissection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the centrifuge with id 'centrifuge_1'.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the preserved marine sample jar labeled 'Swordfish Fin' in the refrigeration unit.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "jar_1",
+          "location_id": "in:refrigeration_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Put the chemical bottle labeled 'CORROSIVE' on the stainless steel dissection table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "location_id": "on:dissection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken microscope.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the DNA sequencer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dna_sequencer_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken wheeled gear cart in the dock area using the repair kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wheeled_gear_cart_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken CoffeeMaster coffee machine in the break room using the repair kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the secure evidence locker door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial refrigeration unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic winch to the main research lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_winch_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the longline spool to the secure evidence locker.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "longline_spool_1",
+          "location_id": "in:secure_evidence_locker"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken GPS tracker on the hydraulic winch and then move the winch to the workshop.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "is_broken": false
+        },
+        {
+          "id": "hydraulic_winch_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel storage cage to the main research lab and open it to access the suspicious longline buoy.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_storage_cage_1",
+          "location_id": "in:main_research_lab"
+        },
+        {
+          "id": "steel_storage_cage_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00034"
+}

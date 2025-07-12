@@ -2,7 +2,7 @@ import os
 import logging
 from typing import Dict, List, Any, Optional, Tuple
 
-from embodied_simulator import SimulationEngine, ActionStatus
+from simulator.core import SimulationEngine, ActionStatus
 from .data_loader import default_loader as framework_data_loader
 
 logger = logging.getLogger(__name__)
@@ -247,6 +247,72 @@ class SimulatorBridge:
                 return self.simulator.env_manager.objects
         return objects
     
+    def _normalize_command(self, command: str) -> str:
+        """
+        标准化命令，将常见的错误命令映射到正确的命令
+
+        Args:
+            command: 原始命令字符串
+
+        Returns:
+            str: 标准化后的命令字符串
+        """
+        # 命令映射表：错误命令 -> 正确命令
+        command_mappings = {
+            # 移动命令
+            'MOVE_TO': 'GOTO',
+            'MOVETO': 'GOTO',
+            'GO_TO': 'GOTO',
+            'NAVIGATE': 'GOTO',
+            'TRAVEL': 'GOTO',
+
+            # 抓取命令
+            'PICKUP': 'GRAB',
+            'PICK_UP': 'GRAB',
+            'TAKE': 'GRAB',
+            'GET': 'GRAB',
+
+            # 放置命令
+            'PUT': 'PLACE',
+            'DROP': 'PLACE',
+            'SET': 'PLACE',
+            'PUT_DOWN': 'PLACE',
+
+            # 观察命令
+            'INSPECT': 'LOOK',
+            'INSPECT_OBJECT': 'LOOK',
+            'EXAMINE': 'LOOK',
+            'CHECK': 'LOOK',
+            'OBSERVE': 'LOOK',
+            'VIEW': 'LOOK',
+            'LOOK_AT': 'LOOK',
+
+            # 其他命令
+            'SEARCH': 'EXPLORE',
+            'SCAN': 'EXPLORE',
+            'INVESTIGATE': 'EXPLORE',
+            'END_TASK': 'DONE',
+            'FINISH': 'DONE',
+            'COMPLETE': 'DONE',
+        }
+
+        # 分割命令获取第一个词（动作）
+        parts = command.strip().split()
+        if not parts:
+            return command
+
+        action = parts[0].upper()
+
+        # 检查是否需要映射
+        if action in command_mappings:
+            # 替换动作部分
+            parts[0] = command_mappings[action]
+            normalized_command = ' '.join(parts)
+            logger.debug(f"命令映射: '{command}' -> '{normalized_command}'")
+            return normalized_command
+
+        return command
+
     def process_command(self, agent_id: str, command: str) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
         """
         处理智能体命令
@@ -258,8 +324,11 @@ class SimulatorBridge:
         Returns:
             Tuple: (状态, 消息, 结果数据)
         """
+        # 标准化命令
+        normalized_command = self._normalize_command(command)
+
         if logger.level <= logging.DEBUG:
-            logger.debug("处理命令 - 智能体: %s, 命令: '%s'", agent_id, command)
+            logger.debug("处理命令 - 智能体: %s, 原始命令: '%s', 标准化命令: '%s'", agent_id, command, normalized_command)
             # 记录命令前的智能体状态
             agent_info = self.get_agent_info(agent_id)
             if agent_info:
@@ -277,11 +346,11 @@ class SimulatorBridge:
 
             # 适配新API：使用action_handler处理命令
             if hasattr(self.simulator, 'action_handler') and self.simulator.action_handler:
-                result = self.simulator.action_handler.process_command(agent_id, command)
+                result = self.simulator.action_handler.process_command(agent_id, normalized_command)
             else:
                 # 回退到旧API
                 if hasattr(self.simulator, 'process_command'):
-                    result = self.simulator.process_command(agent_id, command)
+                    result = self.simulator.process_command(agent_id, normalized_command)
                 else:
                     logger.warning("模拟器没有可用的命令处理方法")
                     return ActionStatus.FAILURE, "模拟器未初始化", None

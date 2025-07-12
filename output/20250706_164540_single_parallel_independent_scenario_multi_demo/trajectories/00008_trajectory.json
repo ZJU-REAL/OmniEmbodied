@@ -1,0 +1,230 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00008",
+    "start_time": "2025-07-06T16:48:56.755255",
+    "end_time": "2025-07-06T16:53:08.484501",
+    "total_duration_seconds": 251.729246,
+    "evaluation_mode": "independent"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "independent",
+    "config_file": "single_agent_config",
+    "scenario_id": "00008",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00008",
+    "initialization_time": "2025-07-06T16:48:56.759311"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the humanitarian aid hub for an incoming emergency relief convoy requiring security setup, medical supply organization, and equipment repairs.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 80.0,
+        "max_size": [
+          3.0,
+          3.0,
+          3.0
+        ],
+        "id": "agent_1",
+        "location_id": "central_operations"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 80.0,
+        "max_size": [
+          3.0,
+          3.0,
+          3.0
+        ],
+        "id": "agent_2",
+        "location_id": "central_operations"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the object with id 'denied_permits_1' in the document safe with id 'document_safe_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "denied_permits_1",
+            "location_id": "in:document_safe_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the object with id 'cctv_monitor_1' on the planning table with id 'planning_table_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "cctv_monitor_1",
+            "location_id": "on:planning_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the coffee-stained duty roster on the bulletin board.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "duty_roster_1",
+            "location_id": "on:bulletin_board_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the confiscated toolbox marked 'UN Property' in the communications corner.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "confiscated_toolbox_1",
+            "location_id": "in:communications_corner"
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the broken radio handset using the confiscated toolbox.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "broken_radio_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the satellite phone using the confiscated toolbox.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "satellite_phone_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Use the confiscated toolbox to repair the printer that has its error light on.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "printer_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Use the packing materials to pack the bloodied field medic's backpack.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "medic_backpack_1",
+            "is_packed": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00008"
+  },
+  "task_executions": [],
+  "execution_statistics": {
+    "total_tasks": 0,
+    "completed_tasks": 0,
+    "failed_tasks": 0,
+    "completion_rate": 0.0,
+    "total_actions": 0,
+    "average_actions_per_task": 0.0,
+    "task_category_stats": {},
+    "action_type_stats": {}
+  }
+}

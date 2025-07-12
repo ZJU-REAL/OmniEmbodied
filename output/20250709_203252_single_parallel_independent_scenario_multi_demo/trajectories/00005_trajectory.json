@@ -1,0 +1,220 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00005",
+    "start_time": "2025-07-09T20:32:52.711572",
+    "end_time": "2025-07-09T20:37:25.548557",
+    "total_duration_seconds": 272.836985,
+    "evaluation_mode": "independent"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "independent",
+    "config_file": "single_agent_config",
+    "scenario_id": "00005",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00005",
+    "initialization_time": "2025-07-09T20:32:52.738260"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the Urban Emergency Response Control Center for an imminent city-wide disaster drill by setting up equipment, repairing systems, and organizing critical resources.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 45.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "break_room_archive_nook"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 45.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "break_room_archive_nook"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the laser_pointer_1 on the holographic_city_table_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "laser_pointer_1",
+            "location_id": "on:holographic_city_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the city_award_1 on the master_control_console_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "city_award_1",
+            "location_id": "on:master_control_console_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Turn on the diagnostic tablet that is black and located on the triple-monitor workstation.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "diagnostic_tablet_1",
+            "is_on": true
+          }
+        ]
+      },
+      {
+        "task_description": "Plug in the black network router on the server rack array.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "network_router_1",
+            "is_plugged_in": true
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the broken coffee machine in the break room.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "broken_coffee_machine_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Use the repair kit to fix the broken wooden circular meeting table that is loose.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "circular_meeting_table_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the broken plastic triple-monitor workstation using the repair kit.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "triple_monitor_workstation_1",
+            "is_broken": false
+          }
+        ]
+      }
+    ],
+    "scene_id": "00005"
+  },
+  "task_executions": [],
+  "execution_statistics": {
+    "total_tasks": 0,
+    "completed_tasks": 0,
+    "failed_tasks": 0,
+    "completion_rate": 0.0,
+    "total_actions": 0,
+    "average_actions_per_task": 0.0,
+    "task_category_stats": {},
+    "action_type_stats": {}
+  }
+}

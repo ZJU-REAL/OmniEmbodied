@@ -1,0 +1,140 @@
+{
+  "task_background": "Prepare the Dakar Rally pit stop for the next race day by organizing equipment, repairing vehicles, and setting up communication systems.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the object with id 'exhaust_pipe_1' in the parts bin with id 'parts_bin_1'.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "exhaust_pipe_1",
+          "location_id": "in:parts_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the object with id 'gps_tracker_1' on the folding table with id 'folding_table_1'.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the only warped titanium exhaust pipe onto the steel workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "exhaust_pipe_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the diagnostic laptop with a cracked screen into the tool cart.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_laptop_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the GPS tracker with the solar charger.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque wrench to loosen the only chrome vanadium wrench set and place it on the workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wrench_set_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the greasy tool cart.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the workbench to the navigation tent.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:navigation_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked cargo trailer to the mechanical bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cargo_trailer_1",
+          "location_id": "in:mechanical_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydraulic bike lift to the supply cache and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bike_lift_1",
+          "location_id": "in:supply_cache",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Honda rally bike to the navigation tent and start its engine.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "honda_crf450_1",
+          "location_id": "in:navigation_tent",
+          "is_engine_on": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00010"
+}

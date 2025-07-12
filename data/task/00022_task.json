@@ -1,0 +1,156 @@
+{
+  "task_background": "Prepare the suspicious medical clinic for an unexpected inspection by authorities, requiring organization, equipment setup, and securing of sensitive materials.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the rotary_phone_1 on the waiting_chair_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rotary_phone_1",
+          "location_id": "on:waiting_chair_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the computer_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "computer_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the heaviest waiting chair in the examination_room_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "waiting_chair_1",
+          "location_id": "in:examination_room_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the only brown waiting chair in the back_office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "waiting_chair_2",
+          "location_id": "in:back_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the narcotics_cabinet_1 using its key.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Write on the patient_sign_in_clipboard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "patient_sign_in_clipboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the narcotics cabinet using the key inside the hollowed-out textbook.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the medical_refrigerator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_refrigerator_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked filing cabinet to the back_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_filing_cabinet_1",
+          "location_id": "in:back_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the autoclave to the storage_pharmacy_nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:storage_pharmacy_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the examination table to the storage room and roll it for storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "examination_table_1",
+          "location_id": "in:storage_pharmacy_nook"
+        },
+        {
+          "id": "examination_table_1",
+          "is_rolled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the narcotics cabinet to the back office and unlock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "location_id": "in:back_office"
+        },
+        {
+          "id": "narcotics_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00022"
+}

@@ -31,12 +31,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 
 # 添加项目根目录到路径
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
-
-# 添加 embodied_simulator 到路径，使其可以被直接导入
-embodied_simulator_path = os.path.join(project_root, 'utils')
-if embodied_simulator_path not in sys.path:
-    sys.path.insert(0, embodied_simulator_path)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from utils.logger import setup_logger
 from utils.task_evaluator import TaskEvaluator

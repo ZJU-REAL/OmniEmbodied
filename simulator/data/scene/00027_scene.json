@@ -1,0 +1,683 @@
+{
+  "description": "A chaotic digital archaeology lab in a forgotten server room, filled with retro computing equipment, modern forensic tools, and layers of technical detritus.",
+  "rooms": [
+    {
+      "id": "main_server_room",
+      "name": "Main Server Room",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench",
+        "archive_corner",
+        "admin_cubicle",
+        "equipment_lockers"
+      ]
+    },
+    {
+      "id": "forensic_workbench",
+      "name": "Forensic Workbench",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "archive_corner"
+      ]
+    },
+    {
+      "id": "archive_corner",
+      "name": "Archive Corner",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "admin_cubicle",
+      "name": "Admin Cubicle",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "equipment_lockers"
+      ]
+    },
+    {
+      "id": "equipment_lockers",
+      "name": "Equipment Lockers",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "admin_cubicle"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "server_rack_1",
+      "name": "42U Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "LOG_ARCHIVE_03"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_2",
+      "name": "42U Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "BACKUP_NODE_B"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "diagnostics_console_1",
+      "name": "Central Diagnostics Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "note": "DO NOT REBOOT!!"
+      },
+      "states": {}
+    },
+    {
+      "id": "failed_raid_array_1",
+      "name": "Failed RAID Array",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.3
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "metal",
+        "led_status": "DEGRADED"
+      },
+      "states": {}
+    },
+    {
+      "id": "error_log_printout_1",
+      "name": "Cryptic Error Log Printout",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "CRC FAIL"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "ITEM",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "weight": 0.5,
+        "requires_key": "admin_key_1"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "provides_abilities": [
+          "dull"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_band_1",
+      "name": "Anti-Static Wristband",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "compressed_air_1",
+      "name": "Can of Compressed Air",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "network_tester_1",
+      "name": "Network Tester",
+      "type": "ITEM",
+      "location_id": "on:diagnostics_console_1",
+      "properties": {
+        "weight": 0.8,
+        "status": "beeping",
+        "note": "CHECK PORT 7B"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "hard_drive_1",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "on:diagnostics_console_1",
+      "properties": {
+        "weight": 5.0,
+        "is_container": false,
+        "color": "black",
+        "state": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "perl_monk_tshirt_1",
+      "name": "Old Perl Monk T-Shirt",
+      "type": "ITEM",
+      "location_id": "on:diagnostics_console_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "design": "cartoon monk with regex sword"
+      },
+      "states": {}
+    },
+    {
+      "id": "crt_monitor_1",
+      "name": "Dusty CRT Monitor",
+      "type": "ITEM",
+      "location_id": "on:diagnostics_console_1",
+      "properties": {
+        "weight": 15.0,
+        "display": "Segmentation fault"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_worktable_1",
+      "name": "Steel Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_station_1",
+      "name": "Microscope Station",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "corrupted_hard_drive_1",
+      "name": "Corrupted Hard Drive",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 1.0,
+        "note": "Sector 0xBADF00D unreadable"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "jtag_debugger_1",
+      "name": "JTAG Debugger",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "NO BOOTLOADER"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "encrypted_usb_drive_1",
+      "name": "Encrypted USB Drive",
+      "type": "ITEM",
+      "location_id": "in:steel_worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "requires_passphrase": true
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "magnetic_screw_holder_1",
+      "name": "Magnetic Screw Holder",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 0.3
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "hot_air_rework_station_1",
+      "name": "Hot Air Rework Station",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 3.0,
+        "temperature": 300.0,
+        "warning": "DO NOT TOUCH TIP"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 0.7,
+        "tape": "RECOVERED_2023-12-04"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "hack_the_planet_poster_1",
+      "name": "Framed Hack the Planet Poster",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "weight": 2.0,
+        "year": "1990s"
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "floppy_disks_1",
+      "name": "Stack of Floppy Disks",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "weight": 0.5,
+        "labels": [
+          "PERL_SCRIPTS_1999"
+        ]
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "thermal_paste_tube_1",
+      "name": "Dried-Up Thermal Paste Tube",
+      "type": "ITEM",
+      "location_id": "on:steel_worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "state": "empty"
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:archive_corner",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tape_drive_1",
+      "name": "Tape Drive",
+      "type": "FURNITURE",
+      "location_id": "in:archive_corner",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "error_light": "HEAD MISALIGNED"
+      },
+      "states": {}
+    },
+    {
+      "id": "mystery_box_1",
+      "name": "Mystery Box",
+      "type": "ITEM",
+      "location_id": "in:industrial_shelving_1",
+      "properties": {
+        "weight": 5.0,
+        "label": "DO NOT OPEN - LEGACY CODE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.4
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Dusty Label Printer",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "note": "Order more thermal rolls"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "y2k_certificate_1",
+      "name": "Vintage Y2K Compliance Certificate",
+      "type": "ITEM",
+      "location_id": "in:archive_corner",
+      "properties": {
+        "weight": 0.3,
+        "condition": "faded"
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "rubber_duck_1",
+      "name": "Rubber Duck",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "sign": "DEBUG ME"
+      },
+      "states": {
+        "is_tied": false
+      }
+    },
+    {
+      "id": "admin_desk_1",
+      "name": "Admin Desk",
+      "type": "FURNITURE",
+      "location_id": "in:admin_cubicle",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Half-Functional Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "state": "half-functional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "admin_key_1",
+      "name": "Admin Key",
+      "type": "ITEM",
+      "location_id": "in:admin_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "purpose": "unlock emergency power switch"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "notebook_1",
+      "name": "Credentials Notebook",
+      "type": "ITEM",
+      "location_id": "in:admin_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "content": "USB passphrase: 'correct horse battery staple'"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "equipment_locker_1",
+      "name": "Equipment Locker",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 3.0,
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 0.1,
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "dull",
+    "erase",
+    "insulate",
+    "open",
+    "paint",
+    "paste",
+    "photograph",
+    "press",
+    "refuel",
+    "scan",
+    "sync",
+    "tie",
+    "turn_on",
+    "uncover",
+    "unleash",
+    "unmute",
+    "close"
+  ]
+}

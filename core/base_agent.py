@@ -3,8 +3,9 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Any, Tuple
 
-from embodied_simulator import SimulationEngine, ActionStatus
-from utils.simulator_bridge import SimulatorBridge
+# 延迟导入以避免循环导入
+# from simulator.core import SimulationEngine, ActionStatus
+# from utils.simulator_bridge import SimulatorBridge
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ class BaseAgent(ABC):
     基础智能体类 - 所有智能体类型的基类
     """
     
-    def __init__(self, simulator: SimulationEngine, agent_id: str, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, simulator: Any, agent_id: str, config: Optional[Dict[str, Any]] = None):
         """
         初始化基础智能体
         
@@ -22,6 +23,9 @@ class BaseAgent(ABC):
             agent_id: 智能体ID
             config: 配置字典，可选
         """
+        # 延迟导入以避免循环导入
+        from utils.simulator_bridge import SimulatorBridge
+
         # 创建模拟器桥接，如果传入的是模拟引擎实例则包装它
         if isinstance(simulator, SimulatorBridge):
             self.bridge = simulator
@@ -41,7 +45,7 @@ class BaseAgent(ABC):
         self.history = []
         self.consecutive_failures = 0
     
-    def step(self) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
+    def step(self) -> Tuple[Any, str, Optional[Dict[str, Any]]]:
         """
         执行一步智能体行为
         

@@ -1,0 +1,42 @@
+# ============================================================================
+# Pipeline Configuration
+# ============================================================================
+# This configuration controls the main data generation pipeline behavior.
+# The pipeline orchestrates end-to-end data generation through multiple stages:
+# Raw Text → Clue Generation → Scene Generation → Task Generation
+
+# ============================================================================
+# Threading Configuration
+# ============================================================================
+# Controls parallel processing at the PIPELINE level
+# This determines how many data items are processed simultaneously through
+# the entire pipeline (clue → scene → task sequence)
+thread_num: 4              # Number of worker threads for pipeline execution
+
+# ============================================================================
+# ID Range Configuration (can be overridden by command-line arguments)
+# ============================================================================
+start_id: 12               # Starting ID (inclusive)
+end_id: 20                 # Ending ID (inclusive, null = process all)
+
+# ============================================================================
+# Generation Control
+# ============================================================================
+continue_generation: true  # Continue from last interruption point (skip completed items)
+
+# ============================================================================
+# Output Configuration
+# ============================================================================
+output_dir: "./data"       # Base output directory for all generated data
+summary_file: "summary.json"  # Pipeline execution summary file
+
+# ============================================================================
+# Logging Configuration  
+# ============================================================================
+log_dir: "./logs"          # Log directory for pipeline execution logs
+
+# ============================================================================
+# Retry Configuration
+# ============================================================================
+max_retries: 3             # Maximum retry attempts for failed tasks
+retry_delay: 2             # Base retry delay in seconds (exponential backoff) 

@@ -1,14 +1,13 @@
 from typing import Dict, List, Optional, Any, Tuple
 import logging
 
-from embodied_simulator import SimulationEngine
-from embodied_simulator.core import ActionStatus
+from utils.embodied_simulator import SimulationEngine, ActionStatus
 
 from core.base_agent import BaseAgent
 from llm import BaseLLM, create_llm_from_config
 from config import ConfigManager
 from utils.prompt_manager import PromptManager
-from .communication import CommunicationManager
+from .communication import CommunicationManager, MessageType, MessagePriority
 
 logger = logging.getLogger(__name__)
 
@@ -100,33 +99,77 @@ class AutonomousAgent(BaseAgent):
             "time": self.simulator.get_current_time() if hasattr(self.simulator, 'get_current_time') else 0
         })
     
-    def send_message(self, receiver_id: str, content: str) -> bool:
+    def send_message(self, receiver_id: str, content: str,
+                    message_type: MessageType = MessageType.DIRECT_MESSAGE,
+                    priority: MessagePriority = MessagePriority.MEDIUM) -> bool:
         """
-        发送消息给其他智能体
-        
+        发送消息给其他智能体 - 增强版本
+
         Args:
             receiver_id: 接收者ID
             content: 消息内容
-            
+            message_type: 消息类型
+            priority: 消息优先级
+
         Returns:
             bool: 是否成功发送
         """
         if self.comm_manager:
-            return self.comm_manager.send_message(self.agent_id, receiver_id, content)
+            return self.comm_manager.send_message(self.agent_id, receiver_id, content,
+                                                message_type, priority)
         return False
-    
-    def broadcast_message(self, content: str) -> bool:
+
+    def broadcast_message(self, content: str,
+                         message_type: MessageType = MessageType.BROADCAST,
+                         priority: MessagePriority = MessagePriority.MEDIUM) -> bool:
         """
-        广播消息给所有已知智能体
-        
+        广播消息给所有已知智能体 - 增强版本
+
         Args:
             content: 消息内容
-            
+            message_type: 消息类型
+            priority: 消息优先级
+
         Returns:
             bool: 是否成功发送
         """
         if self.comm_manager:
-            return self.comm_manager.broadcast_message(self.agent_id, content)
+            return self.comm_manager.broadcast_message(self.agent_id, content,
+                                                     message_type, priority)
+        return False
+
+    def share_information(self, receiver_id: str, info_type: str, info_data: Any) -> bool:
+        """
+        分享信息给其他智能体 - 参考CoELA的信息共享机制
+
+        Args:
+            receiver_id: 接收者ID
+            info_type: 信息类型 (location, object, status等)
+            info_data: 信息数据
+
+        Returns:
+            bool: 是否成功发送
+        """
+        if self.comm_manager:
+            return self.comm_manager.send_info_sharing_message(
+                self.agent_id, receiver_id, info_type, info_data)
+        return False
+
+    def coordinate_task(self, receiver_id: str, task_type: str, task_details: Dict[str, Any]) -> bool:
+        """
+        与其他智能体协调任务
+
+        Args:
+            receiver_id: 接收者ID
+            task_type: 任务类型
+            task_details: 任务详情
+
+        Returns:
+            bool: 是否成功发送
+        """
+        if self.comm_manager:
+            return self.comm_manager.send_task_coordination_message(
+                self.agent_id, receiver_id, task_type, task_details)
         return False
     
     def _parse_prompt(self) -> str:
@@ -227,42 +270,100 @@ class AutonomousAgent(BaseAgent):
     def _process_response(self, response: str) -> str:
         """
         处理LLM响应，提取动作或发送消息
-        
+
         Args:
             response: LLM响应文本
-            
+
         Returns:
             str: 处理后的动作命令
         """
         lines = response.strip().split('\n')
-        action = lines[-1] if lines else ""
-        
-        # 检查是否是消息
-        if action.startswith("MSG") and ":" in action:
-            parts = action.split(":", 1)
-            receiver_id = parts[0][3:].strip()
-            content = parts[1].strip()
-            
-            success = self.send_message(receiver_id, content)
-            if success:
-                # 如果发送成功，返回一个虚拟动作表示已发送消息
-                return f"SENT_MESSAGE_TO_{receiver_id}"
-            else:
-                # 如果发送失败，执行查看环境的动作
-                return "LOOK"
-                
-        # 检查是否是广播
-        elif action.startswith("BROADCAST:"):
-            content = action[10:].strip()
-            success = self.broadcast_message(content)
-            if success:
-                # 如果广播成功，返回一个虚拟动作表示已广播消息
-                return "BROADCAST_MESSAGE"
-            else:
-                # 如果广播失败，执行查看环境的动作
-                return "LOOK"
-        
-        # 否则返回常规动作
+
+        # 尝试从响应中提取动作命令
+        action = ""
+
+        # 查找包含动作命令的行
+        for line in lines:
+            line = line.strip()
+
+            # 检查是否是消息 - 支持更丰富的消息格式
+            if line.startswith("MSG") and ":" in line:
+                parts = line.split(":", 1)
+                receiver_id = parts[0][3:].strip()
+                content = parts[1].strip()
+
+                # 检查是否包含消息类型标识
+                message_type = MessageType.DIRECT_MESSAGE
+                priority = MessagePriority.MEDIUM
+
+                if content.startswith("[INFO]"):
+                    message_type = MessageType.INFO_SHARING
+                    content = content[6:].strip()
+                elif content.startswith("[TASK]"):
+                    message_type = MessageType.TASK_COORDINATION
+                    priority = MessagePriority.HIGH
+                    content = content[6:].strip()
+                elif content.startswith("[HELP]"):
+                    message_type = MessageType.HELP_REQUEST
+                    priority = MessagePriority.HIGH
+                    content = content[6:].strip()
+                elif content.startswith("[STATUS]"):
+                    message_type = MessageType.STATUS_UPDATE
+                    content = content[8:].strip()
+
+                success = self.send_message(receiver_id, content, message_type, priority)
+                if success:
+                    return f"SENT_MESSAGE_TO_{receiver_id}"
+                else:
+                    return "EXPLORE"
+
+            # 检查是否是广播
+            elif line.startswith("BROADCAST:"):
+                content = line[10:].strip()
+
+                # 检查广播类型
+                message_type = MessageType.BROADCAST
+                priority = MessagePriority.MEDIUM
+
+                if content.startswith("[URGENT]"):
+                    priority = MessagePriority.URGENT
+                    content = content[8:].strip()
+                elif content.startswith("[INFO]"):
+                    message_type = MessageType.INFO_SHARING
+                    content = content[6:].strip()
+
+                success = self.broadcast_message(content, message_type, priority)
+                if success:
+                    return "BROADCAST_MESSAGE"
+                else:
+                    return "EXPLORE"
+
+            # 检查是否是常见的动作命令
+            elif any(line.startswith(cmd) for cmd in ['GOTO', 'GRAB', 'PLACE', 'EXPLORE', 'LOOK', 'DONE', 'OPEN', 'CLOSE', 'TURN_ON', 'TURN_OFF']):
+                action = line
+                break
+
+            # 检查是否包含"动作命令："前缀
+            elif "动作命令：" in line:
+                action = line.split("动作命令：", 1)[1].strip()
+                break
+
+            # 检查是否是单个大写单词（可能是动作）
+            elif line.isupper() and len(line.split()) == 1 and line.isalpha():
+                action = line
+                break
+
+        # 如果没有找到明确的动作，使用最后一行
+        if not action:
+            action = lines[-1] if lines else "EXPLORE"
+
+        # 清理动作命令
+        action = action.strip()
+
+        # 如果动作为空或包含中文解释，使用默认动作
+        if not action or any('\u4e00' <= char <= '\u9fff' for char in action):
+            action = "EXPLORE"
+
         return action
     
     def step(self) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
@@ -294,9 +395,18 @@ class AutonomousAgent(BaseAgent):
             return VirtualStatus.MESSAGE_SENT, "消息已发送", None
         
         # 执行实际动作
-        result = self.execute_action(action)
-        
+        status, message, result_data = self.bridge.process_command(self.agent_id, action)
+
+        # 记录历史
+        self.record_action(action, {"status": status, "message": message, "result": result_data})
+
+        # 更新连续失败计数
+        if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
+            self.consecutive_failures += 1
+        else:
+            self.consecutive_failures = 0
+
         # 清空处理过的消息队列
         self.message_queue = []
-        
-        return result 
+
+        return status, message, result_data

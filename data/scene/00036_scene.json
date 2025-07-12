@@ -1,0 +1,896 @@
+{
+  "description": "A Recovery Outreach Center with a reception area, group therapy room, private counseling office, medical check-up station, job training workshop, and staff break room, designed for multi-agent collaboration and rich interaction.",
+  "rooms": [
+    {
+      "id": "reception",
+      "name": "Reception & Waiting Area",
+      "properties": {
+        "type": "reception"
+      },
+      "connected_to_room_ids": [
+        "group_therapy",
+        "private_counseling",
+        "medical_station",
+        "workshop",
+        "break_room"
+      ]
+    },
+    {
+      "id": "group_therapy",
+      "name": "Group Therapy Room",
+      "properties": {
+        "type": "therapy"
+      },
+      "connected_to_room_ids": [
+        "reception",
+        "private_counseling"
+      ]
+    },
+    {
+      "id": "private_counseling",
+      "name": "Private Counseling Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "reception",
+        "group_therapy"
+      ]
+    },
+    {
+      "id": "medical_station",
+      "name": "Medical Check-Up Station",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "reception"
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Job Training Workshop",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "reception"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Staff Break Room",
+      "properties": {
+        "type": "break_room"
+      },
+      "connected_to_room_ids": [
+        "reception"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "front_desk_1",
+      "name": "Heavy Wooden Front Desk",
+      "type": "FURNITURE",
+      "location_id": "in:reception",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "wood",
+        "brand": "OfficeMaster"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_panel_1",
+      "name": "Integrated Security Panel",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "is_container": false,
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "bookshelf_1",
+      "name": "Floor-to-Ceiling Bookshelf",
+      "type": "FURNITURE",
+      "location_id": "in:reception",
+      "properties": {
+        "size": [
+          1.8,
+          0.4,
+          2.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_detector_1",
+      "name": "Metal Detector Archway",
+      "type": "FURNITURE",
+      "location_id": "in:reception",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          2.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "metal",
+        "brand": "SecuriScan"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "visitor_tablet_1",
+      "name": "Visitor Sign-In Tablet",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "white",
+        "brand": "TechTab",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "donation_box_1",
+      "name": "Locked Donation Box",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "green",
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "panic_button_1",
+      "name": "Emergency Panic Button",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "provides_abilities": [
+          "press"
+        ]
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:reception",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "brand": "BrewMaster"
+      },
+      "states": {
+        "is_full": true,
+        "is_active": false
+      }
+    },
+    {
+      "id": "intake_forms_1",
+      "name": "Stack of Intake Forms",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_monitor_1",
+      "name": "Security Camera Monitor",
+      "type": "ITEM",
+      "location_id": "on:front_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "SecureView",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "motivational_poster_1",
+      "name": "Faded Motivational Poster",
+      "type": "ITEM",
+      "location_id": "on:bookshelf_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "multicolor",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_plant_1",
+      "name": "Dying Potted Plant",
+      "type": "ITEM",
+      "location_id": "on:bookshelf_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "green",
+        "material": "ceramic"
+      },
+      "states": {}
+    },
+    {
+      "id": "umbrella_1",
+      "name": "Forgotten Umbrella",
+      "type": "ITEM",
+      "location_id": "in:reception",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "nylon"
+      },
+      "states": {}
+    },
+    {
+      "id": "therapy_chair_1",
+      "name": "Mismatched Chair",
+      "type": "FURNITURE",
+      "location_id": "in:group_therapy",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 12.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "therapy_chair_2",
+      "name": "Wobbly Mismatched Chair",
+      "type": "FURNITURE",
+      "location_id": "in:group_therapy",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 11.5,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_table_1",
+      "name": "Central Wooden Coffee Table",
+      "type": "FURNITURE",
+      "location_id": "in:group_therapy",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.4
+        ],
+        "weight": 25.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:group_therapy",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 15.0,
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tissue_box_1",
+      "name": "Box of Tissues",
+      "type": "ITEM",
+      "location_id": "on:coffee_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "cardboard"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "medication_dispenser_1",
+      "name": "Locked Medication Dispenser",
+      "type": "ITEM",
+      "location_id": "on:coffee_table_1",
+      "properties": {
+        "weight": 4.0,
+        "color": "white",
+        "brand": "MediSafe",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "bluetooth_speaker_1",
+      "name": "Small Bluetooth Speaker",
+      "type": "ITEM",
+      "location_id": "on:coffee_table_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "SoundWave",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "workbooks_1",
+      "name": "Stack of Workbooks",
+      "type": "ITEM",
+      "location_id": "on:coffee_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "blue",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermostat_1",
+      "name": "Thermostat",
+      "type": "ITEM",
+      "location_id": "in:group_therapy",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "brand": "TempControl",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "photo_frame_1",
+      "name": "Framed Photo of Past Graduates",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "brown",
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "sweater_1",
+      "name": "Forgotten Sweater",
+      "type": "ITEM",
+      "location_id": "on:therapy_chair_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "wool"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "counseling_desk_1",
+      "name": "Private Counseling Desk",
+      "type": "FURNITURE",
+      "location_id": "in:private_counseling",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 45.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:private_counseling",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 60.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medical_curtain_1",
+      "name": "Semi-Private Curtain",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 3.0,
+        "color": "blue",
+        "material": "fabric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medicine_cabinet_1",
+      "name": "Locked Medicine Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.8
+        ],
+        "weight": 20.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medicine_bottle_1",
+      "name": "Medicine Bottle with Yellow Cap",
+      "type": "ITEM",
+      "location_id": "in:medicine_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "plastic",
+        "volume": "75%"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_bottle_2",
+      "name": "Medicine Bottle with White Cap",
+      "type": "ITEM",
+      "location_id": "in:medicine_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "plastic",
+        "volume": "50%"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Job Training Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "furniture_crate_1",
+      "name": "Donated Furniture Crate",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 80.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "toolkit_1",
+      "name": "Professional Toolkit",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "cut",
+          "scrape",
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "break_room_cabinet_1",
+      "name": "Locked Staff Break Room Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          1.0
+        ],
+        "weight": 30.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "batteries_1",
+      "name": "Spare Batteries",
+      "type": "ITEM",
+      "location_id": "in:break_room_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "PowerCell"
+      },
+      "states": {}
+    },
+    {
+      "id": "supervisor_desk_1",
+      "name": "Supervisor's Desk",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 50.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "mail_stack_1",
+      "name": "Stack of Unopened Mail",
+      "type": "ITEM",
+      "location_id": "on:supervisor_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "cabinet_key_1",
+      "name": "Break Room Cabinet Key",
+      "type": "ITEM",
+      "location_id": "on:supervisor_desk_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "brand": "QuickHeat",
+        "is_container": true
+      },
+      "states": {
+        "is_active": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "frozen_dinner_1",
+      "name": "Frozen Dinner",
+      "type": "ITEM",
+      "location_id": "in:microwave_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_frozen": true,
+        "is_cooked": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.05
+        ],
+        "weight": 10.0,
+        "material": "cork"
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "brand": "ShredMaster",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "confidential_document_1",
+      "name": "Confidential Document",
+      "type": "ITEM",
+      "location_id": "on:supervisor_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_shredded": false
+      }
+    },
+    {
+      "id": "belt_1",
+      "name": "Leather Belt",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "leather"
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "leash_1",
+      "name": "Dog Leash",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "nylon"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "potatoes_1",
+      "name": "Raw Potatoes",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "vegetable"
+      },
+      "states": {
+        "is_mashed": false,
+        "is_cooked": false
+      }
+    },
+    {
+      "id": "masher_1",
+      "name": "Potato Masher",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "mash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Kitchen Knife",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polishing Cloth",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "microfiber",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scraper_1",
+      "name": "Paint Scraper",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grinder_1",
+      "name": "Coffee Grinder",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "brand": "GrindMaster",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_beans_1",
+      "name": "Coffee Beans",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "bean"
+      },
+      "states": {
+        "is_ground": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "buckle",
+    "cut",
+    "empty",
+    "grind",
+    "mash",
+    "open",
+    "polish",
+    "press",
+    "recharge",
+    "scrape",
+    "shred",
+    "thaw",
+    "unleash",
+    "wear",
+    "close"
+  ]
+}

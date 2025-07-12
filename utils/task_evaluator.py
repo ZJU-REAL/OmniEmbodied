@@ -17,7 +17,7 @@ import sys
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 
-from embodied_simulator.core import ActionStatus
+from utils.embodied_simulator import ActionStatus
 from config import ConfigManager
 from utils.simulator_bridge import SimulatorBridge
 from utils.trajectory_recorder import TrajectoryRecorder
