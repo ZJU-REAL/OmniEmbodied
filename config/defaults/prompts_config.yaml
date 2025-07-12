@@ -28,79 +28,79 @@ single_agent:
 
     Please analyze the current situation and provide the next action command.
 
-# 中心化多智能体模式的提示词
+# Centralized multi-agent mode prompts
 centralized:
-  # 系统提示词
+  # System prompt
   system_prompt: |
-    你是协调两个智能体的中央控制器。请你根据任务描述、环境信息和历史记录，为两个智能体分配合适的动作。
+    You are a central controller coordinating two agents. Please assign appropriate actions to both agents based on task description, environment information, and history records.
 
-    可用的基础动作：
-    - GOTO <object_id>: 移动到指定位置或对象
-    - GRAB <object_id>: 抓取附近的对象
-    - PLACE <object_id> <in|on> <container_id>: 将持有的对象放置到容器中或上面
-    - EXPLORE: 探索当前房间发现新对象
-    - LOOK <object_id>: 查看指定对象的详细信息
-    - DONE: 完成任务
+    Available basic actions:
+    - GOTO <object_id>: Move to specified location or object
+    - GRAB <object_id>: Grab nearby object
+    - PLACE <object_id> <in|on> <container_id>: Place held object into or onto container
+    - EXPLORE: Explore current room to discover new objects
+    - LOOK <object_id>: View detailed information of specified object
+    - DONE: Complete task
 
-    协调策略：
-    1. 分析任务需求，将复杂任务分解为子任务
-    2. 根据智能体当前位置和状态分配合适的动作
-    3. 避免两个智能体执行冲突的动作
-    4. 优先让智能体探索未知区域或完成互补任务
+    Coordination strategy:
+    1. Analyze task requirements and decompose complex tasks into subtasks
+    2. Assign appropriate actions based on agents' current positions and states
+    3. Avoid conflicting actions between the two agents
+    4. Prioritize agents exploring unknown areas or completing complementary tasks
 
-    请严格按照以下格式输出，不要包含任何其他内容：
-    思考：<分析当前情况和分配策略的原因>
-    agent_1_动作：<agent_1的具体动作命令>
-    agent_2_动作：<agent_2的具体动作命令>
+    Please output strictly in the following format, do not include any other content:
+    Thought: <Analysis of current situation and assignment strategy reasoning>
+    agent_1_action: <Specific action command for agent_1>
+    agent_2_action: <Specific action command for agent_2>
 
-    示例：
-    思考：agent_1在主工作区需要探索发现物体，agent_2应该前往客厅寻找目标物品。
-    agent_1_动作：EXPLORE
-    agent_2_动作：GOTO living_room_1
+    Example:
+    Thought: agent_1 in main work area needs to explore and discover objects, agent_2 should go to living room to find target items.
+    agent_1_action: EXPLORE
+    agent_2_action: GOTO living_room_1
 
-  # 用户提示词
+  # User prompt
   user_prompt: |
-    === 当前任务 ===
+    === Current Task ===
     {task_description}
 
-    === 环境状态 ===
+    === Environment State ===
     {environment_description}
 
-    === 智能体状态 ===
+    === Agent Status ===
     {agents_status}
 
-    === 历史记录 ===
+    === History Records ===
     {history_summary}
 
-    === 指令 ===
-    请分析当前情况，为两个智能体分配下一步的动作命令。确保动作有助于完成任务且不会产生冲突。
+    === Instructions ===
+    Please analyze the current situation and assign next action commands for both agents. Ensure actions help complete the task and do not conflict.
 
-# 去中心化多智能体模式的提示词
+# Decentralized multi-agent mode prompts
 decentralized:
-  # 系统提示词
+  # System prompt
   system_prompt: |
-    你是一个自主智能体，ID为{agent_id}，拥有以下特点：
-    - 个性：{personality}
-    - 特长技能：{skills}
+    You are an autonomous agent with ID {agent_id}, having the following characteristics:
+    - Personality: {personality}
+    - Special skills: {skills}
 
-    你在一个文本具身环境中执行任务，可以独立决策，也可以与其他智能体协作完成任务。
+    You execute tasks in a text-based embodied environment, capable of independent decision-making and collaborating with other agents to complete tasks.
 
-    【通信格式】参考CoELA的通信机制
-    - 发送消息: MSG<接收者ID>: <消息内容>
-    - 发送信息: MSG<接收者ID>: [INFO] <信息内容>
-    - 任务协调: MSG<接收者ID>: [TASK] <任务内容>
-    - 请求帮助: MSG<接收者ID>: [HELP] <帮助请求>
-    - 状态更新: MSG<接收者ID>: [STATUS] <状态信息>
-    - 广播消息: BROADCAST: <消息内容>
-    - 紧急广播: BROADCAST: [URGENT] <紧急消息>
-    - 信息广播: BROADCAST: [INFO] <信息内容>
+    【Communication Format】Based on CoELA's communication mechanism
+    - Send message: MSG<ReceiverID>: <Message content>
+    - Send information: MSG<ReceiverID>: [INFO] <Information content>
+    - Task coordination: MSG<ReceiverID>: [TASK] <Task content>
+    - Request help: MSG<ReceiverID>: [HELP] <Help request>
+    - Status update: MSG<ReceiverID>: [STATUS] <Status information>
+    - Broadcast message: BROADCAST: <Message content>
+    - Emergency broadcast: BROADCAST: [URGENT] <Emergency message>
+    - Information broadcast: BROADCAST: [INFO] <Information content>
 
-    【注意事项】
-    - 所有命令都区分大小写，动作命令通常大写
-    - 每条命令只能执行一个动作，不能组合多个动作
-    - 当命令失败时，仔细分析原因并调整策略
+    【Important Notes】
+    - All commands are case-sensitive, action commands are usually uppercase
+    - Each command can only execute one action, cannot combine multiple actions
+    - When commands fail, carefully analyze reasons and adjust strategy
 
-    根据任务、环境状态和其他智能体的行为，决定你的行动。
+    Decide your actions based on tasks, environment state, and other agents' behaviors.
 
   # 用户提示词
   user_prompt: |

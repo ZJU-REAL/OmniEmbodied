@@ -278,30 +278,30 @@ class SceneValidator:
                 if obj_key not in ['id', 'name', 'type', 'location_id', 'properties', 'states'] and obj_key in self.csv_attributes:
                     self.errors.append(f"objects[{i}].{obj_key} is a CSV-defined attribute and should be in states")
             
-            # 检查states中的属性是否都是有效的CSV属性（可选的严格检查）
+            # Check if attributes in states are all valid CSV attributes (optional strict check)
             states = obj.get('states', {})
             for state_key in states.keys():
                 if state_key not in self.csv_attributes:
-                    # 这里我们只记录警告，不作为错误，因为可能有其他自定义状态
-                    pass  # 可以根据需要启用: self.warnings.append(f"objects[{i}].states.{state_key} is not defined in CSV")
-    
+                    # Here we only record warnings, not as errors, because there may be other custom states
+                    pass  # Can be enabled as needed: self.warnings.append(f"objects[{i}].states.{state_key} is not defined in CSV")
+
     def _is_english_text(self, text: str) -> bool:
-        """简单检查文本是否主要为英文"""
+        """Simple check if text is primarily in English"""
         if not text:
             return True
-        
-        # 检查是否包含中文字符
+
+        # Check if it contains Chinese characters
         chinese_char_count = sum(1 for char in text if '\u4e00' <= char <= '\u9fff')
         total_chars = len([c for c in text if c.isalpha()])
-        
+
         if total_chars == 0:
             return True
-        
-        # 如果中文字符超过总字母字符的50%，认为不是英文
+
+        # If Chinese characters exceed 50% of total letter characters, consider it not English
         return chinese_char_count / total_chars < 0.5
-    
+
     def _fix_object_id(self, obj_id: str, used_ids: set) -> str:
-        """智能修复对象ID格式"""
+        """Intelligently fix object ID format"""
         if not obj_id:
             return obj_id
         

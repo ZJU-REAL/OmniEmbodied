@@ -15,40 +15,40 @@ class RunNamingManager:
     """
     
     @staticmethod
-    def generate_run_name(agent_type: str, task_type: str, scenario_id: str, 
+    def generate_run_name(agent_type: str, task_type: str, scenario_id: str,
                          config_name: str = None, custom_suffix: str = None) -> str:
         """
-        生成运行名称
-        
+        Generate run name
+
         Args:
-            agent_type: 智能体类型 ('single' 或 'multi')
-            task_type: 任务类型 ('sequential' 或 'combined')
-            scenario_id: 场景ID
-            config_name: 配置文件名（可选）
-            custom_suffix: 自定义后缀（可选）
-            
+            agent_type: Agent type ('single' or 'multi')
+            task_type: Task type ('sequential' or 'combined')
+            scenario_id: Scenario ID
+            config_name: Configuration file name (optional)
+            custom_suffix: Custom suffix (optional)
+
         Returns:
-            str: 格式化的运行名称
+            str: Formatted run name
         """
-        # 时间戳
+        # Timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        # 基本名称组件
+
+        # Basic name components
         components = [
             timestamp,
             f"{agent_type}_{task_type}",
             f"scenario_{scenario_id}"
         ]
-        
-        # 添加配置名称（如果不是默认配置）
+
+        # Add configuration name (if not default configuration)
         if config_name and not config_name.endswith('_config'):
             config_name = config_name.replace('_config', '')
             if config_name not in ['single_agent', 'centralized', 'decentralized']:
                 components.append(f"config_{config_name}")
         
-        # 添加自定义后缀
+        # Add custom suffix
         if custom_suffix:
-            # 清理自定义后缀，只保留字母数字和下划线
+            # Clean custom suffix, keep only alphanumeric characters and underscores
             clean_suffix = re.sub(r'[^a-zA-Z0-9_]', '_', custom_suffix)
             components.append(clean_suffix)
         
@@ -57,14 +57,14 @@ class RunNamingManager:
     @staticmethod
     def generate_output_directory(base_output_dir: str, run_name: str) -> str:
         """
-        生成输出目录路径
-        
+        Generate output directory path
+
         Args:
-            base_output_dir: 基础输出目录
-            run_name: 运行名称
-            
+            base_output_dir: Base output directory
+            run_name: Run name
+
         Returns:
-            str: 完整的输出目录路径
+            str: Complete output directory path
         """
         return f"{base_output_dir}/{run_name}"
     

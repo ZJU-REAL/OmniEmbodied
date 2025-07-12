@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-中心化双智能体示例 - 使用任务验证器执行中心化协调任务
+Centralized Dual-Agent Example - Execute centralized coordination tasks using task evaluator
 
-这个示例展示了如何使用任务验证器来执行中心化双智能体任务。
-中心化模式使用单个LLM协调器同时规划两个智能体的动作。
-任务验证器提供了完整的日志记录、轨迹记录和评测功能。
+This example demonstrates how to use the task evaluator to execute centralized dual-agent tasks.
+Centralized mode uses a single LLM coordinator to simultaneously plan actions for two agents.
+The task evaluator provides complete logging, trajectory recording, and evaluation functionality.
 
-主要功能：
-1. 从配置文件加载完整配置
-2. 支持不同的评测模式配置
-3. 自动记录执行轨迹和日志
-4. 生成详细的评测报告
-5. 支持命令行参数覆盖配置文件设置
-6. 使用中心化协调器同时控制两个智能体
+Main features:
+1. Load complete configuration from config files
+2. Support different evaluation mode configurations
+3. Automatic execution trajectory and log recording
+4. Generate detailed evaluation reports
+5. Support command line arguments to override config file settings
+6. Use centralized coordinator to control two agents simultaneously
 
-使用方法：
+Usage:
 python examples/centralized_example.py --mode sequential --scenario 00001 --suffix demo
 python examples/centralized_example.py --mode combined --scenario 00001 --suffix test
 python examples/centralized_example.py --config centralized_config
@@ -377,21 +377,21 @@ def run_parallel_evaluation(config, config_file, mode, suffix):
 
 def get_scenario_list(scenario_selection):
     """
-    根据配置获取要评测的场景列表
+    Get the list of scenarios to evaluate based on configuration
 
     Args:
-        scenario_selection: 场景选择配置
+        scenario_selection: Scenario selection configuration
 
     Returns:
-        List[str]: 场景ID列表
+        List[str]: List of scenario IDs
     """
     mode = scenario_selection.get('mode', 'range')
 
     if mode == 'all':
-        # 扫描data/scene目录获取所有场景
+        # Scan data/scene directory to get all scenarios
         scene_dir = 'data/scene'
         if not os.path.exists(scene_dir):
-            raise RuntimeError(f"场景目录不存在: {scene_dir}")
+            raise RuntimeError(f"Scenario directory does not exist: {scene_dir}")
 
         scenarios = []
         for filename in os.listdir(scene_dir):
@@ -609,26 +609,26 @@ def main():
         logger.info(f"  - 失败任务数: {summary.get('failed_tasks', 0)}")
         logger.info(f"  - 完成率: {summary.get('completion_rate', 0):.1%}")
 
-        # 显示详细结果
-        logger.info(f"  - 总步数: {summary.get('total_steps', 0)}")
-        logger.info(f"  - 平均每任务步数: {summary.get('average_steps_per_task', 0):.1f}")
-        logger.info(f"  - 执行时长: {summary.get('total_duration', 0):.2f}秒")
+        # Display detailed results
+        logger.info(f"  - Total steps: {summary.get('total_steps', 0)}")
+        logger.info(f"  - Average steps per task: {summary.get('average_steps_per_task', 0):.1f}")
+        logger.info(f"  - Execution duration: {summary.get('total_duration', 0):.2f} seconds")
 
-        # 显示性能评价
+        # Display performance evaluation
         completion_rate = summary.get('completion_rate', 0)
         if completion_rate >= 0.8:
-            logger.info("🎊 中心化评测结果优秀！")
+            logger.info("🎊 Centralized evaluation results are excellent!")
         elif completion_rate >= 0.6:
-            logger.info("👍 中心化评测结果良好！")
+            logger.info("👍 Centralized evaluation results are good!")
         else:
-            logger.info("📈 中心化模式还有改进空间")
+            logger.info("📈 Centralized mode has room for improvement")
 
         return 0
 
     except Exception as e:
-        logger.error(f"❌ 中心化执行过程中发生错误: {e}")
+        logger.error(f"❌ Error occurred during centralized execution: {e}")
         import traceback
-        logger.error(f"错误详情:\n{traceback.format_exc()}")
+        logger.error(f"Error details:\n{traceback.format_exc()}")
         return 1
 
 

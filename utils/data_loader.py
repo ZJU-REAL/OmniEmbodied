@@ -31,19 +31,19 @@ class DataLoader:
     
     def load_scene(self, scene_id: str) -> Optional[Dict[str, Any]]:
         """
-        加载场景配置
-        
+        Load scene configuration
+
         Args:
-            scene_id: 场景ID（如'00001_scene'）
-            
+            scene_id: Scene ID (e.g., '00001_scene')
+
         Returns:
-            Dict: 场景配置字典，加载失败返回None
+            Dict: Scene configuration dictionary, returns None if loading fails
         """
-        # 如果已缓存，直接返回
+        # Return directly if already cached
         if scene_id in self._scenes_cache:
             return self._scenes_cache[scene_id]
-        
-        # 尝试从多个目录加载
+
+        # Try loading from multiple directories
         for scene_dir in [self.scene_dir, self.scenes_dir, self.default_dir]:
             scene_path = os.path.join(scene_dir, f"{scene_id}.json")
             if os.path.exists(scene_path):
@@ -51,12 +51,12 @@ class DataLoader:
                     with open(scene_path, 'r', encoding='utf-8') as f:
                         scene_data = json.load(f)
                         self._scenes_cache[scene_id] = scene_data
-                        logger.info(f"成功从 {scene_path} 加载场景: {scene_id}")
+                        logger.info(f"Successfully loaded scene from {scene_path}: {scene_id}")
                         return scene_data
                 except Exception as e:
-                    logger.exception(f"从 {scene_path} 加载场景失败: {e}")
-        
-        logger.error(f"场景文件不存在: {scene_id} (已在 scene, scenes, default 目录中查找)")
+                    logger.exception(f"Failed to load scene from {scene_path}: {e}")
+
+        logger.error(f"Scene file does not exist: {scene_id} (searched in scene, scenes, default directories)")
         return None
     
     def load_task(self, task_id: str) -> Optional[Dict[str, Any]]:

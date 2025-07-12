@@ -1,64 +1,64 @@
-# 智能体框架 (Embodied Agent Framework)
+# Embodied Agent Framework
 
-基于大语言模型(LLM)的智能体框架，用于控制文本具身任务模拟器中的智能体执行各种任务。支持单智能体、中心化多智能体和去中心化多智能体三种模式。
+A Large Language Model (LLM) based agent framework for controlling agents in text-based embodied task simulators to execute various tasks. Supports three modes: single agent, centralized multi-agent, and decentralized multi-agent.
 
-## 项目概述
+## Project Overview
 
-本框架为基于LLM的具身智能体提供了强大的运行环境，可以无缝集成到文本具身任务模拟器中。主要特性包括：
+This framework provides a powerful runtime environment for LLM-based embodied agents, seamlessly integrating with text-based embodied task simulators. Main features include:
 
-- **多种交互模式**：根据任务的复杂性选择不同的智能体协作方式
-- **统一的LLM接口**：支持多种LLM提供商，包括本地部署和API服务
-- **动态提示词系统**：提示词与代码分离，支持变量注入和模板化管理
-- **灵活的配置管理**：使用YAML文件进行集中式配置
-- **模拟器桥接层**：简化与模拟器的交互，提供自然语言描述能力
+- **Multiple Interaction Modes**: Choose different agent collaboration approaches based on task complexity
+- **Unified LLM Interface**: Support for multiple LLM providers, including local deployment and API services
+- **Dynamic Prompt System**: Prompts separated from code, supporting variable injection and template management
+- **Flexible Configuration Management**: Centralized configuration using YAML files
+- **Simulator Bridge Layer**: Simplify simulator interactions with natural language description capabilities
 
-## 功能特点
+## Feature Highlights
 
-- **多种智能体模式**：
-  - 单智能体：独立完成任务，支持思维链推理
-  - 中心化多智能体：一个中央LLM协调多个执行智能体，支持协作动作
-  - 去中心化多智能体：多个拥有自己LLM的智能体相互协作，支持个性化配置
-- **先进的提示词系统**：
-  - 配置文件管理提示词模板，支持动态变量注入
-  - 详细的近邻关系和动作命令指南
-  - 支持思维链推理（Chain-of-Thought）
-- **灵活的LLM支持**：支持多种LLM提供商（OpenAI、Azure OpenAI、vLLM等）
-- **智能的环境感知**：
-  - 自然语言环境描述功能
-  - 多层次环境信息（完整/房间/简要）
-  - 动态物体状态跟踪
-- **完善的配置系统**：使用YAML文件管理不同模式的配置，支持日志级别控制
-- **强大的通信机制**：支持智能体间消息传递、广播和协商
-- **增强的执行控制**：
-  - 历史记录管理和失败重试机制
-  - 模拟器桥接层简化交互
-  - 动作状态跟踪和反馈
-- **可扩展的架构**：便于实现不同的智能体策略和协作模式
+- **Multiple Agent Modes**:
+  - Single Agent: Complete tasks independently with chain-of-thought reasoning support
+  - Centralized Multi-Agent: One central LLM coordinates multiple execution agents with collaborative actions
+  - Decentralized Multi-Agent: Multiple agents with their own LLMs collaborate with personalized configurations
+- **Advanced Prompt System**:
+  - Configuration file management of prompt templates with dynamic variable injection
+  - Detailed proximity relationships and action command guidelines
+  - Chain-of-Thought reasoning support
+- **Flexible LLM Support**: Support for multiple LLM providers (OpenAI, Azure OpenAI, vLLM, etc.)
+- **Intelligent Environment Perception**:
+  - Natural language environment description functionality
+  - Multi-level environment information (full/room/brief)
+  - Dynamic object state tracking
+- **Comprehensive Configuration System**: Use YAML files to manage configurations for different modes with log level control
+- **Powerful Communication Mechanism**: Support for inter-agent messaging, broadcasting, and negotiation
+- **Enhanced Execution Control**:
+  - History management and failure retry mechanisms
+  - Simulator bridge layer to simplify interactions
+  - Action state tracking and feedback
+- **Extensible Architecture**: Easy to implement different agent strategies and collaboration modes
 
-## 安装方法
+## Installation
 
-### 前提条件
+### Prerequisites
 
 - Python 3.8+
-- 文本具身任务模拟器 (可单独使用，但推荐与模拟器结合)
+- Text-based embodied task simulator (can be used standalone, but recommended with simulator)
 
-### 安装步骤
+### Installation Steps
 
 ```bash
-# 克隆仓库
-git clone https://github.com/你的用户名/embodied_framework.git
+# Clone repository
+git clone https://github.com/your_username/embodied_framework.git
 
-# 安装依赖
+# Install dependencies
 cd embodied_framework
 pip install -r requirements.txt
 
-# 安装为开发模式
+# Install in development mode
 pip install -e .
 ```
 
-### 环境变量配置
+### Environment Variable Configuration
 
-根据您使用的LLM提供商，设置相应的API密钥：
+Set appropriate API keys based on your LLM provider:
 
 ```bash
 # OpenAI
@@ -70,476 +70,476 @@ export AZURE_OPENAI_RESOURCE="your_resource_name"
 export AZURE_OPENAI_DEPLOYMENT="your_deployment_id"
 ```
 
-## 使用方法
+## Usage
 
-### 单智能体模式
+### Single Agent Mode
 
 ```python
 from embodied_framework import LLMAgent, ConfigManager, SimulatorBridge
 
-# 步骤1: 加载配置
+# Step 1: Load configuration
 config_manager = ConfigManager()
 llm_config = config_manager.get_config("llm_config")
 agent_config = config_manager.get_config("single_agent_config")
 
-# 步骤2: 初始化模拟器桥接
+# Step 2: Initialize simulator bridge
 bridge = SimulatorBridge()
 bridge.initialize_with_task('data/default/default_task.json')
 
-# 输出任务信息
+# Output task information
 task_description = bridge.get_task_description()
-print(f"任务: {task_description}")
+print(f"Task: {task_description}")
 
-# 步骤3: 创建LLM智能体
+# Step 3: Create LLM agent
 agent_id = "agent_1"
 agent = LLMAgent(bridge, agent_id, agent_config)
 
-# 步骤4: 执行任务
+# Step 4: Execute task
 status, message, result = agent.step()
-print(f"执行结果: {message}")
+print(f"Execution result: {message}")
 
-# 获取智能体状态
+# Get agent state
 state = agent.get_state()
 inventory = [item.get("name") for item in state.get("inventory", [])]
-print(f"当前库存: {inventory}")
+print(f"Current inventory: {inventory}")
 ```
 
-### 中心化多智能体模式
+### Centralized Multi-Agent Mode
 
 ```python
 from embodied_framework import Coordinator, WorkerAgent, ConfigManager, SimulatorBridge
 
-# 初始化模拟器桥接
+# Initialize simulator bridge
 bridge = SimulatorBridge()
 bridge.initialize_with_task('data/default/default_task.json')
 
-# 加载配置
+# Load configuration
 config_manager = ConfigManager()
 centralized_config = config_manager.get_config('centralized_config')
 
-# 创建协调器
+# Create coordinator
 coordinator = Coordinator(bridge, 'coordinator', centralized_config.get('coordinator'))
 
-# 创建工作智能体
+# Create worker agent
 worker = WorkerAgent(bridge, 'worker_1', centralized_config.get('worker_agents'))
 coordinator.add_worker(worker)
 
-# 设置任务
-coordinator.set_task("找到厨房，打开冰箱，取出苹果")
+# Set task
+coordinator.set_task("Find the kitchen, open the refrigerator, take out an apple")
 
-# 执行一步协调
+# Execute one coordination step
 status, message, results = coordinator.step()
 ```
 
-### 去中心化多智能体模式
+### Decentralized Multi-Agent Mode
 
 ```python
 from embodied_framework import AutonomousAgent, CommunicationManager, ConfigManager, SimulatorBridge
 
-# 初始化模拟器桥接
+# Initialize simulator bridge
 bridge = SimulatorBridge()
 bridge.initialize_with_task('data/default/default_task.json')
 
-# 创建通信管理器
+# Create communication manager
 comm_manager = CommunicationManager()
 comm_manager.start_processing()
 
-# 加载配置
+# Load configuration
 config_manager = ConfigManager()
 decentralized_config = config_manager.get_config('decentralized_config')
 
-# 创建自主智能体
-agent1 = AutonomousAgent(bridge, 'agent_1', decentralized_config.get('autonomous_agent'), 
+# Create autonomous agents
+agent1 = AutonomousAgent(bridge, 'agent_1', decentralized_config.get('autonomous_agent'),
                        comm_manager=comm_manager)
-agent2 = AutonomousAgent(bridge, 'agent_2', decentralized_config.get('autonomous_agent'), 
+agent2 = AutonomousAgent(bridge, 'agent_2', decentralized_config.get('autonomous_agent'),
                        comm_manager=comm_manager)
 
-# 注册到通信管理器
+# Register with communication manager
 comm_manager.register_agent('agent_1', agent1, agent1.receive_message)
 comm_manager.register_agent('agent_2', agent2, agent2.receive_message)
 
-# 设置任务
-agent1.set_task("探索房子，找到厨房，并告知agent_2")
-agent2.set_task("等待agent_1找到厨房，然后打开冰箱，取出苹果")
+# Set tasks
+agent1.set_task("Explore the house, find the kitchen, and inform agent_2")
+agent2.set_task("Wait for agent_1 to find the kitchen, then open the refrigerator and take out an apple")
 
-# 执行步骤
+# Execute steps
 agent1.step()
 agent2.step()
 ```
 
-### 使用模拟器桥接简化交互
+### Using Simulator Bridge to Simplify Interactions
 
 ```python
 from embodied_framework.utils.simulator_bridge import SimulatorBridge
 
-# 初始化模拟器桥接器
+# Initialize simulator bridge
 bridge = SimulatorBridge()
 
-# 使用任务文件初始化
+# Initialize with task file
 bridge.initialize_with_task('data/default/default_task.json')
 
-# 获取任务信息
+# Get task information
 task_description = bridge.get_task_description()
 agents_config = bridge.get_agents_config()
 
-# 获取场景信息
+# Get scene information
 rooms = bridge.get_rooms()
 for room in rooms:
     objects = bridge.get_objects_in_room(room['id'])
-    
-# 查找物体
+
+# Find objects
 red_objects = bridge.find_objects_by_property('color', 'red')
 heavy_objects = bridge.find_objects_by_property('weight', lambda w: w > 10)
 
-# 使用自然语言描述功能
+# Use natural language description functionality
 agent_id = "agent_1"
 agent_description = bridge.describe_agent_natural_language(agent_id)
-print(f"智能体描述: {agent_description}")
+print(f"Agent description: {agent_description}")
 
-# 描述房间
+# Describe room
 room_id = "kitchen"
 room_description = bridge.describe_room_natural_language(room_id)
-print(f"房间描述: {room_description}")
+print(f"Room description: {room_description}")
 
-# 描述整个环境
+# Describe entire environment
 env_description = bridge.describe_environment_natural_language()
-print(f"环境描述: {env_description}")
+print(f"Environment description: {env_description}")
 ```
 
-## 配置系统
+## Configuration System
 
-### LLM配置
+### LLM Configuration
 
-在`config/defaults/llm_config.yaml`中配置LLM提供商：
+Configure LLM providers in `config/defaults/llm_config.yaml`:
 
 ```yaml
-# LLM推理方式设置
-mode: "api"  # 可选值: "api" 或 "vllm"
+# LLM inference mode settings
+mode: "api"  # Options: "api" or "vllm"
 
-# API调用方式配置
+# API call configuration
 api:
-  provider: "openai"  # 可选值: "openai" 或 "custom"
+  provider: "openai"  # Options: "openai" or "custom"
 
-  # 使用OpenAI
+  # Using OpenAI
   openai:
     model: "gpt-3.5-turbo"
-    api_key: "sk-..."  # 最好使用环境变量OPENAI_API_KEY
+    api_key: "sk-..."  # Best to use environment variable OPENAI_API_KEY
     temperature: 0.7
     max_tokens: 1000
 
-  # 使用自定义端点（如DeepSeek、通义千问等）
+  # Using custom endpoint (e.g., DeepSeek, Qwen, etc.)
   custom:
     model: "deepseek-chat"
-    api_key: "sk-..."  # 或使用环境变量CUSTOM_LLM_API_KEY
+    api_key: "sk-..."  # Or use environment variable CUSTOM_LLM_API_KEY
     endpoint: "https://api.deepseek.com"
     temperature: 0.1
     max_tokens: 4096
 
-# VLLM本地推理配置
+# VLLM local inference configuration
 vllm:
-  model_path: "/path/to/model"  # 本地模型路径
+  model_path: "/path/to/model"  # Local model path
   temperature: 0.1
   max_tokens: 4096
   tensor_parallel_size: 1
   gpu_memory_utilization: 0.9
 
-# LLM参数配置
+# LLM parameter configuration
 parameters:
-  # 是否发送完整的对话历史给LLM
-  send_history: false  # true=发送完整历史，false=只发送摘要
+  # Whether to send complete conversation history to LLM
+  send_history: false  # true=send complete history, false=send only summary
 ```
 
-### 智能体配置
+### Agent Configuration
 
-各种模式的智能体配置位于`config/defaults/`目录下：
-- `single_agent_config.yaml`：单智能体配置
-- `centralized_config.yaml`：中心化多智能体配置
-- `decentralized_config.yaml`：去中心化多智能体配置
+Agent configurations for various modes are located in the `config/defaults/` directory:
+- `single_agent_config.yaml`: Single agent configuration
+- `centralized_config.yaml`: Centralized multi-agent configuration
+- `decentralized_config.yaml`: Decentralized multi-agent configuration
 
-## 提示词系统
+## Prompt System
 
-框架使用配置文件管理提示词模板，使得提示词与代码分离，便于修改和维护。提示词配置文件位于`config/defaults/prompts_config.yaml`。
+The framework uses configuration files to manage prompt templates, separating prompts from code for easy modification and maintenance. The prompt configuration file is located at `config/defaults/prompts_config.yaml`.
 
-### 提示词配置结构
+### Prompt Configuration Structure
 
-提示词配置按照不同的模式（单智能体、中心化、去中心化）进行组织：
+Prompt configurations are organized by different modes (single agent, centralized, decentralized):
 
 ```yaml
-# 单智能体模式的提示词
+# Single agent mode prompts
 single_agent:
   system: |
-    # 系统提示词
+    # System prompt
   task_template: |
-    # 任务提示词模板，支持变量替换
-  
-# 中心化多智能体模式的提示词
+    # Task prompt template with variable substitution support
+
+# Centralized multi-agent mode prompts
 centralized:
   coordinator_system: |
-    # 协调器系统提示词
+    # Coordinator system prompt
   coordinator_template: |
-    # 协调器任务提示词模板
-  
-# 去中心化多智能体模式的提示词
+    # Coordinator task prompt template
+
+# Decentralized multi-agent mode prompts
 decentralized:
   autonomous_system: |
-    # 自主智能体系统提示词模板
+    # Autonomous agent system prompt template
   autonomous_template: |
-    # 自主智能体任务提示词模板
+    # Autonomous agent task prompt template
 ```
 
-### 使用提示词管理器
+### Using Prompt Manager
 
-框架提供了`PromptManager`类用于加载和格式化提示词模板：
+The framework provides a `PromptManager` class for loading and formatting prompt templates:
 
 ```python
 from embodied_framework.utils import PromptManager
 
-# 创建提示词管理器
+# Create prompt manager
 prompt_manager = PromptManager("prompts_config")
 
-# 获取提示词模板
+# Get prompt template
 system_prompt = prompt_manager.get_prompt_template("single_agent", "system")
 
-# 格式化提示词模板
+# Format prompt template
 formatted_prompt = prompt_manager.get_formatted_prompt(
     "single_agent",
     "task_template",
-    task_description="找到厨房，打开冰箱，取出苹果",
-    current_location="客厅",
-    nearby_objects="桌子，沙发，电视",
-    inventory="无"
+    task_description="Find the kitchen, open the refrigerator, take out an apple",
+    current_location="living room",
+    nearby_objects="table, sofa, TV",
+    inventory="none"
 )
 ```
 
-### 环境信息注入
+### Environment Information Injection
 
-提示词系统会自动将环境描述注入到提示词中，通过`{environment_description}`占位符实现：
+The prompt system automatically injects environment descriptions into prompts through the `{environment_description}` placeholder:
 
 ```yaml
-# 在 prompts_config.yaml 中
+# In prompts_config.yaml
 single_agent:
   task_template: |
     {environment_description}
 
-    当前任务：
+    Current task:
     {task_description}
 
-    历史行动：
+    Action history:
     {history_summary}
 ```
 
-环境描述的详细程度由配置文件控制，确保LLM获得适当的环境上下文信息。
+The detail level of environment descriptions is controlled by configuration files, ensuring LLMs receive appropriate environmental context information.
 
-### 动态动作注入
+### Dynamic Action Injection
 
-系统提示词中的`{dynamic_actions_description}`会自动注入当前可用的动作列表：
+The `{dynamic_actions_description}` in system prompts automatically injects the list of currently available actions:
 
 ```yaml
 single_agent:
   system: |
-    你是一个在文本具身环境中执行任务的智能体。
+    You are an agent executing tasks in a text-based embodied environment.
 
     {dynamic_actions_description}
 
-    请根据当前环境状态选择合适的动作。
+    Please choose appropriate actions based on the current environment state.
 ```
 
-### 自定义提示词
+### Custom Prompts
 
-要自定义提示词，只需修改`config/defaults/prompts_config.yaml`文件中的相应模板，而无需修改代码。这使得提示词调优变得更加简单和灵活。
+To customize prompts, simply modify the corresponding templates in the `config/defaults/prompts_config.yaml` file without modifying code. This makes prompt tuning simpler and more flexible.
 
-## 架构设计
+## Architecture Design
 
-### 核心组件
+### Core Components
 
-- `BaseAgent`: 所有智能体的基类，提供基本功能
-- `ConfigManager`: 管理YAML配置文件
-- `PromptManager`: 管理提示词模板
-- `SimulatorBridge`: 简化与模拟器的交互
-- `LLMFactory`: 根据配置创建不同的LLM实例
+- `BaseAgent`: Base class for all agents, providing basic functionality
+- `ConfigManager`: Manages YAML configuration files
+- `PromptManager`: Manages prompt templates
+- `SimulatorBridge`: Simplifies interactions with simulator
+- `LLMFactory`: Creates different LLM instances based on configuration
 
-### 智能体模式
+### Agent Modes
 
-- `single_agent`: 单智能体实现
-- `centralized`: 中心化多智能体实现
-- `decentralized`: 去中心化多智能体实现
+- `single_agent`: Single agent implementation
+- `centralized`: Centralized multi-agent implementation
+- `decentralized`: Decentralized multi-agent implementation
 
-### 目录结构
+### Directory Structure
 
 ```
 embodied_framework/
-├── core/                   # 核心组件
-│   ├── base_agent.py       # 基础智能体抽象类
-│   ├── agent_manager.py    # 智能体管理器
-│   ├── agent_factory.py    # 智能体工厂函数
-├── modes/                  # 不同模式的实现
-│   ├── single_agent/       # 单智能体模式
-│       ├── llm_agent.py    # 基于LLM的智能体
-│   ├── centralized/        # 中心化多智能体
-│       ├── coordinator.py  # 中央协调器
-│       ├── worker_agent.py # 执行智能体
-│       ├── planner.py      # 任务规划组件
-│   ├── decentralized/      # 去中心化多智能体
-│       ├── autonomous_agent.py # 自主智能体
-│       ├── communication.py    # 智能体间通信
-│       ├── negotiation.py      # 协商机制
-├── llm/                    # LLM接口
-│   ├── base_llm.py         # LLM基类
-│   ├── llm_factory.py      # LLM工厂函数
-│   ├── api_llm.py          # API型LLM实现
-│   ├── vllm_llm.py         # 本地vLLM实现
-├── config/                 # 配置系统
-│   ├── config_manager.py   # 配置管理器
-│   ├── defaults/           # 默认配置文件
-├── utils/                  # 工具函数
-│   ├── logger.py           # 日志工具
-│   ├── simulator_bridge.py # 模拟器桥接
-│   ├── prompt_manager.py   # 提示词管理
-│   ├── data_loader.py      # 数据加载工具
-├── examples/               # 示例脚本
+├── core/                   # Core components
+│   ├── base_agent.py       # Base agent abstract class
+│   ├── agent_manager.py    # Agent manager
+│   ├── agent_factory.py    # Agent factory functions
+├── modes/                  # Different mode implementations
+│   ├── single_agent/       # Single agent mode
+│       ├── llm_agent.py    # LLM-based agent
+│   ├── centralized/        # Centralized multi-agent
+│       ├── coordinator.py  # Central coordinator
+│       ├── worker_agent.py # Execution agent
+│       ├── planner.py      # Task planning component
+│   ├── decentralized/      # Decentralized multi-agent
+│       ├── autonomous_agent.py # Autonomous agent
+│       ├── communication.py    # Inter-agent communication
+│       ├── negotiation.py      # Negotiation mechanism
+├── llm/                    # LLM interfaces
+│   ├── base_llm.py         # LLM base class
+│   ├── llm_factory.py      # LLM factory functions
+│   ├── api_llm.py          # API-based LLM implementation
+│   ├── vllm_llm.py         # Local vLLM implementation
+├── config/                 # Configuration system
+│   ├── config_manager.py   # Configuration manager
+│   ├── defaults/           # Default configuration files
+├── utils/                  # Utility functions
+│   ├── logger.py           # Logging utilities
+│   ├── simulator_bridge.py # Simulator bridge
+│   ├── prompt_manager.py   # Prompt management
+│   ├── data_loader.py      # Data loading utilities
+├── examples/               # Example scripts
 ```
 
-## 示例脚本
+## Example Scripts
 
-项目内置了多个示例脚本，帮助您快速上手：
+The project includes multiple example scripts to help you get started quickly:
 
-- `examples/single_agent_example.py`: 单智能体示例
-- `examples/centralized_example.py`: 中心化多智能体示例
-- `examples/decentralized_example.py`: 去中心化多智能体示例
-- `examples/simulator_bridge_demo.py`: 模拟器桥接使用示例
+- `examples/single_agent_example.py`: Single agent example
+- `examples/centralized_example.py`: Centralized multi-agent example
+- `examples/decentralized_example.py`: Decentralized multi-agent example
+- `examples/simulator_bridge_demo.py`: Simulator bridge usage example
 
-## 高级功能
+## Advanced Features
 
-### 自然语言环境描述
+### Natural Language Environment Description
 
-模拟器桥接层(`SimulatorBridge`)提供了强大的自然语言描述功能，可以帮助智能体更好地理解环境：
+The simulator bridge layer (`SimulatorBridge`) provides powerful natural language description functionality to help agents better understand the environment:
 
 ```python
-# 获取自然语言描述
+# Get natural language descriptions
 bridge = SimulatorBridge()
 bridge.initialize_with_task('data/default/default_task.json')
 
-# 描述智能体状态
+# Describe agent state
 agent_desc = bridge.describe_agent_natural_language("agent_1")
 
-# 描述特定房间
+# Describe specific room
 kitchen_desc = bridge.describe_room_natural_language("kitchen")
 
-# 描述整个环境
+# Describe entire environment
 env_desc = bridge.describe_environment_natural_language(
     sim_config={
-        "nlp_show_object_properties": True,  # 显示物体属性
-        "nlp_only_show_discovered": False    # 显示全部内容，不仅是已发现的
+        "nlp_show_object_properties": True,  # Show object properties
+        "nlp_only_show_discovered": False    # Show all content, not just discovered
     }
 )
 ```
 
-这些描述可以作为提示词的一部分，帮助LLM更好地理解和推理环境中的情况。
+These descriptions can be used as part of prompts to help LLMs better understand and reason about environmental situations.
 
-### 任务文件初始化
+### Task File Initialization
 
-框架支持使用任务文件初始化模拟环境，这是最推荐的初始化方式：
+The framework supports using task files to initialize simulation environments, which is the most recommended initialization method:
 
 ```python
 from embodied_framework.utils.simulator_bridge import SimulatorBridge
 
-# 初始化模拟器桥接
+# Initialize simulator bridge
 bridge = SimulatorBridge()
 
-# 使用任务文件初始化
+# Initialize with task file
 task_file = "data/default/default_task.json"
 success = bridge.initialize_with_task(task_file)
 
 if success:
-    # 任务初始化成功
+    # Task initialization successful
     task_description = bridge.get_task_description()
-    print(f"任务: {task_description}")
-    
-    # 获取任务配置的智能体信息
+    print(f"Task: {task_description}")
+
+    # Get agent information configured in task
     agents_config = bridge.get_agents_config()
-    print(f"任务配置了 {len(agents_config)} 个智能体")
+    print(f"Task configured {len(agents_config)} agents")
 else:
-    print("任务初始化失败")
+    print("Task initialization failed")
 ```
 
-任务文件包含了场景设置、智能体配置和任务目标等信息，使用它可以快速设置完整的模拟环境。
+Task files contain scene settings, agent configurations, and task objectives, allowing you to quickly set up a complete simulation environment.
 
-### 智能体间通信
+### Inter-Agent Communication
 
-去中心化多智能体模式支持智能体间通信，智能体可以使用以下命令格式：
-- `MSG<接收者ID>: <消息内容>` - 发送消息到特定智能体
-- `BROADCAST: <消息内容>` - 广播消息给所有智能体
+Decentralized multi-agent mode supports inter-agent communication. Agents can use the following command formats:
+- `MSG<ReceiverID>: <Message Content>` - Send message to specific agent
+- `BROADCAST: <Message Content>` - Broadcast message to all agents
 
-### 个性化智能体配置
+### Personalized Agent Configuration
 
-去中心化模式支持为每个智能体配置个性和技能：
+Decentralized mode supports configuring personality and skills for each agent:
 
 ```yaml
 decentralized:
   autonomous_agent:
-    personality: "合作、高效、谨慎"
-    skills: ["探索", "交互", "分析"]
-    use_cot: true  # 启用思维链推理
+    personality: "cooperative, efficient, cautious"
+    skills: ["exploration", "interaction", "analysis"]
+    use_cot: true  # Enable chain-of-thought reasoning
     max_chat_history: 10
 ```
 
-### 环境描述配置
+### Environment Description Configuration
 
-框架支持灵活的环境描述配置，直接影响提示词中注入的房间信息完整性：
+The framework supports flexible environment description configuration, directly affecting the completeness of room information injected into prompts:
 
 ```yaml
 env_description:
-  detail_level: "full"  # full/room/brief - 控制房间信息范围
-  show_object_properties: true  # 是否显示物体详细属性
-  only_show_discovered: false   # 是否只显示已发现的内容
+  detail_level: "full"  # full/room/brief - Control room information scope
+  show_object_properties: true  # Whether to show detailed object properties
+  only_show_discovered: false   # Whether to show only discovered content
 ```
 
-#### 详细程度说明
+#### Detail Level Description
 
-- **`detail_level: "full"`** - 完整环境描述
-  - 显示**所有房间**的信息
-  - 包含环境概述、房间详情和智能体状态
-  - 适用于需要全局规划的任务
+- **`detail_level: "full"`** - Complete environment description
+  - Shows information for **all rooms**
+  - Includes environment overview, room details, and agent status
+  - Suitable for tasks requiring global planning
 
-- **`detail_level: "room"`** - 当前房间描述（默认）
-  - 只显示**智能体当前所在房间**的信息
-  - 减少提示词长度，适用于局部操作任务
+- **`detail_level: "room"`** - Current room description (default)
+  - Shows only information for **the room the agent is currently in**
+  - Reduces prompt length, suitable for local operation tasks
 
-- **`detail_level: "brief"`** - 简要描述
-  - 只显示智能体自身状态
-  - 最简化的环境信息
+- **`detail_level: "brief"`** - Brief description
+  - Shows only agent's own state
+  - Minimal environment information
 
-#### 物体信息控制
+#### Object Information Control
 
-- **`show_object_properties: true`** - 显示物体的详细属性（尺寸、重量、品牌等）
-- **`only_show_discovered: false`** - 显示所有物体，包括未探索发现的
-- **`only_show_discovered: true`** - 只显示已发现的物体（更符合现实探索场景）
+- **`show_object_properties: true`** - Show detailed object properties (size, weight, brand, etc.)
+- **`only_show_discovered: false`** - Show all objects, including unexplored ones
+- **`only_show_discovered: true`** - Show only discovered objects (more realistic for exploration scenarios)
 
-#### 配置示例
+#### Configuration Examples
 
 ```yaml
-# 全知视角配置 - 适用于规划任务
+# Omniscient perspective configuration - suitable for planning tasks
 env_description:
   detail_level: "full"
   show_object_properties: true
   only_show_discovered: false
 
-# 探索模式配置 - 适用于探索任务
+# Exploration mode configuration - suitable for exploration tasks
 env_description:
   detail_level: "room"
   show_object_properties: true
   only_show_discovered: true
 
-# 轻量模式配置 - 适用于简单任务
+# Lightweight mode configuration - suitable for simple tasks
 env_description:
   detail_level: "brief"
   show_object_properties: false
   only_show_discovered: true
 ```
 
-### 自定义智能体行为
+### Custom Agent Behavior
 
-可以通过继承基础类来实现自定义智能体行为：
+You can implement custom agent behavior by inheriting from base classes:
 
 ```python
 from embodied_framework.core import BaseAgent
@@ -547,108 +547,108 @@ from embodied_framework.core import BaseAgent
 class MyCustomAgent(BaseAgent):
     def __init__(self, simulator, agent_id, config=None):
         super().__init__(simulator, agent_id, config)
-        # 自定义初始化代码
-        
+        # Custom initialization code
+
     def decide_action(self):
-        # 自定义决策逻辑
+        # Custom decision logic
         return "GOTO kitchen"
 ```
 
-## 环境变量
+## Environment Variables
 
-- `OPENAI_API_KEY` - OpenAI API密钥
-- `AZURE_OPENAI_API_KEY` - Azure OpenAI API密钥
-- `AZURE_OPENAI_RESOURCE` - Azure OpenAI资源名称
-- `AZURE_OPENAI_DEPLOYMENT` - Azure OpenAI部署ID
+- `OPENAI_API_KEY` - OpenAI API key
+- `AZURE_OPENAI_API_KEY` - Azure OpenAI API key
+- `AZURE_OPENAI_RESOURCE` - Azure OpenAI resource name
+- `AZURE_OPENAI_DEPLOYMENT` - Azure OpenAI deployment ID
 
-## 常见问题
+## Frequently Asked Questions
 
-### 如何切换LLM提供商？
+### How to Switch LLM Providers?
 
-修改`config/defaults/llm_config.yaml`中的`provider`字段即可切换LLM提供商。
+Modify the `provider` field in `config/defaults/llm_config.yaml` to switch LLM providers.
 
-### 如何添加新的LLM实现？
+### How to Add New LLM Implementation?
 
-1. 在`llm`目录中创建新的LLM实现类，继承`BaseLLM`
-2. 在`llm_factory.py`中添加对应的实例化代码
-3. 在配置文件中添加新的提供商配置
+1. Create a new LLM implementation class in the `llm` directory, inheriting from `BaseLLM`
+2. Add corresponding instantiation code in `llm_factory.py`
+3. Add new provider configuration in the configuration file
 
-### 如何优化提示词？
+### How to Optimize Prompts?
 
-直接编辑`config/defaults/prompts_config.yaml`文件中的提示词模板，无需修改代码。提示词系统支持：
-- 动态变量注入（如任务描述、环境状态、历史记录）
-- 思维链推理提示
-- 不同模式的专用提示词模板
+Directly edit prompt templates in the `config/defaults/prompts_config.yaml` file without modifying code. The prompt system supports:
+- Dynamic variable injection (such as task descriptions, environment states, history records)
+- Chain-of-thought reasoning prompts
+- Dedicated prompt templates for different modes
 
-### 如何配置历史消息发送？
+### How to Configure History Message Sending?
 
-框架支持两种历史信息传递方式，通过`config/defaults/llm_config.yaml`中的`parameters.send_history`配置：
+The framework supports two ways of passing historical information, configured through `parameters.send_history` in `config/defaults/llm_config.yaml`:
 
-**方式1：发送完整对话历史（`send_history: true`）**
-- LLM能看到完整的对话上下文，包括所有历史的用户输入和助手回复
-- 优点：理解更准确，上下文连贯性更好
-- 缺点：消耗更多token，可能超出模型上下文长度限制
-- 适用场景：短对话、需要精确上下文理解的任务
+**Method 1: Send Complete Conversation History (`send_history: true`)**
+- LLM can see complete conversation context, including all historical user inputs and assistant replies
+- Advantages: More accurate understanding, better context coherence
+- Disadvantages: Consumes more tokens, may exceed model context length limits
+- Use cases: Short conversations, tasks requiring precise context understanding
 
-**方式2：发送历史摘要（`send_history: false`，默认）**
-- 只发送system消息和最新的用户消息，历史信息通过`history_summary`在提示词中传递
-- 优点：节省token，避免上下文长度问题，性能更好
-- 缺点：可能丢失部分历史细节
-- 适用场景：长对话、token预算有限、大部分任务场景
+**Method 2: Send History Summary (`send_history: false`, default)**
+- Only sends system messages and latest user messages, historical information passed through `history_summary` in prompts
+- Advantages: Saves tokens, avoids context length issues, better performance
+- Disadvantages: May lose some historical details
+- Use cases: Long conversations, limited token budget, most task scenarios
 
 ```yaml
-# 在 llm_config.yaml 中配置
+# Configure in llm_config.yaml
 parameters:
-  send_history: false  # 推荐设置
+  send_history: false  # Recommended setting
 ```
 
-### 如何调试智能体行为？
+### How to Debug Agent Behavior?
 
-1. 调整日志级别到DEBUG：在配置文件中设置`logging.level: debug`
-2. 使用环境描述功能查看智能体感知的环境状态
-3. 查看执行历史记录分析决策过程
-4. 利用思维链推理功能了解智能体的推理过程
-5. 启用`send_history: true`查看LLM是否需要更多历史上下文
+1. Adjust log level to DEBUG: Set `logging.level: debug` in configuration file
+2. Use environment description functionality to view agent's perceived environment state
+3. Review execution history to analyze decision-making process
+4. Utilize chain-of-thought reasoning functionality to understand agent's reasoning process
+5. Enable `send_history: true` to see if LLM needs more historical context
 
-## 更新日志
+## Changelog
 
-### v1.2.0 (最新版本)
+### v1.2.0 (Latest Version)
 
-**主要功能增强**
-- 🚀 **提示词系统重构**：全面优化提示词配置，增加详细的近邻关系和动作指南
-- 🧠 **思维链推理支持**：所有模式的智能体现在支持Chain-of-Thought推理
-- 🌍 **增强环境感知**：新增多层次环境描述功能（完整/房间/简要）
-- 🤖 **个性化智能体**：去中心化模式支持个性和技能配置
-- 📊 **改进日志系统**：支持调试级别日志，便于问题排查
+**Major Feature Enhancements**
+- 🚀 **Prompt System Refactoring**: Comprehensive optimization of prompt configuration with detailed proximity relationships and action guidelines
+- 🧠 **Chain-of-Thought Reasoning Support**: All mode agents now support Chain-of-Thought reasoning
+- 🌍 **Enhanced Environment Perception**: New multi-level environment description functionality (full/room/brief)
+- 🤖 **Personalized Agents**: Decentralized mode supports personality and skill configuration
+- 📊 **Improved Logging System**: Support for debug-level logging for easier troubleshooting
 
-**代码改进**
-- 优化`BaseAgent`类，增强历史记录管理和状态获取
-- 改进示例脚本，添加更详细的错误处理和调试信息
-- 增强`PromptManager`类，支持动态环境描述注入
-- 完善中心化协调器的协作动作支持
-- 优化去中心化智能体的通信和决策机制
+**Code Improvements**
+- Optimized `BaseAgent` class with enhanced history management and state retrieval
+- Improved example scripts with more detailed error handling and debugging information
+- Enhanced `PromptManager` class with dynamic environment description injection support
+- Improved centralized coordinator's collaborative action support
+- Optimized decentralized agent communication and decision-making mechanisms
 
-**配置优化**
-- 简化提示词配置文件结构
-- 增加环境描述详细级别控制
-- 支持思维链推理开关配置
-- 优化日志级别配置
+**Configuration Optimizations**
+- Simplified prompt configuration file structure
+- Added environment description detail level control
+- Support for chain-of-thought reasoning toggle configuration
+- Optimized log level configuration
 
-## 贡献指南
+## Contributing Guide
 
-欢迎贡献代码、报告问题或提出建议！请遵循以下步骤：
+Welcome to contribute code, report issues, or make suggestions! Please follow these steps:
 
-1. Fork本仓库
-2. 创建功能分支：`git checkout -b feature/amazing-feature`
-3. 提交更改：`git commit -m 'Add some amazing feature'`
-4. 推送到分支：`git push origin feature/amazing-feature`
-5. 提交Pull Request
+1. Fork this repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add some amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Submit Pull Request
 
-## 许可证
+## License
 
-本项目采用MIT许可证 - 详见LICENSE文件
+This project is licensed under the MIT License - see LICENSE file for details
 
-## 致谢
+## Acknowledgments
 
-- 感谢所有贡献者和使用者
-- 本项目基于多种开源工具和库构建 
+- Thanks to all contributors and users
+- This project is built on various open source tools and libraries

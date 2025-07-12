@@ -66,11 +66,11 @@ class TrajectoryRecorder:
             }
         }
         
-        # 当前任务信息
+        # Current task information
         self.current_task_index = 0
         self.current_task = None
-        
-        # 文件路径 - 按类别分类存储
+
+        # File paths - categorized storage
         self.trajectories_dir = os.path.join(output_dir, "trajectories")
         self.logs_dir = os.path.join(output_dir, "logs")
         self.llm_qa_dir = os.path.join(output_dir, "llm_qa")
@@ -80,7 +80,7 @@ class TrajectoryRecorder:
         self.log_file = os.path.join(self.logs_dir, f"{self.scenario_id}_execution.log")
         self.llm_qa_file = os.path.join(self.llm_qa_dir, f"{self.scenario_id}_llm_qa.json")
 
-        # CSV实时记录文件 - 在运行输出目录
+        # CSV real-time recording file - in run output directory
         self.csv_file = os.path.join(output_dir, "subtask_execution_log.csv")
 
         # 简洁轨迹数据 - 仅包含关键执行信息

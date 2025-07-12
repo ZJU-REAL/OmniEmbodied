@@ -1,79 +1,79 @@
-# 中心化双智能体配置
+# Centralized dual-agent configuration
 
-# 协调器设置
+# Coordinator settings
 coordinator:
-  # 使用的LLM配置
+  # LLM configuration to use
   llm_config: llm_config
-  # 最大历史长度
-  max_chat_history: -1  # -1 表示不限制历史记录数量
+  # Maximum history length
+  max_chat_history: -1  # -1 means no limit on history record count
 
-# 工作智能体设置
+# Worker agent settings
 worker_agents:
-  # 使用的LLM配置
+  # LLM configuration to use
   llm_config: llm_config
-  # 最大历史长度
-  max_chat_history: -1  # -1 表示不限制历史记录数量
+  # Maximum history length
+  max_chat_history: -1  # -1 means no limit on history record count
 
-# 任务执行设置
+# Task execution settings
 execution:
-  max_total_steps: 300  # 最大总执行步数
+  max_total_steps: 300  # Maximum total execution steps
 
-# 任务评测器设置
+# Task evaluator settings
 task_evaluator:
-  max_steps_per_task: 30  # 每个子任务的最大步数
+  max_steps_per_task: 30  # Maximum steps per subtask
 
-# 评测模式设置
+# Evaluation mode settings
 evaluation:
-  # 评测类型: 'sequential' (逐个评测) 或 'combined' (混合评测) 或 'independent' (独立评测)
+  # Evaluation type: 'sequential' (sequential evaluation) or 'combined' (combined evaluation) or 'independent' (independent evaluation)
   task_type: 'sequential'
 
-  # 默认场景设置
+  # Default scenario settings
   default_scenario: '00001'
 
-  # 运行设置
+  # Run settings
   run_settings:
-    # 默认运行后缀
+    # Default run suffix
     default_suffix: 'demo'
-    # 日志级别: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
+    # Log level: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
     log_level: 'INFO'
 
-  # 任务执行配置
+  # Task execution configuration
   execution:
-    # 任务超时时间（秒）
+    # Task timeout (seconds)
     timeout_seconds: 900
 
-    # 逐个评测模式配置
+    # Sequential evaluation mode configuration
     sequential:
-      # 是否在子任务失败时继续执行下一个任务
+      # Whether to continue executing next task when subtask fails
       continue_on_failure: true
 
-    # 混合评测模式配置
+    # Combined evaluation mode configuration
     combined:
-      # 任务描述之间的分隔符
-      task_separator: "\n\n下一个任务：\n"
-      # 是否在任务描述前添加序号
+      # Separator between task descriptions
+      task_separator: "\n\nNext task:\n"
+      # Whether to add task numbers before task descriptions
       add_task_numbers: true
 
-    # 独立评测模式配置
+    # Independent evaluation mode configuration
     independent:
-      # 是否在子任务失败时继续执行下一个任务
+      # Whether to continue executing next task when subtask fails
       continue_on_failure: true
 
-      # 子任务间延迟时间（秒）- 用于资源清理
+      # Delay time between subtasks (seconds) - for resource cleanup
       delay_between_subtasks: 1.0
 
-      # 是否显示子任务执行进度
+      # Whether to show subtask execution progress
       show_subtask_progress: true
 
-      # 输出管理配置
+      # Output management configuration
       output_management:
-        # 子任务输出目录命名模式
+        # Subtask output directory naming pattern
         subtask_dir_pattern: 'subtask_{index:03d}_{hash}'
 
-        # 是否保存每个子任务的详细日志
+        # Whether to save detailed logs for each subtask
         save_individual_logs: true
 
-        # 是否生成子任务级别的轨迹文件
+        # Whether to generate subtask-level trajectory files
         generate_subtask_trajectories: true
 
 

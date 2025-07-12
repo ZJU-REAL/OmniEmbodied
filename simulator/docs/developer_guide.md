@@ -416,44 +416,44 @@ Closes #123
 
 ### 4. 代码审查清单
 
-- [ ] 代码符合项目规范
-- [ ] 添加了适当的测试
-- [ ] 测试全部通过
-- [ ] 文档已更新
-- [ ] 没有引入新的依赖（或已说明必要性）
-- [ ] 性能没有明显下降
-- [ ] 向后兼容性保持
+- [ ] Code complies with project standards
+- [ ] Added appropriate tests
+- [ ] All tests pass
+- [ ] Documentation updated
+- [ ] No new dependencies introduced (or necessity explained)
+- [ ] No significant performance degradation
+- [ ] Backward compatibility maintained
 
-### 5. 发布流程
+### 5. Release Process
 
-1. **版本号管理**: 遵循语义化版本控制
-2. **变更日志**: 更新CHANGELOG.md
-3. **标签创建**: 创建版本标签
-4. **文档更新**: 更新版本相关文档
-5. **发布说明**: 编写发布说明
+1. **Version Management**: Follow semantic versioning
+2. **Changelog**: Update CHANGELOG.md
+3. **Tag Creation**: Create version tags
+4. **Documentation Update**: Update version-related documentation
+5. **Release Notes**: Write release notes
 
-## 常见问题
+## Frequently Asked Questions
 
-### Q: 如何调试可视化问题？
-
-A: 
-1. 检查浏览器控制台错误
-2. 验证Web服务器是否正常启动
-3. 检查数据API返回是否正确
-4. 使用浏览器开发者工具检查网络请求
-
-### Q: 如何添加新的测试场景？
+### Q: How to debug visualization issues?
 
 A:
-1. 在`data/scene/`创建场景JSON文件
-2. 在`data/task/`创建任务JSON文件
-3. 在`tests/`添加对应的测试脚本
-4. 确保测试覆盖主要功能路径
+1. Check browser console errors
+2. Verify web server is running normally
+3. Check if data API returns correctly
+4. Use browser developer tools to check network requests
 
-### Q: 如何优化性能？
+### Q: How to add new test scenarios?
 
 A:
-1. 使用性能分析工具识别瓶颈
-2. 优化频繁调用的函数
-3. 添加适当的缓存机制
-4. 考虑异步处理长时间操作
+1. Create scene JSON file in `data/scene/`
+2. Create task JSON file in `data/task/`
+3. Add corresponding test script in `tests/`
+4. Ensure tests cover main functional paths
+
+### Q: How to optimize performance?
+
+A:
+1. Use performance analysis tools to identify bottlenecks
+2. Optimize frequently called functions
+3. Add appropriate caching mechanisms
+4. Consider asynchronous processing for long-running operations

@@ -394,25 +394,25 @@ class SimulationEngine:
                 print(f"已加载 {len(custom_actions)} 个自定义属性动作")
             
         except Exception as e:
-            print(f"加载动作配置失败: {e}")
+            print(f"Failed to load action configuration: {e}")
             import traceback
             traceback.print_exc()
-    
+
     def _find_scene_file(self, scene_uid: str) -> Optional[str]:
         """
-        根据场景UID查找场景文件
-        
+        Find scene file based on scene UID
+
         Args:
-            scene_uid: 场景唯一标识符
-            
+            scene_uid: Scene unique identifier
+
         Returns:
-            str: 场景文件路径，找不到则返回None
+            str: Scene file path, returns None if not found
         """
-        # 默认在data/scene/目录下查找
+        # Search in data/scene/ directory by default
         base_dirs = ["data/default/", "data/scene/"]
         
         for base_dir in base_dirs:
-            # 尝试不同的文件扩展名
+            # Try different file extensions
             for ext in [".json", ".yaml", ".yml"]:
                 file_path = f"{base_dir}{scene_uid}{ext}"
                 if os.path.exists(file_path):

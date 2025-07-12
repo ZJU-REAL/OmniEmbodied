@@ -1,41 +1,41 @@
-# 优化的LLM交互系统
+# Optimized LLM Interaction System
 
-## 概述
+## Overview
 
-本文档介绍了embodied_framework中优化的LLM交互系统，该系统使用最新的模拟器API，实现了动态提示词生成、智能错误处理和学习机制。
+This document introduces the optimized LLM interaction system in embodied_framework, which uses the latest simulator APIs to implement dynamic prompt generation, intelligent error handling, and learning mechanisms.
 
-## 系统架构
+## System Architecture
 
-### 核心组件
+### Core Components
 
-1. **LLMClient** - 统一的LLM客户端
-2. **DynamicPromptManager** - 动态提示词管理器
-3. **OptimizedLLMAgent** - 优化的LLM智能体
-4. **FinalOptimizedLLMAgent** - 最终优化版本（包含学习机制）
+1. **LLMClient** - Unified LLM client
+2. **DynamicPromptManager** - Dynamic prompt manager
+3. **OptimizedLLMAgent** - Optimized LLM agent
+4. **FinalOptimizedLLMAgent** - Final optimized version (with learning mechanism)
 
-### 技术特性
+### Technical Features
 
-#### ✅ 动态提示词生成
-- **实时动作获取**: 使用 `get_agent_supported_actions_description()` API
-- **3564字符的完整动作描述**: 包含基础动作、属性动作和协作动作
-- **智能内容优化**: 自动调整提示词长度和结构
-- **上下文感知**: 根据智能体状态动态调整内容
+#### ✅ Dynamic Prompt Generation
+- **Real-time Action Retrieval**: Uses `get_agent_supported_actions_description()` API
+- **Complete 3564-character Action Description**: Includes basic actions, attribute actions, and collaborative actions
+- **Intelligent Content Optimization**: Automatically adjusts prompt length and structure
+- **Context Awareness**: Dynamically adjusts content based on agent state
 
-#### ✅ 多API提供商支持
-- **OpenAI API**: 支持 GPT-3.5/GPT-4 等模型
-- **自定义API**: 支持 DeepSeek 等第三方API
-- **统一接口**: 无缝切换不同的LLM提供商
-- **错误处理**: 自动重试和降级机制
+#### ✅ Multi-API Provider Support
+- **OpenAI API**: Supports GPT-3.5/GPT-4 and other models
+- **Custom API**: Supports third-party APIs like DeepSeek
+- **Unified Interface**: Seamless switching between different LLM providers
+- **Error Handling**: Automatic retry and fallback mechanisms
 
-#### ✅ 智能学习机制
-- **失败动作记录**: 避免重复执行失败的动作
-- **环境学习**: 记录已探索的房间和发现的物体
-- **适应性重试**: 对某些动作类型允许智能重试
-- **进度跟踪**: 实时监控任务完成状态
+#### ✅ Intelligent Learning Mechanism
+- **Failed Action Recording**: Avoids repeating failed actions
+- **Environment Learning**: Records explored rooms and discovered objects
+- **Adaptive Retry**: Allows intelligent retry for certain action types
+- **Progress Tracking**: Real-time monitoring of task completion status
 
-## API更新
+## API Updates
 
-### 新的模拟器API
+### New Simulator APIs
 
 ```python
 # 获取智能体支持的动作描述
@@ -120,57 +120,57 @@ api:
     endpoint: "https://api.deepseek.com"
 ```
 
-### 支持的模型
+### Supported Models
 
 #### OpenAI
 - `gpt-3.5-turbo`
 - `gpt-4`
 - `gpt-4-turbo`
 
-#### 自定义API (DeepSeek示例)
+#### Custom API (DeepSeek Example)
 - `deepseek-chat`
 - `deepseek-reasoner`
 
-## 性能指标
+## Performance Metrics
 
-### 测试结果
+### Test Results
 
-**优化版本Demo**:
-- ✅ **成功率**: 73.3% (11/15 动作成功)
-- ✅ **运行时间**: 151.3秒
-- ✅ **动作频率**: 5.9 动作/分钟
-- ✅ **LLM调用**: 15次
-- ✅ **环境探索**: 发现42个新物体
+**Optimized Version Demo**:
+- ✅ **Success Rate**: 73.3% (11/15 actions successful)
+- ✅ **Runtime**: 151.3 seconds
+- ✅ **Action Frequency**: 5.9 actions/minute
+- ✅ **LLM Calls**: 15 times
+- ✅ **Environment Exploration**: Discovered 42 new objects
 
-**最终优化版本**:
-- ✅ **学习机制**: 记录失败动作，避免重复
-- ✅ **智能建议**: 基于历史生成动作建议
-- ✅ **适应性重试**: 智能判断是否重试失败动作
-- ✅ **进度监控**: 实时跟踪任务完成状态
+**Final Optimized Version**:
+- ✅ **Learning Mechanism**: Records failed actions, avoids repetition
+- ✅ **Intelligent Suggestions**: Generates action suggestions based on history
+- ✅ **Adaptive Retry**: Intelligently determines whether to retry failed actions
+- ✅ **Progress Monitoring**: Real-time tracking of task completion status
 
-## 关键优化
+## Key Optimizations
 
-### 1. 提示词优化
-- **长度控制**: 4763字符的完整上下文
-- **结构化设计**: 清晰的分段和格式
-- **动态内容**: 根据状态实时更新
-- **智能过滤**: 避免冗余信息
+### 1. Prompt Optimization
+- **Length Control**: Complete context of 4763 characters
+- **Structured Design**: Clear segmentation and formatting
+- **Dynamic Content**: Real-time updates based on state
+- **Intelligent Filtering**: Avoids redundant information
 
-### 2. 错误处理
-- **重试机制**: LLM调用失败自动重试
-- **格式验证**: 严格的JSON响应验证
-- **动作验证**: 智能的动作有效性检查
-- **降级策略**: 多层次的错误恢复
+### 2. Error Handling
+- **Retry Mechanism**: Automatic retry on LLM call failures
+- **Format Validation**: Strict JSON response validation
+- **Action Validation**: Intelligent action validity checking
+- **Fallback Strategy**: Multi-level error recovery
 
-### 3. 学习机制
-- **经验积累**: 记录成功和失败的经验
-- **环境映射**: 构建环境的认知地图
-- **策略优化**: 基于历史调整行为策略
-- **进度感知**: 实时了解任务进展
+### 3. Learning Mechanism
+- **Experience Accumulation**: Records successful and failed experiences
+- **Environment Mapping**: Builds cognitive map of environment
+- **Strategy Optimization**: Adjusts behavioral strategies based on history
+- **Progress Awareness**: Real-time understanding of task progress
 
-## 扩展指南
+## Extension Guide
 
-### 添加新的LLM提供商
+### Adding New LLM Providers
 
 ```python
 class CustomLLMClient(LLMClient):

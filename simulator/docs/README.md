@@ -1,29 +1,29 @@
-# 📖 Embodied Simulator 文档中心
+# 📖 Embodied Simulator Documentation Center
 
-欢迎来到Embodied Simulator的文档中心！这里提供了完整的文档资源，帮助您快速上手和深入了解系统。
+Welcome to the Embodied Simulator documentation center! Here you'll find complete documentation resources to help you get started quickly and understand the system in depth.
 
-## 📚 文档导航
+## 📚 Documentation Navigation
 
-### 🚀 快速开始
-- **[项目README](../README.md)** - 项目概览和快速开始指南
-- **[用户手册](user_manual.md)** - 详细的使用指南和配置说明
+### 🚀 Quick Start
+- **[Project README](../README.md)** - Project overview and quick start guide
+- **[User Manual](user_manual.md)** - Detailed usage guide and configuration instructions
 
-### 🔧 开发文档
-- **[API文档](api.md)** - 完整的API参考和使用示例
-- **[架构文档](architecture.md)** - 系统架构和设计原则
-- **[开发者指南](developer_guide.md)** - 开发环境设置和贡献指南
+### 🔧 Development Documentation
+- **[API Documentation](api.md)** - Complete API reference and usage examples
+- **[Architecture Documentation](architecture.md)** - System architecture and design principles
+- **[Developer Guide](developer_guide.md)** - Development environment setup and contribution guide
 
-### 📋 功能文档
-- **[动作系统](actions.md)** - 动作类型、配置和扩展指南
-- **[实时动作描述](real_time_action_descriptions.md)** - 智能动作描述系统详解
-- **[环境描述配置](environment_description.md)** - 环境描述配置详解和最佳实践
-- **[可视化系统](visualization.md)** - Web界面使用和配置指南
-- **[动态注册机制](dynamic_action_registration.md)** - 动作注册系统详解
+### 📋 Feature Documentation
+- **[Action System](actions.md)** - Action types, configuration, and extension guide
+- **[Real-time Action Descriptions](real_time_action_descriptions.md)** - Intelligent action description system detailed explanation
+- **[Environment Description Configuration](environment_description.md)** - Environment description configuration details and best practices
+- **[Visualization System](visualization.md)** - Web interface usage and configuration guide
+- **[Dynamic Registration Mechanism](dynamic_action_registration.md)** - Action registration system detailed explanation
 
-## 🎯 按角色分类
+## 🎯 Classification by Role
 
-### 👤 最终用户
-如果您是第一次使用Embodied Simulator：
+### 👤 End Users
+If you are using Embodied Simulator for the first time:
 
 1. **[项目README](../README.md)** - 了解项目概况
 2. **[用户手册](user_manual.md)** - 学习基本使用方法
