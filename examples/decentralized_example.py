@@ -21,8 +21,8 @@
 python examples/decentralized_example.py
 """
 
-import os
 import sys
+import os
 import time
 import json
 import logging
@@ -30,17 +30,19 @@ import argparse
 from typing import Dict, Any, List, Tuple
 from datetime import datetime
 
-# 添加项目根目录到路径
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+# 添加项目根目录到Python路径
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from modes.decentralized import AutonomousAgent, CommunicationManager, Negotiator, NegotiationType, NegotiationStatus
-from simulator.core.enums import ActionStatus
+# 使用标准导入方式
+from modes.decentralized.autonomous_agent import AutonomousAgent
+from modes.decentralized.communication import CommunicationManager
+from modes.decentralized.negotiation import Negotiator, NegotiationType, NegotiationStatus
+# OmniSimulator作为第三方库
+from OmniSimulator import ActionStatus
 from utils.logger import setup_logger
 from utils.task_evaluator import TaskEvaluator
 from utils.run_naming import RunNamingManager
-from config import ConfigManager
+from config.config_manager import ConfigManager
 from common_utils import setup_example_environment, get_task_description, check_apple_task_completion
 
 

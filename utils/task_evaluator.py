@@ -17,8 +17,8 @@ import sys
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 
-from simulator.core.enums import ActionStatus
-from config import ConfigManager
+from OmniSimulator.core.enums import ActionStatus
+from config.config_manager import ConfigManager
 from utils.simulator_bridge import SimulatorBridge
 from utils.trajectory_recorder import TrajectoryRecorder
 from utils.run_naming import RunNamingManager

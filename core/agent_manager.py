@@ -1,9 +1,9 @@
 from typing import Dict, List, Any, Optional
 import logging
 
-from simulator.core.engine import SimulationEngine
-from .base_agent import BaseAgent
-from .agent_factory import create_agent
+from OmniSimulator.core.engine import SimulationEngine
+from core.base_agent import BaseAgent
+from core.agent_factory import create_agent
 
 logger = logging.getLogger(__name__)
 

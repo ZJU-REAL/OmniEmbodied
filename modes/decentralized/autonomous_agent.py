@@ -1,14 +1,15 @@
 from typing import Dict, List, Optional, Any, Tuple
 import logging
 
-from simulator.core.enums import ActionStatus
-from simulator.core.engine import SimulationEngine
+from OmniSimulator.core.enums import ActionStatus
+from OmniSimulator.core.engine import SimulationEngine
 
 from core.base_agent import BaseAgent
-from llm import BaseLLM, create_llm_from_config
-from config import ConfigManager
+from llm.base_llm import BaseLLM
+from llm.llm_factory import create_llm_from_config
+from config.config_manager import ConfigManager
 from utils.prompt_manager import PromptManager
-from .communication import CommunicationManager, MessageType, MessagePriority
+from modes.decentralized.communication import CommunicationManager, MessageType, MessagePriority
 
 logger = logging.getLogger(__name__)
 

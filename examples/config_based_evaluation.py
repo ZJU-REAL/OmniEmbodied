@@ -1,21 +1,21 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 基于配置文件的评测示例
 展示如何使用配置文件中的默认参数进行评测，减少命令行参数的使用
 """
 
-import os
 import sys
+import os
+# 添加项目根目录到Python路径
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
 import argparse
 import logging
 
-# 添加项目根目录到路径
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
-
+# 使用标准导入方式
 from utils.task_evaluator import TaskEvaluator
-from config import ConfigManager
+from config.config_manager import ConfigManager
 
 
 def parse_arguments():

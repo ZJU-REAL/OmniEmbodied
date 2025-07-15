@@ -1,6 +1,6 @@
 import logging
 from typing import Dict, List, Optional, Any
-from .base_llm import BaseLLM
+from llm.base_llm import BaseLLM
 
 logger = logging.getLogger(__name__)
 

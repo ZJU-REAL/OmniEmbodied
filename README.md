@@ -39,24 +39,54 @@ This framework provides a powerful runtime environment for LLM-based embodied ag
 
 ### Prerequisites
 
-- Python 3.8+
-- Text-based embodied task simulator (can be used standalone, but recommended with simulator)
+- **Python**: 3.7 or higher (tested on 3.8, 3.9, 3.10, 3.11)
+- **Operating System**: Windows, macOS, or Linux
+- **Memory**: At least 512MB RAM recommended
+- **Storage**: Approximately 100MB for the framework and dependencies
 
-### Installation Steps
+### Quick Installation
 
 ```bash
 # Clone repository
-git clone https://github.com/your_username/embodied_framework.git
+git clone <repository-url>
+cd OmniEmbodied
 
-# Install dependencies
-cd embodied_framework
-pip install -r requirements.txt
+# Create virtual environment (recommended)
+conda create -n omniembodied python=3.9
+conda activate omniembodied
+# Or using venv: python -m venv omniembodied && source omniembodied/bin/activate
 
-# Install in development mode
+# Install OmniSimulator (third-party library)
+cd OmniSimulator
 pip install -e .
+cd ..
+
+# Install framework dependencies
+pip install -r requirements.txt
 ```
 
-### Environment Variable Configuration
+### Development Installation
+
+For development and testing:
+
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+```
+
+### Verification
+
+Test that everything is installed correctly:
+
+```bash
+python -c "
+import yaml, pandas, openai, json_repair, pytest
+from OmniSimulator import SimulationEngine, ActionStatus
+print('✅ All dependencies installed successfully!')
+"
+```
+
+### Environment Configuration
 
 Set appropriate API keys based on your LLM provider:
 
@@ -64,18 +94,65 @@ Set appropriate API keys based on your LLM provider:
 # OpenAI
 export OPENAI_API_KEY="your_openai_api_key"
 
-# Azure OpenAI
+# Azure OpenAI (if using Azure)
 export AZURE_OPENAI_API_KEY="your_azure_api_key"
 export AZURE_OPENAI_RESOURCE="your_resource_name"
 export AZURE_OPENAI_DEPLOYMENT="your_deployment_id"
 ```
+
+Or create a `.env` file in the project root:
+
+```
+OPENAI_API_KEY=your-api-key-here
+```
+
+### Running Examples
+
+Test the installation by running example scripts:
+
+```bash
+# Test configuration-based evaluation
+python examples/config_based_evaluation.py --help
+
+# Test single agent example
+python examples/single_agent_example.py --help
+
+# Test centralized example
+python examples/centralized_example.py --help
+```
+
+### Troubleshooting
+
+**Common Issues:**
+
+1. **Import Errors**: Make sure you've installed OmniSimulator first, then the framework dependencies.
+2. **Configuration File Not Found**: This is normal for first-time setup. Default configurations will be created automatically.
+3. **API Key Errors**: Set your OpenAI API key as described in the Environment Configuration section.
+4. **Path Issues**: Make sure you're running scripts from the project root directory.
+
+For detailed installation instructions, see [INSTALL.md](INSTALL.md).
+
+### Dependencies
+
+The framework requires the following core dependencies:
+
+- **OmniSimulator**: Embodied AI simulation engine (installed as third-party library)
+- **pyyaml**: YAML configuration file parsing
+- **pandas**: Data processing and analysis
+- **openai**: OpenAI API client for LLM integration
+- **json-repair**: JSON format repair and validation
+- **pytest**: Testing framework
+
+All dependencies are automatically installed when you run `pip install -r requirements.txt`.
 
 ## Usage
 
 ### Single Agent Mode
 
 ```python
-from embodied_framework import LLMAgent, ConfigManager, SimulatorBridge
+from modes.single_agent.llm_agent import LLMAgent
+from config.config_manager import ConfigManager
+from utils.simulator_bridge import SimulatorBridge
 
 # Step 1: Load configuration
 config_manager = ConfigManager()
@@ -107,7 +184,10 @@ print(f"Current inventory: {inventory}")
 ### Centralized Multi-Agent Mode
 
 ```python
-from embodied_framework import Coordinator, WorkerAgent, ConfigManager, SimulatorBridge
+from modes.centralized.coordinator import Coordinator
+from modes.centralized.worker_agent import WorkerAgent
+from config.config_manager import ConfigManager
+from utils.simulator_bridge import SimulatorBridge
 
 # Initialize simulator bridge
 bridge = SimulatorBridge()
@@ -134,7 +214,10 @@ status, message, results = coordinator.step()
 ### Decentralized Multi-Agent Mode
 
 ```python
-from embodied_framework import AutonomousAgent, CommunicationManager, ConfigManager, SimulatorBridge
+from modes.decentralized.autonomous_agent import AutonomousAgent
+from modes.decentralized.communication import CommunicationManager
+from config.config_manager import ConfigManager
+from utils.simulator_bridge import SimulatorBridge
 
 # Initialize simulator bridge
 bridge = SimulatorBridge()
@@ -170,7 +253,7 @@ agent2.step()
 ### Using Simulator Bridge to Simplify Interactions
 
 ```python
-from embodied_framework.utils.simulator_bridge import SimulatorBridge
+from utils.simulator_bridge import SimulatorBridge
 
 # Initialize simulator bridge
 bridge = SimulatorBridge()
@@ -292,7 +375,7 @@ decentralized:
 The framework provides a `PromptManager` class for loading and formatting prompt templates:
 
 ```python
-from embodied_framework.utils import PromptManager
+from utils.prompt_manager import PromptManager
 
 # Create prompt manager
 prompt_manager = PromptManager("prompts_config")
@@ -367,36 +450,53 @@ To customize prompts, simply modify the corresponding templates in the `config/d
 ### Directory Structure
 
 ```
-embodied_framework/
-├── core/                   # Core components
+OmniEmbodied/
+├── OmniSimulator/          # Third-party simulation library
+│   ├── setup.py            # Library installation configuration
+│   ├── __init__.py         # Main library interface
+│   ├── core/               # Core simulation components
+│   ├── action/             # Action system
+│   ├── agent/              # Agent system
+│   ├── environment/        # Environment management
+│   └── utils/              # Simulation utilities
+├── core/                   # Framework core components
 │   ├── base_agent.py       # Base agent abstract class
 │   ├── agent_manager.py    # Agent manager
-│   ├── agent_factory.py    # Agent factory functions
+│   └── agent_factory.py    # Agent factory functions
 ├── modes/                  # Different mode implementations
 │   ├── single_agent/       # Single agent mode
-│       ├── llm_agent.py    # LLM-based agent
+│   │   └── llm_agent.py    # LLM-based agent
 │   ├── centralized/        # Centralized multi-agent
-│       ├── coordinator.py  # Central coordinator
-│       ├── worker_agent.py # Execution agent
-│       ├── planner.py      # Task planning component
-│   ├── decentralized/      # Decentralized multi-agent
+│   │   ├── coordinator.py  # Central coordinator
+│   │   ├── worker_agent.py # Execution agent
+│   │   └── planner.py      # Task planning component
+│   └── decentralized/      # Decentralized multi-agent
 │       ├── autonomous_agent.py # Autonomous agent
 │       ├── communication.py    # Inter-agent communication
-│       ├── negotiation.py      # Negotiation mechanism
+│       └── negotiation.py      # Negotiation mechanism
 ├── llm/                    # LLM interfaces
 │   ├── base_llm.py         # LLM base class
 │   ├── llm_factory.py      # LLM factory functions
 │   ├── api_llm.py          # API-based LLM implementation
-│   ├── vllm_llm.py         # Local vLLM implementation
+│   └── vllm_llm.py         # Local vLLM implementation
 ├── config/                 # Configuration system
 │   ├── config_manager.py   # Configuration manager
-│   ├── defaults/           # Default configuration files
-├── utils/                  # Utility functions
+│   └── defaults/           # Default configuration files
+├── utils/                  # Framework utility functions
 │   ├── logger.py           # Logging utilities
 │   ├── simulator_bridge.py # Simulator bridge
 │   ├── prompt_manager.py   # Prompt management
 │   ├── data_loader.py      # Data loading utilities
+│   └── task_evaluator.py   # Task evaluation utilities
+├── data/                   # Data files
+│   ├── scene/              # Scene definitions
+│   ├── task/               # Task definitions
+│   └── clue/               # Task clues
 ├── examples/               # Example scripts
+├── requirements.txt        # Core dependencies
+├── requirements-dev.txt    # Development dependencies
+├── INSTALL.md             # Installation guide
+└── README.md              # This file
 ```
 
 ## Example Scripts
@@ -441,7 +541,7 @@ These descriptions can be used as part of prompts to help LLMs better understand
 The framework supports using task files to initialize simulation environments, which is the most recommended initialization method:
 
 ```python
-from embodied_framework.utils.simulator_bridge import SimulatorBridge
+from utils.simulator_bridge import SimulatorBridge
 
 # Initialize simulator bridge
 bridge = SimulatorBridge()
@@ -542,7 +642,7 @@ env_description:
 You can implement custom agent behavior by inheriting from base classes:
 
 ```python
-from embodied_framework.core import BaseAgent
+from core.base_agent import BaseAgent
 
 class MyCustomAgent(BaseAgent):
     def __init__(self, simulator, agent_id, config=None):

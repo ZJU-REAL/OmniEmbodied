@@ -1,7 +1,7 @@
 from typing import Dict, List, Optional, Any, Tuple
 
-from simulator.core.enums import ActionStatus
-from simulator.core.engine import SimulationEngine
+from OmniSimulator.core.enums import ActionStatus
+from OmniSimulator.core.engine import SimulationEngine
 from core.base_agent import BaseAgent
 
 class WorkerAgent(BaseAgent):

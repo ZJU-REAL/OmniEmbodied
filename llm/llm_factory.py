@@ -1,8 +1,8 @@
 from typing import Dict, Any
 
-from .base_llm import BaseLLM
-from .api_llm import ApiLLM
-from .vllm_llm import VLLMLLM
+from llm.base_llm import BaseLLM
+from llm.api_llm import ApiLLM
+from llm.vllm_llm import VLLMLLM
 
 def create_llm_from_config(config: Dict[str, Any]) -> BaseLLM:
     """

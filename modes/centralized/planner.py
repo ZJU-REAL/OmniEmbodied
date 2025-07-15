@@ -1,7 +1,7 @@
 from typing import Dict, List, Optional, Any
 import logging
 
-from llm import BaseLLM
+from llm.base_llm import BaseLLM
 
 logger = logging.getLogger(__name__)
 

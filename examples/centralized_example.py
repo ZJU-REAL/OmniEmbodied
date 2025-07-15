@@ -21,25 +21,25 @@ python examples/centralized_example.py --mode combined --scenario 00001 --suffix
 python examples/centralized_example.py --config centralized_config
 """
 
-import os
 import sys
+import os
 import time
 import json
 import logging
 import argparse
-import multiprocessing
 from datetime import datetime
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-# 添加项目根目录到路径
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+# 添加项目根目录到Python路径
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
+# 使用标准导入方式
 from utils.logger import setup_logger
 from utils.task_evaluator import TaskEvaluator
 from utils.run_naming import RunNamingManager
-from config import ConfigManager
+from config.config_manager import ConfigManager
+# OmniSimulator作为第三方库
+from OmniSimulator import SimulationEngine, default_data_loader
 
 
 def parse_args():

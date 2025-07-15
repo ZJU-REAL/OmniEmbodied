@@ -2,8 +2,8 @@ import os
 import logging
 from typing import Dict, List, Any, Optional, Tuple
 
-from simulator.core import SimulationEngine, ActionStatus
-from .data_loader import default_loader as framework_data_loader
+from OmniSimulator import SimulationEngine, ActionStatus
+from utils.data_loader import default_loader as framework_data_loader
 
 logger = logging.getLogger(__name__)
 

@@ -5,15 +5,16 @@
 提供示例代码中常用的初始化和配置加载功能
 """
 
-import os
 import sys
+import os
 import logging
 from typing import Dict, Any, Optional, Tuple
 
-# 添加项目根目录到路径
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# 添加项目根目录到Python路径
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from config import ConfigManager
+# 使用标准导入方式
+from config.config_manager import ConfigManager
 from utils.logger import setup_logger
 from utils.simulator_bridge import SimulatorBridge
 
