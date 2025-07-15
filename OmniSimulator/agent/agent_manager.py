@@ -40,7 +40,7 @@ class AgentManager:
             for i in range(agent_count):
                 agent_type = agent_types[i % len(agent_types)] if agent_types else {}
                 agent_id = f"agent_{i+1}"
-                agent_name = f"智能体{i+1}号"
+                agent_name = f"Agent_{i+1}"
                 agent_data = {
                     "id": agent_id,
                     "name": agent_name,
@@ -53,7 +53,7 @@ class AgentManager:
             for i in range(agent_count):
                 agent_type = agent_types[i % len(agent_types)] if agent_types else {}
                 agent_id = f"agent_{i+1}"
-                agent_name = f"智能体{i+1}号"
+                agent_name = f"Agent_{i+1}"
                 room_id = random.choice(room_ids)
                 agent_data = {
                     "id": agent_id,

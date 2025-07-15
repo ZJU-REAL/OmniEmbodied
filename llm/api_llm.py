@@ -81,6 +81,10 @@ class ApiLLM(BaseLLM):
             logger.debug("是否发送历史消息: %s", self.send_history)
             if self.enable_thinking is not None:
                 logger.debug("enable_thinking 配置: %s", self.enable_thinking)
+
+        # 用于记录最后一次调用的统计信息
+        self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+        self.last_response_time_ms = 0.0
         
     def generate(self, 
                  prompt: str, 
@@ -180,6 +184,10 @@ class ApiLLM(BaseLLM):
                 logger.debug(f"[{i}] {role}: {content[:150]}..." if len(content) > 150 else f"[{i}] {role}: {content}")
         
         try:
+            # 记录开始时间
+            import time
+            start_time = time.time()
+
             # 创建参数字典，只包含OpenAI API支持的参数
             params = {
                 "model": kwargs.get("model", self.model),
@@ -202,12 +210,16 @@ class ApiLLM(BaseLLM):
             # 如果是 bailian provider 且配置中有 enable_thinking，则添加到 extra_body 中
             if self.provider == 'bailian' and self.enable_thinking is not None:
                 params["extra_body"] = {"enable_thinking": self.enable_thinking}
-            
+
             # 调用API
             if logger.level <= logging.DEBUG:
                 logger.debug(f"发送API请求，参数: {json.dumps({k: v for k, v in params.items() if k != 'messages'}, ensure_ascii=False)}")
 
             response = self.client.chat.completions.create(**params)
+
+            # 记录响应时间
+            end_time = time.time()
+            self.last_response_time_ms = (end_time - start_time) * 1000
             
             # 记录API响应细节
             if logger.level <= logging.DEBUG:
@@ -230,14 +242,26 @@ class ApiLLM(BaseLLM):
                 except Exception as e:
                     logger.debug(f"记录API响应详情时出错: {e}")
             
+            # 记录token使用情况
+            if hasattr(response, 'usage') and response.usage:
+                self.last_token_usage = {
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens
+                }
+            else:
+                self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+
             # 返回生成的内容
             if hasattr(response, 'choices') and len(response.choices) > 0:
                 result = response.choices[0].message.content
-                
+
                 # 记录响应内容
                 if logger.level <= logging.DEBUG:
                     logger.debug(f"=== LLM响应内容 ===\n{result}\n===================")
-                
+                    logger.debug(f"Token使用: {self.last_token_usage}")
+                    logger.debug(f"响应时间: {self.last_response_time_ms:.2f}ms")
+
                 return result
             else:
                 logger.warning(f"API响应中未找到有效内容")

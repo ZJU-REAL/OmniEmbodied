@@ -40,7 +40,7 @@ from modes.decentralized.negotiation import Negotiator, NegotiationType, Negotia
 # OmniSimulator作为第三方库
 from OmniSimulator import ActionStatus
 from utils.logger import setup_logger
-from utils.task_evaluator import TaskEvaluator
+from evaluation.evaluation_interface import EvaluationInterface
 from utils.run_naming import RunNamingManager
 from config.config_manager import ConfigManager
 from common_utils import setup_example_environment, get_task_description, check_apple_task_completion

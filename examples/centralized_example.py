@@ -35,7 +35,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 # 使用标准导入方式
 from utils.logger import setup_logger
-from utils.task_evaluator import TaskEvaluator
+from evaluation.evaluation_interface import EvaluationInterface
 from utils.run_naming import RunNamingManager
 from config.config_manager import ConfigManager
 # OmniSimulator作为第三方库
@@ -94,8 +94,8 @@ def execute_single_scenario(args_tuple):
         if project_root not in sys.path:
             sys.path.insert(0, project_root)
 
-        # 导入TaskEvaluator和相关模块
-        from utils.task_evaluator import TaskEvaluator
+        # 导入评测接口和相关模块
+        from evaluation.evaluation_interface import EvaluationInterface
         from utils.logger import setup_logger
 
         # 设置独立的日志记录器（避免冲突）
@@ -104,16 +104,17 @@ def execute_single_scenario(args_tuple):
 
         scenario_logger.info(f"🚀 启动场景 {scenario_id} 中心化评测（进程内执行）")
 
-        # 设置环境变量，让TaskEvaluator使用指定的输出目录
-        os.environ['SCENARIO_OUTPUT_DIR'] = scenario_output_dir
-        os.environ['DISABLE_AUTO_OUTPUT_DIR'] = 'true'  # 禁用自动输出目录创建
+        # 使用新的评测接口
+        scenario_selection = {
+            'mode': 'list',
+            'list': [scenario_id]
+        }
 
-        # 创建TaskEvaluator实例，使用multi agent_type和centralized配置
-        evaluator = TaskEvaluator(
+        result = EvaluationInterface.run_evaluation(
             config_file=config_file,
             agent_type='multi',  # 使用多智能体模式
             task_type=mode,
-            scenario_id=scenario_id,
+            scenario_selection=scenario_selection,
             custom_suffix=None  # 不使用后缀，避免自动生成独立目录
         )
 

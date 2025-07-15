@@ -1,305 +1,215 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-任务评测器主程序
-支持四种评测模式：
-1. 单智能体逐个评测 (single_sequential)
-2. 单智能体混合评测 (single_combined)
-3. 多智能体逐个评测 (multi_sequential)
-4. 多智能体混合评测 (multi_combined)
-
-使用方法:
-python evaluator.py --mode single_sequential --scenario 00001
-python evaluator.py --config custom_evaluator_config.yaml
+主入口脚本 - 重构后的评测器入口
 """
 
-import os
-import sys
 import argparse
 import logging
-from typing import Optional
+import sys
+import signal
+from typing import Dict, Any
 
-# 添加项目根目录到路径
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(project_root)
-
-from utils.task_evaluator import TaskEvaluator
-from config import ConfigManager
+from .evaluation_interface import EvaluationInterface
 
 
-def parse_arguments():
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(
-        description="任务评测器 - 支持单场景和并行场景评测模式",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-评测模式说明:
-  单场景评测模式:
-    single_sequential   - 单智能体逐个评测：只加载agent1，每个子任务独立执行
-    single_combined     - 单智能体混合评测：只加载agent1，所有子任务拼接执行
-    single_independent  - 单智能体独立评测：只加载agent1，每个子任务在全新环境中执行
-    multi_sequential    - 多智能体逐个评测：加载所有智能体，每个子任务独立执行
-    multi_combined      - 多智能体混合评测：加载所有智能体，所有子任务拼接执行
-    multi_independent   - 多智能体独立评测：加载所有智能体，每个子任务在全新环境中执行
-
-  并行场景评测模式:
-    parallel_single_sequential   - 单智能体场景级并行逐个评测
-    parallel_single_combined     - 单智能体场景级并行混合评测
-    parallel_single_independent  - 单智能体场景级并行独立评测
-    parallel_multi_sequential    - 多智能体场景级并行逐个评测
-    parallel_multi_combined      - 多智能体场景级并行混合评测
-    parallel_multi_independent   - 多智能体场景级并行独立评测
-
-示例:
-  python evaluator.py --mode single_sequential --scenario 00001
-  python evaluator.py --mode parallel_single_sequential --suffix test
-  python evaluator.py --mode multi_combined --scenario 00002 --config my_config.yaml
-        """
-    )
-    
-    parser.add_argument(
-        '--mode', '-m',
-        choices=['single_sequential', 'single_combined', 'single_independent',
-                'multi_sequential', 'multi_combined', 'multi_independent',
-                'parallel_single_sequential', 'parallel_single_combined', 'parallel_single_independent',
-                'parallel_multi_sequential', 'parallel_multi_combined', 'parallel_multi_independent'],
-        help='评测模式'
-    )
-    
-    parser.add_argument(
-        '--scenario', '-s',
-        type=str,
-        help='场景ID (如: 00001)'
-    )
-    
-    parser.add_argument(
-        '--config', '-c',
-        type=str,
-        help='配置文件名 (可选，默认根据模式自动选择)'
+def setup_logging(log_level: str = 'INFO'):
+    """设置日志配置"""
+    logging.basicConfig(
+        level=getattr(logging, log_level.upper()),
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler(sys.stdout),
+            logging.FileHandler('evaluation.log', encoding='utf-8')
+        ]
     )
 
-    parser.add_argument(
-        '--suffix',
-        type=str,
-        help='自定义运行后缀'
-    )
-    
-    parser.add_argument(
-        '--log-level',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
-        default='INFO',
-        help='日志级别 (默认: INFO)'
-    )
-    
-    parser.add_argument(
-        '--list-modes',
-        action='store_true',
-        help='列出所有可用的评测模式'
-    )
-    
-    parser.add_argument(
-        '--dry-run',
-        action='store_true',
-        help='干运行模式，只检查配置不执行评测'
-    )
-    
-    return parser.parse_args()
 
+def signal_handler(signum, frame):
+    """信号处理器确保中断时保存数据"""
+    _ = signum, frame  # 避免未使用变量警告
+    logger = logging.getLogger(__name__)
+    logger.info("🛑 接收到中断信号，正在保存数据...")
 
-def list_evaluation_modes():
-    """列出所有评测模式"""
-    modes = {
-        'single_sequential': '单智能体逐个评测 - 只加载agent1，每个子任务独立执行，任务间清空历史',
-        'single_combined': '单智能体混合评测 - 只加载agent1，将所有子任务拼接成一个长任务执行',
-        'single_independent': '单智能体独立评测 - 只加载agent1，每个子任务在全新环境中独立执行',
-        'multi_sequential': '多智能体逐个评测 - 加载所有智能体，每个子任务独立执行，任务间清空历史',
-        'multi_combined': '多智能体混合评测 - 加载所有智能体，将所有子任务拼接成一个长任务执行',
-        'multi_independent': '多智能体独立评测 - 加载所有智能体，每个子任务在全新环境中独立执行',
-        'parallel': '并行任务评测 - 多个任务同时并行执行，每个任务使用独立的模拟器实例'
-    }
+    # TODO: 实现中断时的数据保存逻辑
+    # 这里需要访问当前运行的评测器实例来保存数据
 
-    print("📋 可用的评测模式:")
-    print("=" * 80)
-    for mode, description in modes.items():
-        print(f"  {mode:<20} - {description}")
-    print("=" * 80)
-
-
-def parse_mode(mode: str) -> tuple:
-    """解析评测模式"""
-    # 并行模式
-    if mode.startswith('parallel_'):
-        # 解析并行模式: parallel_single_sequential -> single, sequential
-        parts = mode.split('_')
-        if len(parts) != 3:
-            raise ValueError(f"无效的并行评测模式: {mode}")
-
-        agent_type = parts[1]  # single 或 multi
-        task_type = parts[2]   # sequential, combined, independent
-
-        if agent_type == 'single':
-            config_file = 'single_agent_config'
-        elif agent_type == 'multi':
-            config_file = 'centralized_config'
-        else:
-            raise ValueError(f"无效的智能体类型: {agent_type}")
-
-        return agent_type, task_type, config_file, True
-
-    # 常规模式
-    if mode.startswith('single_'):
-        agent_type = 'single'
-        task_type = mode.replace('single_', '')
-        config_file = 'single_agent_config'
-    elif mode.startswith('multi_'):
-        agent_type = 'multi'
-        task_type = mode.replace('multi_', '')
-        config_file = 'centralized_config'  # 默认使用中心化配置
-    else:
-        raise ValueError(f"无效的评测模式: {mode}")
-
-    return agent_type, task_type, config_file, False
-
-
-def validate_config(config: dict, agent_type: str, task_type: str) -> bool:
-    """验证配置的有效性"""
-    try:
-        # 检查必要的配置项
-        required_keys = ['evaluation']
-
-        for key in required_keys:
-            if key not in config:
-                print(f"❌ 配置文件缺少必要项: {key}")
-                return False
-
-        # 检查评测配置
-        eval_config = config['evaluation']
-        if 'output' not in eval_config:
-            print("⚠️ 配置文件缺少输出配置，将使用默认值")
-
-        print(f"✅ 配置验证通过 - 模式: {agent_type}_{task_type}")
-        return True
-
-    except Exception as e:
-        print(f"❌ 配置验证失败: {e}")
-        return False
+    logger.info("✅ 数据保存完成，程序退出")
+    sys.exit(0)
 
 
 def main():
     """主函数"""
-    args = parse_arguments()
-    
+    # 注册信号处理器
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    # 解析命令行参数
+    parser = create_argument_parser()
+    args = parser.parse_args()
+
     # 设置日志
-    logging.basicConfig(
-        level=getattr(logging, args.log_level),
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
+    setup_logging(args.log_level)
     logger = logging.getLogger(__name__)
-    
-    # 列出模式
-    if args.list_modes:
-        list_evaluation_modes()
-        return 0
-    
-    # 检查必要参数
-    if not args.mode:
-        print("❌ 请指定评测模式，使用 --list-modes 查看可用模式")
-        return 1
-    
+
     try:
-        # 解析模式
-        parse_result = parse_mode(args.mode)
-        if len(parse_result) == 4:
-            agent_type, task_type, default_config, is_parallel = parse_result
-        else:
-            agent_type, task_type, default_config = parse_result
-            is_parallel = False
+        # 解析场景选择
+        scenario_selection = EvaluationInterface.parse_scenario_string(args.scenarios)
 
-        # 确定配置文件
-        config_file = args.config or default_config
-
-        # 加载配置
-        config_manager = ConfigManager()
-        config = config_manager.get_config(config_file)
-
-        # 验证配置
-        if not validate_config(config, agent_type, task_type):
+        # 验证配置文件
+        if not EvaluationInterface.validate_config_file(args.config):
+            logger.error(f"❌ 配置文件不存在: {args.config}")
+            available_configs = EvaluationInterface.list_available_configs()
+            logger.info(f"可用配置: {available_configs}")
             return 1
 
-        # 干运行模式
-        if args.dry_run:
-            mode_desc = "并行评测" if is_parallel else f"{agent_type}_{task_type}"
-            print(f"✅ 干运行完成 - 配置有效，模式: {mode_desc}")
-            print(f"📋 配置文件: {config_file}")
-            print(f"🎯 场景: {args.scenario or 'default'}")
-            return 0
+        # 显示评测信息
+        scenario_count = EvaluationInterface.get_scenario_count(scenario_selection)
+        logger.info(f"🎯 评测配置:")
+        logger.info(f"   配置文件: {args.config}")
+        logger.info(f"   智能体类型: {args.agent_type}")
+        logger.info(f"   任务类型: {args.task_type}")
+        logger.info(f"   场景选择: {args.scenarios} ({scenario_count} 个场景)")
+        logger.info(f"   自定义后缀: {args.suffix}")
 
-        # 创建评测器
-        logger.info(f"🚀 启动任务评测器 - 模式: {args.mode}")
+        # 运行评测
+        results = EvaluationInterface.run_evaluation(
+            config_file=args.config,
+            agent_type=args.agent_type,
+            task_type=args.task_type,
+            scenario_selection=scenario_selection,
+            custom_suffix=args.suffix
+        )
 
-        if is_parallel:
-            # 场景级并行评测模式 - 调用单智能体示例脚本
-            import subprocess
-            import sys
+        # 显示结果摘要
+        display_results_summary(results)
 
-            script_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'examples', 'single_agent_example.py')
-            cmd = [
-                sys.executable, script_path,
-                '--mode', task_type,
-                '--config', config_file,
-                '--parallel'
-            ]
-
-            if args.suffix:
-                cmd.extend(['--suffix', args.suffix])
-
-            logger.info(f"🚀 启动并行评测: {' '.join(cmd)}")
-            result = subprocess.run(cmd, cwd=os.path.dirname(os.path.dirname(__file__)))
-
-            if result.returncode == 0:
-                print(f"\n🎉 并行评测成功完成!")
-                return 0
-            else:
-                print(f"\n❌ 并行评测失败，返回码: {result.returncode}")
-                return result.returncode
-        else:
-            # 常规评测模式
-            evaluator = TaskEvaluator(
-                config_file=config_file,
-                agent_type=agent_type,
-                task_type=task_type,
-                scenario_id=args.scenario,
-                custom_suffix=args.suffix
-            )
-            # 运行评测
-            results = evaluator.run_evaluation(args.scenario)
-
-        # 显示结果摘要（仅单场景评测）
-        summary = results['summary']
-        print(f"\n🎉 评测完成!")
-        print(f"🏃 运行名称: {results['run_name']}")
-        print(f"📊 完成率: {summary['completion_rate']:.1%} ({summary['completed_tasks']}/{summary['total_tasks']})")
-        print(f"📊 总步数: {summary['total_steps']}")
-        print(f"📊 耗时: {results['total_duration']:.2f}秒")
-
-        # 显示输出文件信息
-        print(f"📁 输出文件:")
-        print(f"   轨迹: {results['output_files']['trajectory_file']}")
-        print(f"   日志: {results['output_files']['log_file']}")
-
-        if 'error' in results:
-            print(f"❌ 评测过程中出现错误: {results['error']}")
-            return 1
-
+        logger.info("🎉 评测完成!")
         return 0
-        
+
     except KeyboardInterrupt:
         logger.info("🛑 用户中断评测")
         return 1
     except Exception as e:
-        logger.exception(f"❌ 评测器运行失败: {e}")
+        logger.error(f"❌ 评测失败: {e}")
         return 1
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+def create_argument_parser() -> argparse.ArgumentParser:
+    """创建命令行参数解析器"""
+    parser = argparse.ArgumentParser(
+        description='OmniEmbodied评测器',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+使用示例:
+  # 单智能体Sequential模式评测
+  python -m evaluation.evaluator --config single_agent_config --agent-type single --task-type sequential --scenarios 00001-00010 --suffix test1
+
+  # 多智能体Independent模式评测
+  python -m evaluation.evaluator --config decentralized_config --agent-type multi --task-type independent --scenarios all --suffix experiment1
+
+  # 特定场景列表评测
+  python -m evaluation.evaluator --config centralized_config --agent-type multi --task-type combined --scenarios 00001,00005,00010 --suffix selected_scenes
+
+  # 单个场景快速测试
+  python -m evaluation.evaluator --config single_agent_config --agent-type single --task-type sequential --scenarios 00001 --suffix quick_test
+        """
+    )
+
+    parser.add_argument(
+        '--config',
+        required=True,
+        help='配置文件名 (single_agent_config, centralized_config, decentralized_config)'
+    )
+
+    parser.add_argument(
+        '--agent-type',
+        required=True,
+        choices=['single', 'multi'],
+        help='智能体类型'
+    )
+
+    parser.add_argument(
+        '--task-type',
+        required=True,
+        choices=['sequential', 'combined', 'independent'],
+        help='任务类型'
+    )
+
+    parser.add_argument(
+        '--scenarios',
+        default='all',
+        help='场景选择: all, 00001-00010, 00001,00003,00005'
+    )
+
+    parser.add_argument(
+        '--suffix',
+        default='evaluation',
+        help='自定义后缀'
+    )
+
+    parser.add_argument(
+        '--log-level',
+        default='INFO',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
+        help='日志级别'
+    )
+
+    parser.add_argument(
+        '--list-configs',
+        action='store_true',
+        help='列出可用的配置文件'
+    )
+
+    return parser
+
+
+def display_results_summary(results: Dict[str, Any]):
+    """显示结果摘要"""
+    logger = logging.getLogger(__name__)
+
+    run_info = results.get('run_info', {})
+    overall_summary = results.get('overall_summary', {})
+    task_category_stats = results.get('task_category_statistics', {})
+
+    logger.info("📊 评测结果摘要:")
+    logger.info(f"   运行名称: {run_info.get('run_name', 'Unknown')}")
+    logger.info(f"   总耗时: {run_info.get('total_duration', 0):.2f} 秒")
+    logger.info(f"   场景数量: {overall_summary.get('total_scenarios', 0)}")
+    logger.info(f"   任务总数: {overall_summary.get('total_tasks', 0)}")
+    logger.info(f"   完成任务: {overall_summary.get('total_completed_tasks', 0)}")
+    logger.info(f"   总体完成率: {overall_summary.get('overall_completion_rate', 0):.2%}")
+    logger.info(f"   模型准确率: {overall_summary.get('overall_completion_accuracy', 0):.2%}")
+
+    if task_category_stats:
+        logger.info("� 任务类型统计:")
+        for category, stats in task_category_stats.items():
+            completion_rate = stats.get('completion_rate', 0)
+            logger.info(f"   {category}: {completion_rate:.2%}")
+
+    logger.info(f"� 结果保存在: output/{run_info.get('run_name', 'unknown')}/")
+
+
+def list_configs_command():
+    """列出可用配置的命令"""
+    logger = logging.getLogger(__name__)
+
+    configs = EvaluationInterface.list_available_configs()
+    if configs:
+        logger.info("📋 可用的配置文件:")
+        for config in configs:
+            logger.info(f"   - {config}")
+    else:
+        logger.warning("❌ 未找到任何配置文件")
+
+
+if __name__ == '__main__':
+    # 处理特殊命令
+    if len(sys.argv) > 1 and sys.argv[1] == '--list-configs':
+        setup_logging()
+        list_configs_command()
+        sys.exit(0)
+
+    # 运行主程序
+    exit_code = main()
+    sys.exit(exit_code)

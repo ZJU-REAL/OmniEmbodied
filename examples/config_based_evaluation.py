@@ -14,7 +14,7 @@ import argparse
 import logging
 
 # 使用标准导入方式
-from utils.task_evaluator import TaskEvaluator
+from evaluation.evaluation_interface import EvaluationInterface
 from config.config_manager import ConfigManager
 
 
@@ -143,26 +143,28 @@ def main():
         return 0
     
     try:
-        # 创建评测器（使用配置文件中的默认值）
+        # 使用新的评测接口
         logger.info(f"🚀 启动基于配置文件的评测器")
-        evaluator = TaskEvaluator(
+
+        # 解析场景选择
+        scenario_selection = EvaluationInterface.parse_scenario_string(scenario_id or 'all')
+
+        # 运行评测
+        results = EvaluationInterface.run_evaluation(
             config_file=args.config,
             agent_type=agent_type,
             task_type=task_type,
-            scenario_id=scenario_id,
+            scenario_selection=scenario_selection,
             custom_suffix=custom_suffix
         )
-        
-        # 运行评测
-        results = evaluator.run()
-        
+
         # 显示结果摘要
         print("\n📊 评测完成!")
-        print(f"   运行名称: {evaluator.run_name}")
-        print(f"   输出目录: {evaluator.output_dir}")
-        print(f"   完成率: {results['summary']['completion_rate']:.1%}")
-        print(f"   总步数: {results['summary']['total_steps']}")
-        
+        print(f"   运行名称: {results['run_info']['run_name']}")
+        print(f"   输出目录: {results['run_info']['output_dir']}")
+        print(f"   完成率: {results['overall_summary']['completion_rate']:.1%}")
+        print(f"   总步数: {results['overall_summary']['total_steps']}")
+
         return 0
         
     except Exception as e:

@@ -806,6 +806,10 @@ class SimulationEngine:
         if self.env_manager:
             self.task_verifier = self._create_task_verifier(task_data)
 
+            # 同时设置ActionHandler的任务验证器
+            if self.action_handler:
+                self.action_handler.set_task_verifier(task_data)
+
     def get_agent_supported_actions_description(self, agent_ids: List[str]) -> str:
         """
         获取智能体支持的所有动作的字符串描述

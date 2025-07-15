@@ -100,9 +100,10 @@ class LLMAgent(BaseAgent):
         if not self.bridge:
             return ""
 
-        # 获取环境描述配置
-        env_config = self.config.get('environment_description', {})
-        detail_level = env_config.get('detail_level', 'room')
+        # 获取环境描述配置（从agent_config下读取）
+        agent_config = self.config.get('agent_config', {})
+        env_config = agent_config.get('environment_description', {})
+        detail_level = env_config.get('detail_level', 'full')
         show_properties = env_config.get('show_object_properties', True)
         only_discovered = env_config.get('only_show_discovered', False)
         include_other_agents = env_config.get('include_other_agents', True)
@@ -211,8 +212,21 @@ class LLMAgent(BaseAgent):
         # 保存完整的LLM回复，用于历史记录
         self.last_llm_response = response
 
+        # 保存最后一次LLM交互信息（用于新评测器）
+        self.last_llm_interaction = {
+            'prompt': prompt,
+            'response': response,
+            'tokens_used': getattr(self.llm, 'last_token_usage', {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}),
+            'response_time_ms': getattr(self.llm, 'last_response_time_ms', 0.0),
+            'extracted_action': action
+        }
+
         return action
-    
+
+    def get_llm_interaction_info(self) -> Dict[str, Any]:
+        """获取最后一次LLM交互的详细信息（用于新评测器）"""
+        return getattr(self, 'last_llm_interaction', None)
+
     def _extract_action(self, response: str) -> str:
         """从LLM响应中提取动作命令"""
         lines = response.split('\n')
