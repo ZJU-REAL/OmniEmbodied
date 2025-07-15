@@ -1,173 +1,177 @@
 {
-  "task_background": "Prepare the automotive prototype development lab for a critical safety inspection by assembling components, testing systems, and organizing the workspace.",
+  "task_background": "Prepare the automotive prototyping lab for final testing of the Saab 9-2X sportwagon prototype by organizing tools, repairing components, and setting up diagnostic equipment.",
   "agents_config": [
     {
       "name": "robot_1",
-      "max_grasp_limit": 1,
-      "max_weight": 200.0,
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
       "max_size": [
-        1.0,
-        1.0,
-        1.0
+        1.5,
+        1.5,
+        1.5
       ]
     },
     {
       "name": "robot_2",
-      "max_grasp_limit": 1,
-      "max_weight": 200.0,
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
       "max_size": [
-        1.0,
-        1.0,
-        1.0
+        1.5,
+        1.5,
+        1.5
       ]
     }
   ],
   "tasks": [
     {
-      "task_description": "Place the turbocharger_1 in the parts_trolley_1.",
+      "task_description": "Place the coffee-stained shop manual on the workbench.",
       "task_category": "direct_command",
       "validation_checks": [
         {
-          "id": "turbocharger_1",
-          "location_id": "in:parts_trolley_1"
+          "id": "shop_manual_1",
+          "location_id": "on:workbench_1"
         }
       ]
     },
     {
-      "task_description": "Place the energy_drink_1 in the fridge_1.",
+      "task_description": "Place the dented SAAB logo badge on the rolling cart.",
       "task_category": "direct_command",
       "validation_checks": [
         {
-          "id": "energy_drink_1",
-          "location_id": "in:fridge_1"
+          "id": "saab_logo_badge_1",
+          "location_id": "on:rolling_cart_1"
         }
       ]
     },
     {
-      "task_description": "Place the ECU unit with the red prototype sticker into the locked cabinet.",
+      "task_description": "Find the heaviest, red-tagged item and place it in the bin.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
         {
-          "id": "ecu_unit_1",
-          "location_id": "on:locked_cabinet_1"
+          "id": "red_tagged_scrap_parts_1",
+          "location_id": "in:bin_1"
         }
       ]
     },
     {
-      "task_description": "Place the damaged alloy wheel onto the shelving unit in parts storage.",
+      "task_description": "Find the only item with a loose HDMI cable and place it on the workstation.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
         {
-          "id": "alloy_wheel_3",
-          "location_id": "in:shelving_unit_1"
+          "id": "flickering_dyno_monitor_1",
+          "location_id": "on:workstation_1"
         }
       ]
     },
     {
-      "task_description": "Recharge the diagnostic laptop using the battery charger.",
+      "task_description": "Repair the leaking coolant hose using the repair kit.",
       "task_category": "tool_use",
       "validation_checks": [
         {
-          "id": "diagnostic_laptop_1",
+          "id": "leaking_coolant_hose_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the thermal camera using the laptop charger.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "thermal_camera_1",
           "is_charged": true
         }
       ]
     },
     {
-      "task_description": "Shred the coffee-stained blueprint using the document shredder.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "blueprint_1",
-          "is_shredded": true
-        }
-      ]
-    },
-    {
-      "task_description": "Use the impact wrench to connect the oily turbocharger on the workbench.",
+      "task_description": "Use the adjustable wrench to loosen the misaligned AWD drivetrain and then place it on the rolling cart.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
-          "id": "turbocharger_1",
-          "is_connected": true
+          "id": "awd_drivetrain_1",
+          "is_loose": true
+        },
+        {
+          "id": "awd_drivetrain_1",
+          "location_id": "on:rolling_cart_1"
         }
       ]
     },
     {
-      "task_description": "Arm the alarm of the biometric locked cabinet using the RFID keycard.",
+      "task_description": "Find the only item with a red sticker and use the barcode scanner to scan it, then place it on the workstation.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
-          "id": "locked_cabinet_1",
-          "is_alarm_armed": true
+          "id": "ecu_chip_1",
+          "location_id": "on:workstation_1"
         }
       ]
     },
     {
-      "task_description": "Have robot_1 and robot_2 cooperate to open the stuck parts trolley.",
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the server rack.",
       "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "parts_trolley_1",
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked parts cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_parts_cabinet_1",
           "is_open": true
         }
       ]
     },
     {
-      "task_description": "Have robot_1 and robot_2 cooperate to open the locked cabinet.",
-      "task_category": "explicit_collaboration",
+      "task_description": "Move the turbocharged engine block to the prototype assembly bay.",
+      "task_category": "implicit_collaboration",
       "validation_checks": [
         {
-          "id": "locked_cabinet_1",
+          "id": "turbocharged_engine_block_1",
+          "location_id": "in:prototype_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dynamometer rig to the test prep area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dynamometer_rig_1",
+          "location_id": "in:test_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy dyno rig to the diagnostics & tuning station and repair its flickering monitor.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "dyno_rig_1",
+          "location_id": "in:diagnostics_tuning_station"
+        },
+        {
+          "id": "flickering_dyno_monitor_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy tool chest to the parts & fabrication storage and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "location_id": "in:parts_fabrication_storage"
+        },
+        {
+          "id": "tool_chest_1",
           "is_open": true
-        }
-      ]
-    },
-    {
-      "task_description": "Move the uninstalled engine block to the testing corner.",
-      "task_category": "implicit_collaboration",
-      "validation_checks": [
-        {
-          "id": "engine_block_1",
-          "location_id": "in:testing_corner"
-        }
-      ]
-    },
-    {
-      "task_description": "Move the hydraulic press to the prototype assembly bay.",
-      "task_category": "implicit_collaboration",
-      "validation_checks": [
-        {
-          "id": "press_1",
-          "location_id": "in:prototype_assembly_bay"
-        }
-      ]
-    },
-    {
-      "task_description": "Cooperatively move the dyno rig to the prototype assembly bay and connect it to power.",
-      "task_category": "compound_collaboration",
-      "validation_checks": [
-        {
-          "id": "dyno_rig_1",
-          "location_id": "in:prototype_assembly_bay"
-        },
-        {
-          "id": "dyno_rig_1",
-          "is_connected": true
-        }
-      ]
-    },
-    {
-      "task_description": "Cooperatively move the car chassis to the testing corner and connect the sensor array to it.",
-      "task_category": "compound_collaboration",
-      "validation_checks": [
-        {
-          "id": "car_chassis_1",
-          "location_id": "in:testing_corner"
-        },
-        {
-          "id": "sensor_array_1",
-          "is_connected": true
         }
       ]
     }

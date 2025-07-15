@@ -23,13 +23,14 @@ class ClueGenerator(BaseGenerator):
         """Initialize clue generator."""
         super().__init__('clue', config_override)
         
-        # Set specific output directory for clues - use project data directory
-        self.base_dir = Path(__file__).parent.parent  # data_generation/
-        self.output_dir = self.base_dir / 'data' / 'clue'
+        # Set specific paths - use project root data directory
+        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.data_dir = self.project_root / 'data'
+        self.output_dir = self.data_dir / 'clue'
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # File paths
-        self.raw_clue_path = self.base_dir / 'data' / 'news.json'
+        self.raw_clue_path = self.data_dir / 'news.json'
         
         # Thread-safe access to file operations
         self.file_lock = threading.Lock()

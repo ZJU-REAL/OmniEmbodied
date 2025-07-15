@@ -29,14 +29,16 @@ class SceneGenerator(BaseGenerator):
         """Initialize scene generator."""
         super().__init__('scene', config_override)
 
-        # Set specific paths - use project data directory
-        self.base_dir = Path(__file__).parent.parent  # data_generation/
-        self.clue_dir = self.base_dir / 'data' / 'clue'
-        self.scene_dir = self.base_dir / 'data' / 'scene'
+        # Set specific paths - use project root data directory
+        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.data_dir = self.project_root / 'data'
+        self.clue_dir = self.data_dir / 'clue'
+        self.clue_dir.mkdir(parents=True, exist_ok=True)
+        self.scene_dir = self.data_dir / 'scene'
         self.scene_dir.mkdir(parents=True, exist_ok=True)
 
         # Actions CSV path
-        self.actions_csv_path = self.base_dir / 'data' / 'attribute_actions.csv'
+        self.actions_csv_path = self.data_dir / 'attribute_actions.csv'
 
         # Load validator
         self.validator = SceneValidator(str(self.actions_csv_path))

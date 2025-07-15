@@ -20,13 +20,13 @@ Features:
 import argparse
 import json
 import time
+import yaml
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 
 from utils.logger import setup_logging, get_logger, log_success, log_processing, log_completed
-from utils.config_loader import config_loader
 from utils.json_utils import load_json, save_json
 from generators.clue_generator import ClueGenerator
 from generators.scene_generator import SceneGenerator
@@ -56,18 +56,18 @@ class Pipeline:
     def __init__(self):
         """Initialize the pipeline."""
         self.logger = get_logger("pipeline")
-        self.config = config_loader.get_pipeline_config()
+        self.config = self._load_pipeline_config()
 
-        # Output directories
-        self.base_dir = Path(__file__).parent
-        self.data_dir = self.base_dir / 'data'
+        # Output directories - save to project root data/ directory
+        self.project_root = Path(__file__).parent.parent  # Go up to project root
+        self.data_dir = self.project_root / 'data'
         self.clue_dir = self.data_dir / 'clue'
         self.scene_dir = self.data_dir / 'scene'
         self.task_dir = self.data_dir / 'task'
 
         # Initialize task validator
         self.task_validator = TaskValidator()
-        
+
         # Progress tracking
         self.progress_lock = threading.Lock()
         self.progress = {
@@ -83,6 +83,36 @@ class Pipeline:
                 'total': 0
             }
         }
+
+    def _load_pipeline_config(self) -> Dict[str, Any]:
+        """Load pipeline configuration."""
+        try:
+            # 直接从配置文件加载
+            project_root = Path(__file__).parent.parent  # 项目根目录
+            config_path = project_root / "config" / "data_generation" / "pipeline.yaml"
+
+            if not config_path.exists():
+                raise FileNotFoundError(f"Configuration file not found: {config_path}")
+
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+
+            # 应用默认值（只保留实际使用的配置项）
+            defaults = {
+                'thread_num': 4,
+                'start_id': 0,
+                'end_id': None,
+                'continue_generation': True
+            }
+
+            for key, default_value in defaults.items():
+                config.setdefault(key, default_value)
+
+            return config
+
+        except Exception as e:
+            self.logger.error(f"Failed to load pipeline config: {e}")
+            raise
         
     def check_item_completion(self, item_id: int) -> Dict[str, bool]:
         """
@@ -437,12 +467,25 @@ class Pipeline:
             
         self.logger.info("└──────────────────────────────────────────────────┘\n")
         
-        # Save summary
-        self.save_summary(all_results, total_time)
+        # Save summary with ID range
+        start_id = min(item['id'] for item in items) if items else 0
+        end_id = max(item['id'] for item in items) if items else 0
+        self.save_summary(all_results, total_time, start_id, end_id)
         
-    def save_summary(self, results: List[Dict[str, Any]], total_time: float):
-        """Save execution summary."""
-        summary_path = Path(self.config['output_dir']) / 'e2e_summary.json'
+    def save_summary(self, results: List[Dict[str, Any]], total_time: float, start_id: int, end_id: int):
+        """Save execution summary with timestamp and ID range in filename."""
+        # 生成时间戳格式：YYYYMMDD_HHMMSS
+        timestamp = time.strftime('%Y%m%d_%H%M%S')
+
+        # 生成文件名：时间戳_起始ID-结束ID.json
+        filename = f"{timestamp}_data_generation_summary_{start_id}-{end_id}.json"
+
+        # 使用项目根目录的output目录
+        output_dir = self.project_root / 'output'
+        summary_path = output_dir / filename
+
+        # 确保目录存在
+        output_dir.mkdir(parents=True, exist_ok=True)
         
         # Count statistics
         successful = sum(1 for r in results if not r.get('errors', []) and not r.get('skipped', False))
@@ -500,9 +543,28 @@ def main():
     
     # Setup logging
     setup_logging(console_level=args.log_level)
-    
+
     # Load configuration for default values
-    config = config_loader.get_pipeline_config()
+    try:
+        project_root = Path(__file__).parent.parent  # 项目根目录
+        config_path = project_root / "config" / "data_generation" / "pipeline.yaml"
+
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+
+        # 应用默认值（只保留实际使用的配置项）
+        defaults = {
+            'thread_num': 4,
+            'start_id': 0,
+            'end_id': None,
+        }
+
+        for key, default_value in defaults.items():
+            config.setdefault(key, default_value)
+
+    except Exception as e:
+        print(f"Error loading pipeline config: {e}")
+        config = {'thread_num': 4, 'start_id': 0, 'end_id': None}
     
     # Use config values if not provided via command line
     if args.start_id is None:
@@ -516,8 +578,8 @@ def main():
     try:
         input_path = Path(args.input)
         if not input_path.exists():
-            # Try relative to project
-            input_path = Path(__file__).parent / args.input
+            # Try relative to project root
+            input_path = Path(__file__).parent.parent / args.input
             
         data = load_json(str(input_path))
         

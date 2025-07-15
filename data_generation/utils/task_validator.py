@@ -24,7 +24,7 @@ from utils.logger import get_logger
 class TaskValidator:
     """Validator for task JSON data with automatic fixing capabilities."""
 
-    def __init__(self, attribute_actions_csv_path: str = "data/attribute_actions.csv"):
+    def __init__(self, attribute_actions_csv_path: str = None):
         """
         Initialize the task validator.
 
@@ -32,6 +32,13 @@ class TaskValidator:
             attribute_actions_csv_path: Path to the attribute actions CSV file
         """
         self.logger = get_logger(__name__)
+
+        # 设置默认CSV路径
+        if attribute_actions_csv_path is None:
+            from pathlib import Path
+            project_root = Path(__file__).parent.parent.parent  # 项目根目录
+            attribute_actions_csv_path = str(project_root / 'data' / 'attribute_actions.csv')
+
         self.attribute_actions_csv_path = attribute_actions_csv_path
         self.attribute_actions_df = None
         self.valid_task_categories = {

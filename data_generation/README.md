@@ -1,30 +1,28 @@
-# Data Generation Pipeline
+# 🏭 OmniEmbodied Data Generation Pipeline
 
-A comprehensive, production-ready data generation system that transforms raw text into structured multi-agent collaborative scenarios using Large Language Models (LLMs). The system features a robust 4-stage pipeline with automatic quality assurance, intelligent task validation, and extensive customization options.
+A comprehensive, production-ready data generation system that transforms raw text into structured multi-agent collaborative scenarios using Large Language Models (LLMs). The system features a robust 4-stage pipeline with automatic quality assurance, intelligent task validation, and streamlined configuration management.
+
+**Pipeline Flow**: Raw Text → Conceptual Clues → Interactive Scenes → Executable Tasks → Validation
 
 ## 🌟 Key Features
 
-### 🚀 Core Capabilities
-- **Complete 4-Stage Pipeline**: Raw Text → Clue → Scene → Task → Validation & Repair
-- **Automatic Quality Assurance**: Built-in validation and intelligent repair system
-- **Enhanced Action Schema**: Rich action information with attributes, tools, and descriptions
-- **Guaranteed Core Actions**: Every scene includes 'open' and 'close' actions
-- **Multi-Agent Focus**: Generates collaborative tasks requiring multiple AI agents
-- **English Task Generation**: Professional English task descriptions with thematic coherence
+### 🚀 **End-to-End Pipeline**
+- **Unified Processing**: Complete data generation from raw text to validated tasks in a single run
+- **Thread-Safe Concurrency**: Parallel processing with real-time progress tracking
+- **Resume Capability**: Automatically skip completed items on restart
+- **Comprehensive Validation**: Built-in scene and task validation with auto-fixing
 
-### 🔧 Technical Excellence
-- **Thread-Safe Processing**: Robust concurrent processing with proper error handling
-- **Modular Architecture**: Clean separation with base classes and specialized generators
-- **Resume Capability**: Skip completed items to resume interrupted executions
-- **Comprehensive Logging**: Detailed logs with progress tracking and validation reports
-- **Token Usage Tracking**: Monitor API costs with detailed consumption statistics
-- **Flexible Configuration**: Extensive customization through YAML configuration files
+### 🧠 **Intelligent Generation**
+- **Multi-Stage LLM Processing**: Specialized prompts for each generation stage
+- **Dynamic Scene Creation**: Rich, interactive environments with detailed object properties
+- **Task Complexity Scaling**: From simple commands to complex collaborative scenarios
+- **Embedded Verification**: Tasks include built-in success criteria
 
-### 🛡️ Quality Assurance
-- **Automatic Task Validation**: 3-step validation process (category → object ID → attributes)
-- **Intelligent Repair**: Smart fixing using CSV database and domain knowledge
-- **Detailed Fix Logs**: Complete audit trail of all validation and repair operations
-- **Error Recovery**: Graceful handling of failures without interrupting the pipeline
+### � **Production Ready**
+- **Robust Error Handling**: Exponential backoff, retry mechanisms, graceful degradation
+- **Detailed Logging**: Comprehensive logs with token usage tracking
+- **Streamlined Configuration**: Simplified YAML configuration with hardcoded paths
+- **Performance Monitoring**: Real-time statistics and execution summaries
 
 ## 📁 Project Structure
 
@@ -45,33 +43,82 @@ data_generation/
 ├── utils/                       # 🛠️ Utility modules
 │   ├── __init__.py              # Package initialization
 │   ├── logger.py                # Centralized logging system with multiple levels
-│   ├── config_loader.py         # YAML configuration management
 │   ├── json_utils.py            # JSON processing and repair utilities
 │   ├── thread_pool.py           # Thread pool management with retry logic
 │   ├── action_manager.py        # Scene ability analysis and extraction
 │   ├── scene_validator.py       # Scene validation and auto-fixing logic
 │   └── task_validator.py        # Task validation and intelligent repair system
 │
-├── config/                      # ⚙️ Configuration files
-│   ├── pipeline.yaml            # Main pipeline settings and threading
-│   ├── clue_gen_config.yaml     # Clue generator LLM and prompt configuration
-│   ├── scene_gen_config.yaml    # Scene generator with action schema settings
-│   └── task_gen_config.yaml     # Task generator with validation criteria
-│
-├── data/                        # 📊 Data directory
-│   ├── news.json                # Input raw text data (customizable)
-│   ├── attribute_actions.csv    # Action definitions database for validation
-│   ├── e2e_summary.json         # Pipeline execution summary and statistics
-│   ├── clue/                    # Generated clue files (*.json)
-│   ├── scene/                   # Generated scene files (*.json)
-│   └── task/                    # Generated task files with embedded verification
-│
-└── logs/                        # 📝 Execution logs
-    ├── pipeline.log             # Main pipeline logs with validation details
-    ├── clue_raw.log            # Raw LLM responses for clue generation
-    ├── scene_raw.log           # Raw LLM responses for scene generation
-    ├── task_raw.log            # Raw LLM responses for task generation
-    └── *_task_fixes_*.log      # Timestamped task validation and repair logs
+└── logs/                        # 📝 Execution logs and debugging information
+```
+
+---
+
+## 📊 Data Directory Structure
+
+**Important**: All data sources and generated files are located in the project root `data/` folder:
+
+```
+/Users/wangzixuan/workspace/OmniEmbodied/data/
+├── news.json                    # Input raw text data (customizable)
+├── attribute_actions.csv        # Action definitions database for validation
+├── clue/                        # Generated clue files (*.json)
+├── scene/                       # Generated scene files (*.json)
+└── task/                        # Generated task files with embedded verification
+```
+
+## ⚙️ Configuration Structure
+
+Configuration files are located in the project root `config/data_generation/` folder:
+
+```
+/Users/wangzixuan/workspace/OmniEmbodied/config/data_generation/
+├── pipeline.yaml               # Main pipeline settings and threading configuration
+├── clue_gen_config.yaml        # Clue generator LLM and prompt configuration
+├── scene_gen_config.yaml       # Scene generator with action schema settings
+└── task_gen_config.yaml        # Task generator with validation criteria
+```
+
+## 📈 Output Structure
+
+Generated statistics and summaries are saved in the project root `output/` folder:
+
+```
+/Users/wangzixuan/workspace/OmniEmbodied/output/
+└── YYYYMMDD_HHMMSS_data_generation_summary_START-END.json
+```
+
+## 📝 Logs Structure
+
+Execution logs are saved in the `data_generation/logs/` folder:
+
+```
+data_generation/logs/
+├── pipeline.log                # Main pipeline logs with validation details
+├── clue_raw.log               # Raw LLM responses for clue generation
+├── scene_raw.log              # Raw LLM responses for scene generation
+├── task_raw.log               # Raw LLM responses for task generation
+└── *_task_fixes_*.log         # Timestamped task validation and repair logs
+```
+
+## ⚠️ Important Notes
+
+### Directory Structure Changes
+
+**Notice**: This project has been reorganized to improve code maintainability and clarity:
+
+1. **Configuration Location**: All configuration files are now located in the project root `config/data_generation/`
+2. **Data File Location**: All data sources and generated files are located in the project root `data/`
+3. **Simplified Configuration Loading**: Removed complex configuration loader, each generator directly reads configuration files
+4. **Unified Data Paths**: No longer creates folders in `data_generation/` directory, uses root `data/` folder uniformly
+
+### Runtime Environment
+
+**Working Directory**: Ensure all commands are run from the `data_generation/` directory:
+
+```bash
+cd /Users/wangzixuan/workspace/OmniEmbodied/data_generation
+python pipeline.py --input ../data/news.json
 ```
 
 ## 🚀 Quick Start
@@ -94,7 +141,7 @@ data_generation/
 
 2. **Configure API settings:**
 
-   Edit the configuration files in `config/` directory. All generators need API configuration:
+   Edit the configuration files in `../config/data_generation/` directory. All generators need API configuration:
 
    **For OpenAI:**
    ```yaml
@@ -115,7 +162,7 @@ data_generation/
 
 3. **Prepare input data:**
 
-   Create or edit `data/news.json` with your raw text data:
+   Create or edit `../data/news.json` with your raw text data:
    ```json
    [
      {
@@ -139,36 +186,69 @@ data_generation/
 
 **Run complete pipeline:**
 ```bash
-python pipeline.py
+python pipeline.py --input ../data/news.json
 ```
 
 **Process specific range:**
 ```bash
 # Process items 1-5 with 4 threads
-python pipeline.py --start-id 1 --end-id 5 --threads 4
+python pipeline.py --input ../data/news.json --start-id 1 --end-id 5 --threads 4
 ```
 
 **Resume interrupted execution:**
 ```bash
 # Automatically skips completed items
-python pipeline.py --start-id 1 --end-id 100
+python pipeline.py --input ../data/news.json --start-id 1 --end-id 100
 ```
 
 #### Advanced Usage
 
 **Custom input file:**
 ```bash
-python pipeline.py --input data/custom_scenarios.json --start-id 1 --end-id 20
+python pipeline.py --input ../data/custom_scenarios.json --start-id 1 --end-id 20
 ```
 
 **Debug mode with detailed logging:**
 ```bash
-python pipeline.py --log-level DEBUG --threads 1
+python pipeline.py --input ../data/news.json --log-level DEBUG --threads 1
+```
+
+### Configuration Validation
+
+Before running the full pipeline, you can validate that the configuration is correct:
+
+```bash
+# Validate configuration files
+python -c "from generators.clue_generator import ClueGenerator; cg = ClueGenerator(); print('✅ Config OK')"
+
+# View help information
+python pipeline.py --help
+
+# Check input files
+ls -la ../data/news.json
+ls -la ../data/attribute_actions.csv
+```
+
+### Output Files
+
+After successful execution, generated files will be saved in the project root `data/` folder:
+
+```bash
+# View generated files
+ls -la ../data/clue/     # Clue files
+ls -la ../data/scene/    # Scene files
+ls -la ../data/task/     # Task files
+
+# View log files
+ls -la logs/             # Execution logs
+
+# View statistics summaries
+ls -la ../output/        # Execution summaries with timestamps
 ```
 
 **High-throughput processing:**
 ```bash
-python pipeline.py --threads 8 --start-id 1 --end-id 1000
+python pipeline.py --input ../data/news.json --threads 8 --start-id 1 --end-id 1000
 ```
 
 #### Standalone Generator Mode
@@ -489,38 +569,32 @@ The system uses a **layered configuration approach** supporting two distinct usa
 - Useful for processing large batches of a single generation type
 - Ideal for development and testing
 
-### 🔧 Pipeline Configuration (`config/pipeline.yaml`)
+### 🔧 Pipeline Configuration (`config/data_generation/pipeline.yaml`)
 
-Controls the main end-to-end pipeline execution:
+**Simplified Configuration**: The pipeline configuration has been streamlined to include only actively used settings:
 
 ```yaml
 # ============================================================================
 # Threading Configuration
 # ============================================================================
-thread_num: 4              # Number of parallel data items through entire pipeline
+thread_num: 1              # Number of parallel data items through entire pipeline
 
 # ============================================================================
 # ID Range Configuration (can be overridden by command-line arguments)
 # ============================================================================
-start_id: 0                # Starting ID (inclusive)
-end_id: 4                  # Ending ID (inclusive, null = process all)
+start_id: 55               # Starting ID (inclusive)
+end_id: 56                 # Ending ID (inclusive, null = process all)
 
 # ============================================================================
 # Generation Control
 # ============================================================================
 continue_generation: true  # Continue from last interruption point (skip completed items)
-
-# ============================================================================
-# Output Configuration
-# ============================================================================
-output_dir: "./data"       # Base output directory for all generated data
-summary_file: "summary.json"  # Pipeline execution summary file
-
-# ============================================================================
-# Logging Configuration
-# ============================================================================
-log_dir: "./logs"          # Log directory for pipeline execution logs
 ```
+
+**Note**: The following paths are now hardcoded in the application:
+- **Data Output**: Project root `data/` folder (`data/clue/`, `data/scene/`, `data/task/`)
+- **Statistics Output**: Project root `output/` folder with timestamp naming
+- **Logs Output**: `data_generation/logs/` folder
 
 ### 🎯 Generator-Specific Configurations
 
@@ -931,7 +1005,7 @@ python -c "from generators.clue_generator import ClueGenerator; cg = ClueGenerat
 python pipeline.py --start-id 1 --end-id 3 --threads 1 --log-level DEBUG
 
 # Validate configuration
-python -c "from utils.config_loader import config_loader; print('Config OK')"
+python -c "from generators.clue_generator import ClueGenerator; cg = ClueGenerator(); print('Config OK')"
 ```
 
 ## 🚀 Production Deployment

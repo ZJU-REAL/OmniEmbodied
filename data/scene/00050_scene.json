@@ -1,5 +1,5 @@
 {
-  "description": "A high-tech Automotive Prototype Development Lab with a partially built hybrid vehicle chassis, digital design stations, and testing equipment, designed for collaborative engineering tasks.",
+  "description": "A high-stakes automotive prototyping lab where engineers, designers, and technicians collaborate to refine Saab’s new 9-2X sportwagon, a badge-engineered evolution of the Subaru Impreza. The space is a chaotic blend of precision engineering, last-minute modifications, and aftermarket experimentation.",
   "rooms": [
     {
       "id": "prototype_assembly_bay",
@@ -8,54 +8,52 @@
         "type": "industrial"
       },
       "connected_to_room_ids": [
-        "digital_design_station",
-        "parts_storage",
-        "testing_corner",
-        "break_area"
+        "diagnostics_tuning_station",
+        "parts_fabrication_storage"
       ]
     },
     {
-      "id": "digital_design_station",
-      "name": "Digital Design & Diagnostics Station",
+      "id": "diagnostics_tuning_station",
+      "name": "Diagnostics & Tuning Station",
       "properties": {
-        "type": "office"
+        "type": "technical"
       },
       "connected_to_room_ids": [
         "prototype_assembly_bay",
-        "testing_corner"
+        "design_review_lounge"
       ]
     },
     {
-      "id": "parts_storage",
-      "name": "Parts & Inventory Storage",
+      "id": "parts_fabrication_storage",
+      "name": "Parts & Fabrication Storage",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
         "prototype_assembly_bay",
-        "testing_corner"
+        "test_prep_area"
       ]
     },
     {
-      "id": "testing_corner",
-      "name": "Testing & Calibration Corner",
+      "id": "design_review_lounge",
+      "name": "Design Review Lounge",
       "properties": {
-        "type": "industrial"
+        "type": "meeting"
       },
       "connected_to_room_ids": [
-        "prototype_assembly_bay",
-        "parts_storage",
-        "digital_design_station"
+        "diagnostics_tuning_station",
+        "test_prep_area"
       ]
     },
     {
-      "id": "break_area",
-      "name": "Break/Mess Area",
+      "id": "test_prep_area",
+      "name": "Test Prep Area",
       "properties": {
-        "type": "lounge"
+        "type": "preparation"
       },
       "connected_to_room_ids": [
-        "prototype_assembly_bay"
+        "parts_fabrication_storage",
+        "design_review_lounge"
       ]
     }
   ],
@@ -71,321 +69,186 @@
           2.5,
           2.0
         ],
-        "weight": 350.0,
-        "is_container": true,
-        "material": "steel",
-        "model_number": "HL-2200"
+        "weight": 3000.0,
+        "is_container": false,
+        "capacity": "3000kg",
+        "current_height": "1.2m"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "car_chassis_1",
-      "name": "Car Chassis",
+      "id": "engine_hoist_1",
+      "name": "Engine Hoist",
       "type": "FURNITURE",
-      "location_id": "on:hydraulic_lift_1",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "max_load": "500kg",
+        "current_load": "227HP turbocharged EJ20 engine"
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_station_1",
+      "name": "Welding Station",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "type": "MIG welder"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "saab_9_2x_prototype_1",
+      "name": "9-2X Aero Prototype",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
       "properties": {
         "size": [
           4.5,
           1.8,
-          1.2
+          1.5
         ],
-        "weight": 220.0,
+        "weight": 1500.0,
         "is_container": false,
-        "material": "aluminum",
-        "model": "Saab 9-2X Prototype"
+        "missing_parts": "front bumper",
+        "condition": "exposed wiring harness"
       },
-      "states": {}
+      "states": {
+        "is_broken": true
+      }
     },
     {
-      "id": "workbench_1",
-      "name": "Heavy-Duty Steel Workbench",
+      "id": "prototype_ecu_1",
+      "name": "FRAGILE - PROTOTYPE ECU",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "firmware": "v0.8.3",
+        "case": "padded"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "awd_drivetrain_1",
+      "name": "Misaligned AWD Drivetrain",
       "type": "FURNITURE",
       "location_id": "in:prototype_assembly_bay",
       "properties": {
         "size": [
-          3.0,
-          0.8,
-          0.9
+          1.5,
+          1.0,
+          0.8
         ],
         "weight": 120.0,
-        "is_container": true,
-        "material": "steel",
-        "condition": "scratched"
-      },
-      "states": {}
-    },
-    {
-      "id": "turbocharger_1",
-      "name": "Disassembled Turbocharger",
-      "type": "ITEM",
-      "location_id": "on:workbench_1",
-      "properties": {
-        "weight": 8.5,
-        "material": "steel",
-        "condition": "oily",
-        "is_container": false
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "ecu_unit_1",
-      "name": "Prototype ECU Unit",
-      "type": "ITEM",
-      "location_id": "on:workbench_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "black",
-        "sticker": "red PROTOTYPE",
-        "version": "v2.4",
-        "serial_number": "none",
-        "provides_abilities": [
-          "calibrate"
-        ]
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "impact_wrench_1",
-      "name": "Cordless Impact Wrench",
-      "type": "ITEM",
-      "location_id": "on:workbench_1",
-      "properties": {
-        "weight": 3.5,
-        "brand": "DeWalt",
-        "battery_level": 30,
-        "provides_abilities": [
-          "connect",
-          "disconnect"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "alloy_wheel_1",
-      "name": "18\" Alloy Wheel with Tire",
-      "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
-      "properties": {
-        "weight": 22.0,
-        "material": "aluminum",
-        "condition": "new"
-      },
-      "states": {}
-    },
-    {
-      "id": "alloy_wheel_2",
-      "name": "18\" Alloy Wheel with Tire",
-      "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
-      "properties": {
-        "weight": 22.0,
-        "material": "aluminum",
-        "condition": "new"
-      },
-      "states": {}
-    },
-    {
-      "id": "alloy_wheel_3",
-      "name": "18\" Alloy Wheel (Dented)",
-      "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
-      "properties": {
-        "weight": 15.0,
-        "material": "aluminum",
-        "condition": "damaged"
-      },
-      "states": {}
-    },
-    {
-      "id": "parts_trolley_1",
-      "name": "Parts Trolley",
-      "type": "FURNITURE",
-      "location_id": "in:prototype_assembly_bay",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.9
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "steel",
-        "drawer_1": "stuck",
-        "drawer_2": "loose bolts",
-        "drawer_3": "empty"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "triple_monitor_1",
-      "name": "Triple-Monitor Workstation",
-      "type": "FURNITURE",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "size": [
-          1.8,
-          0.8,
-          0.7
-        ],
-        "weight": 35.0,
         "is_container": false,
-        "brand": "Dell",
-        "model": "UltraSharp"
+        "issue": "CV axle not fully seated"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "pressure": "120PSI",
+        "hose_condition": "tangled"
       },
       "states": {
         "is_on": false
       }
     },
     {
-      "id": "usb_drive_1",
-      "name": "USB Drive v2.3_FINAL_FINAL",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "brand": "SanDisk",
-        "capacity": "64GB"
-      },
-      "states": {
-        "is_connected": true,
-        "is_saved": false
-      }
-    },
-    {
-      "id": "rfid_keycard_1",
-      "name": "RFID Keycard",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 0.05,
-        "color": "white",
-        "access_level": "ENGINEERING",
-        "provides_abilities": [
-          "arm_alarm"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "label_maker_1",
-      "name": "Label Maker",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 0.8,
-        "brand": "Brother",
-        "tape_level": "low",
-        "provides_abilities": [
-          "paint"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "hard_drive_1",
-      "name": "External Hard Drive",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 1.2,
-        "brand": "Seagate",
-        "capacity": "2TB"
-      },
-      "states": {
-        "is_connected": true
-      }
-    },
-    {
-      "id": "shelving_unit_1",
-      "name": "Shelving Unit",
+      "id": "tool_chest_1",
+      "name": "Tool Chest",
       "type": "FURNITURE",
-      "location_id": "in:parts_storage",
+      "location_id": "in:prototype_assembly_bay",
       "properties": {
         "size": [
-          2.0,
-          0.5,
-          1.8
+          1.2,
+          0.6,
+          1.0
         ],
-        "weight": 50.0,
+        "weight": 40.0,
         "is_container": true,
-        "material": "steel"
+        "drawers": [
+          "Torx 10-50",
+          "Impact Sockets"
+        ]
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "ecu_unit_2",
-      "name": "ECU Unit (Black Sticker)",
-      "type": "ITEM",
-      "location_id": "in:shelving_unit_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "black",
-        "serial_number": "ECU-001",
-        "provides_abilities": [
-          "calibrate"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "ecu_unit_3",
-      "name": "ECU Unit (Black Sticker)",
-      "type": "ITEM",
-      "location_id": "in:shelving_unit_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "black",
-        "serial_number": "ECU-002",
-        "provides_abilities": [
-          "calibrate"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "locked_cabinet_1",
-      "name": "Locked Cabinet",
+      "id": "parts_bin_1",
+      "name": "Parts Bin",
       "type": "FURNITURE",
-      "location_id": "in:parts_storage",
+      "location_id": "in:prototype_assembly_bay",
       "properties": {
         "size": [
-          1.0,
+          0.8,
           0.5,
-          1.5
+          0.4
         ],
-        "weight": 60.0,
+        "weight": 15.0,
         "is_container": true,
-        "material": "steel",
-        "lock_type": "biometric"
+        "contents": "mismatched bolts, some stripped"
       },
       "states": {
-        "is_open": false,
-        "is_alarm_armed": false
+        "is_full": true
       }
     },
     {
-      "id": "calibration_tool_1",
-      "name": "Calibration Tool",
+      "id": "shop_manual_1",
+      "name": "Coffee-Stained Shop Manual",
       "type": "ITEM",
-      "location_id": "in:locked_cabinet_1",
+      "location_id": "on:workbench_1",
       "properties": {
         "weight": 0.5,
-        "brand": "Fluke",
-        "model": "789",
-        "provides_abilities": [
-          "calibrate"
-        ]
+        "page": "Turbocharger Installation",
+        "condition": "coffee-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "saab_logo_badge_1",
+      "name": "Dented SAAB Logo Badge",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "dented"
       },
       "states": {}
     },
@@ -393,306 +256,322 @@
       "id": "dyno_rig_1",
       "name": "Dyno Rig",
       "type": "FURNITURE",
-      "location_id": "in:testing_corner",
+      "location_id": "in:diagnostics_tuning_station",
       "properties": {
         "size": [
-          2.5,
+          3.0,
           1.5,
-          1.8
+          1.2
         ],
         "weight": 250.0,
+        "is_container": true,
+        "wheels": "locked in",
+        "exhaust": "vented outside"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_tuning_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 100.0,
         "is_container": false,
-        "material": "steel"
+        "software": "real-time telemetry"
       },
       "states": {
-        "is_connected": false
+        "is_on": false
       }
     },
     {
-      "id": "sensor_array_1",
-      "name": "Sensor Array",
+      "id": "laptop_1",
+      "name": "Laptop #1",
       "type": "ITEM",
-      "location_id": "in:testing_corner",
+      "location_id": "on:workstation_1",
       "properties": {
-        "weight": 12.0,
-        "material": "plastic",
-        "condition": "misaligned"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "diagnostic_laptop_1",
-      "name": "Diagnostic Laptop",
-      "type": "ITEM",
-      "location_id": "in:testing_corner",
-      "properties": {
-        "weight": 2.5,
-        "brand": "HP",
-        "model": "EliteBook",
-        "provides_abilities": [
-          "save"
-        ]
+        "weight": 2.0,
+        "software": "ECU tuning software",
+        "error": "Boost Pressure Fluctuation"
       },
       "states": {
         "is_on": false,
+        "is_muted": true
+      }
+    },
+    {
+      "id": "oscilloscope_1",
+      "name": "Oscilloscope",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 5.0,
+        "signal": "erratic signal from O2 sensor"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "prototype_intercooler_1",
+      "name": "DO NOT TOUCH Prototype Intercooler",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 8.0,
+        "note": "Leak test pending"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "battery": "23%"
+      },
+      "states": {
         "is_charged": false
       }
     },
     {
-      "id": "coffee_maker_1",
-      "name": "Coffee Maker",
+      "id": "spare_ecu_chips_1",
+      "name": "Spare ECU Chips",
       "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 3.0,
-        "brand": "Keurig",
-        "model": "K-Elite",
-        "provides_abilities": [
-          "boil"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "fridge_1",
-      "name": "Refrigerator",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          0.7,
-          0.6,
-          1.5
-        ],
-        "weight": 55.0,
-        "is_container": true,
-        "brand": "Whirlpool"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "energy_drink_1",
-      "name": "Energy Drink Can",
-      "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:anti_static_bag_1",
       "properties": {
         "weight": 0.3,
-        "brand": "Red Bull",
-        "flavor": "original",
-        "is_container": true
+        "label": "v0.7 Backup"
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
     },
     {
-      "id": "bulletin_board_1",
-      "name": "Bulletin Board",
+      "id": "subaru_service_manual_1",
+      "name": "Subaru Impreza Service Manual",
+      "type": "ITEM",
+      "location_id": "on:chair_1",
+      "properties": {
+        "weight": 1.0
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
       "type": "FURNITURE",
-      "location_id": "in:break_area",
+      "location_id": "in:diagnostics_tuning_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "note": "Fix torque steer???"
+      },
+      "states": {}
+    },
+    {
+      "id": "turbocharged_engine_block_1",
+      "name": "Turbocharged Engine Block",
+      "type": "FURNITURE",
+      "location_id": "in:parts_fabrication_storage",
       "properties": {
         "size": [
           1.2,
-          0.1,
+          0.8,
           0.9
         ],
-        "weight": 5.0,
-        "is_container": true,
-        "material": "cork"
+        "weight": 150.0,
+        "is_container": false
       },
       "states": {}
     },
     {
-      "id": "sticky_note_1",
-      "name": "Sticky Note",
-      "type": "ITEM",
-      "location_id": "on:bulletin_board_1",
+      "id": "dynamometer_rig_1",
+      "name": "Dynamometer Rig",
+      "type": "FURNITURE",
+      "location_id": "in:parts_fabrication_storage",
       "properties": {
-        "weight": 0.01,
-        "color": "yellow",
-        "text": "CALL SUPPLIER RE: TURBO DELAY"
+        "size": [
+          3.0,
+          1.5,
+          1.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "mounts": "bolted floor mounts"
       },
-      "states": {
-        "is_shredded": false
-      }
+      "states": {}
     },
     {
-      "id": "shop_rag_1",
-      "name": "Dirty Shop Rag",
+      "id": "ecu_chip_1",
+      "name": "ECU Chip v0.8.3 TEST",
       "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
+      "location_id": "on:shelf_1",
       "properties": {
-        "weight": 0.2,
-        "material": "cotton",
-        "condition": "dirty"
+        "weight": 0.1,
+        "sticker": "red"
       },
-      "states": {
-        "is_soaked": false
-      }
+      "states": {}
     },
     {
-      "id": "oil_can_1",
-      "name": "Half-Empty Oil Can",
+      "id": "ecu_chip_2",
+      "name": "ECU Chip v0.7",
       "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
+      "location_id": "on:shelf_1",
       "properties": {
-        "weight": 1.5,
-        "brand": "Mobil",
-        "type": "10W-30",
-        "is_container": true
+        "weight": 0.1,
+        "sticker": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "ecu_chip_3",
+      "name": "ECU Chip v0.6",
+      "type": "ITEM",
+      "location_id": "on:shelf_1",
+      "properties": {
+        "weight": 0.1,
+        "sticker": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "red_tagged_scrap_parts_1",
+      "name": "Red-Tagged Scrap Parts",
+      "type": "ITEM",
+      "location_id": "in:bin_1",
+      "properties": {
+        "weight": 5.0,
+        "tags": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_parts_cabinet_1",
+      "name": "Locked Parts Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_fabrication_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "combination": "19-23-07"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "safety_poster_1",
-      "name": "Faded SAFETY FIRST Poster",
+      "id": "intercooler_hose_1",
+      "name": "Correct Intercooler Hose",
+      "type": "ITEM",
+      "location_id": "in:locked_parts_cabinet_1",
+      "properties": {
+        "weight": 0.5
+      },
+      "states": {}
+    },
+    {
+      "id": "post_it_1",
+      "name": "Post-It Note",
+      "type": "ITEM",
+      "location_id": "on:keyboard_1",
+      "properties": {
+        "weight": 0.01,
+        "note": "19-23-07"
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_coolant_hose_1",
+      "name": "Leaking Coolant Hose",
       "type": "ITEM",
       "location_id": "in:prototype_assembly_bay",
       "properties": {
         "weight": 0.3,
-        "material": "paper",
-        "condition": "faded"
+        "issue": "needs clamping"
       },
       "states": {
-        "is_hidden": false
+        "is_broken": true
       }
     },
     {
-      "id": "blueprint_1",
-      "name": "Coffee-Stained Blueprint",
+      "id": "flickering_dyno_monitor_1",
+      "name": "Flickering Dyno Monitor",
       "type": "ITEM",
-      "location_id": "in:prototype_assembly_bay",
+      "location_id": "on:dyno_rig_1",
       "properties": {
-        "weight": 0.2,
-        "material": "paper",
-        "condition": "stained"
+        "weight": 3.0,
+        "issue": "loose HDMI cable"
       },
       "states": {
-        "is_shredded": false
+        "is_broken": true
       }
     },
     {
-      "id": "car_model_1",
-      "name": "Miniature Saab 900 Model",
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
       "type": "ITEM",
-      "location_id": "in:digital_design_station",
+      "location_id": "in:tool_chest_1",
       "properties": {
-        "weight": 0.5,
-        "material": "plastic",
-        "condition": "dusty"
-      },
-      "states": {}
-    },
-    {
-      "id": "wireless_keyboard_1",
-      "name": "Wireless Keyboard (Missing 'E' Key)",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 0.6,
-        "brand": "Logitech",
-        "model": "K800",
-        "condition": "damaged"
-      },
-      "states": {
-        "is_paired": true
-      }
-    },
-    {
-      "id": "lcd_display_1",
-      "name": "55\" LCD Display",
-      "type": "FURNITURE",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "size": [
-          1.2,
-          0.1,
-          0.7
-        ],
-        "weight": 25.0,
-        "brand": "Samsung",
-        "model": "QN55Q60A"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "error_log_1",
-      "name": "Printed Error Log",
-      "type": "ITEM",
-      "location_id": "in:digital_design_station",
-      "properties": {
-        "weight": 0.1,
-        "material": "paper",
-        "highlight": "SENSOR #4 OFFLINE"
-      },
-      "states": {
-        "is_shredded": false
-      }
-    },
-    {
-      "id": "performance_charts_1",
-      "name": "Performance Charts",
-      "type": "ITEM",
-      "location_id": "on:bulletin_board_1",
-      "properties": {
-        "weight": 0.2,
-        "material": "paper",
-        "content": "dyno test results"
-      },
-      "states": {
-        "is_shredded": false
-      }
-    },
-    {
-      "id": "engine_block_1",
-      "name": "Uninstalled Engine Block",
-      "type": "FURNITURE",
-      "location_id": "in:prototype_assembly_bay",
-      "properties": {
-        "size": [
-          1.0,
-          0.8,
-          0.7
-        ],
-        "weight": 220.0,
-        "material": "aluminum",
-        "model": "EJ25"
-      },
-      "states": {}
-    },
-    {
-      "id": "tire_pressure_gauge_1",
-      "name": "Tire Pressure Gauge",
-      "type": "ITEM",
-      "location_id": "in:testing_corner",
-      "properties": {
-        "weight": 0.2,
-        "brand": "Milton",
+        "weight": 0.8,
         "provides_abilities": [
-          "check_pressure"
+          "loosen",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "loosen",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Microfiber Towel",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "dry"
         ]
       },
       "states": {}
     },
     {
       "id": "charger_1",
-      "name": "Battery Charger",
+      "name": "Laptop Charger",
       "type": "ITEM",
-      "location_id": "in:testing_corner",
+      "location_id": "on:workstation_1",
       "properties": {
-        "weight": 1.5,
-        "brand": "NOCO",
-        "model": "Genius5",
+        "weight": 0.4,
         "provides_abilities": [
           "recharge"
         ]
@@ -700,103 +579,192 @@
       "states": {}
     },
     {
-      "id": "shredder_1",
-      "name": "Document Shredder",
+      "id": "knife_1",
+      "name": "Utility Knife",
       "type": "ITEM",
-      "location_id": "in:digital_design_station",
+      "location_id": "in:tool_chest_1",
       "properties": {
-        "weight": 8.0,
-        "brand": "Fellowes",
-        "model": "62MC",
+        "weight": 0.2,
         "provides_abilities": [
-          "shred"
+          "slice"
         ]
       },
       "states": {}
     },
     {
-      "id": "paint_brush_1",
-      "name": "Paint Brush",
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
       "type": "ITEM",
-      "location_id": "in:parts_storage",
+      "location_id": "on:workstation_1",
       "properties": {
-        "weight": 0.3,
-        "material": "synthetic",
-        "size": "2-inch",
+        "weight": 0.5,
         "provides_abilities": [
-          "paint"
+          "scan_barcode"
         ]
       },
       "states": {}
     },
     {
-      "id": "iron_1",
-      "name": "Clothing Iron",
+      "id": "staining_agent_1",
+      "name": "Oil-Based Staining Agent",
       "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:parts_fabrication_storage",
       "properties": {
-        "weight": 1.8,
-        "brand": "Rowenta",
-        "model": "DW5080",
+        "weight": 0.7,
         "provides_abilities": [
-          "iron"
+          "stain"
         ]
       },
-      "states": {
-        "is_on": false
-      }
+      "states": {}
     },
     {
-      "id": "press_1",
-      "name": "Hydraulic Press",
+      "id": "repair_kit_1",
+      "name": "Automotive Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 2.0,
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling Cart",
       "type": "FURNITURE",
-      "location_id": "in:testing_corner",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_1",
+      "name": "Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_tuning_station",
       "properties": {
         "size": [
           1.5,
-          1.0,
-          1.8
+          0.7,
+          0.8
         ],
-        "weight": 300.0,
-        "brand": "Dake",
-        "model": "B-10",
-        "provides_abilities": [
-          "crush"
-        ]
+        "weight": 30.0,
+        "is_container": true
       },
       "states": {}
     },
     {
-      "id": "test_part_1",
-      "name": "Test Part for Crushing",
-      "type": "ITEM",
-      "location_id": "in:testing_corner",
+      "id": "chair_1",
+      "name": "Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_tuning_station",
       "properties": {
-        "weight": 2.0,
-        "material": "plastic"
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_bag_1",
+      "name": "Anti-Static Bag",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "is_container": true
       },
       "states": {
-        "is_crushed": false
+        "is_open": false
       }
+    },
+    {
+      "id": "shelf_1",
+      "name": "Metal Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:parts_fabrication_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          1.8
+        ],
+        "weight": 35.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "bin_1",
+      "name": "Plastic Bin",
+      "type": "FURNITURE",
+      "location_id": "in:parts_fabrication_storage",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.4
+        ],
+        "weight": 2.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Computer Keyboard",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.6,
+        "is_container": true
+      },
+      "states": {}
     }
   ],
   "abilities": [
-    "arm_alarm",
-    "boil",
-    "calibrate",
-    "check_pressure",
-    "connect",
-    "crush",
-    "disconnect",
-    "hide",
-    "iron",
+    "dry",
+    "empty",
+    "loosen",
     "open",
-    "paint",
     "recharge",
-    "save",
-    "shred",
+    "repair",
+    "scan_barcode",
+    "slice",
+    "stain",
     "turn_on",
-    "unpair",
+    "unmute",
     "close"
   ]
 }

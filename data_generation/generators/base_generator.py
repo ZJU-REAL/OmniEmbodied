@@ -6,6 +6,7 @@ Provides common functionality for LLM-based data generation.
 import os
 import json
 import threading
+import yaml
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional, Tuple
 from pathlib import Path
@@ -14,7 +15,6 @@ import time
 import openai
 
 from utils.logger import get_logger, log_raw_response
-from utils.config_loader import config_loader
 from utils.json_utils import extract_json_from_text, parse_json_safe, save_json, load_json
 from utils.thread_pool import ThreadPoolManager, TaskResult, TaskStatus
 
@@ -55,23 +55,45 @@ class BaseGenerator(ABC):
             'total_time': 0.0
         }
         
-        # Output paths - always use project data directory
-        self.base_dir = Path(__file__).parent.parent  # data_generation/
-        self.output_dir = self.base_dir / 'data' / generator_type
+        # Output paths - always use project root data directory
+        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.output_dir = self.project_root / 'data' / generator_type
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
     def _load_config(self, config_override: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Load and merge configuration."""
         try:
-            config = config_loader.get_generator_config(self.generator_type)
+            # 直接从配置文件加载
+            project_root = Path(__file__).parent.parent.parent  # 项目根目录
+            config_path = project_root / "config" / "data_generation" / f"{self.generator_type}_gen_config.yaml"
+
+            if not config_path.exists():
+                raise FileNotFoundError(f"Configuration file not found: {config_path}")
+
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = yaml.safe_load(f)
+
+            # 应用默认值
+            defaults = {
+                'thread_num': 4,
+                'temperature': 0.7,
+                'max_tokens': 4096,
+                'timeout': 600,
+                'start_id': 0,
+                'end_id': None
+            }
+
+            for key, default_value in defaults.items():
+                config.setdefault(key, default_value)
+
         except Exception as e:
             self.logger.error(f"Failed to load config: {e}")
             raise
-            
+
         # Apply overrides if provided
         if config_override:
             config.update(config_override)
-            
+
         return config
         
     def _init_openai_client(self) -> openai.OpenAI:

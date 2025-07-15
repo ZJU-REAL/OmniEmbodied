@@ -16,9 +16,10 @@ class SceneValidator:
         if csv_path:
             self._load_csv_attributes(csv_path)
         else:
-            # 默认CSV路径 - 使用相对路径
+            # 默认CSV路径 - 使用项目根目录data路径
             from pathlib import Path
-            default_csv_path = Path(__file__).parent.parent / 'data' / 'attribute_actions.csv'
+            project_root = Path(__file__).parent.parent.parent  # 项目根目录
+            default_csv_path = project_root / 'data' / 'attribute_actions.csv'
             if default_csv_path.exists():
                 self._load_csv_attributes(str(default_csv_path))
     

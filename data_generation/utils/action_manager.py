@@ -24,10 +24,10 @@ class ActionManager:
         """
         self.logger = get_logger("ActionManager")
         
-        # Default CSV path
+        # Default CSV path - use project root data directory
         if csv_path is None:
-            base_dir = Path(__file__).parent.parent  # data_generation/
-            csv_path = base_dir / 'data' / 'attribute_actions.csv'
+            project_root = Path(__file__).parent.parent.parent  # 项目根目录
+            csv_path = project_root / 'data' / 'attribute_actions.csv'
             
         self.csv_path = csv_path
         self.actions_df = None

@@ -15,7 +15,6 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 
 from utils.logger import get_logger, log_processing, log_success, log_raw_response
-from utils.config_loader import config_loader
 from utils.json_utils import extract_json_from_text, parse_json_safe, save_json
 from generators.base_generator import BaseGenerator
 
@@ -33,14 +32,15 @@ class TaskGenerator(BaseGenerator):
         """Initialize the task generator."""
         super().__init__('task', config_override)
 
-        # Set specific paths - use project data directory
-        self.base_dir = Path(__file__).parent.parent  # data_generation/
-        self.scene_dir = self.base_dir / 'data' / 'scene'
-        self.task_dir = self.base_dir / 'data' / 'task'
+        # Set specific paths - use project root data directory
+        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.data_dir = self.project_root / 'data'
+        self.scene_dir = self.data_dir / 'scene'
+        self.task_dir = self.data_dir / 'task'
         self.task_dir.mkdir(parents=True, exist_ok=True)
 
         # Load CSV data for action details
-        self.actions_csv_path = self.base_dir / 'data' / 'attribute_actions.csv'
+        self.actions_csv_path = self.data_dir / 'attribute_actions.csv'
         self.actions_data = self._load_actions_csv()
 
         self.logger.info("TaskGenerator initialized")
@@ -358,7 +358,7 @@ class TaskGenerator(BaseGenerator):
         Returns:
             List of scene items with id, filename, and scene_data
         """
-        scene_dir = self.base_dir / 'data' / 'scene'
+        scene_dir = self.scene_dir
         scenes = []
 
         if not scene_dir.exists():
