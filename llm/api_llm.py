@@ -29,18 +29,23 @@ class ApiLLM(BaseLLM):
         self.temperature = provider_config.get('temperature', self.temperature)
         self.max_tokens = provider_config.get('max_tokens', self.max_tokens)
         
-        # 设置API密钥
+        # 设置API密钥 - 配置文件优先级高于环境变量
         if self.provider == 'openai':
-            self.api_key = provider_config.get('api_key') or os.environ.get('OPENAI_API_KEY', '')
+            # 优先使用配置文件中的密钥，如果为空则使用环境变量
+            config_key = provider_config.get('api_key', '').strip()
+            self.api_key = config_key if config_key else os.environ.get('OPENAI_API_KEY', '')
             self.endpoint = "https://api.openai.com/v1"
         elif self.provider == 'volcengine':
-            self.api_key = provider_config.get('api_key') or os.environ.get('VOLCENGINE_API_KEY', '')
+            config_key = provider_config.get('api_key', '').strip()
+            self.api_key = config_key if config_key else os.environ.get('VOLCENGINE_API_KEY', '')
             self.endpoint = provider_config.get('endpoint', '')
         elif self.provider == 'bailian':
-            self.api_key = provider_config.get('api_key') or os.environ.get('BAILIAN_API_KEY', '')
+            config_key = provider_config.get('api_key', '').strip()
+            self.api_key = config_key if config_key else (os.environ.get('BAILIAN_API_KEY', '') or os.environ.get('DASHSCOPE_API_KEY', ''))
             self.endpoint = provider_config.get('endpoint', '')
-        else:  # 自定义端点
-            self.api_key = provider_config.get('api_key') or os.environ.get('CUSTOM_LLM_API_KEY', '')
+        else:  # 自定义端点 (custom)
+            config_key = provider_config.get('api_key', '').strip()
+            self.api_key = config_key if config_key else os.environ.get('CUSTOM_LLM_API_KEY', '')
             self.endpoint = provider_config.get('endpoint', '')
             
         if not self.api_key:

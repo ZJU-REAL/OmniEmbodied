@@ -17,8 +17,8 @@ class ConfigManager:
         Args:
             config_dir: 配置文件目录，如果未指定则使用默认路径
         """
-        # 默认使用项目根目录下的config目录
-        self.config_dir = config_dir or os.path.join(os.path.dirname(__file__), 'defaults')
+        # 默认使用项目根目录下的config/baseline目录
+        self.config_dir = config_dir or os.path.join(os.path.dirname(__file__), 'baseline')
         self.configs = {}
     
     def load_config(self, config_name: str) -> Dict[str, Any]:

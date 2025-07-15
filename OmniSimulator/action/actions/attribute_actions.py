@@ -37,10 +37,12 @@ class AttributeAction(BaseAction):
         if cls.action_configs:
             return
             
-        # 如果未指定路径，使用默认路径
+        # 如果未指定路径，使用默认路径（项目根目录下的data/attribute_actions.csv）
         if csv_path is None:
+            # 从OmniSimulator/action/actions向上三级到项目根目录，然后到data目录
             current_dir = os.path.dirname(os.path.abspath(__file__))
-            csv_path = os.path.join(current_dir, 'attribute_actions.csv')
+            project_root = os.path.dirname(os.path.dirname(os.path.dirname(current_dir)))
+            csv_path = os.path.join(project_root, 'data', 'attribute_actions.csv')
             
         if not os.path.exists(csv_path):
             print(f"Warning: Configuration file does not exist {csv_path}")
