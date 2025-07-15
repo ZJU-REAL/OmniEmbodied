@@ -29,7 +29,8 @@ def read_requirements():
         'seaborn',
         'matplotlib',
         'jupyter',
-        'notebook'
+        'notebook',
+        'json_repair'
     ]
 
 setup(

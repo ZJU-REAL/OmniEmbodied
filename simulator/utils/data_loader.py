@@ -20,9 +20,10 @@ class DataLoader:
             data_dir: 数据目录路径，默认为项目根目录下的data文件夹
         """
         if data_dir is None:
-            # 获取项目根目录
+            # 获取项目根目录（从simulator/utils向上两级到项目根目录）
             current_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(current_dir)
+            simulator_dir = os.path.dirname(current_dir)
+            project_root = os.path.dirname(simulator_dir)
             data_dir = os.path.join(project_root, 'data')
         
         self.data_dir = data_dir

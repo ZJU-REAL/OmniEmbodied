@@ -50,7 +50,8 @@ class SimulationEngine:
     def _load_global_config(self):
         """加载全局配置文件"""
         try:
-            config_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'simulator_config.yaml')
+            # 使用根目录下的config/simulator/simulator_config.yaml
+            config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'config', 'simulator', 'simulator_config.yaml')
             if os.path.exists(config_path):
                 with open(config_path, 'r', encoding='utf-8') as f:
                     global_config = yaml.safe_load(f) or {}
@@ -408,16 +409,23 @@ class SimulationEngine:
         Returns:
             str: Scene file path, returns None if not found
         """
-        # Search in data/scene/ directory by default
-        base_dirs = ["data/default/", "data/scene/"]
-        
+        # 获取项目根目录
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(os.path.dirname(current_dir))
+
+        # Search in root data/scene/ directory
+        base_dirs = [
+            os.path.join(project_root, "data", "scene"),
+            os.path.join(project_root, "data", "task")
+        ]
+
         for base_dir in base_dirs:
             # Try different file extensions
             for ext in [".json", ".yaml", ".yml"]:
-                file_path = f"{base_dir}{scene_uid}{ext}"
+                file_path = os.path.join(base_dir, f"{scene_uid}{ext}")
                 if os.path.exists(file_path):
                     return file_path
-        
+
         return None
     
     def validate_environment(self) -> Tuple[bool, List[str]]:

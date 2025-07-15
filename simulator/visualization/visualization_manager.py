@@ -43,7 +43,8 @@ class VisualizationManager:
     def _load_config(self, config_path: Optional[str] = None) -> Dict[str, Any]:
         """加载配置文件"""
         if config_path is None:
-            config_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'simulator_config.yaml')
+            # 使用根目录下的config/simulator/simulator_config.yaml
+            config_path = os.path.join(os.path.dirname(__file__), '..', '..', 'config', 'simulator', 'simulator_config.yaml')
         
         try:
             if os.path.exists(config_path):
