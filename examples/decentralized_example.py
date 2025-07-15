@@ -36,7 +36,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from modes.decentralized import AutonomousAgent, CommunicationManager, Negotiator, NegotiationType, NegotiationStatus
-from utils.embodied_simulator import ActionStatus
+from simulator.core.enums import ActionStatus
 from utils.logger import setup_logger
 from utils.task_evaluator import TaskEvaluator
 from utils.run_naming import RunNamingManager

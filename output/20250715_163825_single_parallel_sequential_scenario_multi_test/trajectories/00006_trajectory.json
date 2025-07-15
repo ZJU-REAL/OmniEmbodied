@@ -1,0 +1,439 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00006",
+    "start_time": "2025-07-15T16:38:25.260001",
+    "end_time": "2025-07-15T16:38:31.912978",
+    "total_duration_seconds": 6.652977,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00006",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00006",
+    "initialization_time": "2025-07-15T16:38:25.266933"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the Data Migration Lab for the final migration phase by setting up equipment, securing data, and testing systems.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 55.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "data_vault"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 55.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "data_vault"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the thermal_scanner_1 on the collaboration_table_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "thermal_scanner_1",
+            "location_id": "on:collaboration_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Plug in the usb_drive_1 into the validation_terminal_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "usb_drive_1",
+            "is_plugged_in": true
+          }
+        ]
+      },
+      {
+        "task_description": "Place the only yellow tool in the tool_cart_1 onto the collaboration_table_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "thermal_scanner_1",
+            "location_id": "on:collaboration_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Plug in the only blue cable into the network_switch_panel_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "ethernet_cable_1",
+            "is_plugged_in": true
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the deflated rack wheels using the air pump.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "deflated_rack_wheels_1",
+            "is_inflated": true
+          }
+        ]
+      },
+      {
+        "task_description": "Cut the tangled cables using the cable cutter.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "tangled_cables_1",
+            "is_cut": true
+          }
+        ]
+      },
+      {
+        "task_description": "Shred the sensitive documents on the collaboration table using the black shredder.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "sensitive_documents_1",
+            "is_shredded": true
+          }
+        ]
+      },
+      {
+        "task_description": "Write the word 'READY' on the whiteboard using the black marker.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "whiteboard_1",
+            "is_written_on": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00006"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the thermal_scanner_1 on the collaboration_table_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:38:25.316164",
+      "end_time": "2025-07-15T16:38:31.911690",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Data Vault and discovered 28 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:38:30.852989",
+          "detailed_result": {
+            "room_id": "data_vault",
+            "discovered_objects": [
+              {
+                "id": "legacy_schema_cabinet_1",
+                "name": "Legacy Schema Cabinet",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "keycard_reader_1",
+                "name": "Keycard Reader",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hard_drive_1",
+                "name": "Hard Drive",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hard_drive_2",
+                "name": "Hard Drive",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hard_drive_3",
+                "name": "Hard Drive",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hard_drive_4",
+                "name": "Hard Drive",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hard_drive_5",
+                "name": "Hard Drive",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "tape_45_1",
+                "name": "Backup Tape #45",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_1",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_2",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_3",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_4",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_5",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_6",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_7",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_8",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_9",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_10",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_11",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_12",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_13",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_14",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_15",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_16",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_17",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_18",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_19",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              },
+              {
+                "id": "backup_tape_20",
+                "name": "Backup Tape",
+                "type": "ITEM",
+                "container_info": "（在Legacy Schema Cabinet中）"
+              }
+            ],
+            "discovery_count": 28,
+            "is_complete": true,
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 1,
+    "completed_tasks": 0,
+    "failed_tasks": 1,
+    "completion_rate": 0.0,
+    "total_actions": 1,
+    "average_actions_per_task": 1.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 1,
+        "completed": 0,
+        "completion_rate": 0.0
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      }
+    }
+  }
+}

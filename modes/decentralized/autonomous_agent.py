@@ -1,7 +1,8 @@
 from typing import Dict, List, Optional, Any, Tuple
 import logging
 
-from utils.embodied_simulator import SimulationEngine, ActionStatus
+from simulator.core.enums import ActionStatus
+from simulator.core.engine import SimulationEngine
 
 from core.base_agent import BaseAgent
 from llm import BaseLLM, create_llm_from_config

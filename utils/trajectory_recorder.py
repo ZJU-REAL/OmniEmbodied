@@ -290,7 +290,10 @@ class TrajectoryRecorder:
                 # 第一次创建任务时，使用组合任务描述
                 self.current_compact_task['task_description'] = "Combined task execution"
 
-        logger.info(f"🎯 开始任务 {task_index}: {task_description}")
+        # 只记录到文件日志，不输出到控制台
+        log_msg = f"🎯 开始任务 {task_index}: {task_description}"
+        if hasattr(self, 'file_logger'):
+            self.file_logger.info(log_msg)
     
     def record_action(self, action: str, status, message: str = "", agent_id: str = None, result: Any = None):
         """
@@ -349,7 +352,9 @@ class TrajectoryRecorder:
         if message:
             log_msg += f" - {message}"
 
-        logger.info(log_msg)
+        # 只记录到文件日志，不输出到控制台
+        if hasattr(self, 'file_logger'):
+            self.file_logger.info(log_msg)
 
         # 自动保存轨迹（确保中断时不丢失数据）
         self.save_trajectory()
@@ -417,7 +422,11 @@ class TrajectoryRecorder:
             return
 
         self.current_task['completed'] = completed
-        logger.info(f"任务 {self.current_task_index} {'完成' if completed else '未完成'}")
+
+        # 只记录到文件日志，不输出到控制台
+        log_msg = f"任务 {self.current_task_index} {'完成' if completed else '未完成'}"
+        if hasattr(self, 'file_logger'):
+            self.file_logger.info(log_msg)
 
     def record_simulator_completion(self, completion_record: Dict[str, Any]):
         """
@@ -488,7 +497,10 @@ class TrajectoryRecorder:
                 # Sequential/Independent模式：每个任务单独记录
                 self.compact_trajectory['task_executions'].append(self.current_compact_task)
 
-        logger.info(f"🏁 任务 {self.current_task_index} 结束: {'完成' if self.current_task['completed'] else '未完成'}")
+        # 只记录到文件日志，不输出到控制台
+        log_msg = f"🏁 任务 {self.current_task_index} 结束: {'完成' if self.current_task['completed'] else '未完成'}"
+        if hasattr(self, 'file_logger'):
+            self.file_logger.info(log_msg)
 
         # 清空当前任务
         self.current_task = None

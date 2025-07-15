@@ -1,0 +1,667 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00018",
+    "start_time": "2025-07-15T16:14:58.230590",
+    "end_time": "2025-07-15T16:16:44.879322",
+    "total_duration_seconds": 106.648732,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00018",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00018",
+    "initialization_time": "2025-07-15T16:14:58.236859"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "The coastal marine research station is responding to a toxic algae bloom emergency. The team must secure hazardous materials, repair critical equipment, and prepare for field operations.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 25.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "break_room"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 25.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "break_room"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "microscope_1",
+            "location_id": "on:dissection_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the GPS buoy with id 'gps_buoy_1' in the decontamination tank with id 'decontamination_tank_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "gps_buoy_1",
+            "location_id": "in:decontamination_tank_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Move the chemical bottle with a blue cap to the emergency storage closet.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "chemical_bottle_1",
+            "location_id": "in:emergency_storage"
+          }
+        ]
+      },
+      {
+        "task_description": "Move the stack of journals with coffee rings to the break room.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "journal_stack_1",
+            "location_id": "in:break_room"
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the broken microscope.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "microscope_1",
+            "is_paired": true
+          }
+        ]
+      },
+      {
+        "task_description": "Pack the large hazmat suit using packing materials.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "hazmat_suit_1",
+            "is_packed": true
+          }
+        ]
+      },
+      {
+        "task_description": "Use the repair toolkit to fix the centrifuge showing error code E-22.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "centrifuge_1",
+            "is_paired": true
+          }
+        ]
+      },
+      {
+        "task_description": "Use the cleaning brush and agent to scrub the contaminated diving suit with torn glove.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "diving_suit_1",
+            "is_pure": false
+          }
+        ]
+      }
+    ],
+    "scene_id": "00018"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:14:58.256664",
+      "end_time": "2025-07-15T16:15:56.326001",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Break Room and discovered 6 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:14.564967",
+          "detailed_result": {
+            "room_id": "break_room",
+            "discovered_objects": [
+              {
+                "id": "coffee_maker_1",
+                "name": "Coffee Maker",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "coffee_mug_1",
+                "name": "Coffee Mug",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "whiteboard_2",
+                "name": "Whiteboard with Bloom Trajectories",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "police_scanner_1",
+                "name": "Crackling Police Scanner",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "eraser_1",
+                "name": "Eraser",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "post_it_1",
+                "name": "Post-it with Code",
+                "type": "ITEM",
+                "container_info": "（在Coffee Maker上）"
+              }
+            ],
+            "discovery_count": 6,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Break Room but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:21.753740",
+          "detailed_result": {
+            "room_id": "break_room",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Break Room but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:27.052375",
+          "detailed_result": {
+            "room_id": "break_room",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO emergency_storage",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Emergency Storage Closet",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:32.237148",
+          "detailed_result": {
+            "new_location_id": "emergency_storage",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO wet_lab",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Wet Lab",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:37.735664",
+          "detailed_result": {
+            "new_location_id": "wet_lab",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO server_room",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Server/Control Room",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:43.487905",
+          "detailed_result": {
+            "new_location_id": "server_room",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO field_prep_deck",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Field Prep Deck",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:48.754167",
+          "detailed_result": {
+            "new_location_id": "field_prep_deck",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:56.324995"
+        }
+      ],
+      "subtask_completions": [
+        {
+          "step": 1,
+          "timestamp": "2025-07-15T16:15:14.566278",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 2,
+          "timestamp": "2025-07-15T16:15:21.754306",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 3,
+          "timestamp": "2025-07-15T16:15:27.053268",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 4,
+          "timestamp": "2025-07-15T16:15:32.238034",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 5,
+          "timestamp": "2025-07-15T16:15:37.736563",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 6,
+          "timestamp": "2025-07-15T16:15:43.488497",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        },
+        {
+          "step": 7,
+          "timestamp": "2025-07-15T16:15:48.755130",
+          "task_description": "Place the microscope with id 'microscope_1' on the dissection table with id 'dissection_table_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        }
+      ]
+    },
+    {
+      "task_index": 2,
+      "task_description": "Place the GPS buoy with id 'gps_buoy_1' in the decontamination tank with id 'decontamination_tank_1'.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:15:56.326192",
+      "end_time": "2025-07-15T16:16:40.378721",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Field Prep Deck and discovered 10 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:01.789676",
+          "detailed_result": {
+            "room_id": "field_prep_deck",
+            "discovered_objects": [
+              {
+                "id": "winch_1",
+                "name": "Hydraulic Winch",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "sample_crate_rack_1",
+                "name": "Rusted Sample Crate Rack",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "diving_suit_1",
+                "name": "Contaminated Diving Suit",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "gps_buoy_1",
+                "name": "GPS Buoy",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "salt_bucket_1",
+                "name": "Salt-crusted Bucket",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "walkie_talkie_1",
+                "name": "Waterproof Walkie-Talkie",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "energy_wrapper_1",
+                "name": "Discarded Energy Bar Wrapper",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "fishing_net_1",
+                "name": "Fishing Net",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "decontamination_tank_1",
+                "name": "Decontamination Tank",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "oxygen_sensor_1",
+                "name": "Oxygen Sensor Array",
+                "type": "FURNITURE",
+                "container_info": ""
+              }
+            ],
+            "discovery_count": 10,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gps_buoy_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach GPS Buoy before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:08.453664",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gps_buoy_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached GPS Buoy (in Field Prep Deck)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:14.985375",
+          "detailed_result": {
+            "near_object_id": "gps_buoy_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gps_buoy_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed GPS Buoy",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:20.517277",
+          "detailed_result": {
+            "object_id": "gps_buoy_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO decontamination_tank_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Decontamination Tank (in Field Prep Deck)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:29.423715",
+          "detailed_result": {
+            "near_object_id": "decontamination_tank_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gps_buoy_1 in decontamination_tank_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed GPS Buoy on Decontamination Tank",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:35.847606",
+          "detailed_result": {
+            "object_id": "gps_buoy_1",
+            "location_id": "in:decontamination_tank_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:40.377362"
+        }
+      ],
+      "subtask_completions": [
+        {
+          "step": 6,
+          "timestamp": "2025-07-15T16:16:35.849201",
+          "task_description": "Place the GPS buoy with id 'gps_buoy_1' in the decontamination tank with id 'decontamination_tank_1'.",
+          "simulator_status": "completed",
+          "subtask_index": 2,
+          "source": "simulator"
+        }
+      ]
+    },
+    {
+      "task_index": 3,
+      "task_description": "Move the chemical bottle with a blue cap to the emergency storage closet.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:16:40.378855",
+      "end_time": "2025-07-15T16:16:44.877549",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 3,
+    "completed_tasks": 2,
+    "failed_tasks": 1,
+    "completion_rate": 0.6666666666666666,
+    "total_actions": 15,
+    "average_actions_per_task": 5.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 3,
+        "completed": 2,
+        "completion_rate": 0.6666666666666666
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 4,
+        "success": 4,
+        "success_rate": 1.0
+      },
+      "GOTO emergency_storage": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO wet_lab": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO server_room": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO field_prep_deck": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "DONE": {
+        "total": 2,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB gps_buoy_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO gps_buoy_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO decontamination_tank_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE gps_buoy_1 in decontamination_tank_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      }
+    }
+  }
+}

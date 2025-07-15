@@ -1,0 +1,550 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00019",
+    "start_time": "2025-07-15T16:15:49.690036",
+    "end_time": "2025-07-15T16:16:44.879144",
+    "total_duration_seconds": 55.189108,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00019",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00019",
+    "initialization_time": "2025-07-15T16:15:49.694912"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Secure and decontaminate the medical testing facility after a potential breach of a highly infectious bloodborne pathogen.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 40.0,
+        "max_size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "id": "agent_1",
+        "location_id": "decontamination_airlock"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 40.0,
+        "max_size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "id": "agent_2",
+        "location_id": "decontamination_airlock"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the object with id 'coffee_mug_1' on the ppe_station_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "coffee_mug_1",
+            "location_id": "on:ppe_station_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the object with id 'emergency_override_key_1' in the disposal_chute_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "emergency_override_key_1",
+            "location_id": "in:disposal_chute_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Move the blood vial with red cap and confirmed positive label to the medical refrigerator.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "blood_vial_3",
+            "location_id": "in:medical_refrigerator_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the fire extinguisher that is red and has inspection date 2019 onto the ppe_station_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "fire_extinguisher_1",
+            "location_id": "on:ppe_station_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Repair the broken UV light switch using the appropriate tool.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "uv_light_switch_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Clean the dirty microscope using the appropriate tool.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "microscope_1",
+            "is_dirty": false
+          }
+        ]
+      },
+      {
+        "task_description": "Find the centrifuge with model X-4000 that is broken and repair it using the toolbox.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "centrifuge_1",
+            "is_broken": false
+          }
+        ]
+      },
+      {
+        "task_description": "Clean the microscope that is dirty and has model Olympus CX43 using the cleaning kit.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "microscope_1",
+            "is_dirty": false
+          }
+        ]
+      }
+    ],
+    "scene_id": "00019"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the object with id 'coffee_mug_1' on the ppe_station_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:15:49.711982",
+      "end_time": "2025-07-15T16:16:44.877540",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Decontamination Airlock and discovered 12 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:15:54.976590",
+          "detailed_result": {
+            "room_id": "decontamination_airlock",
+            "discovered_objects": [
+              {
+                "id": "ppe_station_1",
+                "name": "PPE Station",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "disposal_chute_1",
+                "name": "Biohazard Disposal Chute",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "emergency_shower_1",
+                "name": "Emergency Shower",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "uv_light_switch_1",
+                "name": "UV Light Switch",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "hand_sanitizer_dispenser_1",
+                "name": "Hand Sanitizer Dispenser",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "wall_mounted_clipboard_1",
+                "name": "Decontamination Log Clipboard",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "safety_poster_1",
+                "name": "Peeling Safety Poster",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "fire_extinguisher_1",
+                "name": "Dusty Fire Extinguisher",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "biohazard_suit_1",
+                "name": "Biohazard Suit (Size L)",
+                "type": "ITEM",
+                "container_info": "（在PPE Station中）"
+              },
+              {
+                "id": "biohazard_suit_2",
+                "name": "Biohazard Suit (Size XL)",
+                "type": "ITEM",
+                "container_info": "（在PPE Station中）"
+              },
+              {
+                "id": "sealed_goggles_1",
+                "name": "Sealed Goggles",
+                "type": "ITEM",
+                "container_info": "（在PPE Station中）"
+              },
+              {
+                "id": "n95_mask_1",
+                "name": "N95 Mask",
+                "type": "ITEM",
+                "container_info": "（在PPE Station中）"
+              }
+            ],
+            "discovery_count": 12,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO main_testing_lab",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Testing Lab",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:00.996771",
+          "detailed_result": {
+            "new_location_id": "main_testing_lab",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Main Testing Lab and discovered 16 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:07.257614",
+          "detailed_result": {
+            "room_id": "main_testing_lab",
+            "discovered_objects": [
+              {
+                "id": "centrifuge_1",
+                "name": "Centrifuge (Model X-4000)",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "fume_hood_1",
+                "name": "Fume Hood",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "blood_sample_rack_1",
+                "name": "Blood Sample Rack",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "microscope_1",
+                "name": "Microscope (Olympus CX43)",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "printer_1",
+                "name": "Printer",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "medical_refrigerator_1",
+                "name": "Medical Grade Refrigerator",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "coffee_mug_1",
+                "name": "Coffee Mug (World's Best Lab Tech)",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "whiteboard_1",
+                "name": "Whiteboard",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "cleaning_kit_1",
+                "name": "Cleaning Kit",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "toolbox_1",
+                "name": "Toolbox",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "sterilizer_1",
+                "name": "Sterilizer",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "blood_vial_1",
+                "name": "Blood Vial (Test Pending)",
+                "type": "ITEM",
+                "container_info": "（在Blood Sample Rack中）"
+              },
+              {
+                "id": "blood_vial_2",
+                "name": "Blood Vial (Test Pending)",
+                "type": "ITEM",
+                "container_info": "（在Blood Sample Rack中）"
+              },
+              {
+                "id": "blood_vial_3",
+                "name": "Blood Vial (Positive - Confirmed)",
+                "type": "ITEM",
+                "container_info": "（在Blood Sample Rack中）"
+              },
+              {
+                "id": "blood_vial_4",
+                "name": "Blood Vial (Positive - Confirmed)",
+                "type": "ITEM",
+                "container_info": "（在Blood Sample Rack中）"
+              },
+              {
+                "id": "blood_vial_5",
+                "name": "Blood Vial (Control Group)",
+                "type": "ITEM",
+                "container_info": "（在Blood Sample Rack中）"
+              }
+            ],
+            "discovery_count": 16,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB coffee_mug_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Coffee Mug (World's Best Lab Tech) before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:13.422117",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO coffee_mug_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Coffee Mug (World's Best Lab Tech) (in Main Testing Lab)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:19.635505",
+          "detailed_result": {
+            "near_object_id": "coffee_mug_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB coffee_mug_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Coffee Mug (World's Best Lab Tech)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:27.724882",
+          "detailed_result": {
+            "object_id": "coffee_mug_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO ppe_station_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "请先前往Decontamination Airlock，再靠近PPE Station",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:33.594841",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO decontamination_airlock",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Decontamination Airlock",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:16:39.063741",
+          "detailed_result": {
+            "new_location_id": "decontamination_airlock",
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 1,
+    "completed_tasks": 0,
+    "failed_tasks": 1,
+    "completion_rate": 0.0,
+    "total_actions": 8,
+    "average_actions_per_task": 8.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 1,
+        "completed": 0,
+        "completion_rate": 0.0
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 2,
+        "success": 2,
+        "success_rate": 1.0
+      },
+      "GOTO main_testing_lab": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GRAB coffee_mug_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO coffee_mug_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO ppe_station_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GOTO decontamination_airlock": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      }
+    }
+  }
+}

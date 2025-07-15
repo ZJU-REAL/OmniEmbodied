@@ -1,0 +1,565 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00032",
+    "start_time": "2025-07-15T16:16:55.243863",
+    "end_time": "2025-07-15T16:18:28.736826",
+    "total_duration_seconds": 93.492963,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00032",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00032",
+    "initialization_time": "2025-07-15T16:16:55.250893"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the quantum materials research lab for a critical symmetry-breaking experiment by configuring equipment, handling sensitive materials, and ensuring operational readiness.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "id": "agent_1",
+        "location_id": "breakout_lounge"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "id": "agent_2",
+        "location_id": "breakout_lounge"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place quantum_interference_device_1 on cryogenic_sample_stage_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "quantum_interference_device_1",
+            "location_id": "on:cryogenic_sample_stage_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Turn on the spectrometer in the instrumentation bay.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "spectrometer_1",
+            "is_on": true
+          }
+        ]
+      },
+      {
+        "task_description": "Open the argon-purged glovebox workstation in the cleanroom annex.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "glovebox_workstation_1",
+            "is_open": true
+          }
+        ]
+      },
+      {
+        "task_description": "Close the laminar airflow fume hood in the storage prep zone.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "fume_hood_1",
+            "is_open": false
+          }
+        ]
+      }
+    ],
+    "scene_id": "00032"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place quantum_interference_device_1 on cryogenic_sample_stage_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:16:55.274079",
+      "end_time": "2025-07-15T16:17:52.106754",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Breakout Lounge and discovered 6 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:00.387326",
+          "detailed_result": {
+            "room_id": "breakout_lounge",
+            "discovered_objects": [
+              {
+                "id": "researcher_backpack_1",
+                "name": "Researcher's Backpack",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "broken_coffee_machine_1",
+                "name": "Broken Coffee Machine",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "sagging_couch_1",
+                "name": "Sagging Couch",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "microwave_1",
+                "name": "Microwave",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "chalkboard_1",
+                "name": "Chalkboard",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "keycard_1",
+                "name": "Keycard",
+                "type": "ITEM",
+                "container_info": "（在Researcher's Backpack中）"
+              }
+            ],
+            "discovery_count": 6,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO main_lab_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Lab Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:06.218121",
+          "detailed_result": {
+            "new_location_id": "main_lab_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Main Lab Floor and discovered 7 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:12.058806",
+          "detailed_result": {
+            "room_id": "main_lab_floor",
+            "discovered_objects": [
+              {
+                "id": "cryogenic_sample_stage_1",
+                "name": "Cryogenic Sample Stage",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "modular_workbench_1",
+                "name": "Modular Workbench",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "electrostatic_discharge_mat_1",
+                "name": "Electrostatic Discharge Mat",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "symmetry_breaking_poster_1",
+                "name": "Symmetry Breaking Poster",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "symmetry_calibration_jig_1",
+                "name": "Symmetry-Calibration Jig",
+                "type": "FURNITURE",
+                "container_info": "（在Modular Workbench上）"
+              },
+              {
+                "id": "quantum_interference_device_1",
+                "name": "Quantum Interference Device",
+                "type": "ITEM",
+                "container_info": "（在Modular Workbench上）"
+              },
+              {
+                "id": "precision_goniometer_1",
+                "name": "Precision Goniometer",
+                "type": "ITEM",
+                "container_info": "（在Modular Workbench上）"
+              }
+            ],
+            "discovery_count": 7,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB quantum_interference_device_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Quantum Interference Device before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:17.816660",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO modular_workbench_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Modular Workbench (in Main Lab Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:23.692102",
+          "detailed_result": {
+            "near_object_id": "modular_workbench_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB quantum_interference_device_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Quantum Interference Device",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:29.280692",
+          "detailed_result": {
+            "object_id": "quantum_interference_device_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO cryogenic_sample_stage_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Cryogenic Sample Stage (in Main Lab Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:38.366088",
+          "detailed_result": {
+            "near_object_id": "cryogenic_sample_stage_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE quantum_interference_device_1 on cryogenic_sample_stage_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Quantum Interference Device on Cryogenic Sample Stage",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:47.239576",
+          "detailed_result": {
+            "object_id": "quantum_interference_device_1",
+            "location_id": "on:cryogenic_sample_stage_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:52.105766"
+        }
+      ],
+      "subtask_completions": [
+        {
+          "step": 8,
+          "timestamp": "2025-07-15T16:17:47.240384",
+          "task_description": "Place quantum_interference_device_1 on cryogenic_sample_stage_1.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        }
+      ]
+    },
+    {
+      "task_index": 2,
+      "task_description": "Turn on the spectrometer in the instrumentation bay.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:17:52.106965",
+      "end_time": "2025-07-15T16:18:21.871790",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "GOTO instrumentation_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Instrumentation Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:57.665727",
+          "detailed_result": {
+            "new_location_id": "instrumentation_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Instrumentation Bay and discovered 4 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:02.872085",
+          "detailed_result": {
+            "room_id": "instrumentation_bay",
+            "discovered_objects": [
+              {
+                "id": "vibration_damped_table_1",
+                "name": "Vibration-Damped Table",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "calibration_tool_cart_1",
+                "name": "Calibration Tool Cart",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "spectrometer_1",
+                "name": "Spectrometer",
+                "type": "ITEM",
+                "container_info": "（在Vibration-Damped Table上）"
+              },
+              {
+                "id": "screwdriver_set_1",
+                "name": "Screwdriver Set",
+                "type": "ITEM",
+                "container_info": "（在Calibration Tool Cart中）"
+              }
+            ],
+            "discovery_count": 4,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO spectrometer_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Spectrometer (in Instrumentation Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:09.103304",
+          "detailed_result": {
+            "near_object_id": "spectrometer_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB spectrometer_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "超出重量限制（当前:0.0kg + 物体:22.0kg > 最大:10.0kg）",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:15.648759",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:21.870233"
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 3,
+      "task_description": "Open the argon-purged glovebox workstation in the cleanroom annex.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:18:21.871942",
+      "end_time": "2025-07-15T16:18:28.734219",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 3,
+    "completed_tasks": 2,
+    "failed_tasks": 1,
+    "completion_rate": 0.6666666666666666,
+    "total_actions": 14,
+    "average_actions_per_task": 4.666666666666667,
+    "task_category_stats": {
+      "subtask": {
+        "total": 3,
+        "completed": 2,
+        "completion_rate": 0.6666666666666666
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 3,
+        "success": 3,
+        "success_rate": 1.0
+      },
+      "GOTO main_lab_floor": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GRAB quantum_interference_device_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO modular_workbench_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO cryogenic_sample_stage_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE quantum_interference_device_1 on cryogenic_sample_stage_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "DONE": {
+        "total": 2,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GOTO instrumentation_bay": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO spectrometer_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GRAB spectrometer_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      }
+    }
+  }
+}

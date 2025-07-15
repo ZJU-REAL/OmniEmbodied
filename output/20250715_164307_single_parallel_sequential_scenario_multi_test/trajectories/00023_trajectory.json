@@ -1,0 +1,248 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00023",
+    "start_time": "2025-07-15T16:43:28.656227",
+    "end_time": "2025-07-15T16:43:29.035912",
+    "total_duration_seconds": 0.379685,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00023",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00023",
+    "initialization_time": "2025-07-15T16:43:28.661069"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the backstage theater workshop for the production of The Wizard of Oz by organizing props, costumes, and equipment.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "actor_green_room"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "actor_green_room"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the object with id 'hot_glue_gun_1' onto the object with id 'step_ladder_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "hot_glue_gun_1",
+            "location_id": "on:step_ladder_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the object with id 'toto_treats_1' into the object with id 'file_cabinet_1'.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "toto_treats_1",
+            "location_id": "in:file_cabinet_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Find the only object that is both made of metal and has a condition of 'dented', then place it in the emergency repair station.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "tin_man_chestplate_1",
+            "location_id": "in:emergency_repair_station"
+          }
+        ]
+      },
+      {
+        "task_description": "Find the uniquely labeled 'Poco's Snacks - DO NOT TOUCH' object and place it on the sagging couch.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "toto_treats_1",
+            "location_id": "on:couch_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Assemble the Wicked Witch's broom.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "wicked_witch_broom_1",
+            "is_assembled": true
+          }
+        ]
+      },
+      {
+        "task_description": "Scan the barcode of the bin labeled 'Munchkin Hats'.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "labeled_bin_1",
+            "is_barcode_scanned": true
+          }
+        ]
+      },
+      {
+        "task_description": "Using the hot glue gun, assemble the only prop basket that is torn and made of woven material.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "toto_basket_1",
+            "is_assembled": true
+          }
+        ]
+      },
+      {
+        "task_description": "Using the industrial velcro, assemble the black hat that is bent and made of felt.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "witch_hat_1",
+            "is_assembled": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00023"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the object with id 'hot_glue_gun_1' onto the object with id 'step_ladder_1'.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:43:28.682691",
+      "end_time": "2025-07-15T16:43:29.034941",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 1,
+    "completed_tasks": 0,
+    "failed_tasks": 1,
+    "completion_rate": 0.0,
+    "total_actions": 0,
+    "average_actions_per_task": 0.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 1,
+        "completed": 0,
+        "completion_rate": 0.0
+      }
+    },
+    "action_type_stats": {}
+  }
+}

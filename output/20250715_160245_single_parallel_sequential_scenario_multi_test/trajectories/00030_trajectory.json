@@ -1,0 +1,764 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00030",
+    "start_time": "2025-07-15T16:16:55.236148",
+    "end_time": "2025-07-15T16:18:28.734562",
+    "total_duration_seconds": 93.498414,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00030",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00030",
+    "initialization_time": "2025-07-15T16:16:55.246044"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Prepare the indie recording studio and time-travel workshop for an experimental recording session and temporal calibration, requiring equipment setup, repairs, and organization.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "chill_out_lounge"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 50.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "chill_out_lounge"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the effect_pedal_1 on the workbench_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "effect_pedal_1",
+            "location_id": "on:workbench_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the hourglass_1 in the storage_closet.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "hourglass_1",
+            "location_id": "in:storage_closet"
+          }
+        ]
+      },
+      {
+        "task_description": "Find the only effect pedal with a red TIME sticker and place it in the workshop corner.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "effect_pedal_1",
+            "location_id": "in:workshop_corner"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the heaviest black microphone currently on the mixing desk into the vocal booth.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "sm58_microphone_1",
+            "location_id": "in:vocal_booth"
+          }
+        ]
+      },
+      {
+        "task_description": "Scan the barcode on the master tape reel using the barcode scanner.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "barcode_2",
+            "is_barcode_scanned": true
+          }
+        ]
+      },
+      {
+        "task_description": "Use the blue pen to write on the only coffee-stained lyric notebook.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "lyric_notebook_1",
+            "is_written_on": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00030"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the effect_pedal_1 on the workbench_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:16:55.269684",
+      "end_time": "2025-07-15T16:18:05.393959",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Chill-Out Lounge and discovered 8 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:00.334951",
+          "detailed_result": {
+            "room_id": "chill_out_lounge",
+            "discovered_objects": [
+              {
+                "id": "couch_1",
+                "name": "Thrift-Store Couch",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "coffee_table_1",
+                "name": "Coffee Table",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "fridge_1",
+                "name": "Small Fridge",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "lyric_sheets_1",
+                "name": "Lyric Sheets",
+                "type": "ITEM",
+                "container_info": "（在Coffee Table上）"
+              },
+              {
+                "id": "energy_drink_3",
+                "name": "Energy Drink Can",
+                "type": "ITEM",
+                "container_info": "（在Coffee Table上）"
+              },
+              {
+                "id": "sticky_note_1",
+                "name": "Sticky Note",
+                "type": "ITEM",
+                "container_info": "（在Coffee Table上）"
+              },
+              {
+                "id": "energy_drink_1",
+                "name": "Energy Drink Can",
+                "type": "ITEM",
+                "container_info": "（在Small Fridge中）"
+              },
+              {
+                "id": "energy_drink_2",
+                "name": "Energy Drink Can",
+                "type": "ITEM",
+                "container_info": "（在Small Fridge中）"
+              }
+            ],
+            "discovery_count": 8,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO main_recording_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Recording Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:05.804301",
+          "detailed_result": {
+            "new_location_id": "main_recording_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Main Recording Floor and discovered 20 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:10.892132",
+          "detailed_result": {
+            "room_id": "main_recording_floor",
+            "discovered_objects": [
+              {
+                "id": "mixing_desk_1",
+                "name": "8-channel Analog Mixing Desk",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "drum_kit_1",
+                "name": "Drum Kit",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "guitar_amp_1",
+                "name": "Guitar Amp Stack",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "hammond_organ_1",
+                "name": "Hammond Organ",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "drum_riser_1",
+                "name": "Drum Riser Platform",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "poster_1",
+                "name": "384 BC Tour Poster",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "time_loop_pedal_1",
+                "name": "Time Loop Pedal",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "master_tape_reel_1",
+                "name": "Master Recording Tape Reel",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "barcode_2",
+                "name": "Barcode Sticker",
+                "type": "ITEM",
+                "container_info": "（在Master Recording Tape Reel上）"
+              },
+              {
+                "id": "lyric_notebook_1",
+                "name": "Lyric Notebook",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "sm58_microphone_1",
+                "name": "SM58 Microphone",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "midi_keyboard_1",
+                "name": "MIDI Keyboard",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "headphones_1",
+                "name": "Headphones",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "effect_pedal_1",
+                "name": "Effect Pedal (Red TIME Sticker)",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "effect_pedal_2",
+                "name": "Effect Pedal (No Sticker)",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "effect_pedal_3",
+                "name": "Effect Pedal (Blue Sticker)",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "effect_pedal_4",
+                "name": "Effect Pedal (Green Sticker)",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "effect_pedal_5",
+                "name": "Effect Pedal (Yellow Sticker)",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "hourglass_1",
+                "name": "Decorative Hourglass",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              },
+              {
+                "id": "lava_lamp_1",
+                "name": "Dusty Lava Lamp",
+                "type": "ITEM",
+                "container_info": "（在8-channel Analog Mixing Desk上）"
+              }
+            ],
+            "discovery_count": 20,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB effect_pedal_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Effect Pedal (Red TIME Sticker) before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:19.662226",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO mixing_desk_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached 8-channel Analog Mixing Desk (in Main Recording Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:25.733043",
+          "detailed_result": {
+            "near_object_id": "mixing_desk_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB effect_pedal_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Effect Pedal (Red TIME Sticker)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:31.285275",
+          "detailed_result": {
+            "object_id": "effect_pedal_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO workshop_corner",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Time Machine Workshop Corner",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:37.402127",
+          "detailed_result": {
+            "new_location_id": "workshop_corner",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Time Machine Workshop Corner and discovered 17 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:42.895136",
+          "detailed_result": {
+            "room_id": "workshop_corner",
+            "discovered_objects": [
+              {
+                "id": "workbench_1",
+                "name": "Workbench",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "theremin_1",
+                "name": "Theremin",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "synth_key_1",
+                "name": "Synth Key",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "chalkboard_1",
+                "name": "Chalkboard",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "oscilloscope_1",
+                "name": "Obsolete Oscilloscope",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "chronon_regulator_1",
+                "name": "Chronon Regulator",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "locked_toolbox_1",
+                "name": "Locked Toolbox",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "barcode_1",
+                "name": "Barcode Sticker",
+                "type": "ITEM",
+                "container_info": "（在Locked Toolbox上）"
+              },
+              {
+                "id": "blueprints_1",
+                "name": "Blueprints for Temporal Echo Device",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "desk_fan_1",
+                "name": "Desk Fan",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "soldering_iron_1",
+                "name": "Soldering Iron",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "screwdriver_1",
+                "name": "Screwdriver",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "wrench_1",
+                "name": "Wrench",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "pen_1",
+                "name": "Pen",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "marker_1",
+                "name": "Marker",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "sci_fi_novel_1",
+                "name": "Retro Sci-Fi Novel",
+                "type": "ITEM",
+                "container_info": "（在Workbench上）"
+              },
+              {
+                "id": "guitar_pick_1",
+                "name": "Guitar Pick",
+                "type": "ITEM",
+                "container_info": "（在Retro Sci-Fi Novel上）"
+              }
+            ],
+            "discovery_count": 17,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE effect_pedal_1 on workbench_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent must approach workbench_1 before placing object",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:49.219320",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO workbench_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Workbench (in Time Machine Workshop Corner)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:17:54.602078",
+          "detailed_result": {
+            "near_object_id": "workbench_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE effect_pedal_1 on workbench_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Effect Pedal (Red TIME Sticker) on Workbench",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:00.399270",
+          "detailed_result": {
+            "object_id": "effect_pedal_1",
+            "location_id": "on:workbench_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:05.393231"
+        }
+      ],
+      "subtask_completions": [
+        {
+          "step": 11,
+          "timestamp": "2025-07-15T16:18:00.400938",
+          "task_description": "Place the effect_pedal_1 on the workbench_1.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        }
+      ]
+    },
+    {
+      "task_index": 2,
+      "task_description": "Place the hourglass_1 in the storage_closet.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:18:05.394153",
+      "end_time": "2025-07-15T16:18:28.732675",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "GOTO mixing_desk_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "请先前往Main Recording Floor，再靠近8-channel Analog Mixing Desk",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:10.904643",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO main_recording_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Main Recording Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:16.082540",
+          "detailed_result": {
+            "new_location_id": "main_recording_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO mixing_desk_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached 8-channel Analog Mixing Desk (in Main Recording Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:21.203371",
+          "detailed_result": {
+            "near_object_id": "mixing_desk_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB hourglass_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Decorative Hourglass",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:18:26.863630",
+          "detailed_result": {
+            "object_id": "hourglass_1",
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 2,
+    "completed_tasks": 1,
+    "failed_tasks": 1,
+    "completion_rate": 0.5,
+    "total_actions": 16,
+    "average_actions_per_task": 8.0,
+    "task_category_stats": {
+      "subtask": {
+        "total": 2,
+        "completed": 1,
+        "completion_rate": 0.5
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 3,
+        "success": 3,
+        "success_rate": 1.0
+      },
+      "GOTO main_recording_floor": {
+        "total": 2,
+        "success": 2,
+        "success_rate": 1.0
+      },
+      "GRAB effect_pedal_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO mixing_desk_1": {
+        "total": 3,
+        "success": 2,
+        "success_rate": 0.6666666666666666
+      },
+      "GOTO workshop_corner": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE effect_pedal_1 on workbench_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO workbench_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "DONE": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB hourglass_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      }
+    }
+  }
+}

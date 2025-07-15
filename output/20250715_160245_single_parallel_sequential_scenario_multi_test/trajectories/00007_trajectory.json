@@ -1,0 +1,1833 @@
+{
+  "execution_info": {
+    "run_name": "scenario_00007",
+    "start_time": "2025-07-15T16:02:45.418681",
+    "end_time": "2025-07-15T16:14:58.184853",
+    "total_duration_seconds": 732.766172,
+    "evaluation_mode": "sequential"
+  },
+  "configuration": {
+    "agent_type": "single",
+    "task_type": "sequential",
+    "config_file": "single_agent_config",
+    "scenario_id": "00007",
+    "config_data": {
+      "execution": {
+        "max_total_steps": 200
+      },
+      "task_evaluator": {
+        "max_steps_per_task": 20
+      },
+      "environment_description": {
+        "detail_level": "full",
+        "show_object_properties": true,
+        "only_show_discovered": true,
+        "include_other_agents": true,
+        "update_frequency": 0
+      },
+      "history": {
+        "max_history_length": -1
+      },
+      "evaluation": {
+        "task_type": "independent",
+        "default_scenario": "00002",
+        "run_settings": {
+          "default_suffix": "demo",
+          "log_level": "INFO"
+        },
+        "output": {
+          "base_dir": "output",
+          "save_trajectory": true,
+          "save_compact_trajectory": true,
+          "generate_report": true
+        },
+        "execution": {
+          "timeout_seconds": 900,
+          "sequential": {
+            "continue_on_failure": true,
+            "clear_history_between_tasks": true,
+            "delay_between_tasks": 1.0,
+            "show_task_progress": true
+          },
+          "combined": {
+            "task_separator": "\n\n下一个任务：\n",
+            "add_task_numbers": true,
+            "show_task_separator": true
+          },
+          "independent": {
+            "continue_on_failure": true,
+            "delay_between_subtasks": 1.0,
+            "show_subtask_progress": true,
+            "output_management": {
+              "subtask_dir_pattern": "subtask_{index:03d}_{hash}",
+              "create_subtask_directories": false,
+              "save_individual_logs": true,
+              "generate_subtask_trajectories": true
+            },
+            "analysis": {
+              "compare_subtask_performance": true,
+              "analyze_category_success_rate": true,
+              "generate_timing_analysis": false
+            }
+          }
+        }
+      },
+      "parallel_evaluation": {
+        "enabled": true,
+        "scenario_parallelism": {
+          "max_parallel_scenarios": 5
+        },
+        "scenario_selection": {
+          "mode": "all",
+          "range": {
+            "start": "00009",
+            "end": "00010"
+          }
+        },
+        "output": {
+          "save_individual_trajectories": true,
+          "generate_summary_report": true
+        }
+      }
+    }
+  },
+  "scenario_info": {
+    "scenario_id": "00007",
+    "initialization_time": "2025-07-15T16:02:45.428729"
+  },
+  "agent_info": {
+    "agent_type": "single",
+    "agents": {
+      "agent_1": {
+        "type": "LLMAgent",
+        "config": "single_agent_config"
+      }
+    }
+  },
+  "task_info": {
+    "task_background": "Reset and prepare the recycling facility for the next operational day after a chaotic sorting shift.",
+    "agents_config": [
+      {
+        "name": "robot_1",
+        "max_grasp_limit": 1,
+        "max_weight": 40.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_1",
+        "location_id": "intake_bay"
+      },
+      {
+        "name": "robot_2",
+        "max_grasp_limit": 1,
+        "max_weight": 40.0,
+        "max_size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "id": "agent_2",
+        "location_id": "intake_bay"
+      }
+    ],
+    "tasks": [
+      {
+        "task_description": "Place the object with id 'scanner_1' on the sorting_table_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "scanner_1",
+            "location_id": "on:sorting_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the object with id 'rubber_boot_1' in the gloves_cart_1.",
+        "task_category": "direct_command",
+        "validation_checks": [
+          {
+            "id": "rubber_boot_1",
+            "location_id": "in:gloves_cart_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Move the only yellow, large rubber boot to the sorting_table_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "rubber_boot_1",
+            "location_id": "on:sorting_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Place the blue-capped water bottle on the sorting_table_1.",
+        "task_category": "attribute_reasoning",
+        "validation_checks": [
+          {
+            "id": "water_bottle_1",
+            "location_id": "on:sorting_table_1"
+          }
+        ]
+      },
+      {
+        "task_description": "Open the hazardous waste drum using the crowbar.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "hazardous_waste_drum_1",
+            "is_open": true
+          }
+        ]
+      },
+      {
+        "task_description": "Take down the safety poster using the knife.",
+        "task_category": "tool_use",
+        "validation_checks": [
+          {
+            "id": "safety_poster_1",
+            "is_hung_up": false
+          }
+        ]
+      },
+      {
+        "task_description": "Fix the only jammed scanner with error code ERROR 47 using the screwdriver.",
+        "task_category": "compound_reasoning",
+        "validation_checks": [
+          {
+            "id": "scanner_1",
+            "is_screwed_in": true
+          }
+        ]
+      }
+    ],
+    "scene_id": "00007"
+  },
+  "task_executions": [
+    {
+      "task_index": 1,
+      "task_description": "Place the object with id 'scanner_1' on the sorting_table_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:02:45.499237",
+      "end_time": "2025-07-15T16:03:45.882664",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Intake Bay and discovered 12 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:02:51.251897",
+          "detailed_result": {
+            "room_id": "intake_bay",
+            "discovered_objects": [
+              {
+                "id": "conveyor_belt_1",
+                "name": "Rusted Steel Conveyor Belt",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "forklift_1",
+                "name": "Hydraulic Forklift",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "hazardous_waste_drum_1",
+                "name": "Mislabeled Hazardous Waste Drum",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "gaylord_box_1",
+                "name": "Empty Gaylord Box",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "clipboard_1",
+                "name": "Damp Intake Logbook",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "safety_poster_1",
+                "name": "Faded Safety Poster",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "potted_cactus_1",
+                "name": "Dead Potted Cactus",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "crowbar_1",
+                "name": "Steel Crowbar",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "scanner_1",
+                "name": "Jammed Scanner",
+                "type": "ITEM",
+                "container_info": "（在Rusted Steel Conveyor Belt上）"
+              },
+              {
+                "id": "rubber_boot_1",
+                "name": "Single Rubber Boot",
+                "type": "ITEM",
+                "container_info": "（在Empty Gaylord Box中）"
+              },
+              {
+                "id": "cracked_tablet_1",
+                "name": "Cracked Tablet",
+                "type": "ITEM",
+                "container_info": "（在Empty Gaylord Box中）"
+              },
+              {
+                "id": "water_bottle_1",
+                "name": "Blue-Capped Water Bottle",
+                "type": "ITEM",
+                "container_info": "（在Empty Gaylord Box中）"
+              }
+            ],
+            "discovery_count": 12,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB scanner_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Jammed Scanner before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:02:56.896043",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO conveyor_belt_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Rusted Steel Conveyor Belt (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:02.337054",
+          "detailed_result": {
+            "near_object_id": "conveyor_belt_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB scanner_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Jammed Scanner",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:07.566781",
+          "detailed_result": {
+            "object_id": "scanner_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Intake Bay but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:13.203043",
+          "detailed_result": {
+            "room_id": "intake_bay",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:19.178079",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 thoroughly explored Sorting Floor and discovered 17 new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:24.528553",
+          "detailed_result": {
+            "room_id": "sorting_floor",
+            "discovered_objects": [
+              {
+                "id": "sorting_table_1",
+                "name": "Central Sorting Table",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "glass_crusher_1",
+                "name": "Glass Crusher",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "aluminum_separator_1",
+                "name": "Aluminum Separator",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "mystery_tote_1",
+                "name": "Sealed Plastic Tote",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "gloves_cart_1",
+                "name": "Wheeled Gloves Cart",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "industrial_fan_1",
+                "name": "Dented Industrial Fan",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "calendar_1",
+                "name": "Wall Calendar",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "coffee_maker_1",
+                "name": "Out of Order Coffee Maker",
+                "type": "FURNITURE",
+                "container_info": ""
+              },
+              {
+                "id": "screwdriver_1",
+                "name": "Phillips Screwdriver",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "knife_1",
+                "name": "Utility Knife",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "plate_1",
+                "name": "Ceramic Plate",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "solvent_bottle_1",
+                "name": "Blue-Capped Solvent Bottle",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "sticky_note_1",
+                "name": "Lock Code Sticky Note",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "brownie_recipe_1",
+                "name": "Best Brownies Recipe",
+                "type": "ITEM",
+                "container_info": ""
+              },
+              {
+                "id": "gloves_small_1",
+                "name": "Small Sorting Gloves",
+                "type": "ITEM",
+                "container_info": "（在Wheeled Gloves Cart中）"
+              },
+              {
+                "id": "gloves_medium_1",
+                "name": "Medium Sorting Gloves",
+                "type": "ITEM",
+                "container_info": "（在Wheeled Gloves Cart中）"
+              },
+              {
+                "id": "gloves_large_1",
+                "name": "Large Sorting Gloves",
+                "type": "ITEM",
+                "container_info": "（在Wheeled Gloves Cart中）"
+              }
+            ],
+            "discovery_count": 17,
+            "is_complete": true,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE scanner_1 on sorting_table_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent must approach sorting_table_1 before placing object",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:30.285033",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_table_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Central Sorting Table (in Sorting Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:35.998175",
+          "detailed_result": {
+            "near_object_id": "sorting_table_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE scanner_1 on sorting_table_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Jammed Scanner on Central Sorting Table",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:41.020872",
+          "detailed_result": {
+            "object_id": "scanner_1",
+            "location_id": "on:sorting_table_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:45.882040"
+        }
+      ],
+      "subtask_completions": [
+        {
+          "step": 10,
+          "timestamp": "2025-07-15T16:03:41.021507",
+          "task_description": "Place the object with id 'scanner_1' on the sorting_table_1.",
+          "simulator_status": "completed",
+          "subtask_index": 1,
+          "source": "simulator"
+        }
+      ]
+    },
+    {
+      "task_index": 2,
+      "task_description": "Place the object with id 'rubber_boot_1' in the gloves_cart_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:03:45.882804",
+      "end_time": "2025-07-15T16:05:43.259525",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:51.448950",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB rubber_boot_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object rubber_boot_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:03:56.929992",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "OPEN gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: OPEN",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:02.822614",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Steel Crowbar before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:09.004021",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO crowbar_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Steel Crowbar (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:14.990483",
+          "detailed_result": {
+            "near_object_id": "crowbar_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Steel Crowbar",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:20.414271",
+          "detailed_result": {
+            "object_id": "crowbar_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:28.389695",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "ASSEMBLE gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: ASSEMBLE",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:34.047467",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB rubber_boot_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object rubber_boot_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:41.912102",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:04:48.156139",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 in gloves_cart_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:00.247292",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent must go to Intake Bay first to interact with Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:06.557579",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:16.525115",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:26.648861",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Intake Bay but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:34.650507",
+          "detailed_result": {
+            "room_id": "intake_bay",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:43.258137"
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 3,
+      "task_description": "Move the only yellow, large rubber boot to the sorting_table_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:05:43.259676",
+      "end_time": "2025-07-15T16:06:25.044846",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:51.287525",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB rubber_boot_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object rubber_boot_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:05:56.677979",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "OPEN gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: OPEN",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:04.361592",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "ASSEMBLE gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: ASSEMBLE",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:11.021360",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:18.004020",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:25.042971"
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 4,
+      "task_description": "Place the blue-capped water bottle on the sorting_table_1.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:06:25.045027",
+      "end_time": "2025-07-15T16:08:58.535415",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "GRAB water_bottle_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object water_bottle_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:31.202735",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:37.091124",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE crowbar_1 in gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Steel Crowbar on Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:42.644563",
+          "detailed_result": {
+            "object_id": "crowbar_1",
+            "location_id": "in:gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object crowbar_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:48.848004",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:06:58.106530",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE water_bottle_1 in gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: water_bottle_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:05.320069",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:11.068880",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:18.607351",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:25.527208",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:33.262813",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:42.990146",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:49.694141",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:07:59.187753",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:06.416706",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:13.857565",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:24.817004",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:32.674321",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:41.379814",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:50.269997",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:08:58.533431",
+          "detailed_result": {
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 5,
+      "task_description": "Open the hazardous waste drum using the crowbar.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:08:58.535600",
+      "end_time": "2025-07-15T16:11:13.167693",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object crowbar_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:04.620108",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 in open",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:09.813897",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Intake Bay but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:17.919993",
+          "detailed_result": {
+            "room_id": "intake_bay",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:26.253597",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB knife_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Utility Knife before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:34.300050",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO knife_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Utility Knife (in Sorting Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:40.382716",
+          "detailed_result": {
+            "near_object_id": "knife_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB knife_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Utility Knife",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:46.413445",
+          "detailed_result": {
+            "object_id": "knife_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:09:52.322883",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE knife_1 in gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent must approach gaylord_box_1 before placing object",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:00.671664",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:06.868979",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE knife_1 in gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Utility Knife on Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:12.700660",
+          "detailed_result": {
+            "object_id": "knife_1",
+            "location_id": "in:gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object crowbar_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:21.446857",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:29.357714",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "FAILURE",
+          "success": false,
+          "result_message": "Agent must approach Phillips Screwdriver before grabbing",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:35.326103",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO screwdriver_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Phillips Screwdriver (in Sorting Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:41.612868",
+          "detailed_result": {
+            "near_object_id": "screwdriver_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully grabbed Phillips Screwdriver",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:47.292064",
+          "detailed_result": {
+            "object_id": "screwdriver_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:53.088693",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:10:59.002720",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE screwdriver_1 in gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 placed Phillips Screwdriver on Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:05.014291",
+          "detailed_result": {
+            "object_id": "screwdriver_1",
+            "location_id": "in:gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:13.165260"
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 6,
+      "task_description": "Take down the safety poster using the knife.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:11:13.167825",
+      "end_time": "2025-07-15T16:12:32.227404",
+      "status": "completed",
+      "completed": true,
+      "action_sequence": [
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:21.835800",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB knife_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object knife_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:27.227752",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 in open",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:33.046346",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "EXPLORE",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 explored Intake Bay but found no new objects",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:40.315710",
+          "detailed_result": {
+            "room_id": "intake_bay",
+            "discovery_count": 0,
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:49.889662",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gloves_cart_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Wheeled Gloves Cart (in Sorting Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:11:55.479869",
+          "detailed_result": {
+            "near_object_id": "gloves_cart_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent must go to Intake Bay first to interact with Steel Crowbar",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:01.395854",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:07.723632",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:16.099753",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gloves_cart_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Wheeled Gloves Cart (in Sorting Floor)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:24.403563",
+          "detailed_result": {
+            "near_object_id": "gloves_cart_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "DONE",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Task verifier not initialized",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:32.224381"
+        }
+      ],
+      "subtask_completions": []
+    },
+    {
+      "task_index": 7,
+      "task_description": "Fix the only jammed scanner with error code ERROR 47 using the screwdriver.",
+      "task_type": "subtask",
+      "start_time": "2025-07-15T16:12:32.227546",
+      "end_time": "2025-07-15T16:14:58.184634",
+      "status": "failed",
+      "completed": false,
+      "action_sequence": [
+        {
+          "action_command": "GOTO intake_bay",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Intake Bay",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:38.806770",
+          "detailed_result": {
+            "new_location_id": "intake_bay",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:49.555376",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:12:57.387822",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:01.882226",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:07.087771",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:12.647193",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:20.394722",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:28.186568",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:34.864430",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "物体长度1.2m超过智能体最大限制1.0m",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:41.141093",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:47.247194",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:13:55.642485",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:02.659670",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:08.886279",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "PLACE gaylord_box_1 on conveyor_belt_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Agent does not hold object: gaylord_box_1",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:16.519637",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO gaylord_box_1",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 approached Empty Gaylord Box (in Intake Bay)",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:25.897240",
+          "detailed_result": {
+            "near_object_id": "gaylord_box_1",
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "OPEN gaylord_box_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "未知命令: OPEN",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:33.548310",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB screwdriver_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object screwdriver_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:40.232935",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GRAB crowbar_1",
+          "execution_status": "INVALID",
+          "success": false,
+          "result_message": "Object crowbar_1 is in closed container Empty Gaylord Box",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:49.670918",
+          "detailed_result": {
+            "task_verification": null
+          }
+        },
+        {
+          "action_command": "GOTO sorting_floor",
+          "execution_status": "SUCCESS",
+          "success": true,
+          "result_message": "robot_1 successfully moved to Sorting Floor",
+          "agent_id": "agent_1",
+          "timestamp": "2025-07-15T16:14:58.181334",
+          "detailed_result": {
+            "new_location_id": "sorting_floor",
+            "task_verification": null
+          }
+        }
+      ],
+      "subtask_completions": []
+    }
+  ],
+  "execution_statistics": {
+    "total_tasks": 7,
+    "completed_tasks": 5,
+    "failed_tasks": 2,
+    "completion_rate": 0.7142857142857143,
+    "total_actions": 104,
+    "average_actions_per_task": 14.857142857142858,
+    "task_category_stats": {
+      "subtask": {
+        "total": 7,
+        "completed": 5,
+        "completion_rate": 0.7142857142857143
+      }
+    },
+    "action_type_stats": {
+      "EXPLORE": {
+        "total": 6,
+        "success": 6,
+        "success_rate": 1.0
+      },
+      "GRAB scanner_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO conveyor_belt_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO sorting_floor": {
+        "total": 8,
+        "success": 8,
+        "success_rate": 1.0
+      },
+      "PLACE scanner_1 on sorting_table_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GOTO sorting_table_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "DONE": {
+        "total": 5,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GOTO intake_bay": {
+        "total": 7,
+        "success": 7,
+        "success_rate": 1.0
+      },
+      "GRAB rubber_boot_1": {
+        "total": 3,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "OPEN gaylord_box_1": {
+        "total": 3,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB crowbar_1": {
+        "total": 7,
+        "success": 1,
+        "success_rate": 0.14285714285714285
+      },
+      "GOTO crowbar_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO gaylord_box_1": {
+        "total": 17,
+        "success": 17,
+        "success_rate": 1.0
+      },
+      "ASSEMBLE gaylord_box_1": {
+        "total": 2,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "PLACE gaylord_box_1 in gloves_cart_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB gaylord_box_1": {
+        "total": 7,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB water_bottle_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "PLACE crowbar_1 in gaylord_box_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE water_bottle_1 in gaylord_box_1": {
+        "total": 1,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "PLACE gaylord_box_1 on conveyor_belt_1": {
+        "total": 7,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "PLACE gaylord_box_1 in open": {
+        "total": 2,
+        "success": 0,
+        "success_rate": 0.0
+      },
+      "GRAB knife_1": {
+        "total": 3,
+        "success": 1,
+        "success_rate": 0.3333333333333333
+      },
+      "GOTO knife_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE knife_1 in gaylord_box_1": {
+        "total": 2,
+        "success": 1,
+        "success_rate": 0.5
+      },
+      "GRAB screwdriver_1": {
+        "total": 9,
+        "success": 1,
+        "success_rate": 0.1111111111111111
+      },
+      "GOTO screwdriver_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "PLACE screwdriver_1 in gaylord_box_1": {
+        "total": 1,
+        "success": 1,
+        "success_rate": 1.0
+      },
+      "GOTO gloves_cart_1": {
+        "total": 2,
+        "success": 2,
+        "success_rate": 1.0
+      }
+    }
+  }
+}
