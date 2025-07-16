@@ -19,18 +19,20 @@ logger = logging.getLogger(__name__)
 class ScenarioExecutor:
     """场景执行器 - 管理单个场景的完整执行"""
     
-    def __init__(self, scenario_id: str, config: Dict[str, Any], output_dir: str):
+    def __init__(self, scenario_id: str, config: Dict[str, Any], output_dir: str, task_indices: List[int] = None):
         """
         初始化场景执行器
-        
+
         Args:
             scenario_id: 场景ID
             config: 配置字典
             output_dir: 输出目录
+            task_indices: 要执行的任务索引列表，None表示执行所有任务
         """
         self.scenario_id = scenario_id
         self.config = config
         self.output_dir = output_dir
+        self.task_indices = task_indices or []  # 空列表表示执行所有任务
         
         # 加载场景和任务数据
         self.scene_data = self._load_scene_data()
@@ -184,8 +186,19 @@ class ScenarioExecutor:
     def _execute_sequential_tasks(self, agent_adapter: AgentAdapter) -> Dict[str, Any]:
         """Sequential模式：逐个执行任务，任务间清空历史"""
         logger.info("📋 执行Sequential模式任务")
-        
-        tasks = self.task_data.get('tasks', [])
+
+        all_tasks = self.task_data.get('tasks', [])
+
+        # 根据任务筛选确定要执行的任务
+        if self.task_indices:
+            # 有具体的任务索引，只执行这些任务
+            tasks_to_execute = [(i, all_tasks[i]) for i in self.task_indices if i < len(all_tasks)]
+            logger.info(f"📋 任务筛选：执行 {len(tasks_to_execute)}/{len(all_tasks)} 个任务")
+        else:
+            # 没有筛选，执行所有任务
+            tasks_to_execute = [(i, task) for i, task in enumerate(all_tasks)]
+            logger.info(f"📋 执行所有 {len(tasks_to_execute)} 个任务")
+
         task_results = []
         
         # 创建任务执行器
@@ -194,8 +207,10 @@ class ScenarioExecutor:
         # 获取每个任务的最大步数配置
         max_steps_per_task = self.config.get('execution', {}).get('max_steps_per_task', 50)
 
-        for i, task in enumerate(tasks):
-            task_index = i + 1
+        for exec_index, (original_index, task) in enumerate(tasks_to_execute):
+            task_index = original_index + 1  # 使用原始任务索引（从1开始）
+
+            logger.info(f"🎯 执行任务 {task_index} (筛选后第{exec_index + 1}个): {task.get('task_description', 'Unknown')[:50]}...")
 
             # 执行任务
             task_result = task_executor.execute_task(task, task_index, max_steps_per_task)
@@ -213,32 +228,44 @@ class ScenarioExecutor:
                 break
 
             # 任务间重置智能体状态（清空历史）
-            if i < len(tasks) - 1:  # 不是最后一个任务
+            if exec_index < len(tasks_to_execute) - 1:  # 不是最后一个任务
                 agent_adapter.reset()
                 logger.debug(f"🔄 任务 {task_index} 完成后重置智能体状态")
         
         return {
             'mode': 'sequential',
             'task_results': task_results,
-            'total_tasks': len(tasks)
+            'total_tasks': len(all_tasks),
+            'executed_tasks': len(tasks_to_execute),
+            'filtered_task_indices': self.task_indices
         }
     
     def _execute_combined_tasks(self, agent_adapter: AgentAdapter) -> Dict[str, Any]:
         """Combined模式：所有任务拼接执行，保持历史"""
         logger.info("📋 执行Combined模式任务")
         
-        tasks = self.task_data.get('tasks', [])
-        
-        # 将所有任务描述拼接成一个长任务
+        all_tasks = self.task_data.get('tasks', [])
+
+        # 根据任务筛选确定要执行的任务
+        if self.task_indices:
+            # 有具体的任务索引，只执行这些任务
+            tasks_to_execute = [all_tasks[i] for i in self.task_indices if i < len(all_tasks)]
+            logger.info(f"📋 任务筛选：执行 {len(tasks_to_execute)}/{len(all_tasks)} 个任务")
+        else:
+            # 没有筛选，执行所有任务
+            tasks_to_execute = all_tasks
+            logger.info(f"📋 执行所有 {len(tasks_to_execute)} 个任务")
+
+        # 将筛选后的任务描述拼接成一个长任务
         combined_description = "请按顺序完成以下任务：\n"
-        for i, task in enumerate(tasks):
+        for i, task in enumerate(tasks_to_execute):
             combined_description += f"{i+1}. {task.get('task_description', '')}\n"
         
         # 创建合并任务
         combined_task = {
             'task_description': combined_description,
             'task_category': 'combined',
-            'subtasks': tasks
+            'subtasks': tasks_to_execute
         }
         
         # 创建任务执行器
@@ -257,7 +284,9 @@ class ScenarioExecutor:
         return {
             'mode': 'combined',
             'task_results': [combined_result],
-            'total_tasks': len(tasks),
+            'total_tasks': len(all_tasks),
+            'executed_tasks': len(tasks_to_execute),
+            'filtered_task_indices': self.task_indices,
             'combined_task': True
         }
     
@@ -265,16 +294,27 @@ class ScenarioExecutor:
         """Independent模式：每个任务在全新环境中执行"""
         logger.info("📋 执行Independent模式任务")
 
-        tasks = self.task_data.get('tasks', [])
+        all_tasks = self.task_data.get('tasks', [])
+
+        # 根据任务筛选确定要执行的任务
+        if self.task_indices:
+            # 有具体的任务索引，只执行这些任务
+            tasks_to_execute = [(i, all_tasks[i]) for i in self.task_indices if i < len(all_tasks)]
+            logger.info(f"📋 任务筛选：执行 {len(tasks_to_execute)}/{len(all_tasks)} 个任务")
+        else:
+            # 没有筛选，执行所有任务
+            tasks_to_execute = [(i, task) for i, task in enumerate(all_tasks)]
+            logger.info(f"📋 执行所有 {len(tasks_to_execute)} 个任务")
+
         task_results = []
 
         # 初始化部分结果记录，用于异常情况下的日志保存
         self._partial_task_results = task_results
-        
-        for i, task in enumerate(tasks):
-            task_index = i + 1
-            
-            logger.info(f"🔄 Independent任务 {task_index}/{len(tasks)}: {task.get('task_description', 'Unknown')}")
+
+        for exec_index, (original_index, task) in enumerate(tasks_to_execute):
+            task_index = original_index + 1  # 使用原始任务索引（从1开始）
+
+            logger.info(f"🔄 Independent任务 {task_index} (筛选后第{exec_index + 1}/{len(tasks_to_execute)}个): {task.get('task_description', 'Unknown')[:50]}...")
             
             # 重新初始化模拟器（全新环境）
             self.simulator = self._initialize_simulator()
@@ -308,7 +348,9 @@ class ScenarioExecutor:
         return {
             'mode': 'independent',
             'task_results': task_results,
-            'total_tasks': len(tasks)
+            'total_tasks': len(all_tasks),
+            'executed_tasks': len(tasks_to_execute),
+            'filtered_task_indices': self.task_indices
         }
     
     def _record_task_to_csv(self, task_result: Dict[str, Any]):

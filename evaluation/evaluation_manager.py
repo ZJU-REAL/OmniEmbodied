@@ -43,8 +43,10 @@ class EvaluationManager:
         self.config_manager = ConfigManager()
         self.config = self.config_manager.get_config(config_file)
         
-        # 选择场景
-        self.scenario_list = ScenarioSelector.get_scenario_list(self.config, scenario_selection)
+        # 选择场景和任务
+        scenario_result = ScenarioSelector.get_scenario_list(self.config, scenario_selection)
+        self.scenario_list = scenario_result['scenarios']
+        self.task_indices = scenario_result['task_indices']
         
         # 生成运行名称和输出目录
         self.run_name = self._generate_run_name()
@@ -222,7 +224,9 @@ class EvaluationManager:
         logger.info(f"🔄 执行场景: {scenario_id}")
         
         try:
-            scenario_executor = ScenarioExecutor(scenario_id, self.config, self.output_dir)
+            # 获取该场景的任务筛选信息
+            task_indices = self.task_indices.get(scenario_id, [])
+            scenario_executor = ScenarioExecutor(scenario_id, self.config, self.output_dir, task_indices)
             result = scenario_executor.execute_scenario(self.agent_type, self.task_type)
             
             # 更新任务统计
@@ -247,7 +251,8 @@ class EvaluationManager:
                 self._executor.submit(
                     execute_scenario_standalone,
                     scenario_id, self.config, self.output_dir,
-                    self.agent_type, self.task_type
+                    self.agent_type, self.task_type,
+                    self.task_indices.get(scenario_id, [])
                 ): scenario_id
                 for scenario_id in self.scenario_list
             }
@@ -437,14 +442,23 @@ class EvaluationManager:
         signal.signal(signal.SIGTERM, signal_handler)
 
 
-def execute_scenario_standalone(scenario_id: str, config: Dict[str, Any], 
-                               output_dir: str, agent_type: str, task_type: str) -> Dict[str, Any]:
+def execute_scenario_standalone(scenario_id: str, config: Dict[str, Any],
+                               output_dir: str, agent_type: str, task_type: str,
+                               task_indices: List[int] = None) -> Dict[str, Any]:
     """
     独立的场景执行函数，用于并行处理
     避免pickle序列化问题
+
+    Args:
+        scenario_id: 场景ID
+        config: 配置信息
+        output_dir: 输出目录
+        agent_type: 智能体类型
+        task_type: 任务类型
+        task_indices: 要执行的任务索引列表，None表示执行所有任务
     """
     try:
-        scenario_executor = ScenarioExecutor(scenario_id, config, output_dir)
+        scenario_executor = ScenarioExecutor(scenario_id, config, output_dir, task_indices)
         return scenario_executor.execute_scenario(agent_type, task_type)
     except Exception as e:
         return {

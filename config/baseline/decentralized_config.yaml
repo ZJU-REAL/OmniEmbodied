@@ -118,17 +118,44 @@ parallel_evaluation:
     max_parallel_scenarios: 4
 
   # 场景选择配置
+  # 说明：首先根据场景选择配置确定基础场景列表，然后应用任务筛选
   scenario_selection:
-    # 场景选择模式: 'all' (所有场景), 'range' (范围), 'list' (指定列表)
+    # 场景选择模式
+    # 选项:
+    #   - 'all': 选择所有可用场景
+    #   - 'range': 选择指定范围内的场景 (如 00001-00010)
+    #   - 'list': 选择指定列表中的场景
     mode: 'range'
 
-    # 范围模式配置 (mode='range'时使用)
+    # 范围模式配置 (当mode='range'时使用)
     range:
-      start: '00001'  # 起始场景ID
-      end: '00010'    # 结束场景ID
+      start: '00001'  # 起始场景ID (5位数字，如 00001)
+      end: '00010'    # 结束场景ID (5位数字，如 00010)
 
-    # 列表模式配置 (mode='list'时使用)
+    # 列表模式配置 (当mode='list'时使用)
+    # 用法：取消注释并指定场景ID列表
     # list: ['00001', '00003', '00005']
+
+    # 任务筛选配置 (与场景选择取交集)
+    # 说明：任务筛选用于根据任务特征进一步筛选要评测的场景
+    # 只有包含符合筛选条件任务的场景才会被评测
+    task_filter:
+      # 任务类别筛选 (可选)
+      # 说明：根据任务的task_category字段筛选任务
+      # 支持的类别:
+      #   - 'direct_command': 直接命令任务 (如"将苹果放到桌子上")
+      #   - 'attribute_reasoning': 属性推理任务 (如"找到最重的物体")
+      #   - 'tool_use': 工具使用任务 (如"用锤子修理设备")
+      #   - 'spatial_reasoning': 空间推理任务 (如"将物体放到最近的容器中")
+      #   - 'compound_reasoning': 复合推理任务
+      #   - 'explicit_collaboration': 显式协作任务 (明确指定多智能体协作)
+      #   - 'implicit_collaboration': 隐式协作任务 (需要智能体自主协作)
+      #   - 'compound_collaboration': 复合协作任务
+      # 用法：取消注释并指定要筛选的类别列表
+      # categories: ['explicit_collaboration', 'implicit_collaboration']
+
+      # 注意：由于当前数据集中所有场景都是双智能体设计，
+      # 因此移除了agent_count筛选配置项
 
   # 输出配置
   output:

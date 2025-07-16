@@ -56,6 +56,14 @@ def main():
         # 解析场景选择
         scenario_selection = EvaluationInterface.parse_scenario_string(args.scenarios)
 
+        # 添加任务筛选
+        if args.task_categories:
+            task_filter = {}
+            if args.task_categories:
+                task_filter['categories'] = args.task_categories
+
+            scenario_selection['task_filter'] = task_filter
+
         # 验证配置文件
         if not EvaluationInterface.validate_config_file(args.config):
             logger.error(f"❌ 配置文件不存在: {args.config}")
@@ -70,6 +78,8 @@ def main():
         logger.info(f"   智能体类型: {args.agent_type}")
         logger.info(f"   任务类型: {args.task_type}")
         logger.info(f"   场景选择: {args.scenarios} ({scenario_count} 个场景)")
+        if args.task_categories:
+            logger.info(f"   任务类别筛选: {args.task_categories}")
         logger.info(f"   自定义后缀: {args.suffix}")
 
         # 运行评测
@@ -113,6 +123,15 @@ def create_argument_parser() -> argparse.ArgumentParser:
 
   # 单个场景快速测试
   python -m evaluation.evaluator --config single_agent_config --agent-type single --task-type sequential --scenarios 00001 --suffix quick_test
+
+  # 筛选特定任务类别
+  python -m evaluation.evaluator --config single_agent_config --agent-type single --task-type sequential --scenarios all --task-categories direct_command attribute_reasoning --suffix filtered_tasks
+
+  # 只评测工具使用任务
+  python -m evaluation.evaluator --config single_agent_config --agent-type single --task-type sequential --scenarios all --task-categories tool_use --suffix tool_use_tasks
+
+  # 只评测协作任务
+  python -m evaluation.evaluator --config centralized_config --agent-type multi --task-type combined --scenarios all --task-categories explicit_collaboration implicit_collaboration --suffix collaboration_tasks
         """
     )
 
@@ -141,6 +160,14 @@ def create_argument_parser() -> argparse.ArgumentParser:
         default='all',
         help='场景选择: all, 00001-00010, 00001,00003,00005'
     )
+
+    parser.add_argument(
+        '--task-categories',
+        nargs='*',
+        help='任务类别筛选: direct_command attribute_reasoning tool_use spatial_reasoning'
+    )
+
+
 
     parser.add_argument(
         '--suffix',

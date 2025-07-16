@@ -14,38 +14,55 @@ class ScenarioSelector:
     """场景选择器 - 简化实现"""
     
     @staticmethod
-    def get_scenario_list(config: Dict[str, Any], scenario_selection: Dict[str, Any] = None) -> List[str]:
+    def get_scenario_list(config: Dict[str, Any], scenario_selection: Dict[str, Any] = None) -> Dict[str, Any]:
         """
-        获取要评测的场景列表
-        
+        获取要评测的场景列表和任务筛选信息
+
         Args:
             config: 配置文件
             scenario_selection: 场景选择配置
                 {
                     'mode': 'all',  # 'all', 'range', 'list'
                     'range': {'start': '00001', 'end': '00010'},
-                    'list': ['00001', '00003', '00005']
+                    'list': ['00001', '00003', '00005'],
+                    'task_filter': {
+                        'categories': ['direct_command', 'attribute_reasoning']  # 任务类别筛选
+                    }
                 }
-            
+
         Returns:
-            List[str]: 场景ID列表
+            Dict[str, Any]: 包含场景列表和任务筛选信息
+                - 'scenarios': 场景ID列表
+                - 'task_indices': 每个场景中需要执行的任务索引
         """
         if scenario_selection is None:
             scenario_selection = {'mode': 'all'}
-        
+
         mode = scenario_selection.get('mode', 'all')
-        
+
+        # 获取基础场景列表
         if mode == 'all':
-            return ScenarioSelector._get_all_scenarios()
+            base_scenarios = ScenarioSelector._get_all_scenarios()
         elif mode == 'range':
             range_config = scenario_selection.get('range', {})
-            return ScenarioSelector._get_range_scenarios(range_config)
+            base_scenarios = ScenarioSelector._get_range_scenarios(range_config)
         elif mode == 'list':
             scenario_list = scenario_selection.get('list', ['00001'])
-            return ScenarioSelector._validate_scenarios(scenario_list)
+            base_scenarios = ScenarioSelector._validate_scenarios(scenario_list)
         else:
             logger.warning(f"未知的场景选择模式: {mode}, 使用默认场景")
-            return ['00001']
+            base_scenarios = ['00001']
+
+        # 应用任务筛选
+        task_filter = scenario_selection.get('task_filter')
+        if task_filter:
+            filter_result = ScenarioSelector._filter_scenarios_by_tasks(base_scenarios, task_filter)
+            return filter_result
+
+        return {
+            'scenarios': base_scenarios,
+            'task_indices': {}  # 空字典表示执行所有任务
+        }
     
     @staticmethod
     def _get_all_scenarios() -> List[str]:
@@ -124,7 +141,94 @@ class ScenarioSelector:
             return ['00001']
         
         return validated_scenarios
-    
+
+    @staticmethod
+    def _filter_scenarios_by_tasks(scenarios: List[str], task_filter: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        根据任务特征筛选场景和任务
+
+        Args:
+            scenarios: 基础场景列表
+            task_filter: 任务筛选配置
+                {
+                    'categories': ['direct_command', 'attribute_reasoning']  # 任务类别筛选
+                }
+
+        Returns:
+            Dict[str, Any]: 筛选结果，包含：
+                - 'scenarios': 筛选后的场景列表
+                - 'task_indices': 每个场景中需要执行的任务索引 {scenario_id: [task_index1, task_index2, ...]}
+        """
+        import json
+
+        if not task_filter:
+            return {
+                'scenarios': scenarios,
+                'task_indices': {}  # 空字典表示执行所有任务
+            }
+
+        filtered_scenarios = []
+        task_indices = {}
+        categories_filter = task_filter.get('categories', [])
+
+        total_tasks_before = 0
+        total_tasks_after = 0
+
+        for scenario_id in scenarios:
+            try:
+                # 加载任务文件
+                task_file = f'data/task/{scenario_id}_task.json'
+                if not os.path.exists(task_file):
+                    logger.warning(f"任务文件不存在: {task_file}")
+                    continue
+
+                with open(task_file, 'r', encoding='utf-8') as f:
+                    task_data = json.load(f)
+
+                tasks = task_data.get('tasks', [])
+                total_tasks_before += len(tasks)
+
+                # 注意：由于当前数据集中所有场景都是双智能体设计，
+                # 因此移除了agent_count筛选逻辑
+
+                # 检查任务类别筛选
+                if categories_filter:
+                    matching_task_indices = []
+
+                    for i, task in enumerate(tasks):
+                        task_category = task.get('task_category', 'unknown')
+                        if task_category in categories_filter:
+                            matching_task_indices.append(i)
+
+                    # 如果没有匹配的任务，跳过此场景
+                    if not matching_task_indices:
+                        continue
+
+                    # 记录需要执行的任务索引
+                    task_indices[scenario_id] = matching_task_indices
+                    total_tasks_after += len(matching_task_indices)
+                else:
+                    # 如果没有类别筛选，执行所有任务
+                    task_indices[scenario_id] = []
+                    total_tasks_after += len(tasks)
+
+                # 通过所有筛选条件
+                filtered_scenarios.append(scenario_id)
+
+            except Exception as e:
+                logger.warning(f"处理场景 {scenario_id} 时出错: {e}")
+                continue
+
+        logger.info(f"场景筛选结果: {len(scenarios)} -> {len(filtered_scenarios)} 个场景")
+        logger.info(f"任务筛选结果: {total_tasks_before} -> {total_tasks_after} 个任务")
+        if categories_filter:
+            logger.info(f"  类别筛选: {categories_filter}")
+
+        return {
+            'scenarios': filtered_scenarios,
+            'task_indices': task_indices
+        }
+
     @staticmethod
     def parse_scenario_selection_string(scenarios_str: str) -> Dict[str, Any]:
         """

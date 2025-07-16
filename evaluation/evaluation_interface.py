@@ -3,7 +3,7 @@
 """
 
 import logging
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 logger = logging.getLogger(__name__)
 
@@ -12,12 +12,12 @@ class EvaluationInterface:
     """为baseline提供的统一评测接口"""
     
     @staticmethod
-    def run_evaluation(config_file: str, agent_type: str, task_type: str, 
-                      scenario_selection: Dict[str, Any] = None, 
+    def run_evaluation(config_file: str, agent_type: str, task_type: str,
+                      scenario_selection: Dict[str, Any] = None,
                       custom_suffix: str = None) -> Dict[str, Any]:
         """
         统一评测入口
-        
+
         Args:
             config_file: 配置文件名 ('single_agent_config', 'centralized_config', 'decentralized_config')
             agent_type: 智能体类型 ('single', 'multi')
@@ -26,7 +26,10 @@ class EvaluationInterface:
                 {
                     'mode': 'range',  # 'all', 'range', 'list'
                     'range': {'start': '00001', 'end': '00010'},
-                    'list': ['00001', '00003', '00005']
+                    'list': ['00001', '00003', '00005'],
+                    'task_filter': {
+                        'categories': ['direct_command', 'attribute_reasoning']  # 任务类别筛选
+                    }
                 }
             custom_suffix: 自定义后缀
             
@@ -39,14 +42,19 @@ class EvaluationInterface:
                 config_file, agent_type, task_type, scenario_selection
             )
             
+            # 合并配置文件中的场景选择和任务筛选设置
+            merged_scenario_selection = EvaluationInterface._merge_scenario_selection_with_config(
+                config_file, scenario_selection
+            )
+
             # 创建评测管理器
             from .evaluation_manager import EvaluationManager
-            
+
             manager = EvaluationManager(
                 config_file=config_file,
                 agent_type=agent_type,
                 task_type=task_type,
-                scenario_selection=scenario_selection,
+                scenario_selection=merged_scenario_selection,
                 custom_suffix=custom_suffix
             )
             
@@ -60,9 +68,54 @@ class EvaluationInterface:
         except Exception as e:
             logger.error(f"❌ 评测失败: {e}")
             raise
-    
+
     @staticmethod
-    def _validate_parameters(config_file: str, agent_type: str, task_type: str, 
+    def _merge_scenario_selection_with_config(config_file: str,
+                                            scenario_selection: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        合并配置文件中的场景选择和任务筛选设置
+
+        Args:
+            config_file: 配置文件名
+            scenario_selection: 命令行或API传入的场景选择配置
+
+        Returns:
+            Dict: 合并后的场景选择配置
+        """
+        from config.config_manager import ConfigManager
+
+        # 加载配置文件
+        config_manager = ConfigManager()
+        config = config_manager.get_config(config_file)
+
+        # 获取配置文件中的场景选择设置
+        config_scenario_selection = config.get('parallel_evaluation', {}).get('scenario_selection', {})
+
+        # 如果没有传入scenario_selection，使用配置文件中的设置
+        if scenario_selection is None:
+            merged_selection = config_scenario_selection.copy()
+        else:
+            # 合并设置，命令行参数优先
+            merged_selection = config_scenario_selection.copy()
+            merged_selection.update(scenario_selection)
+
+        # 处理任务筛选：配置文件中的task_filter与传入的task_filter合并
+        config_task_filter = config_scenario_selection.get('task_filter', {})
+        input_task_filter = scenario_selection.get('task_filter', {}) if scenario_selection else {}
+
+        if config_task_filter or input_task_filter:
+            # 合并任务筛选配置
+            merged_task_filter = config_task_filter.copy()
+            merged_task_filter.update(input_task_filter)
+
+            # 只有在有实际筛选条件时才添加task_filter
+            if merged_task_filter.get('categories'):
+                merged_selection['task_filter'] = merged_task_filter
+
+        return merged_selection
+
+    @staticmethod
+    def _validate_parameters(config_file: str, agent_type: str, task_type: str,
                            scenario_selection: Optional[Dict[str, Any]]):
         """验证参数有效性"""
         # 验证配置文件
@@ -190,10 +243,47 @@ def run_multi_agent_evaluation(config_type: str = 'centralized',
     """运行多智能体评测的便利函数"""
     config_file = f"{config_type}_config"
     scenario_selection = EvaluationInterface.parse_scenario_string(scenarios)
-    
+
     return EvaluationInterface.run_evaluation(
         config_file=config_file,
         agent_type='multi',
+        task_type=task_type,
+        scenario_selection=scenario_selection,
+        custom_suffix=suffix
+    )
+
+
+def run_filtered_evaluation(config_file: str, agent_type: str, task_type: str,
+                           scenarios: str = 'all',
+                           task_categories: List[str] = None,
+                           suffix: str = 'filtered') -> Dict[str, Any]:
+    """
+    运行带任务筛选的评测
+
+    Args:
+        config_file: 配置文件名
+        agent_type: 智能体类型 ('single', 'multi')
+        task_type: 任务类型 ('sequential', 'combined', 'independent')
+        scenarios: 场景选择字符串
+        task_categories: 任务类别筛选列表，如 ['direct_command', 'attribute_reasoning']
+        suffix: 自定义后缀
+
+    Returns:
+        Dict: 评测结果
+    """
+    scenario_selection = EvaluationInterface.parse_scenario_string(scenarios)
+
+    # 添加任务筛选
+    if task_categories:
+        task_filter = {}
+        if task_categories:
+            task_filter['categories'] = task_categories
+
+        scenario_selection['task_filter'] = task_filter
+
+    return EvaluationInterface.run_evaluation(
+        config_file=config_file,
+        agent_type=agent_type,
         task_type=task_type,
         scenario_selection=scenario_selection,
         custom_suffix=suffix
