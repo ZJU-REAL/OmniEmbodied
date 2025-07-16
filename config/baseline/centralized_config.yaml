@@ -1,13 +1,32 @@
-# Centralized dual-agent configuration
+# 中心化多智能体配置文件
 
-# Coordinator settings
+# 智能体配置
+agent_config:
+  agent_class: "modes.centralized.centralized_agent.CentralizedAgent"
+  max_failures: 3
+  max_history: 20
+
+  # 环境描述配置
+  environment_description:
+    # 详细程度: 'full' (完整环境) / 'room' (当前房间) / 'brief' (仅智能体状态)
+    detail_level: 'full'
+    # 是否显示物体属性
+    show_object_properties: true
+    # 是否只显示已发现的内容 全局观察 or 部分观察
+    only_show_discovered: true
+    # 是否包含其他智能体信息 (重要：确保包含两个智能体)
+    include_other_agents: true
+    # 更新频率 (0=每步更新, >0=按频率更新)
+    update_frequency: 0
+
+# 协调器设置 (保持向后兼容)
 coordinator:
   # LLM configuration to use
   llm_config: llm_config
   # Maximum history length
   max_chat_history: -1  # -1 means no limit on history record count
 
-# Worker agent settings
+# Worker agent settings (保持向后兼容)
 worker_agents:
   # LLM configuration to use
   llm_config: llm_config
@@ -50,7 +69,7 @@ evaluation:
     # Combined evaluation mode configuration
     combined:
       # Separator between task descriptions
-      task_separator: "\n\nNext task:\n"
+      task_separator: "Next task:"
       # Whether to add task numbers before task descriptions
       add_task_numbers: true
 
@@ -81,12 +100,12 @@ evaluation:
 # 并行评测配置
 parallel_evaluation:
   # 是否启用并行评测
-  enabled: false
+  enabled: true
 
   # 场景级并行配置
   scenario_parallelism:
     # 最大并行场景数
-    max_parallel_scenarios: 4
+    max_parallel_scenarios: 3
 
   # 场景选择配置
   # 说明：首先根据场景选择配置确定基础场景列表，然后应用任务筛选
@@ -101,7 +120,7 @@ parallel_evaluation:
     # 范围模式配置 (当mode='range'时使用)
     range:
       start: '00001'  # 起始场景ID (5位数字，如 00001)
-      end: '00010'    # 结束场景ID (5位数字，如 00010)
+      end: '00005'    # 结束场景ID (5位数字，如 00005)
 
     # 列表模式配置 (当mode='list'时使用)
     # 用法：取消注释并指定场景ID列表
@@ -123,10 +142,7 @@ parallel_evaluation:
       #   - 'implicit_collaboration': 隐式协作任务 (需要智能体自主协作)
       #   - 'compound_collaboration': 复合协作任务
       # 用法：取消注释并指定要筛选的类别列表
-      # categories: ['direct_command', 'tool_use']
-
-      # 注意：由于当前数据集中所有场景都是双智能体设计，
-      # 因此移除了agent_count筛选配置项
+      categories: ['explicit_collaboration']
 
   # 输出配置
   output:

@@ -41,8 +41,10 @@ class ScenarioExecutor:
         # 初始化模拟器
         self.simulator = self._initialize_simulator()
         
-        # 创建轨迹记录器
-        self.trajectory_recorder = TrajectoryRecorder(scenario_id, output_dir)
+        # 创建轨迹记录器，根据智能体类型选择合适的模式
+        agent_class = self.config.get('agent_config', {}).get('agent_class', '')
+        agent_type = "single" if 'single' in agent_class else "multi"
+        self.trajectory_recorder = TrajectoryRecorder(scenario_id, output_dir, agent_type)
         
         # 创建CSV记录器
         csv_file = os.path.join(output_dir, "subtask_execution_log.csv")
@@ -78,9 +80,19 @@ class ScenarioExecutor:
     def _initialize_simulator(self) -> SimulationEngine:
         """初始化模拟器"""
         try:
-            # 创建模拟器配置，确保创建智能体
+            # 根据配置确定智能体数量
+            agent_config = self.config.get('agent_config', {})
+            agent_class = agent_config.get('agent_class', '')
+
+            # 判断是否为中心化多智能体模式
+            if 'centralized' in agent_class:
+                agent_count = 2  # 中心化模式需要2个智能体
+            else:
+                agent_count = 1  # 单智能体模式创建1个智能体
+
+            # 创建模拟器配置，确保创建正确数量的智能体
             simulator_config = {
-                'agent_count': 1,  # 单智能体模式创建1个智能体
+                'agent_count': agent_count,
                 'agent_init_mode': 'default',  # 使用默认初始化模式
                 'visualization': {'enabled': False},
                 'task_verification': {'enabled': True}
@@ -217,7 +229,19 @@ class ScenarioExecutor:
             task_results.append(task_result)
 
             # 记录到CSV
-            self._record_task_to_csv(task_result)
+            try:
+                self._record_task_to_csv(task_result)
+                logger.debug(f"📊 任务 {task_index} 已记录到CSV")
+            except Exception as csv_error:
+                logger.error(f"❌ 记录任务 {task_index} 到CSV失败: {csv_error}")
+                # 尝试重新初始化CSV记录器
+                try:
+                    csv_file = os.path.join(self.output_dir, "subtask_execution_log.csv")
+                    self.csv_recorder = CSVRecorder(csv_file)
+                    self._record_task_to_csv(task_result)
+                    logger.info(f"✅ CSV记录器重新初始化成功，任务 {task_index} 已记录")
+                except Exception as retry_error:
+                    logger.error(f"❌ CSV记录器重新初始化也失败: {retry_error}")
 
             # 立即保存当前任务的执行日志
             self._save_single_task_execution_log(task_result, 'sequential')
@@ -276,7 +300,11 @@ class ScenarioExecutor:
         combined_result = task_executor.execute_task(combined_task, 1, max_steps)
 
         # 记录到CSV
-        self._record_task_to_csv(combined_result)
+        try:
+            self._record_task_to_csv(combined_result)
+            logger.debug(f"📊 Combined任务已记录到CSV")
+        except Exception as csv_error:
+            logger.error(f"❌ 记录Combined任务到CSV失败: {csv_error}")
 
         # 立即保存当前任务的执行日志
         self._save_single_task_execution_log(combined_result, 'combined')
@@ -335,7 +363,11 @@ class ScenarioExecutor:
             task_results.append(task_result)
 
             # 记录到CSV
-            self._record_task_to_csv(task_result)
+            try:
+                self._record_task_to_csv(task_result)
+                logger.debug(f"📊 Independent任务 {task_index} 已记录到CSV")
+            except Exception as csv_error:
+                logger.error(f"❌ 记录Independent任务 {task_index} 到CSV失败: {csv_error}")
 
             # 立即保存当前任务的执行日志
             self._save_single_task_execution_log(task_result, 'independent')
@@ -359,13 +391,22 @@ class ScenarioExecutor:
             # 获取评估结果
             eval_result = task_result.get('evaluation_result', {})
 
+            # 检测智能体类型
+            agent_type = 'single'  # 默认值
+            agent_config = self.config.get('agent_config', {})
+            agent_class = agent_config.get('agent_class', '')
+            if 'centralized' in agent_class:
+                agent_type = 'centralized'
+            elif 'decentralized' in agent_class:
+                agent_type = 'decentralized'
+
             csv_row = [
                 datetime.now().isoformat(),  # timestamp
                 self.scenario_id,  # scenario_id
                 task_result.get('task_index'),  # task_index
                 task_result.get('task_description'),  # task_description
                 task_result.get('task_category'),  # task_category
-                'single',  # agent_type (简化处理)
+                agent_type,  # agent_type (动态检测)
                 task_result.get('status'),  # status
                 task_result.get('task_executed'),  # task_executed
                 task_result.get('subtask_completed'),  # subtask_completed
@@ -483,6 +524,28 @@ class ScenarioExecutor:
             logger.debug(f"📝 准备保存执行日志，包含 {len(execution_logs)} 个任务日志")
             self.trajectory_recorder.save_execution_log(scenario_execution_log)
             logger.info(f"✅ 执行日志已保存到 logs/ 目录")
+
+            # 强制保存轨迹文件（确保轨迹数据不丢失）
+            try:
+                if hasattr(self.trajectory_recorder, '_save_trajectory_immediately'):
+                    trajectory_data = self.trajectory_recorder._load_trajectory_data()
+                    if trajectory_data:
+                        self.trajectory_recorder._save_trajectory_immediately(trajectory_data)
+                        logger.debug(f"💾 轨迹文件强制保存完成: {self.scenario_id}")
+                    else:
+                        logger.warning(f"⚠️ 场景 {self.scenario_id} 没有轨迹数据需要保存")
+            except Exception as trajectory_error:
+                logger.error(f"❌ 强制保存轨迹文件失败: {trajectory_error}")
+
+            # 强制保存QA文件
+            try:
+                if hasattr(self.trajectory_recorder, '_save_qa_immediately'):
+                    qa_data = self.trajectory_recorder._load_qa_data()
+                    if qa_data:
+                        self.trajectory_recorder._save_qa_immediately(qa_data)
+                        logger.debug(f"💾 QA文件强制保存完成: {self.scenario_id}")
+            except Exception as qa_error:
+                logger.error(f"❌ 强制保存QA文件失败: {qa_error}")
         except Exception as e:
             logger.error(f"保存执行日志失败: {e}")
             import traceback

@@ -75,29 +75,24 @@ class AgentAdapter:
     def _create_centralized_agents(self):
         """创建中心化智能体系统"""
         try:
-            # 从配置获取协调器类
-            coordinator_config = self.config.get('coordinator_config', {})
-            coordinator_class_path = coordinator_config.get(
-                'agent_class', 'modes.centralized.coordinator.CentralizedCoordinator'
-            )
-            
-            # 动态导入协调器类
-            module_path, class_name = coordinator_class_path.rsplit('.', 1)
+            # 从配置获取智能体类
+            agent_config = self.config.get('agent_config', {})
+            agent_class_path = agent_config.get('agent_class', 'modes.centralized.centralized_agent.CentralizedAgent')
+
+            # 动态导入智能体类
+            module_path, class_name = agent_class_path.rsplit('.', 1)
             module = import_module(module_path)
-            coordinator_class = getattr(module, class_name)
-            
-            # 创建协调器实例
-            coordinator = coordinator_class(self.simulator, "coordinator", self.config)
-            
-            # 添加工作智能体
-            worker_config = self.config.get('worker_config', {})
-            max_workers = coordinator_config.get('max_workers', 3)
-            
-            for i in range(max_workers):
-                worker_id = f"worker_{i+1}"
-                coordinator.add_worker(worker_id, worker_config)
-            
-            logger.info(f"✅ 中心化智能体系统创建成功: 1个协调器 + {max_workers}个工作智能体")
+            agent_class = getattr(module, class_name)
+
+            # 创建中心化智能体实例（使用centralized_controller作为ID）
+            agent = agent_class(self.simulator, "centralized_controller", self.config)
+
+            logger.info(f"✅ 中心化智能体创建成功: {agent_class_path}")
+            return agent
+
+        except Exception as e:
+            logger.error(f"❌ 创建中心化智能体失败: {e}")
+            raise
             return coordinator
             
         except Exception as e:

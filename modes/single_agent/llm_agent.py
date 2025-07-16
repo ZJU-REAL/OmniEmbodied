@@ -195,16 +195,25 @@ class LLMAgent(BaseAgent):
         system_prompt = self._get_system_prompt()
         response = self.llm.generate_chat(self.chat_history, system_message=system_prompt)
 
-        # 记录LLM QA到轨迹记录器
-        if self.trajectory_recorder:
-            self.trajectory_recorder.record_llm_qa(
-                instruction=prompt,
-                output=response,
-                system=system_prompt
-            )
-
         # 解析响应中的动作命令
         action = self._extract_action(response)
+
+        # 记录LLM交互到轨迹记录器（使用新接口）
+        if self.trajectory_recorder:
+            # 获取token使用情况
+            tokens_used = getattr(self.llm, 'last_token_usage', {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0})
+            response_time_ms = getattr(self.llm, 'last_response_time_ms', 0.0)
+
+            # 单智能体使用步数作为交互索引
+            self.trajectory_recorder.record_llm_interaction(
+                task_index=1,  # 默认任务索引
+                interaction_index=self.step_count,  # 使用步数作为交互索引
+                prompt=prompt,
+                response=response,
+                tokens_used=tokens_used,
+                response_time_ms=response_time_ms,
+                extracted_action=action
+            )
 
         # 记录LLM响应到对话历史
         self.chat_history.append({"role": "assistant", "content": response})

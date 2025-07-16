@@ -16,27 +16,33 @@ logger = logging.getLogger(__name__)
 class TrajectoryRecorder:
     """轨迹记录器 - 每次操作都立即写入磁盘"""
     
-    def __init__(self, scenario_id: str, output_dir: str):
+    def __init__(self, scenario_id: str, output_dir: str, agent_type: str = "multi"):
         """
         初始化轨迹记录器
-        
+
         Args:
             scenario_id: 场景ID
             output_dir: 输出目录
+            agent_type: 智能体类型 ("single" 或 "multi")
         """
         self.scenario_id = scenario_id
         self.output_dir = output_dir
+        self.agent_type = agent_type
         self.lock = threading.Lock()
-        
+
+        # 计数器
+        self._action_step_counter = 0  # 动作步骤计数器
+        self._qa_interaction_counter = 0  # QA交互计数器
+
         # 文件路径
         self.trajectory_file = os.path.join(output_dir, f"trajectories/{scenario_id}_trajectory.json")
         self.qa_file = os.path.join(output_dir, f"llm_qa/{scenario_id}_llm_qa.json")
         # 按场景组织执行日志：logs/scenario_id/scenario_execution.json
         self.execution_log_file = os.path.join(output_dir, f"logs/{scenario_id}/scenario_execution.json")
-        
+
         # 确保目录存在
         self._create_directories()
-        
+
         logger.debug(f"📝 轨迹记录器初始化: {scenario_id}")
     
     def _create_directories(self):
@@ -53,43 +59,206 @@ class TrajectoryRecorder:
                                action: str, status: str,
                                message: str, result: Dict[str, Any],
                                agent_id: str = None) -> None:
-        """记录动作执行 - 立即写入磁盘"""
+        """记录动作执行 - 立即写入磁盘，支持单智能体和多智能体格式"""
         with self.lock:
-            action_data = {
+            # 递增动作步骤计数器
+            self._action_step_counter += 1
+            actual_step = self._action_step_counter
+
+            # 确保status是字符串格式，处理ActionStatus枚举
+            if hasattr(status, 'name'):
+                status_str = status.name
+            elif hasattr(status, 'value'):
+                status_str = str(status.value)
+            else:
+                status_str = str(status)
+
+            # 检测智能体类型并构建相应的轨迹格式
+            if isinstance(result, dict) and 'coordination_details' in result:
+                # 多智能体（中心化）模式：为每个智能体生成独立记录
+                action_data_list = self._build_multi_agent_action_data(
+                    actual_step, action, status_str, message, result, agent_id
+                )
+                logger.debug(f"📝 记录中心化多智能体轨迹: {len(action_data_list)} 个智能体记录")
+
+                # 为每个智能体记录分别追加到轨迹文件
+                for action_data in action_data_list:
+                    self._append_to_trajectory(task_index, action_data)
+            else:
+                # 单智能体模式：标准格式
+                action_data = self._build_single_agent_action_data(
+                    actual_step, action, status_str, message, result, agent_id
+                )
+                logger.debug(f"📝 记录单智能体轨迹: {action_data['agent_id']}")
+
+                # 立即追加到轨迹文件
+                self._append_to_trajectory(task_index, action_data)
+
+    def _build_single_agent_action_data(self, step: int, action: str, status_str: str,
+                                       message: str, result: Dict[str, Any],
+                                       agent_id: str = None) -> Dict[str, Any]:
+        """构建单智能体轨迹数据格式"""
+        return {
+            "action_index": step,
+            "action_command": action,
+            "execution_status": status_str,
+            "result_message": message,
+            "agent_id": agent_id or result.get('agent_id', 'unknown')
+        }
+
+    def _build_multi_agent_action_data(self, step: int, action: str, status_str: str,
+                                      message: str, result: Dict[str, Any],
+                                      agent_id: str = None) -> List[Dict[str, Any]]:
+        """构建多智能体（中心化）轨迹数据格式 - 返回两个智能体的独立记录"""
+        action_data_list = []
+
+        # 安全检查：确保result不为None且包含coordination_details
+        if not isinstance(result, dict) or 'coordination_details' not in result:
+            logger.warning(f"result缺少coordination_details: {result}")
+            # 回退到原始格式
+            action_data_list.append(self._build_single_agent_action_data(
+                step, action, status_str, message, result or {}, agent_id
+            ))
+            return action_data_list
+
+        coordination_details = result['coordination_details']
+        if not isinstance(coordination_details, dict):
+            logger.warning(f"coordination_details不是字典类型: {type(coordination_details)}")
+            action_data_list.append(self._build_single_agent_action_data(
+                step, action, status_str, message, result, agent_id
+            ))
+            return action_data_list
+
+        # 为每个智能体创建独立的轨迹记录
+        for current_agent_id, agent_result in coordination_details.items():
+            # 安全检查：确保agent_result不为None
+            if not isinstance(agent_result, dict):
+                logger.warning(f"智能体 {current_agent_id} 的结果不是字典类型: {type(agent_result)}")
+                continue
+
+            # 提取智能体的具体动作
+            agent_action = self._extract_agent_action_from_result(agent_result, action)
+
+            # 确保status是字符串格式
+            agent_status = agent_result.get('status', status_str)
+            if hasattr(agent_status, 'name'):
+                agent_status_str = agent_status.name
+            elif hasattr(agent_status, 'value'):
+                agent_status_str = str(agent_status.value)
+            else:
+                agent_status_str = str(agent_status) if agent_status is not None else status_str
+
+            # 构建单智能体格式的记录
+            agent_action_data = {
                 "action_index": step,
-                "action_command": action,
-                "execution_status": status,
-                "result_message": message,
-                "agent_id": agent_id or result.get('agent_id', 'unknown')
+                "action_command": agent_action,
+                "execution_status": agent_status_str,
+                "result_message": agent_result.get('message', message) or message,
+                "agent_id": current_agent_id
             }
-            
-            # 立即追加到轨迹文件
-            self._append_to_trajectory(task_index, action_data)
-    
+
+            action_data_list.append(agent_action_data)
+
+        return action_data_list
+
+    def _extract_agent_action_from_result(self, agent_result: Dict[str, Any],
+                                         original_action: str) -> str:
+        """从智能体结果中提取具体的动作命令"""
+        # 安全检查：确保agent_result不为None且为字典
+        if not isinstance(agent_result, dict):
+            logger.warning(f"agent_result不是字典类型: {type(agent_result)}")
+            return self._get_default_action(original_action)
+
+        # 尝试从result中提取动作信息
+        if 'result' in agent_result and isinstance(agent_result['result'], dict):
+            result = agent_result['result']
+
+            # 检查是否有location相关的动作
+            if 'new_location_id' in result:
+                return f"GOTO {result['new_location_id']}"
+
+            # 检查是否有物品相关的动作
+            if 'grabbed_object_id' in result:
+                return f"GRAB {result['grabbed_object_id']}"
+
+            if 'placed_object_id' in result and 'target_id' in result:
+                return f"PLACE {result['placed_object_id']} on {result['target_id']}"
+
+        return self._get_default_action(original_action)
+
+    def _get_default_action(self, original_action: str) -> str:
+        """获取默认动作"""
+        # 如果无法提取具体动作，尝试从原始动作中推断
+        if original_action == "COORDINATE":
+            # 对于COORDINATE动作，返回通用的EXPLORE作为默认值
+            return "EXPLORE"
+
+        return original_action or "EXPLORE"
+
+    def _serialize_coordination_details(self, coordination_details: Dict[str, Any]) -> Dict[str, Any]:
+        """序列化coordination_details，确保ActionStatus枚举被转换为字符串"""
+        serialized = {}
+        for agent_id, details in coordination_details.items():
+            if isinstance(details, dict):
+                serialized_details = details.copy()
+                # 转换status字段
+                if 'status' in serialized_details:
+                    status = serialized_details['status']
+                    if hasattr(status, 'name'):
+                        serialized_details['status'] = status.name
+                    elif hasattr(status, 'value'):
+                        serialized_details['status'] = str(status.value)
+                    else:
+                        serialized_details['status'] = str(status)
+                serialized[agent_id] = serialized_details
+            else:
+                serialized[agent_id] = details
+        return serialized
+
     def record_llm_interaction(self, task_index: int, interaction_index: int,
                               prompt: str, response: str,
                               tokens_used: Dict[str, int], response_time_ms: float,
                               extracted_action: str) -> None:
-        """记录LLM交互 - 立即写入磁盘，严格按照文档格式"""
+        """记录LLM交互 - 立即写入磁盘，根据智能体类型使用不同格式"""
         with self.lock:
+            if self.agent_type == "single":
+                # 单智能体：使用传入的interaction_index，保持原有行为
+                actual_interaction_index = interaction_index if interaction_index > 0 else (self._qa_interaction_counter + 1)
+                self._qa_interaction_counter = max(self._qa_interaction_counter, actual_interaction_index)
+            else:
+                # 多智能体：内部管理交互索引
+                self._qa_interaction_counter += 1
+                actual_interaction_index = self._qa_interaction_counter
+
             qa_data = {
-                "interaction_index": interaction_index,
+                "interaction_index": actual_interaction_index,
                 "timestamp": datetime.now().isoformat(),
                 "prompt": prompt,
                 "response": response,
                 "tokens_used": tokens_used,
-                "response_time_ms": response_time_ms,
-                "extracted_action": extracted_action
+                "response_time_ms": response_time_ms
             }
+
+            logger.debug(f"📝 记录LLM交互 ({self.agent_type}): interaction_index={actual_interaction_index}, tokens={tokens_used}")
 
             # 立即追加到QA文件
             self._append_to_qa_file(task_index, qa_data)
 
     def record_llm_qa(self, instruction: str, output: str, system: str = None) -> None:
-        """兼容现有LLMAgent的接口 - 已弃用，不再记录以避免重复"""
-        # 这个方法已被弃用，因为会导致重复记录
-        # 现在由TaskExecutor通过record_llm_interaction统一记录
-        pass
+        """废弃的接口 - 请使用record_llm_interaction"""
+        logger.warning("record_llm_qa接口已废弃，请使用record_llm_interaction接口")
+
+        # 为了向后兼容，仍然提供基本功能，但不推荐使用
+        # 注意：索引将由record_llm_interaction内部管理
+        self.record_llm_interaction(
+            task_index=1,  # 默认任务索引
+            interaction_index=0,  # 将被内部管理的索引覆盖
+            prompt=instruction,
+            response=output,
+            tokens_used={"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},  # 默认token统计
+            response_time_ms=0.0,  # 默认响应时间
+            extracted_action=""  # 空字符串，不再使用
+        )
 
     def _extract_action_from_response(self, response: str) -> str:
         """从LLM响应中提取动作命令"""

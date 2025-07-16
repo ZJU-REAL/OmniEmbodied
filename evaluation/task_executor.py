@@ -95,13 +95,24 @@ class TaskExecutor:
                 action = self._get_last_action_from_agent()
 
                 # 3. 记录LLM交互（如果有）
-                llm_info = self._record_llm_interaction(task_index, llm_interactions)
+                llm_info = self._record_llm_interaction(task_index)
                 if llm_info:
                     llm_interactions += 1
                 
                 # 4. 记录动作执行
                 agent_id = self._get_agent_id()
                 self._record_action_execution(task_index, step, action, status, message, result, agent_id)
+
+                # 5. 记录到轨迹记录器（确保轨迹文件被保存）
+                try:
+                    # 确保status是字符串格式
+                    status_str = status.name if hasattr(status, 'name') else str(status)
+                    self.trajectory_recorder.record_action_execution(
+                        task_index, step + 1, action, status_str,
+                        message, result or {}, agent_id
+                    )
+                except Exception as record_error:
+                    logger.error(f"记录轨迹失败: {record_error}")
                 
                 # 5. 更新统计
                 if status == ActionStatus.SUCCESS:
@@ -161,16 +172,16 @@ class TaskExecutor:
             'execution_log': execution_log
         }
     
-    def _record_llm_interaction(self, task_index: int, interaction_index: int) -> Dict[str, Any]:
+    def _record_llm_interaction(self, task_index: int) -> Dict[str, Any]:
         """记录LLM交互 - 按照文档格式要求"""
         try:
             # 尝试从智能体获取LLM交互信息
             if hasattr(self.agent_adapter, 'get_llm_interaction_info'):
                 llm_info = self.agent_adapter.get_llm_interaction_info()
                 if llm_info:
-                    # 按照文档要求的格式记录
+                    # 按照文档要求的格式记录（索引由轨迹记录器内部管理）
                     self.trajectory_recorder.record_llm_interaction(
-                        task_index, interaction_index,
+                        task_index, 0,  # 索引将被内部管理的索引覆盖
                         llm_info.get('prompt', ''),
                         llm_info.get('response', ''),
                         llm_info.get('tokens_used', {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}),
@@ -206,7 +217,23 @@ class TaskExecutor:
                 if hasattr(agent, 'history') and agent.history:
                     last_entry = agent.history[-1]
                     if isinstance(last_entry, dict) and 'action' in last_entry:
-                        return last_entry['action']
+                        action = last_entry['action']
+
+                        # 特殊处理中心化智能体的COORDINATE动作
+                        if action == 'COORDINATE' and 'coordination_details' in last_entry:
+                            # 从coordination_details中提取实际的协作命令
+                            coordination_details = last_entry['coordination_details']
+                            agent_1_action = coordination_details.get('agent_1', {}).get('action', 'UNKNOWN')
+                            agent_2_action = coordination_details.get('agent_2', {}).get('action', 'UNKNOWN')
+
+                            # 如果两个智能体执行相同的协作命令，返回该命令
+                            if agent_1_action == agent_2_action and agent_1_action.startswith('CORP_'):
+                                return agent_1_action
+                            # 否则返回组合格式
+                            elif agent_1_action != 'UNKNOWN' or agent_2_action != 'UNKNOWN':
+                                return f"agent_1:{agent_1_action}, agent_2:{agent_2_action}"
+
+                        return action
                 # 如果没有历史记录，尝试获取当前动作
                 if hasattr(agent, 'current_action'):
                     return agent.current_action
@@ -277,7 +304,23 @@ class TaskExecutor:
     
     def _should_terminate(self, action: str, completion_status: Dict[str, Any]) -> bool:
         """判断是否应该终止执行"""
-        # 只有智能体输出DONE命令才终止
+        # 检查是否为中心化模式的双DONE
+        if hasattr(self.agent_adapter, 'agent') and hasattr(self.agent_adapter.agent, 'mode'):
+            if self.agent_adapter.agent.mode == "centralized":
+                # 中心化模式：检查是否两个智能体都输出DONE
+                if hasattr(self.agent_adapter.agent, 'last_llm_interaction'):
+                    last_interaction = self.agent_adapter.agent.last_llm_interaction
+                    if last_interaction and 'extracted_action' in last_interaction:
+                        extracted_action = last_interaction['extracted_action']
+                        # 检查是否包含两个DONE
+                        if 'agent_1=DONE' in extracted_action and 'agent_2=DONE' in extracted_action:
+                            logger.info("🏁 中心化模式：两个智能体都输出DONE，任务终止")
+                            return True
+
+                # 如果只有一个DONE，继续执行
+                return False
+
+        # 单智能体模式：只要输出DONE就终止
         if "DONE" in action.upper():
             return True
 

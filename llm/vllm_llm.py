@@ -38,7 +38,11 @@ class VLLMLLM(BaseLLM):
         # VLLM特有参数
         self.tensor_parallel_size = vllm_config.get('tensor_parallel_size', 1)
         self.gpu_memory_utilization = vllm_config.get('gpu_memory_utilization', 0.9)
-        
+
+        # 用于记录最后一次调用的统计信息
+        self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+        self.last_response_time_ms = 0.0
+
         # 初始化VLLM模型
         try:
             logger.info(f"正在加载VLLM模型: {self.model_path}")
@@ -92,19 +96,41 @@ class VLLMLLM(BaseLLM):
         )
         
         try:
+            # 记录开始时间
+            import time
+            start_time = time.time()
+
             # 生成响应
             outputs = self.engine.generate(
                 prompts=[full_prompt],
                 sampling_params=sampling_params
             )
-            
+
+            # 记录响应时间
+            end_time = time.time()
+            self.last_response_time_ms = (end_time - start_time) * 1000
+
             if outputs and len(outputs) > 0:
-                generated_text = outputs[0].outputs[0].text
+                output = outputs[0]
+                generated_text = output.outputs[0].text
+
+                # 估算token使用情况（VLLM没有直接提供token统计）
+                prompt_tokens = len(full_prompt.split()) * 1.3  # 粗略估算
+                completion_tokens = len(generated_text.split()) * 1.3  # 粗略估算
+
+                self.last_token_usage = {
+                    "prompt_tokens": int(prompt_tokens),
+                    "completion_tokens": int(completion_tokens),
+                    "total_tokens": int(prompt_tokens + completion_tokens)
+                }
+
                 return generated_text.strip()
             else:
+                self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
                 return ""
         except Exception as e:
             logger.exception(f"VLLM推理时发生错误: {str(e)}")
+            self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
             return f"错误: {str(e)}"
     
     def generate_chat(self, 
@@ -174,17 +200,39 @@ class VLLMLLM(BaseLLM):
         )
         
         try:
+            # 记录开始时间
+            import time
+            start_time = time.time()
+
             # 生成响应
             outputs = self.engine.generate(
                 prompts=[full_prompt],
                 sampling_params=sampling_params
             )
-            
+
+            # 记录响应时间
+            end_time = time.time()
+            self.last_response_time_ms = (end_time - start_time) * 1000
+
             if outputs and len(outputs) > 0:
-                generated_text = outputs[0].outputs[0].text
+                output = outputs[0]
+                generated_text = output.outputs[0].text
+
+                # 估算token使用情况（VLLM没有直接提供token统计）
+                prompt_tokens = len(full_prompt.split()) * 1.3  # 粗略估算
+                completion_tokens = len(generated_text.split()) * 1.3  # 粗略估算
+
+                self.last_token_usage = {
+                    "prompt_tokens": int(prompt_tokens),
+                    "completion_tokens": int(completion_tokens),
+                    "total_tokens": int(prompt_tokens + completion_tokens)
+                }
+
                 return generated_text.strip()
             else:
+                self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
                 return ""
         except Exception as e:
             logger.exception(f"VLLM推理时发生错误: {str(e)}")
-            return f"错误: {str(e)}" 
+            self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+            return f"错误: {str(e)}"

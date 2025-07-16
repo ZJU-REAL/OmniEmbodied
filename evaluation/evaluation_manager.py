@@ -22,14 +22,14 @@ logger = logging.getLogger(__name__)
 class EvaluationManager:
     """评测管理器 - 统一评测管理和场景级并行执行"""
     
-    def __init__(self, config_file: str, agent_type: str, task_type: str, 
+    def __init__(self, config_file: str, agent_type: str, task_type: str,
                  scenario_selection: Dict[str, Any], custom_suffix: str = None):
         """
         初始化评测管理器
-        
+
         Args:
             config_file: 配置文件名
-            agent_type: 智能体类型 ('single', 'centralized', 'decentralized')
+            agent_type: 智能体类型 ('single', 'multi')
             task_type: 任务类型 ('sequential', 'combined', 'independent')
             scenario_selection: 场景选择配置
             custom_suffix: 自定义后缀
@@ -38,6 +38,9 @@ class EvaluationManager:
         self.agent_type = agent_type
         self.task_type = task_type
         self.custom_suffix = custom_suffix or 'demo'
+
+        # 映射agent_type到实际的智能体模式
+        self.actual_agent_type = self._map_agent_type(agent_type, config_file)
         
         # 加载配置
         self.config_manager = ConfigManager()
@@ -77,6 +80,32 @@ class EvaluationManager:
 
         logger.info(f"🚀 评测管理器初始化完成: {self.run_name}")
         logger.info(f"📊 场景数量: {len(self.scenario_list)}, 并行数: {self.parallel_count}")
+
+    def _map_agent_type(self, agent_type: str, config_file: str) -> str:
+        """
+        将评测接口的agent_type映射到实际的智能体模式
+
+        Args:
+            agent_type: 评测接口传入的类型 ('single', 'multi')
+            config_file: 配置文件名
+
+        Returns:
+            str: 实际的智能体模式 ('single', 'centralized', 'decentralized')
+        """
+        if agent_type == 'single':
+            return 'single'
+        elif agent_type == 'multi':
+            # 根据配置文件名判断多智能体模式
+            if 'centralized' in config_file:
+                return 'centralized'
+            elif 'decentralized' in config_file:
+                return 'decentralized'
+            else:
+                # 默认为中心化模式
+                return 'centralized'
+        else:
+            # 直接返回，支持直接传入具体模式
+            return agent_type
     
     def _generate_run_name(self) -> str:
         """生成运行名称"""
@@ -227,7 +256,7 @@ class EvaluationManager:
             # 获取该场景的任务筛选信息
             task_indices = self.task_indices.get(scenario_id, [])
             scenario_executor = ScenarioExecutor(scenario_id, self.config, self.output_dir, task_indices)
-            result = scenario_executor.execute_scenario(self.agent_type, self.task_type)
+            result = scenario_executor.execute_scenario(self.actual_agent_type, self.task_type)
             
             # 更新任务统计
             self._update_task_statistics(result)
@@ -251,7 +280,7 @@ class EvaluationManager:
                 self._executor.submit(
                     execute_scenario_standalone,
                     scenario_id, self.config, self.output_dir,
-                    self.agent_type, self.task_type,
+                    self.actual_agent_type, self.task_type,
                     self.task_indices.get(scenario_id, [])
                 ): scenario_id
                 for scenario_id in self.scenario_list
