@@ -87,7 +87,7 @@ class BaseAction:
         # 检查智能体是否存在
         agent = agent_manager.get_agent(self.agent_id)
         if not agent:
-            return False, f"智能体不存在: {self.agent_id}"
+            return False, f"Agent does not exist: {self.agent_id}"
             
         # 具体验证逻辑由子类实现
         return self._validate(agent, world_state, env_manager, agent_manager)
@@ -95,17 +95,17 @@ class BaseAction:
     def _validate(self, agent, world_state, env_manager, agent_manager) -> Tuple[bool, str]:
         """
         验证动作的具体逻辑，由子类实现
-        
+
         Args:
             agent: 执行动作的智能体
             world_state: 世界状态
             env_manager: 环境管理器
             agent_manager: 智能体管理器
-            
+
         Returns:
             Tuple[bool, str]: (是否有效, 原因消息)
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
     
     def execute(self, world_state, env_manager, agent_manager) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
         """

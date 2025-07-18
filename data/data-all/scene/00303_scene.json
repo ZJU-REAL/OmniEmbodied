@@ -1,0 +1,532 @@
+{
+  "description": "A bustling hypermarket stockroom and adjacent back-office during peak restocking hours, filled with heavy objects, tools, and time-sensitive tasks requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "receiving_dock",
+      "name": "Receiving Dock",
+      "properties": {
+        "type": "loading_zone"
+      },
+      "connected_to_room_ids": [
+        "main_stockroom"
+      ]
+    },
+    {
+      "id": "main_stockroom",
+      "name": "Main Stockroom",
+      "properties": {
+        "type": "high_density_storage"
+      },
+      "connected_to_room_ids": [
+        "receiving_dock",
+        "back_office"
+      ]
+    },
+    {
+      "id": "back_office",
+      "name": "Back Office",
+      "properties": {
+        "type": "inventory_control"
+      },
+      "connected_to_room_ids": [
+        "main_stockroom"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "freight_scale_1",
+      "name": "Freight Scale",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "capacity": "500kg",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_crate_stack_1",
+      "name": "Steel Crate Stack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "PERISHABLE – HANDLE FIRST",
+        "condition": "torn_label"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 45.0,
+        "material": "steel",
+        "max_load": "800kg",
+        "condition": "squeaky_wheels",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "delivery_manifest_clipboard_1",
+      "name": "Delivery Manifest Clipboard",
+      "type": "ITEM",
+      "location_id": "on:freight_scale_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "smudged",
+        "content": "today_manifest"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "refrigerated_crate_1",
+      "name": "Refrigerated Crate",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "plastic",
+        "condition": "condensation",
+        "barcode": "unscannable"
+      },
+      "states": {
+        "is_open": false,
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "dolly_cart_1",
+      "name": "Dolly Cart",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 8.0,
+        "material": "steel",
+        "condition": "wobbly_wheel",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "box_cutter_1",
+      "name": "Box Cutter",
+      "type": "ITEM",
+      "location_id": "on:steel_crate_stack_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "condition": "sticky_tape_residue",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_unit_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "sagging"
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 800.0,
+        "material": "steel",
+        "condition": "low_battery",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "mislabelled_pallet_1",
+      "name": "Mislabelled Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "TOYS",
+        "actual_content": "cleaning_supplies"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "leaking_drum_1",
+      "name": "Leaking Drum",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 25.0,
+        "material": "plastic",
+        "capacity": "5-gallon",
+        "label": "NON-TOXIC",
+        "condition": "leaking"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "rolling_ladder_1",
+      "name": "Rolling Ladder",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 35.0,
+        "material": "aluminum",
+        "condition": "stuck_wheel",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hand_scanner_1",
+      "name": "Hand Scanner",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "low_battery",
+        "last_scan": "2_hours_ago"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "broken_tape_dispenser_1",
+      "name": "Broken Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_unit_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "condition": "broken",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "l_shaped_desk_1",
+      "name": "L-Shaped Desk",
+      "type": "FURNITURE",
+      "location_id": "in:back_office",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "uneven"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:back_office",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "blinking_leds"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "thermal_label_printer_1",
+      "name": "Thermal Label Printer",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "condition": "jammed",
+        "provides_abilities": [
+          "paste"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal",
+        "condition": "empty",
+        "provides_abilities": [
+          "paste"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "master_keyring_1",
+      "name": "Master Keyring",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "label": "STOREROOM 1-4",
+        "condition": "bent_nail"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "condition": "on_hold",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "metal",
+        "condition": "beeping",
+        "provides_abilities": [
+          "roast"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "condition": "buried",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_charger_1",
+      "name": "Forklift Charger",
+      "type": "ITEM",
+      "location_id": "in:back_office",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "condition": "behind_server_rack",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Chemical Drum",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 20.0,
+        "material": "plastic",
+        "label": "CORROSIVE",
+        "condition": "corroded_cap"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_2",
+      "name": "Chemical Drum",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 20.0,
+        "material": "plastic",
+        "label": "NON-TOXIC",
+        "condition": "intact"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_3",
+      "name": "Chemical Drum",
+      "type": "ITEM",
+      "location_id": "in:main_stockroom",
+      "properties": {
+        "weight": 20.0,
+        "material": "plastic",
+        "label": "NON-TOXIC",
+        "condition": "intact"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "today_manifest",
+        "condition": "clean"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clipboard_2",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "old_schedule",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clipboard_3",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "old_schedule",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "open",
+    "pair",
+    "paste",
+    "pump",
+    "roast",
+    "slice",
+    "thaw",
+    "turn_off",
+    "turn_on",
+    "untie"
+  ]
+}

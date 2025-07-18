@@ -1,0 +1,554 @@
+{
+  "description": "An industrial cable tray fabrication workshop with multiple functional zones for raw material storage, cutting, assembly, and quality control, designed for multi-agent collaboration and complex task execution.",
+  "rooms": [
+    {
+      "id": "raw_materials_storage",
+      "name": "Raw Materials Storage & Inventory Hub",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "cutting_drilling_station"
+      ]
+    },
+    {
+      "id": "cutting_drilling_station",
+      "name": "Cutting & Drilling Station",
+      "properties": {
+        "type": "fabrication"
+      },
+      "connected_to_room_ids": [
+        "raw_materials_storage",
+        "assembly_welding_bay"
+      ]
+    },
+    {
+      "id": "assembly_welding_bay",
+      "name": "Assembly & Welding Bay",
+      "properties": {
+        "type": "assembly"
+      },
+      "connected_to_room_ids": [
+        "cutting_drilling_station",
+        "quality_control_shipping"
+      ]
+    },
+    {
+      "id": "quality_control_shipping",
+      "name": "Quality Control & Shipping Prep",
+      "properties": {
+        "type": "inspection"
+      },
+      "connected_to_room_ids": [
+        "assembly_welding_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_shelving_unit_1",
+      "name": "Heavy-duty steel shelving unit",
+      "type": "FURNITURE",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sheet_metal_coil_1",
+      "name": "Sheet metal coil",
+      "type": "ITEM",
+      "location_id": "in:steel_shelving_unit_1",
+      "properties": {
+        "weight": 200.0,
+        "diameter": 1.0,
+        "material": "steel",
+        "color": "silver",
+        "thickness": 0.002
+      },
+      "states": {}
+    },
+    {
+      "id": "sap_terminal_1",
+      "name": "SAP inventory terminal",
+      "type": "FURNITURE",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "SAP",
+        "model": "Inventory Pro"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "priority_rush_order_crate_1",
+      "name": "Priority Rush Order crate",
+      "type": "ITEM",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "label": "FOR PROJECT DELTA-7 - URGENT"
+      },
+      "states": {
+        "is_sealed": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "metal_coil_cart_1",
+      "name": "Metal coil cart",
+      "type": "FURNITURE",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "condition": "stuck wheel",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode scanner",
+      "type": "ITEM",
+      "location_id": "on:sap_terminal_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Zebra",
+        "model": "DS2208"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet jack",
+      "type": "FURNITURE",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "condition": "leaking hydraulic fluid",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with inventory sheets",
+      "type": "ITEM",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "weight": 0.3,
+        "condition": "coffee stain on page 3"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cnc_punch_press_1",
+      "name": "CNC punch press",
+      "type": "FURNITURE",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          1.8
+        ],
+        "weight": 950.0,
+        "is_container": false,
+        "status": "ERROR: BIT MISALIGNMENT"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "drill_press_table_1",
+      "name": "Manual drill press table",
+      "type": "FURNITURE",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "condition": "rusted handle, squeaky lever"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uncut_sheet_metal_1",
+      "name": "Uncut sheet metal",
+      "type": "ITEM",
+      "location_id": "on:drill_press_table_1",
+      "properties": {
+        "weight": 15.0,
+        "size": [
+          1.0,
+          0.5,
+          0.002
+        ],
+        "condition": "one corner bent"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "dull_drill_bit_1",
+      "name": "Dull drill bit",
+      "type": "ITEM",
+      "location_id": "in:drill_press_table_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "stuck in press",
+        "diameter": 0.01
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "grinder_1",
+      "name": "Grinder",
+      "type": "ITEM",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "weight": 3.5,
+        "condition": "safety guard missing"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "bench_vise_1",
+      "name": "Bench vise",
+      "type": "FURNITURE",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "grip worn smooth"
+      },
+      "states": {}
+    },
+    {
+      "id": "air_compressor_hose_1",
+      "name": "Air compressor hose",
+      "type": "ITEM",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "weight": 1.2,
+        "condition": "kinked, hissing slightly",
+        "length": 5.0
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead crane",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_welding_bay",
+      "properties": {
+        "size": [
+          4.0,
+          3.0,
+          3.5
+        ],
+        "weight": 800.0,
+        "is_container": false,
+        "condition": "controls sticky, jerks when moving left"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "welding_station_1",
+      "name": "Welding station",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_welding_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "condition": "ventilation hood rattling"
+      },
+      "states": {
+        "is_pure": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "half_assembled_cable_tray_1",
+      "name": "Half-assembled cable tray",
+      "type": "ITEM",
+      "location_id": "in:assembly_welding_bay",
+      "properties": {
+        "weight": 45.0,
+        "size": [
+          1.5,
+          0.5,
+          0.2
+        ],
+        "condition": "misaligned bolt holes"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "welding_mask_1",
+      "name": "Welding mask",
+      "type": "ITEM",
+      "location_id": "in:welding_station_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "cracked lens"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire extinguisher",
+      "type": "ITEM",
+      "location_id": "in:assembly_welding_bay",
+      "properties": {
+        "weight": 5.0,
+        "condition": "last inspection tag outdated"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "inspection_table_1",
+      "name": "Inspection table",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_shipping",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "condition": "LED lamp flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "shipping_label_printer_1",
+      "name": "Shipping label printer",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 3.0,
+        "condition": "out of toner"
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "blueprint_1",
+      "name": "Blueprint",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "corner torn"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rejected_tray_1",
+      "name": "Rejected tray",
+      "type": "ITEM",
+      "location_id": "in:quality_control_shipping",
+      "properties": {
+        "weight": 20.0,
+        "size": [
+          1.0,
+          0.5,
+          0.2
+        ],
+        "condition": "DEFECT - DO NOT SHIP"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "charger_1",
+      "name": "Universal charger",
+      "type": "ITEM",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Anker",
+        "model": "PowerPort",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pliers_1",
+      "name": "Pliers",
+      "type": "ITEM",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "weight": 0.4,
+        "material": "steel",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ventilation_filter_1",
+      "name": "Ventilation filter replacement",
+      "type": "ITEM",
+      "location_id": "in:priority_rush_order_crate_1",
+      "properties": {
+        "weight": 1.2,
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network router",
+      "type": "ITEM",
+      "location_id": "in:raw_materials_storage",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Cisco",
+        "provides_abilities": [
+          "upload"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seal_cutter_1",
+      "name": "Seal cutter",
+      "type": "ITEM",
+      "location_id": "in:cutting_drilling_station",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Industrial broom",
+      "type": "ITEM",
+      "location_id": "in:assembly_welding_bay",
+      "properties": {
+        "weight": 1.5,
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "toner_cartridge_1",
+      "name": "Toner cartridge",
+      "type": "ITEM",
+      "location_id": "in:quality_control_shipping",
+      "properties": {
+        "weight": 0.7,
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "hide",
+    "open",
+    "print",
+    "purify",
+    "recharge",
+    "slice",
+    "sweep",
+    "unseal",
+    "upload",
+    "close"
+  ]
+}

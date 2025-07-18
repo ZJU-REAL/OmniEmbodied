@@ -1,0 +1,563 @@
+{
+  "description": "A bustling Hospital Emergency Department (ED) with an adjacent Medical Records Wing, overwhelmed by an influx of newly insured patients. The scene is designed to highlight collaborative healthcare operations under stress, with embedded security vulnerabilities (physical and digital) that require multi-agent coordination to manage.",
+  "rooms": [
+    {
+      "id": "ed_triage_zone",
+      "name": "ED Triage Zone",
+      "properties": {
+        "type": "medical",
+        "atmosphere": "High tension, flickering fluorescent lights, distant alarms, antiseptic smell mixed with sweat."
+      },
+      "connected_to_room_ids": [
+        "ed_treatment_bay_3",
+        "medical_records_wing"
+      ]
+    },
+    {
+      "id": "ed_treatment_bay_3",
+      "name": "ED Treatment Bay 3",
+      "properties": {
+        "type": "medical",
+        "atmosphere": "Bloodstains on the floor (recently mopped but not fully cleaned), beeping monitors, an overturned IV stand."
+      },
+      "connected_to_room_ids": [
+        "ed_triage_zone"
+      ]
+    },
+    {
+      "id": "medical_records_wing",
+      "name": "Medical Records Wing",
+      "properties": {
+        "type": "administrative",
+        "atmosphere": "Dim lighting (one flickering bulb), a hum of servers, the scent of ozone from overheating electronics."
+      },
+      "connected_to_room_ids": [
+        "ed_triage_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "triage_desk_1",
+      "name": "Triage Desk",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "scratched",
+        "features": "A chipped laminate top, embedded fingerprint scanner (sticky note: 'Use WIPE 2 CLEAN'), and a wall-mounted intercom (static-filled)."
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_queue_board_1",
+      "name": "Patient Queue Board",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "status": "malfunctioning",
+        "display": "PATIENT 47: WAIT TIME—ERROR."
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Handwritten Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.05,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "condition": "smudged marker updates"
+      },
+      "states": {}
+    },
+    {
+      "id": "collapsible_wheelchair_1",
+      "name": "Collapsible Wheelchair",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          0.9,
+          0.6,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "state": "stuck in folded position"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "urgent_patient_file_1",
+      "name": "Urgent Patient File",
+      "type": "ITEM",
+      "location_id": "on:triage_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "label": "CONFIDENTIAL – J. DOE",
+        "condition": "left unattended"
+      },
+      "states": {}
+    },
+    {
+      "id": "janitors_mop_bucket_1",
+      "name": "Janitor's Mop Bucket",
+      "type": "ITEM",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "weight": 8.0,
+        "contents": "half-full of grey water",
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "security_door_1",
+      "name": "Security Door",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "state": "propped open by mop bucket"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "hand_sanitizer_dispenser_1",
+      "name": "Hand Sanitizer Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "status": "empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_stethoscope_1",
+      "name": "Broken Stethoscope",
+      "type": "ITEM",
+      "location_id": "on:triage_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "one earpiece missing",
+        "material": "rubber and metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "overflowing_trash_bin_1",
+      "name": "Overflowing Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "contents": "wadded gloves, coffee cups"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "hydraulic_medical_bed_1",
+      "name": "Hydraulic Medical Bed",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          0.8
+        ],
+        "weight": 220.0,
+        "is_container": false,
+        "status": "stuck at 30° incline",
+        "error": "ERR 47"
+      },
+      "states": {}
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "status": "locked wheels, partially stocked",
+        "missing": "defibrillator pads",
+        "contents": "epinephrine vials (expired)"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "narcotics_cabinet_1",
+      "name": "Narcotics Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "lock_status": "biometric lock malfunctioning",
+        "keycard_reader": "LED blinking red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oxygen_tank_1",
+      "name": "Oxygen Tank",
+      "type": "ITEM",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "weight": 15.0,
+        "status": "empty",
+        "gauge": "0 PSI"
+      },
+      "states": {}
+    },
+    {
+      "id": "heart_monitor_1",
+      "name": "Heart Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 10.0,
+        "status": "beeping erratically"
+      },
+      "states": {}
+    },
+    {
+      "id": "iv_stand_1",
+      "name": "IV Stand",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.5
+        ],
+        "weight": 5.0,
+        "status": "tipped over, drip chamber cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "sharps_bin_1",
+      "name": "Sharps Bin",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.4
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "status": "overfilled, lid not sealed"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "status": "overheating, fan noise irregular",
+        "drive_bay": "one open, unlabeled USB stick inserted"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "it_workstation_1",
+      "name": "IT Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "status": "logged in, unattended",
+        "open_email": "RE: SECURITY BREACH – URGENT"
+      },
+      "states": {}
+    },
+    {
+      "id": "unshredded_patient_files_1",
+      "name": "Unshredded Patient Files",
+      "type": "ITEM",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "weight": 5.0,
+        "status": "on rolling cart, unlocked",
+        "top_file": "J. DOE – SSN: ***-**-**** (partially obscured by a coffee ring)"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_lanyard_1",
+      "name": "Keycard on Lanyard",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "PHARMACY ACCESS – DO NOT DUPLICATE",
+        "status": "left on desk"
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_shredder_1",
+      "name": "Paper Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "status": "jammed, red light on"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_hard_drive_1",
+      "name": "Backup Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "weight": 1.0,
+        "status": "unplugged, dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_keycard_1",
+      "name": "Expired Keycard",
+      "type": "ITEM",
+      "location_id": "on:triage_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "status": "expired access",
+        "color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "janitors_keycard_1",
+      "name": "Janitor's Keycard",
+      "type": "ITEM",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "weight": 0.05,
+        "access": "storage closet",
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_keycard_1",
+      "name": "Fake Keycard",
+      "type": "ITEM",
+      "location_id": "in:medical_records_wing",
+      "properties": {
+        "weight": 0.05,
+        "status": "deactivated",
+        "color": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_keycard_2",
+      "name": "Fake Keycard",
+      "type": "ITEM",
+      "location_id": "in:ed_triage_zone",
+      "properties": {
+        "weight": 0.05,
+        "status": "deactivated",
+        "color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_stick_1",
+      "name": "Unlabeled USB Stick",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.02,
+        "status": "inserted into server rack"
+      },
+      "states": {}
+    },
+    {
+      "id": "wipe_2_clean_1",
+      "name": "WIPE 2 CLEAN",
+      "type": "ITEM",
+      "location_id": "on:triage_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "purpose": "clean fingerprint scanner",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_release_tool_1",
+      "name": "Hydraulic Release Tool",
+      "type": "ITEM",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "weight": 0.5,
+        "purpose": "reset hydraulic medical bed",
+        "provides_abilities": [
+          "reset"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defibrillator_pads_1",
+      "name": "Defibrillator Pads",
+      "type": "ITEM",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "weight": 0.3,
+        "purpose": "replace missing pads in crash cart",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oxygen_tank_replacement_1",
+      "name": "Oxygen Tank Replacement",
+      "type": "ITEM",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "weight": 15.0,
+        "status": "full",
+        "gauge": "2000 PSI"
+      },
+      "states": {}
+    },
+    {
+      "id": "storage_closet_1",
+      "name": "Storage Closet",
+      "type": "FURNITURE",
+      "location_id": "in:ed_treatment_bay_3",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "lock_status": "locked, key missing"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "open",
+    "replace"
+  ]
+}

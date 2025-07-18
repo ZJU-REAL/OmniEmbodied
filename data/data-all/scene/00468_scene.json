@@ -1,0 +1,832 @@
+{
+  "description": "A high-tech cybercrime forensic lab tasked with analyzing and reverse-engineering intercepted financial fraud devices, specifically an ATM skimmer operation. The lab is densely populated with technological, physical, and digital evidence, requiring specialized tools, coordinated movement, and layered reasoning.",
+  "rooms": [
+    {
+      "id": "evidence_intake",
+      "name": "Evidence Intake & Decontamination Bay",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "forensic_workbench",
+      "name": "Forensic Workbench (Primary Analysis Zone)",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "evidence_intake",
+        "digital_forensics",
+        "collaborative_area"
+      ]
+    },
+    {
+      "id": "digital_forensics",
+      "name": "Digital Forensics Station",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench",
+        "secure_storage"
+      ]
+    },
+    {
+      "id": "collaborative_area",
+      "name": "Collaborative Whiteboard & Strategy Area",
+      "properties": {
+        "type": "meeting"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "secure_storage",
+      "name": "Secure Storage & Tool Crib",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "digital_forensics"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "decontamination_table_1",
+      "name": "Stainless-steel decontamination table",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "DC-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_locker_1",
+      "name": "Evidence locker (PENDING)",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "RFID"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_locker_2",
+      "name": "Evidence locker (CLEANED)",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "RFID"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_locker_3",
+      "name": "Evidence locker (HAZARDOUS)",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.2
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "RFID"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "atm_skimmer_1",
+      "name": "Intercepted ATM skimmer",
+      "type": "ITEM",
+      "location_id": "on:decontamination_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "has_camera": true,
+        "has_transmitter": true
+      },
+      "states": {
+        "is_photographed": false,
+        "is_cut": false
+      }
+    },
+    {
+      "id": "uv_light_wand_1",
+      "name": "Forensic UV light wand",
+      "type": "ITEM",
+      "location_id": "on:decontamination_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "ForensicTech",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_bags_1",
+      "name": "Anti-static evidence bags",
+      "type": "ITEM",
+      "location_id": "in:evidence_locker_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "plastic",
+        "quantity": 20
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fume_extractor_1",
+      "name": "Industrial fume extractor",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "filter_capacity": 67
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "evidence_camera_1",
+      "name": "Digital evidence camera",
+      "type": "ITEM",
+      "location_id": "on:decontamination_table_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Canon",
+        "model": "EOS 5D",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "glove_type": "nitrile",
+        "glove_size": "large",
+        "fill_level": 33
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_poster_1",
+      "name": "Biohazard Protocol poster",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "weight": 0.1,
+        "condition": "peeling",
+        "has_notes": true
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "evidence_logbook_1",
+      "name": "Evidence logbook",
+      "type": "ITEM",
+      "location_id": "on:decontamination_table_1",
+      "properties": {
+        "weight": 0.8,
+        "current_page": 43,
+        "last_entry": "3 days ago"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee cup",
+      "type": "ITEM",
+      "location_id": "on:decontamination_table_1",
+      "properties": {
+        "weight": 0.3,
+        "content": "coffee",
+        "temperature": "cold",
+        "has_lipstick": true
+      },
+      "states": {}
+    },
+    {
+      "id": "work_mat_1",
+      "name": "Anti-static work mat",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.6,
+          0.9,
+          0.01
+        ],
+        "weight": 2.0,
+        "material": "rubber",
+        "condition": "scratched",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_station_1",
+      "name": "Microscope station",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "zoom": "400x",
+        "connection": "USB"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "overhead_lamp_1",
+      "name": "Overhead articulating lamp",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.5,
+          0.2,
+          0.8
+        ],
+        "weight": 3.5,
+        "light_type": "LED",
+        "is_flickering": true
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "false_keypad_1",
+      "name": "False keypad overlay",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "silicone",
+        "has_fingerprints": true
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "micro_camera_1",
+      "name": "Micro-camera module",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.05,
+        "lens_size": "3mm",
+        "has_battery": true
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "rf_transmitter_1",
+      "name": "RF transmitter chip",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.02,
+        "serial_number": "partially_scratched"
+      },
+      "states": {
+        "is_cut": false,
+        "is_soldered": true
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision screwdriver set",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.3,
+        "is_magnetic": true,
+        "missing_bits": [
+          "T5"
+        ],
+        "provides_abilities": [
+          "cut",
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multi-meter",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.4,
+        "battery_status": "low",
+        "probes_attached": false
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "magnifying_lens_1",
+      "name": "Magnifying lens on a swing arm",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 1.5,
+        "condition": "dusty",
+        "alignment": "misaligned"
+      },
+      "states": {}
+    },
+    {
+      "id": "component_tray_1",
+      "name": "Component tray (SUSPECT WIRING)",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.5,
+        "is_container": true,
+        "label": "SUSPECT WIRING"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "component_tray_2",
+      "name": "Component tray (UNKNOWN ICs)",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.5,
+        "is_container": true,
+        "label": "UNKNOWN ICs"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_microscope_1",
+      "name": "USB microscope camera",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_plugged_in": true,
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "schematic_printout_1",
+      "name": "Coffee-ringed schematic printout",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.05,
+        "content": "ATM internal wiring",
+        "has_red_pen_corrections": true
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky note (CHECK FOR NFC RELAY)",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.01,
+        "text": "CHECK FOR NFC RELAY - LAST CASE HAD IT"
+      },
+      "states": {}
+    },
+    {
+      "id": "spudger_tool_1",
+      "name": "Broken plastic spudger tool",
+      "type": "ITEM",
+      "location_id": "on:work_mat_1",
+      "properties": {
+        "weight": 0.02,
+        "condition": "broken",
+        "pieces": 2
+      },
+      "states": {
+        "is_cut": true
+      }
+    },
+    {
+      "id": "forensic_workstation_1",
+      "name": "Dual-monitor forensic workstation",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "os": "Linux",
+        "is_container": true
+      },
+      "states": {
+        "is_plugged_in": true,
+        "is_on": true,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "faraday_cage_1",
+      "name": "Faraday cage enclosure",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.5
+        ],
+        "weight": 75.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "network_tap_1",
+      "name": "Network tap device",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 1.0,
+        "status_light": "green"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "write_blocker_1",
+      "name": "Write-blocker USB adapter",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "is_attached": true,
+        "connected_to": "skimmer_memory_chip"
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_hdd_1",
+      "name": "Encrypted external HDD",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "label": "SKIMMER CASE #47 - RAW DUMP",
+        "is_encrypted": true
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "signal_jammer_1",
+      "name": "Signal jammer",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "frequency": "2.4GHz",
+        "battery_level": 20
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "reference_manual_1",
+      "name": "Reference manual (Advanced RFID Forensics)",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.7,
+        "bookmarked_page": "Ch. 6"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "spare_keyboard_1",
+      "name": "Spare keyboard",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "type": "mechanical",
+        "missing_key": "F3"
+      },
+      "states": {}
+    },
+    {
+      "id": "headphones_1",
+      "name": "Headphones",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "torn_ear_cushion"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "password_note_1",
+      "name": "Sticky note (PASSWORD: EVIDENCE2024)",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.01,
+        "text": "PASSWORD: EVIDENCE2024"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Empty energy drink can",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.05,
+        "is_empty": true,
+        "position": "knocked_over"
+      },
+      "states": {}
+    },
+    {
+      "id": "malware_calendar_1",
+      "name": "Outdated Malware Trends calendar",
+      "type": "ITEM",
+      "location_id": "in:digital_forensics",
+      "properties": {
+        "weight": 0.2,
+        "current_month": "November 2023"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Collaborative whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:collaborative_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          0.05
+        ],
+        "weight": 30.0,
+        "has_notes": true,
+        "has_diagrams": true,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "marker_set_1",
+      "name": "Whiteboard marker set",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.2,
+        "colors": [
+          "red",
+          "blue",
+          "black",
+          "green"
+        ],
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "case_files_1",
+      "name": "Case files stack",
+      "type": "ITEM",
+      "location_id": "in:collaborative_area",
+      "properties": {
+        "weight": 3.0,
+        "number_of_files": 15,
+        "is_organized": false
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Locked forensic tool cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "lock_type": "keypad"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hot_air_station_1",
+      "name": "Hot-air rework station",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 8.0,
+        "requires_two_hands": true,
+        "provides_abilities": [
+          "cut",
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fine_tweezers_1",
+      "name": "Fine tweezers",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_scanner_1",
+      "name": "Portable evidence scanner",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 2.5,
+        "battery_level": 15,
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "rfid_reader_1",
+      "name": "Forensic RFID reader",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.2,
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "cut",
+    "disconnect",
+    "open",
+    "photograph",
+    "plug_in",
+    "scratch",
+    "tear",
+    "turn_off",
+    "unplug",
+    "unstack"
+  ]
+}

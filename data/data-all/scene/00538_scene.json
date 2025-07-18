@@ -1,0 +1,772 @@
+{
+  "description": "A high-tech underground bunker designed for apocalypse preparedness, featuring a main control hub, supply storage, living quarters, medical bay, and escape tunnel access. The scene is densely packed with tools, supplies, and interactive objects requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_control_hub",
+      "name": "Main Control Hub",
+      "properties": {
+        "type": "control_center"
+      },
+      "connected_to_room_ids": [
+        "supply_storage",
+        "living_quarters",
+        "medical_bay"
+      ]
+    },
+    {
+      "id": "supply_storage",
+      "name": "Supply Storage & Workshop",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Living Quarters",
+      "properties": {
+        "type": "residential"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "supply_storage",
+        "medical_bay"
+      ]
+    },
+    {
+      "id": "medical_bay",
+      "name": "Medical & Bio-Containment",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "escape_tunnel",
+      "name": "Escape Tunnel Access",
+      "properties": {
+        "type": "exit"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_command_console_1",
+      "name": "Central Command Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CMD-3000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_broadcast_panel_1",
+      "name": "Emergency Broadcast Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Large Steel Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_safe_1",
+      "name": "Locked Safe",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "faulty_power_relay_1",
+      "name": "Faulty Power Relay",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 2.5,
+        "material": "metal",
+        "condition": "faulty",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "radio_transmitter_1",
+      "name": "Radio Transmitter",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "condition": "jammed",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "cracked_coffee_mug_1",
+      "name": "Cracked Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:central_command_console_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "color": "white",
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "waste_bin_1",
+      "name": "Overflowing Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "emergency_flashlight_1",
+      "name": "Emergency Flashlight",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "color": "yellow",
+        "battery_level": 50,
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "heavy_steel_shelving_1",
+      "name": "Heavy Steel Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench with Vise",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_rations_crate_1",
+      "name": "Emergency Rations Crate",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.4
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": "food_supplies"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "locked_tool_cabinet_1",
+      "name": "Locked Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "faulty_water_purifier_1",
+      "name": "Faulty Water Purifier",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 12.0,
+        "material": "plastic",
+        "condition": "leaking",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "duct_tape_roll_1",
+      "name": "Duct Tape Roll",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "color": "silver",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {
+        "is_moist": false
+      }
+    },
+    {
+      "id": "portable_generator_1",
+      "name": "Portable Generator",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 25.0,
+        "material": "metal",
+        "fuel_level": 20,
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "spare_fuse_box_1",
+      "name": "Spare Fuse Box",
+      "type": "ITEM",
+      "location_id": "on:heavy_steel_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "color": "black",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "bunk_bed_1",
+      "name": "Bunk Bed",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "locked_diary_1",
+      "name": "Locked Diary",
+      "type": "ITEM",
+      "location_id": "in:bunk_bed_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "leather",
+        "color": "brown",
+        "provides_abilities": [
+          "shred"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_shredded": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Overheating Microwave",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 15.0,
+        "material": "metal",
+        "condition": "overheating",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "medical_cabinet_1",
+      "name": "Medical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "decontamination_shower_1",
+      "name": "Decontamination Shower",
+      "type": "FURNITURE",
+      "location_id": "in:medical_bay",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.0
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "quarantine_zone_1",
+      "name": "Quarantine Zone",
+      "type": "FURNITURE",
+      "location_id": "in:medical_bay",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "escape_hatch_1",
+      "name": "Reinforced Escape Hatch",
+      "type": "FURNITURE",
+      "location_id": "in:escape_tunnel",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.2
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "camera_1",
+      "name": "Surveillance Camera",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "color": "black",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "keycard_a_1",
+      "name": "Keycard A",
+      "type": "ITEM",
+      "location_id": "in:locked_diary_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "color": "blue",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "keycard_b_1",
+      "name": "Keycard B",
+      "type": "ITEM",
+      "location_id": "in:medical_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "color": "red",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "pan_1",
+      "name": "Frying Pan",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 1.2,
+        "material": "metal",
+        "color": "black",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {
+        "is_fried": false
+      }
+    },
+    {
+      "id": "stove_1",
+      "name": "Portable Stove",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {
+        "is_fried": false
+      }
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 8.0,
+        "material": "plastic",
+        "color": "white",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {
+        "is_shredded": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Computer Keyboard",
+      "type": "ITEM",
+      "location_id": "on:central_command_console_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "black",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "scraper_1",
+      "name": "Metal Scraper",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "tiller_1",
+      "name": "Hand Tiller",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "color": "brown",
+        "provides_abilities": [
+          "till_soil"
+        ]
+      },
+      "states": {
+        "is_tilled": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "blue",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "peeler_1",
+      "name": "Vegetable Peeler",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "peel"
+        ]
+      },
+      "states": {
+        "is_peeled": false
+      }
+    },
+    {
+      "id": "scratch_tool_1",
+      "name": "Scratch Tool",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "color": "black",
+        "provides_abilities": [
+          "scratch"
+        ]
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "puzzle_box_1",
+      "name": "Puzzle Box",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 1.0,
+        "material": "wood",
+        "color": "brown",
+        "provides_abilities": [
+          "reset_puzzle"
+        ]
+      },
+      "states": {
+        "is_solved": true
+      }
+    },
+    {
+      "id": "table_set_1",
+      "name": "Table Setting Kit",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 2.0,
+        "material": "ceramic",
+        "color": "white",
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {
+        "is_table_set": false
+      }
+    },
+    {
+      "id": "pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "color": "red",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {
+        "is_inflated": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "disassemble",
+    "fry",
+    "inflate",
+    "moisten",
+    "open",
+    "peel",
+    "photograph",
+    "scrape",
+    "scratch",
+    "set_table",
+    "shred",
+    "reset_puzzle",
+    "till_soil",
+    "type",
+    "verify",
+    "water"
+  ]
+}

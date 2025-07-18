@@ -1,0 +1,606 @@
+{
+  "description": "A craft brewery's Quality Control Lab and Packaging Facility with collaborative tasks, heavy equipment, and time-sensitive operations",
+  "rooms": [
+    {
+      "id": "quality_control_lab",
+      "name": "Quality Control Lab",
+      "properties": {
+        "type": "laboratory",
+        "lighting": "fluorescent",
+        "temperature": 21.0
+      },
+      "connected_to_room_ids": [
+        "packaging_prep_area"
+      ]
+    },
+    {
+      "id": "packaging_prep_area",
+      "name": "Packaging Prep Area",
+      "properties": {
+        "type": "industrial",
+        "lighting": "overhead",
+        "temperature": 18.0
+      },
+      "connected_to_room_ids": [
+        "quality_control_lab",
+        "cold_storage"
+      ]
+    },
+    {
+      "id": "cold_storage",
+      "name": "Cold Storage & Keg Room",
+      "properties": {
+        "type": "refrigerated",
+        "lighting": "LED",
+        "temperature": 4.0
+      },
+      "connected_to_room_ids": [
+        "packaging_prep_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "stainless_workbench_1",
+      "name": "Stainless Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "surface_condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Industrial Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "interior_condition": "stained"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "chemical_cabinet_1",
+      "name": "Locked Chemical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "hazard_type": "flammable"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "resin_sample_1",
+      "name": "Sixpoint Resin Sample",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "volume": 250,
+        "cap_color": "blue",
+        "contents": "cloudy",
+        "label_text": "Batch #XR289 - FUNKY TASTE?"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 3.2,
+        "magnification": 40,
+        "brand": "Olympus",
+        "focus_condition": "stiff"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "owner": "M. Nguyen",
+        "status": "valid"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_2",
+      "name": "Expired Keycard",
+      "type": "ITEM",
+      "location_id": "on:dead_plant_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "owner": "J. Smith",
+        "status": "expired"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "size": "large",
+        "pocket_contents": "stained 3Beans label",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Pothos Plant",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "pot_material": "ceramic",
+        "soil_condition": "cracked",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "size": [
+          3.0,
+          0.7,
+          1.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "power_status": "off"
+      },
+      "states": {}
+    },
+    {
+      "id": "stuck_can_1",
+      "name": "Stuck Can",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Sixpoint",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeling_machine_1",
+      "name": "Labeling Machine",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "status": "out_of_labels"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "labels_1",
+      "name": "Adhesive Labels",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "quantity": 500,
+        "type": "bottle_labels",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "supply_cabinet_1",
+      "name": "Supply Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 45.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "beans_4pack_1",
+      "name": "3Beans 4-Pack",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 1.5,
+        "quantity": 4,
+        "condition": "unsealed"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 2.1,
+        "max_capacity": 30,
+        "status": "overloaded"
+      },
+      "states": {}
+    },
+    {
+      "id": "packaging_table_1",
+      "name": "Packaging Table",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          0.8
+        ],
+        "weight": 55.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "hand_truck_1",
+      "name": "Hand Truck",
+      "type": "ITEM",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "weight": 12.0,
+        "condition": "squeaky_wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Industrial Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 1.8,
+        "status": "empty",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keg_rack_1",
+      "name": "Keg Rack",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "condition": "bent_shelf"
+      },
+      "states": {}
+    },
+    {
+      "id": "sweet_action_keg_1",
+      "name": "Sweet Action Keg",
+      "type": "ITEM",
+      "location_id": "on:keg_rack_1",
+      "properties": {
+        "weight": 160.0,
+        "volume": 50,
+        "status": "missing_bung"
+      },
+      "states": {}
+    },
+    {
+      "id": "co2_tank_1",
+      "name": "CO2 Tank",
+      "type": "ITEM",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "weight": 45.0,
+        "height": 1.0,
+        "pressure_status": "hissing",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:co2_tank_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "broken",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          2.2
+        ],
+        "weight": 500.0,
+        "battery_level": 10,
+        "keys_status": "in_ignition"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "weight": 8.0,
+        "status": "seal_broken",
+        "contents": "scattered"
+      },
+      "states": {}
+    },
+    {
+      "id": "keg_washer_1",
+      "name": "Keg Washer",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          1.5
+        ],
+        "weight": 95.0,
+        "hose_condition": "kinked",
+        "mode": "stuck_on_rinse"
+      },
+      "states": {}
+    },
+    {
+      "id": "righteous_ale_pallet_1",
+      "name": "Pallet of Righteous Ale",
+      "type": "ITEM",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "weight": 200.0,
+        "condition": "crushed",
+        "leak_status": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "refractometer_1",
+      "name": "Digital Refractometer",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "status": "needs_calibration",
+        "display_message": "CALIBRATE?"
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "probe_condition": "dried_out",
+        "accuracy": "unreliable"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_fluid_1",
+      "name": "Calibration Fluid",
+      "type": "ITEM",
+      "location_id": "in:chemical_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "type": "pH_buffer",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 65.0,
+        "temperature": 121,
+        "lid_status": "unsealed"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "lab_reports_1",
+      "name": "Stack of Lab Reports",
+      "type": "ITEM",
+      "location_id": "on:stainless_workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "top_sheet": "Bengali Tiger - pH 4.2 (ABNORMAL)",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.05,
+        "type": "pencil_eraser",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cart_1",
+      "name": "Cleaning Cart",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_area",
+      "properties": {
+        "size": [
+          0.9,
+          0.5,
+          1.1
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "spill_status": "caustic_foam_tipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:cleaning_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "contents": "disinfectant",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_manual_1",
+      "name": "Dusty Safety Manual",
+      "type": "ITEM",
+      "location_id": "on:keg_rack_1",
+      "properties": {
+        "weight": 0.9,
+        "bookmark": "CO2 Asphyxiation Risks"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gloves_1",
+      "name": "Mismatched Gloves",
+      "type": "ITEM",
+      "location_id": "on:keg_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "colors": [
+          "neon_pink",
+          "black_nitrile"
+        ]
+      },
+      "states": {
+        "is_folded": false
+      }
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "close",
+    "erase",
+    "fold",
+    "label",
+    "moisten",
+    "open",
+    "spray",
+    "unseal"
+  ]
+}

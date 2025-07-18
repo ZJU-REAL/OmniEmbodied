@@ -1,0 +1,529 @@
+{
+  "description": "A United Nations Humanitarian Aid Coordination Center, a high-stakes environment where multiple agents must collaborate to allocate and dispatch emergency aid packages to crisis zones. The scene is a converted industrial loft with modular workstations, reinforced storage, and a sense of urgent activity.",
+  "rooms": [
+    {
+      "id": "main_operations_hub",
+      "name": "Main Operations Hub",
+      "properties": {
+        "type": "operations"
+      },
+      "connected_to_room_ids": [
+        "secure_storage_vault",
+        "loading_dock",
+        "breakout_meeting_room"
+      ]
+    },
+    {
+      "id": "secure_storage_vault",
+      "name": "Secure Storage Vault",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_operations_hub"
+      ]
+    },
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock & Inspection Zone",
+      "properties": {
+        "type": "loading"
+      },
+      "connected_to_room_ids": [
+        "main_operations_hub"
+      ]
+    },
+    {
+      "id": "breakout_meeting_room",
+      "name": "Breakout Meeting Room",
+      "properties": {
+        "type": "meeting"
+      },
+      "connected_to_room_ids": [
+        "main_operations_hub",
+        "archives_records"
+      ]
+    },
+    {
+      "id": "archives_records",
+      "name": "Archives & Records",
+      "properties": {
+        "type": "archives"
+      },
+      "connected_to_room_ids": [
+        "breakout_meeting_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "command_desk_1",
+      "name": "10-seat Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_operations_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "lcd_panels_1",
+      "name": "4x3 Grid of LCD Panels",
+      "type": "FURNITURE",
+      "location_id": "in:main_operations_hub",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.1
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "condition": "one screen flickers"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "crisis_priority_board_1",
+      "name": "Crisis Priority Board",
+      "type": "FURNITURE",
+      "location_id": "in:main_operations_hub",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "one tag is dangling"
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_aid_request_1",
+      "name": "Sealed Aid Request - Malaria Vaccines",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "coffee ring obscuring coordinates",
+        "urgency": "URGENT",
+        "destination": "CONGO"
+      },
+      "states": {}
+    },
+    {
+      "id": "secure_tablet_1",
+      "name": "Secure Tablet",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.7,
+        "requires_two_factor_auth": true,
+        "current_notification": "SHIPMENT DELAYED – PORT STRIKE IN DAKAR"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_operations_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_keypad_1",
+      "name": "Biometric Keypad",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "condition": "dead pixel line",
+        "requires_dual_handprints": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hiv_antiretroviral_crates_1",
+      "name": "HIV Antiretroviral Crates",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "condition": "one has a broken seal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cash_canisters_1",
+      "name": "Cash Canisters",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 5.0,
+        "rfid_tagged": true,
+        "condition": "one's tag is unreadable",
+        "value": "€50k"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_satphone_kit_1",
+      "name": "Emergency SatPhone Kit",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 1.5,
+        "condition": "battery dead, charger missing"
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_with_weight_sensor_1",
+      "name": "Dolly with Weight Sensor",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "sensor drifts +/- 5kg"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerated_vaccine_crate_1",
+      "name": "Refrigerated Vaccine Crate",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "water_purifier_system_1",
+      "name": "Water Purifier System",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "requires_assembly": true
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "pallet_of_rice_sacks_1",
+      "name": "Pallet of Rice Sacks",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "condition": "one leaking bag"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_handprint_scanner_1",
+      "name": "Spare Handprint Scanner",
+      "type": "ITEM",
+      "location_id": "in:archives_records",
+      "properties": {
+        "weight": 1.0,
+        "condition": "stored under 1990s logistics reports"
+      },
+      "states": {}
+    },
+    {
+      "id": "admins_yubikey_1",
+      "name": "Admin's Yubikey",
+      "type": "ITEM",
+      "location_id": "in:end_poverty_mug_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "left in the mug"
+      },
+      "states": {}
+    },
+    {
+      "id": "end_poverty_mug_1",
+      "name": "#END POVERTY Mug",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "stained",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pump_1",
+      "name": "Hand Pump",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 2.0,
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sewing_kit_1",
+      "name": "Sewing Kit",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_source_1",
+      "name": "Water Source",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "provides_abilities": [
+          "fill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Iron",
+      "type": "ITEM",
+      "location_id": "in:breakout_meeting_room",
+      "properties": {
+        "weight": 1.5,
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shovel_1",
+      "name": "Shovel",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1.8,
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:archives_records",
+      "properties": {
+        "weight": 0.1,
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hammer_1",
+      "name": "Hammer",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1.0,
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:breakout_meeting_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "condition": "on its last legs",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 3.0,
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_1",
+      "name": "Contaminant",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "brew",
+    "contaminate",
+    "damage",
+    "dig",
+    "drain",
+    "fill",
+    "iron",
+    "open",
+    "paint",
+    "pump",
+    "screw",
+    "sew",
+    "stain",
+    "turn_on",
+    "weld",
+    "close"
+  ]
+}

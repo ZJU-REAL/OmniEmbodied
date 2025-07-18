@@ -1,0 +1,780 @@
+{
+  "description": "A sprawling, cluttered shipping warehouse where order and chaos collide, filled with mismatched crates, fragile cargo, and misplaced items requiring precise handling and coordination.",
+  "rooms": [
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sorting_hub"
+      ]
+    },
+    {
+      "id": "sorting_hub",
+      "name": "Sorting Hub",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "loading_dock",
+        "storage_aisle"
+      ]
+    },
+    {
+      "id": "storage_aisle",
+      "name": "Storage Aisle",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sorting_hub",
+        "workshop"
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "storage_aisle"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_loading_ramp_1",
+      "name": "Hydraulic Loading Ramp",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "HLR-3000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "battery_level": 12
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "pallet_stack_a_1",
+      "name": "Pallet Stack A",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.2,
+          1.0,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "oversized_crate_1",
+      "name": "Oversized Crate",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.8
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE: GLASSWARE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shipping_manifest_tablet_1",
+      "name": "Shipping Manifest Tablet",
+      "type": "ITEM",
+      "location_id": "on:pallet_stack_a_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "TechCorp",
+        "model_number": "TC-1000"
+      },
+      "states": {
+        "is_synced": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "hand_truck_1",
+      "name": "Hand Truck",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "material": "steel",
+        "condition": "missing one wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:pallet_stack_a_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "ScanMaster",
+        "battery_level": 15
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "conveyor_belt_a_1",
+      "name": "Conveyor Belt A",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "size": [
+          4.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "rubber"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "conveyor_belt_b_1",
+      "name": "Conveyor Belt B",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "size": [
+          4.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "rubber"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "brand": "WeighRight",
+        "display": "ERR 0.00"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "digital_scale_2",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "brand": "WeighRight",
+        "display": "flickering"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "red_bin_7_1",
+      "name": "Red Bin #7",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "color": "red",
+        "label": "Electronics",
+        "actual_content": "kitchenware"
+      },
+      "states": {}
+    },
+    {
+      "id": "priority_keycard_fragment_1",
+      "name": "Priority Keycard Fragment",
+      "type": "ITEM",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "packing_tape_dispenser_1",
+      "name": "Packing Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "tape_remaining": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:sorting_hub",
+      "properties": {
+        "weight": 0.4,
+        "color": "red",
+        "material": "metal",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "collapsed_shelf_unit_d5_1",
+      "name": "Collapsed Shelf Unit D5",
+      "type": "FURNITURE",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "collapsed"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_gate_1",
+      "name": "Locked Gate",
+      "type": "FURNITURE",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "antique_clock_1",
+      "name": "Antique Clock",
+      "type": "ITEM",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "weight": 5.0,
+        "color": "brown",
+        "material": "wood",
+        "label": "Do Not Ship",
+        "glass_casing": true
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Chemical Drum",
+      "type": "FURNITURE",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "CORROSIVE",
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "step_ladder_1",
+      "name": "Step Ladder",
+      "type": "ITEM",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "weight": 7.0,
+        "color": "yellow",
+        "material": "aluminum",
+        "condition": "wobbly, missing one rubber foot"
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "ITEM",
+      "location_id": "in:storage_aisle",
+      "properties": {
+        "weight": 6.0,
+        "color": "black",
+        "material": "steel",
+        "condition": "rusted wheels, squeaks loudly"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_pegboard_1",
+      "name": "Tool Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "wood",
+        "missing_tools": [
+          "wrench",
+          "wire cutters"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_mystery_crate_1",
+      "name": "Sealed Mystery Crate",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "sealed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "second_keycard_fragment_1",
+      "name": "Second Keycard Fragment",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic",
+        "location": "inside a hollowed-out manual"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "metal",
+        "condition": "still warm"
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "broken_radio_1",
+      "name": "Broken Radio",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "plastic",
+        "condition": "broken",
+        "sound": "static playing faintly"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Crowbar",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "steel",
+        "condition": "buried under debris",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 1.0,
+        "color": "silver",
+        "material": "steel",
+        "condition": "missing from pegboard",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wire_cutters_1",
+      "name": "Wire Cutters",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "steel",
+        "condition": "missing from pegboard",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 3.0,
+        "color": "yellow",
+        "material": "metal",
+        "fuel_type": "diesel",
+        "fuel_level": 50,
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "plastic",
+        "brand": "PrecisionTools",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_brush_1",
+      "name": "Cleaning Brush",
+      "type": "ITEM",
+      "location_id": "in:workshop",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "material": "plastic",
+        "condition": "worn",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_agent_1",
+      "name": "Cleaning Agent",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "liquid",
+        "brand": "CleanMaster",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "QuickHeat"
+      },
+      "states": {
+        "is_hot": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "frozen_item_1",
+      "name": "Frozen Item",
+      "type": "ITEM",
+      "location_id": "in:microwave_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "food",
+        "condition": "frozen"
+      },
+      "states": {
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "steel",
+        "provides_abilities": [
+          "chop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Grater",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grinder_1",
+      "name": "Grinder",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "plastic",
+        "brand": "GrindMaster",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:workshop",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "scribbled shipping codes, half-erased"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "marker_1",
+      "name": "Marker",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic",
+        "ink_level": 50,
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic",
+        "ink_level": 30,
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "chop",
+    "grate",
+    "grind",
+    "hide",
+    "mount",
+    "open",
+    "refuel",
+    "scrub",
+    "start_process",
+    "stop_process",
+    "sync",
+    "thaw",
+    "unmute",
+    "whisk",
+    "write",
+    "close"
+  ]
+}

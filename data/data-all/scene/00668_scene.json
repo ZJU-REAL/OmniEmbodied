@@ -1,0 +1,863 @@
+{
+  "description": "A high-stakes bioethics research lab caught in tension between scientific rigor and external ideological pressure, featuring a hybrid research-church facility with three interconnected zones: Main Research Floor, Secure Isolation Wing, and Administrative & Outreach Office.",
+  "rooms": [
+    {
+      "id": "main_research_floor",
+      "name": "Main Research Floor",
+      "properties": {
+        "type": "laboratory",
+        "atmosphere": "sterile"
+      },
+      "connected_to_room_ids": [
+        "secure_isolation_wing",
+        "administrative_office"
+      ]
+    },
+    {
+      "id": "secure_isolation_wing",
+      "name": "Secure Isolation Wing",
+      "properties": {
+        "type": "restricted_lab",
+        "atmosphere": "tense"
+      },
+      "connected_to_room_ids": [
+        "main_research_floor"
+      ]
+    },
+    {
+      "id": "administrative_office",
+      "name": "Administrative & Outreach Office",
+      "properties": {
+        "type": "office",
+        "atmosphere": "warm"
+      },
+      "connected_to_room_ids": [
+        "main_research_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Central Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "humming": "faint",
+        "class": "II"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "liquid_handling_robot_1",
+      "name": "Automated Liquid Handling Robot",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "status_light": "yellow",
+        "status_message": "Calibration Required"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "specimen_freezer_1",
+      "name": "Specimen Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": -80.0,
+        "lock_type": "biometric_scanner"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "project_lazarus_folder_1",
+      "name": "Project Lazarus Research Folder",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "CONFIDENTIAL",
+        "color": "red_striped",
+        "redacted": true,
+        "content": "experimental_revival_therapies"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "contaminated_pipette_set_1",
+      "name": "Contaminated Pipette Set",
+      "type": "ITEM",
+      "location_id": "in:biohazard_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "cracked",
+        "biohazard_level": 2
+      },
+      "states": {
+        "is_washed": false
+      }
+    },
+    {
+      "id": "encrypted_tablet_1",
+      "name": "Encrypted Tablet",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.7,
+        "brand": "SecureTech",
+        "screen_content": "half-composed_email_to_NCF_Admin",
+        "requires_passcode": true
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "brand": "Olympus",
+        "model": "CX43",
+        "lens_condition": "smudged"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "lab_coat_rack_1",
+      "name": "Lab Coat Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          1.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "coat_count": 3,
+        "stained_coat": "purple_substance"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "stained_lab_coat_1",
+      "name": "Stained Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_rack_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "white",
+        "stain_color": "purple",
+        "hidden_item": "NCF_pin"
+      },
+      "states": {
+        "is_washed": false
+      }
+    },
+    {
+      "id": "emergency_eye_wash_1",
+      "name": "Emergency Eye Wash Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "condition": "dusty",
+        "seal_status": "broken"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "science_poster_1",
+      "name": "Science in Service of God Poster",
+      "type": "ITEM",
+      "location_id": "on:wall_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "edges_curling",
+        "content": "religious_propaganda"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World's Best Dad Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:desk_2",
+      "properties": {
+        "weight": 0.4,
+        "content": "cold_coffee",
+        "lipstick_mark": true,
+        "owner": "Dr. Kowalski"
+      },
+      "states": {
+        "is_washed": false
+      }
+    },
+    {
+      "id": "pamphlets_1",
+      "name": "The Moral Limits of Medicine Pamphlets",
+      "type": "ITEM",
+      "location_id": "in:trash_bin_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "torn",
+        "content": "religious_propaganda"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "quarantine_pod_1",
+      "name": "Quarantine Pod",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 300.0,
+        "material": "reinforced_glass",
+        "status_panel": "O2 LOW",
+        "contains": "comatose_test_subject"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "neuroimaging_rig_1",
+      "name": "Neuroimaging Rig",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          2.5,
+          2.0,
+          2.0
+        ],
+        "weight": 250.0,
+        "type": "fMRI",
+        "error_code": "E-47"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "syringe_caddy_1",
+      "name": "Syringe Caddy",
+      "type": "ITEM",
+      "location_id": "on:medical_tray_1",
+      "properties": {
+        "weight": 0.5,
+        "vial_count": 5,
+        "vial_labels": [
+          "Placebo",
+          "Placebo",
+          "Placebo",
+          "Placebo",
+          "unlabeled_blue_cap"
+        ]
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "security_keycard_1",
+      "name": "Security Keycard",
+      "type": "ITEM",
+      "location_id": "on:wheeled_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "access_level": "high",
+        "grants_access_to": "specimen_freezer_1"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 40.0,
+        "defibrillator_status": "charged",
+        "missing_paddle": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "intercom_1",
+      "name": "Wall-mounted Intercom",
+      "type": "FURNITURE",
+      "location_id": "on:wall_2",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "sound_quality": "static-filled",
+        "button_status": "stuck"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "hymnbook_1",
+      "name": "Sacred Hymns for Healing Hymnbook",
+      "type": "ITEM",
+      "location_id": "on:medical_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "dented",
+        "content": "religious_hymns"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "fake_plant_1",
+      "name": "Plastic Ficus",
+      "type": "ITEM",
+      "location_id": "on:table_1",
+      "properties": {
+        "weight": 1.5,
+        "type": "plastic",
+        "condition": "broken_leaf"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "surveillance_monitor_1",
+      "name": "Surveillance Monitor Wall",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.5
+        ],
+        "weight": 60.0,
+        "screen_count": 6,
+        "displaying": "specimen_freezer_feed"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "donation_box_1",
+      "name": "Donation Box",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "label": "For the Children's Fund",
+        "actual_content": "suspicious"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "ncf_laptop_1",
+      "name": "NCF Laptop",
+      "type": "ITEM",
+      "location_id": "on:desk_2",
+      "properties": {
+        "weight": 2.0,
+        "wallpaper": "Bible_verse",
+        "password_hint": "sticky_note_under_keyboard"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "fake_research_permit_1",
+      "name": "Fake Research Permit",
+      "type": "ITEM",
+      "location_id": "in:drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "signature": "forged",
+        "purpose": "institutional_sabotage"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Office Printer",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "jam_light": "on",
+        "document": "Termination_Notice_for_Dr_Elias"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cross_stitch_1",
+      "name": "Faith Over Facts Cross-stitch",
+      "type": "ITEM",
+      "location_id": "on:wall_3",
+      "properties": {
+        "weight": 0.2,
+        "position": "crooked",
+        "blocks": "fire_extinguisher"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Research Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_tray_1",
+      "name": "Biohazard Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "biohazard_level": 2
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "desk_1",
+      "name": "Lab Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_1",
+      "name": "Lab Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          5.0,
+          0.1,
+          3.0
+        ],
+        "weight": 0.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_2",
+      "name": "Office Desk",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "trash_bin_1",
+      "name": "Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medical_tray_1",
+      "name": "Medical Tray",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheeled_cart_1",
+      "name": "Wheeled Cart",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_2",
+      "name": "Isolation Wing Wall",
+      "type": "FURNITURE",
+      "location_id": "in:secure_isolation_wing",
+      "properties": {
+        "size": [
+          4.0,
+          0.1,
+          3.0
+        ],
+        "weight": 0.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "table_1",
+      "name": "Office Table",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "drawer_1",
+      "name": "File Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          0.4,
+          0.5,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wall_3",
+      "name": "Office Wall",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.5
+        ],
+        "weight": 0.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "FURNITURE",
+      "location_id": "on:specimen_freezer_1",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.5,
+        "is_container": false,
+        "compatible_keycards": [
+          "security_keycard_1"
+        ]
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "bolt_cutters_1",
+      "name": "Bolt Cutters",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:janitor_closet_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "content": "disinfectant",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_cup_1",
+      "name": "Measuring Cup",
+      "type": "ITEM",
+      "location_id": "in:kitchen_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "maintenance_closet_1",
+      "name": "Maintenance Closet",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "janitor_closet_1",
+      "name": "Janitor Closet",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_floor",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "kitchen_cabinet_1",
+      "name": "Kitchen Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:administrative_office",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "cover",
+    "fold",
+    "measure",
+    "open",
+    "press",
+    "spray",
+    "turn_off",
+    "turn_on",
+    "uncover",
+    "unlock",
+    "wash"
+  ]
+}

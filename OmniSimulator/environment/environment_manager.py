@@ -375,12 +375,12 @@ class EnvironmentManager:
                 # 如果位置不存在但是我们当前正在加载场景，可能是物体定义的顺序问题
                 # 我们先将物体添加到图中，稍后再处理位置关系
                 print(f"Location does not exist: {real_location_id}")
-                
+
                 # 我们仍然创建对象并添加到图中，但是不建立位置关系
                 obj = create_object_from_dict(obj_data)
                 obj.location_id = location_id  # 保留原始位置ID以便稍后处理
                 self.world_state.graph.add_node(obj.id, obj.to_dict())
-                
+
                 # 将此对象标记为需要稍后解析位置
                 if not hasattr(self, '_pending_locations'):
                     self._pending_locations = []

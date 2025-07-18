@@ -1,0 +1,647 @@
+{
+  "description": "A clandestine data relay hub located in a geopolitical buffer zone, designed to circumvent digital firewalls by physically transferring data between isolated networks. The station is a high-tech yet makeshift environment where teams of engineers, couriers, and security personnel collaborate to manage the flow of information across restricted borders.",
+  "rooms": [
+    {
+      "id": "main_server_room",
+      "name": "Main Server Room",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "courier_prep_bay",
+        "security_airlock"
+      ]
+    },
+    {
+      "id": "courier_prep_bay",
+      "name": "Courier Prep Bay",
+      "properties": {
+        "type": "logistics"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "technician_workshop"
+      ]
+    },
+    {
+      "id": "security_airlock",
+      "name": "Security Airlock",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "main_server_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "technician_workshop",
+      "name": "Technician Workshop",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "courier_prep_bay",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "rest"
+      },
+      "connected_to_room_ids": [
+        "security_airlock",
+        "technician_workshop"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "primary_server_rack_1",
+      "name": "Primary Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          2.2
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "Cisco-42U"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tier_1_routing_module_1",
+      "name": "Tier-1 Routing Module",
+      "type": "ITEM",
+      "location_id": "in:primary_server_rack_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "requires_keys": [
+          "key_a",
+          "key_b"
+        ]
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "floor_cable_trench_1",
+      "name": "Floor Cable Trench",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          2.5,
+          0.3,
+          0.2
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_nas_drive_1",
+      "name": "Encrypted NAS Drive",
+      "type": "ITEM",
+      "location_id": "on:primary_server_rack_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "biometric_pad_color": "blue",
+        "scorch_marks": true,
+        "capacity": "4TB"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "encrypted_nas_drive_2",
+      "name": "Encrypted NAS Drive",
+      "type": "ITEM",
+      "location_id": "on:primary_server_rack_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "biometric_pad_color": "red",
+        "scorch_marks": false,
+        "capacity": "4TB"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "encrypted_nas_drive_3",
+      "name": "Encrypted NAS Drive",
+      "type": "ITEM",
+      "location_id": "on:primary_server_rack_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "biometric_pad_color": "green",
+        "scorch_marks": false,
+        "capacity": "4TB"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "manual_override_lever_1",
+      "name": "Manual Override Lever",
+      "type": "ITEM",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "is_breakable": true
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:primary_server_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "Tripp Lite"
+      },
+      "states": {
+        "is_plugged_in": true,
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "cable_tester_1",
+      "name": "Cable Tester",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "brand": "Fluke",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_gun_1",
+      "name": "Label Gun",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Brother",
+        "is_out_of_tape": true
+      },
+      "states": {}
+    },
+    {
+      "id": "no_photography_sign_1",
+      "name": "NO PHOTOGRAPHY Sign",
+      "type": "ITEM",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "plastic",
+        "is_faded": true
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Bandwidth Optimization Champions Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "gold",
+        "material": "metal",
+        "is_dusty": true
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_table_1",
+      "name": "Packing Table",
+      "type": "FURNITURE",
+      "location_id": "in:courier_prep_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "has_rfid_scanner": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pelican_case_1",
+      "name": "Pelican Case",
+      "type": "ITEM",
+      "location_id": "in:courier_prep_bay",
+      "properties": {
+        "weight": 10.0,
+        "color": "black",
+        "size": "small",
+        "has_tamper_evident_seal": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pelican_case_2",
+      "name": "Pelican Case",
+      "type": "ITEM",
+      "location_id": "in:courier_prep_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "size": "large",
+        "has_tamper_evident_seal": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "priority_drive_1",
+      "name": "Priority Drive",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 10.0,
+        "color": "orange",
+        "has_countdown_timer": true,
+        "is_fragile": true
+      },
+      "states": {}
+    },
+    {
+      "id": "gps_jammer_1",
+      "name": "GPS Jammer",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "disguised_as": "power strip",
+        "provides_abilities": [
+          "unplug"
+        ]
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "brand": "Dymo",
+        "is_out_of_paper": true
+      },
+      "states": {}
+    },
+    {
+      "id": "weighing_scale_1",
+      "name": "Weighing Scale",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "brand": "Tanita",
+        "is_stuck": true
+      },
+      "states": {}
+    },
+    {
+      "id": "route_map_1",
+      "name": "Route Map",
+      "type": "ITEM",
+      "location_id": "in:courier_prep_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "paper",
+        "has_coffee_stains": true,
+        "has_red_circle": true
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "dumpling_containers_1",
+      "name": "Empty Dumpling Containers",
+      "type": "ITEM",
+      "location_id": "in:courier_prep_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "is_stackable": true
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "ITEM",
+      "location_id": "in:security_airlock",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "HID",
+        "is_functional": true
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_axe_1",
+      "name": "Emergency Axe",
+      "type": "ITEM",
+      "location_id": "in:security_airlock",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "material": "metal",
+        "is_behind_glass": true
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:technician_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "Weller",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_server_1",
+      "name": "Broken Server",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "brand": "Dell",
+        "model": "PowerEdge"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:technician_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "melamine"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "rubber",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "silver",
+        "brand": "Keurig",
+        "is_functional": true
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "hidden_panel_1",
+      "name": "Hidden Panel",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "wood",
+        "material": "plywood",
+        "is_concealed": true
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "backup_drive_1",
+      "name": "Backup Drive",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Seagate",
+        "capacity": "1TB"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "propaganda_poster_1",
+      "name": "Propaganda Poster",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "paper",
+        "is_outdated": true
+      },
+      "states": {}
+    },
+    {
+      "id": "loose_floor_tile_1",
+      "name": "Loose Floor Tile",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "beige",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_hidden": false,
+        "is_loose": true
+      }
+    },
+    {
+      "id": "key_a_1",
+      "name": "Key A",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "key_b_1",
+      "name": "Key B",
+      "type": "ITEM",
+      "location_id": "in:technician_workshop",
+      "properties": {
+        "weight": 0.1,
+        "color": "gold",
+        "material": "metal"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "blue_toolbox_1",
+      "name": "Blue Toolbox",
+      "type": "ITEM",
+      "location_id": "in:main_server_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "blue",
+        "material": "metal",
+        "is_decorative": true
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "plastic",
+        "minute_hand_is_screwdriver": true
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "erase",
+    "hide",
+    "insert",
+    "open",
+    "show",
+    "solder",
+    "thaw",
+    "unplug",
+    "close"
+  ]
+}

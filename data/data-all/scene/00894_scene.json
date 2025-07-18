@@ -1,0 +1,582 @@
+{
+  "description": "A bustling 24-hour auto repair garage with a central hydraulic lift holding a 2001 Chevrolet Silverado, surrounded by diagnostic stations, tool storage, and pressure testing areas. The scene is rich with interactive tools, dynamic states, and layered problems requiring coordinated reasoning and collaboration.",
+  "rooms": [
+    {
+      "id": "main_repair_bay",
+      "name": "Main Repair Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_station",
+        "parts_storage",
+        "pressure_testing_zone"
+      ]
+    },
+    {
+      "id": "diagnostic_station",
+      "name": "Diagnostic Station",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_repair_bay",
+        "parts_storage"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts & Tool Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_repair_bay",
+        "diagnostic_station",
+        "pressure_testing_zone"
+      ]
+    },
+    {
+      "id": "pressure_testing_zone",
+      "name": "Pressure Testing Zone",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_repair_bay",
+        "parts_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "fluid_level": 80,
+        "condition": "seeping"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chevrolet_silverado_1",
+      "name": "2001 Chevrolet Silverado",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          5.5,
+          2.0,
+          1.8
+        ],
+        "weight": 450.0,
+        "is_container": true,
+        "model": "5.3L V8",
+        "condition": "misfiring"
+      },
+      "states": {
+        "is_engine_on": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "spark_plug_3_1",
+      "name": "Spark Plug #3",
+      "type": "ITEM",
+      "location_id": "in:chevrolet_silverado_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "carbon-fouled",
+        "thread_state": "loosened",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {
+        "is_loose": true
+      }
+    },
+    {
+      "id": "fuel_pressure_gauge_1",
+      "name": "Fuel Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:chevrolet_silverado_1",
+      "properties": {
+        "weight": 0.5,
+        "pressure": 48,
+        "condition": "fluctuating",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "o2_sensor_bank1_1",
+      "name": "O2 Sensor Bank 1",
+      "type": "ITEM",
+      "location_id": "in:chevrolet_silverado_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "label": "CAUTION: HEATED",
+        "condition": "corroded",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {
+        "is_loose": true
+      }
+    },
+    {
+      "id": "defective_o2_sensor_1",
+      "name": "Defective O2 Sensor",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "label": "CAUTION: HEATED",
+        "condition": "broken",
+        "thermocouple": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_hoist_1",
+      "name": "Engine Hoist",
+      "type": "FURNITURE",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "capacity": 500,
+        "condition": "rusty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "work_light_1",
+      "name": "LED Work Light",
+      "type": "ITEM",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "weight": 1.5,
+        "lumens": 2000,
+        "condition": "flickering",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "tank_size": 60,
+        "pressure": 110,
+        "condition": "messy"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "oil_drain_pan_1",
+      "name": "Oil Drain Pan",
+      "type": "ITEM",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "weight": 5.0,
+        "content": "blackened oil",
+        "smell": "gasoline",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {
+        "is_scooped": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "weight": 4.0,
+        "inspection": "outdated",
+        "condition": "mounted"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_bench_1",
+      "name": "Tool Bench",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_station",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "obd2_scanner_1",
+      "name": "OBD-II Scanner",
+      "type": "ITEM",
+      "location_id": "on:tool_bench_1",
+      "properties": {
+        "weight": 1.0,
+        "brand": "Autel MaxiCOM MK808",
+        "screen": "active codes",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "wiring_diagram_1",
+      "name": "Wiring Diagram",
+      "type": "ITEM",
+      "location_id": "on:tool_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "title": "2001 Silverado Fuel Pump Circuit",
+        "condition": "stained",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:tool_bench_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Brother PT-D210",
+        "tape": "out",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "on:tool_bench_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "Backup Calibrations",
+        "condition": "plugged in",
+        "provides_abilities": [
+          "insert"
+        ]
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "rolling_toolbox_1",
+      "name": "Rolling Toolbox",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "dominating"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:rolling_toolbox_1",
+      "properties": {
+        "weight": 2.5,
+        "pieces": 12,
+        "condition": "complete",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:rolling_toolbox_1",
+      "properties": {
+        "weight": 1.5,
+        "pieces": 8,
+        "condition": "complete",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_pressure_kit_1",
+      "name": "Fuel Pressure Gauge Kit",
+      "type": "ITEM",
+      "location_id": "in:pressure_testing_zone",
+      "properties": {
+        "weight": 3.0,
+        "components": [
+          "gauge",
+          "hose",
+          "connectors"
+        ],
+        "condition": "ready",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "hand_pump_1",
+      "name": "Hand Pump",
+      "type": "ITEM",
+      "location_id": "in:pressure_testing_zone",
+      "properties": {
+        "weight": 2.0,
+        "condition": "functional",
+        "provides_abilities": [
+          "press"
+        ]
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "compression_tester_1",
+      "name": "Compression Tester",
+      "type": "ITEM",
+      "location_id": "in:pressure_testing_zone",
+      "properties": {
+        "weight": 1.5,
+        "condition": "ready",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "backpressure_rig_1",
+      "name": "Backpressure Rig",
+      "type": "ITEM",
+      "location_id": "in:pressure_testing_zone",
+      "properties": {
+        "weight": 2.5,
+        "condition": "ready",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "parts_cage_1",
+      "name": "Parts Cage",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "security": "high",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "weight": 0.05,
+        "label": "Parts Cage Access",
+        "condition": "hidden",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "new_fuel_pump_1",
+      "name": "New Fuel Pump",
+      "type": "ITEM",
+      "location_id": "in:parts_cage_1",
+      "properties": {
+        "weight": 3.5,
+        "condition": "new",
+        "provides_abilities": [
+          "start_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spark_plug_set_1",
+      "name": "Spark Plug Set",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.0,
+        "pieces": 8,
+        "condition": "new",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "o2_sensor_set_1",
+      "name": "O2 Sensor Set",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.2,
+        "pieces": 4,
+        "condition": "new",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "weight": 1.8,
+        "condition": "used",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_1",
+      "name": "Garage Floor",
+      "type": "FURNITURE",
+      "location_id": "in:main_repair_bay",
+      "properties": {
+        "size": [
+          10.0,
+          10.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "condition": "stained",
+        "material": "concrete"
+      },
+      "states": {
+        "is_swept": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "insert",
+    "open",
+    "press",
+    "print",
+    "scoop",
+    "show",
+    "start_engine",
+    "start_process",
+    "sweep",
+    "tighten",
+    "toggle"
+  ]
+}

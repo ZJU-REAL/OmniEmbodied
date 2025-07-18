@@ -1,0 +1,680 @@
+{
+  "description": "A cutting-edge Genomic Patent Research Laboratory with interconnected zones for DNA sequencing, bioinformatics analysis, cryogenic storage, and decontamination.",
+  "rooms": [
+    {
+      "id": "primary_sequencing_bay",
+      "name": "Primary Sequencing Bay",
+      "properties": {
+        "type": "laboratory",
+        "atmosphere": "Humming machinery, faint blue glow from sequencing displays, sterile metallic scent"
+      },
+      "connected_to_room_ids": [
+        "decontamination_prep_room"
+      ]
+    },
+    {
+      "id": "bioinformatics_hub",
+      "name": "Bioinformatics Hub",
+      "properties": {
+        "type": "computer_room",
+        "atmosphere": "Low blue light from monitors, faint keyboard clatter, whiteboard covered in gene diagrams"
+      },
+      "connected_to_room_ids": []
+    },
+    {
+      "id": "cryogenic_storage_vault",
+      "name": "Cryogenic Storage Vault",
+      "properties": {
+        "type": "storage",
+        "atmosphere": "Subzero chill, foggy breath visible, red emergency lighting"
+      },
+      "connected_to_room_ids": []
+    },
+    {
+      "id": "decontamination_prep_room",
+      "name": "Decontamination & Prep Room",
+      "properties": {
+        "type": "sterilization",
+        "atmosphere": "Sterile, bleach scent, UV light humming"
+      },
+      "connected_to_room_ids": [
+        "primary_sequencing_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dna_sequencer_1",
+      "name": "High-throughput DNA sequencer (Illumina NovaSeq X)",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "model": "NovaSeq X",
+        "status_led": "blinking 'Processing'",
+        "temperature": "warm"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "laminar_flow_hood_1",
+      "name": "Laminar flow hood",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "filter_type": "HEPA",
+        "sound": "humming softly"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge (Beckman Coulter Avanti J-26S)",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "display": "RPM: 14,000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dna_sample_1",
+      "name": "Isolated DNA sample (BRCA1-A247G)",
+      "type": "ITEM",
+      "location_id": "in:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.1,
+        "container": "1.5ml microcentrifuge tube",
+        "label": "BRCA1-A247G",
+        "cap_color": "blue",
+        "volume": "half-empty",
+        "priority": "handwritten 'PRIORITY' label"
+      },
+      "states": {}
+    },
+    {
+      "id": "dna_sample_2",
+      "name": "Isolated DNA sample (BRCA2-B348T)",
+      "type": "ITEM",
+      "location_id": "in:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.1,
+        "container": "1.5ml microcentrifuge tube",
+        "label": "BRCA2-B348T",
+        "cap_color": "red",
+        "volume": "full",
+        "priority": "printed label"
+      },
+      "states": {}
+    },
+    {
+      "id": "crispr_kit_1",
+      "name": "CRISPR editing kit",
+      "type": "ITEM",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "weight": 2.5,
+        "contents": "guide RNA vials, Cas9 enzyme",
+        "includes": "calibration chart",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_pipette_controller_1",
+      "name": "Broken pipette controller",
+      "type": "ITEM",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.8,
+        "issue": "leaking hydraulic fluid"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "autoclave_bin_1",
+      "name": "Autoclave bin",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "contents": "used tips and gloves",
+        "fullness": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "eye_wash_station_1",
+      "name": "Emergency eye wash station",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "condition": "dusty",
+        "functionality": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Fume hood",
+      "type": "FURNITURE",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "status": "beeping intermittently",
+        "door_position": "slightly ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "patent_certificate_1",
+      "name": "Framed patent certificate",
+      "type": "ITEM",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "weight": 1.2,
+        "content": "US Patent #9,000,000: Isolated Human DNA Sequences",
+        "frame_material": "wood",
+        "glass": "true"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_stain_1",
+      "name": "Coffee stain on lab bench",
+      "type": "ITEM",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "weight": 0.01,
+        "age": "old, dried",
+        "shape": "ring",
+        "near": "stack of outdated protocols"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Dusty safety goggles",
+      "type": "ITEM",
+      "location_id": "in:primary_sequencing_bay",
+      "properties": {
+        "weight": 0.2,
+        "condition": "dusty, one lens cracked",
+        "location": "hanging on a hook"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server rack (IBM Quantum System One)",
+      "type": "FURNITURE",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "sound": "humming loudly",
+        "status": "DNA Fold Simulation: 78% Complete"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Dual-monitor workstation",
+      "type": "FURNITURE",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "status": "logged in",
+        "content": "draft patent applications open"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "encrypted_hard_drive_1",
+      "name": "Encrypted hard drive (PATENT DRAFTS - RESTRICTED)",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 0.5,
+        "security": "requires two-factor authentication (badge + PIN)"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "gene_editing_software_1",
+      "name": "Gene-editing simulation software",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 0.1,
+        "status": "frozen",
+        "error": "Sequence Conflict Detected"
+      },
+      "states": {}
+    },
+    {
+      "id": "legal_briefs_1",
+      "name": "Printed legal briefs",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 0.8,
+        "content": "highlighted sections debating Chakrabarty vs. Mayo rulings"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label maker",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 0.7,
+        "status": "out of tape",
+        "display": "blinking 'REPLACE CARTRIDGE'"
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer (HP LaserJet 500)",
+      "type": "FURNITURE",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "status": "jammed",
+        "error_light": "on"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_book_1",
+      "name": "Patent Law for Geneticists",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 1.5,
+        "condition": "bookmarked on key pages"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_notes_1",
+      "name": "Sticky notes",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 0.05,
+        "content": "REMEMBER: File Form SB-43 by Friday!!"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_fern_1",
+      "name": "Dead potted fern",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dead",
+        "soil": "cracked from neglect",
+        "location": "on a filing cabinet"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Employee of the Month plaque",
+      "type": "ITEM",
+      "location_id": "in:bioinformatics_hub",
+      "properties": {
+        "weight": 1.0,
+        "date": "two years ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "liquid_nitrogen_tank_1",
+      "name": "Liquid nitrogen tank (Taylor-Wharton CX1000)",
+      "type": "FURNITURE",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "pressure_gauge": "yellow zone"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_retrieval_arm_1",
+      "name": "Robotic sample retrieval arm",
+      "type": "FURNITURE",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "status": "frozen mid-motion",
+        "error": "Axis 3 Overload"
+      },
+      "states": {}
+    },
+    {
+      "id": "brca1_sample_1",
+      "name": "Patented BRCA1 cDNA sample",
+      "type": "ITEM",
+      "location_id": "in:liquid_nitrogen_tank_1",
+      "properties": {
+        "weight": 0.1,
+        "container": "cryo-tube",
+        "location": "rack A7",
+        "barcode": "MYRIAD-IP-001"
+      },
+      "states": {}
+    },
+    {
+      "id": "temperature_logger_1",
+      "name": "Broken temperature logger",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "weight": 0.3,
+        "display": "frozen at -170°C",
+        "actual_temp": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "cryo_gloves_1",
+      "name": "Spare cryo-gloves",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "condition": "torn at the fingertips"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_thaw_kit_1",
+      "name": "Emergency thaw kit",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "weight": 1.2,
+        "status": "unopened",
+        "expiry": "next month"
+      },
+      "states": {}
+    },
+    {
+      "id": "warning_sign_1",
+      "name": "Warning sign",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "content": "UNAUTHORIZED ACCESS = TERMINATION"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Old lab coat",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_vault",
+      "properties": {
+        "weight": 0.8,
+        "condition": "frozen stiff",
+        "location": "hanging on a hook"
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave (Steris AMSCO 400)",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "door_condition": "slightly misaligned",
+        "sound": "beeping for maintenance"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "glass_condition": "scratched",
+        "airflow_sensor": "flickering"
+      },
+      "states": {}
+    },
+    {
+      "id": "replacement_pipette_controller_1",
+      "name": "Replacement pipette controller",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 0.8,
+        "location": "drawer D4",
+        "packaging": "wrapped in anti-static foam",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminated_spill_kit_1",
+      "name": "Contaminated spill kit",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 3.0,
+        "status": "unused",
+        "seal": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_box_1",
+      "name": "Sealed reagent box",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 5.0,
+        "label": "FRAGILE - KEEP UPRIGHT"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "sharps_bin_1",
+      "name": "Sharps disposal bin",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "fullness": "¾ full",
+        "warning_light": "on"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Outdated safety poster",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 0.3,
+        "content": "Proper Glove Usage (2008 Edition)"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Dusty coffee maker",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 2.5,
+        "condition": "dusty, unplugged",
+        "sticker": "BIOHAZARD"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_kit_1",
+      "name": "Lab cleaning kit",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 4.0,
+        "contents": "sponges, disinfectant, cloths",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealing_tool_1",
+      "name": "Sample sealing tool",
+      "type": "ITEM",
+      "location_id": "in:decontamination_prep_room",
+      "properties": {
+        "weight": 1.2,
+        "function": "creates airtight seals on containers",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "clean",
+    "close",
+    "open",
+    "seal",
+    "turn_off",
+    "turn_on"
+  ]
+}

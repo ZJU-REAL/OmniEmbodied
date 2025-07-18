@@ -1,0 +1,698 @@
+{
+  "description": "A high-security biotech research facility after hours, featuring a main lobby, research lab, and server room, designed for multi-agent collaboration and complex problem-solving.",
+  "rooms": [
+    {
+      "id": "main_lobby",
+      "name": "Main Lobby & Security Checkpoint",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "research_lab_a",
+        "server_room"
+      ]
+    },
+    {
+      "id": "research_lab_a",
+      "name": "Research Lab A",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "main_lobby",
+        "server_room"
+      ]
+    },
+    {
+      "id": "server_room",
+      "name": "Server Room & Storage Closet",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "main_lobby",
+        "research_lab_a"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reception_desk_1",
+      "name": "Reception Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "faux_marble",
+        "condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_turnstile_1",
+      "name": "Security Turnstile",
+      "type": "FURNITURE",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "state": "activated"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "security_terminal_1",
+      "name": "Wall-Mounted Security Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "display": "ERROR: ADMIN CARD NOT DETECTED"
+      },
+      "states": {}
+    },
+    {
+      "id": "lost_and_found_tray_1",
+      "name": "Lost & Found Tray",
+      "type": "FURNITURE",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "admin_keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_tray_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "stripe_color": "gold",
+        "function": "security_access"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_door_1",
+      "name": "Heavy Fire Door",
+      "type": "FURNITURE",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "size": [
+          2.1,
+          1.0,
+          0.1
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel",
+        "mechanism": "hydraulic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "reception_computer_1",
+      "name": "Reception Computer",
+      "type": "FURNITURE",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.05
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "state": "sleep_mode",
+        "password": "Gamma2023"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_camera_1",
+      "name": "Security Camera",
+      "type": "FURNITURE",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "status": "active",
+        "feed_status": "frozen"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "content": "REMEMBER: ALWAYS WEAR YOUR LAB COAT"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:main_lobby",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dead",
+        "soil_state": "cracked"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "label": "SECURITY - DO NOT TOUCH",
+        "content": "half_empty"
+      },
+      "states": {
+        "is_wet": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Central Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "light_status": "off",
+        "uv_status": "active"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "security_drone_1",
+      "name": "Deactivated Security Drone",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.5
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "status": "deactivated"
+      },
+      "states": {}
+    },
+    {
+      "id": "specimen_fridge_1",
+      "name": "Specimen Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          1.2,
+          0.7,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "lock_status": "locked",
+        "keypad_prompt": "ENTER 4-DIGIT CODE"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "operation_status": "uneven",
+        "sound": "grinding"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "eye_wash_station_1",
+      "name": "Emergency Eye Wash Station",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "lever_condition": "stiff"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.02
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "content": "PASSCODE: 7??1"
+      },
+      "states": {}
+    },
+    {
+      "id": "pizza_box_1",
+      "name": "Old Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "weight": 0.5,
+        "condition": "greasy",
+        "content": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "pocket_contents": [
+          "bent_paperclip_1"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bent_paperclip_1",
+      "name": "Bent Paperclip",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "metal",
+        "shape": "bent",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "status": "overheating"
+      },
+      "states": {}
+    },
+    {
+      "id": "janitorial_closet_1",
+      "name": "Janitorial Closet",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "door_status": "ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "backup_generator_1",
+      "name": "Backup Generator",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "fuel_status": "empty",
+        "fuel_type": "ethanol"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethanol_canister_1",
+      "name": "Ethanol Canister",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 5.0,
+        "content": "ethanol",
+        "capacity": "5_liters"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_safe_1",
+      "name": "Locked Safe",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "lock_type": "4_digit_code",
+        "hint": "first_two_digits_match_fridge_code"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "circuit_breaker_1",
+      "name": "Circuit Breaker Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "switch_status": "off"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_keyboard_1",
+      "name": "Dusty Keyboard",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 0.5,
+        "condition": "dusty",
+        "cable_condition": "frayed",
+        "functionality": "working"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Outdated Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 5.0,
+        "expiration": "expired",
+        "pressure": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "phillips",
+        "size": "medium",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.4,
+        "content": "cleaning_solution",
+        "capacity": "500_ml",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.2,
+        "content": "adhesive",
+        "capacity": "100_ml",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_can_1",
+      "name": "Watering Can",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "content": "empty",
+        "capacity": "1_liter",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper Roll",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "length": "5_meters",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_tape_1",
+      "name": "Packing Tape",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.2,
+        "width": "5_cm",
+        "length": "50_meters",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scoop_1",
+      "name": "Scoop",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "capacity": "100_ml",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hanger_1",
+      "name": "Clothes Hanger",
+      "type": "ITEM",
+      "location_id": "in:janitorial_closet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "verification_device_1",
+      "name": "Verification Device",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 0.5,
+        "function": "check_accuracy",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab_a",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "pressure_capacity": "10_tons",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "crush",
+    "deactivate",
+    "glue",
+    "hang_up",
+    "open",
+    "pack",
+    "scoop",
+    "screw",
+    "spray",
+    "unseal",
+    "verify",
+    "water",
+    "wrap"
+  ]
+}

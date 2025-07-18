@@ -1,0 +1,600 @@
+{
+  "description": "A bustling test kitchen and food science lab where culinary experimentation meets rigorous scientific analysis, designed for multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "preparation_station",
+      "name": "Preparation & Ingredient Station",
+      "properties": {
+        "type": "kitchen"
+      },
+      "connected_to_room_ids": [
+        "cooking_hub"
+      ]
+    },
+    {
+      "id": "cooking_hub",
+      "name": "Cooking & Experimentation Hub",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "preparation_station",
+        "quality_control_bay"
+      ]
+    },
+    {
+      "id": "quality_control_bay",
+      "name": "Quality Control & Packaging Bay",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "cooking_hub",
+        "storage_corner"
+      ]
+    },
+    {
+      "id": "storage_corner",
+      "name": "Storage & Logistics Corner",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "quality_control_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "stainless_steel_worktable_1",
+      "name": "Stainless Steel Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:preparation_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "embedded_digital_scale_1",
+      "name": "Embedded Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "precision": "±0.1g",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_ingredient_racks_1",
+      "name": "Overhead Ingredient Racks",
+      "type": "FURNITURE",
+      "location_id": "in:preparation_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spice_jar_1",
+      "name": "Spice Jar (Cumin)",
+      "type": "ITEM",
+      "location_id": "in:overhead_ingredient_racks_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spice_jar_2",
+      "name": "Spice Jar (Paprika)",
+      "type": "ITEM",
+      "location_id": "in:overhead_ingredient_racks_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wall_mounted_knife_rack_1",
+      "name": "Wall Mounted Knife Rack",
+      "type": "FURNITURE",
+      "location_id": "in:preparation_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chefs_knife_1",
+      "name": "Chef's Knife (20cm)",
+      "type": "ITEM",
+      "location_id": "in:wall_mounted_knife_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "steel",
+        "sharpness": "sharp"
+      },
+      "states": {}
+    },
+    {
+      "id": "chefs_knife_2",
+      "name": "Chef's Knife (25cm)",
+      "type": "ITEM",
+      "location_id": "in:wall_mounted_knife_rack_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "red",
+        "material": "steel",
+        "sharpness": "dull"
+      },
+      "states": {}
+    },
+    {
+      "id": "wooden_cutting_board_1",
+      "name": "Wooden Cutting Board",
+      "type": "FURNITURE",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.05
+        ],
+        "weight": 1.2,
+        "is_container": true,
+        "material": "wood",
+        "condition": "warped"
+      },
+      "states": {}
+    },
+    {
+      "id": "half_chopped_shallot_1",
+      "name": "Half Chopped Shallot",
+      "type": "ITEM",
+      "location_id": "on:wooden_cutting_board_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "purple",
+        "material": "vegetable",
+        "state": "unevenly diced"
+      },
+      "states": {}
+    },
+    {
+      "id": "food_processor_1",
+      "name": "Food Processor (BlendTech 4000)",
+      "type": "FURNITURE",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "carrot_pulp_1",
+      "name": "Carrot Pulp",
+      "type": "ITEM",
+      "location_id": "in:food_processor_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "orange",
+        "material": "vegetable"
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_glass_jar_1",
+      "name": "Sealed Glass Jar (Crushed Garlic – Batch #24)",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "stack_mixing_bowls_1",
+      "name": "Stack of Mixing Bowls",
+      "type": "FURNITURE",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "one dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "laminated_recipe_sheet_1",
+      "name": "Laminated Recipe Sheet",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_worktable_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_gas_stove_1",
+      "name": "Industrial Gas Stove",
+      "type": "FURNITURE",
+      "location_id": "in:cooking_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "one burner flickering"
+      },
+      "states": {}
+    },
+    {
+      "id": "nonstick_frying_pan_1",
+      "name": "Nonstick Frying Pan",
+      "type": "ITEM",
+      "location_id": "on:industrial_gas_stove_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "nonstick",
+        "provides_abilities": [
+          "boil"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "veggie_residue_1",
+      "name": "Veggie Residue",
+      "type": "ITEM",
+      "location_id": "on:nonstick_frying_pan_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "material": "food"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_ph_meter_1",
+      "name": "Digital pH Meter",
+      "type": "ITEM",
+      "location_id": "on:industrial_gas_stove_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "safety_check_form_1",
+      "name": "Safety Check Form",
+      "type": "ITEM",
+      "location_id": "on:industrial_gas_stove_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:industrial_gas_stove_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "laminar_flow_hood_1",
+      "name": "Laminar Flow Hood",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "eyepiece loose"
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_sealer_1",
+      "name": "Vacuum Sealer",
+      "type": "FURNITURE",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "missing gasket"
+      },
+      "states": {}
+    },
+    {
+      "id": "tray_veggie_burger_patties_1",
+      "name": "Tray of Veggie Burger Patties",
+      "type": "ITEM",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "food"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "qc_pass_fail_stamps_1",
+      "name": "QC Pass/Fail Stamps",
+      "type": "ITEM",
+      "location_id": "on:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "commercial_fridge_1",
+      "name": "Commercial Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:storage_corner",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "urgent_client_samples_box_1",
+      "name": "URGENT: Client Samples Box",
+      "type": "ITEM",
+      "location_id": "in:commercial_fridge_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "brown",
+        "material": "cardboard"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "shipping_manifest_1",
+      "name": "Shipping Manifest",
+      "type": "ITEM",
+      "location_id": "on:commercial_fridge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "insulated_food_delivery_bag_1",
+      "name": "Insulated Food Delivery Bag",
+      "type": "ITEM",
+      "location_id": "on:commercial_fridge_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "silver",
+        "material": "foil",
+        "condition": "torn seam"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "squeaky wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:storage_corner",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "dustpan_1",
+      "name": "Dustpan",
+      "type": "ITEM",
+      "location_id": "in:storage_corner",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "cracked"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "boil",
+    "close",
+    "open",
+    "sign",
+    "turn_on",
+    "unpack",
+    "verify",
+    "weigh"
+  ]
+}

@@ -1,0 +1,831 @@
+{
+  "description": "A high-security, automated radiological manufacturing lab for brachytherapy seed production, featuring a negative-pressure containment glovebox, laser welding stations, and radioactive material handling areas.",
+  "rooms": [
+    {
+      "id": "tube_dispensing_bay",
+      "name": "Tube Dispensing & Preparation Bay",
+      "properties": {
+        "type": "industrial",
+        "pressure": "negative",
+        "containment_level": "high"
+      },
+      "connected_to_room_ids": [
+        "laser_welding_station"
+      ]
+    },
+    {
+      "id": "laser_welding_station",
+      "name": "Laser Welding & Sealing Station",
+      "properties": {
+        "type": "industrial",
+        "pressure": "negative",
+        "containment_level": "high"
+      },
+      "connected_to_room_ids": [
+        "tube_dispensing_bay",
+        "radioactive_loading_bay"
+      ]
+    },
+    {
+      "id": "radioactive_loading_bay",
+      "name": "Radioactive Sphere Loading Bay",
+      "properties": {
+        "type": "industrial",
+        "pressure": "negative",
+        "containment_level": "maximum"
+      },
+      "connected_to_room_ids": [
+        "laser_welding_station",
+        "output_inspection"
+      ]
+    },
+    {
+      "id": "output_inspection",
+      "name": "Output Inspection & Storage",
+      "properties": {
+        "type": "industrial",
+        "pressure": "negative",
+        "containment_level": "high"
+      },
+      "connected_to_room_ids": [
+        "radioactive_loading_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "vibratory_bowl_feeder_1",
+      "name": "Vibratory Bowl Feeder",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.3
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "frequency": "60Hz",
+        "model_number": "VBF-400"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "scara_robot_1",
+      "name": "SCARA Robot Arm",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "reach": "1.5m",
+        "gripper_type": "pneumatic",
+        "force_sensitive": true
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "pneumatic_gripper_1",
+      "name": "Pneumatic Gripper",
+      "type": "ITEM",
+      "location_id": "on:scara_robot_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "tungsten_carbide",
+        "jaw_count": 2,
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "titanium_tubes_bin_1",
+      "name": "Titanium Tubes Bin",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "polycarbonate",
+        "label": "UNIRRADIATED",
+        "tube_diameter": "0.8mm",
+        "tube_length": "4.5mm"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "titanium_tube_1",
+      "name": "Titanium Tube",
+      "type": "ITEM",
+      "location_id": "in:titanium_tubes_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "titanium",
+        "diameter": "0.8mm",
+        "length": "4.5mm",
+        "state": "raw"
+      },
+      "states": {}
+    },
+    {
+      "id": "titanium_tube_2",
+      "name": "Titanium Tube",
+      "type": "ITEM",
+      "location_id": "in:titanium_tubes_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "titanium",
+        "diameter": "0.8mm",
+        "length": "4.5mm",
+        "state": "raw"
+      },
+      "states": {}
+    },
+    {
+      "id": "titanium_tube_3",
+      "name": "Titanium Tube",
+      "type": "ITEM",
+      "location_id": "in:titanium_tubes_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "titanium",
+        "diameter": "0.8mm",
+        "length": "4.5mm",
+        "state": "raw"
+      },
+      "states": {}
+    },
+    {
+      "id": "tube_reject_bin_1",
+      "name": "Tube Reject Bin",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "interface": "touchscreen",
+        "buttons": [
+          "START",
+          "CALIBRATE",
+          "EMERGENCY STOP"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "tool_drawer_1",
+      "name": "Tool Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "geiger_counter_1",
+      "name": "Geiger Counter",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "brand": "RadAlert",
+        "model": "100",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tweezers_1",
+      "name": "Tweezers",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "stainless_steel",
+        "length": "12cm",
+        "tip_type": "pointed"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiber_cloth_1",
+      "name": "Microfiber Cloth",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "microfiber",
+        "color": "blue",
+        "size": "20x20cm"
+      },
+      "states": {}
+    },
+    {
+      "id": "tri_laser_welding_hood_1",
+      "name": "Tri-Laser Welding Hood",
+      "type": "FURNITURE",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "anodized_aluminum",
+        "color": "black",
+        "laser_type": "Nd:YAG",
+        "laser_count": 3
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "welding_chamber_1",
+      "name": "Welding Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "polycarbonate",
+        "lighting": "LED_ring"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "laser_alignment_camera_1",
+      "name": "Laser Alignment Camera",
+      "type": "ITEM",
+      "location_id": "on:tri_laser_welding_hood_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "aluminum",
+        "magnification": "50x",
+        "reticle": "crosshair"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "weld_inspection_monitor_1",
+      "name": "Weld Inspection Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "display_type": "LCD",
+        "imaging_mode": "thermal"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_shutoff_button_1",
+      "name": "Emergency Shutoff Button",
+      "type": "ITEM",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "red",
+        "type": "mushroom_switch",
+        "protection": "cover"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "lead_shielded_sphere_dispenser_1",
+      "name": "Lead-Shielded Sphere Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "lead",
+        "thickness": "15cm",
+        "viewport": "glass",
+        "sticker": "CAUTION: I-125"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "radioactive_sphere_1",
+      "name": "Radioactive Sphere",
+      "type": "ITEM",
+      "location_id": "in:lead_shielded_sphere_dispenser_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "gold_plated",
+        "diameter": "0.5mm",
+        "isotope": "I-125",
+        "activity": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "radioactive_sphere_2",
+      "name": "Radioactive Sphere",
+      "type": "ITEM",
+      "location_id": "in:lead_shielded_sphere_dispenser_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "gold_plated",
+        "diameter": "0.5mm",
+        "isotope": "I-125",
+        "activity": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "verification_pin_sensor_1",
+      "name": "Verification Pin Sensor",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 1.0,
+        "material": "stainless_steel",
+        "pin_extension": "3mm",
+        "indicator": "LED",
+        "colors": [
+          "green",
+          "red"
+        ]
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "rejection_chute_1",
+      "name": "Rejection Chute",
+      "type": "FURNITURE",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "destination": "CONTAMINATED WASTE bin"
+      },
+      "states": {}
+    },
+    {
+      "id": "antistatic_gun_1",
+      "name": "Antistatic Gun",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "function": "discharge_spheres",
+        "mounting": "hook"
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_ports_1",
+      "name": "Glove Ports",
+      "type": "FURNITURE",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "rubber",
+        "thickness": "thick",
+        "seal_type": "airtight"
+      },
+      "states": {}
+    },
+    {
+      "id": "dose_rate_meter_1",
+      "name": "Dose Rate Meter",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "display": "digital",
+        "current_reading": "0.02 mR/hr"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "helium_leak_detector_1",
+      "name": "Helium Leak Detector",
+      "type": "FURNITURE",
+      "location_id": "in:output_inspection",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "function": "seal_integrity_check",
+        "sensitivity": "high"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rotating_carousel_1",
+      "name": "Rotating Carousel",
+      "type": "FURNITURE",
+      "location_id": "in:output_inspection",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "aluminum",
+        "compartments": [
+          "accepted",
+          "rejected"
+        ]
+      },
+      "states": {
+        "is_spinning": false
+      }
+    },
+    {
+      "id": "waste_disposal_chute_1",
+      "name": "Waste Disposal Chute",
+      "type": "FURNITURE",
+      "location_id": "in:output_inspection",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.5
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "steel",
+        "destination": "shielded_storage_bin",
+        "shielding": "lead"
+      },
+      "states": {}
+    },
+    {
+      "id": "lead_shielding_panel_1",
+      "name": "Lead Shielding Panel",
+      "type": "FURNITURE",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.1
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "lead",
+        "thickness": "5cm"
+      },
+      "states": {}
+    },
+    {
+      "id": "laser_housing_unit_1",
+      "name": "Laser Housing Unit",
+      "type": "FURNITURE",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.4
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "mounting": "bolted",
+        "bolt_size": "10mm",
+        "bolt_count": 4
+      },
+      "states": {
+        "is_mounted": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "temperature": "adjustable",
+        "tip_type": "fine",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seal_breaker_1",
+      "name": "Seal Breaker Tool",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "tip_type": "sharp",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:output_inspection",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "brand": "Sony",
+        "model": "HDR-CX405",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "volume": "5ml",
+        "needle_gauge": "21G",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "type": "CO2",
+        "capacity": "5kg",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "osha_safety_poster_1",
+      "name": "OSHA Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "content": "RADIATION EXPOSURE LIMITS: 5 REM/YEAR",
+        "condition": "faded"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "color": "white",
+        "stain": "machine_oil",
+        "location": "stack_of_manuals"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "trophy_1",
+      "name": "Trophy",
+      "type": "ITEM",
+      "location_id": "in:tube_dispensing_bay",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "inscription": "BEST INNOVATION – MEDICAL AUTOMATION 2015",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "charred_weld_samples_1",
+      "name": "Charred Weld Samples",
+      "type": "ITEM",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "titanium",
+        "mounting": "corkboard",
+        "notes": "TOO MUCH POWER"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "weight": 0.4,
+        "material": "glass",
+        "color": "blue",
+        "shape": "radioactive_symbol"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_calendar_1",
+      "name": "Wall Calendar",
+      "type": "ITEM",
+      "location_id": "in:laser_welding_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "month": "July",
+        "year": "2022",
+        "status": "outdated"
+      },
+      "states": {}
+    },
+    {
+      "id": "days_since_incident_counter_1",
+      "name": "Days Since Last Incident Counter",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "type": "magnetic",
+        "current_count": "287"
+      },
+      "states": {}
+    },
+    {
+      "id": "team_photo_1",
+      "name": "Framed Team Photo",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "content": "lab_coats_thumbs_up",
+        "frame": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_bar_1",
+      "name": "Half-Eaten Protein Bar",
+      "type": "ITEM",
+      "location_id": "in:radioactive_loading_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "foil",
+        "flavor": "chocolate",
+        "status": "half_eaten"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "connect",
+    "extinguish",
+    "hide",
+    "inject",
+    "mount",
+    "open",
+    "record_video",
+    "show",
+    "solder",
+    "spin",
+    "turn_on",
+    "uncover",
+    "unseal"
+  ]
+}

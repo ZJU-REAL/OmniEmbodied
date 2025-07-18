@@ -151,8 +151,8 @@ class CorpGotoAction(BaseAction):
         # 检查所有智能体是否存在
         for agent_id in self.agents:
             if not agent_manager.get_agent(agent_id):
-                return False, f"智能体 {agent_id} 不存在"
-        
+                return False, f"Agent {agent_id} does not exist"
+
         # 检查目标位置是否存在
         if not world_state.graph.get_node(self.target_location):
             return False, f"Location {self.target_location} does not exist"
@@ -227,11 +227,11 @@ class CorpPlaceAction(BaseAction):
         for agent_id in self.agents:
             agent = agent_manager.get_agent(agent_id)
             if not agent:
-                return False, f"智能体 {agent_id} 不存在"
-            
+                return False, f"Agent {agent_id} does not exist"
+
             # 检查智能体是否在合作模式
             if not hasattr(agent, 'corporate_mode_object_id') or agent.corporate_mode_object_id != self.target_object:
-                return False, f"智能体 {agent_id} 未在合作抓取 {self.target_object}"
+                return False, f"Agent {agent_id} is not in cooperative grab mode for {self.target_object}"
         
         # 检查目标物体是否存在
         if not env_manager.get_object_by_id(self.target_object):

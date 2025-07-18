@@ -1,0 +1,962 @@
+{
+  "description": "A clandestine restoration lab within the Vatican Archives, filled with ancient artifacts, modern restoration equipment, and hidden secrets. The dimly lit space is a blend of historical reverence and cutting-edge technology, with a palpable tension between preservation and suppression.",
+  "rooms": [
+    {
+      "id": "main_restoration_chamber",
+      "name": "Main Restoration Chamber",
+      "properties": {
+        "type": "restoration_workspace"
+      },
+      "connected_to_room_ids": [
+        "secure_vault",
+        "chemical_preparation_room",
+        "scholars_alcove",
+        "supply_closet",
+        "observation_balcony"
+      ]
+    },
+    {
+      "id": "secure_vault",
+      "name": "Secure Vault",
+      "properties": {
+        "type": "high_security_storage"
+      },
+      "connected_to_room_ids": [
+        "main_restoration_chamber"
+      ]
+    },
+    {
+      "id": "chemical_preparation_room",
+      "name": "Chemical Preparation Room",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "main_restoration_chamber",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "scholars_alcove",
+      "name": "Scholar's Alcove",
+      "properties": {
+        "type": "study"
+      },
+      "connected_to_room_ids": [
+        "main_restoration_chamber"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_restoration_chamber",
+        "chemical_preparation_room"
+      ]
+    },
+    {
+      "id": "observation_balcony",
+      "name": "Observation Balcony",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_restoration_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "oak_restoration_table_1",
+      "name": "12-foot-long Oak Restoration Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          3.66,
+          1.2,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "oak",
+        "reinforcement": "steel_brackets",
+        "surface": "green_felt_pad"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_lift_platform_1",
+      "name": "Hydraulic Lift Platform",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "max_capacity": 250.0,
+        "power_source": "electric"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "uv_lighting_rig_1",
+      "name": "UV-filtered Lighting Rig",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "light_type": "LED",
+        "filter_type": "UV_blocking"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "uv_lighting_rig_2",
+      "name": "UV-filtered Lighting Rig (Flickering)",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "light_type": "LED",
+        "filter_type": "UV_blocking",
+        "condition": "faulty_wiring"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "disputed_gospel_1",
+      "name": "The Disputed Gospel",
+      "type": "ITEM",
+      "location_id": "on:oak_restoration_table_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "vellum",
+        "age": "ancient",
+        "container": "acrylic_case",
+        "security": "dual_key_lock"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "titanium_stylus_1",
+      "name": "Titanium Stylus (0.2mm tip)",
+      "type": "ITEM",
+      "location_id": "on:oak_restoration_table_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "titanium",
+        "tip_size": "0.2mm",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "nano_adhesive_jar_1",
+      "name": "Jar of Nano-Adhesive",
+      "type": "ITEM",
+      "location_id": "on:oak_restoration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "contents": "nano_adhesive",
+        "warning": "IRREVERSIBLE_BOND",
+        "provides_abilities": [
+          "combine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scanner_1",
+      "name": "Broken Digital Scanner",
+      "type": "ITEM",
+      "location_id": "on:oak_restoration_table_1",
+      "properties": {
+        "weight": 8.0,
+        "brand": "ArchivTech",
+        "model": "DT-X9000",
+        "error_message": "Lens_Calibration_Failed"
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:oak_restoration_table_1",
+      "properties": {
+        "weight": 1.2,
+        "contents": [
+          "phillips",
+          "flathead",
+          "torx"
+        ],
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "humidity_control_console_1",
+      "name": "Humidity Control Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 25.0,
+        "current_setting": "45%_RH",
+        "alarm_status": "sensor_drift_detected"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "document_camera_1",
+      "name": "Document Camera",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.5
+        ],
+        "weight": 5.0,
+        "feed_destination": "observation_balcony"
+      },
+      "states": {
+        "is_on": true,
+        "is_playing": true
+      }
+    },
+    {
+      "id": "wheeled_tool_cart_1",
+      "name": "Wheeled Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "contents_description": "magnifiers, brushes, espresso_cup"
+      },
+      "states": {}
+    },
+    {
+      "id": "vatican_mug_1",
+      "name": "Vatican Museums Mug",
+      "type": "ITEM",
+      "location_id": "on:wheeled_tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "condition": "chipped",
+        "contents": "espresso",
+        "state": "half_full"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_tapestry_1",
+      "name": "Faded Tapestry (16th-century)",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.5
+        ],
+        "weight": 15.0,
+        "material": "wool_silk",
+        "damage": "moth_edges",
+        "era": "renaissance"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "dusty_reliquary_1",
+      "name": "Dusty Reliquary",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.7
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "label": "St._Eligius—Remains_Transferred_1987",
+        "secret_compartment": "false_bottom"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Outdated Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.05,
+          0.9
+        ],
+        "weight": 8.0,
+        "contents": [
+          "fire_drill_memos",
+          "VERITAS_VOS_LIBERABIT_poster"
+        ],
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_vault_door_1",
+      "name": "3-Ton Steel Vault Door",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          2.5,
+          0.3,
+          3.0
+        ],
+        "weight": 3000.0,
+        "security_features": [
+          "biometric_palm_scanner",
+          "keycard_slot",
+          "manual_override_wheel"
+        ],
+        "access_requirement": "dual_operator"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "climate_shelving_1",
+      "name": "Climate-Controlled Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          3.0,
+          0.6,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "features": [
+          "vibration_dampening",
+          "temperature_control",
+          "humidity_control"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gospel_of_thomas_1",
+      "name": "Gospel of Thomas Fragment",
+      "type": "ITEM",
+      "location_id": "in:climate_shelving_1",
+      "properties": {
+        "weight": 1.8,
+        "container": "lead_lined_box",
+        "hazard": "radiation",
+        "visibility": "faint_symbol_under_dust"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "archivists_keycard_1",
+      "name": "Archivist's Keycard",
+      "type": "ITEM",
+      "location_id": "on:climate_shelving_1",
+      "properties": {
+        "weight": 0.05,
+        "condition": "demagnetized",
+        "access_level": "level_4"
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_power_unit_1",
+      "name": "Backup Power Unit",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 40.0,
+        "battery_level": 62,
+        "noise_level": "soft_whirring"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "fire_suppression_nozzle_1",
+      "name": "Fire Suppression Nozzle",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.2
+        ],
+        "weight": 3.0,
+        "condition": "leaking",
+        "leak_rate": "occasional_drips"
+      },
+      "states": {}
+    },
+    {
+      "id": "censored_manuscripts_1",
+      "name": "Stack of Censored Manuscripts",
+      "type": "ITEM",
+      "location_id": "on:climate_shelving_1",
+      "properties": {
+        "weight": 5.0,
+        "markings": "SUB_INDICE_in_red_wax",
+        "access_restriction": "vatican_approval_required"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_crucifix_1",
+      "name": "Broken Crucifix",
+      "type": "ITEM",
+      "location_id": "on:climate_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "damage": "detached_head",
+        "material": "ivory",
+        "era": "baroque"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "solvent_bottle_1",
+      "name": "Glass Solvent Bottle (Blue Label)",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.8,
+        "contents": "ethanol_ether_mix",
+        "hazard": "flammable",
+        "label_color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "solvent_bottle_2",
+      "name": "Glass Solvent Bottle (Red Label)",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.8,
+        "contents": "acetone",
+        "hazard": "flammable",
+        "label_color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "solvent_bottle_3",
+      "name": "Glass Solvent Bottle (Green Label)",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.8,
+        "contents": "distilled_water",
+        "label_color": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "solvent_bottle_4",
+      "name": "Glass Solvent Bottle (Yellow Label)",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.8,
+        "contents": "ammonia_solution",
+        "hazard": "toxic_fumes",
+        "label_color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "solvent_bottle_5",
+      "name": "Glass Solvent Bottle (Clear Label)",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.8,
+        "contents": "isopropyl_alcohol",
+        "label_color": "clear"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_vase_1",
+      "name": "Decorative Blue Vase",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 1.2,
+        "color": "cobalt_blue",
+        "material": "ceramic",
+        "style": "ming_dynasty"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_screwdriver_1",
+      "name": "Calibration Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "type": "precision",
+        "size": "small",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gloves_box_1",
+      "name": "Box of Disposable Gloves",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "quantity": 100,
+        "material": "nitrile",
+        "size": "medium"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "leaking_pipe_1",
+      "name": "Leaking Pipe",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          1.5
+        ],
+        "weight": 8.0,
+        "leak_rate": "slow_drip",
+        "catchment": "metal_bucket"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock (Stuck at 3:33)",
+      "type": "FURNITURE",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.3
+        ],
+        "weight": 2.0,
+        "condition": "stuck",
+        "stuck_time": "3:33"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "singing_bowl_1",
+      "name": "Singing Bowl",
+      "type": "ITEM",
+      "location_id": "on:climate_shelving_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "bronze",
+        "resonance": "harmonic_hum",
+        "trigger": "HVAC_vibration"
+      },
+      "states": {}
+    },
+    {
+      "id": "scholars_desk_1",
+      "name": "Scholar's Desk",
+      "type": "FURNITURE",
+      "location_id": "in:scholars_alcove",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.75
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "mahogany",
+        "contents": [
+          "reference_books",
+          "translation_notes"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:scholars_desk_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.5,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "contents": "personal_journals",
+        "lock_type": "tumbler"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lead_gospel_box_1",
+      "name": "Lead-lined Gospel Box",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.3
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "lead_wood_composite",
+        "handling_requirement": "two_person_lift"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_restoration_chamber",
+      "properties": {
+        "weight": 5.0,
+        "type": "CO2",
+        "pressure": "full",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 7.5,
+        "type": "canister",
+        "filter": "HEPA",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "base": "iron_gall",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_freezer_1",
+      "name": "Portable Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "temperature_setting": "-18C",
+        "provides_abilities": [
+          "freeze"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "electric_kettle_1",
+      "name": "Electric Kettle",
+      "type": "ITEM",
+      "location_id": "in:chemical_preparation_room",
+      "properties": {
+        "weight": 1.5,
+        "capacity": "1.7L",
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "watering_can_1",
+      "name": "Watering Can",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.8,
+        "capacity": "2L",
+        "material": "galvanized_steel",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.1,
+        "bristle_type": "sable",
+        "size": "medium",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Clothes Iron",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 1.2,
+        "temperature_settings": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "steam_function": "yes",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "compressed_artifact_1",
+      "name": "Compressed Artifact",
+      "type": "ITEM",
+      "location_id": "in:climate_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "parchment",
+        "compression_method": "vacuum_seal"
+      },
+      "states": {
+        "is_compressed": true
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "FURNITURE",
+      "location_id": "in:scholars_alcove",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 0.5,
+        "is_container": false,
+        "connection_type": "ethernet_wifi",
+        "provides_abilities": [
+          "upload"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "light_bulb_1",
+      "name": "Light Bulb",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "type": "LED",
+        "wattage": "9W",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bluetooth_speaker_1",
+      "name": "Bluetooth Speaker",
+      "type": "ITEM",
+      "location_id": "in:scholars_alcove",
+      "properties": {
+        "weight": 1.0,
+        "brand": "Sonos",
+        "battery_level": 85,
+        "paired_device": "scholars_tablet_1"
+      },
+      "states": {
+        "is_on": true,
+        "is_playing": true,
+        "is_paired": true
+      }
+    },
+    {
+      "id": "scholars_tablet_1",
+      "name": "Scholar's Tablet",
+      "type": "ITEM",
+      "location_id": "on:scholars_desk_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "iPad",
+        "storage": "256GB",
+        "paired_device": "bluetooth_speaker_1"
+      },
+      "states": {
+        "is_on": true,
+        "is_paired": true
+      }
+    }
+  ],
+  "abilities": [
+    "boil",
+    "combine",
+    "decompress",
+    "extinguish",
+    "freeze",
+    "iron",
+    "open",
+    "paint",
+    "replace",
+    "stain",
+    "stop_playback",
+    "turn_off",
+    "turn_on",
+    "unpair",
+    "upload",
+    "vacuum",
+    "water",
+    "close"
+  ]
+}

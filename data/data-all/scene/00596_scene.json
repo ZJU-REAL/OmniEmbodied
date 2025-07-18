@@ -1,0 +1,971 @@
+{
+  "description": "A cutting-edge nutrition research lab with advanced monitoring equipment, bio-sample processing stations, participant interaction pods, and supply storage areas, designed for multi-agent collaboration in dietary monitoring and intervention.",
+  "rooms": [
+    {
+      "id": "main_monitoring_hub",
+      "name": "Main Monitoring Hub",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "bio_sample_processing_station",
+        "participant_interaction_pod",
+        "supply_equipment_storage"
+      ]
+    },
+    {
+      "id": "bio_sample_processing_station",
+      "name": "Bio-Sample Processing Station",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "participant_interaction_pod"
+      ]
+    },
+    {
+      "id": "participant_interaction_pod",
+      "name": "Participant Interaction Pod",
+      "properties": {
+        "type": "consultation"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "bio_sample_processing_station"
+      ]
+    },
+    {
+      "id": "supply_equipment_storage",
+      "name": "Supply & Equipment Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_desk_1",
+      "name": "Steel-reinforced Central Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_type": "smooth"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_dashboard_1",
+      "name": "Large Curved Digital Dashboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "display_type": "LED",
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "overhead_projector_1",
+      "name": "Overhead Projector",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Sony",
+        "lumens": 4000
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ai_dietitian_terminal_1",
+      "name": "AI Dietitian Terminal",
+      "type": "FURNITURE",
+      "location_id": "on:central_desk_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "requires_id": true,
+        "brand": "NutriTech"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_override_panel_1",
+      "name": "Emergency Override Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "security_level": "high"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "wearable_sync_station_1",
+      "name": "Wearable Sync Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "capacity": 10
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "smartwatch_1",
+      "name": "Smartwatch (Participant #1)",
+      "type": "ITEM",
+      "location_id": "in:wearable_sync_station_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "model": "FitTrack Pro",
+        "battery_level": 85
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "smartwatch_2",
+      "name": "Smartwatch (Participant #2)",
+      "type": "ITEM",
+      "location_id": "in:wearable_sync_station_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "model": "FitTrack Pro",
+        "battery_level": 45
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "HP",
+        "paper_level": "low"
+      },
+      "states": {
+        "is_open": false,
+        "is_printed": false
+      }
+    },
+    {
+      "id": "ergonomic_chair_1",
+      "name": "Ergonomic Chair (Missing Armrest)",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "damaged",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini-Fridge (Staff Only)",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "healthy_choices_poster_1",
+      "name": "Peeling 'Healthy Choices' Poster",
+      "type": "ITEM",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "weight": 0.5,
+        "condition": "peeling",
+        "year": 2018,
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note (Sodium Reminder)",
+      "type": "ITEM",
+      "location_id": "on:central_desk_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "text": "Check Participant #45's sodium levels!",
+        "is_sticky": true
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_pen_holder_1",
+      "name": "Dusty Coffee Cup Pen Holder",
+      "type": "ITEM",
+      "location_id": "on:central_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "original_use": "coffee",
+        "current_use": "pen_holder",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "food_dehydrator_1",
+      "name": "Industrial Food Dehydrator",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "temperature_range": "30-70C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "High-Precision Digital Scale",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "max_capacity": 5.0,
+        "sensitivity": 0.01
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "specimen_jar_1",
+      "name": "Specimen Jar (Blue Lid, HIGH SUGAR)",
+      "type": "ITEM",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "weight": 0.5,
+        "lid_color": "blue",
+        "label": "HIGH SUGAR",
+        "seal_condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "specimen_jar_2",
+      "name": "Specimen Jar (Red Lid)",
+      "type": "ITEM",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "weight": 0.5,
+        "lid_color": "red",
+        "label": "LOW FAT",
+        "seal_condition": "intact"
+      },
+      "states": {}
+    },
+    {
+      "id": "specimen_jar_3",
+      "name": "Specimen Jar (Green Lid)",
+      "type": "ITEM",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "weight": 0.5,
+        "lid_color": "green",
+        "label": "HIGH PROTEIN",
+        "seal_condition": "intact"
+      },
+      "states": {}
+    },
+    {
+      "id": "microspectrometer_1",
+      "name": "Microspectrometer",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "accuracy": 87
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "contaminated_waste_bin_1",
+      "name": "Contaminated Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "biohazard_level": 2,
+        "fill_level": 75
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "max_rpm": 15000
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "pipette_rack_1",
+      "name": "Pipette Rack (Missing Pipettes)",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "missing_pipettes": 3,
+        "damaged_pipettes": 1
+      },
+      "states": {}
+    },
+    {
+      "id": "outdated_studies_1",
+      "name": "Stack of Outdated Dietary Studies",
+      "type": "ITEM",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "weight": 2.0,
+        "years": "2015-2020",
+        "material": "paper",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "office_plant_1",
+      "name": "Withered Office Plant",
+      "type": "ITEM",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "weight": 1.5,
+        "type": "fern",
+        "last_watered": "2 weeks ago",
+        "health": "poor"
+      },
+      "states": {
+        "is_pruned": false
+      }
+    },
+    {
+      "id": "exam_table_1",
+      "name": "Adjustable Exam Table",
+      "type": "FURNITURE",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "mechanism": "hydraulic",
+        "condition": "squeaky"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "one_way_mirror_1",
+      "name": "One-Way Mirror",
+      "type": "FURNITURE",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.1
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "privacy_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "meal_logging_tablet_1",
+      "name": "Tablet with Locked Meal-Logging App",
+      "type": "ITEM",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "weight": 0.5,
+        "brand": "iPad",
+        "app_name": "NutriLog",
+        "security": "PIN"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Impulse Control Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "lock_type": "override_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "headphones_1",
+      "name": "Noise-Canceling Headphones (Torn Earpad)",
+      "type": "ITEM",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Bose",
+        "condition": "damaged",
+        "earpad_missing": "left"
+      },
+      "states": {}
+    },
+    {
+      "id": "sanitizer_dispenser_1",
+      "name": "Sanitizer Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "fill_level": 0
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_fern_1",
+      "name": "Fake Potted Fern",
+      "type": "ITEM",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "weight": 2.0,
+        "type": "fake_plant",
+        "condition": "dusty",
+        "realism": "medium"
+      },
+      "states": {}
+    },
+    {
+      "id": "food_pyramid_chart_1",
+      "name": "Outdated Food Pyramid Chart",
+      "type": "ITEM",
+      "location_id": "in:participant_interaction_pod",
+      "properties": {
+        "weight": 0.5,
+        "year": 2010,
+        "condition": "crooked",
+        "material": "laminated_paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Heavy-Duty Shelving Unit (Partially Collapsed)",
+      "type": "FURNITURE",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "condition": "damaged",
+        "sagging_shelf": "middle"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_locker_1",
+      "name": "Refrigerated Sample Locker",
+      "type": "FURNITURE",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "temperature": 4.0,
+        "alarm_status": "intermittent"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "battery_pack_1",
+      "name": "Emergency Battery Pack",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 1.5,
+        "charge_level": 30,
+        "compatibility": "wearable_sensors"
+      },
+      "states": {}
+    },
+    {
+      "id": "nutrient_test_strips_1",
+      "name": "Box of Sealed Nutrient Test Strips",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.5,
+        "expiry_date": "next_month",
+        "quantity": 50
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_cart_1",
+      "name": "Dolly Cart (Wobbly Wheel)",
+      "type": "FURNITURE",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "wheel_condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 3.0,
+        "condition": "unopened",
+        "contents": "absorbent_pads, gloves, bags"
+      },
+      "states": {}
+    },
+    {
+      "id": "lunchbox_1",
+      "name": "Forgotten Lunchbox (Moldy Sandwich)",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 1.0,
+        "contents": "moldy_sandwich",
+        "owner": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleanliness_sign_1",
+      "name": "Faded 'Cleanliness Matters!' Sign",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.2,
+        "condition": "faded",
+        "message": "Cleanliness Matters!"
+      },
+      "states": {}
+    },
+    {
+      "id": "metabolic_chamber_door_1",
+      "name": "Metabolic Chamber Door",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "hinge_type": "pneumatic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "id_badge_1",
+      "name": "ID Badge (Dr. Smith)",
+      "type": "ITEM",
+      "location_id": "on:central_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "owner": "Dr. Smith",
+        "access_level": "high",
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.3,
+        "compatibility": "microspectrometer",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.4,
+        "condition": "sharp",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.5,
+        "size": "medium",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Hand Saw",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.7,
+        "blade_material": "steel",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Laboratory Stove",
+      "type": "FURNITURE",
+      "location_id": "in:bio_sample_processing_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "heat_source": "electric"
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "pot_1",
+      "name": "Stainless Steel Pot",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 1.2,
+        "material": "stainless_steel",
+        "capacity": "5L",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Portable Heater",
+      "type": "FURNITURE",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "wattage": 1500
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "picture_hook_1",
+      "name": "Picture Hook",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "roller_1",
+      "name": "Flattening Roller",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 2.0,
+        "width": "30cm",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "computer_1",
+      "name": "Desktop Computer",
+      "type": "FURNITURE",
+      "location_id": "on:central_desk_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.2,
+          0.4
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "os": "Windows 10"
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "pencil_1",
+      "name": "Drawing Pencil",
+      "type": "ITEM",
+      "location_id": "in:coffee_cup_pen_holder_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "yellow",
+        "provides_abilities": [
+          "draw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:supply_equipment_storage",
+      "properties": {
+        "weight": 0.3,
+        "type": "phillips",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "security_level": "high"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    }
+  ],
+  "abilities": [
+    "boil",
+    "calibrate",
+    "close",
+    "draw",
+    "flatten",
+    "hang_up",
+    "lower",
+    "open",
+    "plug_in",
+    "prune",
+    "saw",
+    "tighten",
+    "turn_on"
+  ]
+}

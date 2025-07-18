@@ -1,0 +1,456 @@
+{
+  "description": "A high-tech mobile phone assembly and quality control laboratory with four interconnected zones: Main Assembly Floor, Component Storage & Prep, Quality Assurance Testing Chamber, and Packaging & Shipping Station.",
+  "rooms": [
+    {
+      "id": "main_assembly_floor",
+      "name": "Main Assembly Floor",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "component_storage_prep",
+        "quality_assurance_chamber"
+      ]
+    },
+    {
+      "id": "component_storage_prep",
+      "name": "Component Storage & Prep",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_assembly_floor",
+        "packaging_shipping_station"
+      ]
+    },
+    {
+      "id": "quality_assurance_chamber",
+      "name": "Quality Assurance Testing Chamber",
+      "properties": {
+        "type": "testing"
+      },
+      "connected_to_room_ids": [
+        "main_assembly_floor"
+      ]
+    },
+    {
+      "id": "packaging_shipping_station",
+      "name": "Packaging & Shipping Station",
+      "properties": {
+        "type": "shipping"
+      },
+      "connected_to_room_ids": [
+        "component_storage_prep"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt System",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly_floor",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CB-3000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_material": "ESD mat"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "unfinished_phone_1",
+      "name": "Unfinished OPPO Find 5 Prototype",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "model_number": "OPPO-F5"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "micro_screwdriver_set_1",
+      "name": "Micro-Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Precision Tools",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "Soldering Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_assembly_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "metal",
+        "provides_abilities": [
+          "cook"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "component_tray_1",
+      "name": "Component Tray",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic",
+        "contents": "resistors, capacitors, NFC chips"
+      },
+      "states": {}
+    },
+    {
+      "id": "qr_code_scanner_1",
+      "name": "QR Code Scanner",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "ScanTech",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "heavy_shelving_unit_1",
+      "name": "Heavy Steel Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage_prep",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          0.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "sections": [
+          "Screens",
+          "Batteries",
+          "Motherboards"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ips_display_box_1",
+      "name": "5\" 1080p IPS Display Box",
+      "type": "ITEM",
+      "location_id": "on:heavy_shelving_unit_1",
+      "properties": {
+        "weight": 25.0,
+        "color": "white",
+        "label": "CRITICAL – DO NOT BEND",
+        "material": "anti-static foam"
+      },
+      "states": {}
+    },
+    {
+      "id": "lithium_battery_1",
+      "name": "2500mAh Lithium Battery",
+      "type": "ITEM",
+      "location_id": "on:heavy_shelving_unit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "voltage": 3.7,
+        "label": "Fully Charged"
+      },
+      "states": {}
+    },
+    {
+      "id": "lithium_battery_2",
+      "name": "2500mAh Lithium Battery",
+      "type": "ITEM",
+      "location_id": "on:heavy_shelving_unit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "voltage": 0.0,
+        "label": "For Testing"
+      },
+      "states": {}
+    },
+    {
+      "id": "lithium_battery_3",
+      "name": "2500mAh Lithium Battery",
+      "type": "ITEM",
+      "location_id": "on:heavy_shelving_unit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "voltage": 0.1,
+        "label": "FAULTY – LEAKING"
+      },
+      "states": {}
+    },
+    {
+      "id": "motherboard_tray_1",
+      "name": "Motherboard Tray",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage_prep",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.3
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "wheel stuck"
+      },
+      "states": {}
+    },
+    {
+      "id": "soundproof_booth_1",
+      "name": "Soundproof Testing Booth",
+      "type": "FURNITURE",
+      "location_id": "in:quality_assurance_chamber",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "glass and steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "diagnostic_workstation_1",
+      "name": "Diagnostic Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:quality_assurance_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "plastic and metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "audio_calibration_rig_1",
+      "name": "Audio Calibration Rig",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workstation_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "SoundTech",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_pixel_detector_1",
+      "name": "Dead Pixel Detector",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "condition": "cracked handle",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "golden_sample_phone_1",
+      "name": "Golden Sample Reference Phone",
+      "type": "ITEM",
+      "location_id": "in:soundproof_booth_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "gold",
+        "model_number": "OPPO-F5-GS",
+        "condition": "flawless"
+      },
+      "states": {}
+    },
+    {
+      "id": "packaging_table_1",
+      "name": "Packaging Table",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_shipping_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "foam_inserts_1",
+      "name": "Foam Inserts",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "foam"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "labeling_machine_1",
+      "name": "Labeling Machine",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "brand": "LabelMaster"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access_level": "high",
+        "provides_abilities": [
+          "insert"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "microfiber",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "stainless steel",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_wrap_roll_1",
+      "name": "Plastic Wrap Roll",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "clear",
+        "material": "plastic",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "cook",
+    "cut",
+    "insert",
+    "open",
+    "replace",
+    "scan",
+    "turn_on",
+    "wipe",
+    "wrap",
+    "close"
+  ]
+}

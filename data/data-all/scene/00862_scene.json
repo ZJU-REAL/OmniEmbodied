@@ -1,0 +1,491 @@
+{
+  "description": "A pediatric hematology research lab and blood processing center with time-sensitive workflows and collaborative equipment handling.",
+  "rooms": [
+    {
+      "id": "specimen_reception",
+      "name": "Specimen Reception & Preliminary Testing Area",
+      "properties": {
+        "type": "laboratory",
+        "lighting": "bright",
+        "scent": "antiseptic"
+      },
+      "connected_to_room_ids": [
+        "central_analyzer_station"
+      ]
+    },
+    {
+      "id": "central_analyzer_station",
+      "name": "Central Hematology Analyzer Station",
+      "properties": {
+        "type": "laboratory",
+        "noise_level": "moderate",
+        "equipment_status": "operational"
+      },
+      "connected_to_room_ids": [
+        "specimen_reception",
+        "microscope_zone",
+        "storage_room"
+      ]
+    },
+    {
+      "id": "microscope_zone",
+      "name": "Microscope & Iron Deficiency Research Zone",
+      "properties": {
+        "type": "research",
+        "noise_level": "quiet",
+        "whiteboard_content": "iron-level charts"
+      },
+      "connected_to_room_ids": [
+        "central_analyzer_station"
+      ]
+    },
+    {
+      "id": "storage_room",
+      "name": "Storage & Supply Room",
+      "properties": {
+        "type": "storage",
+        "temperature": "2-8°C",
+        "organization": "cluttered"
+      },
+      "connected_to_room_ids": [
+        "central_analyzer_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "specimen_counter_1",
+      "name": "Stainless Steel Specimen Drop-off Counter",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_reception",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "surface_condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_slot_1",
+      "name": "Biohazard Disposal Slot",
+      "type": "ITEM",
+      "location_id": "on:specimen_counter_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "is_container": false,
+        "hazard_level": "biohazard",
+        "connected_to": "incinerator"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "checkin_terminal_1",
+      "name": "Digital Check-in Terminal",
+      "type": "ITEM",
+      "location_id": "on:specimen_counter_1",
+      "properties": {
+        "weight": 4.2,
+        "color": "black",
+        "screen_condition": "smudged",
+        "battery_level": 87,
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "sample_rack_1",
+      "name": "Rotating Sample Rack",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_reception",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "capacity": 12,
+        "rotation_speed": "adjustable"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blood_vial_1",
+      "name": "Urgent Blood Sample (P-4472)",
+      "type": "ITEM",
+      "location_id": "in:sample_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "priority": "high",
+        "patient_id": "P-4472",
+        "condition": "Low Hgb, Suspected Iron-Deficient",
+        "volume_ml": 5.0
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Handheld Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:specimen_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "battery_level": 23,
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Biohazard Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:specimen_reception",
+      "properties": {
+        "weight": 3.5,
+        "color": "red",
+        "seal_condition": "intact",
+        "dust_level": "slightly_dusty",
+        "provides_abilities": [
+          "scrub",
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Thermal Label Printer",
+      "type": "ITEM",
+      "location_id": "on:specimen_counter_1",
+      "properties": {
+        "weight": 2.8,
+        "color": "white",
+        "label_status": "out_of_yellow",
+        "alert_light": "blinking"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "consent_forms_1",
+      "name": "Stack of Consent Forms",
+      "type": "ITEM",
+      "location_id": "on:specimen_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "completion_status": "half_filled",
+        "clip_condition": "broken_pen"
+      },
+      "states": {}
+    },
+    {
+      "id": "hematology_analyzer_1",
+      "name": "XL-9000 Hematology Analyzer #1",
+      "type": "FURNITURE",
+      "location_id": "in:central_analyzer_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.2,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "model": "XL-9000",
+        "status": "operational"
+      },
+      "states": {
+        "is_open": false,
+        "is_running": true
+      }
+    },
+    {
+      "id": "hematology_analyzer_2",
+      "name": "XL-9000 Hematology Analyzer #2",
+      "type": "FURNITURE",
+      "location_id": "in:central_analyzer_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.2,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "model": "XL-9000",
+        "status": "low_pressure_warning"
+      },
+      "states": {
+        "is_open": false,
+        "is_running": true
+      }
+    },
+    {
+      "id": "calibration_fluid_1",
+      "name": "Calibration Fluid Bottle",
+      "type": "ITEM",
+      "location_id": "in:central_analyzer_station",
+      "properties": {
+        "weight": 1.2,
+        "color": "clear",
+        "expiration_date": "next_week",
+        "volume_ml": 500,
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "error_log_1",
+      "name": "Error Log Printout",
+      "type": "ITEM",
+      "location_id": "on:hematology_analyzer_2",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "content": "XL-9000 #2: Low Pressure Warning",
+        "urgency": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_rack_adapter_1",
+      "name": "Sample Rack Adapter",
+      "type": "ITEM",
+      "location_id": "on:hematology_analyzer_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "alignment": "misaligned",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_stool_1",
+      "name": "Adjustable Lab Stool",
+      "type": "FURNITURE",
+      "location_id": "in:central_analyzer_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 8.0,
+        "wheel_condition": "squeaky",
+        "height_adjustable": true
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:hematology_analyzer_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "countdown": "15_min",
+        "purpose": "QC_check"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "spare_cartridges_1",
+      "name": "Spare Analyzer Cartridges",
+      "type": "ITEM",
+      "location_id": "in:central_analyzer_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "lock_status": "locked",
+        "key_location": "missing"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_microscope_1",
+      "name": "Digital Microscope #1",
+      "type": "FURNITURE",
+      "location_id": "in:microscope_zone",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "focus_knob_condition": "loose",
+        "magnification": "1000x",
+        "is_container": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "blood_smear_slide_1",
+      "name": "Annotated Blood Smear Slide (Case #29)",
+      "type": "ITEM",
+      "location_id": "on:digital_microscope_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "clear",
+        "condition": "Severe Microcytic Anemia",
+        "annotation_quality": "detailed"
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_logbook_1",
+      "name": "Iron Supplement Trial Logbook",
+      "type": "ITEM",
+      "location_id": "in:microscope_zone",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "current_page": 47,
+        "completion_status": "incomplete"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_fridge_1",
+      "name": "Blood Sample Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:storage_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "temperature_setting": "2-8°C",
+        "alarm_status": "disabled"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:storage_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 65.0,
+        "lid_condition": "stuck",
+        "max_rpm": 15000
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iron_reagent_1",
+      "name": "Iron Assay Reagent Kit",
+      "type": "ITEM",
+      "location_id": "in:storage_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "expiration_status": "expired_yesterday",
+        "volume_ml": 250
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_keycard_1",
+      "name": "Spare Analyzer Keycard",
+      "type": "ITEM",
+      "location_id": "in:storage_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "location": "taped_under_shelf",
+        "access_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling Cart",
+      "type": "FURNITURE",
+      "location_id": "in:storage_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "wheel_condition": "jammed",
+        "mobility": "impaired",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "gray",
+        "tape_status": "out",
+        "battery_level": 42
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "extinguish",
+    "open",
+    "replace",
+    "scan_barcode",
+    "scrub",
+    "stop_process",
+    "close"
+  ]
+}

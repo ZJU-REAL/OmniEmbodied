@@ -1,0 +1,682 @@
+{
+  "description": "A high-tech Digital Archive Recovery Center with specialized areas for media intake, forensic recovery, data processing, and quality control, designed for multi-agent collaboration and complex tasks.",
+  "rooms": [
+    {
+      "id": "media_intake_bay",
+      "name": "Media Intake & Sorting Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "forensic_recovery_lab"
+      ]
+    },
+    {
+      "id": "forensic_recovery_lab",
+      "name": "Forensic Recovery Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "media_intake_bay",
+        "data_processing_room"
+      ]
+    },
+    {
+      "id": "data_processing_room",
+      "name": "Data Processing Server Room",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "forensic_recovery_lab",
+        "qc_station"
+      ]
+    },
+    {
+      "id": "qc_station",
+      "name": "Archival Quality Control Station",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "data_processing_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room / Ad-Hoc Debugging Zone",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "qc_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "receiving_table_1",
+      "name": "Steel Receiving Table",
+      "type": "FURNITURE",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_condition": "scratched"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Motorized Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "steel_rubber",
+        "status": "jammed"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "decontamination_airlock_1",
+      "name": "Decontamination Airlock",
+      "type": "FURNITURE",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.2
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "glass_steel",
+        "led_color": "yellow"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "media_crate_1",
+      "name": "Incoming Media Crate",
+      "type": "FURNITURE",
+      "location_id": "on:receiving_table_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE—MAGNETIC MEDIA"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "media_crate_2",
+      "name": "Incoming Media Crate (Broken Latch)",
+      "type": "FURNITURE",
+      "location_id": "on:receiving_table_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 22.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "broken_latch"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "emergency_kit_1",
+      "name": "Emergency Recovery Kit",
+      "type": "ITEM",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "weld",
+          "plaster",
+          "sew",
+          "drill",
+          "inject"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:receiving_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Zebra"
+      },
+      "states": {
+        "is_on": true,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "dolly_1",
+      "name": "Wheeled Dolly",
+      "type": "FURNITURE",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal_rubber",
+        "wheel_condition": "squeaky"
+      },
+      "states": {
+        "is_rolled": false
+      }
+    },
+    {
+      "id": "static_safe_workbench_1",
+      "name": "Static-Safe Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_recovery_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.9
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "wood_metal",
+        "grounding_strap": "dangling"
+      },
+      "states": {}
+    },
+    {
+      "id": "robotic_tape_loader_1",
+      "name": "Robotic Tape Loader",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_recovery_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel_plastic",
+        "status_message": "ERROR: CARTRIDGE MISALIGNMENT"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "floppy_drive_1",
+      "name": "5.25\" Floppy Drive",
+      "type": "FURNITURE",
+      "location_id": "on:static_safe_workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic_metal",
+        "disk_label": "BANK RECORDS 1987"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "syquest_drive_1",
+      "name": "SyQuest Drive",
+      "type": "FURNITURE",
+      "location_id": "on:static_safe_workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.5,
+        "is_container": true,
+        "material": "plastic",
+        "eject_button": "jammed"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "quarantine_diskette_1",
+      "name": "Warped 3.5\" Diskette",
+      "type": "ITEM",
+      "location_id": "in:forensic_recovery_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic_magnetic",
+        "label": "CORRUPT—DO NOT MOUNT"
+      },
+      "states": {
+        "is_compressed": true
+      }
+    },
+    {
+      "id": "usb_scsi_adapter_1",
+      "name": "USB-to-SCSI Adapter",
+      "type": "ITEM",
+      "location_id": "on:static_safe_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "brand": "Adaptec"
+      },
+      "states": {
+        "is_connected": false,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Inspection Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_recovery_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "metal_glass",
+        "lens_condition": "dusty"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_recovery_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": "screwdrivers, torx bits, soldering iron"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "brand": "Weller",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Legacy Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_processing_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "rail_condition": "loose_bolt"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hot_swap_drive_1",
+      "name": "Hot-Swap Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "beige",
+        "brand": "IBM"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "qc_table_1",
+      "name": "Quality Control Table",
+      "type": "FURNITURE",
+      "location_id": "in:qc_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "m_disc_burner_1",
+      "name": "Archival M-Disc Burner",
+      "type": "FURNITURE",
+      "location_id": "on:qc_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "status": "idle"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "failed_media_bin_1",
+      "name": "Failed Media Bin",
+      "type": "FURNITURE",
+      "location_id": "in:qc_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "cracked CDs, snapped tapes"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_manual_1",
+      "name": "File Formats of the 20th Century",
+      "type": "ITEM",
+      "location_id": "on:qc_table_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "paper",
+        "condition": "worn"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "material": "ceramic",
+        "sticker": "red_dot"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Debugging Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "message": "Why does SCSI-2 hate us?"
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:media_intake_bay",
+      "properties": {
+        "weight": 3.0,
+        "color": "brown",
+        "material": "cardboard_bubble_wrap",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "degausser_1",
+      "name": "Handheld Degausser",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "yellow",
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {
+        "is_pure": true
+      }
+    },
+    {
+      "id": "trowel_1",
+      "name": "Plaster Trowel",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sewing_kit_1",
+      "name": "Sewing Kit",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "fabric_metal",
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Electric Drill",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "plastic",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Utility Knife",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "spread"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Food Grater",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:emergency_kit_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {
+        "is_welded": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "connect",
+    "contaminate",
+    "decompress",
+    "drill",
+    "grate",
+    "inject",
+    "lower",
+    "open",
+    "pack",
+    "plaster",
+    "plug_in",
+    "roll",
+    "sew",
+    "spread",
+    "start_process",
+    "turn_off",
+    "unplug",
+    "weld"
+  ]
+}

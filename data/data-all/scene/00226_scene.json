@@ -1,0 +1,879 @@
+{
+  "description": "A bustling Digital Democracy Voting Hub where election officials, IT specialists, and civic volunteers collaborate to manage a secure online voting system.",
+  "rooms": [
+    {
+      "id": "voter_verification_station",
+      "name": "Voter Verification Station",
+      "properties": {
+        "type": "reception"
+      },
+      "connected_to_room_ids": [
+        "server_control_room",
+        "admin_workstations",
+        "public_voting_booths"
+      ]
+    },
+    {
+      "id": "server_control_room",
+      "name": "Server Control Room",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "voter_verification_station",
+        "tech_maintenance_closet"
+      ]
+    },
+    {
+      "id": "admin_workstations",
+      "name": "Admin Workstations",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "voter_verification_station",
+        "public_voting_booths"
+      ]
+    },
+    {
+      "id": "tech_maintenance_closet",
+      "name": "Tech Maintenance Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "server_control_room"
+      ]
+    },
+    {
+      "id": "public_voting_booths",
+      "name": "Public Voting Booths",
+      "properties": {
+        "type": "public"
+      },
+      "connected_to_room_ids": [
+        "voter_verification_station",
+        "admin_workstations"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reception_desk_1",
+      "name": "Steel Reception Desk",
+      "type": "FURNITURE",
+      "location_id": "in:voter_verification_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "is_bolted": true
+      },
+      "states": {}
+    },
+    {
+      "id": "palm_scanner_1",
+      "name": "Biometric Palm Scanner",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "SecureTech",
+        "model_number": "PalmScan-2000",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "kiosk_stand_1",
+      "name": "Rotating Kiosk Stand",
+      "type": "FURNITURE",
+      "location_id": "in:voter_verification_station",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "voter_tablet_1",
+      "name": "Voter Registration Tablet",
+      "type": "ITEM",
+      "location_id": "on:kiosk_stand_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "brand": "TabletTech",
+        "model_number": "RegTab-500",
+        "provides_abilities": [
+          "turn_on",
+          "download"
+        ]
+      },
+      "states": {
+        "is_on": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "badge_dispenser_1",
+      "name": "Locked Acrylic Badge Dispenser",
+      "type": "FURNITURE",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "acrylic"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "voter_badge_1",
+      "name": "Temporary Voter Badge",
+      "type": "ITEM",
+      "location_id": "in:badge_dispenser_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "rfid_enabled": true,
+        "serial_number": "VB-001"
+      },
+      "states": {}
+    },
+    {
+      "id": "misplaced_badge_1",
+      "name": "Misplaced Voter Badge",
+      "type": "ITEM",
+      "location_id": "in:voter_verification_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "rfid_enabled": true,
+        "serial_number": "VB-482"
+      },
+      "states": {}
+    },
+    {
+      "id": "fingerprint_scanner_1",
+      "name": "Fingerprint Scanner",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "BioSecure",
+        "model_number": "FPS-100",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fingerprint_scanner_2",
+      "name": "Fingerprint Scanner (Low Battery)",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "BioSecure",
+        "model_number": "FPS-100",
+        "battery_status": "low",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fingerprint_scanner_3",
+      "name": "Fingerprint Scanner",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "BioSecure",
+        "model_number": "FPS-100",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "brand": "PrintMaster",
+        "model_number": "PM-3000",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "office_chair_1",
+      "name": "Wheeled Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:voter_verification_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic",
+        "caster_status": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "inscription": "Scanner 3 needs recalibration – ask IT."
+      },
+      "states": {}
+    },
+    {
+      "id": "poster_1",
+      "name": "Trust Your Vote! Poster",
+      "type": "ITEM",
+      "location_id": "in:voter_verification_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "condition": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-Empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic",
+        "contents": "coffee"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "voter_guides_1",
+      "name": "Stack of Outdated Voter Guides",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "edition": "2018"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "is_bolted": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_2",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "is_bolted": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_3",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "is_bolted": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_4",
+      "name": "Server Rack (Leaking Pipe Above)",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "is_bolted": true
+      },
+      "states": {
+        "is_frosted": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "ITEM",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "main_server_1",
+      "name": "Main Voting Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 25.0,
+        "color": "black",
+        "brand": "ServerTech",
+        "model_number": "VoteMaster-5000",
+        "status": "SYNC ERROR",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "backup_drive_1",
+      "name": "Mismatched Backup Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_2",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "serial_number": "BZ-449",
+        "label": "DO NOT USE – CORRUPT?",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "network_switch_1",
+      "name": "Network Switch",
+      "type": "ITEM",
+      "location_id": "in:server_rack_3",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "NetGear",
+        "model_number": "NS-200",
+        "active_ports": 5,
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "in:server_rack_4",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "brand": "KVMPro",
+        "model_number": "KVM-100",
+        "condition": "sticky",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "weight": 10.0,
+        "color": "white",
+        "inscription": "PASSWORD: ****"
+      },
+      "states": {}
+    },
+    {
+      "id": "plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "gold",
+        "year": "2019",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_fan_1",
+      "name": "Broken Desk Fan",
+      "type": "ITEM",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "FanTech",
+        "model_number": "DF-100",
+        "missing_parts": "two blades",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ethernet_cable_1",
+      "name": "Tangled Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "condition": "chewed",
+        "length": "3m"
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_desk_1",
+      "name": "Admin Desk",
+      "type": "FURNITURE",
+      "location_id": "in:admin_workstations",
+      "properties": {
+        "size": [
+          1.6,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Official Use)",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "inscription": "OFFICIAL USE",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive (Red)",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "usb_drive_3",
+      "name": "USB Drive (Black)",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "usb_drive_4",
+      "name": "USB Drive (Unmarked)",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "usb_drive_5",
+      "name": "USB Drive (Unmarked)",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "admin_computer_1",
+      "name": "Admin Computer",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "CompTech",
+        "model_number": "AdminPro-1000",
+        "provides_abilities": [
+          "turn_on",
+          "download"
+        ]
+      },
+      "states": {
+        "is_on": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "admin_chair_1",
+      "name": "Admin Chair",
+      "type": "FURNITURE",
+      "location_id": "in:admin_workstations",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "leather"
+      },
+      "states": {}
+    },
+    {
+      "id": "voter_logs_1",
+      "name": "Voter Logs",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "manila"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:admin_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tech_cabinet_1",
+      "name": "Locked Tech Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:tech_maintenance_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Biometric Scanner Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:tech_cabinet_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "brand": "SecureTech",
+        "model_number": "CalibTool-200",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "admin_keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "in:tech_maintenance_closet",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "rfid_enabled": true,
+        "serial_number": "AK-001"
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_battery_1",
+      "name": "Backup Server Battery",
+      "type": "ITEM",
+      "location_id": "in:tech_maintenance_closet",
+      "properties": {
+        "weight": 50.0,
+        "color": "black",
+        "brand": "PowerTech",
+        "model_number": "BB-5000",
+        "fragility": "high",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:tech_maintenance_closet",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "brand": "CleanMaster",
+        "model_number": "VC-200",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "voting_booth_1",
+      "name": "Public Voting Booth",
+      "type": "FURNITURE",
+      "location_id": "in:public_voting_booths",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "voting_tablet_1",
+      "name": "Voting Tablet",
+      "type": "ITEM",
+      "location_id": "in:voting_booth_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "VoteTech",
+        "model_number": "VoteTab-100",
+        "provides_abilities": [
+          "turn_on",
+          "download"
+        ]
+      },
+      "states": {
+        "is_on": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "privacy_screen_1",
+      "name": "Privacy Screen",
+      "type": "ITEM",
+      "location_id": "on:voting_booth_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "frosted",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "voting_instructions_1",
+      "name": "Voting Instructions",
+      "type": "ITEM",
+      "location_id": "in:voting_booth_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    }
+  ],
+  "abilities": [
+    "download",
+    "drink",
+    "open",
+    "turn_on",
+    "unstaple",
+    "vacuum",
+    "close"
+  ]
+}

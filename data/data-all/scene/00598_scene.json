@@ -1,0 +1,754 @@
+{
+  "description": "A high-pressure engineering bay aboard a nuclear-powered submarine, designed for maintenance, diagnostics, and emergency response. The confined, densely packed environment demands collaboration with heavy machinery, safety protocols, and critical systems under time pressure.",
+  "rooms": [
+    {
+      "id": "reactor_monitoring_station",
+      "name": "Reactor Monitoring Station",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "primary_coolant_loop_access",
+        "steam_generator_turbine_room"
+      ]
+    },
+    {
+      "id": "primary_coolant_loop_access",
+      "name": "Primary Coolant Loop Access",
+      "properties": {
+        "type": "maintenance_corridor"
+      },
+      "connected_to_room_ids": [
+        "reactor_monitoring_station",
+        "tool_supply_locker"
+      ]
+    },
+    {
+      "id": "steam_generator_turbine_room",
+      "name": "Steam Generator & Turbine Room",
+      "properties": {
+        "type": "engine_room"
+      },
+      "connected_to_room_ids": [
+        "reactor_monitoring_station",
+        "tool_supply_locker"
+      ]
+    },
+    {
+      "id": "tool_supply_locker",
+      "name": "Tool & Supply Locker",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "primary_coolant_loop_access",
+        "steam_generator_turbine_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_control_console_1",
+      "name": "Central Control Console",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CC-2000",
+        "brand": "NavalTech"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "radiation_shielding_door_1",
+      "name": "Radiation Shielding Door",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "lead_glass",
+        "thickness": "10cm"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "primary_coolant_pressure_gauge_1",
+      "name": "Primary Coolant Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "current_pressure": 2200,
+        "unit": "psi",
+        "max_pressure": 2500
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_scram_button_1",
+      "name": "Emergency SCRAM Button",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "key_id": "scram_key_1"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "TechSys",
+        "model": "DT-450",
+        "current_warning": "AUX COOLANT PUMP OFFLINE"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "clipboard_reactor_logs_1",
+      "name": "Clipboard with Reactor Logs",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "metal",
+        "last_entry": "Valve 7B inspected, minor corrosion detected"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "desk_fan_1",
+      "name": "Desk Fan",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "gray",
+        "brand": "AirFlow",
+        "speed": "medium"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_thermos_1",
+      "name": "Coffee Thermos",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "silver",
+        "brand": "ThermoKing",
+        "content": "coffee",
+        "volume": "half_full",
+        "temperature": "lukewarm",
+        "label": "LT. HARRIS"
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:reactor_monitoring_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "message": "REMEMBER: 3-MINUTE RADIATION ALARM RESPONSE DRILLS WEEKLY"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "metal_cabinet_1",
+      "name": "Dented Metal Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "dented"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_certificate_1",
+      "name": "Outdated Calibration Certificate",
+      "type": "ITEM",
+      "location_id": "in:reactor_monitoring_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "expiry_date": "6 months ago"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "high_pressure_coolant_pipes_1",
+      "name": "High-Pressure Coolant Pipes",
+      "type": "FURNITURE",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "size": [
+          4.0,
+          0.1,
+          0.1
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel",
+        "insulation": "yellow",
+        "warning": "HOT ZONE"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "maintenance_catwalk_1",
+      "name": "Maintenance Catwalk",
+      "type": "FURNITURE",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "size": [
+          3.0,
+          0.6,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_coolant_valve_7b_1",
+      "name": "Leaking Coolant Valve (7B)",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 3.0,
+        "color": "blue",
+        "tag": "corrosion",
+        "is_leaking": true,
+        "requires_wrench": true
+      },
+      "states": {}
+    },
+    {
+      "id": "radiation_sensor_panel_1",
+      "name": "Radiation Sensor Panel",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 2.5,
+        "color": "gray",
+        "status": "flashing_amber",
+        "location": "Pipe Junction C"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "manual_override_pump_crank_1",
+      "name": "Manual Override Pump Crank",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 15.0,
+        "color": "red",
+        "requires_two_agents": true
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": "sealing_tape, funnel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealing_tape_1",
+      "name": "Half-Used Roll of Sealing Tape",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "gray",
+        "remaining": "50%",
+        "provides_abilities": [
+          "combine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dented_funnel_1",
+      "name": "Dented Funnel",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "condition": "dented",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_eyewash_station_1",
+      "name": "Emergency Eyewash Station",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 10.0,
+        "color": "white",
+        "condition": "dusty",
+        "last_inspection": "faded",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_pipe_1",
+      "name": "Graffiti on Pipe",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 0.1,
+        "message": "Kilroy Was Here - '78"
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "mismatched_bolts_1",
+      "name": "Mismatched Bolts",
+      "type": "ITEM",
+      "location_id": "in:primary_coolant_loop_access",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "quantity": 5
+      },
+      "states": {
+        "is_combined": false
+      }
+    },
+    {
+      "id": "steam_turbine_assembly_1",
+      "name": "Steam Turbine Assembly",
+      "type": "FURNITURE",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "rpm": 1200
+      },
+      "states": {
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "condensation_drain_tray_1",
+      "name": "Condensation Drain Tray",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "metal",
+        "condition": "partially_clogged"
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "faulty_pressure_relief_valve_1",
+      "name": "Faulty Pressure Relief Valve",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "brass",
+        "status": "hissing",
+        "requires_replacement": true
+      },
+      "states": {
+        "is_welded": false
+      }
+    },
+    {
+      "id": "secondary_loop_flow_meter_1",
+      "name": "Secondary Loop Flow Meter",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "current_flow": 85,
+        "unit": "%",
+        "is_stuck": true
+      },
+      "states": {}
+    },
+    {
+      "id": "turbine_access_panel_1",
+      "name": "Turbine Access Panel",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "bolts": 4,
+        "stripped_bolts": 1
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "grease_stained_workbench_1",
+      "name": "Grease-Stained Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "grease_stained"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "half_disassembled_pump_1",
+      "name": "Half-Disassembled Pump",
+      "type": "ITEM",
+      "location_id": "on:grease_stained_workbench_1",
+      "properties": {
+        "weight": 7.0,
+        "color": "metal",
+        "status": "disassembled"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "steam_vent_control_wheel_1",
+      "name": "Steam Vent Control Wheel",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "requires_two_hands": true
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "rusty_coffee_can_1",
+      "name": "Rusty Coffee Can",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "rust",
+        "contents": "nuts_and_bolts"
+      },
+      "states": {
+        "is_combined": false
+      }
+    },
+    {
+      "id": "frayed_rope_1",
+      "name": "Frayed Rope",
+      "type": "ITEM",
+      "location_id": "in:steam_generator_turbine_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "condition": "frayed"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "tool_locker_1",
+      "name": "Tool Locker",
+      "type": "FURNITURE",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "combination"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "specialized_wrench_1",
+      "name": "Specialized Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_locker_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "size": "large",
+        "provides_abilities": [
+          "weld",
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "radiation_meter_1",
+      "name": "Radiation Meter",
+      "type": "ITEM",
+      "location_id": "in:tool_locker_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "brand": "RadSafe",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_repair_kit_1",
+      "name": "Emergency Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:tool_locker_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "contents": "gaskets, sealant, bolts",
+        "provides_abilities": [
+          "combine",
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scram_key_1",
+      "name": "SCRAM Key",
+      "type": "ITEM",
+      "location_id": "in:tool_locker_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "brass",
+        "purpose": "unlock_emergency_scram"
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "weight": 30.0,
+        "color": "beige",
+        "brand": "CopyMaster",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "wood",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "weight": 0.7,
+        "color": "blue",
+        "content": "cleaner",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:tool_locker_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "weight": 0.4,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_container_1",
+      "name": "Water Container",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_locker",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "volume": "5L",
+        "content": "water",
+        "provides_abilities": [
+          "water",
+          "spill"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "combine",
+    "cool",
+    "copy",
+    "copy_file",
+    "drain",
+    "install",
+    "open",
+    "raise",
+    "spill",
+    "spray",
+    "sweep",
+    "take_down",
+    "turn_off",
+    "turn_on",
+    "water",
+    "weld",
+    "close"
+  ]
+}

@@ -1,0 +1,566 @@
+{
+  "description": "A high-density molecular parasitology lab focused on malaria research, featuring specialized zones for wet lab work, data analysis, specimen storage, and supervisor oversight. The lab is mid-experiment with numerous interactive objects and collaborative challenges.",
+  "rooms": [
+    {
+      "id": "wet_lab",
+      "name": "Wet Lab",
+      "properties": {
+        "type": "laboratory",
+        "atmosphere": "sterile but lived-in"
+      },
+      "connected_to_room_ids": [
+        "computer_station",
+        "specimen_storage",
+        "supervisor_office"
+      ]
+    },
+    {
+      "id": "computer_station",
+      "name": "Computer & Data Analysis Station",
+      "properties": {
+        "type": "workspace",
+        "atmosphere": "less clinical"
+      },
+      "connected_to_room_ids": [
+        "wet_lab"
+      ]
+    },
+    {
+      "id": "specimen_storage",
+      "name": "Specimen Storage & Prep Area",
+      "properties": {
+        "type": "storage",
+        "atmosphere": "cold, faint formaldehyde scent"
+      },
+      "connected_to_room_ids": [
+        "wet_lab"
+      ]
+    },
+    {
+      "id": "supervisor_office",
+      "name": "Supervisor’s Office",
+      "properties": {
+        "type": "office",
+        "atmosphere": "academic"
+      },
+      "connected_to_room_ids": [
+        "wet_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dna_extraction_workbench_1",
+      "name": "DNA Extraction Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "embedded_features": [
+          "UV sterilizer",
+          "micropipette rack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pcr_machine_1",
+      "name": "PCR Machine with Error",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "model": "ThermoCycler XT",
+        "status": "ERROR: LID TEMP"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Refrigerated Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "requires_collaboration": true,
+        "calibration_status": "precise"
+      },
+      "states": {}
+    },
+    {
+      "id": "lizard_sample_tray_1",
+      "name": "Lizard-237 Sample Tray",
+      "type": "ITEM",
+      "location_id": "on:dna_extraction_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "content": "western fence lizard liver sample",
+        "label": "P. mexicanum - LOW VARIANCE?",
+        "color": "clear",
+        "seal_status": "intact"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "primer_vial_rack_1",
+      "name": "Cytochrome b Primer Set",
+      "type": "ITEM",
+      "location_id": "on:dna_extraction_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "vial_count": 5,
+        "cap_colors": [
+          "blue",
+          "red",
+          "red",
+          "red",
+          "red"
+        ],
+        "viability": [
+          "viable",
+          "expired",
+          "contaminated",
+          "expired",
+          "contaminated"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Broken Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "error_message": "SEAL FAILURE"
+      },
+      "states": {
+        "is_open": true,
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Camera",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "mode": "low-power",
+        "brand": "Nikon"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "fill_level": "¾ full",
+        "contains": [
+          "discarded gloves"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "tri_monitor_setup_1",
+      "name": "Tri-Monitor Setup",
+      "type": "FURNITURE",
+      "location_id": "in:computer_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          0.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "screen_contents": [
+          "gene sequence alignment",
+          "raw sequencing data",
+          "email draft"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Research Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:computer_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.02
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "content": "CYTOCHROME B = SPECIES MARKER??"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_1",
+      "name": "ST. DENIS THESIS BACKUP",
+      "type": "ITEM",
+      "location_id": "on:tri_monitor_setup_1",
+      "properties": {
+        "weight": 0.4,
+        "status": "plugged in but not mounted",
+        "capacity": "2TB"
+      },
+      "states": {}
+    },
+    {
+      "id": "handwritten_notes_1",
+      "name": "Coffee-Stained Notes",
+      "type": "ITEM",
+      "location_id": "on:tri_monitor_setup_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "No silent mutations—confirm with Schall.",
+        "paper_type": "lined"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:computer_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "status": "out of tape",
+        "jam": "half-printed label"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "specimen_fridge_1",
+      "name": "Walk-in Specimen Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "size": [
+          2.5,
+          2.0,
+          2.2
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "requires_collaboration": true,
+        "temperature": "4°C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dissection_table_1",
+      "name": "Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "stainless steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "lizard_specimen_1",
+      "name": "Pinned Lizard Specimen",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 0.7,
+        "species": "western fence lizard",
+        "preservation": "formaldehyde"
+      },
+      "states": {}
+    },
+    {
+      "id": "supervisor_desk_1",
+      "name": "Cluttered Supervisor Desk",
+      "type": "FURNITURE",
+      "location_id": "in:supervisor_office",
+      "properties": {
+        "size": [
+          1.6,
+          0.8,
+          0.75
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "contents": [
+          "research journals",
+          "awards",
+          "office supplies"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blue_paperweight_1",
+      "name": "Decorative Blue Paperweight",
+      "type": "ITEM",
+      "location_id": "on:supervisor_desk_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "blue",
+        "material": "glass",
+        "purpose": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_gasket_1",
+      "name": "Autoclave Spare Gasket",
+      "type": "ITEM",
+      "location_id": "in:supervisor_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "rubber",
+        "compatibility": "fits autoclave_1"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_key_1",
+      "name": "Supervisor Desk Key",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.05,
+        "type": "small brass key",
+        "fits": "supervisor_desk_1"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "weight": 0.8,
+        "size": "large",
+        "pockets": [
+          "left",
+          "right"
+        ],
+        "contents": [
+          "desk_key_1"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:supervisor_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "pieces": 6,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "maintenance_tools_1",
+      "name": "Lab Maintenance Toolkit",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "weight": 5.0,
+        "contents": [
+          "wrench",
+          "pliers",
+          "multimeter"
+        ],
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_microscope_1",
+      "name": "Backup Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 14.0,
+        "is_container": false,
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Microfiber Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unfolded_poster_1",
+      "name": "Safety Protocol Poster",
+      "type": "ITEM",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "weight": 0.2,
+        "title": "PROTOCOL FOR SPILLS (Revised 2018)",
+        "condition": "faded"
+      },
+      "states": {
+        "is_folded": true
+      }
+    },
+    {
+      "id": "lab_mug_1",
+      "name": "World's Okayest Geneticist Mug",
+      "type": "ITEM",
+      "location_id": "on:dna_extraction_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "contents": [
+          "pens"
+        ],
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_tip_box_1",
+      "name": "Unopened Pipette Tip Box",
+      "type": "ITEM",
+      "location_id": "in:wet_lab",
+      "properties": {
+        "weight": 0.5,
+        "status": "unopened",
+        "location": "back of shelf"
+      },
+      "states": {}
+    },
+    {
+      "id": "starbucks_cup_1",
+      "name": "Anonymous Starbucks Cup",
+      "type": "ITEM",
+      "location_id": "on:tri_monitor_setup_1",
+      "properties": {
+        "weight": 0.3,
+        "content": "coffee",
+        "inscription": "Katie?"
+      },
+      "states": {}
+    },
+    {
+      "id": "conference_lanyard_1",
+      "name": "Parasitology Symposium Lanyard",
+      "type": "ITEM",
+      "location_id": "on:tri_monitor_setup_1",
+      "properties": {
+        "weight": 0.1,
+        "event": "Annual Parasitology Symposium 2023"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "deactivate",
+    "disassemble",
+    "dust",
+    "open",
+    "screw",
+    "unfold"
+  ]
+}

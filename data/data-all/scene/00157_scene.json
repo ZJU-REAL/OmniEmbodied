@@ -1,0 +1,538 @@
+{
+  "description": "A high-stakes survival research outpost in a quarantined zone, featuring a main lab, specimen storage, supply closet, observation deck, and break room, all understaffed and underfunded with numerous interactive and collaborative challenges.",
+  "rooms": [
+    {
+      "id": "main_lab",
+      "name": "Main Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "specimen_storage",
+        "supply_closet",
+        "observation_deck",
+        "break_room"
+      ]
+    },
+    {
+      "id": "specimen_storage",
+      "name": "Specimen Storage",
+      "properties": {
+        "type": "cold_room"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "bioreactor_array_1",
+      "name": "Central Bioreactor Array",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          3.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "model_number": "BR-5000"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "lab_table_1",
+      "name": "Anti-Glass Lab Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "anti_glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_centrifuge_1",
+      "name": "Broken Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "on:lab_table_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "model_number": "CF-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_k72_1",
+      "name": "Sample #K-72",
+      "type": "ITEM",
+      "location_id": "on:lab_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "label": "VOLATILE",
+        "volume": "half_full"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "fume_extractor_1",
+      "name": "Portable Fume Extractor",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "overheating",
+        "model_number": "FE-100"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "digital_logbook_1",
+      "name": "Digital Logbook",
+      "type": "ITEM",
+      "location_id": "on:lab_table_1",
+      "properties": {
+        "weight": 0.5,
+        "battery": 94,
+        "last_entry": "DAY 18 – OUT OF TIME"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "biohazard_poster_1",
+      "name": "Faded Biohazard Protocol Poster",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.1,
+        "condition": "peeled_off",
+        "text": "DO NOT PANIC"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Best Innovation 2038 Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "inscription": "Best Innovation 2038",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "walk_in_freezer_1",
+      "name": "Walk-In Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "temperature": -20,
+        "condition": "failing_seal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "specimen_rack_1",
+      "name": "Specimen Rack A",
+      "type": "FURNITURE",
+      "location_id": "in:walk_in_freezer_1",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "cryo_tank_gamma_1",
+      "name": "Cryo-Tank Gamma",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "content": "last_stable_virus_strain"
+      },
+      "states": {}
+    },
+    {
+      "id": "temperature_monitor_1",
+      "name": "Broken Temperature Monitor",
+      "type": "ITEM",
+      "location_id": "on:specimen_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "display": "ERR",
+        "model_number": "TM-300"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "weight": 3.0,
+        "condition": "unopened",
+        "expiry_date": "passed"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_manual_1",
+      "name": "Outdated Safety Manual",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "weight": 0.5,
+        "condition": "water_damaged",
+        "page": "hypothermia_risks"
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti on Wall",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage",
+      "properties": {
+        "weight": 0.1,
+        "text": "J.L. WAS HERE"
+      },
+      "states": {}
+    },
+    {
+      "id": "supply_shelf_1",
+      "name": "Supply Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolkit_1",
+      "name": "Professional Toolkit",
+      "type": "ITEM",
+      "location_id": "on:supply_shelf_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "loosen",
+          "seal",
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Small Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:supply_shelf_1",
+      "properties": {
+        "weight": 0.2,
+        "size": "small",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Backup Keycard",
+      "type": "ITEM",
+      "location_id": "in:trophy_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Observation Monitor",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 10.0,
+        "size": "large",
+        "model_number": "OM-400"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_alarm_1",
+      "name": "Jammed Emergency Alarm",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 3.0,
+        "condition": "jammed"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "holoboard_1",
+      "name": "Flickering Holoboard",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 8.0,
+        "condition": "flickering",
+        "model_number": "HB-200"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "locked_safe_1",
+      "name": "Locked Safe",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "lock_type": "digital_keypad"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 4.0,
+        "condition": "stained",
+        "model_number": "CM-100"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "blue_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:lab_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "scalpel_1",
+      "name": "Scalpel",
+      "type": "ITEM",
+      "location_id": "on:supply_shelf_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "on:supply_shelf_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 2.0,
+        "type": "bubble_wrap",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "on:lab_table_1",
+      "properties": {
+        "weight": 1.0,
+        "model_number": "KB-101",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Portable Heater",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 3.0,
+        "model_number": "PH-200",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soap_1",
+      "name": "Soap",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "brand": "CleanAll",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "heat_up",
+    "loosen",
+    "open",
+    "pack",
+    "plug_in",
+    "polish",
+    "seal",
+    "sync",
+    "turn_on",
+    "type",
+    "unlock",
+    "wash",
+    "close"
+  ]
+}

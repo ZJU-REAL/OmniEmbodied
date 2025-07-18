@@ -1,0 +1,701 @@
+{
+  "description": "A bustling university IT distribution center during the rollout of new Windows 8 tablets and ultrabooks to students, featuring a hybrid space of high-tech supply depot, device configuration lab, and troubleshooting workshop.",
+  "rooms": [
+    {
+      "id": "receiving_inventory_zone",
+      "name": "Receiving & Inventory Zone",
+      "properties": {
+        "type": "industrial",
+        "lighting": "cold_industrial",
+        "floor_markings": "forklift"
+      },
+      "connected_to_room_ids": [
+        "configuration_lab"
+      ]
+    },
+    {
+      "id": "configuration_lab",
+      "name": "Configuration Lab",
+      "properties": {
+        "type": "lab",
+        "lighting": "sterile_well_lit",
+        "features": [
+          "workstations",
+          "server_rack"
+        ]
+      },
+      "connected_to_room_ids": [
+        "receiving_inventory_zone",
+        "qa_testing_corner",
+        "student_pickup_counter"
+      ]
+    },
+    {
+      "id": "qa_testing_corner",
+      "name": "QA Testing Corner",
+      "properties": {
+        "type": "testing",
+        "soundproofing": "yes",
+        "features": [
+          "faraday_cage",
+          "signal_jammers"
+        ]
+      },
+      "connected_to_room_ids": [
+        "configuration_lab"
+      ]
+    },
+    {
+      "id": "student_pickup_counter",
+      "name": "Student Pickup Counter",
+      "properties": {
+        "type": "service",
+        "traffic": "high",
+        "features": [
+          "digital_kiosk",
+          "reinforced_counter"
+        ]
+      },
+      "connected_to_room_ids": [
+        "configuration_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_shelving_unit_1",
+      "name": "Steel Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray",
+        "max_load": 500.0
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Hydraulic Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.3
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "condition": "leaking_oil",
+        "brand": "Toyota"
+      },
+      "states": {
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Zebra",
+        "battery_status": "low",
+        "display_message": "Low Battery"
+      },
+      "states": {}
+    },
+    {
+      "id": "samsung_tablet_crate_1",
+      "name": "Sealed Samsung Tablet Crate",
+      "type": "FURNITURE",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE – DO NOT STACK"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shipping_manifest_1",
+      "name": "Master Shipping Manifest",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "note": "3/10 crates missing – escalate to vendor"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Rolling Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "color": "red",
+        "wheels": 4
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cordless_drill_1",
+      "name": "Cordless Drill",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "DeWalt",
+        "battery_level": 80,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "box_cutter_1",
+      "name": "Box Cutter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "blade_status": "sharp",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_wrist_strap_1",
+      "name": "Anti-Static Wrist Strap",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "length": "adjustable"
+      },
+      "states": {}
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Dented Mini-Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "condition": "dented",
+        "light_status": "flickering"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety First Poster",
+      "type": "ITEM",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "condition": "torn",
+        "content": "cartoon forklift accident"
+      },
+      "states": {}
+    },
+    {
+      "id": "windows_mug_1",
+      "name": "Windows 8 Beta Tester Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "color": "white",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "modular_workstation_1",
+      "name": "Modular Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:configuration_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model": "UltraSharp"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "dell_monitor_1",
+      "name": "24\" Dell Monitor",
+      "type": "ITEM",
+      "location_id": "on:modular_workstation_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Dell",
+        "model": "UltraSharp U2415"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "logitech_keyboard_1",
+      "name": "Logitech K350 Keyboard",
+      "type": "ITEM",
+      "location_id": "on:modular_workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Logitech",
+        "model": "K350",
+        "is_wireless": true,
+        "battery_level": 60
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Floor-Standing Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:configuration_lab",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "brand": "APC",
+        "led_status": "blinking",
+        "note": "PATCH SERVER #3 – PRIORITY"
+      },
+      "states": {}
+    },
+    {
+      "id": "nokia_lumia_1",
+      "name": "Nokia Lumia 900 Phone",
+      "type": "ITEM",
+      "location_id": "on:modular_workstation_1",
+      "properties": {
+        "weight": 0.2,
+        "brand": "Nokia",
+        "model": "Lumia 900",
+        "condition": "cracked_screen",
+        "case_color": "blue",
+        "sticker": "Demo Unit",
+        "sim_tray": "missing"
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_terminal_1",
+      "name": "Locked Admin Terminal",
+      "type": "ITEM",
+      "location_id": "on:modular_workstation_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Dell",
+        "model": "OptiPlex",
+        "display_message": "Group Policy Update in Progress – 73%"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:configuration_lab",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Brother",
+        "tape_status": "out",
+        "error_light": "blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_hub_1",
+      "name": "USB Hub",
+      "type": "ITEM",
+      "location_id": "on:modular_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Anker",
+        "ports": 7,
+        "condition": "overloaded",
+        "port_damage": "melted"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Complaints",
+      "type": "ITEM",
+      "location_id": "in:configuration_lab",
+      "properties": {
+        "weight": 10.0,
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "content": "Wi-Fi keeps dropping! circled in red"
+      },
+      "states": {}
+    },
+    {
+      "id": "windows_banner_1",
+      "name": "Windows 8 Promotional Banner",
+      "type": "ITEM",
+      "location_id": "in:configuration_lab",
+      "properties": {
+        "weight": 1.0,
+        "material": "vinyl",
+        "condition": "partially_detached"
+      },
+      "states": {}
+    },
+    {
+      "id": "faraday_cage_1",
+      "name": "Faraday Cage Testing Booth",
+      "type": "FURNITURE",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "door_status": "ajar",
+        "humming": "RF interference"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Imaging Camera",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 1.8,
+        "brand": "FLIR",
+        "placement": "precarious"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "failed_tablet_1",
+      "name": "Failed Samsung Tablet",
+      "type": "ITEM",
+      "location_id": "in:faraday_cage_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Samsung",
+        "display": "BSOD",
+        "note": "Corrupt driver – reimage?"
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "spectrum_analyzer_1",
+      "name": "Spectrum Analyzer",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Keysight",
+        "graph": "erratic Wi-Fi signal spikes",
+        "keycard_location": "under"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "access_level": "admin",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Weller",
+        "temperature": "warm",
+        "mat_condition": "scorched",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "refurbished_stickers_1",
+      "name": "Certified Refurbished Stickers",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 0.1,
+        "quantity": 50,
+        "adhesive": "failing"
+      },
+      "states": {}
+    },
+    {
+      "id": "quiet_zone_sign_1",
+      "name": "Quiet Zone Sign",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "addition": "OR ELSE in Sharpie"
+      },
+      "states": {}
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "I ❤ Active Directory Stress Ball",
+      "type": "ITEM",
+      "location_id": "in:qa_testing_corner",
+      "properties": {
+        "weight": 0.15,
+        "color": "red",
+        "stains": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_counter_1",
+      "name": "Reinforced Steel Transaction Counter",
+      "type": "FURNITURE",
+      "location_id": "in:student_pickup_counter",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "condition": "scratched",
+        "cause": "backpack zippers"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_kiosk_1",
+      "name": "Digital Kiosk",
+      "type": "ITEM",
+      "location_id": "on:steel_counter_1",
+      "properties": {
+        "weight": 15.0,
+        "brand": "HP",
+        "screen_condition": "cracked",
+        "video_loop": "Windows 8 tutorial"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Check-in Sheets",
+      "type": "ITEM",
+      "location_id": "on:steel_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "last_entry": "J. Smith – iPad confiscated, policy violation"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "lost_and_found_bin_1",
+      "name": "Lost and Found Bin",
+      "type": "FURNITURE",
+      "location_id": "in:student_pickup_counter",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "contents": [
+          "wireless_mouse_1",
+          "dented_nokia_1"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wireless_mouse_1",
+      "name": "Wireless Mouse",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "brand": "Logitech",
+        "condition": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "dented_nokia_1",
+      "name": "Dented Nokia Phone",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_bin_1",
+      "properties": {
+        "weight": 0.15,
+        "brand": "Nokia",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "receipt_printer_1",
+      "name": "Receipt Printer",
+      "type": "ITEM",
+      "location_id": "on:steel_counter_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Epson",
+        "paper_status": "out",
+        "error_code": "flashing"
+      },
+      "states": {}
+    },
+    {
+      "id": "handheld_scanner_1",
+      "name": "Handheld Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:steel_counter_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Honeywell",
+        "condition": "dropped",
+        "repair": "duct tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "corkboard_1",
+      "name": "Corkboard with Memos",
+      "type": "ITEM",
+      "location_id": "in:student_pickup_counter",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          1.0,
+          0.7,
+          0.05
+        ],
+        "notice": "BYOD POLICY UPDATES – REVIEW IMMEDIATELY"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_cactus_1",
+      "name": "Dead Potted Cactus",
+      "type": "ITEM",
+      "location_id": "on:steel_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "pot_material": "clay",
+        "holder": "Motivational Plant of the Month"
+      },
+      "states": {
+        "is_planted": false
+      }
+    }
+  ],
+  "abilities": [
+    "drink",
+    "heat_up",
+    "load",
+    "open",
+    "screw",
+    "turn_on",
+    "unlock",
+    "close"
+  ]
+}

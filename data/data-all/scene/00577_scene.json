@@ -1,0 +1,680 @@
+{
+  "description": "A clandestine Horde research station hidden within the ruins of an abandoned mage tower, specializing in the extraction and refinement of necromantic reagents. The environment is hazardous and requires collaboration due to volatile substances, heavy containers, and cursed artifacts.",
+  "rooms": [
+    {
+      "id": "extraction_chamber",
+      "name": "Extraction Chamber",
+      "properties": {
+        "type": "industrial",
+        "hazard_level": "high"
+      },
+      "connected_to_room_ids": [
+        "alchemy_lab"
+      ]
+    },
+    {
+      "id": "alchemy_lab",
+      "name": "Alchemy Lab",
+      "properties": {
+        "type": "laboratory",
+        "hazard_level": "extreme"
+      },
+      "connected_to_room_ids": [
+        "extraction_chamber",
+        "secure_vault",
+        "field_prep_station"
+      ]
+    },
+    {
+      "id": "secure_vault",
+      "name": "Secure Vault",
+      "properties": {
+        "type": "storage",
+        "security_level": "maximum"
+      },
+      "connected_to_room_ids": [
+        "alchemy_lab"
+      ]
+    },
+    {
+      "id": "field_prep_station",
+      "name": "Field Prep Station",
+      "properties": {
+        "type": "staging",
+        "hazard_level": "moderate"
+      },
+      "connected_to_room_ids": [
+        "alchemy_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dissection_table_1",
+      "name": "Steel Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "rune_inscription": "suppression"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "bone_grinder_1",
+      "name": "Bone-Grinding Apparatus",
+      "type": "FURNITURE",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "iron",
+        "mechanism": "hand-crank"
+      },
+      "states": {
+        "is_ground": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "containment_cabinet_1",
+      "name": "Reinforced Containment Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "high"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "dreadbone_spine_1",
+      "name": "Dreadbone Spine Sample S-7",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "ivory",
+        "rune_color": "blue",
+        "energy_level": "high",
+        "condition": "crackling"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "dreadbone_spine_2",
+      "name": "Dreadbone Spine Sample S-8",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 3.2,
+        "color": "ivory",
+        "rune_color": "red",
+        "energy_level": "low",
+        "condition": "stable"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "dreadbone_spine_3",
+      "name": "Dreadbone Spine Sample S-9",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 3.7,
+        "color": "ivory",
+        "rune_color": "green",
+        "energy_level": "medium",
+        "condition": "unstable"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "grinder_power_lever_1",
+      "name": "Grinder Power Lever",
+      "type": "ITEM",
+      "location_id": "on:bone_grinder_1",
+      "properties": {
+        "weight": 12.0,
+        "material": "iron",
+        "requires_agents": 2
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "hazardous_waste_bin_1",
+      "name": "Hazardous Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "steel",
+        "contents": "failed_extractions"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "wheeled_cart_1",
+      "name": "Wheeled Cart",
+      "type": "FURNITURE",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.7,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "squeaky_axle"
+      },
+      "states": {
+        "is_loaded": true
+      }
+    },
+    {
+      "id": "rune_scalpel_1",
+      "name": "Rune-Inscribed Scalpel",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "glow": "faint",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "leather_apron_1",
+      "name": "Sturdy Leather Apron",
+      "type": "ITEM",
+      "location_id": "in:extraction_chamber",
+      "properties": {
+        "weight": 1.5,
+        "material": "leather",
+        "condition": "splattered",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "alchemy_workstation_1",
+      "name": "Large Alchemical Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:alchemy_lab",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          0.9
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "wood",
+        "clutter_level": "high"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "cooling_unit_1",
+      "name": "Magical Cooling Unit",
+      "type": "FURNITURE",
+      "location_id": "in:alchemy_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "enchanted_steel",
+        "power_source": "magic_crystal"
+      },
+      "states": {
+        "is_on": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "iron_cauldron_1",
+      "name": "Heavy Iron Cauldron",
+      "type": "FURNITURE",
+      "location_id": "in:alchemy_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "iron",
+        "requires_agents": 2
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "distillation_rig_1",
+      "name": "Active Distillation Rig",
+      "type": "FURNITURE",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "glass",
+        "valves": 3
+      },
+      "states": {
+        "is_twisted": false
+      }
+    },
+    {
+      "id": "scourgebane_draught_1",
+      "name": "Scourgebane Draught Prototype",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "glow": "bright",
+        "condition": "overcharged"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "scourgebane_draught_2",
+      "name": "Scourgebane Draught Prototype",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "glow": "dim",
+        "condition": "stable"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "refining_manual_1",
+      "name": "Spinal Dust Refining Manual",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "parchment",
+        "open_page": "warning"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "mortar_pestle_1",
+      "name": "Mortar and Pestle",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "stone",
+        "stain": "dark_purple",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "magic_firestarter_1",
+      "name": "Magical Firestarter",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "enchanted_metal",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dual_locked_safe_1",
+      "name": "Dual-Locked Arcane Safe",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "arcane_steel",
+        "locks": 2
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "warded_shelf_1",
+      "name": "Warded Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "oak",
+        "ward_strength": "high"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "master_vial_1",
+      "name": "Master Vial of Spinal Essence",
+      "type": "ITEM",
+      "location_id": "in:dual_locked_safe_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "neon_green",
+        "glow": "ominous",
+        "requires_hands": 2
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "research_ledger_1",
+      "name": "Magistrix Aminel’s Research Ledger",
+      "type": "ITEM",
+      "location_id": "on:warded_shelf_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "leather",
+        "lock_type": "cipher"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "ITEM",
+      "location_id": "on:dual_locked_safe_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "light": "flashing_red"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "enchanted_broom_1",
+      "name": "Enchanted Broom",
+      "type": "ITEM",
+      "location_id": "in:secure_vault",
+      "properties": {
+        "weight": 2.5,
+        "material": "wood",
+        "enchantment": "autonomous_sweeping",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drop_off_crate_1",
+      "name": "Reinforced Drop-Off Crate",
+      "type": "FURNITURE",
+      "location_id": "in:field_prep_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "scuffed"
+      },
+      "states": {
+        "is_loaded": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "bounty_board_1",
+      "name": "Bounty Board",
+      "type": "FURNITURE",
+      "location_id": "in:field_prep_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.1,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "cork",
+        "notices": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "bone_sample_1",
+      "name": "Unprocessed Bone Sample",
+      "type": "ITEM",
+      "location_id": "in:drop_off_crate_1",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dripping_ichor",
+        "source": "unknown"
+      },
+      "states": {
+        "is_sliced": false
+      }
+    },
+    {
+      "id": "adventurer_backpack_1",
+      "name": "Adventurer’s Backpack",
+      "type": "ITEM",
+      "location_id": "on:drop_off_crate_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "leather",
+        "contents": [
+          "half_eaten_ration",
+          "locked_diary"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "whetstone_1",
+      "name": "Whetstone",
+      "type": "ITEM",
+      "location_id": "on:drop_off_crate_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "stone",
+        "condition": "well_used",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cloth",
+        "stains": "multiple",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealing_wax_1",
+      "name": "Sealing Wax",
+      "type": "ITEM",
+      "location_id": "on:alchemy_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "wax",
+        "color": "red",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:adventurer_backpack_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "access_level": "medium",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_2",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:leather_apron_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "access_level": "high",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "magic_crystal_1",
+      "name": "Magic Crystal",
+      "type": "ITEM",
+      "location_id": "in:dual_locked_safe_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "glow": "bright",
+        "power_level": "high",
+        "provides_abilities": [
+          "wind_up"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "grind",
+    "heat_up",
+    "open",
+    "polish",
+    "raise",
+    "seal",
+    "slice",
+    "turn_on",
+    "twist",
+    "unload",
+    "unlock",
+    "wind_up"
+  ]
+}

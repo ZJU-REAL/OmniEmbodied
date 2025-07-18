@@ -1,0 +1,590 @@
+{
+  "description": "A competitive mini-golf course with themed zones (jungle, pirate cove, sci-fi) requiring urgent maintenance and event setup before a high-stakes tournament.",
+  "rooms": [
+    {
+      "id": "entrance_control_booth",
+      "name": "Entrance & Control Booth",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "jungle_zone",
+        "pirate_cove",
+        "sci_fi_zone",
+        "storage_workshop"
+      ]
+    },
+    {
+      "id": "jungle_zone",
+      "name": "Jungle Zone (Holes 1-4)",
+      "properties": {
+        "type": "themed_zone"
+      },
+      "connected_to_room_ids": [
+        "entrance_control_booth",
+        "pirate_cove"
+      ]
+    },
+    {
+      "id": "pirate_cove",
+      "name": "Pirate Cove (Holes 5-8)",
+      "properties": {
+        "type": "themed_zone"
+      },
+      "connected_to_room_ids": [
+        "jungle_zone",
+        "sci_fi_zone"
+      ]
+    },
+    {
+      "id": "sci_fi_zone",
+      "name": "Sci-Fi Zone (Holes 9-12)",
+      "properties": {
+        "type": "themed_zone"
+      },
+      "connected_to_room_ids": [
+        "pirate_cove",
+        "storage_workshop"
+      ]
+    },
+    {
+      "id": "storage_workshop",
+      "name": "Storage & Workshop",
+      "properties": {
+        "type": "utility"
+      },
+      "connected_to_room_ids": [
+        "entrance_control_booth",
+        "sci_fi_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "control_monitors_1",
+      "name": "Control Monitors",
+      "type": "FURNITURE",
+      "location_id": "in:entrance_control_booth",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Sony",
+        "model_number": "BVM-HX310"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Critical Issues Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:entrance_control_booth",
+      "properties": {
+        "size": [
+          1.2,
+          0.05,
+          0.9
+        ],
+        "weight": 12.5,
+        "is_container": true,
+        "color": "white",
+        "surface": "porcelain"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "whiteboard_marker_1",
+      "name": "Whiteboard Marker",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Expo",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "waterfall_hazard_1",
+      "name": "Leaking Waterfall Hazard",
+      "type": "FURNITURE",
+      "location_id": "in:jungle_zone",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "fiberglass",
+        "leak_rate": "moderate"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "rope_bridge_1",
+      "name": "Unhooked Rope Bridge",
+      "type": "FURNITURE",
+      "location_id": "in:jungle_zone",
+      "properties": {
+        "size": [
+          4.0,
+          1.2,
+          0.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "hemp",
+        "condition": "unstable"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "bridge_hook_1",
+      "name": "Replacement Bridge Hook",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 2.5,
+        "material": "steel",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ss_putter_1",
+      "name": "S.S. Putter Tilting Ship Deck",
+      "type": "FURNITURE",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "size": [
+          4.0,
+          2.0,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "wood",
+        "tilt_angle": 30
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "hydraulic_panel_1",
+      "name": "S.S. Putter Hydraulic Panel",
+      "type": "FURNITURE",
+      "location_id": "on:ss_putter_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "steel",
+        "resistance": 10.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "windmill_1",
+      "name": "Redan Hole 7's Windmill",
+      "type": "FURNITURE",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "wood",
+        "motor_status": "overheating"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "windmill_repair_kit_1",
+      "name": "Windmill Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 5.0,
+        "is_container": true,
+        "contents": "replacement_motor, grease_tube",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cannon_ball_launcher_1",
+      "name": "Jammed Cannon Ball Launcher",
+      "type": "FURNITURE",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "material": "iron",
+        "jam_angle": 45
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rust_remover_1",
+      "name": "Rust Remover Solution",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 1.2,
+        "volume": "500ml",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sand_trap_rake_1",
+      "name": "Clogged Sand Trap Rake",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 3.5,
+        "material": "metal",
+        "condition": "clogged",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "treasure_chest_1",
+      "name": "Loose-Hinged Treasure Chest",
+      "type": "FURNITURE",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "hinge_status": "loose"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "dew_spray_bottle_1",
+      "name": "Empty Dew Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.3,
+        "volume": "empty",
+        "label": "Hole 7 AM Conditioning",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "black_hole_vortex_1",
+      "name": "Malfunctioning Black Hole Vortex",
+      "type": "FURNITURE",
+      "location_id": "in:sci_fi_zone",
+      "properties": {
+        "size": [
+          1.8,
+          1.8,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "plastic",
+        "rotation_speed": "excessive"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "soundboard_1",
+      "name": "Broken Soundboard",
+      "type": "FURNITURE",
+      "location_id": "in:sci_fi_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "Yamaha",
+        "loop_status": "screeching"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "spare_turf_roll_1",
+      "name": "Spare Turf Roll",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 8.0,
+        "length": "5m",
+        "material": "artificial_grass",
+        "provides_abilities": [
+          "unroll"
+        ]
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Windmill Parts Toolbox",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 7.5,
+        "is_container": true,
+        "label": "WINDMILL PARTS – FRAGILE",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "slope_calibration_wedge_1",
+      "name": "Slope Calibration Wedge",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "angle": "adjustable",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Precarious Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "content": "half-full, cold",
+        "provides_abilities": [
+          "empty"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "kraken_painting_1",
+      "name": "Kraken Painting",
+      "type": "FURNITURE",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.8
+        ],
+        "weight": 3.0,
+        "material": "canvas",
+        "hiding": "windmill_controls"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "pirate_night_poster_1",
+      "name": "Pirate Night Live! Poster",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "obscuring": "windmill_controls"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "test_ball_1",
+      "name": "Neon Orange Test Ball",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.05,
+        "color": "neon_orange",
+        "behavior": "veers_left"
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_am_1",
+      "name": "AM Shift Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.6,
+        "label": "Turf Care",
+        "sticker": "faded_AM_Shift",
+        "trigger": "broken",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_pm_1",
+      "name": "PM Shift Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.6,
+        "label": "Turf Care",
+        "sticker": "PM_Shift",
+        "trigger": "functional",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rubber_parrot_1",
+      "name": "Dangling Rubber Parrot",
+      "type": "ITEM",
+      "location_id": "in:pirate_cove",
+      "properties": {
+        "weight": 0.3,
+        "material": "rubber",
+        "attachment": "one_wing"
+      },
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Tanita",
+        "max_capacity": "50kg",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Feather Duster",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 0.2,
+        "material": "feathers",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Microfiber Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:storage_workshop",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "cover",
+    "dust",
+    "empty",
+    "erase",
+    "open",
+    "paint",
+    "replace",
+    "stop_process",
+    "turn_on",
+    "uncover",
+    "unroll",
+    "water",
+    "weigh"
+  ]
+}

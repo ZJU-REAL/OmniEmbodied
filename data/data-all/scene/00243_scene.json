@@ -1,0 +1,618 @@
+{
+  "description": "A cutting-edge Veterinary Surgical Research and Rehabilitation Facility specializing in canine neutering procedures, post-operative care, and behavioral studies. The facility includes a Pre-Op Assessment Bay, Surgical Suite, Post-Op Recovery Ward, Behavioral Observation Lounge, Lab & Diagnostics, and Storage & Supply Room.",
+  "rooms": [
+    {
+      "id": "pre_op_assessment_bay",
+      "name": "Pre-Op Assessment Bay",
+      "properties": {
+        "type": "clinical"
+      },
+      "connected_to_room_ids": [
+        "surgical_suite"
+      ]
+    },
+    {
+      "id": "surgical_suite",
+      "name": "Surgical Suite",
+      "properties": {
+        "type": "sterile"
+      },
+      "connected_to_room_ids": [
+        "pre_op_assessment_bay",
+        "post_op_recovery_ward"
+      ]
+    },
+    {
+      "id": "post_op_recovery_ward",
+      "name": "Post-Op Recovery Ward",
+      "properties": {
+        "type": "recovery"
+      },
+      "connected_to_room_ids": [
+        "surgical_suite",
+        "behavioral_observation_lounge"
+      ]
+    },
+    {
+      "id": "behavioral_observation_lounge",
+      "name": "Behavioral Observation Lounge",
+      "properties": {
+        "type": "observation"
+      },
+      "connected_to_room_ids": [
+        "post_op_recovery_ward",
+        "lab_diagnostics"
+      ]
+    },
+    {
+      "id": "lab_diagnostics",
+      "name": "Lab & Diagnostics",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "behavioral_observation_lounge",
+        "storage_supply_room"
+      ]
+    },
+    {
+      "id": "storage_supply_room",
+      "name": "Storage & Supply Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "lab_diagnostics"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "examination_table_1",
+      "name": "Stainless-steel examination table",
+      "type": "FURNITURE",
+      "location_id": "in:pre_op_assessment_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "adjustable_height": true
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_weight_scale_1",
+      "name": "Digital weight scale",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 5.0,
+        "max_capacity": 100.0,
+        "precision": 0.1
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "blood_pressure_cuff_1",
+      "name": "Blood pressure cuff (Large Breed)",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.5,
+        "size": "large",
+        "needs_calibration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "rfid_scanner_1",
+      "name": "RFID scanner",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.8,
+        "battery_level": 75
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "hand_sanitizer_dispenser_1",
+      "name": "Automatic hand sanitizer dispenser",
+      "type": "ITEM",
+      "location_id": "in:pre_op_assessment_bay",
+      "properties": {
+        "weight": 2.0,
+        "fluid_level": "low"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "stool_1",
+      "name": "Stool with wheels",
+      "type": "FURNITURE",
+      "location_id": "in:pre_op_assessment_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "loose_caster": true
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_rack_1",
+      "name": "Clipboard rack",
+      "type": "FURNITURE",
+      "location_id": "in:pre_op_assessment_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.2,
+          0.3
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "contains": "vaccination_records"
+      },
+      "states": {}
+    },
+    {
+      "id": "surgical_table_1",
+      "name": "Hydraulic surgical table",
+      "type": "FURNITURE",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "anesthesia_machine_1",
+      "name": "Anesthesia machine",
+      "type": "FURNITURE",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 180.0,
+        "is_container": false,
+        "requires_collaboration": true,
+        "o2_level": 98,
+        "isoflurane_level": 1.5
+      },
+      "states": {}
+    },
+    {
+      "id": "sterile_toolkit_1",
+      "name": "Sealed sterile toolkit (Neutering Pack #9)",
+      "type": "ITEM",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "weight": 3.0,
+        "expiry_date": "tomorrow"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "electrocautery_pen_1",
+      "name": "Electrocautery pen",
+      "type": "ITEM",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "weight": 0.5,
+        "needs_refill": true,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defibrillator_1",
+      "name": "Emergency defibrillator",
+      "type": "ITEM",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "weight": 10.0,
+        "battery_level": 73
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "iv_stand_1",
+      "name": "IV stand",
+      "type": "FURNITURE",
+      "location_id": "in:surgical_suite",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "wheel_locked": true
+      },
+      "states": {}
+    },
+    {
+      "id": "instrument_tray_1",
+      "name": "Metal instrument tray",
+      "type": "ITEM",
+      "location_id": "on:surgical_table_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "recovery_kennel_1",
+      "name": "Heated recovery kennel",
+      "type": "FURNITURE",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "temperature_controlled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_cart_1",
+      "name": "Medicine cart",
+      "type": "FURNITURE",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "requires_fingerprint": true
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "diazepam_syringe_1",
+      "name": "Diazepam syringe (5mg)",
+      "type": "ITEM",
+      "location_id": "in:medicine_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "dose": "5mg",
+        "label": "For agitation only",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ice_pack_1",
+      "name": "Ice pack",
+      "type": "ITEM",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "weight": 0.5,
+        "is_leaking": true,
+        "needs_replacement": true
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_chart_1",
+      "name": "Patient chart (Dog #12)",
+      "type": "ITEM",
+      "location_id": "on:recovery_kennel_1",
+      "properties": {
+        "weight": 0.2,
+        "note": "Elevated temp—monitor for infection."
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital thermometer",
+      "type": "ITEM",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "weight": 0.3,
+        "last_reading": 38.5
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "blanket_warmer_1",
+      "name": "Blanket warmer",
+      "type": "ITEM",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "weight": 15.0
+      },
+      "states": {
+        "is_running": true,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "waste_bin_1",
+      "name": "Waste bin",
+      "type": "FURNITURE",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "is_overflowing": true
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:lab_diagnostics",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": false
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "in:lab_diagnostics",
+      "properties": {
+        "weight": 8.0,
+        "magnification": "1000x"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "blood_sample_storage_1",
+      "name": "Refrigerated blood sample storage",
+      "type": "FURNITURE",
+      "location_id": "in:lab_diagnostics",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:lab_diagnostics",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "Study #47: Aggression Reduction in Neutered Males"
+      },
+      "states": {}
+    },
+    {
+      "id": "surgical_kits_1",
+      "name": "Sealed surgical kits",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 5.0,
+        "quantity": 10
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "anesthetic_vials_1",
+      "name": "Anesthetic vials",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "label": "TESTED - 04/12",
+        "is_expired": false
+      },
+      "states": {}
+    },
+    {
+      "id": "anesthetic_vials_2",
+      "name": "Anesthetic vials",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "label": "",
+        "is_expired": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sterile_gauze_1",
+      "name": "Sterile gauze",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 0.5,
+        "quantity": 50
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked cabinet (controlled substances)",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "contains": "ketamine, opioids"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "overturned_stool_1",
+      "name": "Overturned stool",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "is_blocking_door": true
+      },
+      "states": {}
+    },
+    {
+      "id": "manual_vitals_kit_1",
+      "name": "Backup manual vitals kit",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 2.0,
+        "location": "Shelf B",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_iv_bag_1",
+      "name": "Leaking IV bag",
+      "type": "ITEM",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "weight": 1.0,
+        "is_leaking": true,
+        "is_draining": true
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_records_1",
+      "name": "Stack of patient records",
+      "type": "ITEM",
+      "location_id": "in:post_op_recovery_ward",
+      "properties": {
+        "weight": 3.0
+      },
+      "states": {
+        "is_covered": false,
+        "is_wet": true
+      }
+    },
+    {
+      "id": "misplaced_scalpel_1",
+      "name": "Misplaced scalpel",
+      "type": "ITEM",
+      "location_id": "in:behavioral_observation_lounge",
+      "properties": {
+        "weight": 0.1,
+        "is_sterilized": false,
+        "needs_disposal": true
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "cover",
+    "inject",
+    "open",
+    "plug_in",
+    "start_process",
+    "stop_process",
+    "unplug",
+    "close"
+  ]
+}

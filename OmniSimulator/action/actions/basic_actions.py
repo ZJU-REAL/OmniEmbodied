@@ -38,15 +38,15 @@ class GotoAction(BaseAction):
         if target_object:
             # 物体必须已被发现
             if not target_object.get('is_discovered', False):
-                return False, f"目标物体未被发现: {target_object.get('name', self.target_id)}"
+                return False, f"Target object not discovered: {target_object.get('name', self.target_id)}"
             # 必须在同一房间
             object_room = env_manager.get_object_room(self.target_id)
             if object_room != agent.location_id:
                 room = env_manager.get_room_by_id(object_room)
                 room_name = room.get('name', object_room) if room else object_room
-                return False, f"请先前往{room_name}，再靠近{target_object.get('name', self.target_id)}"
-        
-        return True, "动作有效"
+                return False, f"Must go to {room_name} first, then approach {target_object.get('name', self.target_id)}"
+
+        return True, "Action is valid"
     
     def _execute(self, agent, world_state, env_manager, agent_manager):
         """
@@ -70,23 +70,23 @@ class GotoAction(BaseAction):
         # 记录执行前的位置
         old_location_id = agent.location_id
         old_near_objects = set(agent.near_objects) if hasattr(agent, 'near_objects') else set()
-        
-        logger.debug(f"GOTO执行前 - 位置: {old_location_id}, 近邻物体数: {len(old_near_objects)}")
-        
+
+        logger.debug(f"GOTO execution before - location: {old_location_id}, nearby objects count: {len(old_near_objects)}")
+
         if target_room:
             # goto房间，调用move_agent
-            logger.debug(f"目标是房间: {self.target_id}")
+            logger.debug(f"Target is room: {self.target_id}")
             success = agent_manager.move_agent(agent.id, self.target_id)
             if success:
                 room_name = target_room.get('name', self.target_id)
                 # 确保near_objects在移动后被更新
                 if hasattr(agent, 'near_objects'):
                     agent.update_near_objects(env_manager=env_manager)
-                    logger.debug(f"GOTO成功 - 新位置: {self.target_id}, 近邻物体数: {len(agent.near_objects)}")
-                
+                    logger.debug(f"GOTO success - new location: {self.target_id}, nearby objects count: {len(agent.near_objects)}")
+
                 return ActionStatus.SUCCESS, f"{agent.name} successfully moved to {room_name}", {"new_location_id": self.target_id}
             else:
-                logger.warning(f"GOTO房间失败: {self.target_id}")
+                logger.warning(f"GOTO room failed: {self.target_id}")
                 return ActionStatus.FAILURE, f"Movement failed", None
         elif target_object:
             # goto物体，不改变location_id，只更新near_objects
@@ -94,38 +94,38 @@ class GotoAction(BaseAction):
             
             # 检查物体是否已发现
             if not target_object.get('is_discovered', False):
-                logger.warning(f"目标物体未被发现: {self.target_id}")
-                return ActionStatus.FAILURE, f"目标物体未被发现: {target_object.get('name', self.target_id)}", None
-            
+                logger.warning(f"Target object not discovered: {self.target_id}")
+                return ActionStatus.FAILURE, f"Target object not discovered: {target_object.get('name', self.target_id)}", None
+
             # 检查物体是否在同一房间
             object_room = env_manager.get_object_room(self.target_id)
             if object_room != agent.location_id:
-                logger.warning(f"物体不在当前房间 - 物体: {self.target_id}, 物体房间: {object_room}, 智能体房间: {agent.location_id}")
-                return ActionStatus.FAILURE, f"目标物体不在当前房间", None
+                logger.warning(f"Object not in current room - object: {self.target_id}, object room: {object_room}, agent room: {agent.location_id}")
+                return ActionStatus.FAILURE, f"Target object not in current room", None
                 
             # 更新near_objects集合
             agent.update_near_objects(self.target_id, env_manager)
             
             # 检查更新后的near_objects是否包含目标物体
             if self.target_id not in agent.near_objects:
-                logger.warning(f"更新near_objects后目标物体不在集合中 - 物体: {self.target_id}, near_objects: {agent.near_objects}")
+                logger.warning(f"Target object not in near_objects after update - object: {self.target_id}, near_objects: {agent.near_objects}")
                 # 强制添加目标物体到near_objects
                 agent.near_objects.add(self.target_id)
-                logger.debug(f"强制添加目标物体到near_objects: {self.target_id}")
-            
+                logger.debug(f"Force add target object to near_objects: {self.target_id}")
+
             obj_name = target_object.get('name', self.target_id)
             room_id = agent.location_id
             room = env_manager.get_room_by_id(room_id)
             room_name = room.get('name', room_id) if room else room_id
-            
-            logger.debug(f"GOTO物体成功 - 物体: {obj_name}, 房间: {room_name}, 近邻物体数: {len(agent.near_objects)}")
-            
+
+            logger.debug(f"GOTO object success - object: {obj_name}, room: {room_name}, nearby objects count: {len(agent.near_objects)}")
+
             # 确保agent状态被保存
             agent_manager.update_agent(agent.id, agent.to_dict())
-            
+
             return ActionStatus.SUCCESS, f"{agent.name} approached {obj_name} (in {room_name})", {"near_object_id": self.target_id}
         else:
-            logger.error(f"目标位置不存在: {self.target_id}")
+            logger.error(f"Target location does not exist: {self.target_id}")
             return ActionStatus.FAILURE, f"Target location does not exist: {self.target_id}", None
 
 
@@ -169,30 +169,30 @@ class GrabAction(BaseAction):
         Returns:
             Tuple: (执行状态, 反馈消息, 结果数据)
         """
-        logger.debug(f"执行GRAB动作 - 智能体: {agent.id}, 目标: {self.target_id}")
-        
+        logger.debug(f"Executing GRAB action - agent: {agent.id}, target: {self.target_id}")
+
         # 记录执行前的状态
         inventory_before = set(agent.inventory)
         near_objects_before = set(agent.near_objects) if hasattr(agent, 'near_objects') else set()
-        
-        logger.debug(f"GRAB执行前 - 库存: {inventory_before}, 近邻物体数: {len(near_objects_before)}")
-        
+
+        logger.debug(f"GRAB before execution - inventory: {inventory_before}, nearby objects count: {len(near_objects_before)}")
+
         # 获取物体
         obj = env_manager.get_object_by_id(self.target_id)
         if not obj:
-            logger.warning(f"物体不存在: {self.target_id}")
+            logger.warning(f"Object does not exist: {self.target_id}")
             return ActionStatus.FAILURE, f"Object does not exist: {self.target_id}", None
 
         obj_name = obj.get('name', self.target_id)
 
         # 检查物体是否已发现
         if not obj.get('is_discovered', False):
-            logger.warning(f"物体未被发现: {self.target_id}")
+            logger.warning(f"Object not discovered: {self.target_id}")
             return ActionStatus.FAILURE, f"Object not discovered: {obj_name}", None
 
         # 检查物体是否在近邻列表中
         if self.target_id not in agent.near_objects:
-            logger.warning(f"物体不在近邻列表中 - 物体: {self.target_id}, 近邻: {agent.near_objects}")
+            logger.warning(f"Object not in nearby list - object: {self.target_id}, nearby: {agent.near_objects}")
             return ActionStatus.FAILURE, f"Agent must approach {obj_name} before grabbing", None
         
         # 记录抓取前的容器id
@@ -200,22 +200,22 @@ class GrabAction(BaseAction):
         if 'location_id' in obj:
             from ...utils.parse_location import parse_location_id
             _, container_id = parse_location_id(obj['location_id'])
-            logger.debug(f"物体当前容器: {container_id}")
-        
+            logger.debug(f"Object current container: {container_id}")
+
         # 检查物体是否可以被智能体承载
         properties = obj.get('properties', {})
         can_carry, reason = agent.can_carry(properties)
         if not can_carry:
-            logger.warning(f"物体不可承载: {reason}")
+            logger.warning(f"Object cannot be carried: {reason}")
             return ActionStatus.FAILURE, reason, None
-        
+
         # 将物体添加到智能体库存
         success, message = agent.grab_object(self.target_id, properties)
         if not success:
-            logger.warning(f"抓取失败: {message}")
+            logger.warning(f"Grab failed: {message}")
             return ActionStatus.FAILURE, message, None
-        
-        logger.debug(f"抓取成功 - 物体: {obj_name}")
+
+        logger.debug(f"Grab successful - object: {obj_name}")
         
         # 检查物体是否赋予智能体特定能力
         abilities = properties.get('provides_abilities', [])
@@ -224,17 +224,17 @@ class GrabAction(BaseAction):
                 abilities = [abilities]  # 如果是单个字符串，转为列表
             
             for ability in abilities:
-                logger.debug(f"物体提供能力: {ability}")
+                logger.debug(f"Object provides ability: {ability}")
                 agent.add_ability_from_object(ability, self.target_id)
-                
+
         # 更新智能体数据
         agent_manager.update_agent(agent.id, agent.to_dict())
-        
+
         # 更新物体位置
         env_success = env_manager.move_object(self.target_id, agent.id)
         if not env_success:
             # 如果环境更新失败，要回滚智能体状态
-            logger.error(f"更新物体位置失败 - 物体: {self.target_id}")
+            logger.error(f"Failed to update object position - object: {self.target_id}")
             success, _ = agent.drop_object(self.target_id, properties)
             # 同时移除已授予的能力
             abilities = properties.get('provides_abilities', [])
@@ -245,21 +245,21 @@ class GrabAction(BaseAction):
                     agent.remove_ability_from_object(ability, self.target_id)
             agent_manager.update_agent(agent.id, agent.to_dict())
             return ActionStatus.FAILURE, f"Failed to update object position", None
-        
+
         # 抓取成功后，near_objects包含原容器
         if container_id:
-            logger.debug(f"更新近邻列表，包含原容器: {container_id}")
+            logger.debug(f"Update nearby list, include original container: {container_id}")
             agent.update_near_objects(container_id, env_manager)
         else:
             agent.update_near_objects()
-        
+
         # 记录执行后的状态
         inventory_after = set(agent.inventory)
         near_objects_after = set(agent.near_objects) if hasattr(agent, 'near_objects') else set()
-        
-        logger.debug(f"GRAB执行后 - 库存: {inventory_after}, 近邻物体数: {len(near_objects_after)}")
-        logger.debug(f"库存变化: 新增 {inventory_after - inventory_before}, 移除 {inventory_before - inventory_after}")
-        logger.debug(f"近邻变化: 新增 {near_objects_after - near_objects_before}, 移除 {near_objects_before - near_objects_after}")
+
+        logger.debug(f"GRAB after execution - inventory: {inventory_after}, nearby objects count: {len(near_objects_after)}")
+        logger.debug(f"Inventory changes: added {inventory_after - inventory_before}, removed {inventory_before - inventory_after}")
+        logger.debug(f"Nearby changes: added {near_objects_after - near_objects_before}, removed {near_objects_before - near_objects_after}")
         
         return ActionStatus.SUCCESS, f"{agent.name} successfully grabbed {obj_name}", {
             "object_id": self.target_id
@@ -283,7 +283,7 @@ class PlaceAction(BaseAction):
     
     def _validate(self, agent, world_state, env_manager, agent_manager):
         if not self.target_id:
-            return False, "PLACE动作需要指定目标物体"
+            return False, "PLACE action requires target object"
 
         # 检查是否提供了必要的relation和location_id参数
         relation = self.params.get('relation')
@@ -304,9 +304,9 @@ class PlaceAction(BaseAction):
                 location_name = location.get('name', location_id) if location else location_id
                 room = env_manager.get_room_by_id(location_room)
                 room_name = room.get('name', location_room) if room else location_room
-                return False, f"智能体必须先前往{room_name}才能将物体放在{location_name}上"
+                return False, f"Agent must go to {room_name} first to place object on {location_name}"
 
-        return True, "动作有效"
+        return True, "Action is valid"
     
     def _execute(self, agent, world_state, env_manager, agent_manager):
         # 获取物体
@@ -393,7 +393,7 @@ class LookAction(BaseAction):
             if not result:
                 return False, result.message
 
-        return True, "动作有效"
+        return True, "Action is valid"
     
     def _execute(self, agent, world_state, env_manager, agent_manager):
         # 查看范围
@@ -521,7 +521,7 @@ class ExploreAction(BaseAction):
             sim_config = getattr(env_manager, 'sim_config', {}) or getattr(world_state, 'sim_config', {}) or {}
             exploration_level = sim_config.get('explore_mode', 'thorough')  # 默认改为thorough，发现所有物品
         
-        logger.debug(f"EXPLORE - 探索级别: {exploration_level}, 未发现物体数: {len(undiscovered_objects)}")
+        logger.debug(f"EXPLORE - exploration level: {exploration_level}, undiscovered objects count: {len(undiscovered_objects)}")
         
         if exploration_level == 'thorough':
             # 彻底探索 - 发现所有物体
@@ -537,24 +537,24 @@ class ExploreAction(BaseAction):
             # 随机选择要发现的物体
             to_discover = random.sample(undiscovered_objects, min(discovery_count, len(undiscovered_objects)))
         
-        logger.debug(f"EXPLORE - 将要发现的物体数: {len(to_discover)}")
-        
+        logger.debug(f"EXPLORE - objects to be discovered: {len(to_discover)}")
+
         # 标记物体为已发现并收集物体信息（包括所属关系）
         discovered_objects = []
         for obj in to_discover:
             obj_id = obj.get('id')
             # 确保物体被标记为已发现
             env_manager.update_object_state(obj_id, {"is_discovered": True})
-            
+
             # 查找物体的所属关系（在哪个物体上/中）
             container_info = ""
             for potential_container_id, edges in world_state.graph.edges.items():
                 if obj_id in edges and potential_container_id != room_id and potential_container_id not in world_state.graph.room_ids:
                     container = world_state.graph.get_node(potential_container_id)
                     if container and container.get('is_discovered', False):  # 只显示已发现的容器
-                        relation_type = edges[obj_id][0].get('type', '在') if edges[obj_id] else '在'
-                        relation_text = '上' if relation_type == 'on' else '中' if relation_type == 'in' else '处'
-                        container_info = f"（在{container.get('name', potential_container_id)}{relation_text}）"
+                        relation_type = edges[obj_id][0].get('type', 'at') if edges[obj_id] else 'at'
+                        relation_text = 'on' if relation_type == 'on' else 'in' if relation_type == 'in' else 'at'
+                        container_info = f"({relation_text} {container.get('name', potential_container_id)})"
                         break
             
             discovered_objects.append({

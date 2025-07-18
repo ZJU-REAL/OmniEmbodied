@@ -1,0 +1,543 @@
+{
+  "description": "A bustling international cruise ship terminal on embarkation day, featuring multiple interconnected zones with dense interactive elements and collaborative challenges.",
+  "rooms": [
+    {
+      "id": "main_check_in_hall",
+      "name": "Main Check-In Hall",
+      "properties": {
+        "type": "terminal_hall"
+      },
+      "connected_to_room_ids": [
+        "baggage_drop_off",
+        "customs_immigration",
+        "waiting_lounge"
+      ]
+    },
+    {
+      "id": "baggage_drop_off",
+      "name": "Baggage Drop-Off & Security Screening",
+      "properties": {
+        "type": "security_area"
+      },
+      "connected_to_room_ids": [
+        "main_check_in_hall",
+        "customs_immigration"
+      ]
+    },
+    {
+      "id": "customs_immigration",
+      "name": "Customs & Immigration Counter",
+      "properties": {
+        "type": "inspection_zone"
+      },
+      "connected_to_room_ids": [
+        "main_check_in_hall",
+        "baggage_drop_off",
+        "boarding_gate"
+      ]
+    },
+    {
+      "id": "waiting_lounge",
+      "name": "Waiting Lounge",
+      "properties": {
+        "type": "passenger_area"
+      },
+      "connected_to_room_ids": [
+        "main_check_in_hall",
+        "lost_and_found",
+        "boarding_gate"
+      ]
+    },
+    {
+      "id": "lost_and_found",
+      "name": "Lost & Found / Information Desk",
+      "properties": {
+        "type": "service_counter"
+      },
+      "connected_to_room_ids": [
+        "waiting_lounge"
+      ]
+    },
+    {
+      "id": "boarding_gate",
+      "name": "Boarding Gate",
+      "properties": {
+        "type": "departure_zone"
+      },
+      "connected_to_room_ids": [
+        "customs_immigration",
+        "waiting_lounge"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "check_in_counter_1",
+      "name": "Check-In Counter",
+      "type": "FURNITURE",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.1
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CI-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "passport_scanner_1",
+      "name": "Passport Scanner",
+      "type": "ITEM",
+      "location_id": "on:check_in_counter_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "SecurTech",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "boarding_pass_printer_1",
+      "name": "Boarding Pass Printer",
+      "type": "ITEM",
+      "location_id": "on:check_in_counter_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "white",
+        "brand": "PrintMaster",
+        "paper_level": "low"
+      },
+      "states": {
+        "is_open": false,
+        "is_active": true
+      }
+    },
+    {
+      "id": "customs_forms_stack_1",
+      "name": "Stack of Customs Forms",
+      "type": "ITEM",
+      "location_id": "on:check_in_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "condition": "crumpled"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "oversized_suitcase_1",
+      "name": "Oversized Suitcase",
+      "type": "ITEM",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "weight": 32.0,
+        "color": "black",
+        "material": "polycarbonate",
+        "handle_material": "rubber",
+        "tag_color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheelchair_1",
+      "name": "Wheelchair",
+      "type": "FURNITURE",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "size": [
+          1.1,
+          0.7,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "out_of_order"
+      },
+      "states": {}
+    },
+    {
+      "id": "self_service_kiosk_1",
+      "name": "Self-Service Kiosk",
+      "type": "FURNITURE",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.5
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "touchscreen_status": "unresponsive"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt System",
+      "type": "FURNITURE",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "size": [
+          4.0,
+          1.2,
+          0.9
+        ],
+        "weight": 250.0,
+        "is_container": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "x_ray_scanner_1",
+      "name": "X-Ray Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": false
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "suspicious_suitcase_1",
+      "name": "Suspicious Unmarked Suitcase",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 18.0,
+        "color": "black",
+        "material": "nylon",
+        "alert_status": "inspection_required"
+      },
+      "states": {}
+    },
+    {
+      "id": "confiscated_toiletry_bag_1",
+      "name": "Confiscated Toiletry Bag",
+      "type": "ITEM",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "weight": 0.8,
+        "color": "transparent",
+        "contents": "120ml_liquid_bottle"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "porter_trolley_1",
+      "name": "Porter's Trolley",
+      "type": "FURNITURE",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "wheel_condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "customs_declaration_cabinet_1",
+      "name": "Customs Declaration Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:customs_immigration",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "lost_and_found_drawer_1",
+      "name": "Lost & Found Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:lost_and_found",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "contents": [
+          "coins",
+          "broken_watch",
+          "cabinet_key"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cabinet_key_1",
+      "name": "Cabinet Key",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "boarding_gate_scanner_1",
+      "name": "Boarding Gate Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:boarding_gate",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "power_status": "unplugged"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "spilled_smoothie_1",
+      "name": "Spilled Smoothie",
+      "type": "ITEM",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "weight": 0.3,
+        "color": "pink",
+        "state": "liquid"
+      },
+      "states": {
+        "is_mopped": false
+      }
+    },
+    {
+      "id": "wet_floor_sign_1",
+      "name": "Wet Floor Sign",
+      "type": "ITEM",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:baggage_drop_off",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:waiting_lounge",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 12.0,
+        "is_container": true
+      },
+      "states": {
+        "is_hot": true,
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "coffee_pot_1",
+      "name": "Coffee Pot",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "glass",
+        "material": "glass",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:waiting_lounge",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "leak_status": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "on:water_cooler_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "boarding_pass_1",
+      "name": "Boarding Pass",
+      "type": "ITEM",
+      "location_id": "in:main_check_in_hall",
+      "properties": {
+        "weight": 0.01,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_barcode_scanned": false,
+        "is_verified": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:check_in_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "verification_device_1",
+      "name": "Verification Device",
+      "type": "ITEM",
+      "location_id": "on:customs_declaration_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "gray",
+        "material": "metal",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:check_in_counter_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "brew",
+    "deactivate",
+    "extinguish",
+    "mop",
+    "open",
+    "scan_barcode",
+    "verify",
+    "water",
+    "write",
+    "close"
+  ]
+}

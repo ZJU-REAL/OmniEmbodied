@@ -1,0 +1,627 @@
+{
+  "description": "A high-stakes daycare center undergoing safety inspection and renovation after a fire incident, requiring multi-agent collaboration for assessment, repairs, and reorganization.",
+  "rooms": [
+    {
+      "id": "main_playroom",
+      "name": "Main Playroom",
+      "properties": {
+        "type": "play_area",
+        "fire_damage": "moderate",
+        "smoke_damage": true
+      },
+      "connected_to_room_ids": [
+        "kitchenette_dining_area",
+        "nap_room"
+      ]
+    },
+    {
+      "id": "kitchenette_dining_area",
+      "name": "Kitchenette & Dining Area",
+      "properties": {
+        "type": "kitchen",
+        "fire_damage": "severe",
+        "water_damage": true
+      },
+      "connected_to_room_ids": [
+        "main_playroom",
+        "outdoor_play_area"
+      ]
+    },
+    {
+      "id": "nap_room",
+      "name": "Nap Room",
+      "properties": {
+        "type": "rest_area",
+        "smoke_damage": true,
+        "fire_damage": "none"
+      },
+      "connected_to_room_ids": [
+        "main_playroom",
+        "storage_closet"
+      ]
+    },
+    {
+      "id": "storage_closet",
+      "name": "Storage Closet",
+      "properties": {
+        "type": "storage",
+        "organization": "poor",
+        "safety_issues": true
+      },
+      "connected_to_room_ids": [
+        "nap_room"
+      ]
+    },
+    {
+      "id": "outdoor_play_area",
+      "name": "Outdoor Play Area",
+      "properties": {
+        "type": "outdoor",
+        "fence_damage": true,
+        "weather_exposure": "sunny"
+      },
+      "connected_to_room_ids": [
+        "kitchenette_dining_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "play_table_1",
+      "name": "Scorched Wooden Play Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          120,
+          80,
+          50
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "wood",
+        "damage": "charred",
+        "color": "brown",
+        "stability": "wobbly"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "bookshelf_1",
+      "name": "Sturdy Bookshelf",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          180,
+          90,
+          30
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "wood",
+        "tilt": "slight",
+        "water_damage": true
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_chair_1",
+      "name": "Child-Sized Plastic Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          30,
+          30,
+          40
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "material": "plastic",
+        "color": "red",
+        "stacked": false
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_chair_2",
+      "name": "Child-Sized Plastic Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          30,
+          30,
+          40
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "material": "plastic",
+        "color": "blue",
+        "stacked": true
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Expired Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "on:bookshelf_1",
+      "properties": {
+        "weight": 5.0,
+        "expired": true,
+        "pressure": "low",
+        "color": "red",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "stuffed_animal_1",
+      "name": "Smoke-Damaged Stuffed Bear",
+      "type": "ITEM",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "weight": 0.5,
+        "material": "fabric",
+        "color": "brown",
+        "odor": "smoky",
+        "label": "To be cleaned"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "electrical_outlet_1",
+      "name": "Exposed Wiring Outlet",
+      "type": "ITEM",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "weight": 0.3,
+        "hazard": "electrical",
+        "cover_status": "loose",
+        "color": "white"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "toy_bin_1",
+      "name": "Blocks Toy Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          40,
+          30,
+          25
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "green",
+        "label": "Blocks"
+      },
+      "states": {}
+    },
+    {
+      "id": "art_easel_1",
+      "name": "Damaged Art Easel",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          100,
+          60,
+          80
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "wood",
+        "missing_screws": 2,
+        "paint_status": "dried"
+      },
+      "states": {}
+    },
+    {
+      "id": "hand_sanitizer_1",
+      "name": "Empty Hand Sanitizer Dispenser",
+      "type": "ITEM",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "weight": 0.8,
+        "mount_type": "wall",
+        "fluid_level": "empty",
+        "color": "white"
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "countertop_1",
+      "name": "Scorched Countertop with Stove",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          200,
+          60,
+          90
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "laminate",
+        "warping": "left_side",
+        "burner_status": "functional"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Overturned Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          180,
+          70,
+          180
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal",
+        "position": "overturned",
+        "dent_location": "right_side"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_gate_1",
+      "name": "Broken Child Safety Gate",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          90,
+          5,
+          60
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "hinge_status": "broken",
+        "mounting": "loose"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "deep_fryer_1",
+      "name": "Unplugged Deep Fryer",
+      "type": "ITEM",
+      "location_id": "on:countertop_1",
+      "properties": {
+        "weight": 7.5,
+        "power_status": "unplugged",
+        "oil_residue": true,
+        "color": "stainless",
+        "fire_source": true
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "fireproof_cabinet_1",
+      "name": "Locked Fireproof Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          100,
+          50,
+          180
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_status": "locked",
+        "key_location": "missing",
+        "contents": "cleaning_chemicals"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "exit_sign_1",
+      "name": "Flickering Emergency Exit Sign",
+      "type": "ITEM",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "weight": 2.0,
+        "mount_type": "ceiling",
+        "power_source": "battery",
+        "battery_status": "low",
+        "light_status": "flickering"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave with Faulty Door",
+      "type": "ITEM",
+      "location_id": "on:countertop_1",
+      "properties": {
+        "weight": 15.0,
+        "functionality": "operational",
+        "door_status": "faulty",
+        "color": "white",
+        "brand": "General Electric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "drying_rack_1",
+      "name": "Cracked Drying Rack",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          40,
+          30,
+          35
+        ],
+        "weight": 3.5,
+        "is_container": true,
+        "material": "plastic",
+        "crack_location": "base",
+        "contents": "plates_and_cups"
+      },
+      "states": {}
+    },
+    {
+      "id": "step_stool_1",
+      "name": "Wobbly Step Stool",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          40,
+          30,
+          25
+        ],
+        "weight": 4.0,
+        "is_container": false,
+        "material": "wood",
+        "stability": "wobbly",
+        "tightness": "loose"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_spray_1",
+      "name": "Non-Toxic Cleaning Spray",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 1.2,
+        "toxicity": "non-toxic",
+        "label": "Child-Safe",
+        "color": "green",
+        "provides_abilities": [
+          "clean",
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_spray_2",
+      "name": "Toxic Cleaning Spray",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 1.2,
+        "toxicity": "toxic",
+        "label": "Caution",
+        "color": "red",
+        "provides_abilities": [
+          "clean",
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "crayon_bin_1",
+      "name": "False-Bottom Crayon Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_playroom",
+      "properties": {
+        "size": [
+          25,
+          25,
+          15
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic",
+        "secret_compartment": true,
+        "contents": "cabinet_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "electrical_tape_1",
+      "name": "Electrical Tape Roll",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.3,
+        "purpose": "insulation",
+        "color": "black",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Microfiber Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.2,
+        "material": "microfiber",
+        "color": "yellow",
+        "provides_abilities": [
+          "clean",
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "batteries_1",
+      "name": "AA Batteries Pack",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "type": "AA",
+        "quantity": 4,
+        "brand": "Duracell"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "fireproof_door_1",
+      "name": "Heavy Fireproof Door",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_dining_area",
+      "properties": {
+        "size": [
+          210,
+          90,
+          5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "metal",
+        "installation_status": "uninstalled",
+        "safety_rating": "1_hour"
+      },
+      "states": {}
+    },
+    {
+      "id": "nap_mat_1",
+      "name": "Foldable Nap Mat",
+      "type": "FURNITURE",
+      "location_id": "in:nap_room",
+      "properties": {
+        "size": [
+          60,
+          30,
+          5
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "fabric_foam",
+        "cleanliness": "smoky"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "smoke_detector_1",
+      "name": "Wall-Mounted Smoke Detector",
+      "type": "ITEM",
+      "location_id": "in:nap_room",
+      "properties": {
+        "weight": 0.5,
+        "battery_status": "low",
+        "test_button": "red",
+        "color": "white"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "damaged_fence_1",
+      "name": "Damaged Outdoor Fence",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_play_area",
+      "properties": {
+        "size": [
+          300,
+          5,
+          120
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "wood",
+        "damage_type": "cracked",
+        "safety_hazard": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sandbox_1",
+      "name": "Outdoor Sandbox",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_play_area",
+      "properties": {
+        "size": [
+          150,
+          150,
+          30
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": "sand",
+        "cover_status": "missing"
+      },
+      "states": {
+        "is_covered": false
+      }
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "cover",
+    "fold",
+    "insert",
+    "insulate",
+    "open",
+    "start_process",
+    "stop_process",
+    "wipe"
+  ]
+}

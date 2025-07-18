@@ -1,0 +1,738 @@
+{
+  "description": "A high-stakes financial operations hub in the back office of a major stock exchange, featuring a trading operations desk, document processing room, server closet, and break room with emergency storage.",
+  "rooms": [
+    {
+      "id": "trading_operations_desk",
+      "name": "Trading Operations Desk",
+      "properties": {
+        "type": "operations"
+      },
+      "connected_to_room_ids": [
+        "document_processing_room"
+      ]
+    },
+    {
+      "id": "document_processing_room",
+      "name": "Document Processing Room",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "trading_operations_desk",
+        "server_closet"
+      ]
+    },
+    {
+      "id": "server_closet",
+      "name": "Server Closet",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "document_processing_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room / Emergency Storage",
+      "properties": {
+        "type": "hybrid"
+      },
+      "connected_to_room_ids": [
+        "server_closet"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "bloomberg_terminal_1",
+      "name": "Bloomberg Terminal Station",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "brand": "Bloomberg",
+        "model": "Professional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "led_ticker_board_1",
+      "name": "LED Ticker Board",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "brand": "Samsung",
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "industrial_printer_1",
+      "name": "Industrial Printer",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "brand": "HP",
+        "model": "OfficeJet 9000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "transaction_slip_1",
+      "name": "Transaction Slip",
+      "type": "ITEM",
+      "location_id": "on:industrial_printer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "status": "unsigned"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "transaction_slip_2",
+      "name": "Transaction Slip",
+      "type": "ITEM",
+      "location_id": "on:industrial_printer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "status": "urgent"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "locked_briefcase_1",
+      "name": "Locked Briefcase",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "aluminum",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "malfunctioning_terminal_1",
+      "name": "Malfunctioning Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "error_message": "Network Connection Lost – Retry?"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "office_chair_1",
+      "name": "Rolling Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "wheels stuck"
+      },
+      "states": {}
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:bloomberg_terminal_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Panasonic",
+        "model": "KX-TS520"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:trading_operations_desk",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "status": "out of water"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:bloomberg_terminal_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_drunk": false,
+        "is_full": true
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Heavy-Duty Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sorting_table_1",
+      "name": "Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Fujitsu",
+        "status_light": "blinking yellow"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "stock_certificate_1",
+      "name": "Stock Certificate",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "cream",
+        "note": "Hold for Client #7721"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_bag_1",
+      "name": "Sealed Evidence Bag",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "SEC Audit – DO NOT OPEN",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paper_shredder_1",
+      "name": "Paper Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "brand": "Fellowes",
+        "jam_light": "on"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_closet",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "brand": "Dell",
+        "status_light": "red alarm"
+      },
+      "states": {
+        "is_on": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_battery_1",
+      "name": "Backup Battery Unit",
+      "type": "FURNITURE",
+      "location_id": "in:server_closet",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "charge_level": "43%"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "network_switch_1",
+      "name": "Network Switch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "cable_status": "loose"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "failed_hard_drive_1",
+      "name": "Failed Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "serial_number": "HD-4489",
+        "label": "TRANSACTION LOGS"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_suppression_1",
+      "name": "Fire Suppression Canister",
+      "type": "ITEM",
+      "location_id": "in:server_closet",
+      "properties": {
+        "weight": 8.0,
+        "pressure_gauge": "yellow zone",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "maintenance_logbook_1",
+      "name": "Maintenance Logbook",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "last_entry": "Fan 3B noisy – monitor",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "brand": "Whirlpool",
+        "light_status": "flickering"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "locker_1",
+      "name": "Locker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "status": "slightly open"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "emergency_stretcher_1",
+      "name": "Emergency Stretcher",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.7,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "status": "in packaging"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:locker_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "access_level": "supervisor"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "status": "leaking"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First-Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 2.0,
+        "status": "bandages depleted",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "clock": "blinking 12:00"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "status": "out of order"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "handle_material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "dustpan_1",
+      "name": "Dustpan",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Swingline",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless steel",
+        "handle_material": "plastic",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "blue",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "Device Charger",
+      "type": "ITEM",
+      "location_id": "in:server_closet",
+      "properties": {
+        "weight": 0.2,
+        "brand": "Anker",
+        "model": "PowerPort",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Iron",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Rowenta",
+        "model": "SteamForce",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "bristle",
+        "handle_material": "wood",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_jar_1",
+      "name": "Seasoning Jar",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "content": "salt",
+        "material": "glass",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pencil_1",
+      "name": "Pencil",
+      "type": "ITEM",
+      "location_id": "on:bloomberg_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "wood",
+        "provides_abilities": [
+          "draw"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "draw",
+    "drink",
+    "empty",
+    "iron",
+    "open",
+    "recharge",
+    "season",
+    "slice",
+    "staple",
+    "turn_off",
+    "turn_on",
+    "varnish",
+    "wipe"
+  ]
+}

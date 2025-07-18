@@ -1,0 +1,544 @@
+{
+  "description": "A high-stakes forensic accounting recovery office where teams collaborate to trace and recover funds from financial fraud, featuring a main investigation hub, secure document vault, IT forensics lab, check distribution station, and break room.",
+  "rooms": [
+    {
+      "id": "main_investigation_hub",
+      "name": "Main Investigation Hub",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "secure_document_vault",
+        "it_forensics_lab",
+        "check_distribution_station",
+        "break_room"
+      ]
+    },
+    {
+      "id": "secure_document_vault",
+      "name": "Secure Document Vault",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_investigation_hub"
+      ]
+    },
+    {
+      "id": "it_forensics_lab",
+      "name": "IT Forensics Lab",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "main_investigation_hub"
+      ]
+    },
+    {
+      "id": "check_distribution_station",
+      "name": "Check Distribution Station",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "main_investigation_hub"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_investigation_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_worktable_1",
+      "name": "Central Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:main_investigation_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_wall_1",
+      "name": "Evidence Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_investigation_hub",
+      "properties": {
+        "size": [
+          4.0,
+          0.1,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "corkboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "case_file_4412_m_1",
+      "name": "Case File #4412-M",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 2.5,
+        "label": "High Priority",
+        "seal_status": "broken",
+        "content": "handwritten notes from Madoff’s ledger"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_laptop_1",
+      "name": "Encrypted Laptop",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 1.8,
+        "brand": "Dell Latitude",
+        "chain_of_custody": "#3087",
+        "requires_yubikey": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "check_verification_logbook_1",
+      "name": "Check Verification Logbook",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 3.0,
+        "pages": 500,
+        "cover": "leather",
+        "requires_dual_signatures": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Fujitsu",
+        "maintenance_light": "orange"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Brother P-touch",
+        "tape_status": "out"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:secure_document_vault",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_box_17_1",
+      "name": "Evidence Box #17",
+      "type": "ITEM",
+      "location_id": "in:industrial_shelving_1",
+      "properties": {
+        "weight": 15.0,
+        "label": "red stripe",
+        "content": "original investor affidavits"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "fireproof_safe_1",
+      "name": "Fireproof Safe",
+      "type": "FURNITURE",
+      "location_id": "in:secure_document_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.6
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "lock_type": "digital keypad",
+        "requires_two_codes": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Honeywell",
+        "battery_status": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "dehumidifier_1",
+      "name": "Dehumidifier",
+      "type": "ITEM",
+      "location_id": "in:secure_document_vault",
+      "properties": {
+        "weight": 10.0,
+        "brand": "Whirlpool",
+        "tank_status": "half-full"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:it_forensics_lab",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.8
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_workstation_1",
+      "name": "Forensic Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:it_forensics_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "external_hard_drive_1",
+      "name": "External Hard Drive #1",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Seagate",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_2",
+      "name": "External Hard Drive #2",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Seagate",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_3",
+      "name": "External Hard Drive #3",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Seagate",
+        "condition": "scratched",
+        "sticker": "CONFIDENTIAL",
+        "activity_light": "missing"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_4",
+      "name": "External Hard Drive #4",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Seagate",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_5",
+      "name": "External Hard Drive #5",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Seagate",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "check_printer_1",
+      "name": "Check Printer",
+      "type": "ITEM",
+      "location_id": "in:check_distribution_station",
+      "properties": {
+        "weight": 15.0,
+        "brand": "Epson",
+        "status": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "check_embosser_1",
+      "name": "Check Embosser",
+      "type": "ITEM",
+      "location_id": "in:check_distribution_station",
+      "properties": {
+        "weight": 8.0,
+        "brand": "Trodat",
+        "status": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_envelopes_1",
+      "name": "Security Envelopes",
+      "type": "ITEM",
+      "location_id": "in:check_distribution_station",
+      "properties": {
+        "weight": 1.0,
+        "quantity": 100,
+        "type": "pre-signed"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Keurig",
+        "water_level": "half",
+        "is_container": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "couch_1",
+      "name": "Couch",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "condition": "worn",
+        "arm_condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.9
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "content": "memos and milestones poster"
+      },
+      "states": {}
+    },
+    {
+      "id": "muffin_1",
+      "name": "Half-eaten Muffin",
+      "type": "ITEM",
+      "location_id": "on:couch_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "half-eaten",
+        "on_napkin": true
+      },
+      "states": {}
+    },
+    {
+      "id": "yubikey_1",
+      "name": "Yubikey",
+      "type": "ITEM",
+      "location_id": "in:fireproof_safe_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "provides_abilities": [
+          "unpair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "on:central_worktable_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Swingline",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:secure_document_vault",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Ohaus",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scoop_1",
+      "name": "Scoop",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pourer_1",
+      "name": "Coffee Pourer",
+      "type": "ITEM",
+      "location_id": "on:coffee_maker_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "open",
+    "pour",
+    "scoop",
+    "staple",
+    "turn_off",
+    "turn_on",
+    "unpair",
+    "weigh",
+    "close"
+  ]
+}

@@ -20,16 +20,16 @@ class SceneValidator:
         
         # 检查基本结构
         if not isinstance(scene_data, dict):
-            errors.append("场景数据必须是字典类型")
+            errors.append("Scene data must be a dictionary")
             return False, errors
-            
+
         # 检查rooms字段
         if "rooms" not in scene_data:
-            errors.append("场景数据必须包含'rooms'字段")
+            errors.append("Scene data must contain 'rooms' field")
             return False, errors
-            
+
         if not isinstance(scene_data["rooms"], list):
-            errors.append("'rooms'字段必须是列表类型")
+            errors.append("'rooms' field must be a list")
             return False, errors
         
         # 验证每个房间
@@ -41,14 +41,14 @@ class SceneValidator:
             
             # 检查房间ID唯一性
             if room.get("id") in room_ids:
-                errors.append(f"房间ID重复: {room.get('id')}")
+                errors.append(f"Duplicate room ID: {room.get('id')}")
             else:
                 room_ids.add(room.get("id"))
-                
+
         # 验证objects字段(如果存在)
         if "objects" in scene_data:
             if not isinstance(scene_data["objects"], list):
-                errors.append("'objects'字段必须是列表类型")
+                errors.append("'objects' field must be a list")
             else:
                 container_ids = set(room_ids)  # 初始化为房间ID集合
                 object_ids = set()
@@ -65,7 +65,7 @@ class SceneValidator:
                     
                     # 检查对象ID唯一性
                     if obj_id in object_ids:
-                        errors.append(f"物体ID重复: {obj_id}")
+                        errors.append(f"Duplicate object ID: {obj_id}")
                     else:
                         object_ids.add(obj_id)
                         

@@ -1,0 +1,544 @@
+{
+  "description": "A high-security underground Data Vault Archival Facility with modular server racks, robotic retrieval arms, and secure storage vaults in disarray after a power surge.",
+  "rooms": [
+    {
+      "id": "main_archive_chamber",
+      "name": "Main Archive Chamber",
+      "properties": {
+        "type": "industrial",
+        "lighting": "emergency_red",
+        "humidity": "controlled"
+      },
+      "connected_to_room_ids": [
+        "verification_station",
+        "secure_storage_vault"
+      ]
+    },
+    {
+      "id": "verification_station",
+      "name": "Verification & Sorting Station",
+      "properties": {
+        "type": "workstation",
+        "lighting": "flickering",
+        "status": "disorganized"
+      },
+      "connected_to_room_ids": [
+        "main_archive_chamber",
+        "secure_storage_vault"
+      ]
+    },
+    {
+      "id": "secure_storage_vault",
+      "name": "Secure Storage Vault",
+      "properties": {
+        "type": "secure",
+        "lighting": "off",
+        "security_level": "high"
+      },
+      "connected_to_room_ids": [
+        "main_archive_chamber",
+        "verification_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack #1",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "partially_ejected"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "server_rack_2",
+      "name": "Server Rack #2",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "aligned"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_retrieval_arm_1",
+      "name": "Robotic Retrieval Arm",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "aluminum",
+        "status": "frozen"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "emergency_power_relay_1",
+      "name": "Emergency Power Relay Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "plastic",
+        "status": "override_required"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "data_cartridge_1",
+      "name": "Misaligned Data Cartridge",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "label_status": "smudged",
+        "content_type": "encrypted"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "data_cartridge_2",
+      "name": "Misaligned Data Cartridge",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "label_status": "mismatched",
+        "content_type": "corrupted"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "manual_override_key_1",
+      "name": "Red Hexagonal Wrench",
+      "type": "ITEM",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "material": "steel",
+        "provides_abilities": [
+          "scratch",
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "power_surge_log_1",
+      "name": "Power Surge Log",
+      "type": "ITEM",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "weight": 0.1,
+        "material": "thermal_paper",
+        "content": "voltage_spike_sector_3"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "status": "functional"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "battery_status": "low",
+        "status": "operational"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "tape_status": "out",
+        "status": "inoperative"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "overhead_drone_1",
+      "name": "Overhead Drone DV-DR-001",
+      "type": "FURNITURE",
+      "location_id": "in:main_archive_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "serial_number": "DV-DR-001",
+        "status": "docked"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sorting_conveyor_1",
+      "name": "Central Sorting Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:verification_station",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "rubber_metal",
+        "status": "jammed"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "verification_terminal_1",
+      "name": "Verification Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:verification_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "status": "error_displayed"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "inconsistent_cartridge_1",
+      "name": "Inconsistent Data Cartridge DV-887X",
+      "type": "ITEM",
+      "location_id": "on:sorting_conveyor_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "label_type": "handwritten",
+        "content_type": "legacy"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "barcode_reprinter_1",
+      "name": "Barcode Re-printer",
+      "type": "FURNITURE",
+      "location_id": "in:verification_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic",
+        "tape_status": "out"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "thermal_tape_spool_1",
+      "name": "Half-used Thermal Tape Spool",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "material": "plastic",
+        "tape_remaining": "50%"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_gun_1",
+      "name": "Label Gun",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.7,
+        "color": "gray",
+        "status": "jammed",
+        "provides_abilities": [
+          "scratch",
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_lock_panel_1",
+      "name": "Biometric Lock Panel",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal_glass",
+        "security_level": "high"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "legacy_tape_cabinet_1",
+      "name": "Legacy Tape Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mislabeled_tape_1",
+      "name": "Mislabeled Tape DV-552L",
+      "type": "ITEM",
+      "location_id": "in:legacy_tape_cabinet_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "label": "DO NOT MIGRATE",
+        "content_type": "sensitive"
+      },
+      "states": {}
+    },
+    {
+      "id": "vault_override_keycard_1",
+      "name": "Vault Override Keycard",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "access_level": "master"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shutdown_button_1",
+      "name": "Emergency Shutdown Button",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "metal_glass",
+        "status": "covered"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "fire_suppression_system_1",
+      "name": "Fire Suppression System",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "status": "armed"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "dusty_blueprints_1",
+      "name": "Dusty Blueprints",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "content": "original_dvau_layout"
+      },
+      "states": {
+        "is_written_on": true,
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "duster_1",
+      "name": "Feather Duster",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "material": "feathers_plastic",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_chair_1",
+      "name": "Broken Chair",
+      "type": "FURNITURE",
+      "location_id": "in:verification_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "status": "missing_wheel"
+      },
+      "states": {
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Discarded Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "content": "cold_coffee",
+        "label": "DO NOT PLACE LIQUIDS NEAR EQUIPMENT"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "crack",
+    "deactivate",
+    "disconnect",
+    "drink",
+    "dust",
+    "open",
+    "scrape",
+    "scratch",
+    "stack",
+    "turn_off"
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "description": "A high-security Cybersecurity Emergency Response Lab in the midst of a digital crisis, featuring interconnected zones with heavy equipment, security restrictions, and time pressure forcing parallel workflows.",
+  "rooms": [
+    {
+      "id": "main_forensic_workroom",
+      "name": "Main Forensic Workroom",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "server_containment_vault",
+        "network_operations_closet",
+        "break_room"
+      ]
+    },
+    {
+      "id": "server_containment_vault",
+      "name": "Server Containment Vault",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workroom"
+      ]
+    },
+    {
+      "id": "network_operations_closet",
+      "name": "Network Operations Closet",
+      "properties": {
+        "type": "network"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workroom"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workroom"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "forensic_workbench_1",
+      "name": "Forensic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workroom",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "FW-2500"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_locker_cabinet_1",
+      "name": "Evidence Locker Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workroom",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "infected_laptop_1",
+      "name": "Infected Laptop",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Precision 5560",
+        "condition": "scratched",
+        "status": "BIOS error blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_write_blocker_1",
+      "name": "Forensic Write-Blocker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Tableau",
+        "model": "T8",
+        "led_color": "red",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_patch_usb_1",
+      "name": "Emergency Patch USB",
+      "type": "ITEM",
+      "location_id": "in:evidence_locker_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "MS09-037",
+        "color": "blue",
+        "seal_status": "intact",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 3.2,
+        "brand": "Brother",
+        "model": "QL-800",
+        "tape_status": "out",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workroom",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "content": "CVE-2009-0901 HIGH PRIORITY",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 4.5,
+        "brand": "Fujitsu",
+        "model": "ScanSnap",
+        "jam_status": "on",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "worlds_best_hacker_mug_1",
+      "name": "World's Best Hacker Mug",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "condition": "empty",
+        "inscription": "World's Best Hacker"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "dual_keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_power_cutoff_1",
+      "name": "Emergency Power Cutoff",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "shield_status": "closed",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "corrupted_server_blade_1",
+      "name": "Corrupted Server Blade",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "HP",
+        "model": "ProLiant DL380",
+        "serial_number": "XJ-4492",
+        "fan_status": "erratic"
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 2.0,
+        "brand": "Avocent",
+        "current_server": "Server #4",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "hardware_token_1",
+      "name": "Hardware Token",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 0.05,
+        "brand": "Yubikey",
+        "model": "5C",
+        "attachment": "lanyard",
+        "provides_abilities": [
+          "unpair"
+        ]
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "cable_tester_1",
+      "name": "Cable Tester",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Fluke Networks",
+        "battery_status": "low",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 0.6,
+        "brand": "FLIR",
+        "model": "ONE",
+        "last_used": "Rack B",
+        "provides_abilities": [
+          "stop_recording"
+        ]
+      },
+      "states": {
+        "is_recording": true
+      }
+    },
+    {
+      "id": "server_maintenance_log_1",
+      "name": "Server Maintenance Log",
+      "type": "ITEM",
+      "location_id": "in:server_containment_vault",
+      "properties": {
+        "weight": 1.5,
+        "condition": "dusty",
+        "last_entry": "two weeks ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_mounted_patch_panel_1",
+      "name": "Wall-Mounted Patch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "size": [
+          0.6,
+          0.1,
+          0.5
+        ],
+        "weight": 12.0,
+        "ports": 48,
+        "label_status": "half_unlabeled"
+      },
+      "states": {}
+    },
+    {
+      "id": "cisco_router_stack_1",
+      "name": "Cisco Router Stack",
+      "type": "FURNITURE",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 25.0,
+        "units": 3,
+        "power_status": "loose"
+      },
+      "states": {}
+    },
+    {
+      "id": "compromised_switch_1",
+      "name": "Compromised Switch",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Netgear",
+        "model": "GS724T",
+        "port_status": "blinking rapidly",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "fiber_optic_tester_1",
+      "name": "Fiber Optic Tester",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 1.8,
+        "brand": "EXFO",
+        "model": "Max-720",
+        "calibration_status": "overdue",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "spare_cable_box_1",
+      "name": "Spare Cable Box",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 2.5,
+        "material": "cardboard",
+        "label": "Cat6 - 50ft",
+        "condition": "open"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 0.7,
+        "brand": "Dymo",
+        "model": "Rhino 4200",
+        "battery_status": "out",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.7,
+          0.7,
+          1.6
+        ],
+        "weight": 60.0,
+        "brand": "Samsung",
+        "light_status": "flickering",
+        "condition": "out of order"
+      },
+      "states": {}
+    },
+    {
+      "id": "locker_1",
+      "name": "Locker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.5,
+          1.8
+        ],
+        "weight": 30.0,
+        "lock_status": "broken",
+        "unit_number": 3
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_contact_list_1",
+      "name": "Emergency Contact List",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "condition": "coffee-stained",
+        "missing_info": "HR number"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_reset_station_1",
+      "name": "Keycard Reset Station",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 2.0,
+        "brand": "HID",
+        "error_code": "E-07",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 15.0,
+        "brand": "Sharp",
+        "timer_remaining": "30 sec",
+        "sound_status": "beeping",
+        "provides_abilities": [
+          "deactivate",
+          "mute"
+        ]
+      },
+      "states": {
+        "is_active": true,
+        "is_muted": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 3.5,
+        "brand": "Keurig",
+        "water_status": "empty",
+        "grounds_status": "used",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "hack_the_planet_poster_1",
+      "name": "Hack the Planet Poster",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "condition": "torn corner",
+        "origin": "90s cybersecurity conference"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_potted_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "type": "succulent",
+        "condition": "dried out"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "deactivate",
+    "mute",
+    "open",
+    "stop_recording",
+    "unpair",
+    "unseal"
+  ]
+}

@@ -1,0 +1,537 @@
+{
+  "description": "A high-tech Panoramic Photography Lab specializing in 360° immersive imaging for real estate and architectural projects, featuring four interconnected zones: Main Shooting Bay, Equipment Prep Station, Post-Processing Hub, and Storage & Maintenance Closet.",
+  "rooms": [
+    {
+      "id": "main_shooting_bay",
+      "name": "Main Shooting Bay",
+      "properties": {
+        "type": "controlled_environment",
+        "lighting": "adjustable",
+        "soundproofing": true,
+        "vibration_dampened": true
+      },
+      "connected_to_room_ids": [
+        "equipment_prep_station",
+        "post_processing_hub"
+      ]
+    },
+    {
+      "id": "equipment_prep_station",
+      "name": "Equipment Prep Station",
+      "properties": {
+        "type": "workshop",
+        "esd_safe": true
+      },
+      "connected_to_room_ids": [
+        "main_shooting_bay",
+        "storage_closet"
+      ]
+    },
+    {
+      "id": "post_processing_hub",
+      "name": "Post-Processing Hub",
+      "properties": {
+        "type": "digital_workspace",
+        "monitors": 4,
+        "servers": 2
+      },
+      "connected_to_room_ids": [
+        "main_shooting_bay"
+      ]
+    },
+    {
+      "id": "storage_closet",
+      "name": "Storage & Maintenance Closet",
+      "properties": {
+        "type": "storage",
+        "locked": true
+      },
+      "connected_to_room_ids": [
+        "equipment_prep_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "mirror_ball_rig_1",
+      "name": "360° Mirror Ball Rig",
+      "type": "FURNITURE",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "chrome",
+        "diameter": "50cm"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "tripod_1",
+      "name": "Manfrotto 058B Triaut Tripod",
+      "type": "FURNITURE",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "brand": "Manfrotto",
+        "model": "058B",
+        "height_adjustable": true
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_plate_1",
+      "name": "Vibration-Dampened Floor Plate",
+      "type": "FURNITURE",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.02
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "rubber",
+        "embedded_sensors": [
+          "accelerometers"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lighting_grid_1",
+      "name": "Overhead Lighting Grid",
+      "type": "FURNITURE",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          0.1
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "panels": 6,
+        "color_temperature_range": "3000K–6500K",
+        "motorized": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "camera_1",
+      "name": "Canon EOS R5 with RF 15-35mm Lens",
+      "type": "ITEM",
+      "location_id": "on:tripod_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Canon",
+        "model": "EOS R5",
+        "lens": "RF 15-35mm",
+        "image_stabilization": "disabled",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "remote_trigger_1",
+      "name": "Exposure Remote Trigger",
+      "type": "ITEM",
+      "location_id": "on:tripod_1",
+      "properties": {
+        "weight": 0.2,
+        "wireless": true,
+        "delay": "10-second"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_targets_1",
+      "name": "Calibration Targets",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 0.5,
+        "pattern": "checkerboard",
+        "contrast": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "lens_cleaning_kit_1",
+      "name": "Lens Cleaning Kit",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 1.0,
+        "contents": [
+          "microfiber cloths",
+          "isopropyl alcohol",
+          "blower"
+        ],
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tripod_counterweights_1",
+      "name": "Tripod Counterweights",
+      "type": "ITEM",
+      "location_id": "on:tripod_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "sand",
+        "quantity": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "laptop_1",
+      "name": "Laptop on Stand",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 2.0,
+        "brand": "Dell",
+        "model": "XPS 15",
+        "display": "live feed"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_prep_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "ESD-safe",
+        "surface": "mat"
+      },
+      "states": {}
+    },
+    {
+      "id": "lens_calibration_jig_1",
+      "name": "Lens Calibration Jig",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.2,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "adjustment": "micrometer"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_mirror_ball_1",
+      "name": "Spare Mirror Ball",
+      "type": "ITEM",
+      "location_id": "in:equipment_prep_station",
+      "properties": {
+        "weight": 60.0,
+        "packaging": "foam-lined crate",
+        "label": "FRAGILE – DO NOT TILT",
+        "is_container": true
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "lens_testing_chart_1",
+      "name": "Lens Testing Chart",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "pattern": "Siemens star",
+        "resolution": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_drawer_1",
+      "name": "Tool Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_prep_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "contents": [
+          "screwdrivers",
+          "hex wrenches",
+          "torque wrench"
+        ],
+        "provides_abilities": [
+          "loosen",
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "battery_charging_station_1",
+      "name": "Battery Charging Station",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_prep_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "batteries": 4,
+        "type": "LP-E6NH"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "storage_cabinet_1",
+      "name": "Locked Equipment Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "security": "keycard-protected"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "access_level": "maintenance"
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Dyson",
+        "model": "V11",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Half-Full Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 0.4,
+        "content": "coffee",
+        "fill_level": "half",
+        "material": "ceramic",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {
+        "is_served": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Dusty Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 0.1,
+        "message": "CHECK YOUR STABILIZER SETTINGS!",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "perfect_shot_examples_1",
+      "name": "Framed 'Perfect Shot' Examples",
+      "type": "ITEM",
+      "location_id": "in:main_shooting_bay",
+      "properties": {
+        "weight": 2.0,
+        "quantity": 3,
+        "frame_material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "outdated_gear_catalog_1",
+      "name": "Outdated Gear Catalog",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "edition": "2018",
+        "condition": "dog-eared"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "Bob – Don’t forget ISO 100!!",
+        "color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "FURNITURE",
+      "location_id": "in:post_processing_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "brand": "Xerox",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:photocopier_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Epson",
+        "model": "Perfection V600",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 5.0,
+        "capacity": "5 liters",
+        "content": "gasoline",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "generator_1",
+      "name": "Portable Generator",
+      "type": "FURNITURE",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "fuel_type": "gasoline"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    }
+  ],
+  "abilities": [
+    "clean",
+    "copy",
+    "disassemble",
+    "loosen",
+    "open",
+    "photograph",
+    "refuel",
+    "scan",
+    "serve",
+    "turn_off",
+    "turn_on",
+    "uncover",
+    "vacuum",
+    "close"
+  ]
+}

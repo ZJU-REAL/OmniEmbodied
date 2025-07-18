@@ -1,0 +1,643 @@
+{
+  "description": "A high-density Data Processing & Analysis Lab designed for multi-agent collaboration, featuring a main data hub, server rack zone, filtering station, and storage closet.",
+  "rooms": [
+    {
+      "id": "main_data_hub",
+      "name": "Main Data Hub",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "server_rack_zone",
+        "filtering_qa_station",
+        "storage_closet"
+      ]
+    },
+    {
+      "id": "server_rack_zone",
+      "name": "Server Rack Zone",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "main_data_hub"
+      ]
+    },
+    {
+      "id": "filtering_qa_station",
+      "name": "Filtering & QA Station",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "main_data_hub"
+      ]
+    },
+    {
+      "id": "storage_closet",
+      "name": "Storage & Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_data_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "interactive_display_wall_1",
+      "name": "Interactive Display Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_data_hub",
+      "properties": {
+        "size": [
+          2.5,
+          0.1,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "glass",
+        "brand": "TechVision",
+        "model_number": "DVW-2500"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "central_workbench_1",
+      "name": "Central Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_data_hub",
+      "properties": {
+        "size": [
+          2.4,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_type": "anti-static"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "primary_terminal_1",
+      "name": "Primary Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 5.2,
+        "color": "black",
+        "brand": "CompuTech",
+        "model_number": "CT-9000",
+        "provides_abilities": [
+          "sync"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "external_hard_drive_array_1",
+      "name": "External Hard Drive Array",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 25.0,
+        "color": "black",
+        "brand": "DataSafe",
+        "capacity": "8TB",
+        "provides_abilities": [
+          "sync"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "data_transfer_station_1",
+      "name": "Data Transfer Station",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "silver",
+        "brand": "PortMaster",
+        "port_types": [
+          "USB-C",
+          "Thunderbolt"
+        ],
+        "provides_abilities": [
+          "sync"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 8.7,
+        "color": "white",
+        "brand": "ScanPro",
+        "model_number": "SP-200",
+        "provides_abilities": [
+          "sync"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "rack_units": 42
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cooling_unit_1",
+      "name": "Cooling Unit",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 65.0,
+        "color": "white",
+        "brand": "CoolMax",
+        "temperature_display": "29°C",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "faulty_server_node_1",
+      "name": "Faulty Server Node",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "brand": "ServerTech",
+        "serial_number": "SRV-7821-K",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 2.3,
+        "color": "red",
+        "brand": "PowerSafe",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true,
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "plexiglass_panel_1",
+      "name": "Plexiglass Panel",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 5.0,
+        "color": "clear",
+        "material": "plexiglass",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:central_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "SecureAccess",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dual_monitor_desk_1",
+      "name": "Dual-Monitor Verification Desk",
+      "type": "FURNITURE",
+      "location_id": "in:filtering_qa_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          0.8
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Digital Overlay",
+      "type": "ITEM",
+      "location_id": "on:dual_monitor_desk_1",
+      "properties": {
+        "weight": 4.5,
+        "color": "black",
+        "brand": "MicroView",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:dual_monitor_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "gray",
+        "brand": "LabelPro",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "reference_datasheets_1",
+      "name": "Reference Datasheets",
+      "type": "ITEM",
+      "location_id": "on:dual_monitor_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "various",
+        "material": "paper",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "storage_shelf_1",
+      "name": "Storage Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "size": [
+          1.5,
+          0.4,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "glass",
+        "label": "CORROSIVE",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "glass",
+        "label": "NON-TOXIC"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_3",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "glass",
+        "label": "FLAMMABLE"
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "brand": "FixIt",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "insulation_roll_1",
+      "name": "Insulation Roll",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "silver",
+        "material": "foil",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "SafetyFirst",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "green",
+        "brand": "GardenPro",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_potted_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "on:dual_monitor_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "ceramic",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {
+        "is_pruned": false
+      }
+    },
+    {
+      "id": "overhead_magnifying_lamp_1",
+      "name": "Overhead Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "in:filtering_qa_station",
+      "properties": {
+        "weight": 4.0,
+        "color": "black",
+        "brand": "MagniView",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "adjustable_task_lamp_1",
+      "name": "Adjustable Task Lamp",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "brand": "LumaBright",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_data_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.05,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "melamine"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_notes_1",
+      "name": "Sticky Notes",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "paper",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "coffee_stain_1",
+      "name": "Coffee Stain",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "brown",
+        "material": "dried_liquid",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "expired_security_badge_1",
+      "name": "Expired Security Badge",
+      "type": "ITEM",
+      "location_id": "in:central_workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "dusty_server_manual_1",
+      "name": "Dusty Server Manual",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "material": "paper",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "quiet_hours_sign_1",
+      "name": "Quiet Hours Sign",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "material": "plastic",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "employee_of_the_month_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:filtering_qa_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "frame",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "extinguish",
+    "insulate",
+    "open",
+    "prune",
+    "purify",
+    "repair",
+    "show",
+    "sync",
+    "turn_on",
+    "close"
+  ]
+}

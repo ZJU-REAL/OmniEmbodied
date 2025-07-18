@@ -1,0 +1,823 @@
+{
+  "description": "A high-intensity Sports Medicine Clinic post-Super Bowl, featuring a triage bay, rehabilitation gym, medical lab, and tactical review room, filled with medical equipment, recovery tools, and strategy materials.",
+  "rooms": [
+    {
+      "id": "triage_bay",
+      "name": "Triage & Examination Bay",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "rehab_gym",
+        "medical_lab",
+        "tactical_room"
+      ]
+    },
+    {
+      "id": "rehab_gym",
+      "name": "Rehabilitation Gym",
+      "properties": {
+        "type": "fitness"
+      },
+      "connected_to_room_ids": [
+        "triage_bay",
+        "medical_lab"
+      ]
+    },
+    {
+      "id": "medical_lab",
+      "name": "Medical Lab & Pharmacy",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "triage_bay",
+        "rehab_gym",
+        "tactical_room"
+      ]
+    },
+    {
+      "id": "tactical_room",
+      "name": "Tactical Review Room",
+      "properties": {
+        "type": "strategy"
+      },
+      "connected_to_room_ids": [
+        "triage_bay",
+        "medical_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "examination_table_1",
+      "name": "Motorized Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "load_capacity": 250.0
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Wheeled Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "xray_viewer_1",
+      "name": "Wall-Mounted Digital X-Ray Viewer",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "mri_tablet_1",
+      "name": "Dwight Freeney's MRI Scan Tablet",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Samsung",
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "blood_pressure_cuff_1",
+      "name": "Blood Pressure Cuff",
+      "type": "ITEM",
+      "location_id": "on:crash_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "condition": "partially deflated"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Sealed Biohazard Bin",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ultrasound_machine_1",
+      "name": "Portable Ultrasound Machine",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "brand": "GE"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "medication_fridge_1",
+      "name": "Locked Medication Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "wobbly left wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydrotherapy_tub_1",
+      "name": "Hydrotherapy Cold Plunge Tub",
+      "type": "FURNITURE",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.2
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "water_temp": 10.0
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "massage_table_1",
+      "name": "Motorized Massage Table",
+      "type": "FURNITURE",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.7
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "condition": "stuck in recline mode"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "resistance_band_rack_1",
+      "name": "Resistance Band Rack",
+      "type": "FURNITURE",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "rehab_plan_1",
+      "name": "Peyton Manning's Rehab Plan",
+      "type": "ITEM",
+      "location_id": "on:massage_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "condition": "smudged ink, missing page 2"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "kinesiology_tape_dispenser_1",
+      "name": "Kinesiology Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:resistance_band_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "electrostimulation_machine_1",
+      "name": "Broken Electrostimulation Machine",
+      "type": "FURNITURE",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "error_code": "E-47"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "foam_roller_1",
+      "name": "Foam Roller",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "condition": "slightly torn, leaking beads"
+      },
+      "states": {}
+    },
+    {
+      "id": "stopwatch_1",
+      "name": "Digital Stopwatch",
+      "type": "ITEM",
+      "location_id": "on:resistance_band_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "battery low, time drifts"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "condition": "empty"
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "condition": "lid stuck"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blood_sample_storage_1",
+      "name": "Refrigerated Blood Sample Storage",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "condition": "temperature alarm blinking"
+      },
+      "states": {
+        "is_active": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "narcotics_cabinet_1",
+      "name": "Locked Narcotics Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          1.2
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "fingerprint smudged"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bloodwork_reports_1",
+      "name": "Player Bloodwork Reports",
+      "type": "ITEM",
+      "location_id": "on:centrifuge_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "condition": "mislabeled, two files swapped"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "cortisone_vial_1",
+      "name": "Vial of Cortisone",
+      "type": "ITEM",
+      "location_id": "in:narcotics_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "expiration_date": "yesterday"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "iv_bag_1",
+      "name": "Sealed IV Bag",
+      "type": "ITEM",
+      "location_id": "in:blood_sample_storage_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "condition": "leaking slightly at the port"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "condition": "focus knob stiff"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "lab_scale_1",
+      "name": "Lab Scale",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "condition": "needs recalibration, drifts by 0.3g"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "shredder_1",
+      "name": "Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "paper jam, warning light on"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "tactical_screen_1",
+      "name": "Tactical Screen",
+      "type": "FURNITURE",
+      "location_id": "in:tactical_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "brand": "Sony"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:tactical_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "condition": "half-erased workout routines"
+      },
+      "states": {}
+    },
+    {
+      "id": "physicians_badge_1",
+      "name": "Head Physician's Badge",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "provides_abilities": [
+          "arm_alarm"
+        ]
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "game_footage_usb_1",
+      "name": "Game Footage USB",
+      "type": "ITEM",
+      "location_id": "in:tactical_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "provides_abilities": [
+          "format"
+        ]
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "burnt smell, needs descaling"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "fedex_boxes_1",
+      "name": "Unopened FedEx Boxes",
+      "type": "ITEM",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "brown",
+        "condition": "addressed to Head Physician"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "championship_trophy_1",
+      "name": "Championship Trophy",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 3.0,
+        "color": "gold",
+        "condition": "tarnished"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "protein_shake_bottle_1",
+      "name": "Discarded Protein Shake Bottle",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "condition": "lid missing, sticky residue"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "team_photos_1",
+      "name": "Framed Team Photos",
+      "type": "ITEM",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "condition": "dusty, slightly crooked"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "sports_medicine_journals_1",
+      "name": "Stack of Sports Medicine Journals",
+      "type": "ITEM",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "condition": "2018-2022 editions"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-Empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "inscription": "DR. LEWIS",
+        "condition": "stained"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Saw",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shovel_1",
+      "name": "Shovel",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hammer_1",
+      "name": "Hammer",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 1.0,
+        "color": "yellow",
+        "provides_abilities": [
+          "pulverize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "picture_hook_1",
+      "name": "Picture Hook",
+      "type": "ITEM",
+      "location_id": "in:triage_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_filter_1",
+      "name": "Water Filter",
+      "type": "ITEM",
+      "location_id": "in:medical_lab",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grinding_stone_1",
+      "name": "Grinding Stone",
+      "type": "ITEM",
+      "location_id": "in:rehab_gym",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "provides_abilities": [
+          "dull"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "arm_alarm",
+    "close",
+    "deactivate",
+    "dig",
+    "dull",
+    "format",
+    "hang_up",
+    "hide",
+    "open",
+    "pulverize",
+    "purify",
+    "refuel",
+    "saw",
+    "solve_puzzle",
+    "start_process",
+    "stop_playback",
+    "stop_process",
+    "toggle",
+    "unstaple"
+  ]
+}

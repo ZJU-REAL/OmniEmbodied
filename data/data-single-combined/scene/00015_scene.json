@@ -1,0 +1,582 @@
+{
+  "description": "A mafia-controlled recycling facility with a mix of legitimate operations and hidden criminal activities, featuring heavy materials, deceptive workflows, and environmental hazards.",
+  "rooms": [
+    {
+      "id": "receiving_bay",
+      "name": "Receiving Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sorting_floor"
+      ]
+    },
+    {
+      "id": "sorting_floor",
+      "name": "Sorting Floor",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "receiving_bay",
+        "hidden_back_room",
+        "loading_dock"
+      ]
+    },
+    {
+      "id": "hidden_back_room",
+      "name": "Hidden Back Room",
+      "properties": {
+        "type": "secret"
+      },
+      "connected_to_room_ids": [
+        "sorting_floor"
+      ]
+    },
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sorting_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_weighing_platform_1",
+      "name": "Steel Weighing Platform",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.2
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "max_capacity": 5000.0,
+        "condition": "flickering_display"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "size": [
+          5.0,
+          1.0,
+          0.5
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "suspicious_refrigerator_1",
+      "name": "Suspicious Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "SCRAP"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazardous_waste_drum_1",
+      "name": "Hazardous Waste Drum",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "ACID #4",
+        "condition": "leaking"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_pallet_jack_1",
+      "name": "Broken Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.3
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Incoming Shipments",
+      "type": "ITEM",
+      "location_id": "on:steel_weighing_platform_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "GLASS - 200kg (DELAYED)"
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti",
+      "type": "ITEM",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "paint",
+        "text": "NOSEY WORKERS GET RECYCLED"
+      },
+      "states": {}
+    },
+    {
+      "id": "moldy_coffee_cup_1",
+      "name": "Moldy Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:receiving_bay",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "content": "cigarette_butts",
+        "condition": "moldy"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "contraband_bin_1",
+      "name": "Contraband Bin",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "PLASTIC",
+        "condition": "padlocked"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "magnesium_sorting_rod_1",
+      "name": "Magnesium Sorting Rod",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 2.0,
+        "material": "magnesium",
+        "purpose": "separate_aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "defunct_vending_machine_1",
+      "name": "Defunct Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "stuck_on_A3"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "cork",
+        "content": "Godfather_movie_still"
+      },
+      "states": {}
+    },
+    {
+      "id": "hidden_back_room_door_1",
+      "name": "Hidden Back Room Door",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "keypad_locked"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "compacted_car_chassis_1",
+      "name": "Compacted Car Chassis",
+      "type": "FURNITURE",
+      "location_id": "in:hidden_back_room",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          1.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "purpose": "evidence_disposal"
+      },
+      "states": {}
+    },
+    {
+      "id": "shrink_wrapped_cash_1",
+      "name": "Shrink-Wrapped Cash",
+      "type": "ITEM",
+      "location_id": "in:hidden_back_room",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "amount": "large"
+      },
+      "states": {}
+    },
+    {
+      "id": "ledgers_1",
+      "name": "Ledgers",
+      "type": "ITEM",
+      "location_id": "in:hidden_back_room",
+      "properties": {
+        "weight": 2.0,
+        "material": "paper",
+        "content": "financial_records"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:hidden_back_room",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "condition": "bullet_hole"
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          2.0
+        ],
+        "weight": 1000.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "low_battery"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "paper_bales_1",
+      "name": "Paper Bales",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "paper",
+        "label": "PAPER",
+        "condition": "hollow"
+      },
+      "states": {}
+    },
+    {
+      "id": "gloves_1",
+      "name": "Protective Gloves",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.2,
+        "material": "rubber",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "key_1",
+      "name": "Key",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharp_object_1",
+      "name": "Sharp Object",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "provides_abilities": [
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_1",
+      "name": "Contaminant",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.5,
+        "material": "chemical",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 1.0,
+        "material": "wood",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.2,
+        "material": "bristle",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pan_1",
+      "name": "Pan",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oven_1",
+      "name": "Oven",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "functional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "freezer_1",
+      "name": "Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "frosted"
+      },
+      "states": {
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "lawnmower_1",
+      "name": "Lawnmower",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 15.0,
+        "material": "metal",
+        "provides_abilities": [
+          "mow_lawn"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "deli_receipt_1",
+      "name": "Deli Receipt",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "content": "keypad_code"
+      },
+      "states": {}
+    },
+    {
+      "id": "air_vent_1",
+      "name": "Air Vent",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "screwed"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "websters_dictionary_1",
+      "name": "Webster's Dictionary",
+      "type": "ITEM",
+      "location_id": "in:sorting_floor",
+      "properties": {
+        "weight": 3.0,
+        "material": "paper",
+        "content": "hidden_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "clean",
+    "contaminate",
+    "disconnect",
+    "fry",
+    "lock",
+    "mow_lawn",
+    "open",
+    "paint",
+    "scratch",
+    "sweep",
+    "turn_on",
+    "close"
+  ]
+}

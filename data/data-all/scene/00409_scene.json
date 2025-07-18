@@ -1,0 +1,621 @@
+{
+  "description": "A bustling Chocolate Factory Quality Control Lab with four interconnected zones for ingredient inspection, calibration, quality testing, and packaging preparation. The lab is dense with sensory data, heavy machinery, and precision tools, requiring collaboration and multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "ingredient_inspection_station",
+      "name": "Primary Ingredient Inspection Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "calibration_molding_area"
+      ]
+    },
+    {
+      "id": "calibration_molding_area",
+      "name": "Calibration & Molding Area",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "ingredient_inspection_station",
+        "quality_testing_booth"
+      ]
+    },
+    {
+      "id": "quality_testing_booth",
+      "name": "Quality Testing Booth",
+      "properties": {
+        "type": "controlled"
+      },
+      "connected_to_room_ids": [
+        "calibration_molding_area",
+        "packaging_prep_zone"
+      ]
+    },
+    {
+      "id": "packaging_prep_zone",
+      "name": "Packaging Prep Zone",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "quality_testing_booth"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_worktable_1",
+      "name": "Industrial Stainless Steel Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_inspection_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "WS-2000"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerated_vault_1",
+      "name": "Refrigerated Ingredient Vault",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_inspection_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cocoa_sack_1",
+      "name": "5kg Cocoa Bean Sack",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "burlap",
+        "color": "brown"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sweetener_dispenser_1",
+      "name": "Liquid Sweetener Dispenser",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Ingredient Logs",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital Thermometer",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "metal_scoop_1",
+      "name": "Metal Scoop",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Chocolate Press",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_molding_area",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "laser_engraver_1",
+      "name": "Laser Engraving Module",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_molding_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "aluminum"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "mold_jig_1",
+      "name": "Mold Alignment Jig",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "defect_tray_1",
+      "name": "DEFECTS Tray",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "maintenance_toolkit_1",
+      "name": "Maintenance Toolkit",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "color": "red",
+        "provides_abilities": [
+          "repair",
+          "solder"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Conveyor Belt Control Panel",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "color": "gray"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "work_gloves_1",
+      "name": "Grease-Stained Work Gloves",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "leather",
+        "color": "brown"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sensory_booth_1",
+      "name": "Sensory Evaluation Booth",
+      "type": "FURNITURE",
+      "location_id": "in:quality_testing_booth",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "analytical_scale_1",
+      "name": "Precision Analytical Scale",
+      "type": "FURNITURE",
+      "location_id": "in:quality_testing_booth",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "glass"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "golden_sample_1",
+      "name": "Reference Golden Sample Chocolate Bar",
+      "type": "ITEM",
+      "location_id": "on:analytical_scale_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "chocolate",
+        "color": "gold"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "defective_logbook_1",
+      "name": "Defective Batch Logbook",
+      "type": "ITEM",
+      "location_id": "on:analytical_scale_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "paper",
+        "color": "black"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:analytical_scale_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "palette_cleanser_1",
+      "name": "Palette Cleanser",
+      "type": "ITEM",
+      "location_id": "in:sensory_booth_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "timer_1",
+      "name": "Timer",
+      "type": "ITEM",
+      "location_id": "in:sensory_booth_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "rejected_bin_1",
+      "name": "Rejected Sample Bin",
+      "type": "ITEM",
+      "location_id": "in:sensory_booth_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sealing_machine_1",
+      "name": "Automatic Sealing Machine",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_zone",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "box_jig_1",
+      "name": "Cardboard Box Assembly Jig",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_zone",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "shipping_labels_1",
+      "name": "Misprinted Shipping Labels",
+      "type": "ITEM",
+      "location_id": "on:box_jig_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "color": "white"
+      },
+      "states": {
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "fragile_sticker_1",
+      "name": "FRAGILE Sticker Roll",
+      "type": "ITEM",
+      "location_id": "on:box_jig_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "color": "red"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "rework_tray_1",
+      "name": "Rejected Bars Rework Tray",
+      "type": "ITEM",
+      "location_id": "on:box_jig_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "color": "blue"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Packing Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:box_jig_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_prep_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.3
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "glove_box_1",
+      "name": "Half-Full Box of Gloves",
+      "type": "ITEM",
+      "location_id": "on:pallet_jack_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "cardboard",
+        "color": "brown"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "on:industrial_worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "cloth",
+        "color": "blue",
+        "provides_abilities": [
+          "clean",
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "color": "red",
+        "provides_abilities": [
+          "repair",
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_press_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "color": "black",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "on:box_jig_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "on:analytical_scale_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "cloth",
+        "color": "yellow",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "cut",
+    "fold",
+    "open",
+    "polish",
+    "repair",
+    "rip",
+    "solder",
+    "start_process",
+    "wipe"
+  ]
+}

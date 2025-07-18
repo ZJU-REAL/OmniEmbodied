@@ -1,0 +1,708 @@
+{
+  "description": "A Zero-G Orbital Maintenance Bay aboard a commercial space station, designed for servicing and refitting spacecraft like the Boeing CST-100. The environment is inherently collaborative due to microgravity physics, high-stakes precision tasks, and modular workspaces.",
+  "rooms": [
+    {
+      "id": "primary_work_deck",
+      "name": "Primary Work Deck",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "equipment_lockers",
+        "fuel_control_station",
+        "crew_ready_room"
+      ]
+    },
+    {
+      "id": "equipment_lockers",
+      "name": "Equipment Lockers & Parts Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "primary_work_deck",
+        "crew_ready_room"
+      ]
+    },
+    {
+      "id": "fuel_control_station",
+      "name": "Fuel & Propellant Control Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "primary_work_deck"
+      ]
+    },
+    {
+      "id": "crew_ready_room",
+      "name": "Crew Ready Room",
+      "properties": {
+        "type": "living"
+      },
+      "connected_to_room_ids": [
+        "primary_work_deck",
+        "equipment_lockers"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_repair_gantry_1",
+      "name": "Central Repair Gantry",
+      "type": "FURNITURE",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "load_capacity": "500kg"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "multi_axis_workbench_1",
+      "name": "Multi-axis Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_coolant_line_1",
+      "name": "Leaking Coolant Line",
+      "type": "ITEM",
+      "location_id": "on:multi_axis_workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "length": "2m",
+        "diameter": "10cm",
+        "color": "blue",
+        "material": "flexible_polymer",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "calibration_jig_1",
+      "name": "Calibration Jig",
+      "type": "ITEM",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "weight": 12.0,
+        "color": "silver",
+        "material": "titanium",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "power_drill_1",
+      "name": "Power Drill",
+      "type": "ITEM",
+      "location_id": "on:multi_axis_workbench_1",
+      "properties": {
+        "weight": 2.8,
+        "brand": "Bosch",
+        "model": "X-Pro",
+        "battery_level": "0%",
+        "provides_abilities": [
+          "assemble",
+          "mount"
+        ]
+      },
+      "states": {
+        "is_assembled": false,
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "tool_rack_1",
+      "name": "Tool Rack",
+      "type": "FURNITURE",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnetic_wrench_1",
+      "name": "Magnetic Wrench",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "size": "medium",
+        "material": "steel",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "magnetic_wrench_2",
+      "name": "Magnetic Wrench",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "size": "large",
+        "material": "steel",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ultrasonic_welder_1",
+      "name": "Ultrasonic Welder",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 4.5,
+        "power_level": "23%",
+        "material": "plastic_metal_composite",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "display": "error_log"
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "eva_suit_rack_1",
+      "name": "EVA Suit Rack",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "eva_suit_1",
+      "name": "EVA Suit",
+      "type": "ITEM",
+      "location_id": "on:eva_suit_rack_1",
+      "properties": {
+        "weight": 12.0,
+        "size": "large",
+        "color": "white",
+        "condition": "missing_left_glove"
+      },
+      "states": {}
+    },
+    {
+      "id": "helmet_1",
+      "name": "Helmet",
+      "type": "ITEM",
+      "location_id": "on:eva_suit_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "condition": "cracked_visor"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Parts Bin",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "FASTENERS – GRADE 8 TITANIUM"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_actuator_1",
+      "name": "Hydraulic Actuator",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 80.0,
+        "size": "large",
+        "material": "steel",
+        "label": "RUSH PRIORITY – CST-100 DELTA WING"
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_sample_tube_1",
+      "name": "Biohazard Sample Tube",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 0.5,
+        "size": "small",
+        "material": "glass",
+        "requires_keypad_code": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_soldering_iron_1",
+      "name": "Broken Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 0.7,
+        "condition": "tip_melted",
+        "material": "metal_plastic",
+        "location": "DEFECTIVE bin"
+      },
+      "states": {}
+    },
+    {
+      "id": "main_fuel_console_1",
+      "name": "Main Fuel Console",
+      "type": "FURNITURE",
+      "location_id": "in:fuel_control_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "pressure_dials": 6
+      },
+      "states": {}
+    },
+    {
+      "id": "mislabeled_valve_1",
+      "name": "Mislabeled Valve",
+      "type": "ITEM",
+      "location_id": "on:main_fuel_console_1",
+      "properties": {
+        "weight": 2.0,
+        "original_label": "OXYGEN",
+        "new_label": "NITROGEN",
+        "material": "brass",
+        "requires_verification": true
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "fuel_transfer_hose_1",
+      "name": "Fuel Transfer Hose",
+      "type": "ITEM",
+      "location_id": "in:fuel_control_station",
+      "properties": {
+        "weight": 8.0,
+        "length": "3m",
+        "condition": "kinked",
+        "material": "rubber_steel_composite"
+      },
+      "states": {
+        "is_pushed": true
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Checklist",
+      "type": "ITEM",
+      "location_id": "on:main_fuel_console_1",
+      "properties": {
+        "weight": 0.3,
+        "status": "half-completed",
+        "material": "plastic_paper"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "leatherman_multi_tool_1",
+      "name": "Leatherman Multi-Tool",
+      "type": "ITEM",
+      "location_id": "on:main_fuel_console_1",
+      "properties": {
+        "weight": 0.5,
+        "attachment": "velcro",
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "magnetic_floor_break_space_1",
+      "name": "Magnetic Floor Break Space",
+      "type": "FURNITURE",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "magnetic_composite"
+      },
+      "states": {}
+    },
+    {
+      "id": "locker_1",
+      "name": "Locker",
+      "type": "FURNITURE",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wall_mounted_tablet_1",
+      "name": "Wall Mounted Tablet",
+      "type": "FURNITURE",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "material": "plastic_glass",
+        "display": "spacecraft_telemetry"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:wall_mounted_tablet_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "content": "fridge_code: 7845",
+        "condition": "coffee_stained"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "coffee_bulb_1",
+      "name": "Coffee Bulb",
+      "type": "ITEM",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "weight": 0.3,
+        "content": "half-drunk",
+        "lid_inscription": "JIM’S – DON’T TOUCH",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "obsolete_poster_1",
+      "name": "Obsolete Poster",
+      "type": "ITEM",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "weight": 0.2,
+        "message": "REMEMBER: 5-POINT HARNESS CHECKS SAVE LIVES",
+        "condition": "edges_curling"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "handheld_spectrometer_1",
+      "name": "Handheld Spectrometer",
+      "type": "ITEM",
+      "location_id": "in:crew_ready_room",
+      "properties": {
+        "weight": 1.5,
+        "brand": "SciTech",
+        "model": "ST-2000",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "insulated_gloves_1",
+      "name": "Insulated Gloves",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 0.4,
+        "material": "rubber",
+        "size": "large",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grease_stained_manual_1",
+      "name": "Grease Stained Manual",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "title": "Operations Manual",
+        "condition": "grease_stained"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "faded_family_photo_1",
+      "name": "Faded Family Photo",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 0.1,
+        "condition": "edges_yellowed",
+        "location": "taped_inside_locker_door"
+      },
+      "states": {}
+    },
+    {
+      "id": "dented_coffee_tin_1",
+      "name": "Dented Coffee Tin",
+      "type": "ITEM",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "weight": 0.3,
+        "label": "EARTH’S BEST – LAST ONE, DON’T STEAL",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shower_1",
+      "name": "Emergency Shower",
+      "type": "FURNITURE",
+      "location_id": "in:fuel_control_station",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.0
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "tag": "TESTED 03/2145"
+      },
+      "states": {}
+    },
+    {
+      "id": "doodle_panel_1",
+      "name": "Doodle on Panel",
+      "type": "ITEM",
+      "location_id": "in:fuel_control_station",
+      "properties": {
+        "weight": 0.01,
+        "content": "cartoon_rocket with 'FLY ME TO THE MOON'",
+        "condition": "shaky_handwriting"
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_fire_extinguisher_1",
+      "name": "Expired Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:fuel_control_station",
+      "properties": {
+        "weight": 5.0,
+        "gauge_status": "red",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "detached_thruster_module_1",
+      "name": "Detached Thruster Module",
+      "type": "ITEM",
+      "location_id": "in:primary_work_deck",
+      "properties": {
+        "weight": 150.0,
+        "diameter": "1.2m",
+        "condition": "scorch_marks_on_nozzle",
+        "material": "titanium_composite"
+      },
+      "states": {}
+    },
+    {
+      "id": "avionics_box_1",
+      "name": "Avionics Box",
+      "type": "ITEM",
+      "location_id": "on:multi_axis_workbench_1",
+      "properties": {
+        "weight": 8.0,
+        "serial_number": "BX-455-9",
+        "condition": "partially_disassembled",
+        "material": "aluminum"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "fastener_bin_1",
+      "name": "Fastener Bin",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "FASTENERS – GRADE 8 TITANIUM"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "overflowing_trash_bin_1",
+      "name": "Overflowing Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_lockers",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "food_wrappers, fuel_line_schematic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fuel_line_schematic_1",
+      "name": "Fuel Line Schematic",
+      "type": "ITEM",
+      "location_id": "in:overflowing_trash_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "crumpled",
+        "material": "paper"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "close",
+    "mount",
+    "open",
+    "paste",
+    "pull",
+    "purify",
+    "take_down",
+    "verify"
+  ]
+}

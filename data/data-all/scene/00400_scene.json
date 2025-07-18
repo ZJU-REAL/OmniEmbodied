@@ -1,0 +1,540 @@
+{
+  "description": "A bustling media conversion lab bridging analog and digital eras, filled with vintage recording equipment, modern servers, and logistical tools for handling physical media.",
+  "rooms": [
+    {
+      "id": "analog_intake",
+      "name": "Analog Intake & Sorting Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "digitization_studio",
+        "shipping_logistics"
+      ]
+    },
+    {
+      "id": "digitization_studio",
+      "name": "Digitization Studio",
+      "properties": {
+        "type": "studio"
+      },
+      "connected_to_room_ids": [
+        "analog_intake",
+        "server_farm",
+        "qc_station"
+      ]
+    },
+    {
+      "id": "server_farm",
+      "name": "Server Farm & Cloud Archive",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "digitization_studio",
+        "qc_station"
+      ]
+    },
+    {
+      "id": "qc_station",
+      "name": "Quality Control Station",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "digitization_studio",
+        "server_farm",
+        "break_room"
+      ]
+    },
+    {
+      "id": "shipping_logistics",
+      "name": "Shipping & Logistics",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "analog_intake",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room/Shared Workspace",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "qc_station",
+        "shipping_logistics"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "sorting_table_1",
+      "name": "Steel Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:analog_intake",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Zebra",
+        "model_number": "DS2208"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "rare_masters_crate_1",
+      "name": "RARE MASTERS Crate",
+      "type": "FURNITURE",
+      "location_id": "in:analog_intake",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "DO NOT DROP"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:analog_intake",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.4
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "leaking_hydraulic_fluid"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 5.2,
+        "color": "white",
+        "brand": "Brother",
+        "model_number": "QL-800",
+        "is_container": true
+      },
+      "states": {
+        "is_on": true,
+        "is_labeled": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "label_roll_1",
+      "name": "Label Roll",
+      "type": "ITEM",
+      "location_id": "in:label_printer_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "paper",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vinyl_mailers_1",
+      "name": "Stack of Vinyl Mailers",
+      "type": "ITEM",
+      "location_id": "in:analog_intake",
+      "properties": {
+        "weight": 3.5,
+        "color": "brown",
+        "material": "cardboard",
+        "condition": "mixed"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "studer_a80_1",
+      "name": "Studer A80 Tape Machine",
+      "type": "FURNITURE",
+      "location_id": "in:digitization_studio",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "brand": "Studer",
+        "model_number": "A80",
+        "calibration_knob_color": "red",
+        "warning_label": "15 IPS ONLY"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "neumann_u87_1",
+      "name": "Neumann U87 Microphone",
+      "type": "ITEM",
+      "location_id": "on:studer_a80_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Neumann",
+        "serial_number": "A48922",
+        "cable_condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Locked Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          2.0
+        ],
+        "weight": 700.0,
+        "is_container": true,
+        "material": "steel",
+        "clearance_level": "L2"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cat6_cables_1",
+      "name": "Box of Cat-6 Cables",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "spilled"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "reference_speaker_1",
+      "name": "Reference Speaker",
+      "type": "ITEM",
+      "location_id": "in:qc_station",
+      "properties": {
+        "weight": 8.5,
+        "color": "black",
+        "brand": "Genelec",
+        "model_number": "8030C",
+        "is_container": true
+      },
+      "states": {
+        "is_on": true,
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "studio_headphones_1",
+      "name": "Studio Headphones",
+      "type": "ITEM",
+      "location_id": "on:reference_speaker_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "brand": "Sennheiser",
+        "model_number": "HD650"
+      },
+      "states": {}
+    },
+    {
+      "id": "reject_tapes_1",
+      "name": "Stack of Reject Tapes",
+      "type": "ITEM",
+      "location_id": "in:qc_station",
+      "properties": {
+        "weight": 4.2,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "packing_table_1",
+      "name": "Packing Table",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_logistics",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "postal_scale_1",
+      "name": "Postal Scale",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "brand": "Dymo",
+        "model_number": "S100"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fedex_boxes_1",
+      "name": "Wall of FedEx Boxes",
+      "type": "ITEM",
+      "location_id": "in:shipping_logistics",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "material": "cardboard"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "keurig_1",
+      "name": "Broken Keurig",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "Keurig",
+        "model_number": "K-Classic",
+        "is_container": true
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "l2_keycard_1",
+      "name": "L2 Keycard",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "clearance_level": "L2"
+      },
+      "states": {}
+    },
+    {
+      "id": "mug_1",
+      "name": "DON’T TOUCH Mug",
+      "type": "ITEM",
+      "location_id": "on:keurig_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic",
+        "inscription": "DON’T TOUCH – L2 STAFF ONLY"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mug_2",
+      "name": "Pens Mug",
+      "type": "ITEM",
+      "location_id": "on:keurig_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "ceramic",
+        "contents": "pens"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mug_3",
+      "name": "Loose Change Mug",
+      "type": "ITEM",
+      "location_id": "on:keurig_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "green",
+        "material": "ceramic",
+        "contents": "coins"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "melamine",
+        "content": "$5/month???"
+      },
+      "states": {}
+    },
+    {
+      "id": "marker_1",
+      "name": "Whiteboard Marker",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Expo",
+        "ink_level": "low",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Tape Machine Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:digitization_studio",
+      "properties": {
+        "weight": 0.7,
+        "color": "silver",
+        "material": "steel",
+        "brand": "Studer",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_brush_1",
+      "name": "Cleaning Brush",
+      "type": "ITEM",
+      "location_id": "in:digitization_studio",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "plastic",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "utility_knife_1",
+      "name": "Utility Knife",
+      "type": "ITEM",
+      "location_id": "in:shipping_logistics",
+      "properties": {
+        "weight": 0.3,
+        "color": "orange",
+        "brand": "Stanley",
+        "provides_abilities": [
+          "cut",
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "paste"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "crack",
+    "cut",
+    "label",
+    "open",
+    "paste",
+    "scrub",
+    "slice",
+    "stack",
+    "turn_off",
+    "turn_on",
+    "unstack",
+    "close"
+  ]
+}

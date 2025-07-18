@@ -1,0 +1,866 @@
+{
+  "description": "A high-traffic data center control room with multiple interconnected areas, designed for multi-agent collaboration to ensure uptime, troubleshoot hardware, and reroute critical services.",
+  "rooms": [
+    {
+      "id": "main_control_hub",
+      "name": "Main Control Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "server_farm",
+        "network_closet",
+        "cache_storage_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "server_farm",
+      "name": "Server Farm",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "network_closet"
+      ]
+    },
+    {
+      "id": "network_closet",
+      "name": "Network Closet",
+      "properties": {
+        "type": "network_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "server_farm"
+      ]
+    },
+    {
+      "id": "cache_storage_room",
+      "name": "Cache Storage Room",
+      "properties": {
+        "type": "storage_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_monitoring_desk_1",
+      "name": "Central Monitoring Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_power_panel_1",
+      "name": "Emergency Power Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "primary_terminal_1",
+      "name": "Primary Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Custom",
+        "model_number": "LinuxWS-1"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cache_override_switch_1",
+      "name": "Cache Override Switch",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "server_reboot_console_1",
+      "name": "Server Reboot Console",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "material": "plastic"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "secondary_laptop_1",
+      "name": "Secondary Laptop",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "brand": "Dell",
+        "model": "XPS"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "secondary_laptop_2",
+      "name": "Secondary Laptop",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "brand": "Dell",
+        "model": "XPS"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "secondary_laptop_3",
+      "name": "Secondary Laptop",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "brand": "Dell",
+        "model": "XPS"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:central_monitoring_desk_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "brand": "Dymo",
+        "model": "LabelWriter 450",
+        "provides_abilities": [
+          "draw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 1.5,
+        "color": "gold",
+        "material": "wood",
+        "inscription": "Employee of the Month 2020"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_can_1",
+      "name": "Energy Drink Can",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "brand": "Red Bull",
+        "is_empty": true
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_can_2",
+      "name": "Energy Drink Can",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "brand": "Monster",
+        "is_empty": true
+      },
+      "states": {}
+    },
+    {
+      "id": "it_manual_1",
+      "name": "IT Manual",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "title": "Legacy Server Configurations",
+        "is_outdated": true
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_2",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_3",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black",
+        "is_overheating": true
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "server_rack_4",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_cooling_vent_1",
+      "name": "Overhead Cooling Vent",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "metal",
+        "is_clogged": true
+      },
+      "states": {}
+    },
+    {
+      "id": "manual_bypass_switch_1",
+      "name": "Manual Bypass Switch",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": false
+      }
+    },
+    {
+      "id": "spare_hard_drive_1",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "Seagate",
+        "model": "IronWolf"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "spare_hard_drive_2",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "Seagate",
+        "model": "IronWolf"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "spare_hard_drive_3",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "Seagate",
+        "model": "IronWolf"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "Klein",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cable_tester_1",
+      "name": "Cable Tester",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "brand": "Fluke",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Thermal Paste",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "Arctic",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "do_not_touch_sign_1",
+      "name": "DO NOT TOUCH Sign",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "plastic",
+        "inscription": "DO NOT TOUCH"
+      },
+      "states": {}
+    },
+    {
+      "id": "post_it_note_1",
+      "name": "Post-It Note",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "material": "paper",
+        "inscription": "Jenkins test failed 3x – fix later."
+      },
+      "states": {}
+    },
+    {
+      "id": "cisco_switch_stack_1",
+      "name": "Cisco Catalyst Switch Stack",
+      "type": "FURNITURE",
+      "location_id": "in:network_closet",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "brand": "Cisco",
+        "model": "Catalyst"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "fiber_optic_patch_panel_1",
+      "name": "Fiber Optic Patch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:network_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          1.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "manual_reroute_panel_1",
+      "name": "Manual Traffic Reroute Panel",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_ethernet_cable_1",
+      "name": "Spare Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "type": "Cat6",
+        "is_tangled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_ethernet_cable_2",
+      "name": "Spare Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "type": "Cat6",
+        "is_tangled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_ethernet_cable_3",
+      "name": "Spare Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "type": "Cat5e",
+        "is_tangled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tone_generator_1",
+      "name": "Tone Generator",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "brand": "Klein Tools",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "network_topology_diagram_1",
+      "name": "Network Topology Diagram",
+      "type": "ITEM",
+      "location_id": "in:network_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper",
+        "is_outdated": true
+      },
+      "states": {}
+    },
+    {
+      "id": "cache_drive_1",
+      "name": "Cache Drive",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Western Digital",
+        "model": "Red"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "cache_drive_2",
+      "name": "Cache Drive",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Western Digital",
+        "model": "Red"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "cache_drive_3",
+      "name": "Cache Drive",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Western Digital",
+        "model": "Red"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "cache_drive_4",
+      "name": "Cache Drive",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Western Digital",
+        "model": "Red"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "cache_drive_5",
+      "name": "Cache Drive",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Western Digital",
+        "model": "Red",
+        "inscription": "FALLBACK_MASTER"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "manual_override_switch_1",
+      "name": "Manual Override Switch",
+      "type": "ITEM",
+      "location_id": "in:cache_storage_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "coffee_mug_2",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "material": "paper",
+        "inscription": "Check proxy rules!"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_2",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.01,
+        "color": "pink",
+        "material": "paper",
+        "inscription": "Keycard in drawer"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_drawer_1",
+      "name": "Desk Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ups_battery_unit_1",
+      "name": "UPS Battery Unit",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "server_rack_tray_1",
+      "name": "Server Rack Slide-Out Tray",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.1
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "draw",
+    "open",
+    "replace",
+    "scan",
+    "turn_off",
+    "turn_on",
+    "varnish",
+    "close"
+  ]
+}

@@ -1,0 +1,693 @@
+{
+  "description": "A medieval-fantasy tactical armory and blacksmith forge, serving as both a training ground and equipment maintenance hub for a mercenary company. The space is designed for multi-agent collaboration, requiring coordination to move heavy weapons, repair armor, forge new gear, and organize supplies.",
+  "rooms": [
+    {
+      "id": "forge_workspace",
+      "name": "Forge & Anvil Workspace",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "weapon_racks",
+        "tactical_planning_table"
+      ]
+    },
+    {
+      "id": "weapon_racks",
+      "name": "Weapon Racks & Armor Stands",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "forge_workspace",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "tactical_planning_table",
+      "name": "Tactical Planning Table",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "forge_workspace",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet & Repair Station",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "weapon_racks",
+        "tactical_planning_table"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "blast_furnace_1",
+      "name": "Blast Furnace",
+      "type": "FURNITURE",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "size": [
+          1.8,
+          1.8,
+          2.5
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "material": "iron",
+        "temperature": 950.0
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "heavy_anvil_1",
+      "name": "Heavy Anvil",
+      "type": "FURNITURE",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "quenching_trough_1",
+      "name": "Quenching Trough",
+      "type": "FURNITURE",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "wood",
+        "liquid_type": "water",
+        "liquid_volume": 50.0
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "unfinished_greatsword_1",
+      "name": "Unfinished Greatsword",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 8.5,
+        "material": "steel",
+        "temperature": 850.0,
+        "color": "red"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "warhammer_head_1",
+      "name": "Warhammer Head",
+      "type": "ITEM",
+      "location_id": "on:heavy_anvil_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "iron",
+        "condition": "loose"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "broken_bellows_handle_1",
+      "name": "Broken Bellows Handle",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 2.5,
+        "material": "wood",
+        "condition": "splintered"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "tool_rack_1",
+      "name": "Tool Rack",
+      "type": "FURNITURE",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          1.5
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "hammer_1",
+      "name": "Smithing Hammer",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "provides_abilities": [
+          "assemble",
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tongs_1",
+      "name": "Blacksmith Tongs",
+      "type": "ITEM",
+      "location_id": "on:tool_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "iron",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coal_scuttle_1",
+      "name": "Coal Scuttle",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 15.0,
+        "material": "iron",
+        "contents": "coal",
+        "fill_percentage": 50.0
+      },
+      "states": {}
+    },
+    {
+      "id": "leather_apron_1",
+      "name": "Leather Apron",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 1.5,
+        "material": "leather",
+        "condition": "oil-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "danger_sign_1",
+      "name": "DANGER: HEAT Sign",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 0.5,
+        "material": "wood",
+        "condition": "faded"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "metal_scraps_1",
+      "name": "Pile of Metal Scraps",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 12.0,
+        "material": "mixed_metal",
+        "condition": "sharp"
+      },
+      "states": {}
+    },
+    {
+      "id": "victory_banner_1",
+      "name": "Victory Banner",
+      "type": "ITEM",
+      "location_id": "in:forge_workspace",
+      "properties": {
+        "weight": 1.0,
+        "material": "cloth",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "reinforced_weapon_rack_1",
+      "name": "Reinforced Weapon Rack",
+      "type": "FURNITURE",
+      "location_id": "in:weapon_racks",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "oak",
+        "condition": "loose_beam"
+      },
+      "states": {}
+    },
+    {
+      "id": "armor_mannequin_1",
+      "name": "Armor Mannequin",
+      "type": "FURNITURE",
+      "location_id": "in:weapon_racks",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "material": "steel",
+        "missing_parts": "gauntlet"
+      },
+      "states": {}
+    },
+    {
+      "id": "ornate_greatsword_1",
+      "name": "Ornate Greatsword",
+      "type": "ITEM",
+      "location_id": "in:weapon_racks",
+      "properties": {
+        "weight": 5.5,
+        "material": "steel",
+        "pommel": "wolf_head",
+        "grip": "leather",
+        "inscription": "Kragh's Fang"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "unbalanced_halberd_1",
+      "name": "Unbalanced Halberd",
+      "type": "ITEM",
+      "location_id": "on:reinforced_weapon_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "steel",
+        "condition": "loose_head"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "heavy_shield_1",
+      "name": "Heavy Shield",
+      "type": "ITEM",
+      "location_id": "on:reinforced_weapon_rack_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "steel",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "whetstone_wheel_1",
+      "name": "Whetstone Wheel",
+      "type": "FURNITURE",
+      "location_id": "in:weapon_racks",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stone",
+        "condition": "squeaky"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "oil_flask_1",
+      "name": "Oil Flask",
+      "type": "ITEM",
+      "location_id": "on:whetstone_wheel_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "glass",
+        "contents": "oil",
+        "fill_percentage": 75.0,
+        "condition": "leaking"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "leather_straps_1",
+      "name": "Leather Straps",
+      "type": "ITEM",
+      "location_id": "in:weapon_racks",
+      "properties": {
+        "weight": 0.8,
+        "material": "leather",
+        "condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "large_oak_table_1",
+      "name": "Large Oak Table",
+      "type": "FURNITURE",
+      "location_id": "in:tactical_planning_table",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "oak",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_weapon_crate_1",
+      "name": "Locked Weapon Crate",
+      "type": "FURNITURE",
+      "location_id": "in:tactical_planning_table",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "oak"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "battle_map_1",
+      "name": "Battle Map",
+      "type": "ITEM",
+      "location_id": "on:large_oak_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "parchment",
+        "condition": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "hollow_book_1",
+      "name": "Hollow Book",
+      "type": "ITEM",
+      "location_id": "on:large_oak_table_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "paper",
+        "title": "Tactics of the Iron Legion",
+        "contents": "key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "inkwell_1",
+      "name": "Inkwell",
+      "type": "ITEM",
+      "location_id": "on:large_oak_table_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "contents": "ink",
+        "fill_percentage": 10.0
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "lantern_1",
+      "name": "Lantern",
+      "type": "ITEM",
+      "location_id": "on:large_oak_table_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "metal",
+        "fuel_level": 15.0
+      },
+      "states": {
+        "is_playing": false
+      }
+    },
+    {
+      "id": "rickety_stool_1",
+      "name": "Rickety Stool",
+      "type": "FURNITURE",
+      "location_id": "in:tactical_planning_table",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "wood",
+        "condition": "loose_leg"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "jammed_drawers"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barrel_of_oil_1",
+      "name": "Barrel of Blacksmith Oil",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": "oil",
+        "volume": 200.0
+      },
+      "states": {}
+    },
+    {
+      "id": "replacement_haft_1",
+      "name": "Replacement Haft",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 3.0,
+        "material": "oak",
+        "length": 1.2
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_iron_box_1",
+      "name": "Locked Iron Box",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "iron",
+        "contents": "flux"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "grindstone_1",
+      "name": "Grindstone",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "material": "stone",
+        "condition": "cracked_edge"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "brushes_1",
+      "name": "Brushes and Rags",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "material": "mixed",
+        "condition": "oily"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "spare_nails_1",
+      "name": "Spare Nails and Rivets",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 1.0,
+        "material": "iron",
+        "condition": "rusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "linseed_oil_1",
+      "name": "Linseed Oil",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.7,
+        "material": "glass",
+        "contents": "linseed_oil",
+        "fill_percentage": 50.0
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 4.0,
+        "material": "metal",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "material": "cloth",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cooling_trough_1",
+      "name": "Cooling Trough",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.4
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "stone",
+        "contents": "water"
+      },
+      "states": {
+        "is_hot": false
+      }
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "close",
+    "cover",
+    "open",
+    "play",
+    "start_process",
+    "take_down",
+    "weld",
+    "wipe"
+  ]
+}

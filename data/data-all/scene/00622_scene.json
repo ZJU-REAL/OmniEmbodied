@@ -1,0 +1,911 @@
+{
+  "description": "A high-stakes aircraft maintenance hangar during emergency repairs, featuring a partially disassembled passenger jet, specialized tools, diagnostic equipment, and a team of technicians working under time pressure.",
+  "rooms": [
+    {
+      "id": "main_work_bay",
+      "name": "Main Work Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "tool_crib",
+        "avionics_station",
+        "paint_repair_corner",
+        "break_area"
+      ]
+    },
+    {
+      "id": "tool_crib",
+      "name": "Tool Crib & Parts Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_work_bay"
+      ]
+    },
+    {
+      "id": "avionics_station",
+      "name": "Avionics Diagnostics Station",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "main_work_bay"
+      ]
+    },
+    {
+      "id": "paint_repair_corner",
+      "name": "Paint & Composite Repair Corner",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "main_work_bay"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_work_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "jet_1",
+      "name": "Passenger Jet",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          30.0,
+          35.0,
+          12.0
+        ],
+        "weight": 50000.0,
+        "is_container": false,
+        "model": "A318",
+        "condition": "partially_disassembled"
+      },
+      "states": {}
+    },
+    {
+      "id": "wing_jack_1",
+      "name": "Hydraulic Wing Jack",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          3.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "capacity": "2-ton",
+        "pressure_gauge": 1200
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "aileron_1",
+      "name": "Detached Aileron",
+      "type": "FURNITURE",
+      "location_id": "on:wing_jack_1",
+      "properties": {
+        "size": [
+          4.0,
+          0.8,
+          0.3
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "composite",
+        "condition": "defective",
+        "tag": "DEFECTIVE – DO NOT INSTALL"
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_hoist_1",
+      "name": "Mobile Engine Hoist",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          3.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "sling_material": "nylon",
+        "sling_condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "rudder_assembly_1",
+      "name": "Rudder Assembly",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "part_number": "A318-667B",
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "work_platform_1",
+      "name": "Aluminum Scaffold",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          3.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "aluminum",
+        "steps_condition": "greasy"
+      },
+      "states": {}
+    },
+    {
+      "id": "work_platform_2",
+      "name": "Aluminum Scaffold",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          3.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "aluminum",
+        "steps_condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_rod_1",
+      "name": "Aileron Control Rod",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.05,
+          0.05
+        ],
+        "weight": 3.5,
+        "material": "titanium",
+        "condition": "bent",
+        "defect_location": "30cm from end"
+      },
+      "states": {
+        "is_ground": false
+      }
+    },
+    {
+      "id": "flight_data_recorder_1",
+      "name": "Flight Data Recorder Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.15,
+          0.1
+        ],
+        "weight": 2.0,
+        "color": "black",
+        "status": "plugged_in",
+        "display": "yaw_oscillation_graphs"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hydraulic_actuator_1",
+      "name": "Rudder Hydraulic Actuator",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "fluid_type": "amber",
+        "part_number": "A318-667B",
+        "condition": "leaking"
+      },
+      "states": {
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": [
+          "torque_wrenches",
+          "lockwire_pliers",
+          "ultrasonic_gauge"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.05,
+          0.05
+        ],
+        "weight": 1.2,
+        "setting": "25 Nm",
+        "brand": "Snap-on"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "ultrasonic_gauge_1",
+      "name": "Ultrasonic Thickness Gauge",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.1,
+          0.05
+        ],
+        "weight": 0.5,
+        "brand": "Olympus",
+        "battery_status": "full"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "FURNITURE",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "solvent_type": "industrial",
+        "status": "bubbling"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "corroded_bolts_1",
+      "name": "Corroded Bolts",
+      "type": "ITEM",
+      "location_id": "in:parts_washer_1",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "weight": 0.3,
+        "material": "steel",
+        "condition": "corroded"
+      },
+      "states": {
+        "is_soaked": false
+      }
+    },
+    {
+      "id": "work_light_1",
+      "name": "LED Work Light",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 1.8,
+        "brand": "Milwaukee",
+        "status": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.01
+        ],
+        "weight": 0.2,
+        "message": "NO STEP",
+        "condition": "faded"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Chipped Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "weight": 0.3,
+        "contents": [
+          "pens",
+          "spirit_level"
+        ],
+        "condition": "chipped",
+        "is_container": true
+      },
+      "states": {
+        "is_scooped": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "spirit_level_1",
+      "name": "Cracked Spirit Level",
+      "type": "ITEM",
+      "location_id": "in:coffee_mug_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.05,
+          0.02
+        ],
+        "weight": 0.1,
+        "condition": "cracked",
+        "brand": "Empire"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_work_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 1.5,
+        "inscription": "Safest Hangar 2018",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_polished": false
+      }
+    },
+    {
+      "id": "servo_module_1",
+      "name": "Servo Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.4,
+        "label": "YAWSERVO-4A",
+        "casing_condition": "scuffed",
+        "led_color": "green"
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "servo_module_2",
+      "name": "Servo Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.4,
+        "label": "YAWSERVO-4A",
+        "sticker": "CALIBRATED 10/12",
+        "solder_joint": "cracked"
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "servo_module_3",
+      "name": "Servo Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.4,
+        "label": "YAWSERVO-4A",
+        "missing_part": "mounting_bracket",
+        "note": "TESTED – NO OUTPUT"
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "servo_module_4",
+      "name": "Servo Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.4,
+        "label": "YAWSERVO-4A",
+        "condition": "new",
+        "serial_number": "YAWSERVO-4A-004"
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "servo_module_5",
+      "name": "Servo Module",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.4,
+        "label": "YAWSERVO-4A",
+        "condition": "used",
+        "test_results": "passed"
+      },
+      "states": {
+        "is_scratched": false
+      }
+    },
+    {
+      "id": "paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:avionics_station",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {
+        "is_squeezed": false
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Locked Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:tool_crib",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "lock_type": "digital_keypad"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "invoice_1",
+      "name": "Coffee-Stained Invoice",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.01
+        ],
+        "weight": 0.1,
+        "stain": "coffee",
+        "note": "CODE 4297 – CRBN FIBR ORDER"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Stained Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "weight": 2.5,
+        "brand": "Mr. Coffee",
+        "condition": "stained"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Shift Schedule Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "shift_schedules"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "tv_1",
+      "name": "Wall-Mounted TV",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.1
+        ],
+        "weight": 12.0,
+        "display": "live_weather_radar",
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "grinder_1",
+      "name": "Industrial Grinder",
+      "type": "ITEM",
+      "location_id": "in:paint_repair_corner",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.3
+        ],
+        "weight": 8.0,
+        "power": "electric",
+        "brand": "Dewalt"
+      },
+      "provides_abilities": [
+        "grind"
+      ],
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Tool Sharpener",
+      "type": "ITEM",
+      "location_id": "in:tool_crib",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 3.0,
+        "type": "bench_top",
+        "brand": "Work Sharp"
+      },
+      "provides_abilities": [
+        "sharpen"
+      ],
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper Sheet",
+      "type": "ITEM",
+      "location_id": "in:paint_repair_corner",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.01
+        ],
+        "weight": 0.1,
+        "grit": "220",
+        "brand": "3M"
+      },
+      "provides_abilities": [
+        "sand"
+      ],
+      "states": {}
+    },
+    {
+      "id": "scratch_tool_1",
+      "name": "Metal Scratch Tool",
+      "type": "ITEM",
+      "location_id": "in:tool_crib",
+      "properties": {
+        "size": [
+          0.15,
+          0.05,
+          0.01
+        ],
+        "weight": 0.2,
+        "material": "steel",
+        "tip": "sharp"
+      },
+      "provides_abilities": [
+        "scratch"
+      ],
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Digital Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "size": [
+          0.1,
+          0.05,
+          0.03
+        ],
+        "weight": 0.3,
+        "units": "PSI/kPa",
+        "brand": "Ashcroft"
+      },
+      "provides_abilities": [
+        "check_pressure"
+      ],
+      "states": {}
+    },
+    {
+      "id": "masher_1",
+      "name": "Food Masher",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.25,
+          0.1,
+          0.03
+        ],
+        "weight": 0.4,
+        "material": "stainless_steel",
+        "handle": "wood"
+      },
+      "provides_abilities": [
+        "mash"
+      ],
+      "states": {}
+    },
+    {
+      "id": "scoop_1",
+      "name": "Metal Scoop",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.2,
+          0.1,
+          0.05
+        ],
+        "weight": 0.3,
+        "material": "aluminum",
+        "capacity": "100ml"
+      },
+      "provides_abilities": [
+        "scoop"
+      ],
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polishing Cloth",
+      "type": "ITEM",
+      "location_id": "in:paint_repair_corner",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.01
+        ],
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "yellow"
+      },
+      "provides_abilities": [
+        "polish"
+      ],
+      "states": {}
+    },
+    {
+      "id": "soaking_tank_1",
+      "name": "Soaking Tank",
+      "type": "FURNITURE",
+      "location_id": "in:paint_repair_corner",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "liquid": "water"
+      },
+      "provides_abilities": [
+        "soak"
+      ],
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Cordless Drill",
+      "type": "ITEM",
+      "location_id": "in:tool_crib",
+      "properties": {
+        "size": [
+          0.25,
+          0.15,
+          0.1
+        ],
+        "weight": 1.8,
+        "brand": "Makita",
+        "battery_status": "charged"
+      },
+      "provides_abilities": [
+        "drill"
+      ],
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Whiteboard Eraser",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.1,
+          0.05,
+          0.05
+        ],
+        "weight": 0.1,
+        "material": "felt",
+        "color": "blue"
+      },
+      "provides_abilities": [
+        "erase"
+      ],
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:tool_crib",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.8,
+        "capacity": "10kg",
+        "precision": "0.01g"
+      },
+      "provides_abilities": [
+        "weigh"
+      ],
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "copy_file",
+    "open",
+    "press",
+    "squeeze",
+    "turn_on",
+    "close"
+  ]
+}

@@ -1,0 +1,703 @@
+{
+  "description": "A high-tech Supersonic Wind Tunnel Test Facility with interconnected zones for testing, control, repair, data analysis, and storage, requiring multi-agent coordination for operation and emergency response.",
+  "rooms": [
+    {
+      "id": "main_test_chamber",
+      "name": "Main Test Chamber",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "control_room",
+        "component_workshop"
+      ]
+    },
+    {
+      "id": "control_room",
+      "name": "Control Room",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_test_chamber",
+        "data_analysis_lab"
+      ]
+    },
+    {
+      "id": "component_workshop",
+      "name": "Component Workshop",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "main_test_chamber",
+        "storage_logistics_bay"
+      ]
+    },
+    {
+      "id": "data_analysis_lab",
+      "name": "Data Analysis Lab",
+      "properties": {
+        "type": "analysis"
+      },
+      "connected_to_room_ids": [
+        "control_room"
+      ]
+    },
+    {
+      "id": "storage_logistics_bay",
+      "name": "Storage & Logistics Bay",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "component_workshop"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "wind_tunnel_duct_1",
+      "name": "Supersonic Wind Tunnel Duct",
+      "type": "FURNITURE",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "size": [
+          25.0,
+          2.0,
+          2.0
+        ],
+        "weight": 3000.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "STD-2500"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_inlet_adjuster_1",
+      "name": "Hydraulic Inlet Adjuster Mechanism",
+      "type": "FURNITURE",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "power_rating": "5kW"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "schlieren_imaging_rig_1",
+      "name": "Schlieren Imaging Rig",
+      "type": "FURNITURE",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "aluminum",
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_lever_1",
+      "name": "Emergency Shutdown Lever",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "steel",
+        "requires_two_handed": true
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "pressure_sensor_array_1",
+      "name": "Pressure Sensor Array",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "material": "plastic",
+        "sensor_count": 10,
+        "faulty_sensors": 3
+      },
+      "states": {
+        "is_attached": false
+      }
+    },
+    {
+      "id": "unstarted_inlet_cone_1",
+      "name": "Unstarted Inlet Cone",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 150.0,
+        "color": "silver",
+        "material": "titanium",
+        "condition": "dented"
+      },
+      "states": {
+        "is_attached": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels_locked": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "material": "steel",
+        "size": "medium",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Digital Multimeter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "yellow",
+        "material": "plastic",
+        "brand": "Fluke",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "steel",
+        "set_size": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_fluid_leak_1",
+      "name": "Hydraulic Fluid Leak",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "material": "fluid",
+        "hazard_level": "moderate"
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "loose_fasteners_1",
+      "name": "Loose Fasteners",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "steel",
+        "count": 12
+      },
+      "states": {
+        "is_collected": false
+      }
+    },
+    {
+      "id": "max_speed_sign_1",
+      "name": "MAX SPEED: MACH 3.5 Warning Sign",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "plastic",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "aerotech_trophy_1",
+      "name": "AeroTech 2019 Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 3.0,
+        "color": "gold",
+        "material": "metal",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_stained_clipboard_1",
+      "name": "Coffee Stained Clipboard",
+      "type": "ITEM",
+      "location_id": "in:main_test_chamber",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wood",
+        "content": "last_test_logs"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_console_1",
+      "name": "Central Control Console",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "plastic",
+        "button_count": 20
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_power_cutoff_1",
+      "name": "Emergency Power Cutoff",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "steel",
+        "cover_material": "plexiglass"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "airflow_monitor_1",
+      "name": "Primary Airflow Monitor",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "black",
+        "material": "plastic",
+        "display_type": "touchscreen"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "intercom_system_1",
+      "name": "Intercom System",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 4.0,
+        "color": "white",
+        "material": "plastic",
+        "condition": "static_filled"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Laser Printer",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "material": "plastic",
+        "jam_light": "blinking",
+        "paper_status": "out"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Calculation Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "half_erased_calculations"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety First! Poster",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "stale_donut_1",
+      "name": "Stale Donut in Paper Bag",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "material": "food",
+        "freshness": "stale"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Repair Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:component_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_area": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_inlet_parts_1",
+      "name": "Spare Inlet Parts",
+      "type": "ITEM",
+      "location_id": "in:component_workshop",
+      "properties": {
+        "weight": 25.0,
+        "color": "silver",
+        "material": "titanium",
+        "count": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_equipment_1",
+      "name": "Diagnostic Equipment",
+      "type": "ITEM",
+      "location_id": "in:component_workshop",
+      "properties": {
+        "weight": 12.0,
+        "color": "gray",
+        "material": "plastic",
+        "brand": "TechDiagnose"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "locked_toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "in:component_workshop",
+      "properties": {
+        "weight": 10.0,
+        "color": "red",
+        "material": "steel",
+        "lock_type": "combination",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "override_keycard_1",
+      "name": "Override Keycard",
+      "type": "ITEM",
+      "location_id": "in:locked_toolbox_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "access_level": "admin"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Data Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_lab",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "metal",
+        "server_count": 4
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Analysis Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "wood",
+        "monitor_count": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "equation_whiteboard_1",
+      "name": "Airflow Equations Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          0.05
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "airflow_equations"
+      },
+      "states": {}
+    },
+    {
+      "id": "storage_shelves_1",
+      "name": "Heavy-Duty Storage Shelves",
+      "type": "FURNITURE",
+      "location_id": "in:storage_logistics_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "shelf_count": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_parts_crate_1",
+      "name": "Spare Parts Crate",
+      "type": "ITEM",
+      "location_id": "in:storage_logistics_bay",
+      "properties": {
+        "weight": 50.0,
+        "color": "brown",
+        "material": "wood",
+        "content": "spare_sensors"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazmat_supplies_1",
+      "name": "Hazmat Supplies",
+      "type": "ITEM",
+      "location_id": "in:storage_logistics_bay",
+      "properties": {
+        "weight": 30.0,
+        "color": "yellow",
+        "material": "plastic",
+        "contents": "safety_gear"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Industrial Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 20.0,
+        "color": "stainless_steel",
+        "material": "metal",
+        "brand": "BrewMaster",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "insulation_roll_1",
+      "name": "Fiberglass Insulation Roll",
+      "type": "ITEM",
+      "location_id": "in:storage_logistics_bay",
+      "properties": {
+        "weight": 5.0,
+        "color": "pink",
+        "material": "fiberglass",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Cleaning Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:component_workshop",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "material": "plastic",
+        "contents": "cleaner",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Ballpoint Pen",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "plastic",
+        "ink_color": "blue",
+        "provides_abilities": [
+          "sign",
+          "draw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "Metal File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.8,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel",
+        "drawer_count": 4
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "brew",
+    "draw",
+    "insulate",
+    "open",
+    "press",
+    "scan_barcode",
+    "scrape",
+    "sign",
+    "spray",
+    "sync",
+    "turn_on",
+    "close"
+  ]
+}

@@ -1,0 +1,862 @@
+{
+  "description": "A bustling underground gnome enclave featuring a sprawling workshop and marketplace, filled with intricate devices, heavy machinery, and hidden security systems requiring collaborative efforts.",
+  "rooms": [
+    {
+      "id": "main_workshop",
+      "name": "Main Workshop Chamber",
+      "properties": {
+        "type": "industrial",
+        "lighting": "dim",
+        "primary_use": "crafting"
+      },
+      "connected_to_room_ids": [
+        "storage_alcove",
+        "security_hub",
+        "market_stalls",
+        "living_quarters",
+        "lift_system"
+      ]
+    },
+    {
+      "id": "storage_alcove",
+      "name": "Storage & Supply Alcove",
+      "properties": {
+        "type": "storage",
+        "organization": "cluttered",
+        "primary_use": "material_storage"
+      },
+      "connected_to_room_ids": [
+        "main_workshop",
+        "lift_system"
+      ]
+    },
+    {
+      "id": "security_hub",
+      "name": "Hidden Security Hub",
+      "properties": {
+        "type": "security",
+        "access": "restricted",
+        "primary_use": "surveillance"
+      },
+      "connected_to_room_ids": [
+        "main_workshop"
+      ]
+    },
+    {
+      "id": "market_stalls",
+      "name": "Market Stalls & Trading Post",
+      "properties": {
+        "type": "commercial",
+        "atmosphere": "bustling",
+        "primary_use": "trading"
+      },
+      "connected_to_room_ids": [
+        "main_workshop"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Private Living Quarters",
+      "properties": {
+        "type": "residential",
+        "privacy": "high",
+        "primary_use": "sleeping"
+      },
+      "connected_to_room_ids": [
+        "main_workshop"
+      ]
+    },
+    {
+      "id": "lift_system",
+      "name": "Mechanical Lift & Conveyor System",
+      "properties": {
+        "type": "transport",
+        "mechanism": "pulley",
+        "primary_use": "heavy_lifting"
+      },
+      "connected_to_room_ids": [
+        "main_workshop",
+        "storage_alcove"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_workbench_1",
+      "name": "Central Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel_reinforced_wood",
+        "condition": "stained",
+        "stains": [
+          "oil",
+          "ink"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pulley_system_1",
+      "name": "Overhead Pulley System",
+      "type": "FURNITURE",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          2.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "max_lift_capacity": 80.0,
+        "mechanism": "chain_and_rope"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "gear_assembly_1",
+      "name": "Wall-Mounted Gear Assembly",
+      "type": "FURNITURE",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "brass",
+        "completion_status": "half_completed",
+        "missing_parts": [
+          "left_arm"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thrumming_core_1",
+      "name": "Thrumming Core",
+      "type": "ITEM",
+      "location_id": "in:gear_assembly_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "blue",
+        "material": "crystal",
+        "glow_intensity": "faint",
+        "sound": "humming",
+        "diameter": 30.0,
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "tool_chest_1",
+      "name": "Locked Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "brass",
+        "lock_type": "keyed",
+        "contents": [
+          "precision_screwdrivers"
+        ]
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Broken Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "size": [
+          2.5,
+          0.5,
+          0.1
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "leather",
+        "condition": "snapped"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Adjustable Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "material": "metal",
+        "light_source": "gas",
+        "adjustability": "high",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_on": true,
+        "is_verified": false
+      }
+    },
+    {
+      "id": "blueprints_1",
+      "name": "Stack of Blueprints",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "yellowed",
+        "material": "paper",
+        "label": "Self-Wringing Laundry Array v.4",
+        "binding": "twine"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "anvil_1",
+      "name": "Small Anvil",
+      "type": "ITEM",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "material": "steel",
+        "use": "metal_shaping"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "weight": 3.0,
+        "color": "gold",
+        "material": "metal",
+        "inscription": "Fastest Gear-Cutter, 1247 DR",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "faded",
+        "material": "paper",
+        "content": "Depicts a gnome losing a finger to a misaligned gear",
+        "condition": "faded"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "ceramic",
+        "inscription": "World’s Best Tinkerer",
+        "condition": "chipped",
+        "contents": [
+          "screws",
+          "bolts"
+        ],
+        "has_false_bottom": true,
+        "hidden_item": "safe_key",
+        "is_container": true
+      },
+      "states": {
+        "is_drunk": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "heavy_crate_stack_1",
+      "name": "Heavy Crate Stack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "wood",
+        "top_crate_label": "Fragile: Glass Tubing"
+      },
+      "states": {}
+    },
+    {
+      "id": "bin_rack_1",
+      "name": "Wall-Mounted Bin Rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "screws",
+          "springs",
+          "lubricant_vials"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_drum_1",
+      "name": "Sealed Metal Drum",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 50.0,
+        "color": "silver",
+        "material": "metal",
+        "label": "Corrosive – Handle with Gloves",
+        "contents": "unknown_corrosive"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keyring_1",
+      "name": "Mismatched Keyring",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "metal",
+        "keys": [
+          "workshop_chest_key",
+          "decoy_key_1",
+          "decoy_key_2"
+        ],
+        "location": "hanging_on_hook"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "handcart_1",
+      "name": "Handcart",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 15.0,
+        "color": "red",
+        "material": "wood_and_metal",
+        "condition": "squeaky_wheel",
+        "use": "transporting_heavy_materials"
+      },
+      "states": {}
+    },
+    {
+      "id": "scrap_bin_1",
+      "name": "Overflowing Scrap Bin",
+      "type": "FURNITURE",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": [
+          "bent_nails",
+          "broken_gears",
+          "frayed_wires"
+        ]
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "recipe_notes_1",
+      "name": "Yellowed Recipe Notes",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellowed",
+        "material": "paper",
+        "content": "Stain Remover: 3 parts vinegar, 1 part powdered mithral.",
+        "mounting": "pinned_to_wall"
+      },
+      "states": {}
+    },
+    {
+      "id": "teddy_bear_1",
+      "name": "Dusty Teddy Bear",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "fabric",
+        "condition": "missing_eye",
+        "sentimental_value": "unknown"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "surveillance_mirrors_1",
+      "name": "Surveillance Mirrors",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "glass_and_brass",
+        "function": "surveillance"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_safe_1",
+      "name": "Locked Safe",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "contents": [
+          "blueprints",
+          "valuables"
+        ],
+        "lock_type": "keyed"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "trap_controls_1",
+      "name": "Trap Controls",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "brass",
+        "mechanism": "lever_based",
+        "requires_coordination": true
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "market_stall_1",
+      "name": "Gadget Display Stall",
+      "type": "FURNITURE",
+      "location_id": "in:market_stalls",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "harmless_gadgets"
+        ],
+        "hidden_function": "defensive"
+      },
+      "states": {}
+    },
+    {
+      "id": "fold_out_bed_1",
+      "name": "Fold-Out Bed",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.3
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "wood_and_fabric",
+        "condition": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_system_1",
+      "name": "Concealed Alarm System",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "activation": "motion_sensor"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "mechanical_lift_1",
+      "name": "Mechanical Lift Platform",
+      "type": "FURNITURE",
+      "location_id": "in:lift_system",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.2
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "steel",
+        "mechanism": "pulley_driven",
+        "operation_requirement": "two_gnomes"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "control_levers_1",
+      "name": "Lift Control Levers",
+      "type": "FURNITURE",
+      "location_id": "in:lift_system",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "wood_and_brass",
+        "operation_requirement": "simultaneous_pull"
+      },
+      "states": {}
+    },
+    {
+      "id": "brass_gear_1",
+      "name": "Brass Gear (Red Mark)",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "brass",
+        "material": "metal",
+        "marking": "red_paint",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "brass_gear_2",
+      "name": "Brass Gear (No Mark)",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "brass",
+        "material": "metal",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "brass_gear_3",
+      "name": "Brass Gear (Blue Mark)",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "brass",
+        "material": "metal",
+        "marking": "blue_paint",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "brass_gear_4",
+      "name": "Brass Gear (Green Mark)",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "brass",
+        "material": "metal",
+        "marking": "green_paint",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "brass_gear_5",
+      "name": "Brass Gear (Yellow Mark)",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "brass",
+        "material": "metal",
+        "marking": "yellow_paint",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "leather_strap_1",
+      "name": "Replacement Leather Strap",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "leather",
+        "use": "conveyor_belt_repair"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "multicolored",
+        "material": "metal_and_plastic",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gloves_1",
+      "name": "Protective Gloves",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "rubber",
+        "use": "handling_corrosives",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Portable Heater",
+      "type": "ITEM",
+      "location_id": "in:main_workshop",
+      "properties": {
+        "weight": 8.0,
+        "color": "silver",
+        "material": "metal",
+        "power_source": "electric",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "material": "cloth",
+        "condition": "stained",
+        "provides_abilities": [
+          "dust",
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "watering_can_1",
+      "name": "Watering Can",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.5,
+        "color": "green",
+        "material": "metal",
+        "contents": "water",
+        "provides_abilities": [
+          "pour",
+          "spill"
+        ]
+      },
+      "states": {
+        "is_poured": false,
+        "is_wet": false
+      }
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "plastic_and_metal",
+        "function": "surveillance",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:storage_alcove",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "metal",
+        "use": "plant_trimming",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "safe_key_1",
+      "name": "Safe Key",
+      "type": "ITEM",
+      "location_id": "in:coffee_mug_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "brass",
+        "material": "metal",
+        "use": "unlocking_safe"
+      },
+      "states": {
+        "is_locked": false
+      }
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "cover",
+    "drink",
+    "dust",
+    "heat_up",
+    "open",
+    "pour",
+    "prune",
+    "purify",
+    "raise",
+    "record_video",
+    "spill",
+    "take_down",
+    "turn_off",
+    "verify",
+    "wash",
+    "close"
+  ]
+}

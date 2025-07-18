@@ -1,0 +1,760 @@
+{
+  "description": "A Neonatal Intensive Care Unit (NICU) Support Room with breastfeeding stations, medical prep areas, and supply closets, designed for multi-agent collaboration and high-stakes infant care.",
+  "rooms": [
+    {
+      "id": "breastfeeding_station",
+      "name": "Breastfeeding Station",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "medical_prep_area",
+        "observation_hub"
+      ]
+    },
+    {
+      "id": "medical_prep_area",
+      "name": "Medical Prep Area",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "breastfeeding_station",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "observation_hub",
+      "name": "Observation & Documentation Hub",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "breastfeeding_station"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "medical_prep_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "adjustable_recliner_1",
+      "name": "Adjustable Electric Recliner",
+      "type": "FURNITURE",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "leather",
+        "condition": "slightly cracked"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "iv_pole_1",
+      "name": "IV Pole",
+      "type": "FURNITURE",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": "locked"
+      },
+      "states": {}
+    },
+    {
+      "id": "baby_monitor_1",
+      "name": "Wall-mounted Baby Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.2
+        ],
+        "weight": 2.5,
+        "is_container": true,
+        "brand": "Philips",
+        "display": "heart rate: 142 BPM"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "breast_pump_1",
+      "name": "Hospital-grade Breast Pump",
+      "type": "ITEM",
+      "location_id": "on:adjustable_recliner_1",
+      "properties": {
+        "weight": 3.2,
+        "brand": "Medela Symphony",
+        "model": "Symphony",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "latch_assist_pillow_1",
+      "name": "Latch Assist Ergonomic Pillow",
+      "type": "ITEM",
+      "location_id": "on:adjustable_recliner_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "memory foam",
+        "condition": "stained",
+        "missing_parts": "one strap clip"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_call_button_1",
+      "name": "Emergency Call Button",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "condition": "partially obscured"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "nipple_cream_1",
+      "name": "Nipple Cream Tube",
+      "type": "ITEM",
+      "location_id": "on:adjustable_recliner_1",
+      "properties": {
+        "weight": 0.1,
+        "brand": "Lansinoh",
+        "remaining": "40%",
+        "missing_parts": "cap"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital Thermometer",
+      "type": "ITEM",
+      "location_id": "on:adjustable_recliner_1",
+      "properties": {
+        "weight": 0.3,
+        "battery_status": "low",
+        "condition": "beeping intermittently"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "one wheel squeaks",
+        "height_adjuster": "stuck"
+      },
+      "states": {}
+    },
+    {
+      "id": "stainless_steel_countertop_1",
+      "name": "Stainless Steel Countertop",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "condition": "smudged with fingerprint streaks"
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Industrial Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "display": "Cycle Complete: 00:32 remaining"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Under-counter Mini-fridge",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "condition": "vibrating faintly",
+        "condensation": "on handle"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "formula_kit_1",
+      "name": "Pre-measured Formula Kit",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Enfamil Gentlease",
+        "condition": "leaking powder",
+        "quantity": "3 unopened, 1 leaking"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "sterile_bottle_1",
+      "name": "Sealed Sterile Bottle",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Dr. Brown’s",
+        "size": "4 oz",
+        "expiration_date": "next month"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "syringe_pump_1",
+      "name": "Broken Syringe Pump",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 2.0,
+        "error_code": "E-7 Flow Block",
+        "condition": "abandoned mid-repair"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "condition": "smells of old milk"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "paper_towel_dispenser_1",
+      "name": "Paper Towel Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "weight": 1.0,
+        "condition": "5 minutes slow",
+        "sound": "ticking loudly"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "nurses_workstation_1",
+      "name": "Nurse’s Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:observation_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_chart_1",
+      "name": "Digital Chart",
+      "type": "ITEM",
+      "location_id": "on:nurses_workstation_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "displaying infant stats",
+        "provides_abilities": [
+          "save"
+        ]
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Wall-mounted Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:observation_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "tracking infant stats"
+      },
+      "states": {}
+    },
+    {
+      "id": "phone_1",
+      "name": "Ringing Phone",
+      "type": "ITEM",
+      "location_id": "on:nurses_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "ringing",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "supply_shelf_1",
+      "name": "Supply Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.4,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "top shelf"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sterile_tubing_1",
+      "name": "Sterile Tubing Replacement",
+      "type": "ITEM",
+      "location_id": "in:supply_shelf_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "behind expired gauze",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "flashlight_1",
+      "name": "Flashlight",
+      "type": "ITEM",
+      "location_id": "in:supply_shelf_1",
+      "properties": {
+        "weight": 0.3,
+        "battery_status": "30%",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "medical_crib_1",
+      "name": "Medical Crib",
+      "type": "FURNITURE",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "wheels": "locked"
+      },
+      "states": {}
+    },
+    {
+      "id": "drip_bag_1",
+      "name": "IV Drip Bag",
+      "type": "ITEM",
+      "location_id": "on:iv_pole_1",
+      "properties": {
+        "weight": 1.0,
+        "content": "half-empty saline drip",
+        "condition": "unstable if tilted >15°"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "formula_bottle_pink_1",
+      "name": "Hypoallergenic Formula Bottle",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.4,
+        "cap_color": "pink",
+        "label": "smudged URGENT",
+        "temperature": "warm to the touch"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "sippy_cup_1",
+      "name": "Pink-capped Sippy Cup",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.2,
+        "cap_color": "pink",
+        "owner": "staff member’s child"
+      },
+      "states": {}
+    },
+    {
+      "id": "breast_milk_fridge_1",
+      "name": "Breast Milk Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          0.7,
+          0.6,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "temperature": "4°C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cleaning_brush_1",
+      "name": "Cleaning Brush",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "material": "bristle",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 2.0,
+        "contents": "various tools",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilization_equipment_1",
+      "name": "Sterilization Equipment",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 5.0,
+        "type": "UV sterilizer",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "formula_mixer_1",
+      "name": "Formula Mixer",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Medela",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "emergency_supplies_1",
+      "name": "Emergency Supplies",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 4.0,
+        "contents": "various medical supplies",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "lactation_aids_1",
+      "name": "Lactation Aids",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 1.5,
+        "contents": "various aids",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "monitoring_devices_1",
+      "name": "Monitoring Devices",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 2.0,
+        "type": "various",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "nurse_gown_1",
+      "name": "Nurse Gown",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "condition": "hanging",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "poster_1",
+      "name": "Framed Poster",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 1.0,
+        "title": "Successful Latch Techniques",
+        "condition": "slightly askew",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "tissue_box_1",
+      "name": "Discarded Tissue Box",
+      "type": "ITEM",
+      "location_id": "in:breastfeeding_station",
+      "properties": {
+        "weight": 0.1,
+        "condition": "empty, crushed",
+        "location": "under the recliner"
+      },
+      "states": {
+        "is_empty": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Faded Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:baby_monitor_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "Remember: check suction setting!",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "shift_schedule_1",
+      "name": "Coffee-stained Shift Schedule",
+      "type": "ITEM",
+      "location_id": "on:mini_fridge_1",
+      "properties": {
+        "weight": 0.05,
+        "condition": "half-illegible",
+        "stain": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "aloe_plant_1",
+      "name": "Dried-out Potted Aloe Plant",
+      "type": "ITEM",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "weight": 0.8,
+        "condition": "dried-out",
+        "missing_parts": "one leaf broken off"
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti on Cabinet Door",
+      "type": "ITEM",
+      "location_id": "in:medical_prep_area",
+      "properties": {
+        "weight": 0.01,
+        "message": "NICU Warriors 2023",
+        "color": "blue marker"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "deactivate",
+    "empty",
+    "hang_up",
+    "mount",
+    "open",
+    "repair",
+    "save",
+    "scrub",
+    "start_process",
+    "turn_off",
+    "turn_on",
+    "close"
+  ]
+}

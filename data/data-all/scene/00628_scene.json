@@ -1,0 +1,399 @@
+{
+  "description": "A high-security Network Operations Center (NOC) with a multi-agent cybersecurity incident response setup, featuring a main monitoring hub, server vault, and forensics lab annex.",
+  "rooms": [
+    {
+      "id": "main_monitoring_hub",
+      "name": "Main Monitoring Hub",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "server_vault",
+        "forensics_lab_annex"
+      ]
+    },
+    {
+      "id": "server_vault",
+      "name": "Server Vault",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "forensics_lab_annex"
+      ]
+    },
+    {
+      "id": "forensics_lab_annex",
+      "name": "Forensics Lab Annex",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "server_vault"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "command_desk_1",
+      "name": "Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "carbon_fiber",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "thread_monitor_1",
+      "name": "Thread Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "status": "98/100 THREADS ACTIVE"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_killswitch_1",
+      "name": "Emergency Killswitch",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "material": "metal",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_usb_1",
+      "name": "Encrypted USB",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "label": "handwritten",
+        "condition": "scratched_near_port"
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_terminal_1",
+      "name": "Admin Terminal",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "status": "PASSWORD EXPIRED"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "status": "OUT OF ORDER",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "server_rack_5",
+      "name": "Server Rack #5",
+      "type": "FURNITURE",
+      "location_id": "in:server_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "requires_collaboration": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "fiber_spool_1",
+      "name": "Fiber Spool",
+      "type": "ITEM",
+      "location_id": "in:server_vault",
+      "properties": {
+        "weight": 20.0,
+        "color": "white",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "admin_keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "in:server_vault",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "status": "stuck"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_tester_1",
+      "name": "Ethernet Tester",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "status": "NO SIGNAL on port 3"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "evidence_locker_1",
+      "name": "Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_station_1",
+      "name": "Microscope Station",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal_plastic_composite"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:microscope_station_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "twist"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "thread_dump_file_1",
+      "name": "Thread Dump File",
+      "type": "ITEM",
+      "location_id": "on:microscope_station_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "status": "highlighted with DEADLOCK?"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "status": "out_of_tape",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "MAX_THREADS=100?? circled"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "needle_and_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 0.05,
+        "color": "assorted",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:forensics_lab_annex",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "provides_abilities": [
+          "water",
+          "pour"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    }
+  ],
+  "abilities": [
+    "dust",
+    "empty",
+    "label",
+    "mend",
+    "open",
+    "pour",
+    "scan",
+    "solder",
+    "turn_on",
+    "twist",
+    "unroll",
+    "water",
+    "close"
+  ]
+}

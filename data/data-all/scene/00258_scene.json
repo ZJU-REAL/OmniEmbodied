@@ -1,0 +1,815 @@
+{
+  "description": "A high-security Digital Archive Retrieval Center (DARC) with interconnected zones for document storage, processing, and retrieval, requiring multi-agent collaboration due to physical constraints and security protocols.",
+  "rooms": [
+    {
+      "id": "main_control_hub",
+      "name": "Main Control Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "physical_archive_vault",
+        "digital_processing_room",
+        "sorting_verification_zone"
+      ]
+    },
+    {
+      "id": "physical_archive_vault",
+      "name": "Physical Archive Vault",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "sorting_verification_zone"
+      ]
+    },
+    {
+      "id": "digital_processing_room",
+      "name": "Digital Processing Room",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    },
+    {
+      "id": "sorting_verification_zone",
+      "name": "Sorting & Verification Zone",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub",
+        "physical_archive_vault"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_command_console_1",
+      "name": "Central Command Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.9
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "DARC-CC-5000",
+        "requires_dual_authentication": true
+      },
+      "states": {
+        "is_active": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "security_panel_wall_1",
+      "name": "Security Panel Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          4.0,
+          0.2,
+          2.5
+        ],
+        "weight": 180.0,
+        "is_container": false,
+        "material": "aluminum",
+        "num_screens": 8
+      },
+      "states": {}
+    },
+    {
+      "id": "master_keycard_terminal_1",
+      "name": "Master Keycard Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_command_console_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "SecuriTech",
+        "requires_dual_keycards": true
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shutdown_button_1",
+      "name": "Emergency Shutdown Button",
+      "type": "ITEM",
+      "location_id": "in:central_command_console_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "is_under_glass": true,
+        "required_clearance": "Level 4"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "encrypted_usb_drive_1",
+      "name": "Encrypted USB Drive",
+      "type": "ITEM",
+      "location_id": "in:central_command_console_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "brand": "DataVault",
+        "capacity_gb": 128
+      },
+      "states": {
+        "is_verified": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "desktop_terminal_1",
+      "name": "Desktop Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "TechCorp",
+        "model": "TC-4500",
+        "screen_condition": "flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "desktop_terminal_2",
+      "name": "Desktop Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "TechCorp",
+        "model": "TC-4500",
+        "screen_condition": "idle"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "desktop_terminal_3",
+      "name": "Desktop Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "TechCorp",
+        "model": "TC-4500",
+        "screen_condition": "login_prompt"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "digital_clock_1",
+      "name": "Wall-mounted Digital Clock",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "TimeMaster",
+        "time_offset_minutes": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "brand": "BrewPerfect",
+        "water_level": "half-full",
+        "status": "beeping"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "access_protocol_poster_1",
+      "name": "Faded Access Protocol Poster",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.2,
+        "condition": "peeling",
+        "content": "access_protocols"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note on Monitor",
+      "type": "ITEM",
+      "location_id": "on:desktop_terminal_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "text": "PASSWORD: TEMP1234 – CHANGE ASAP"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "inscription": "DARC Employee of the Month, June 2021"
+      },
+      "states": {}
+    },
+    {
+      "id": "modular_shelf_1",
+      "name": "Modular Steel Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "requires_biometric_auth": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "climate_drawer_1",
+      "name": "Climate-Controlled Document Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "humidity_level": 40,
+        "requires_fingerprint": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "project_phoenix_box_1",
+      "name": "Project Phoenix File Box",
+      "type": "ITEM",
+      "location_id": "in:modular_shelf_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.6,
+          0.2
+        ],
+        "weight": 18.0,
+        "color": "red",
+        "seal_type": "red_tape",
+        "requires_dual_signatures": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_scanner_1",
+      "name": "Broken Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "brand": "ScanTech",
+        "error_message": "ERROR: LASER ALIGNMENT FAILURE"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "misplaced_keycard_1",
+      "name": "Misplaced Keycard",
+      "type": "ITEM",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "owner": "Agent Kowalski",
+        "access_level": "Level 3"
+      },
+      "states": {}
+    },
+    {
+      "id": "document_cart_1",
+      "name": "Wheeled Document Cart",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "wheel_condition": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:document_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "LabelPro",
+        "tape_status": "out",
+        "has_half_printed_label": true
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "last_inspection_date": "3_months_ago",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "file_guidelines_1",
+      "name": "Outdated File Sorting Guidelines",
+      "type": "ITEM",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "weight": 0.3,
+        "condition": "torn",
+        "content": "sorting_protocols"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "weight": 0.2,
+        "material": "ceramic",
+        "is_clean": false
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "microfilm_reader_1",
+      "name": "Dusty Old Microfilm Reader",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_vault",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.6
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "condition": "non-functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack Array",
+      "type": "FURNITURE",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "brand": "DataFort",
+        "status_leds": "blinking",
+        "has_overheat_warning": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "decryption_terminal_1",
+      "name": "Data Decryption Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "requires_retinal_scan": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "corrupted_hard_drive_1",
+      "name": "Corrupted Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "Backup 47-A",
+        "sound": "clicking",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "magnetic_tape_1",
+      "name": "Magnetic Tape Archive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "misaligned",
+        "error": "read_errors"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "admin_keyboard_1",
+      "name": "Admin Keyboard",
+      "type": "ITEM",
+      "location_id": "on:decryption_terminal_1",
+      "properties": {
+        "weight": 0.7,
+        "brand": "KeyTech",
+        "missing_key": "F5"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "status": "jam_detected",
+        "light": "flashing_red"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "hdd_enclosure_1",
+      "name": "External HDD Enclosure",
+      "type": "ITEM",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "weight": 1.0,
+        "temperature": "warm",
+        "condition": "overheating"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Unlocked Toolbox",
+      "type": "ITEM",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "weight": 6.0,
+        "contents": [
+          "screwdrivers",
+          "spare_cables",
+          "usb_adapter"
+        ],
+        "provides_abilities": [
+          "loosen",
+          "verify"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "post_it_1",
+      "name": "Post-it Note on Monitor",
+      "type": "ITEM",
+      "location_id": "on:decryption_terminal_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "text": "DO NOT TOUCH – SYSTEM UPDATE IN PROGRESS"
+      },
+      "states": {}
+    },
+    {
+      "id": "manuals_stack_1",
+      "name": "Stack of Old Manuals",
+      "type": "ITEM",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "weight": 2.5,
+        "title": "Legacy Database Migration Guide, 2015 Edition"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Plant",
+      "type": "ITEM",
+      "location_id": "in:digital_processing_room",
+      "properties": {
+        "weight": 1.0,
+        "pot_condition": "cracked",
+        "plant_type": "unknown"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "capacity_ml": 500,
+        "provides_abilities": [
+          "water",
+          "extinguish"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "coffee_machine_2",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "brand": "BrewPerfect",
+        "water_level": "full"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "locker_1",
+      "name": "Locker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "num_compartments": 12
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sandwich_1",
+      "name": "Sandwich",
+      "type": "ITEM",
+      "location_id": "in:locker_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "ham_and_cheese",
+        "is_fresh": false
+      },
+      "states": {
+        "is_eaten": false,
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "towel_1",
+      "name": "Towel",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.4,
+        "material": "cotton",
+        "color": "white",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lighter_1",
+      "name": "Lighter",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_stack_1",
+      "name": "Stack of Papers",
+      "type": "ITEM",
+      "location_id": "in:sorting_verification_zone",
+      "properties": {
+        "weight": 2.0,
+        "num_pages": 50,
+        "content": "unsorted_documents"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "verification_scanner_1",
+      "name": "Verification Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_verification_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "ScanTech",
+        "status": "operational"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "rope_1",
+      "name": "Rope",
+      "type": "ITEM",
+      "location_id": "in:sorting_verification_zone",
+      "properties": {
+        "weight": 0.8,
+        "length_m": 5,
+        "material": "nylon"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "puzzle_box_1",
+      "name": "Puzzle Box",
+      "type": "ITEM",
+      "location_id": "in:sorting_verification_zone",
+      "properties": {
+        "weight": 1.5,
+        "difficulty": "hard",
+        "contents": "unknown"
+      },
+      "states": {
+        "is_solved": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "dry",
+    "eat",
+    "empty",
+    "extinguish",
+    "fold",
+    "ignite",
+    "load",
+    "loosen",
+    "open",
+    "solve_puzzle",
+    "thaw",
+    "untie",
+    "verify",
+    "water"
+  ]
+}

@@ -1,0 +1,911 @@
+{
+  "description": "A high-stakes military operations hub serving as both a warzone command center and a salvage and repair depot, where multiple agents must coordinate attacks, repairs, and resource management in real-time.",
+  "rooms": [
+    {
+      "id": "central_command_hub",
+      "name": "Central Command Hub",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "armory_tool_bay",
+        "collapsed_building_site",
+        "field_medical_tent",
+        "generator_alley"
+      ]
+    },
+    {
+      "id": "armory_tool_bay",
+      "name": "Armory & Tool Bay",
+      "properties": {
+        "type": "armory"
+      },
+      "connected_to_room_ids": [
+        "central_command_hub",
+        "collapsed_building_site"
+      ]
+    },
+    {
+      "id": "collapsed_building_site",
+      "name": "Collapsed Building Site",
+      "properties": {
+        "type": "work_area"
+      },
+      "connected_to_room_ids": [
+        "central_command_hub",
+        "armory_tool_bay",
+        "field_medical_tent"
+      ]
+    },
+    {
+      "id": "field_medical_tent",
+      "name": "Field Medical Tent",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "central_command_hub",
+        "collapsed_building_site"
+      ]
+    },
+    {
+      "id": "generator_alley",
+      "name": "Generator Alley",
+      "properties": {
+        "type": "utility"
+      },
+      "connected_to_room_ids": [
+        "central_command_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "strategic_map_table_1",
+      "name": "Strategic Map Table",
+      "type": "FURNITURE",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "acrylic",
+        "surface_condition": "scratched"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "communications_array_1",
+      "name": "Communications Array",
+      "type": "FURNITURE",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "damaged"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "target_dossier_1",
+      "name": "Target Dossier",
+      "type": "ITEM",
+      "location_id": "on:strategic_map_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "manila",
+        "condition": "torn",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_shutoff_lever_1",
+      "name": "Emergency Shutoff Lever",
+      "type": "ITEM",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "weight": 15.0,
+        "material": "steel",
+        "condition": "rusted",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:strategic_map_table_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "MilSpec Brew",
+        "condition": "broken"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_chair_1",
+      "name": "Steel Chair",
+      "type": "FURNITURE",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.9
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "missing_wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.9
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "cork",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_ammo_crate_1",
+      "name": "Empty Ammo Crate",
+      "type": "ITEM",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "weight": 5.0,
+        "material": "wood",
+        "color": "olive_drab",
+        "contents": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "weapons_rack_1",
+      "name": "Weapons Rack",
+      "type": "FURNITURE",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "bolted"
+      },
+      "states": {}
+    },
+    {
+      "id": "rifle_1",
+      "name": "Assault Rifle",
+      "type": "ITEM",
+      "location_id": "on:weapons_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "condition": "missing_firing_pin",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rifle_2",
+      "name": "Assault Rifle",
+      "type": "ITEM",
+      "location_id": "on:weapons_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "condition": "missing_firing_pin",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rifle_3",
+      "name": "Assault Rifle",
+      "type": "ITEM",
+      "location_id": "on:weapons_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "condition": "functional",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rocket_launcher_1",
+      "name": "Rocket Launcher",
+      "type": "ITEM",
+      "location_id": "on:weapons_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "green",
+        "condition": "no_ammo",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_wall_1",
+      "name": "Tool Wall",
+      "type": "FURNITURE",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "size": [
+          2.5,
+          0.1,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "pegboard",
+        "condition": "missing_tools"
+      },
+      "states": {}
+    },
+    {
+      "id": "demolition_charge_1",
+      "name": "Demolition Charge",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 10.0,
+        "color": "olive_drab",
+        "label": "FOR STEEL SUPPORTS ONLY",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 7.5,
+        "color": "red",
+        "material": "steel",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolbox_key_1",
+      "name": "Toolbox Key",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "brass",
+        "color": "gold"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "grinder_1",
+      "name": "Grinder",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 4.0,
+        "color": "yellow",
+        "condition": "frayed_cord",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "vise_grip_1",
+      "name": "Vise Grip",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "steel",
+        "condition": "clamped",
+        "provides_abilities": [
+          "drill"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bent_metal_rod_1",
+      "name": "Bent Metal Rod",
+      "type": "ITEM",
+      "location_id": "in:vise_grip_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "condition": "bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "collapsed_steel_girder_1",
+      "name": "Collapsed Steel Girder",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "size": [
+          4.0,
+          0.5,
+          0.3
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "crushed_medical_kit_1",
+      "name": "Crushed Medical Kit",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "condition": "crushed"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "smoking_generator_1",
+      "name": "Smoking Generator",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "leaking"
+      },
+      "states": {
+        "is_alight": false
+      }
+    },
+    {
+      "id": "survivors_radio_1",
+      "name": "Survivor's Radio",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "condition": "buried"
+      },
+      "states": {
+        "is_on": false,
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "blueprint_tube_1",
+      "name": "Blueprint Tube",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "label": "FACTORY ALPHA – STRUCTURAL WEAKNESSES",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pile_of_rebar_1",
+      "name": "Pile of Rebar",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 25.0,
+        "material": "steel",
+        "condition": "sharp",
+        "temperature": "hot"
+      },
+      "states": {}
+    },
+    {
+      "id": "cracked_concrete_slab_1",
+      "name": "Cracked Concrete Slab",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          0.2
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "concrete",
+        "condition": "unstable"
+      },
+      "states": {}
+    },
+    {
+      "id": "childs_toy_1",
+      "name": "Child's Toy",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "condition": "charred",
+        "type": "teddy_bear"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_mural_1",
+      "name": "Faded Mural",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "condition": "peeling",
+        "message": "OUR WORK UNIT IS OUR STRENGTH"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_barrel_1",
+      "name": "Chemical Barrel",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 20.0,
+        "color": "blue",
+        "label": "CORROSIVE",
+        "note": "DILUTE FIRST",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_barrel_2",
+      "name": "Chemical Barrel",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 20.0,
+        "color": "red",
+        "label": "CORROSIVE",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_barrel_3",
+      "name": "Chemical Barrel",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 20.0,
+        "color": "red",
+        "label": "CORROSIVE",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_bottle_1",
+      "name": "Blue Glass Bottle",
+      "type": "ITEM",
+      "location_id": "in:collapsed_building_site",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass",
+        "contents": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_tent_1",
+      "name": "Medical Tent",
+      "type": "FURNITURE",
+      "location_id": "in:field_medical_tent",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "canvas",
+        "condition": "bloodied"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iv_drip_1",
+      "name": "IV Drip",
+      "type": "ITEM",
+      "location_id": "in:medical_tent_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "clear",
+        "condition": "flickering",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "medicine_cabinet_1",
+      "name": "Medicine Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_tent_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medicine_cabinet_key_1",
+      "name": "Medicine Cabinet Key",
+      "type": "ITEM",
+      "location_id": "in:target_dossier_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "brass",
+        "color": "silver"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "bloodied_bandages_1",
+      "name": "Bloodied Bandages",
+      "type": "ITEM",
+      "location_id": "in:medical_tent_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "condition": "bloodied"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:medical_tent_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "condition": "damp",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "diesel_generator_1",
+      "name": "Diesel Generator",
+      "type": "FURNITURE",
+      "location_id": "in:generator_alley",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "sputtering",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "diesel_generator_2",
+      "name": "Diesel Generator",
+      "type": "FURNITURE",
+      "location_id": "in:generator_alley",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "functional",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "extension_cord_1",
+      "name": "Extension Cord",
+      "type": "ITEM",
+      "location_id": "in:generator_alley",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "condition": "tangled",
+        "length": "10m"
+      },
+      "states": {}
+    },
+    {
+      "id": "dangling_bulb_1",
+      "name": "Dangling Bulb",
+      "type": "ITEM",
+      "location_id": "in:generator_alley",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "condition": "flickering",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "condition": "functional",
+        "provides_abilities": [
+          "ignite",
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Crowbar",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 2.5,
+        "material": "steel",
+        "color": "black",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "condition": "functional",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "MilSpec Cam",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:strategic_map_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "TactiWrite",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "functional",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plate_1",
+      "name": "Plate",
+      "type": "ITEM",
+      "location_id": "in:central_command_hub",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "color": "white",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:armory_tool_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "contents": "oil_based",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "clean",
+    "drill",
+    "ignite",
+    "label",
+    "open",
+    "purify",
+    "record_video",
+    "saw",
+    "serve",
+    "show",
+    "sign",
+    "stain",
+    "turn_on",
+    "close"
+  ]
+}

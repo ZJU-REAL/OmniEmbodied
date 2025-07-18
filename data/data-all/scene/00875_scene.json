@@ -1,0 +1,697 @@
+{
+  "description": "A modular oil rig maintenance and inspection hub with five key zones: Maintenance Bay, Tool & Parts Storage, Inspection & Calibration Lab, Hazardous Materials Locker, and Admin & Logistics Office.",
+  "rooms": [
+    {
+      "id": "maintenance_bay",
+      "name": "Maintenance Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "tool_parts_storage",
+        "inspection_lab",
+        "hazardous_materials",
+        "admin_office"
+      ]
+    },
+    {
+      "id": "tool_parts_storage",
+      "name": "Tool & Parts Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay",
+        "inspection_lab"
+      ]
+    },
+    {
+      "id": "inspection_lab",
+      "name": "Inspection & Calibration Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay",
+        "tool_parts_storage"
+      ]
+    },
+    {
+      "id": "hazardous_materials",
+      "name": "Hazardous Materials Locker",
+      "properties": {
+        "type": "secure_storage"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay"
+      ]
+    },
+    {
+      "id": "admin_office",
+      "name": "Admin & Logistics Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "rig_mast_1",
+      "name": "Disassembled Rig Mast",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          7.0,
+          3.0,
+          2.5
+        ],
+        "weight": 7000.0,
+        "is_container": false,
+        "material": "steel",
+        "angle": 45
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          10.0,
+          3.0,
+          4.0
+        ],
+        "weight": 10000.0,
+        "is_container": true,
+        "capacity": 10000.0,
+        "current_load": "i_beam_1"
+      },
+      "states": {}
+    },
+    {
+      "id": "i_beam_1",
+      "name": "Steel I-Beam",
+      "type": "ITEM",
+      "location_id": "on:gantry_crane_1",
+      "properties": {
+        "weight": 3000.0,
+        "length": 3.0,
+        "material": "steel",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Oil-Stained Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_pipe_1",
+      "name": "Misaligned Drill Pipe",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 85.0,
+        "length": 2.5,
+        "diameter": 0.3,
+        "material": "steel",
+        "marking": "REJECT"
+      },
+      "states": {
+        "is_drilled": false
+      }
+    },
+    {
+      "id": "hydraulic_pump_1",
+      "name": "Faulty Hydraulic Pump",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "aluminum",
+        "leak": "dark_fluid"
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "wire_spool_1",
+      "name": "Frayed Wire Spool",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 12.0,
+        "length": 50.0,
+        "gauge": "12AWG",
+        "condition": "frayed"
+      },
+      "states": {
+        "is_chopped": false
+      }
+    },
+    {
+      "id": "welding_rig_1",
+      "name": "Portable Welding Rig",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 35.0,
+        "gas_level": 30,
+        "electrodes": "scattered",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Digital Torque Wrench",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "display": "flickering",
+        "battery": 15,
+        "provides_abilities": [
+          "squeeze"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_plates_1",
+      "name": "Stack of Steel Plates",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 120.0,
+        "dimensions": "2m x 1m",
+        "condition": "precarious"
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "safety_sign_1",
+      "name": "Days Since Last Injury Sign",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 1.5,
+        "message": "DAYS SINCE LAST INJURY: 27",
+        "condition": "grease_smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "osha_posters_1",
+      "name": "Faded OSHA Posters",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.8,
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_thermos_1",
+      "name": "Open Coffee Thermos",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "state": "cold",
+        "lid": "open"
+      },
+      "states": {
+        "is_wrapped": true
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "condition": "bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Locked Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "access": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_seals_crate_1",
+      "name": "Sealed Hydraulic Seals Crate",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 400.0,
+        "label": "HYDRAULIC SEALS – LOT 47B",
+        "requires": "forklift"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Calibrated Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.2,
+        "case": "foam-lined",
+        "last_inspection": "faded"
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "bolt_bin_1",
+      "name": "Missing Bolt Bin",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 3.0,
+        "content": "half-empty",
+        "note": "Order more M12x1.75"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "weight": 85.0,
+        "condition": "crooked",
+        "wheel": "squeaking"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.7,
+        "battery": "low",
+        "last_scan": "Drill Bit – Carbide Tip",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Dusty Employee Plaque",
+      "type": "ITEM",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "weight": 1.0,
+        "year": 2018,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "rigging_manual_1",
+      "name": "Torn Rigging Manual",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "torn",
+        "pages": "stuck"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "vibration_test_rig_1",
+      "name": "Vibration Test Rig",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "status": "idle",
+        "last_use": "mud motor bearing"
+      },
+      "states": {}
+    },
+    {
+      "id": "alignment_station_1",
+      "name": "Optical Alignment Station",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "laser_grid": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_valve_1",
+      "name": "Out-of-Spec Pressure Valve",
+      "type": "ITEM",
+      "location_id": "on:alignment_station_1",
+      "properties": {
+        "weight": 3.5,
+        "tag": "FAIL – 5% OVER TOLERANCE",
+        "color": "red"
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "in:inspection_lab",
+      "properties": {
+        "weight": 5.0,
+        "missing": "500g",
+        "case": "foam"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Cracked Eyepiece",
+      "type": "ITEM",
+      "location_id": "on:alignment_station_1",
+      "properties": {
+        "weight": 4.0,
+        "eyepiece": "cracked",
+        "functional": true,
+        "is_container": true
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "on:alignment_station_1",
+      "properties": {
+        "weight": 1.8,
+        "status": "on",
+        "battery": 12,
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_certificate_1",
+      "name": "Coffee-Ringed Calibration Certificate",
+      "type": "ITEM",
+      "location_id": "in:inspection_lab",
+      "properties": {
+        "weight": 0.1,
+        "expiry": "next_month",
+        "stains": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "scope_note_1",
+      "name": "Sticky Note About Scope",
+      "type": "ITEM",
+      "location_id": "on:microscope_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "Don’t use this scope—Bob drooled on it."
+      },
+      "states": {}
+    },
+    {
+      "id": "hazardous_locker_1",
+      "name": "Hazardous Materials Locker",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "security": "reinforced"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flammable_supplies_1",
+      "name": "Flammable Supplies",
+      "type": "ITEM",
+      "location_id": "in:hazardous_locker_1",
+      "properties": {
+        "weight": 15.0,
+        "type": "chemical",
+        "hazard": "flammable"
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_desk_1",
+      "name": "Admin Desk",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.75
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "location": "under coffee-stained invoice",
+        "access": "tool_cabinet_1"
+      },
+      "states": {}
+    },
+    {
+      "id": "shipment_schedule_1",
+      "name": "Shipment Schedule",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "paper-littered"
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "towel_1",
+      "name": "Cleaning Towel",
+      "type": "ITEM",
+      "location_id": "on:admin_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Industrial Broom",
+      "type": "ITEM",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "weight": 2.0,
+        "bristles": "stiff",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_container_1",
+      "name": "Water Container",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 5.0,
+        "capacity": "10L",
+        "provides_abilities": [
+          "water",
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "weight": 0.4,
+        "bristles": "synthetic",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 3.5,
+        "power": "electric",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mixing_bowl_1",
+      "name": "Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "in:tool_parts_storage",
+      "properties": {
+        "weight": 1.2,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Utility Scissors",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "blade": "sharp",
+        "provides_abilities": [
+          "unwrap",
+          "chop"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "chop",
+    "drill",
+    "dry",
+    "inflate",
+    "load",
+    "mix",
+    "open",
+    "paint",
+    "photograph",
+    "plug_in",
+    "rinse",
+    "squeeze",
+    "sweep",
+    "unwrap",
+    "water",
+    "close"
+  ]
+}

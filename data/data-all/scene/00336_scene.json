@@ -1,0 +1,677 @@
+{
+  "description": "A sprawling outdoor tech emporium warehouse and installation yard, filled with high-tech inventory, demo setups, and installation stations requiring multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "main_warehouse",
+      "name": "Main Warehouse Floor",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "outdoor_demo_yard",
+        "installation_bay",
+        "shipping_dock",
+        "break_room",
+        "managers_office"
+      ]
+    },
+    {
+      "id": "outdoor_demo_yard",
+      "name": "Outdoor Demo Yard",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "main_warehouse"
+      ]
+    },
+    {
+      "id": "installation_bay",
+      "name": "Installation Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_warehouse"
+      ]
+    },
+    {
+      "id": "shipping_dock",
+      "name": "Shipping & Receiving Dock",
+      "properties": {
+        "type": "loading"
+      },
+      "connected_to_room_ids": [
+        "main_warehouse"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Staff Break Room",
+      "properties": {
+        "type": "staff"
+      },
+      "connected_to_room_ids": [
+        "main_warehouse"
+      ]
+    },
+    {
+      "id": "managers_office",
+      "name": "Manager's Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_warehouse"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          3.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_racking_1",
+      "name": "Pallet Racking",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          4.0,
+          2.0,
+          4.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "surface": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "tv_crate_1",
+      "name": "75\" Outdoor TV Crate",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "URGENT: Customer pickup by 3PM"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 8.5,
+        "color": "red",
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "mislabeled_pallet_1",
+      "name": "Mislabeled Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "Mixed TV enclosures and mounts"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Zebra",
+        "model": "DS2208",
+        "battery_level": 0.15
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "lift_cart_1",
+      "name": "Hydraulic Lift Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 65.0,
+        "material": "steel",
+        "condition": "squeaky wheels"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_fan_1",
+      "name": "Industrial Fan",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 25.0,
+        "material": "metal",
+        "condition": "off-balance"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "demo_pergola_1",
+      "name": "Demo Pergola",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 75.0,
+        "material": "wood",
+        "color": "natural",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tv_stand_1",
+      "name": "Freestanding TV Stand",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.5
+        ],
+        "weight": 30.0,
+        "material": "metal",
+        "condition": "rusted bolts",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "demo_tv_1",
+      "name": "65\" All-Weather TV",
+      "type": "ITEM",
+      "location_id": "on:demo_pergola_1",
+      "properties": {
+        "weight": 35.0,
+        "brand": "SunTech",
+        "model": "OW-65X",
+        "screen_size": 65
+      },
+      "states": {
+        "is_on": false,
+        "is_muted": true
+      }
+    },
+    {
+      "id": "malfunctioning_tv_1",
+      "name": "Malfunctioning Demo TV",
+      "type": "ITEM",
+      "location_id": "on:tv_stand_1",
+      "properties": {
+        "weight": 25.0,
+        "brand": "SunTech",
+        "model": "OW-50X",
+        "screen_size": 50
+      },
+      "states": {
+        "is_on": false,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "remote_control_1",
+      "name": "Demo Remote Control",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "label": "Demo Unit #4"
+      },
+      "states": {}
+    },
+    {
+      "id": "remote_control_2",
+      "name": "Personal Remote Control",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "inscription": "Property of John"
+      },
+      "states": {}
+    },
+    {
+      "id": "power_cable_1",
+      "name": "Power Cable with Red Tape",
+      "type": "ITEM",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "weight": 0.5,
+        "length": "3m",
+        "marking": "red electrical tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "power_cable_2",
+      "name": "Power Cable with Black Tape",
+      "type": "ITEM",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "weight": 0.5,
+        "length": "3m",
+        "marking": "black electrical tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "outdoor_speakers_1",
+      "name": "Outdoor Speaker Set",
+      "type": "ITEM",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "weight": 12.0,
+        "brand": "SunTech",
+        "model": "OS-200"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "weatherproof_cover_1",
+      "name": "Weatherproof TV Cover",
+      "type": "ITEM",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "weight": 1.5,
+        "material": "vinyl",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_washed": true
+      }
+    },
+    {
+      "id": "extension_cord_1",
+      "name": "Extension Cord Reel",
+      "type": "ITEM",
+      "location_id": "in:outdoor_demo_yard",
+      "properties": {
+        "weight": 3.0,
+        "length": "15m",
+        "condition": "tangled"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "order_cabinet_1",
+      "name": "Customer Order Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_warehouse",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 40.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "office_key_1",
+      "name": "Cabinet Key",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 0.05,
+        "material": "brass",
+        "label": "Order Cabinet"
+      },
+      "states": {}
+    },
+    {
+      "id": "voltage_tester_1",
+      "name": "Voltage Tester",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Fluke",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hdmi_cable_1",
+      "name": "Replacement HDMI Cable",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "length": "2m",
+        "version": "2.1"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Milton",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Whiteboard Eraser",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Stainless Steel Whisk",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "TV Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "SunTech",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "Barcode Scanner Charger",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "brand": "Zebra",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "washing_supplies_1",
+      "name": "Cleaning Kit",
+      "type": "ITEM",
+      "location_id": "in:installation_bay",
+      "properties": {
+        "weight": 2.0,
+        "contents": "soap, sponge, cloth",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grinder_1",
+      "name": "Angle Grinder",
+      "type": "ITEM",
+      "location_id": "in:installation_bay",
+      "properties": {
+        "weight": 3.5,
+        "brand": "DeWalt",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealant_gun_1",
+      "name": "Sealant Gun",
+      "type": "ITEM",
+      "location_id": "in:installation_bay",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Loctite",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 4.0,
+        "brand": "Brother",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "oven_1",
+      "name": "Toaster Oven",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Black+Decker",
+        "provides_abilities": [
+          "bake"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "trash_bin_1",
+      "name": "Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "cable_reel_1",
+      "name": "Cable Reel",
+      "type": "ITEM",
+      "location_id": "in:installation_bay",
+      "properties": {
+        "weight": 8.0,
+        "length": "50m",
+        "material": "plastic"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "computer_1",
+      "name": "Office Computer",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Dell",
+        "model": "OptiPlex"
+      },
+      "states": {
+        "is_on": false,
+        "is_saved": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          2.0
+        ],
+        "weight": 2500.0,
+        "fuel_level": 0.3
+      },
+      "states": {
+        "is_running": false
+      }
+    }
+  ],
+  "abilities": [
+    "bake",
+    "calibrate",
+    "check_pressure",
+    "empty",
+    "erase",
+    "grind",
+    "open",
+    "print",
+    "recharge",
+    "save",
+    "seal",
+    "start_process",
+    "turn_on",
+    "unmute",
+    "unroll",
+    "wash",
+    "whisk",
+    "close"
+  ]
+}

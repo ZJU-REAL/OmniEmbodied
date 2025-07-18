@@ -1,0 +1,675 @@
+{
+  "description": "A high-tech Biolab Equipment Testing & Calibration Facility with interconnected zones for collaborative equipment evaluation and calibration.",
+  "rooms": [
+    {
+      "id": "main_testing_bay",
+      "name": "Main Testing Bay",
+      "properties": {
+        "type": "industrial",
+        "lighting": "bright_led",
+        "atmosphere": "sterile_metallic"
+      },
+      "connected_to_room_ids": [
+        "calibration_storage_annex",
+        "observation_control_room"
+      ]
+    },
+    {
+      "id": "calibration_storage_annex",
+      "name": "Calibration & Storage Annex",
+      "properties": {
+        "type": "storage",
+        "lighting": "dim",
+        "atmosphere": "organized_chaos"
+      },
+      "connected_to_room_ids": [
+        "main_testing_bay"
+      ]
+    },
+    {
+      "id": "observation_control_room",
+      "name": "Observation & Control Room",
+      "properties": {
+        "type": "office",
+        "lighting": "low_blue",
+        "atmosphere": "cluttered_technical"
+      },
+      "connected_to_room_ids": [
+        "main_testing_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "servo_testing_rig_1",
+      "name": "Servo-Controlled Force Testing Rig",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.8
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "STR-3000",
+        "has_hydraulic_dampers": true,
+        "embedded_sensors": [
+          "strain_gauges",
+          "piezoelectric"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.5
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "load_capacity": 300.0,
+        "cable_condition": "partially_frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_workbench_1",
+      "name": "Diagnostic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_finish": "anti_static"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "32\" Diagnostic Monitor",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workbench_1",
+      "properties": {
+        "weight": 8.5,
+        "brand": "Dell",
+        "model": "UltraSharp",
+        "display_content": "live_force_distribution_graphs",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "monitor_2",
+      "name": "32\" Diagnostic Monitor",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workbench_1",
+      "properties": {
+        "weight": 8.5,
+        "brand": "Dell",
+        "model": "UltraSharp",
+        "display_content": "error_log",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true,
+        "is_active": false
+      }
+    },
+    {
+      "id": "smart_ball_prototype_1",
+      "name": "Smart Ball Prototype",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "diameter": 15.0,
+        "material": "polycarbonate",
+        "color": "black",
+        "sensor_nodes": 3,
+        "sensor_condition": "misaligned"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "calibration_jig_1",
+      "name": "Calibration Jig",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "aluminum",
+        "current_offset": 7.5,
+        "adjustment_type": "fine_knobs",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "cover_status": "missing",
+        "contact_condition": "corroded",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": 4
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hex_wrench_set_1",
+      "name": "Hex Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "sizes": [
+          1.5,
+          2.0,
+          2.5,
+          3.0,
+          4.0,
+          5.0
+        ],
+        "material": "chrome_vanadium",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_screwdriver_1",
+      "name": "Torque Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "current_setting": 4.0,
+        "unit": "Nm",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_oscilloscope_1",
+      "name": "USB Oscilloscope",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Hantek",
+        "model": "6022BE",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "supply_cabinet_1",
+      "name": "Supply Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keypad"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gel_pack_1",
+      "name": "Sealed Gel Pack",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "expiry_date": "06/2025",
+        "contents": "conductive_gel",
+        "seal_integrity": "intact"
+      },
+      "states": {}
+    },
+    {
+      "id": "sensor_node_1",
+      "name": "Spare Sensor Node",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "aluminum",
+        "packaging": "anti_static_bag",
+        "calibration_status": "uncalibrated"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_testing_bay",
+      "properties": {
+        "weight": 0.2,
+        "content": "DO NOT OVERLOAD CRANE",
+        "condition": "faded",
+        "corners": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "modular_shelving_1",
+      "name": "Modular Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_storage_annex",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "has_weight_alarm": true,
+        "alarm_threshold": 50.0
+      },
+      "states": {}
+    },
+    {
+      "id": "decommissioned_centrifuge_1",
+      "name": "Decommissioned Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_storage_annex",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "repurposed_as": "tool_rack"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_weight_1",
+      "name": "1g Calibration Weight",
+      "type": "ITEM",
+      "location_id": "in:decommissioned_centrifuge_1",
+      "properties": {
+        "weight": 0.001,
+        "material": "brass",
+        "tolerance_class": "E1"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_weight_2",
+      "name": "10kg Calibration Weight",
+      "type": "ITEM",
+      "location_id": "in:decommissioned_centrifuge_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "stainless_steel",
+        "tolerance_class": "F2"
+      },
+      "states": {}
+    },
+    {
+      "id": "master_calibration_device_1",
+      "name": "Master Calibration Device",
+      "type": "ITEM",
+      "location_id": "on:modular_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "type": "handheld_force_gauge",
+        "brand": "Mark-10",
+        "note": "RE-CALIBRATE",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Locked Parts Bin",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_storage_annex",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "lock_type": "rfid",
+        "required_key": "rfid_keycard_1"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:modular_shelving_1",
+      "properties": {
+        "weight": 0.7,
+        "brand": "Brother",
+        "tape_status": "out",
+        "partial_label": "CRITICAL - DO NOT"
+      },
+      "states": {}
+    },
+    {
+      "id": "drying_rack_1",
+      "name": "Drying Rack",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_storage_annex",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.6
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "sensor_housing_1",
+      "name": "Sensor Housing",
+      "type": "ITEM",
+      "location_id": "on:drying_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "polycarbonate",
+        "condition": "dripping"
+      },
+      "states": {}
+    },
+    {
+      "id": "main_monitoring_station_1",
+      "name": "Main Monitoring Station",
+      "type": "FURNITURE",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_finish": "matte"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_3",
+      "name": "Primary Monitor",
+      "type": "ITEM",
+      "location_id": "on:main_monitoring_station_1",
+      "properties": {
+        "weight": 9.0,
+        "brand": "LG",
+        "model": "UltraWide",
+        "display_content": "force_distribution_heatmaps",
+        "condition": "flickering",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "emergency_protocol_binder_1",
+      "name": "Emergency Protocol Binder",
+      "type": "ITEM",
+      "location_id": "on:main_monitoring_station_1",
+      "properties": {
+        "weight": 2.5,
+        "condition": "coffee_stained",
+        "location": "wedged_under_keyboard",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "rfid_keycard_1",
+      "name": "RFID Keycard",
+      "type": "ITEM",
+      "location_id": "on:main_monitoring_station_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access_level": "storage_annex",
+        "location": "under_keyboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "prototype_worktable_1",
+      "name": "Prototype Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "disassembled_smart_ball_1",
+      "name": "Disassembled Smart Ball Prototype",
+      "type": "ITEM",
+      "location_id": "on:prototype_worktable_1",
+      "properties": {
+        "weight": 1.1,
+        "sensor_nodes_detached": 1,
+        "condition": "in_progress",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "micro_screwdriver_1",
+      "name": "Micro Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:prototype_worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "size": "PH00",
+        "material": "steel",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Laser Printer",
+      "type": "ITEM",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "weight": 15.0,
+        "brand": "HP",
+        "model": "LaserJet",
+        "paper_status": "out",
+        "error_light": "blinking",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "kettle_1",
+      "name": "Electric Kettle",
+      "type": "ITEM",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Cuisinart",
+        "temperature": "warm",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:prototype_worktable_1",
+      "properties": {
+        "weight": 0.4,
+        "contents": "cold_coffee",
+        "fill_level": "half",
+        "condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Wall-Mounted Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "content": "RE: Sensor 3 drift—check grounding?",
+        "marker_color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "team_photo_1",
+      "name": "Framed Team Photo",
+      "type": "ITEM",
+      "location_id": "in:observation_control_room",
+      "properties": {
+        "weight": 1.5,
+        "frame_material": "wood",
+        "condition": "dusty",
+        "alignment": "crooked"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "assemble",
+    "download",
+    "open",
+    "sign",
+    "turn_off",
+    "close"
+  ]
+}

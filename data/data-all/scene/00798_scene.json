@@ -1,0 +1,767 @@
+{
+  "description": "An artisan bakery workshop and microbrewery collaboration lab with a dynamic mix of baking and brewing equipment, tools, and ingredients, designed for multi-agent interaction and complex task execution.",
+  "rooms": [
+    {
+      "id": "main_baking_floor",
+      "name": "Main Baking Floor",
+      "properties": {
+        "type": "baking",
+        "temperature": "warm",
+        "humidity": "high"
+      },
+      "connected_to_room_ids": [
+        "microbrewery_corner",
+        "tool_preparation_zone",
+        "storage_dry_goods"
+      ]
+    },
+    {
+      "id": "microbrewery_corner",
+      "name": "Microbrewery Experiment Corner",
+      "properties": {
+        "type": "brewing",
+        "temperature": "cool",
+        "humidity": "moderate"
+      },
+      "connected_to_room_ids": [
+        "main_baking_floor",
+        "tool_preparation_zone"
+      ]
+    },
+    {
+      "id": "tool_preparation_zone",
+      "name": "Tool Preparation Zone",
+      "properties": {
+        "type": "workshop",
+        "temperature": "room",
+        "humidity": "low"
+      },
+      "connected_to_room_ids": [
+        "main_baking_floor",
+        "microbrewery_corner"
+      ]
+    },
+    {
+      "id": "storage_dry_goods",
+      "name": "Storage & Dry Goods",
+      "properties": {
+        "type": "storage",
+        "temperature": "cold",
+        "humidity": "low"
+      },
+      "connected_to_room_ids": [
+        "main_baking_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "granite_worktable_1",
+      "name": "Granite Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.9
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "granite",
+        "condition": "chipped",
+        "surface": "flour-dusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "deck_oven_1",
+      "name": "Deck Oven",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 180.0,
+        "is_container": false,
+        "material": "steel",
+        "temperature": 475.0,
+        "display": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "dough_divider_1",
+      "name": "Dough Divider",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "override_lever_1",
+      "name": "Override Lever",
+      "type": "ITEM",
+      "location_id": "on:granite_worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "color": "silver",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "brewery_wrench_1",
+      "name": "Brewery Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 2.0,
+        "material": "steel",
+        "color": "black",
+        "provides_abilities": [
+          "open",
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fermentation_tank_7",
+      "name": "Fermentation Tank #7",
+      "type": "FURNITURE",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "pressure": 12.0,
+        "label": "Doppelbock Batch #7"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "molasses_dispenser_1",
+      "name": "Molasses Dispenser",
+      "type": "ITEM",
+      "location_id": "on:fermentation_tank_7",
+      "properties": {
+        "weight": 5.0,
+        "material": "glass",
+        "color": "brown",
+        "condition": "clogged"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "kettle_1",
+      "name": "Kettle",
+      "type": "ITEM",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "weight": 3.0,
+        "material": "stainless_steel",
+        "color": "silver",
+        "provides_abilities": [
+          "spill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "white",
+        "condition": "calibration_fluid_spilled"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "color": "blue",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_1",
+      "name": "Flour Sack",
+      "type": "ITEM",
+      "location_id": "in:storage_dry_goods",
+      "properties": {
+        "weight": 50.0,
+        "material": "paper",
+        "color": "white",
+        "label": "Whole Wheat Flour"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "rye_flour_sack_1",
+      "name": "Rye Flour Sack",
+      "type": "ITEM",
+      "location_id": "in:storage_dry_goods",
+      "properties": {
+        "weight": 10.0,
+        "material": "paper",
+        "color": "brown",
+        "label": "Organic Rye Flour"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "sourdough_starter_1",
+      "name": "Sourdough Starter",
+      "type": "ITEM",
+      "location_id": "in:storage_dry_goods",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass",
+        "color": "clear",
+        "label": "Felila's Grandmother's Culture"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "scoring_lame_1",
+      "name": "MKelly's Coffee-Stirrer Lame",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "color": "silver",
+        "handle": "coffee_stirrer",
+        "condition": "dried_dough"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "scoring_lame_2",
+      "name": "Elagins' Antique Straight Razor",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.2,
+        "material": "steel",
+        "color": "tarnished",
+        "handle": "wood",
+        "inscription": "WIPE AFTER USE - sourdough acid!!"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "alcohol_wipes_1",
+      "name": "Alcohol Wipes",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.3,
+        "material": "fabric",
+        "color": "white",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_bin_1",
+      "name": "Flour Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic",
+        "condition": "lid_askew"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dough_tub_1",
+      "name": "Dough Tub",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "polypropylene",
+        "condition": "scratched"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "proofing_cabinet_1",
+      "name": "Proofing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood",
+        "temperature": 30.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lab_bench_1",
+      "name": "Lab Bench",
+      "type": "FURNITURE",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          0.9
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "color": "black",
+        "condition": "focus_knob_stiff"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ph_strips_1",
+      "name": "pH Strips",
+      "type": "ITEM",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "color": "white",
+        "condition": "backup"
+      },
+      "states": {}
+    },
+    {
+      "id": "hop_pellet_bags_1",
+      "name": "Hop Pellet Bags",
+      "type": "ITEM",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "color": "green",
+        "condition": "torn"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "apron_1",
+      "name": "Apron",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.5,
+        "material": "cotton",
+        "color": "blue",
+        "condition": "clean"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "gloves_1",
+      "name": "Gloves",
+      "type": "ITEM",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "weight": 0.2,
+        "material": "rubber",
+        "color": "yellow",
+        "condition": "new"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "inscription": "Trial #23: +5% wheat - gummy crumb??"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "on:chalkboard_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "color": "white",
+        "inscription": "ACETOBACTER = VINEGAR. DON'T CROSS-CONTAMINATE!"
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "color": "black",
+        "condition": "static"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "basil_plant_1",
+      "name": "Basil Plant",
+      "type": "ITEM",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "weight": 0.5,
+        "material": "plant",
+        "color": "brown",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "shipping_label_1",
+      "name": "Shipping Label",
+      "type": "ITEM",
+      "location_id": "on:granite_worktable_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "color": "white",
+        "inscription": "FRAGILE - GLASS LAME BLADES"
+      },
+      "states": {}
+    },
+    {
+      "id": "dough_sheeter_1",
+      "name": "Dough Sheeter",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "gas_chromatograph_1",
+      "name": "Gas Chromatograph",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "metal",
+        "color": "silver",
+        "condition": "calibrated"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Sink",
+      "type": "FURNITURE",
+      "location_id": "in:microbrewery_corner",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "walk_in_fridge_1",
+      "name": "Walk-in Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:storage_dry_goods",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sack_rack_1",
+      "name": "Sack Rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_dry_goods",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "sturdy"
+      },
+      "states": {}
+    },
+    {
+      "id": "molasses_jar_1",
+      "name": "Molasses Jar",
+      "type": "ITEM",
+      "location_id": "on:sack_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "glass",
+        "color": "brown",
+        "inscription": "USE GLOVES - stains!!"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "pegboard_wall_1",
+      "name": "Pegboard Wall",
+      "type": "FURNITURE",
+      "location_id": "in:tool_preparation_zone",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "organized"
+      },
+      "states": {}
+    },
+    {
+      "id": "exacto_knife_1",
+      "name": "Exacto Knife",
+      "type": "ITEM",
+      "location_id": "on:pegboard_wall_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "color": "silver",
+        "handle": "plastic"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "paring_knife_1",
+      "name": "Victorinox Paring Knife",
+      "type": "ITEM",
+      "location_id": "on:pegboard_wall_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "steel",
+        "color": "silver",
+        "inscription": "KazaKhan's Favorite"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "dish_alcohol_wipes_1",
+      "name": "Dish of Alcohol Wipes",
+      "type": "ITEM",
+      "location_id": "on:pegboard_wall_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "color": "white",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_art_1",
+      "name": "Wall Art",
+      "type": "ITEM",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "weight": 2.0,
+        "material": "paper",
+        "color": "vintage",
+        "inscription": "La Scarification: L'Art du Pain"
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_1",
+      "name": "Floor",
+      "type": "FURNITURE",
+      "location_id": "in:main_baking_floor",
+      "properties": {
+        "size": [
+          5.0,
+          5.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": true,
+        "material": "concrete",
+        "condition": "drag_marks"
+      },
+      "states": {}
+    },
+    {
+      "id": "sesame_seed_1",
+      "name": "Sesame Seed",
+      "type": "ITEM",
+      "location_id": "on:floor_1",
+      "properties": {
+        "weight": 0.001,
+        "material": "seed",
+        "color": "brown"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "open",
+    "spill",
+    "turn_on",
+    "unseal",
+    "wear",
+    "wipe",
+    "close"
+  ]
+}

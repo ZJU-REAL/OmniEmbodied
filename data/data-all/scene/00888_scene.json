@@ -1,0 +1,544 @@
+{
+  "description": "A densely populated CGI server room with aging infrastructure, requiring collaborative efforts for maintenance and debugging.",
+  "rooms": [
+    {
+      "id": "main_server_farm",
+      "name": "Main Server Farm",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_station",
+        "cable_closet",
+        "backup_power_area",
+        "break_area"
+      ]
+    },
+    {
+      "id": "diagnostic_station",
+      "name": "Diagnostic & Monitoring Station",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_server_farm",
+        "cable_closet"
+      ]
+    },
+    {
+      "id": "cable_closet",
+      "name": "Cable & Storage Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_server_farm",
+        "diagnostic_station"
+      ]
+    },
+    {
+      "id": "backup_power_area",
+      "name": "Backup Power & HVAC Corner",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "main_server_farm"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_server_farm"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "server_rack_alpha_1",
+      "name": "Server Rack Alpha",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_farm",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blade_server_7_1",
+      "name": "Blade Server #7",
+      "type": "ITEM",
+      "location_id": "in:server_rack_alpha_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "PowerEdge"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "network_switch_hub_1",
+      "name": "Network Switch Hub",
+      "type": "ITEM",
+      "location_id": "in:server_rack_alpha_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "brand": "Cisco",
+        "model_number": "WS-C2960"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:server_rack_alpha_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "beige",
+        "brand": "ATEN",
+        "model_number": "CS1764"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_farm",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Thermal Paste",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "brand": "Arctic",
+        "model_number": "MX-4",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "compressed_air_1",
+      "name": "Compressed Air",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "brand": "Dust-Off",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "brand": "Stanley",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_cutoff_switch_1",
+      "name": "Emergency Cutoff Switch",
+      "type": "ITEM",
+      "location_id": "in:main_server_farm",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "triple_monitor_setup_1",
+      "name": "Triple Monitor Setup",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model_number": "U2415"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "terminal_3_1",
+      "name": "Terminal #3",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_setup_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "HP",
+        "model_number": "EliteDisplay"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "usb_debug_dongle_1",
+      "name": "USB Debug Dongle",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_setup_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "FTDI",
+        "model_number": "FT232"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "brand": "Brother",
+        "model_number": "PT-E100"
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "overloaded_shelving_unit_1",
+      "name": "Overloaded Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:cable_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_router_1",
+      "name": "Spare Router",
+      "type": "ITEM",
+      "location_id": "in:overloaded_shelving_unit_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "Netgear",
+        "model_number": "R7000"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "mystery_cable_bin_1",
+      "name": "Mystery Cable Bin",
+      "type": "ITEM",
+      "location_id": "in:overloaded_shelving_unit_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "gray",
+        "material": "plastic"
+      },
+      "states": {
+        "is_combined": false
+      }
+    },
+    {
+      "id": "extension_cord_1",
+      "name": "Extension Cord",
+      "type": "ITEM",
+      "location_id": "in:cable_closet",
+      "properties": {
+        "weight": 1.5,
+        "color": "orange",
+        "brand": "Tripp Lite"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "ups_battery_bank_1",
+      "name": "UPS Battery Bank",
+      "type": "FURNITURE",
+      "location_id": "in:backup_power_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "brand": "APC",
+        "model_number": "SMX1500"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "circuit_breaker_panel_1",
+      "name": "Circuit Breaker Panel",
+      "type": "ITEM",
+      "location_id": "in:backup_power_area",
+      "properties": {
+        "weight": 10.0,
+        "color": "gray",
+        "brand": "Square D"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "air_conditioner_1",
+      "name": "Air Conditioner",
+      "type": "ITEM",
+      "location_id": "in:backup_power_area",
+      "properties": {
+        "weight": 25.0,
+        "color": "white",
+        "brand": "LG",
+        "model_number": "LW1216ER"
+      },
+      "states": {
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "Keurig",
+        "model_number": "K-Elite"
+      },
+      "states": {
+        "is_boiling": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.1
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "melamine"
+      },
+      "states": {
+        "is_polished": false
+      }
+    },
+    {
+      "id": "office_chair_1",
+      "name": "Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "leather"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "microfiber",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Sharpener",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "gray",
+        "brand": "WorkSharp",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Towel",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealant_gun_1",
+      "name": "Sealant Gun",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "3M",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:cable_closet",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "brand": "BikeMaster",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_station",
+      "properties": {
+        "weight": 10.0,
+        "color": "white",
+        "brand": "HP",
+        "model_number": "LaserJet",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "combine",
+    "cool",
+    "drill",
+    "dry",
+    "inflate",
+    "open",
+    "polish",
+    "print",
+    "raise",
+    "seal",
+    "sharpen",
+    "sync",
+    "turn_on",
+    "unpair",
+    "unplug",
+    "close"
+  ]
+}

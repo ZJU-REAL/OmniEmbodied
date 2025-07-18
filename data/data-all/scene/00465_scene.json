@@ -1,0 +1,723 @@
+{
+  "description": "A decommissioned industrial district repurposed as a hyper-realistic Urban Disaster Response Training Facility, simulating a city block after a catastrophic event with collapsed buildings, trapped survivors, and hazardous materials.",
+  "rooms": [
+    {
+      "id": "collapsed_apartment_block",
+      "name": "Collapsed Apartment Block",
+      "properties": {
+        "type": "disaster_zone",
+        "hazard_level": "extreme",
+        "structural_integrity": "compromised"
+      },
+      "connected_to_room_ids": [
+        "industrial_warehouse",
+        "underground_parking_garage"
+      ]
+    },
+    {
+      "id": "industrial_warehouse",
+      "name": "Industrial Warehouse",
+      "properties": {
+        "type": "hazardous_materials",
+        "hazard_level": "high",
+        "chemical_spill": true
+      },
+      "connected_to_room_ids": [
+        "collapsed_apartment_block",
+        "medical_triage_tent"
+      ]
+    },
+    {
+      "id": "underground_parking_garage",
+      "name": "Underground Parking Garage",
+      "properties": {
+        "type": "flooded_area",
+        "water_level": "rising",
+        "electrical_hazard": true
+      },
+      "connected_to_room_ids": [
+        "collapsed_apartment_block"
+      ]
+    },
+    {
+      "id": "medical_triage_tent",
+      "name": "Medical Triage Tent",
+      "properties": {
+        "type": "medical_zone",
+        "patient_capacity": 12,
+        "supply_status": "low"
+      },
+      "connected_to_room_ids": [
+        "industrial_warehouse"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "fractured_staircase_1",
+      "name": "Fractured Central Staircase",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "size": [
+          5.0,
+          2.0,
+          3.0
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "reinforced_concrete",
+        "angle": 30,
+        "rebar_exposed": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pancaked_living_room_1",
+      "name": "Pancaked Living Room",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "size": [
+          4.5,
+          3.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "mixed_debris",
+        "ceiling_slab_collapsed": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "trapped_victim_1",
+      "name": "Trapped Victim Mannequin",
+      "type": "ITEM",
+      "location_id": "in:pancaked_living_room_1",
+      "properties": {
+        "weight": 70.0,
+        "condition": "pinned",
+        "injury_type": "crush",
+        "requires_extraction": true
+      },
+      "states": {
+        "is_loaded": true
+      }
+    },
+    {
+      "id": "wooden_beam_1",
+      "name": "Wooden Support Beam",
+      "type": "ITEM",
+      "location_id": "on:pancaked_living_room_1",
+      "properties": {
+        "weight": 45.0,
+        "material": "oak",
+        "length": "2.4m",
+        "diameter": "15cm",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unstable_gas_line_1",
+      "name": "Unstable Gas Line",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 8.5,
+        "material": "steel",
+        "diameter": "5cm",
+        "leak_rate": "high",
+        "hazard_level": "extreme"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "gas_line_cap_1",
+      "name": "Gas Line Cap",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 0.5,
+        "material": "brass",
+        "thread_size": "5cm",
+        "provides_abilities": [
+          "stop_process"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_cabinet_1",
+      "name": "Dented First Aid Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "label": "FIRST AID",
+        "antiseptic_spilled": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bandages_1",
+      "name": "Intact Bandages",
+      "type": "ITEM",
+      "location_id": "in:medical_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "quantity": 12,
+        "sterility": "maintained",
+        "size": "10cm x 5m"
+      },
+      "states": {}
+    },
+    {
+      "id": "surveyor_tripod_1",
+      "name": "Surveyor's Tripod",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 4.2,
+        "material": "aluminum",
+        "laser_active": true,
+        "height_adjustable": true
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "overturned_forklift_1",
+      "name": "Overturned Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.2
+        ],
+        "weight": 2500.0,
+        "is_container": false,
+        "capacity": "2.5 tons",
+        "hydraulic_leak": true,
+        "pinned_worker": true
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_storage_rack_1",
+      "name": "Chemical Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "bent_metal",
+        "leaking_drums": 3,
+        "stability": "compromised"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Acetic Anhydride Drum",
+      "type": "ITEM",
+      "location_id": "in:chemical_storage_rack_1",
+      "properties": {
+        "weight": 22.0,
+        "capacity": "20L",
+        "label": "CORROSIVE",
+        "leak_status": "active",
+        "handwritten_label": "REACTIVE WITH WATER"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_2",
+      "name": "Acetic Anhydride Drum",
+      "type": "ITEM",
+      "location_id": "in:chemical_storage_rack_1",
+      "properties": {
+        "weight": 22.0,
+        "capacity": "20L",
+        "label": "CORROSIVE",
+        "leak_status": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_containment_kit_1",
+      "name": "Spill Containment Kit",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 8.0,
+        "status": "unopened",
+        "contents": [
+          "absorbent_pads",
+          "neutralizer",
+          "gloves"
+        ],
+        "access_blocked": true,
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "electrical_panel_1",
+      "name": "Damaged Electrical Panel",
+      "type": "FURNITURE",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "size": [
+          0.8,
+          0.3,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "arc_flash_visible": true,
+        "cover_status": "cracked"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Functional Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 85.0,
+        "capacity": "2.0 tons",
+        "blocked_by_debris": true,
+        "provides_abilities": [
+          "load",
+          "unload"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "submerged_car_1",
+      "name": "Submerged Sedan",
+      "type": "FURNITURE",
+      "location_id": "in:underground_parking_garage",
+      "properties": {
+        "size": [
+          4.8,
+          1.8,
+          1.5
+        ],
+        "weight": 1500.0,
+        "is_container": true,
+        "water_level": "fully_submerged",
+        "blocking_drain": true
+      },
+      "states": {
+        "is_loaded": true
+      }
+    },
+    {
+      "id": "water_pump_1",
+      "name": "Industrial Water Pump",
+      "type": "ITEM",
+      "location_id": "in:underground_parking_garage",
+      "properties": {
+        "weight": 65.0,
+        "flow_rate": "500L/min",
+        "hose_length": "10m",
+        "requires_setup": true,
+        "provides_abilities": [
+          "stop_process"
+        ]
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "underwater_drone_1",
+      "name": "Search and Rescue Drone",
+      "type": "ITEM",
+      "location_id": "in:underground_parking_garage",
+      "properties": {
+        "weight": 8.5,
+        "battery_level": "low",
+        "camera_operational": true,
+        "max_depth": "30m",
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "drone_charger_1",
+      "name": "Drone Charging Station",
+      "type": "ITEM",
+      "location_id": "in:underground_parking_garage",
+      "properties": {
+        "weight": 3.2,
+        "voltage": "24V",
+        "compatibility": "multi-model",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_cot_1",
+      "name": "Triage Cot",
+      "type": "FURNITURE",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "patient": "Priority 1",
+        "injury": "crush",
+        "bp": "80/40"
+      },
+      "states": {}
+    },
+    {
+      "id": "trauma_kit_1",
+      "name": "Open Trauma Kit",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 2.5,
+        "contents": [
+          "bandages",
+          "tourniquet",
+          "chest_seal"
+        ],
+        "organization": "disarray",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "iv_bag_1",
+      "name": "Saline IV Bag",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 1.2,
+        "volume": "1000mL",
+        "sterility": "maintained",
+        "expiration": "2024-06-01"
+      },
+      "states": {
+        "is_served": false
+      }
+    },
+    {
+      "id": "triage_clipboard_1",
+      "name": "Triage Notes Clipboard",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 0.5,
+        "content": "Priority 1: Crush injury, BP 80/40",
+        "urgency": "high",
+        "requires_action": true
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Portable Photocopier",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 12.0,
+        "paper_loaded": true,
+        "toner_level": "medium",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "structural_shoring_kit_1",
+      "name": "Emergency Shoring Kit",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 45.0,
+        "contents": [
+          "hydraulic_jacks",
+          "steel_braces",
+          "ratchet_straps"
+        ],
+        "capacity": "5-ton",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "winch_system_1",
+      "name": "Heavy-Duty Winch",
+      "type": "ITEM",
+      "location_id": "in:underground_parking_garage",
+      "properties": {
+        "weight": 55.0,
+        "capacity": "3-ton",
+        "cable_length": "15m",
+        "requires_assembly": true,
+        "provides_abilities": [
+          "load",
+          "unload"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "janitorial_cart_1",
+      "name": "Janitorial Supply Cart",
+      "type": "FURNITURE",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "contents": [
+          "cleaning_solvents",
+          "mops",
+          "gloves"
+        ],
+        "misleading_labels": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cleaning_solvent_1",
+      "name": "Industrial Cleaning Solvent",
+      "type": "ITEM",
+      "location_id": "in:janitorial_cart_1",
+      "properties": {
+        "weight": 5.0,
+        "volume": "4L",
+        "appearance": "similar_to_chemical_drums",
+        "hazard_level": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 0.2,
+        "message": "PROPER PPE REQUIRED",
+        "condition": "torn",
+        "legibility": "poor"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "picture_hook_1",
+      "name": "Wall Hook",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 0.1,
+        "load_capacity": "5kg",
+        "mounting_type": "screw",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_clock_1",
+      "name": "Shattered Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 1.5,
+        "time_stopped": "3:17",
+        "glass_damage": "shattered",
+        "sentimental_value": true
+      },
+      "states": {
+        "is_shattered": false
+      }
+    },
+    {
+      "id": "family_photo_1",
+      "name": "Cracked Family Photo",
+      "type": "ITEM",
+      "location_id": "in:collapsed_apartment_block",
+      "properties": {
+        "weight": 0.3,
+        "inscription": "Est. 1987",
+        "frame_material": "wood",
+        "glass_condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "electrical_toolbox_1",
+      "name": "Electrician's Toolbox",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 7.5,
+        "contents": [
+          "wire_cutters",
+          "multimeter",
+          "insulation_tape"
+        ],
+        "lock_type": "combination",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "forklift_key_1",
+      "name": "Forklift Ignition Key",
+      "type": "ITEM",
+      "location_id": "in:industrial_warehouse",
+      "properties": {
+        "weight": 0.05,
+        "key_code": "FL-42",
+        "attached_to": "lanyard",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Handheld Radio",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 0.8,
+        "battery_level": "low",
+        "channel": "emergency",
+        "static_level": "high"
+      },
+      "states": {
+        "is_playing": true,
+        "is_charged": false
+      }
+    },
+    {
+      "id": "radio_charger_1",
+      "name": "Radio Charging Dock",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 0.3,
+        "compatibility": "multi-model",
+        "input_voltage": "12V",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "media_control_1",
+      "name": "Radio Control Panel",
+      "type": "ITEM",
+      "location_id": "in:medical_triage_tent",
+      "properties": {
+        "weight": 0.5,
+        "buttons": [
+          "power",
+          "volume",
+          "channel"
+        ],
+        "display": "digital",
+        "provides_abilities": [
+          "stop_playback"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "copy",
+    "copy_file",
+    "hang_up",
+    "load",
+    "mount",
+    "open",
+    "purify",
+    "recharge",
+    "serve",
+    "shatter",
+    "solve_puzzle",
+    "stop_playback",
+    "stop_process",
+    "unload",
+    "unlock"
+  ]
+}

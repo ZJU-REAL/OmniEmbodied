@@ -1,0 +1,492 @@
+{
+  "description": "A mobile veterinary cardiology unit equipped with advanced diagnostic and treatment equipment for pets with heart conditions, featuring four zones: Patient Intake & Prep Area, Imaging & Diagnostics Bay, Pharmacy & Supply Storage, and Technician Workstation & Data Review.",
+  "rooms": [
+    {
+      "id": "patient_intake",
+      "name": "Patient Intake & Prep Area",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "imaging_bay"
+      ]
+    },
+    {
+      "id": "imaging_bay",
+      "name": "Imaging & Diagnostics Bay",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "patient_intake",
+        "pharmacy_storage",
+        "technician_workstation"
+      ]
+    },
+    {
+      "id": "pharmacy_storage",
+      "name": "Pharmacy & Supply Storage",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "imaging_bay"
+      ]
+    },
+    {
+      "id": "technician_workstation",
+      "name": "Technician Workstation & Data Review",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "imaging_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "exam_table_1",
+      "name": "Adjustable Exam Table",
+      "type": "FURNITURE",
+      "location_id": "in:patient_intake",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "model_number": "VET-4500"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Wall-Mounted Digital Scale",
+      "type": "FURNITURE",
+      "location_id": "in:patient_intake",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "max_weight": 50.0,
+        "display_type": "LCD"
+      },
+      "states": {
+        "is_weighed": false
+      }
+    },
+    {
+      "id": "sedation_kit_1",
+      "name": "Sedation Kit",
+      "type": "ITEM",
+      "location_id": "in:patient_intake",
+      "properties": {
+        "weight": 2.5,
+        "color": "blue",
+        "is_container": true,
+        "contents": [
+          "propofol_vials",
+          "syringes",
+          "iv_line"
+        ],
+        "locked": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oxygen_tank_1",
+      "name": "Portable Oxygen Tank",
+      "type": "ITEM",
+      "location_id": "in:patient_intake",
+      "properties": {
+        "weight": 8.0,
+        "capacity": "2L",
+        "material": "steel",
+        "connected_to": "flow_regulator"
+      },
+      "states": {
+        "is_inflated": true
+      }
+    },
+    {
+      "id": "echocardiography_machine_1",
+      "name": "Echocardiography Machine",
+      "type": "FURNITURE",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "brand": "CardioVet",
+        "model": "EchoPro-5000"
+      },
+      "states": {}
+    },
+    {
+      "id": "anesthesia_monitor_1",
+      "name": "Anesthesia Monitoring Station",
+      "type": "FURNITURE",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "components": [
+          "pulse_oximeter",
+          "ecg_leads",
+          "blood_pressure_cuff"
+        ]
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "ultrasound_probe_1",
+      "name": "Ultrasound Probe",
+      "type": "ITEM",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "weight": 0.5,
+        "frequency": "10MHz",
+        "material": "plastic",
+        "requires_cleaning": true
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Emergency Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": [
+          "epinephrine",
+          "defibrillator_pads"
+        ],
+        "locked": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medication_cabinet_1",
+      "name": "Locked Medication Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "lock_type": "digital_keypad",
+        "refrigerated": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "supply_shelves_1",
+      "name": "Supply Shelves",
+      "type": "FURNITURE",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.4,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "labels": [
+          "IV_Catheters",
+          "Gauze",
+          "ECG_Leads"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drug_logbook_1",
+      "name": "Controlled Substance Logbook",
+      "type": "ITEM",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "weight": 0.8,
+        "material": "leather",
+        "pages": 100,
+        "pen_attached": true
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "emergency_drug_box_1",
+      "name": "Emergency Drug Box",
+      "type": "ITEM",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "contents": [
+          "atropine",
+          "lidocaine"
+        ],
+        "requires_check": "weekly"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "laptop_stand_1",
+      "name": "Rolling Laptop Stand",
+      "type": "FURNITURE",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "adjustable": true,
+        "wheel_condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "laser_printer_1",
+      "name": "Laser Printer",
+      "type": "FURNITURE",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "toner_level": "low",
+        "paper_jam_history": true
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "Patient Database USB Drive",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "encrypted": true,
+        "label": "CardioCases_2024"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "reference_book_1",
+      "name": "Reference Textbook",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 1.5,
+        "title": "Small Animal Cardiac Ultrasound",
+        "page_marked": 147,
+        "condition": "dog-eared"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wireless_mouse_1",
+      "name": "Wireless Mouse",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "battery_status": "low",
+        "brand": "Logitech"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "sticky_notes_1",
+      "name": "Sticky Notes",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.05,
+        "color": "pink",
+        "content": "Call Dr. MacKie re: bulldog case",
+        "peeled": true
+      },
+      "states": {
+        "is_drawn": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World’s Okayest Vet Tech Mug",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "content": "half-full of cold coffee",
+        "inscription": "World’s Okayest Vet Tech"
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "potted_cactus_1",
+      "name": "Dead Potted Cactus",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.5,
+        "pot_material": "clay",
+        "plant_condition": "dead",
+        "location": "windowsill"
+      },
+      "states": {
+        "is_alight": false
+      }
+    },
+    {
+      "id": "cleaning_gel_1",
+      "name": "Ultrasound Probe Cleaning Gel",
+      "type": "ITEM",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "volume": "250ml",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:imaging_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "white",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "weight": 0.2,
+        "type": "phillips",
+        "size": "medium",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:pharmacy_storage",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "length": "2m",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:technician_workstation",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Canon",
+        "model": "EOS-2000",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "copy_file",
+    "dust",
+    "deflate",
+    "mend",
+    "open",
+    "photograph",
+    "plug_in",
+    "screw",
+    "unplug",
+    "close"
+  ]
+}

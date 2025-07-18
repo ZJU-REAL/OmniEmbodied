@@ -226,7 +226,7 @@ class ActionHandler:
         except Exception as e:
             import logging
             logger = logging.getLogger(__name__)
-            logger.error(f"处理done命令时发生错误: {e}")
+            logger.error(f"Error occurred while processing done command: {e}")
             return ActionStatus.INVALID, f"Verification failed: {str(e)}", None
 
     def get_task_verification_status(self) -> Optional[Dict[str, Any]]:

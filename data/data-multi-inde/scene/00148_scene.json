@@ -1,0 +1,613 @@
+{
+  "description": "A remote, semi-automated Arctic research station designed for studying extreme weather patterns and climate change, consisting of four interconnected modules: Main Hub, Sample Processing Lab, Storage & Maintenance Bay, and Living Quarters.",
+  "rooms": [
+    {
+      "id": "main_hub",
+      "name": "Main Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "sample_lab",
+        "storage_bay",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "sample_lab",
+      "name": "Sample Processing Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "main_hub",
+        "storage_bay"
+      ]
+    },
+    {
+      "id": "storage_bay",
+      "name": "Storage & Maintenance Bay",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_hub",
+        "sample_lab",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Living Quarters",
+      "properties": {
+        "type": "living_space"
+      },
+      "connected_to_room_ids": [
+        "main_hub",
+        "storage_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "climate_console_1",
+      "name": "Central Climate Control Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CC-3000"
+      },
+      "states": {
+        "is_running": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_panel_1",
+      "name": "Emergency Broadcast Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "data_drive_1",
+      "name": "Ice Core Data Drive",
+      "type": "ITEM",
+      "location_id": "in:climate_console_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Samsung",
+        "capacity": "256GB",
+        "label": "Core Samples 12/04"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "thermocouple_wire_1",
+      "name": "Broken Thermocouple Wire",
+      "type": "ITEM",
+      "location_id": "on:climate_console_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "copper",
+        "condition": "frayed",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {
+        "is_soldered": false
+      }
+    },
+    {
+      "id": "radio_transmitter_1",
+      "name": "Radio Transmitter",
+      "type": "ITEM",
+      "location_id": "on:climate_console_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Yaesu",
+        "frequency": "118.7 MHz",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Dot-Matrix Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "brand": "Epson"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:main_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Mr. Coffee"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "tool_drawer_1",
+      "name": "Tool Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:main_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wire_strippers_1",
+      "name": "Wire Strippers",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "brand": "Klein",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "in:tool_drawer_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Fluke",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mass_spectrometer_1",
+      "name": "Mass Spectrometer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "brand": "Agilent"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:sample_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "brand": "Nikon"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_jar_1",
+      "name": "Contaminated Sample Jar",
+      "type": "ITEM",
+      "location_id": "on:microscope_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "glass",
+        "label": "Core A-17",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {
+        "is_labeled": false,
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "in:microscope_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "brass",
+        "count": 5,
+        "provides_abilities": [
+          "hide"
+        ]
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "brand": "Eppendorf"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "lab_fridge_1",
+      "name": "Lab Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "temperature": -20.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fuel_drum_1",
+      "name": "Generator Fuel Drum",
+      "type": "FURNITURE",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.2
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "ice_core_drill_1",
+      "name": "Ice Core Drill Rig",
+      "type": "FURNITURE",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          1.8
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "aluminum"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Weller",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 0.2,
+        "grit": "120",
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Zebra",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 5.0,
+        "type": "CO2",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Lincoln",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "insulation_foam_1",
+      "name": "Insulation Foam",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 1.5,
+        "material": "polyurethane",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "in:storage_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bunk_bed_1",
+      "name": "Bunk Bed",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "kitchenette_1",
+      "name": "Kitchenette",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oven_1",
+      "name": "Oven",
+      "type": "FURNITURE",
+      "location_id": "in:kitchenette_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "brand": "GE"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "bread_1",
+      "name": "Bread Loaf",
+      "type": "ITEM",
+      "location_id": "in:kitchenette_1",
+      "properties": {
+        "weight": 0.5,
+        "type": "sourdough",
+        "provides_abilities": [
+          "slice",
+          "roast"
+        ]
+      },
+      "states": {
+        "is_sliced": false,
+        "is_roasted": false
+      }
+    },
+    {
+      "id": "knife_1",
+      "name": "Chef's Knife",
+      "type": "ITEM",
+      "location_id": "in:kitchenette_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Swingline",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "papers_1",
+      "name": "Stack of Papers",
+      "type": "ITEM",
+      "location_id": "on:bunk_bed_1",
+      "properties": {
+        "weight": 0.6,
+        "count": 50,
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {
+        "is_stapled": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "extinguish",
+    "hide",
+    "insulate",
+    "label",
+    "open",
+    "pair",
+    "polish",
+    "roast",
+    "sand",
+    "scan_barcode",
+    "slice",
+    "solder",
+    "staple",
+    "start_process",
+    "stop_process",
+    "sync",
+    "thaw",
+    "weld"
+  ]
+}

@@ -1,0 +1,752 @@
+{
+  "description": "A bustling used car dealership with a showroom, backlot garage, parts storage closet, and manager's office, filled with deceptive appearances and hidden mechanical flaws requiring collaborative problem-solving.",
+  "rooms": [
+    {
+      "id": "showroom_floor",
+      "name": "Showroom Floor",
+      "properties": {
+        "type": "showroom"
+      },
+      "connected_to_room_ids": [
+        "backlot_garage"
+      ]
+    },
+    {
+      "id": "backlot_garage",
+      "name": "Backlot Garage",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "showroom_floor",
+        "parts_storage_closet",
+        "managers_office"
+      ]
+    },
+    {
+      "id": "parts_storage_closet",
+      "name": "Parts Storage Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "backlot_garage"
+      ]
+    },
+    {
+      "id": "managers_office",
+      "name": "Manager’s Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "backlot_garage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "display_platform_1",
+      "name": "Display Platform",
+      "type": "FURNITURE",
+      "location_id": "in:showroom_floor",
+      "properties": {
+        "size": [
+          2.0,
+          4.0,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "carpeted"
+      },
+      "states": {}
+    },
+    {
+      "id": "rotating_sedan_1",
+      "name": "2012 Sedan",
+      "type": "FURNITURE",
+      "location_id": "on:display_platform_1",
+      "properties": {
+        "size": [
+          4.5,
+          1.8,
+          1.5
+        ],
+        "weight": 1200.0,
+        "is_container": true,
+        "make": "Generic Motors",
+        "model": "Sedan",
+        "year": 2012,
+        "color": "silver",
+        "mileage": 85000
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sales_desk_1",
+      "name": "Sales Desk",
+      "type": "FURNITURE",
+      "location_id": "in:showroom_floor",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.75
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "particleboard",
+        "condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "gold_star_folder_1",
+      "name": "Gold Star Certified Folder",
+      "type": "ITEM",
+      "location_id": "on:sales_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "contents": "brochures and recall note",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "obd_scanner_1",
+      "name": "OBD-II Scanner",
+      "type": "ITEM",
+      "location_id": "in:rotating_sedan_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "AutoPro",
+        "model": "AP-200",
+        "screen_display": "P0420 – Catalyst Efficiency Below Threshold",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:sales_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "BrewMaster",
+        "condition": "out of order",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paper_cups_1",
+      "name": "Stack of Paper Cups",
+      "type": "ITEM",
+      "location_id": "on:sales_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "quantity": 12,
+        "condition": "some crumpled"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_camera_1",
+      "name": "Security Camera",
+      "type": "ITEM",
+      "location_id": "in:showroom_floor",
+      "properties": {
+        "weight": 1.2,
+        "brand": "SecureEye",
+        "status": "power disconnected",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "fake_plant_1",
+      "name": "Fake Plant",
+      "type": "ITEM",
+      "location_id": "in:showroom_floor",
+      "properties": {
+        "weight": 3.0,
+        "type": "ficus",
+        "condition": "dusty, one leaf loose"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_frame_1",
+      "name": "Employee of the Month Frame",
+      "type": "ITEM",
+      "location_id": "in:showroom_floor",
+      "properties": {
+        "weight": 1.5,
+        "condition": "photo missing, glass cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift #1",
+      "type": "FURNITURE",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.0
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "status": "jammed",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "pickup_truck_1",
+      "name": "Pickup Truck",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          5.5,
+          2.0,
+          1.8
+        ],
+        "weight": 1800.0,
+        "is_container": true,
+        "tires": "mismatched",
+        "condition": "needs repair"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_wall_1",
+      "name": "Tool Wall",
+      "type": "FURNITURE",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "missing_tools": "10mm wrench"
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_block_1",
+      "name": "Engine Block on Cart",
+      "type": "FURNITURE",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "status": "partially disassembled",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "striped_bolt_1",
+      "name": "Striped Bolt",
+      "type": "ITEM",
+      "location_id": "on:engine_block_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "REPLACE ASAP",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "rust_free_chassis_1",
+      "name": "Rust-Free Chassis",
+      "type": "FURNITURE",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "size": [
+          4.0,
+          1.8,
+          1.2
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "condition": "bondo patches flaking",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {
+        "is_glued": false
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "ITEM",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "weight": 50.0,
+        "status": "hose tangled, gauge stuck",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "ITEM",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "weight": 35.0,
+        "fluid_condition": "dark with debris",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "weight": 2.0,
+        "station": "sports talk",
+        "status": "static buzz",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "calendar_1",
+      "name": "1980s Calendar",
+      "type": "ITEM",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "weight": 0.5,
+        "month": "July",
+        "condition": "faded, coffee stains"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Heavy Metal Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_closet",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "condition": "one shelf bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "crate_of_rotors_1",
+      "name": "Crate of Brake Rotors",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 120.0,
+        "quantity": 8,
+        "condition": "heavy, requires two agents"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "keycard",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "battery_box_1",
+      "name": "Mismatched Battery Box",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 15.0,
+        "label": "NEW",
+        "condition": "corrosion-stained terminal",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Broken Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_closet",
+      "properties": {
+        "weight": 25.0,
+        "condition": "handle detached",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_closet",
+      "properties": {
+        "weight": 0.3,
+        "contents": "inventory list with corrections",
+        "condition": "hanging askew"
+      },
+      "states": {}
+    },
+    {
+      "id": "mouse_trap_1",
+      "name": "Mouse Trap",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "status": "set but unsprung"
+      },
+      "states": {}
+    },
+    {
+      "id": "safe_1",
+      "name": "Safe",
+      "type": "FURNITURE",
+      "location_id": "in:managers_office",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "lock_type": "digital keypad",
+        "default_code": "0000",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "service_log_1",
+      "name": "Service Log Binder",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 2.0,
+        "contents": "conflicting entries",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard Duplicate",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 0.05,
+        "status": "active",
+        "location": "inside hollow trophy",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "keycard_2",
+      "name": "Keycard Duplicate",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 0.05,
+        "status": "deactivated",
+        "location": "near radio",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 10.0,
+        "status": "out of paper",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 5.0,
+        "contents": "Monthly Goals!",
+        "condition": "numbers half-erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "family_photo_1",
+      "name": "Family Photo",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 0.5,
+        "condition": "frame smashed, dog picture taped"
+      },
+      "states": {}
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Stress Ball",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 0.2,
+        "condition": "flattened, under desk leg"
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_hoist_1",
+      "name": "Engine Hoist",
+      "type": "FURNITURE",
+      "location_id": "in:backlot_garage",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "requires": "two agents",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "oil_can_1",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "type": "synthetic blend",
+        "viscosity": "5W-30",
+        "label_color": "blue",
+        "fill_level": "half-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_can_2",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "type": "conventional",
+        "viscosity": "10W-40",
+        "label_color": "black",
+        "fill_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_can_3",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "type": "conventional",
+        "viscosity": "5W-20",
+        "label_color": "black",
+        "fill_level": "quarter-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_can_4",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "type": "synthetic",
+        "viscosity": "5W-30",
+        "label_color": "blue",
+        "fill_level": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_can_5",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "type": "conventional",
+        "viscosity": "10W-30",
+        "label_color": "black",
+        "fill_level": "three-quarters"
+      },
+      "states": {}
+    },
+    {
+      "id": "dirty_rag_1",
+      "name": "Dirty Rag",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue stains",
+        "condition": "dirty"
+      },
+      "states": {}
+    },
+    {
+      "id": "best_salesman_trophy_1",
+      "name": "Best Salesman Trophy",
+      "type": "ITEM",
+      "location_id": "in:managers_office",
+      "properties": {
+        "weight": 1.5,
+        "condition": "hollow, glue marks on base",
+        "contents": "keycard",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "disconnect",
+    "glue",
+    "open",
+    "pair",
+    "replace",
+    "close"
+  ]
+}

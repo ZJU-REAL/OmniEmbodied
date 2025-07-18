@@ -1,0 +1,981 @@
+{
+  "description": "A high-precision chrono-research laboratory dedicated to ultra-high-resolution time measurement and synchronization, featuring a main calibration chamber, server room, equipment storage, documentation area, and break area.",
+  "rooms": [
+    {
+      "id": "main_calibration_chamber",
+      "name": "Main Calibration Chamber",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "server_control_room",
+        "equipment_storage",
+        "documentation_corner",
+        "break_area"
+      ]
+    },
+    {
+      "id": "server_control_room",
+      "name": "Server & Control Room",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "main_calibration_chamber"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage & Prep Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_calibration_chamber"
+      ]
+    },
+    {
+      "id": "documentation_corner",
+      "name": "Documentation & Analysis Corner",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_calibration_chamber"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_calibration_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "optical_table_1",
+      "name": "Vibration-Isolated Optical Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_type": "vibration_damped"
+      },
+      "states": {}
+    },
+    {
+      "id": "atomic_clock_primary_1",
+      "name": "Primary Atomic Clock",
+      "type": "FURNITURE",
+      "location_id": "on:optical_table_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "model": "Cesium-Beam",
+        "status": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "atomic_clock_backup_a_1",
+      "name": "Backup A Atomic Clock",
+      "type": "FURNITURE",
+      "location_id": "on:optical_table_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "model": "Cesium-Beam",
+        "status": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "atomic_clock_backup_b_1",
+      "name": "Backup B Atomic Clock",
+      "type": "FURNITURE",
+      "location_id": "on:optical_table_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "model": "Cesium-Beam",
+        "status": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "laser_interferometer_1",
+      "name": "Laser Interferometer Rig",
+      "type": "FURNITURE",
+      "location_id": "on:optical_table_1",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "aluminum",
+        "laser_type": "HeNe"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "mirror_mount_1",
+      "name": "Mirror Mount",
+      "type": "ITEM",
+      "location_id": "on:laser_interferometer_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "aluminum",
+        "adjustment_type": "fine"
+      },
+      "states": {
+        "is_loose": true
+      }
+    },
+    {
+      "id": "calibration_terminal_1",
+      "name": "Calibration Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "display_type": "touchscreen",
+        "lock_type": "RFID"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "set_type": "metric/SAE",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "set_type": "Phillips/Flathead",
+        "provides_abilities": [
+          "tighten",
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "laser_goggles_1",
+      "name": "Laser Goggles",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "lens_color": "green",
+        "protection_level": "OD5"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "FURNITURE",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "size": [
+          0.15,
+          0.15,
+          0.1
+        ],
+        "weight": 0.5,
+        "is_container": false,
+        "color": "red",
+        "label": "TEST MONTHLY"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_monitor_1",
+      "name": "Thermal Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "display_type": "digital",
+        "units": "Celsius"
+      },
+      "states": {}
+    },
+    {
+      "id": "nobel_prize_poster_1",
+      "name": "Nobel Prize Poster",
+      "type": "ITEM",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "year": 2001,
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Outdated Logbook",
+      "type": "ITEM",
+      "location_id": "on:optical_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "status": "outdated",
+        "page_marked": "Tried HPET tweak—no luck. Try QPC?"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels_locked": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blade_server_1",
+      "name": "TIMESYNC_MASTER Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "metal",
+        "status": "online",
+        "model": "blade"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "blade_server_2",
+      "name": "TIMESYNC_NODE1 Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "metal",
+        "status": "online",
+        "model": "blade"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "blade_server_3",
+      "name": "TIMESYNC_NODE2 Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "metal",
+        "status": "offline",
+        "model": "blade"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "blade_server_4",
+      "name": "TIMESYNC_NODE3 Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "metal",
+        "status": "online",
+        "model": "blade"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "blade_server_5",
+      "name": "TIMESYNC_NODE4 Server",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "metal",
+        "status": "online",
+        "model": "blade"
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "sync_hub_1",
+      "name": "HPET INTERFACE Sync Hub",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "version": "3.2",
+        "led_status": "blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_1",
+      "name": "Control Desk",
+      "type": "FURNITURE",
+      "location_id": "in:server_control_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.75
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "drawers": 3
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "RFID Keycard",
+      "type": "ITEM",
+      "location_id": "in:desk_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "color": "blue",
+        "access_level": "calibration"
+      },
+      "states": {}
+    },
+    {
+      "id": "error_log_monitor_1",
+      "name": "Error Log Monitor",
+      "type": "FURNITURE",
+      "location_id": "on:desk_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "display_type": "LCD",
+        "error_message": "QUERY_PERF_COUNTER: OFFSET -12ns (NODE3)"
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "current_selection": "MASTER",
+        "ports": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "tape_status": "out",
+        "battery_level": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_parts_bin_1",
+      "name": "Spare Parts Bin",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "contents": [
+          "RAM sticks",
+          "SFP+ transceivers",
+          "thermal pad"
+        ],
+        "organization": "mixed"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Nanoseconds Matter! Mug",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "content": "coffee",
+        "temperature": "cold"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "post_it_1",
+      "name": "Post-it Note",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "message": "BIOS update messed up HPET—revert??",
+        "color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "framed_photo_1",
+      "name": "Framed Team Photo",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "event": "2022 Chrono-Olympics",
+        "frame_color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal",
+        "drawers": 5
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_mirror_1",
+      "name": "Spare Mirror",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass",
+        "diameter": "10cm",
+        "coating": "dielectric"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "white",
+        "provides_abilities": [
+          "wipe",
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_cables_1",
+      "name": "Spare Cables Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "mixed",
+        "types": [
+          "fiber-optic",
+          "coaxial",
+          "USB"
+        ],
+        "length": "varied"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Large Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_corner",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "surface": "whiteboard",
+        "content": "timing diagrams"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_marker_1",
+      "name": "Whiteboard Marker",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "color": "black",
+        "ink_level": "low",
+        "provides_abilities": [
+          "draw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "research_notes_1",
+      "name": "Scattered Research Notes",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "organization": "scattered",
+        "content": "calibration data"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_manual_1",
+      "name": "Reference Manual",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "paper",
+        "title": "High-Precision Timing Standards",
+        "edition": "3rd"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Keurig",
+        "water_level": "half"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "led_clock_1",
+      "name": "Flickering LED Clock",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "display_type": "LED",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "conference_poster_1",
+      "name": "High-Performance Timing Poster",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "year": 2018,
+        "condition": "outdated"
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_towel_roll_1",
+      "name": "Paper Towel Roll",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "sheets_remaining": 10,
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fiber_optic_cable_1",
+      "name": "Fiber Optic Cable",
+      "type": "ITEM",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "length": "2m",
+        "label": "CRITICAL SYNC",
+        "color": "black",
+        "stripe_color": "orange"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "fiber_optic_cable_2",
+      "name": "Fiber Optic Cable",
+      "type": "ITEM",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "length": "2m",
+        "label": "secondary",
+        "color": "black"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "fiber_optic_cable_3",
+      "name": "Fiber Optic Cable",
+      "type": "ITEM",
+      "location_id": "in:main_calibration_chamber",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "length": "2m",
+        "label": "backup",
+        "color": "black"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "purpose": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "sata_cable_1",
+      "name": "SATA Cable",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "length": "0.5m",
+        "connection_status": "loose"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "UV Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "wavelength": "254nm",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_vial_1",
+      "name": "Contaminant Vial",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "content": "dust particles",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ignition_key_1",
+      "name": "Ignition Key",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal",
+        "label": "Server Rack",
+        "provides_abilities": [
+          "start_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_corner",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "brand": "Xerox",
+        "paper_level": "low",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "pressure": "10 tons",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "test_sample_1",
+      "name": "Test Sample",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "shape": "cylindrical",
+        "condition": "intact"
+      },
+      "states": {
+        "is_crushed": false
+      }
+    },
+    {
+      "id": "folded_poster_1",
+      "name": "Folded Conference Poster",
+      "type": "ITEM",
+      "location_id": "in:documentation_corner",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "event": "Time Measurement Symposium",
+        "fold_type": "tri-fold"
+      },
+      "states": {
+        "is_folded": true
+      }
+    },
+    {
+      "id": "zippered_case_1",
+      "name": "Zippered Equipment Case",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 1.0,
+        "material": "nylon",
+        "color": "black",
+        "contents": "sensitive instruments"
+      },
+      "states": {
+        "is_zipped": false
+      }
+    }
+  ],
+  "abilities": [
+    "contaminate",
+    "copy",
+    "crush",
+    "disassemble",
+    "draw",
+    "dust",
+    "open",
+    "start_engine",
+    "sterilize",
+    "stop_playback",
+    "tighten",
+    "turn_on",
+    "unfold",
+    "unpair",
+    "wipe",
+    "zip",
+    "close"
+  ]
+}

@@ -1,0 +1,726 @@
+{
+  "description": "A Pokémon Research & Training Facility named 'The Aqua Defense Lab', featuring a hybrid research lab and aquatic training environment designed for Water-type Pokémon. The facility includes a Main Research Hub, Aquatic Training Tank, Equipment Storage & Maintenance Bay, Pokémon Recovery Wing, and Observation Deck, all filled with interactive objects and heavy equipment requiring multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "main_research_hub",
+      "name": "Main Research Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "aquatic_training_tank",
+        "equipment_storage",
+        "recovery_wing",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "aquatic_training_tank",
+      "name": "Aquatic Training Tank",
+      "properties": {
+        "type": "training_pool"
+      },
+      "connected_to_room_ids": [
+        "main_research_hub",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage & Maintenance Bay",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_research_hub",
+        "recovery_wing"
+      ]
+    },
+    {
+      "id": "recovery_wing",
+      "name": "Pokémon Recovery Wing",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_research_hub",
+        "equipment_storage"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "observation"
+      },
+      "connected_to_room_ids": [
+        "main_research_hub",
+        "aquatic_training_tank"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_holotable_1",
+      "name": "Central Holotable",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_hub",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          1.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "HT-5000"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "brand": "TechCore"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "defense_calibrator_1",
+      "name": "Defense Calibrator",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_hub",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "emergency_shutdown_panel_1",
+      "name": "Emergency Shutdown Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 10.5,
+        "is_container": false,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "PrintMaster",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "on:central_holotable_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "KeyTech",
+        "condition": "missing_key"
+      },
+      "states": {}
+    },
+    {
+      "id": "wave_generator_1",
+      "name": "Wave Generator",
+      "type": "FURNITURE",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "rusty"
+      },
+      "states": {
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "submerged_treadmill_1",
+      "name": "Submerged Treadmill",
+      "type": "FURNITURE",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "rubber",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "depth_gauge_1",
+      "name": "Depth Gauge",
+      "type": "ITEM",
+      "location_id": "on:wave_generator_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "silver",
+        "brand": "AquaMeasure",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "pokemon_restraint_harness_1",
+      "name": "Pokémon Restraint Harness",
+      "type": "ITEM",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "weight": 2.5,
+        "color": "blue",
+        "material": "nylon",
+        "condition": "frayed"
+      },
+      "states": {
+        "is_buckled": true,
+        "is_torn": false
+      }
+    },
+    {
+      "id": "net_1",
+      "name": "Net",
+      "type": "ITEM",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "weight": 1.8,
+        "color": "white",
+        "material": "nylon",
+        "condition": "hole"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "lifebuoy_1",
+      "name": "Lifebuoy",
+      "type": "ITEM",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "material": "foam",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "steel",
+        "brand": "LiftMaster"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Chemical Drum #1",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 25.0,
+        "color": "yellow",
+        "material": "plastic",
+        "label": "NON-CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_2",
+      "name": "Chemical Drum #2",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 25.0,
+        "color": "green",
+        "material": "plastic",
+        "label": "NON-CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_3",
+      "name": "Chemical Drum #3",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 25.0,
+        "color": "yellow",
+        "material": "plastic",
+        "label": "NON-CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_4",
+      "name": "Chemical Drum #4",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 25.0,
+        "color": "blue",
+        "material": "plastic",
+        "label": "CORROSIVE",
+        "cap": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_5",
+      "name": "Chemical Drum #5",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 25.0,
+        "color": "green",
+        "material": "plastic",
+        "label": "NON-CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_toolbox_1",
+      "name": "Blue Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 8.0,
+        "color": "blue",
+        "material": "metal",
+        "is_container": true,
+        "provides_abilities": [
+          "solder",
+          "screw",
+          "mend",
+          "staple"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medical_cabinet_1",
+      "name": "Medical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_wing",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iv_drip_1",
+      "name": "IV Drip",
+      "type": "ITEM",
+      "location_id": "in:recovery_wing",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "material": "plastic",
+        "brand": "MediFlow"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "scanning_pod_1",
+      "name": "Scanning Pod",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_wing",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.5
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "material": "plastic",
+        "brand": "BioScan"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 4.0,
+        "color": "black",
+        "material": "plastic",
+        "brand": "BrewMaster",
+        "is_container": true
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "binoculars_1",
+      "name": "Binoculars",
+      "type": "ITEM",
+      "location_id": "on:coffee_maker_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "material": "metal",
+        "brand": "ViewPlus"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wood",
+        "condition": "stained"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "waterproof_case_1",
+      "name": "Waterproof Case",
+      "type": "ITEM",
+      "location_id": "in:aquatic_training_tank",
+      "properties": {
+        "weight": 1.0,
+        "color": "yellow",
+        "material": "plastic",
+        "is_container": true,
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:waterproof_case_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "brand": "SecureAccess"
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "Charger",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic",
+        "brand": "PowerUp",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "metal",
+        "brand": "SolderPro",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "silver",
+        "material": "metal",
+        "brand": "PressureTech",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "metal",
+        "brand": "ToolMaster",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_and_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "metal",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:blue_toolbox_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "material": "plastic",
+        "brand": "ClipFast",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "filter_1",
+      "name": "Water Filter",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "material": "plastic",
+        "brand": "PureFlow",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:medical_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic",
+        "brand": "MediInject",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.6,
+        "color": "green",
+        "material": "metal",
+        "brand": "GardenPro",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "toaster_1",
+      "name": "Toaster",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "material": "metal",
+        "brand": "ToastMaster",
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grinder_1",
+      "name": "Grinder",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "material": "metal",
+        "brand": "GrindPro",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plate_1",
+      "name": "Plate",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "ceramic",
+        "brand": "ServeWell",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "deactivate",
+    "disconnect",
+    "grind",
+    "inject",
+    "mend",
+    "open",
+    "prune",
+    "purify",
+    "recharge",
+    "screw",
+    "serve",
+    "solder",
+    "staple",
+    "tear",
+    "toast",
+    "unbuckle",
+    "close"
+  ]
+}

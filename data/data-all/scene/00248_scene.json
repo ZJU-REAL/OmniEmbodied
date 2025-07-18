@@ -1,0 +1,696 @@
+{
+  "description": "A clandestine municipal policy testing lab hidden within a nondescript government building, simulating the real-world impact of controversial laws before enactment. The lab is divided into four interconnected zones: Retail Simulation Room, Data Hub, Policy Workshop, and Reaction Chamber.",
+  "rooms": [
+    {
+      "id": "retail_simulation_room",
+      "name": "Retail Simulation Room",
+      "properties": {
+        "type": "retail"
+      },
+      "connected_to_room_ids": [
+        "data_hub",
+        "policy_workshop",
+        "reaction_chamber"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "retail_simulation_room",
+        "policy_workshop"
+      ]
+    },
+    {
+      "id": "policy_workshop",
+      "name": "Policy Workshop",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "retail_simulation_room",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "reaction_chamber",
+      "name": "Reaction Chamber",
+      "properties": {
+        "type": "observation"
+      },
+      "connected_to_room_ids": [
+        "retail_simulation_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "modular_shelving_unit_1",
+      "name": "Modular Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "adjustable_shelf_heights": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Retrofit Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "has_weight_sensors": true
+      },
+      "states": {
+        "is_open": false,
+        "is_running": true
+      }
+    },
+    {
+      "id": "checkout_counter_1",
+      "name": "Checkout Counter",
+      "type": "FURNITURE",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "banned_soda_cups_1",
+      "name": "Banned Size Soda Cups",
+      "type": "ITEM",
+      "location_id": "on:modular_shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "size_oz": 32,
+        "stamp": "ILLEGAL"
+      },
+      "states": {}
+    },
+    {
+      "id": "compliant_mini_cups_1",
+      "name": "Legally Compliant Mini-Cups",
+      "type": "ITEM",
+      "location_id": "in:locked_case_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "size_oz": 8,
+        "label": "GOVT-APPROVED"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_case_1",
+      "name": "Locked Transparent Case",
+      "type": "FURNITURE",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "hidden_button_1",
+      "name": "Hidden Button",
+      "type": "ITEM",
+      "location_id": "in:checkout_counter_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "function": "triggers_protest"
+      },
+      "states": {}
+    },
+    {
+      "id": "price_gun_1",
+      "name": "Price Gun",
+      "type": "ITEM",
+      "location_id": "on:checkout_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "label_count": 10,
+        "is_jammed": true
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_receipts_1",
+      "name": "Stack of Fake Receipts",
+      "type": "ITEM",
+      "location_id": "on:checkout_counter_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "condition": [
+          "crumpled",
+          "neat"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "security_camera_1",
+      "name": "Security Camera",
+      "type": "ITEM",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "obscured_by": "SALE TODAY banner"
+      },
+      "states": {}
+    },
+    {
+      "id": "no_loitering_sign_1",
+      "name": "NO LOITERING Sign",
+      "type": "ITEM",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "weight": 0.4,
+        "color": "red",
+        "condition": "peeling",
+        "note": "They can't ban refills... right?"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Dusty Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "silver",
+        "label": "HEALTHIER OPTION",
+        "condition": "unused"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "central_monitor_wall_1",
+      "name": "Central Monitor Wall",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "metal",
+        "display": "live_feeds"
+      },
+      "states": {}
+    },
+    {
+      "id": "conference_table_1",
+      "name": "Cluttered Conference Table",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "loophole_logbook_1",
+      "name": "Loophole Logbook",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "content": "exploit_records"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermal_printer_1",
+      "name": "Broken Thermal Printer",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "secure_server_rack_1",
+      "name": "Secure Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "metal",
+        "access_requirement": "two_keycards"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "content": "smudged_equations"
+      },
+      "states": {}
+    },
+    {
+      "id": "policy_binders_1",
+      "name": "Stack of Outdated Policy Binders",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "various",
+        "bookmarks": "fast-food_coupons"
+      },
+      "states": {}
+    },
+    {
+      "id": "led_panel_1",
+      "name": "Flickering LED Panel",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "display": "mock_approval_rating"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "defaced_poster_1",
+      "name": "Defaced Poster",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.5,
+        "color": "multicolor",
+        "subject": "Mayor Bloomberg",
+        "defacement": "mustache"
+      },
+      "states": {}
+    },
+    {
+      "id": "pretzel_bag_1",
+      "name": "Half-Empty Bag of Pretzels",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "condition": "half-empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "label": "BACKUP - DO NOT DELETE",
+        "status": "plugged_in"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "legal_reference_books_1",
+      "name": "Legal Reference Books",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 10.0,
+        "color": "brown",
+        "condition": "well-used"
+      },
+      "states": {}
+    },
+    {
+      "id": "d_printer_1",
+      "name": "3D Printer",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "function": "prototyping_labels"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "contraband_items_1",
+      "name": "Contraband Test Items",
+      "type": "ITEM",
+      "location_id": "in:locked_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "various",
+        "type": "oversized_soda_cups"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "chemical_bottles_1",
+      "name": "Chemical Bottles",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "label": "CORROSIVE",
+        "fill_level": "half-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "robotic_civilians_1",
+      "name": "Robotic Civilians",
+      "type": "ITEM",
+      "location_id": "in:reaction_chamber",
+      "properties": {
+        "weight": 30.0,
+        "color": "gray",
+        "sensors": "basic"
+      },
+      "states": {}
+    },
+    {
+      "id": "banned_sign_1",
+      "name": "Flashing BANNED Sign",
+      "type": "ITEM",
+      "location_id": "in:reaction_chamber",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "function": "stimulus"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "alarm_system_1",
+      "name": "Alarm System",
+      "type": "ITEM",
+      "location_id": "in:reaction_chamber",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "function": "emergency"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "data_logs_1",
+      "name": "Data Logs",
+      "type": "ITEM",
+      "location_id": "in:reaction_chamber",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "content": "reaction_data"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "water_source_1",
+      "name": "Water Source",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 10.0,
+        "color": "white",
+        "provides_abilities": [
+          "rinse",
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "trowel_1",
+      "name": "Trowel",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "metal",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Saw",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 1.0,
+        "color": "silver",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Grater",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 0.3,
+        "color": "metal",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:retail_simulation_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Stove",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "provides_abilities": [
+          "boil",
+          "melt"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "pot_1",
+      "name": "Pot",
+      "type": "ITEM",
+      "location_id": "on:stove_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Refrigerator",
+      "type": "ITEM",
+      "location_id": "in:policy_workshop",
+      "properties": {
+        "weight": 50.0,
+        "color": "white",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "access_level": "1"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_2",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "access_level": "2"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "boil",
+    "cool",
+    "grate",
+    "melt",
+    "open",
+    "plaster",
+    "rinse",
+    "save",
+    "saw",
+    "stop_process",
+    "sweep",
+    "turn_off",
+    "turn_on",
+    "unpack",
+    "wash",
+    "close"
+  ]
+}

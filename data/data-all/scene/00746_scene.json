@@ -1,0 +1,611 @@
+{
+  "description": "A bustling Cuban cigar-rolling workshop in a repurposed Omaha warehouse, blending traditional craftsmanship with modern logistics, featuring a rolling floor, drying room, shipping area, and break nook.",
+  "rooms": [
+    {
+      "id": "rolling_floor",
+      "name": "Rolling Floor",
+      "properties": {
+        "type": "workshop",
+        "humidity": "high",
+        "temperature": 24.0
+      },
+      "connected_to_room_ids": [
+        "drying_room",
+        "shipping_inventory",
+        "break_nook"
+      ]
+    },
+    {
+      "id": "drying_room",
+      "name": "Drying Room",
+      "properties": {
+        "type": "storage",
+        "humidity": 68,
+        "temperature": 21.0
+      },
+      "connected_to_room_ids": [
+        "rolling_floor"
+      ]
+    },
+    {
+      "id": "shipping_inventory",
+      "name": "Shipping & Inventory",
+      "properties": {
+        "type": "logistics",
+        "humidity": "low",
+        "temperature": 22.0
+      },
+      "connected_to_room_ids": [
+        "rolling_floor"
+      ]
+    },
+    {
+      "id": "break_nook",
+      "name": "Break Nook",
+      "properties": {
+        "type": "lounge",
+        "humidity": "normal",
+        "temperature": 23.0
+      },
+      "connected_to_room_ids": [
+        "rolling_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "rolling_table_1",
+      "name": "Communal Rolling Table",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "mahogany",
+        "condition": "leaking_humidifier"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolling_table_2",
+      "name": "Communal Rolling Table",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 87.0,
+        "is_container": true,
+        "material": "mahogany",
+        "condition": "good"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tobacco_leaf_bin_1",
+      "name": "Tobacco Leaf Bin",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "content": "San_Andrés_leaves"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "master_toolkit_1",
+      "name": "Master Roller's Toolkit",
+      "type": "ITEM",
+      "location_id": "on:rolling_table_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "leather",
+        "provides_abilities": [
+          "sharpen",
+          "scrape"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bone_knife_1",
+      "name": "Bone Knife",
+      "type": "ITEM",
+      "location_id": "in:master_toolkit_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "bone",
+        "condition": "chipped_edge",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {
+        "is_sharp": false
+      }
+    },
+    {
+      "id": "chaveta_1",
+      "name": "Chaveta",
+      "type": "ITEM",
+      "location_id": "in:master_toolkit_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "steel",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_pot_1",
+      "name": "Glue Pot",
+      "type": "ITEM",
+      "location_id": "on:rolling_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "ceramic",
+        "handle_color": "red",
+        "condition": "drying_crust"
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_pot_2",
+      "name": "Glue Pot",
+      "type": "ITEM",
+      "location_id": "on:rolling_table_1",
+      "properties": {
+        "weight": 1.1,
+        "material": "ceramic",
+        "handle_color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "quality_control_station_1",
+      "name": "Quality Control Station",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:quality_control_station_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "hygrometer_1",
+      "name": "Digital Hygrometer",
+      "type": "ITEM",
+      "location_id": "on:quality_control_station_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "condition": "flickering_display"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "reject_pile_1",
+      "name": "Reject Pile",
+      "type": "ITEM",
+      "location_id": "on:quality_control_station_1",
+      "properties": {
+        "weight": 0.8,
+        "content": "20_cigars",
+        "condition": "uneven_seams"
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_radio_1",
+      "name": "Workstation Radio",
+      "type": "ITEM",
+      "location_id": "on:rolling_table_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "condition": "stuck_on_static"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "workstation_radio_2",
+      "name": "Workstation Radio",
+      "type": "ITEM",
+      "location_id": "on:rolling_table_2",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "condition": "good"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "apron_hook_1",
+      "name": "Apron Hook",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 0.5,
+        "is_container": false,
+        "label": "Lázaro"
+      },
+      "states": {}
+    },
+    {
+      "id": "apron_hook_2",
+      "name": "Apron Hook",
+      "type": "FURNITURE",
+      "location_id": "in:rolling_floor",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 0.5,
+        "is_container": false,
+        "label": "Rosa"
+      },
+      "states": {}
+    },
+    {
+      "id": "cedar_shelf_1",
+      "name": "Cedar Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:drying_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          3.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "cedar",
+        "condition": "one_tray_jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "climate_control_panel_1",
+      "name": "Climate Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:drying_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "humidity_setting": 68,
+        "temperature_setting": 21.0
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "premium_cigar_cabinet_1",
+      "name": "Premium Cigar Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:drying_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          2.0
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "oak",
+        "content": "50_Cohiba_style_cigars"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mold_inspection_logbook_1",
+      "name": "Mold Inspection Logbook",
+      "type": "ITEM",
+      "location_id": "on:cedar_shelf_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "paper",
+        "condition": "open_to_page_22",
+        "note": "Patchy_white_spots_Batch_22"
+      },
+      "states": {}
+    },
+    {
+      "id": "step_stool_1",
+      "name": "Wheeled Step Stool",
+      "type": "FURNITURE",
+      "location_id": "in:drying_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "loose_wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cart_1",
+      "name": "Cleaning Cart",
+      "type": "FURNITURE",
+      "location_id": "in:drying_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "content": "spray_bottles_microfiber_cloths"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:cleaning_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "condition": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiber_cloth_1",
+      "name": "Microfiber Cloth",
+      "type": "ITEM",
+      "location_id": "in:cleaning_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_charging_station_1",
+      "name": "Forklift Charging Station",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_inventory",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "low_battery_light_blinking"
+      },
+      "states": {
+        "is_charged": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_rack_1",
+      "name": "Pallet Rack System",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_inventory",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          3.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "content": "50kg_crates_Maduro_wrappers"
+      },
+      "states": {}
+    },
+    {
+      "id": "rosewood_gift_box_1",
+      "name": "Rosewood Gift Box",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_inventory",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "condition": "unassembled",
+        "note": "instructions_missing"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_scale_1",
+      "name": "Broken Scale",
+      "type": "ITEM",
+      "location_id": "on:pallet_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "condition": "display_error_03"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:shipping_inventory",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic",
+        "condition": "out_of_4x6_paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_tape_dispenser_1",
+      "name": "Packing Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "in:shipping_inventory",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_tin_1",
+      "name": "Coffee Tin",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "label": "Azúcar",
+        "content": "premium_cabinet_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_pot_1",
+      "name": "Coffee Pot",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 1.0,
+        "material": "stainless_steel",
+        "condition": "half_empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "condition": "good"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "charger_1",
+      "name": "Forklift Charger",
+      "type": "ITEM",
+      "location_id": "in:forklift_charging_station_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Knife Sharpener",
+      "type": "ITEM",
+      "location_id": "in:master_toolkit_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "open",
+    "recharge",
+    "scrape",
+    "sharpen",
+    "turn_off",
+    "close"
+  ]
+}

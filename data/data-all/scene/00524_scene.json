@@ -1,0 +1,563 @@
+{
+  "description": "A high-tech logistics warehouse in Shanghai, bustling with activity and filled with heavy machinery, containers, and workstations requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "dockyard_loading_bay",
+      "name": "Dockyard & Loading Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "main_sorting_floor"
+      ]
+    },
+    {
+      "id": "main_sorting_floor",
+      "name": "Main Sorting & Inventory Floor",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "dockyard_loading_bay",
+        "customs_inspection_office",
+        "high_value_storage_vault",
+        "worker_break_room"
+      ]
+    },
+    {
+      "id": "customs_inspection_office",
+      "name": "Customs Inspection Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_sorting_floor"
+      ]
+    },
+    {
+      "id": "high_value_storage_vault",
+      "name": "High-Value Storage Vault",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "main_sorting_floor"
+      ]
+    },
+    {
+      "id": "worker_break_room",
+      "name": "Worker Break Room",
+      "properties": {
+        "type": "break_room"
+      },
+      "connected_to_room_ids": [
+        "main_sorting_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "gantry_crane_1",
+      "name": "40-ton Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "size": [
+          10.0,
+          5.0,
+          8.0
+        ],
+        "weight": 40000.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cargo_ramp_1",
+      "name": "Modular Cargo Ramp",
+      "type": "FURNITURE",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "size": [
+          4.0,
+          2.0,
+          1.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "refrigerated_container_1",
+      "name": "Sealed Refrigerated Container",
+      "type": "FURNITURE",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "size": [
+          6.0,
+          2.5,
+          2.5
+        ],
+        "weight": 2300.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "LIVE CULTURES – DO NOT OPEN"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "customs_seal_1",
+      "name": "Misplaced Customs Seal",
+      "type": "ITEM",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "inscription": "SHANGHAI PORT AUTHORITY"
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Toyota 8FGU25 Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 3000.0,
+        "is_container": false,
+        "fuel_level": 30,
+        "condition": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "dockmaster_terminal_1",
+      "name": "Dockmaster’s Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:dockyard_loading_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "display_message": "CONTAINER #HK-8821 – OVERDUE"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_system_1",
+      "name": "High-Speed Conveyor System",
+      "type": "FURNITURE",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "size": [
+          20.0,
+          2.0,
+          1.0
+        ],
+        "weight": 1000.0,
+        "is_container": false,
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_a7_1",
+      "name": "Industrial Shelving Unit A7",
+      "type": "FURNITURE",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "condition": "bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "mislabelled_crate_1",
+      "name": "Mislabelled Crate",
+      "type": "FURNITURE",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "label": "ELECTRONICS",
+        "contents": "organic matter"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool for Scanners",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_a7_1",
+      "properties": {
+        "weight": 1.0,
+        "condition": "dusty",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_printer_1",
+      "name": "Barcode Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "condition": "out_of_paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_case_1",
+      "name": "Sealed Sample Case",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "hazard_stripe": "blue",
+        "inscription": "URGENT",
+        "condensation": "slight"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_case_2",
+      "name": "Sealed Sample Case",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "hazard_stripe": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "world_map_1",
+      "name": "Wall-Mounted World Map",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "condition": "pinned"
+      },
+      "states": {}
+    },
+    {
+      "id": "titanium_locker_1",
+      "name": "Titanium Alloy Locker",
+      "type": "FURNITURE",
+      "location_id": "in:high_value_storage_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "climate_control_panel_1",
+      "name": "Climate Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:high_value_storage_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "error_message": "ERROR 47"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "maintenance_manual_1",
+      "name": "Maintenance Manual",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.5,
+        "condition": "used",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Cracked Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "condition": "jammed",
+        "jammed_item": "Dragon Well Tea"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shift_schedule_1",
+      "name": "Handwritten Shift Schedule",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.1,
+        "condition": "scribbled",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Grater",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "cotton",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "provides_abilities": [
+          "chop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Saw",
+      "type": "ITEM",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "weight": 1.0,
+        "material": "steel",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Sharpener",
+      "type": "ITEM",
+      "location_id": "in:worker_break_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:main_sorting_floor",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Zebra",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "writing_pad_1",
+      "name": "Writing Pad",
+      "type": "ITEM",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "weight": 0.1,
+        "condition": "blank"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "in:customs_inspection_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "chop",
+    "grate",
+    "inject",
+    "label",
+    "open",
+    "polish",
+    "repair",
+    "saw",
+    "scan_barcode",
+    "sharpen",
+    "staple",
+    "write",
+    "close"
+  ]
+}

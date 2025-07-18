@@ -1,0 +1,832 @@
+{
+  "description": "A high-tech Sandwich Innovation Lab with interconnected zones for ingredient prep, assembly, testing, and packaging, designed for multi-agent collaboration and precision tasks.",
+  "rooms": [
+    {
+      "id": "ingredient_prep_station",
+      "name": "Ingredient Prep Station",
+      "properties": {
+        "type": "prep_area",
+        "temperature": "4°C"
+      },
+      "connected_to_room_ids": [
+        "prototype_assembly_bay"
+      ]
+    },
+    {
+      "id": "prototype_assembly_bay",
+      "name": "Prototype Assembly Bay",
+      "properties": {
+        "type": "assembly_area",
+        "lighting": "LED"
+      },
+      "connected_to_room_ids": [
+        "ingredient_prep_station",
+        "analytical_testing_corner"
+      ]
+    },
+    {
+      "id": "analytical_testing_corner",
+      "name": "Analytical Testing Corner",
+      "properties": {
+        "type": "testing_area",
+        "equipment": "spectrometers, sensors"
+      },
+      "connected_to_room_ids": [
+        "prototype_assembly_bay",
+        "packaging_logistics_hub"
+      ]
+    },
+    {
+      "id": "packaging_logistics_hub",
+      "name": "Packaging & Logistics Hub",
+      "properties": {
+        "type": "packaging_area",
+        "access": "loading_dock"
+      },
+      "connected_to_room_ids": [
+        "analytical_testing_corner"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_refrigerator_1",
+      "name": "Industrial Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": "-4°C",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vegetable_hydro_washer_1",
+      "name": "Vegetable Hydro-Washer",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "plastic_steel_composite",
+        "status": "humming"
+      },
+      "states": {}
+    },
+    {
+      "id": "butcher_block_table_1",
+      "name": "Butcher Block Table",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.9
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "maple_wood",
+        "condition": "knife_scars",
+        "tilt": "slightly_tilted"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "organic_spinach_bin_1",
+      "name": "Organic Spinach Bin",
+      "type": "ITEM",
+      "location_id": "in:industrial_refrigerator_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "vacuum_sealed_plastic",
+        "label": "Organic Spinach",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "free_range_turkey_bin_1",
+      "name": "Free-Range Turkey Bin",
+      "type": "ITEM",
+      "location_id": "in:industrial_refrigerator_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "vacuum_sealed_plastic",
+        "label": "Free-Range Turkey",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "precision_mandoline_slicer_1",
+      "name": "Precision Mandoline Slicer",
+      "type": "ITEM",
+      "location_id": "on:butcher_block_table_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "stainless_steel",
+        "adjustability": "thickness",
+        "safety": "blade_locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_key_1",
+      "name": "Safety Key",
+      "type": "ITEM",
+      "location_id": "in:butcher_block_table_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:butcher_block_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic_metal",
+        "accuracy": "0.1g",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "spice_rack_1",
+      "name": "Spice Rack",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.2,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "organization": "alphabetized",
+        "condition": "some_jars_half_empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "smoked_paprika_jar_1",
+      "name": "Smoked Paprika Jar",
+      "type": "ITEM",
+      "location_id": "in:spice_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "label": "Smoked Paprika",
+        "fill_level": "half_empty"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "turmeric_jar_1",
+      "name": "Turmeric Jar",
+      "type": "ITEM",
+      "location_id": "in:spice_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "label": "Turmeric",
+        "fill_level": "half_empty"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "sanitizer_dispenser_1",
+      "name": "Sanitizer Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "mount_type": "wall",
+        "fill_level": "30%",
+        "activation": "motion",
+        "condition": "sticky_nozzle"
+      },
+      "states": {}
+    },
+    {
+      "id": "ingredient_log_clipboard_1",
+      "name": "Ingredient Log Clipboard",
+      "type": "ITEM",
+      "location_id": "on:butcher_block_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "wood_metal",
+        "last_entry": "Batch #47 – Cucumber pH 5.8",
+        "pen_status": "dangling",
+        "is_container": true
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:ingredient_log_clipboard_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "ink_color": "black",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wash_hands_poster_1",
+      "name": "Wash Hands Poster",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "faded_torn",
+        "award_stamp": "2018"
+      },
+      "states": {}
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.05
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "message": "Today’s Special: Avocado-Chipotle Wrap",
+        "condition": "half_erased_doodles"
+      },
+      "states": {}
+    },
+    {
+      "id": "dented_metal_tray_1",
+      "name": "Dented Metal Tray",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "condition": "dented_sharpening_marks",
+        "location": "under_table"
+      },
+      "states": {}
+    },
+    {
+      "id": "modular_sandwich_bench_1",
+      "name": "Modular Sandwich Bench",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          4.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "zones": [
+          "Assembly",
+          "Toasting",
+          "Garnishing"
+        ],
+        "features": "magnetic_tool_strips"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "multi_zone_conveyor_toaster_1",
+      "name": "Multi-Zone Conveyor Toaster",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "error_code": "E-12",
+        "status": "jammed_bread"
+      },
+      "states": {
+        "is_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "condiment_dispenser_array_1",
+      "name": "Condiment Dispenser Array",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "nozzles": 6,
+        "empty_reservoirs": 3,
+        "labels": [
+          "Sriracha Mayo",
+          "Tahini"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portion_controlled_spread_applicator_1",
+      "name": "Portion-Controlled Spread Applicator",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic_metal",
+        "issue": "clogged_nozzle_2"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "prototype_7b_1",
+      "name": "Prototype #7B",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "glass_metal",
+        "description": "High-Protein Seitan Stack",
+        "temperature_status": "too_warm"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "glass_cloche_1",
+      "name": "Glass Cloche",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "glass",
+        "provides_abilities": [
+          "cover"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bread_slicer_guide_1",
+      "name": "Bread Slicer Guide",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "issue": "misaligned_cuts",
+        "required_tool": "allen_wrench"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "allen_wrench_1",
+      "name": "Allen Wrench",
+      "type": "ITEM",
+      "location_id": "in:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "size": "5mm",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "parchment_sheets_stack_1",
+      "name": "Stack of Parchment Sheets",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "condition": "some_stuck_together",
+        "label_status": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "crumb_tray_1",
+      "name": "Crumb Tray",
+      "type": "ITEM",
+      "location_id": "in:multi_zone_conveyor_toaster_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "metal",
+        "condition": "overflowing",
+        "operation": "slides_with_resistance"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cloth",
+        "condition": "clean",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "recipe_terminal_1",
+      "name": "Recipe Terminal",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic_glass",
+        "screen_condition": "cracked",
+        "last_search": "Low-Carb Wraps"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "wall_of_fame_1",
+      "name": "Wall of Fame",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "contents": "polaroids_of_champions",
+        "condition": "one_crooked_photo"
+      },
+      "states": {}
+    },
+    {
+      "id": "motivational_sign_1",
+      "name": "Motivational Sign",
+      "type": "ITEM",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "weight": 0.5,
+        "material": "wood",
+        "message": "Innovate or Perish",
+        "condition": "coffee_stain"
+      },
+      "states": {}
+    },
+    {
+      "id": "stale_baguette_1",
+      "name": "Stale Baguette",
+      "type": "ITEM",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "weight": 0.3,
+        "material": "bread",
+        "condition": "stale_decorative",
+        "location": "basket"
+      },
+      "states": {}
+    },
+    {
+      "id": "spectrometer_1",
+      "name": "Spectrometer",
+      "type": "FURNITURE",
+      "location_id": "in:analytical_testing_corner",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "function": "analyze_ingredients"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "moisture_sensor_1",
+      "name": "Moisture Sensor",
+      "type": "ITEM",
+      "location_id": "on:spectrometer_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic_metal",
+        "function": "measure_moisture"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "taste_testing_booth_1",
+      "name": "Taste Testing Booth",
+      "type": "FURNITURE",
+      "location_id": "in:analytical_testing_corner",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "features": "privacy_screen"
+      },
+      "states": {}
+    },
+    {
+      "id": "sealing_machine_1",
+      "name": "Sealing Machine",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_logistics_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "function": "vacuum_seal"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "labeled_crate_1",
+      "name": "Labeled Crate",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_logistics_hub",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "label": "Prototype Sandwiches",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "loading_dock_door_1",
+      "name": "Loading Dock Door",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_logistics_hub",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          3.0
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "operation": "roll_up",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "maintenance_key_1",
+      "name": "Maintenance Key",
+      "type": "ITEM",
+      "location_id": "in:labeled_crate_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Chef's Knife",
+      "type": "ITEM",
+      "location_id": "on:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "stainless_steel",
+        "condition": "sharp",
+        "provides_abilities": [
+          "chop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:modular_sandwich_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:analytical_testing_corner",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tire_1",
+      "name": "Tire",
+      "type": "ITEM",
+      "location_id": "in:packaging_logistics_hub",
+      "properties": {
+        "weight": 8.0,
+        "material": "rubber",
+        "condition": "inflated"
+      },
+      "states": {
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "water_container_1",
+      "name": "Water Container",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "fill_level": "full",
+        "provides_abilities": [
+          "water",
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plant_1",
+      "name": "Plant",
+      "type": "ITEM",
+      "location_id": "in:analytical_testing_corner",
+      "properties": {
+        "weight": 2.0,
+        "material": "organic",
+        "type": "herb"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:packaging_logistics_hub",
+      "properties": {
+        "weight": 2.5,
+        "material": "wood_cloth",
+        "condition": "clean",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_1",
+      "name": "Lab Floor",
+      "type": "FURNITURE",
+      "location_id": "in:prototype_assembly_bay",
+      "properties": {
+        "size": [
+          10.0,
+          10.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "material": "epoxy"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "chop",
+    "clean",
+    "cover",
+    "mop",
+    "open",
+    "rinse",
+    "sign",
+    "turn_on",
+    "water",
+    "whisk",
+    "close"
+  ]
+}

@@ -1,0 +1,792 @@
+{
+  "description": "A high-security Cybersecurity Forensic Lab recently compromised by a suspected airgap-bypassing malware attack, featuring a main forensic workbench, server isolation chamber, component storage & repair bay, and security monitoring hub.",
+  "rooms": [
+    {
+      "id": "main_forensic_workbench",
+      "name": "Main Forensic Workbench",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "server_isolation_chamber",
+        "component_storage_repair_bay",
+        "security_monitoring_hub"
+      ]
+    },
+    {
+      "id": "server_isolation_chamber",
+      "name": "Server Isolation Chamber",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workbench"
+      ]
+    },
+    {
+      "id": "component_storage_repair_bay",
+      "name": "Component Storage & Repair Bay",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workbench"
+      ]
+    },
+    {
+      "id": "security_monitoring_hub",
+      "name": "Security Monitoring Hub",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_workbench"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workbench",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray",
+        "brand": "ESD-Safe"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_dissection_rack_1",
+      "name": "Server Dissection Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workbench",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "Rack-5000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dell_poweredge_server_1",
+      "name": "Dell PowerEdge Server",
+      "type": "FURNITURE",
+      "location_id": "in:server_dissection_rack_1",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model_number": "PowerEdge R740"
+      },
+      "states": {
+        "is_assembled": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "motherboard_1",
+      "name": "Motherboard",
+      "type": "ITEM",
+      "location_id": "in:dell_poweredge_server_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "green",
+        "material": "fiberglass",
+        "condition": "scorched"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "gpu_nvidia_tesla_v100_1",
+      "name": "NVIDIA Tesla V100 GPU",
+      "type": "ITEM",
+      "location_id": "in:dell_poweredge_server_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "NVIDIA",
+        "model_number": "Tesla V100",
+        "current_temperature": 45.0
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "hard_drive_array_1",
+      "name": "Hard Drive Array",
+      "type": "ITEM",
+      "location_id": "in:dell_poweredge_server_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "brand": "Seagate",
+        "model_number": "Exos X18",
+        "inscription": "DO NOT MOUNT – Firmware Rootkit?"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "write_blocker_usb_adapter_1",
+      "name": "Write-Blocker USB Adapter",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "brand": "Tableau",
+        "model_number": "T356789",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oscilloscope_1",
+      "name": "Oscilloscope",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Tektronix",
+        "model_number": "TBS1052B",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "sealed_evidence_bag_1",
+      "name": "Sealed Evidence Bag",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_stick_1",
+      "name": "USB Stick",
+      "type": "ITEM",
+      "location_id": "in:sealed_evidence_bag_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "brand": "SanDisk",
+        "model_number": "Ultra Fit",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_tool_drawer_1",
+      "name": "Locked Tool Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workbench",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "precision_screwdrivers_1",
+      "name": "Precision Screwdrivers",
+      "type": "ITEM",
+      "location_id": "in:locked_tool_drawer_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "multicolor",
+        "brand": "iFixit",
+        "model_number": "64-bit",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "jewelers_loupe_1",
+      "name": "Jewelers Loupe",
+      "type": "ITEM",
+      "location_id": "in:locked_tool_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "BelOMO",
+        "magnification": "10x"
+      },
+      "states": {}
+    },
+    {
+      "id": "network_tap_device_1",
+      "name": "Network Tap Device",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "gray",
+        "brand": "Net Optics",
+        "led_color": "red",
+        "status": "ERR: Packet Overflow"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workbench",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "model_number": "K-Classic",
+        "condition": "out of order"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "framed_certification_1",
+      "name": "Framed Certification",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "wood",
+        "inscription": "Advanced Hardware Forensics, 2018"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_workbench",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "white",
+        "content": "ultrasonic resonance?"
+      },
+      "states": {}
+    },
+    {
+      "id": "stack_of_old_magazines_1",
+      "name": "Stack of Old Magazines",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "multicolor",
+        "material": "paper",
+        "title": "IEEE Security & Privacy – 2022 Issues"
+      },
+      "states": {}
+    },
+    {
+      "id": "soundproofed_server_rack_enclosure_1",
+      "name": "Soundproofed Server Rack Enclosure",
+      "type": "FURNITURE",
+      "location_id": "in:server_isolation_chamber",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vibration_dampening_floor_panels_1",
+      "name": "Vibration-Dampening Floor Panels",
+      "type": "FURNITURE",
+      "location_id": "in:server_isolation_chamber",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          0.1
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "rubber"
+      },
+      "states": {}
+    },
+    {
+      "id": "airgapped_server_1",
+      "name": "Airgapped Server",
+      "type": "FURNITURE",
+      "location_id": "in:soundproofed_server_rack_enclosure_1",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "brand": "HP",
+        "model_number": "ProLiant DL380"
+      },
+      "states": {
+        "is_assembled": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "piezo_speaker_1",
+      "name": "Piezo Speaker",
+      "type": "ITEM",
+      "location_id": "in:airgapped_server_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Murata",
+        "model_number": "PKMCS0909E4000"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_microphone_array_1",
+      "name": "External Microphone Array",
+      "type": "ITEM",
+      "location_id": "on:soundproofed_server_rack_enclosure_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "brand": "Audio-Technica",
+        "model_number": "AT2020",
+        "inscription": "Ambient Noise Monitor – DO NOT DISCONNECT"
+      },
+      "states": {}
+    },
+    {
+      "id": "faraday_cage_1",
+      "name": "Faraday Cage",
+      "type": "FURNITURE",
+      "location_id": "in:server_isolation_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "copper"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "rfid_lock_1",
+      "name": "RFID Lock",
+      "type": "ITEM",
+      "location_id": "on:soundproofed_server_rack_enclosure_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "brand": "HID Global",
+        "model_number": "HID Prox"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "on:soundproofed_server_rack_enclosure_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "yellow",
+        "brand": "FLIR",
+        "model_number": "E8",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "on:soundproofed_server_rack_enclosure_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "paper",
+        "content": "Ultrasonic Hazard Zone – Hearing Protection Mandatory."
+      },
+      "states": {}
+    },
+    {
+      "id": "dangling_ethernet_cable_1",
+      "name": "Dangling Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:server_isolation_chamber",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic",
+        "length": "3m",
+        "condition": "unplugged"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_unit_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage_repair_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "esd_safe_repair_station_1",
+      "name": "ESD-Safe Repair Station",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage_repair_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "replacement_ram_module_1",
+      "name": "Replacement RAM Module",
+      "type": "ITEM",
+      "location_id": "in:industrial_shelving_unit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "brand": "Crucial",
+        "model_number": "DDR4-3200",
+        "inscription": "Tested Clean – Use for GPU Debug"
+      },
+      "states": {}
+    },
+    {
+      "id": "oscilloscope_probe_set_1",
+      "name": "Oscilloscope Probe Set",
+      "type": "ITEM",
+      "location_id": "in:industrial_shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Tektronix",
+        "model_number": "TPP0201",
+        "condition": "frayed wire"
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "locked_chemical_cabinet_1",
+      "name": "Locked Chemical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:component_storage_repair_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          1.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "conductive_cleaning_fluid_1",
+      "name": "Conductive Cleaning Fluid",
+      "type": "ITEM",
+      "location_id": "in:locked_chemical_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "material": "liquid",
+        "brand": "MG Chemicals",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:esd_safe_repair_station_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "brand": "Brother",
+        "model_number": "PT-E100",
+        "condition": "out of tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_crt_monitor_1",
+      "name": "Broken CRT Monitor",
+      "type": "ITEM",
+      "location_id": "in:component_storage_repair_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "beige",
+        "brand": "Sony",
+        "model_number": "Trinitron",
+        "condition": "for parts only"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_cactus_1",
+      "name": "Potted Cactus",
+      "type": "ITEM",
+      "location_id": "on:esd_safe_repair_station_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "green",
+        "material": "plant",
+        "condition": "nearly dead"
+      },
+      "states": {
+        "is_pruned": false
+      }
+    },
+    {
+      "id": "wall_of_monitors_1",
+      "name": "Wall of Monitors",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model_number": "UltraSharp U2723QE",
+        "quantity": 6
+      },
+      "states": {}
+    },
+    {
+      "id": "central_command_desk_1",
+      "name": "Central Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "incident_whiteboard_1",
+      "name": "Incident Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "Malware Propagation Path"
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_laptop_1",
+      "name": "Encrypted Laptop",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "Lenovo",
+        "model_number": "ThinkPad X1 Carbon",
+        "status": "Decryption Key Required"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "HP",
+        "model_number": "LaserJet Pro",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "headset_1",
+      "name": "Headset",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Jabra",
+        "model_number": "Evolve 75",
+        "condition": "crackling"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_of_the_month_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "on:wall_of_monitors_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_pizza_box_1",
+      "name": "Empty Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "cardboard",
+        "brand": "Domino's"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "close",
+    "disassemble",
+    "open",
+    "toggle",
+    "turn_on",
+    "wash"
+  ]
+}

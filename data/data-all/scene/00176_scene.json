@@ -1,0 +1,524 @@
+{
+  "description": "A high-tech Plant Research Facility with a hybrid greenhouse-laboratory, featuring hydroponic cultivation zones, analytical workstations, and heavy equipment requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "hydroponic_cultivation_bay",
+      "name": "Hydroponic Cultivation Bay",
+      "properties": {
+        "type": "greenhouse",
+        "humidity": "high",
+        "lighting": "LED"
+      },
+      "connected_to_room_ids": [
+        "microscopy_lab",
+        "equipment_storage",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "microscopy_lab",
+      "name": "Microscopy & Diagnostics Lab",
+      "properties": {
+        "type": "laboratory",
+        "temperature": "cold",
+        "sterility": "high"
+      },
+      "connected_to_room_ids": [
+        "hydroponic_cultivation_bay",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage & Prep Zone",
+      "properties": {
+        "type": "storage",
+        "organization": "low",
+        "lighting": "dim"
+      },
+      "connected_to_room_ids": [
+        "hydroponic_cultivation_bay",
+        "outdoor_sampling_plot"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Hub",
+      "properties": {
+        "type": "workstation",
+        "equipment": "digital",
+        "connectivity": "high"
+      },
+      "connected_to_room_ids": [
+        "hydroponic_cultivation_bay",
+        "microscopy_lab"
+      ]
+    },
+    {
+      "id": "outdoor_sampling_plot",
+      "name": "Outdoor Sampling Plot",
+      "properties": {
+        "type": "field",
+        "exposure": "outdoor",
+        "terrain": "natural"
+      },
+      "connected_to_room_ids": [
+        "equipment_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "growth_rack_1",
+      "name": "Modular Growth Rack",
+      "type": "FURNITURE",
+      "location_id": "in:hydroponic_cultivation_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "adjustability": "high",
+        "led_intensity": 30
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "nutrient_tank_1",
+      "name": "Nutrient Reservoir Tank",
+      "type": "FURNITURE",
+      "location_id": "in:hydroponic_cultivation_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "capacity": "500L",
+        "wheeled": true,
+        "brake_engaged": true
+      },
+      "states": {}
+    },
+    {
+      "id": "arabidopsis_sample_1",
+      "name": "Diseased Arabidopsis Sample",
+      "type": "ITEM",
+      "location_id": "on:growth_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "health": "wilting",
+        "pathogen_strain": "Xf-19",
+        "color": "yellow",
+        "lesions": true
+      },
+      "states": {}
+    },
+    {
+      "id": "co2_dispenser_1",
+      "name": "CO₂ Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:hydroponic_cultivation_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "flow_rate": "15%",
+        "error_code": "E-4",
+        "digital": true
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "on:growth_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "calibration": "needed",
+        "spilled": true,
+        "material": "plastic",
+        "brand": "LabTech"
+      },
+      "states": {
+        "is_measured": false
+      }
+    },
+    {
+      "id": "harvesting_scissors_1",
+      "name": "Sterile Scissors",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.2,
+        "condition": "rusted",
+        "sterility": "low",
+        "material": "metal",
+        "purpose": "plant_harvesting"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "electron_microscope_1",
+      "name": "Electron Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "status": "out_of_order",
+        "brand": "NanoView",
+        "sample_tray": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "specimen_freezer_1",
+      "name": "Specimen Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": "-80°C",
+        "alarm": "blinking",
+        "door_ajar": true,
+        "frost_buildup": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "slide_box_1",
+      "name": "Slide Box",
+      "type": "ITEM",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "weight": 1.2,
+        "label": "Root Hairs – Day 7",
+        "condition": "cracked",
+        "smudged": true,
+        "material": "cardboard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "lid_status": "stuck",
+        "timer": "00:00",
+        "brand": "SpinMaster"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.7,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "cycle_status": "complete",
+        "door_status": "locked",
+        "steam_hissing": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "co2_regulator_1",
+      "name": "Replacement CO₂ Regulator",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 3.5,
+        "packaging": "original",
+        "buried_under": "manuals",
+        "material": "metal",
+        "brand": "GasControl"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "microscope_repair_kit_1",
+      "name": "Microscope Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 2.0,
+        "missing_screwdriver": true,
+        "material": "plastic",
+        "brand": "FixIt"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "portable_grow_light_1",
+      "name": "Portable Grow Light",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "battery_status": "dead",
+        "charger_status": "tangled",
+        "material": "plastic",
+        "brand": "GrowBright"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "data_hub_terminal_1",
+      "name": "Data Hub Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "status": "frozen",
+        "upload_progress": "72%",
+        "brand": "DataMaster"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 1.5,
+        "material": "wood",
+        "bristles": "stiff",
+        "brand": "CleanSweep",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "press_1",
+      "name": "Hydraulic Press",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 50.0,
+        "material": "steel",
+        "pressure_capacity": "high",
+        "brand": "PressMaster",
+        "provides_abilities": [
+          "compress"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_cup_1",
+      "name": "Measuring Cup",
+      "type": "ITEM",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "capacity": "250ml",
+        "brand": "MeasureRight",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "peeler_1",
+      "name": "Vegetable Peeler",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "handle": "plastic",
+        "brand": "PeelEasy",
+        "provides_abilities": [
+          "peel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "bristles": "soft",
+        "brand": "VarnishPro",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Hand Saw",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 1.8,
+        "material": "metal",
+        "teeth": "sharp",
+        "brand": "CutRight",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "contents": "chemical",
+        "brand": "SafetyFirst",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "serving_tray_1",
+      "name": "Serving Tray",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "capacity": "large",
+        "brand": "ServeWell",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unsealing_tool_1",
+      "name": "Unsealing Tool",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "grip": "rubber",
+        "brand": "SealBreak",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pour_spout_1",
+      "name": "Pour Spout",
+      "type": "ITEM",
+      "location_id": "in:microscopy_lab",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "attachment": "universal",
+        "brand": "PourEasy",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "compress",
+    "extinguish",
+    "measure",
+    "open",
+    "peel",
+    "pour",
+    "press",
+    "saw",
+    "serve",
+    "sweep",
+    "unseal",
+    "varnish"
+  ]
+}

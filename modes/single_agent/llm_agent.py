@@ -204,9 +204,12 @@ class LLMAgent(BaseAgent):
             tokens_used = getattr(self.llm, 'last_token_usage', {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0})
             response_time_ms = getattr(self.llm, 'last_response_time_ms', 0.0)
 
+            # 获取当前任务索引，如果没有设置则使用默认值1
+            current_task_index = getattr(self, 'current_task_index', 1)
+
             # 单智能体使用步数作为交互索引
             self.trajectory_recorder.record_llm_interaction(
-                task_index=1,  # 默认任务索引
+                task_index=current_task_index,  # 使用当前任务索引
                 interaction_index=self.step_count,  # 使用步数作为交互索引
                 prompt=prompt,
                 response=response,

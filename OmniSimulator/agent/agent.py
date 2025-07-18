@@ -75,7 +75,7 @@ class Agent:
         # 检查重量限制
         obj_weight = object_properties.get("weight", 0.0)
         if self.current_weight + obj_weight > self.properties["max_weight"]:
-            return False, f"超出重量限制（当前:{self.current_weight}kg + 物体:{obj_weight}kg > 最大:{self.properties['max_weight']}kg）"
+            return False, f"Weight limit exceeded (current:{self.current_weight}kg + object:{obj_weight}kg > max:{self.properties['max_weight']}kg)"
         
         # 检查尺寸限制，优先用size数组
         size = object_properties.get("size")
@@ -87,13 +87,13 @@ class Agent:
             obj_height = object_properties.get("height", 0.0)
         
         if obj_length > self.properties["max_length"]:
-            return False, f"物体长度{obj_length}m超过智能体最大限制{self.properties['max_length']}m"
+            return False, f"Object length {obj_length}m exceeds agent maximum limit {self.properties['max_length']}m"
         if obj_width > self.properties["max_width"]:
-            return False, f"物体宽度{obj_width}m超过智能体最大限制{self.properties['max_width']}m"
+            return False, f"Object width {obj_width}m exceeds agent maximum limit {self.properties['max_width']}m"
         if obj_height > self.properties["max_height"]:
-            return False, f"物体高度{obj_height}m超过智能体最大限制{self.properties['max_height']}m"
-        
-        return True, "可以承载"
+            return False, f"Object height {obj_height}m exceeds agent maximum limit {self.properties['max_height']}m"
+
+        return True, "Can carry"
     
     def grab_object(self, object_id: str, object_properties: Dict[str, Any]) -> Tuple[bool, str]:
         """
@@ -107,20 +107,20 @@ class Agent:
             Tuple[bool, str]: (是否成功抓取, 原因)
         """
         if not self.can_grab():
-            return False, f"已达到最大抓取数量限制 ({self.max_grasp_limit})"
-        
+            return False, f"Maximum grab limit reached ({self.max_grasp_limit})"
+
         if object_id in self.inventory:
-            return False, "已经持有该物体"  # 已经持有该物体
-        
+            return False, "Already holding this object"  # 已经持有该物体
+
         # 检查是否能承载该物体
         can_carry, reason = self.can_carry(object_properties)
         if not can_carry:
             return False, reason
-        
+
         # 更新当前负载
         self.current_weight += object_properties.get("weight", 0.0)
         self.inventory.append(object_id)
-        return True, "成功抓取物体"
+        return True, "Successfully grabbed object"
     
     def drop_object(self, object_id: str, object_properties: Dict[str, Any]) -> Tuple[bool, str]:
         """
@@ -134,12 +134,12 @@ class Agent:
             Tuple[bool, str]: (是否成功放下, 原因)
         """
         if object_id not in self.inventory:
-            return False, "未持有该物体"
-        
+            return False, "Not holding this object"
+
         # 更新当前负载
         self.current_weight -= object_properties.get("weight", 0.0)
         self.inventory.remove(object_id)
-        return True, "成功放下物体"
+        return True, "Successfully dropped object"
     
     def move_to(self, new_location_id: str) -> None:
         """
@@ -301,7 +301,7 @@ class Agent:
             from OmniEmbodied.simulator.action.action_manager import ActionManager
             ActionManager.register_ability_action(ability, self.id)
         except Exception as e:
-            print(f"为智能体 {self.id} 注册动作 {ability} 失败: {e}")
+            print(f"Failed to register action {ability} for agent {self.id}: {e}")
     
     def remove_ability_from_object(self, ability: str, object_id: str) -> None:
         """
@@ -336,7 +336,7 @@ class Agent:
                 from OmniEmbodied.simulator.action.action_manager import ActionManager
                 ActionManager.unregister_ability_action(ability, self.id)
             except Exception as e:
-                print(f"为智能体 {self.id} 解绑动作 {ability} 失败: {e}")
+                print(f"Failed to unregister action {ability} for agent {self.id}: {e}")
     
     def has_ability(self, ability: str) -> bool:
         """

@@ -1,0 +1,709 @@
+{
+  "description": "An overcrowded, suspiciously chaotic medical clinic with deteriorating equipment, hidden records, and a mix of functional and broken tools, requiring multi-agent collaboration for navigation and task completion.",
+  "rooms": [
+    {
+      "id": "reception_waiting_area",
+      "name": "Reception & Waiting Area",
+      "properties": {
+        "type": "clinic_reception"
+      },
+      "connected_to_room_ids": [
+        "examination_room_1",
+        "storage_pharmacy",
+        "doctors_office",
+        "equipment_hallway"
+      ]
+    },
+    {
+      "id": "examination_room_1",
+      "name": "Examination Room 1",
+      "properties": {
+        "type": "clinic_examination"
+      },
+      "connected_to_room_ids": [
+        "reception_waiting_area",
+        "storage_pharmacy"
+      ]
+    },
+    {
+      "id": "storage_pharmacy",
+      "name": "Storage & Pharmacy",
+      "properties": {
+        "type": "clinic_storage"
+      },
+      "connected_to_room_ids": [
+        "reception_waiting_area",
+        "examination_room_1",
+        "doctors_office"
+      ]
+    },
+    {
+      "id": "doctors_office",
+      "name": "Doctor’s Office",
+      "properties": {
+        "type": "clinic_office"
+      },
+      "connected_to_room_ids": [
+        "reception_waiting_area",
+        "storage_pharmacy"
+      ]
+    },
+    {
+      "id": "equipment_hallway",
+      "name": "Equipment Hallway",
+      "properties": {
+        "type": "clinic_hallway"
+      },
+      "connected_to_room_ids": [
+        "reception_waiting_area",
+        "examination_room_1"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reception_counter_1",
+      "name": "Reception Counter",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          2.5,
+          0.6,
+          1.0
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "waiting_chair_1",
+      "name": "Waiting Chair",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "waiting_chair_2",
+      "name": "Waiting Chair",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "wood",
+        "condition": "duct_taped"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_mounted_tv_1",
+      "name": "Wall-Mounted TV",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.2,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "model": "CRT",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "patient_sign_in_clipboard_1",
+      "name": "Patient Sign-In Clipboard",
+      "type": "ITEM",
+      "location_id": "on:reception_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "missing_pages"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_coffee_machine_1",
+      "name": "Broken Coffee Machine",
+      "type": "ITEM",
+      "location_id": "on:reception_counter_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:reception_counter_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "condition": "working"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "trash_bin_1",
+      "name": "Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "condition": "overflowing"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "wall_calendar_1",
+      "name": "Wall Calendar",
+      "type": "ITEM",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "outdated"
+      },
+      "states": {}
+    },
+    {
+      "id": "wash_your_hands_poster_1",
+      "name": "Wash Your Hands Poster",
+      "type": "ITEM",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "fake_potted_plant_1",
+      "name": "Fake Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "old_newspapers_1",
+      "name": "Old Newspapers",
+      "type": "ITEM",
+      "location_id": "in:reception_waiting_area",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "condition": "yellowed"
+      },
+      "states": {}
+    },
+    {
+      "id": "examination_table_1",
+      "name": "Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "hydraulic_failure"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_cart_1",
+      "name": "Medicine Cart",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "rusted_wheels"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_pressure_cuff_1",
+      "name": "Blood Pressure Cuff",
+      "type": "ITEM",
+      "location_id": "on:medicine_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "fabric",
+        "condition": "frayed"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "medicine_cabinet_1",
+      "name": "Medicine Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ekg_machine_1",
+      "name": "EKG Machine",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "disconnected_wires"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "stethoscope_1",
+      "name": "Stethoscope",
+      "type": "ITEM",
+      "location_id": "on:medicine_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "rubber",
+        "condition": "loose_earpieces"
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_light_1",
+      "name": "Overhead Light",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Sink",
+      "type": "FURNITURE",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "ceramic",
+        "condition": "dripping"
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_degree_1",
+      "name": "Medical Degree",
+      "type": "ITEM",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "condition": "smudged_signature"
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_gown_1",
+      "name": "Patient Gown",
+      "type": "ITEM",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "fabric",
+        "condition": "stained"
+      },
+      "states": {
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:examination_room_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "scratched_face"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_bottle_1",
+      "name": "Medicine Bottle",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "label": "CORROSIVE",
+        "condition": "half_full"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_bottle_2",
+      "name": "Medicine Bottle",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "green",
+        "label": "ANTIBIOTIC",
+        "condition": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_bottle_3",
+      "name": "Medicine Bottle",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "red",
+        "label": "PAINKILLER",
+        "condition": "empty"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "medicine_bottle_4",
+      "name": "Medicine Bottle",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "label": "SEDATIVE",
+        "condition": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_bottle_5",
+      "name": "Medicine Bottle",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "label": "UNKNOWN",
+        "condition": "sealed"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_vase_1",
+      "name": "Blue Vase",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 0.5,
+        "material": "ceramic",
+        "color": "blue",
+        "condition": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "suspicious_box_1",
+      "name": "Suspicious Box",
+      "type": "ITEM",
+      "location_id": "in:storage_pharmacy",
+      "properties": {
+        "weight": 10.0,
+        "material": "cardboard",
+        "condition": "unlabeled"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "doctors_desk_1",
+      "name": "Doctor’s Desk",
+      "type": "FURNITURE",
+      "location_id": "in:doctors_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:doctors_office",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "patient_file_1",
+      "name": "Patient File",
+      "type": "ITEM",
+      "location_id": "on:doctors_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "label": "Adams, J.",
+        "condition": "buried"
+      },
+      "states": {}
+    },
+    {
+      "id": "bulky_xray_machine_1",
+      "name": "Bulky X-Ray Machine",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_hallway",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          1.5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "broken"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "wheelchair_1",
+      "name": "Wheelchair",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_hallway",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "rusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_hallway",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "condition": "functional",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:equipment_hallway",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "condition": "used",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Camera",
+      "type": "ITEM",
+      "location_id": "in:doctors_office",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "functional",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "empty",
+    "open",
+    "paint",
+    "photograph",
+    "repair",
+    "rip",
+    "unpack",
+    "close"
+  ]
+}

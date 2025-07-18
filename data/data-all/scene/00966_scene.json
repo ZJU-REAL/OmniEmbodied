@@ -1,0 +1,525 @@
+{
+  "description": "An Emergency Biosafety Containment Laboratory with high-stakes purification and containment tasks, requiring collaborative efforts to manage biological hazards.",
+  "rooms": [
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "entry_point",
+        "atmosphere": "Humid, faint ozone smell from disinfectant sprays"
+      },
+      "connected_to_room_ids": [
+        "primary_workstation"
+      ]
+    },
+    {
+      "id": "primary_workstation",
+      "name": "Primary Workstation",
+      "properties": {
+        "type": "central_lab",
+        "atmosphere": "Harsh LED lighting, faint hum of refrigeration units"
+      },
+      "connected_to_room_ids": [
+        "decontamination_airlock",
+        "cold_storage",
+        "emergency_backup"
+      ]
+    },
+    {
+      "id": "cold_storage",
+      "name": "Cold Storage & Hazardous Waste Zone",
+      "properties": {
+        "type": "storage",
+        "atmosphere": "Noticeably colder, condensation on metal surfaces"
+      },
+      "connected_to_room_ids": [
+        "primary_workstation"
+      ]
+    },
+    {
+      "id": "emergency_backup",
+      "name": "Emergency Backup Station",
+      "properties": {
+        "type": "secondary_lab",
+        "atmosphere": "Dimmer lighting, stacks of unorganized supply boxes"
+      },
+      "connected_to_room_ids": [
+        "primary_workstation"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "uv_sterilization_array_1",
+      "name": "UV Sterilization Array",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "aluminum",
+        "indicator_color": "green"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ppe_locker_1",
+      "name": "Sealed PPE Locker",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_suit_1",
+      "name": "Biohazard Suit",
+      "type": "ITEM",
+      "location_id": "in:ppe_locker_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "yellow",
+        "size": "large",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "boot_scrubber_tray_1",
+      "name": "Boot Scrubber Tray",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic",
+        "contains": "disinfectant_gel"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_decon_spray_1",
+      "name": "Emergency Decon Spray",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "volume_ml": 500,
+        "label": "BioShield-9",
+        "provides_abilities": [
+          "clean",
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hazard_suit_scanner_1",
+      "name": "Hazard Suit Integrity Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "plastic",
+        "warning_message": "CHECK SEALS"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "main_lab_bench_1",
+      "name": "Main Lab Bench",
+      "type": "FURNITURE",
+      "location_id": "in:primary_workstation",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "smeared_with_ethanol"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "High-Speed Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "metal",
+        "display_message": "14,000 RPM COMPLETE"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:primary_workstation",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "glass_and_steel",
+        "fan_status": "humming"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "purification_kit_1",
+      "name": "QIAquick PCR Purification Kit",
+      "type": "ITEM",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "status": "half_used",
+        "missing_columns": 1
+      },
+      "states": {}
+    },
+    {
+      "id": "ethanol_bottle_1",
+      "name": "Glass Ethanol Bottle",
+      "type": "ITEM",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "clear",
+        "volume_ml": 500,
+        "label": "ICE-COLD ONLY",
+        "temperature": "room_temp"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "ethanol_bottle_2",
+      "name": "Glass Ethanol Bottle",
+      "type": "ITEM",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "clear",
+        "volume_ml": 500,
+        "label": "ICE-COLD ONLY",
+        "temperature": "ice_cold"
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "contaminated_tube_1",
+      "name": "Contaminated Sample Tube",
+      "type": "ITEM",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "label": "UNSTABLE – PROCESS IMMEDIATELY"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Digital Pipette Set",
+      "type": "ITEM",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "grey",
+        "calibration_status": "drifting",
+        "requires_calibration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Broken Stage Clip",
+      "type": "FURNITURE",
+      "location_id": "on:main_lab_bench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal_and_glass",
+        "condition": "broken_stage_clip"
+      },
+      "states": {}
+    },
+    {
+      "id": "dna_freezer_1",
+      "name": "-20°C DNA Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature_c": -20
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_waste_bin_1",
+      "name": "Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic",
+        "fill_percentage": 95,
+        "warning_light": "blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_cabinet_1",
+      "name": "Locked Reagent Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keycard_and_pin",
+        "contains": "isopropanol_stocks"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glovebox_1",
+      "name": "Glovebox with Contaminated Tools",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "plastic_and_glass",
+        "seal_status": "broken"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "outdated_centrifuge_1",
+      "name": "Outdated Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_backup",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "loud_vibrations",
+        "missing_parts": "rubber_feet"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "supply_shelves_1",
+      "name": "Crowded Supply Shelves",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_backup",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood",
+        "organization_status": "overflowing"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_columns_1",
+      "name": "Spare Qiagen Columns",
+      "type": "ITEM",
+      "location_id": "in:supply_shelves_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "quantity": 5,
+        "hidden_under": "old_journals"
+      },
+      "states": {}
+    },
+    {
+      "id": "tris_buffer_bottle_1",
+      "name": "Cracked Tris Buffer Bottle",
+      "type": "ITEM",
+      "location_id": "on:supply_shelves_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "clear",
+        "leak_status": "slow",
+        "ph_status": "drifting"
+      },
+      "states": {
+        "is_cracked": true
+      }
+    },
+    {
+      "id": "bunsen_burner_1",
+      "name": "Bunsen Burner",
+      "type": "ITEM",
+      "location_id": "on:supply_shelves_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "metal",
+        "gas_valve_status": "stuck_open"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:supply_shelves_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "condition": "used",
+        "provides_abilities": [
+          "clean",
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "brush_1",
+      "name": "Scrubbing Brush",
+      "type": "ITEM",
+      "location_id": "in:supply_shelves_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "bristle_type": "stiff",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "decon_spray_2",
+      "name": "Backup Decon Spray",
+      "type": "ITEM",
+      "location_id": "in:supply_shelves_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "volume_ml": 500,
+        "label": "BioShield-9",
+        "provides_abilities": [
+          "clean",
+          "scrub"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "dust",
+    "open",
+    "scrub",
+    "turn_on"
+  ]
+}

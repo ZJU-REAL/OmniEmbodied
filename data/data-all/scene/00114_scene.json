@@ -1,0 +1,758 @@
+{
+  "description": "An international airport cargo handling and customs inspection zone with high-stakes, time-sensitive operations requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_cargo_sorting_bay",
+      "name": "Main Cargo Sorting Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "customs_inspection_booth",
+        "hazardous_materials_storage",
+        "break_room",
+        "loading_dock"
+      ]
+    },
+    {
+      "id": "customs_inspection_booth",
+      "name": "Customs Inspection Booth",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_cargo_sorting_bay"
+      ]
+    },
+    {
+      "id": "hazardous_materials_storage",
+      "name": "Hazardous Materials Storage",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "main_cargo_sorting_bay"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "rest"
+      },
+      "connected_to_room_ids": [
+        "main_cargo_sorting_bay"
+      ]
+    },
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "external"
+      },
+      "connected_to_room_ids": [
+        "main_cargo_sorting_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "conveyor_belt_system_1",
+      "name": "Industrial Conveyor Belt System",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          12.0,
+          1.5,
+          1.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "CB-1200"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Heavy-Duty Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "max_load": 2000.0,
+        "condition": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "storage_rack_a1_1",
+      "name": "Steel Storage Rack A1",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          4.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "A1"
+      },
+      "states": {}
+    },
+    {
+      "id": "biolab_zeta_crate_1",
+      "name": "Sealed Wooden Crate (BIOLAB ZETA)",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          0.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shipping_manifest_1",
+      "name": "Mislabelled Shipping Manifest",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "condition": "flagged",
+        "content": "5 crates (only 4 present)"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "strap_cutter_1",
+      "name": "Broken Strap Cutter",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "condition": "broken",
+        "brand": "Stanley"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "battery_level": "low",
+        "brand": "Zebra"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "empty_pallet_1",
+      "name": "Empty Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.15
+        ],
+        "weight": 15.0,
+        "material": "wood",
+        "condition": "splintered"
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "condition": "squeaky_wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded SAFETY FIRST Poster",
+      "type": "ITEM",
+      "location_id": "on:wall_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "examination_table_1",
+      "name": "Steel Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_booth",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 80.0,
+        "material": "steel",
+        "condition": "scratched",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_mounted_monitor_1",
+      "name": "Wall-Mounted Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_booth",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.5
+        ],
+        "weight": 15.0,
+        "condition": "frozen"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "metal_case_1",
+      "name": "Suspicious Metal Case",
+      "type": "FURNITURE",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "lock_type": "biometric",
+        "label": "none"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "customs_form_1",
+      "name": "Incomplete Customs Form",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.05,
+        "missing_field": "Country of Origin",
+        "pen_status": "out_of_ink"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 3.0,
+        "condition": "dusty"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:customs_inspection_booth",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "paper_status": "out_of_paper"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Chemical Drum #1",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "label": "yellow",
+        "note": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_2",
+      "name": "Chemical Drum #2",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "label": "yellow",
+        "note": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_3",
+      "name": "Chemical Drum #3",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "label": "blue",
+        "note": "OPEN WITH CARE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_4",
+      "name": "Chemical Drum #4",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "label": "yellow",
+        "note": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_drum_5",
+      "name": "Chemical Drum #5",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "label": "yellow",
+        "note": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_tarp_1",
+      "name": "Blue Safety Tarp",
+      "type": "ITEM",
+      "location_id": "in:hazardous_materials_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "brand": "Panasonic"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 5.0,
+        "brand": "Keurig"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "provides_abilities": [
+          "loosen",
+          "clean",
+          "damage"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "supervisor_keycard_1",
+      "name": "Supervisor’s Keycard",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "access_level": "supervisor"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.5
+        ],
+        "weight": 200.0,
+        "condition": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "cargo_truck_1",
+      "name": "Cargo Truck",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          6.0,
+          2.5,
+          3.0
+        ],
+        "weight": 5000.0,
+        "fuel_status": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "jerrycan_1",
+      "name": "Jerrycan",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "content": "diesel",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_table_1",
+      "name": "Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 10.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_1",
+      "name": "Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_cargo_sorting_bay",
+      "properties": {
+        "size": [
+          10.0,
+          0.2,
+          4.0
+        ],
+        "weight": 1000.0,
+        "material": "concrete",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "in:customs_inspection_booth",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "size": "medium",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hammer_1",
+      "name": "Hammer",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "steel",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 2.0,
+        "type": "electric",
+        "provides_abilities": [
+          "inflate",
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "temperature": 4.0
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "stove_1",
+      "name": "Stove",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "burners": 4
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "pot_1",
+      "name": "Pot",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hanger_1",
+      "name": "Hanger",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "leash_1",
+      "name": "Leash",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 0.2,
+        "material": "nylon",
+        "length": "2m"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    }
+  ],
+  "abilities": [
+    "boil",
+    "clean",
+    "damage",
+    "drain",
+    "erase",
+    "hang_up",
+    "inflate",
+    "loosen",
+    "open",
+    "plug_in",
+    "pump",
+    "raise",
+    "unleash",
+    "close"
+  ]
+}

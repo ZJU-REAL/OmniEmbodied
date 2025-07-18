@@ -1,0 +1,683 @@
+{
+  "description": "The Cobb County Forensics Lab – A high-stakes forensic lab environment where multiple specialists must collaboratively analyze evidence to reconstruct the events surrounding a child’s death in a hot car.",
+  "rooms": [
+    {
+      "id": "evidence_intake_bay",
+      "name": "Evidence Intake Bay",
+      "properties": {
+        "type": "forensic",
+        "temperature": 18.0,
+        "humidity": 45.0
+      },
+      "connected_to_room_ids": [
+        "digital_forensics_room",
+        "autopsy_toxicology_lab"
+      ]
+    },
+    {
+      "id": "digital_forensics_room",
+      "name": "Digital Forensics Room",
+      "properties": {
+        "type": "technical",
+        "temperature": 16.0,
+        "humidity": 30.0
+      },
+      "connected_to_room_ids": [
+        "evidence_intake_bay",
+        "detective_bullpen"
+      ]
+    },
+    {
+      "id": "autopsy_toxicology_lab",
+      "name": "Autopsy & Toxicology Lab",
+      "properties": {
+        "type": "medical",
+        "temperature": 15.0,
+        "humidity": 40.0
+      },
+      "connected_to_room_ids": [
+        "evidence_intake_bay",
+        "vehicle_examination_hangar"
+      ]
+    },
+    {
+      "id": "detective_bullpen",
+      "name": "Detective’s Bullpen",
+      "properties": {
+        "type": "office",
+        "temperature": 22.0,
+        "humidity": 50.0
+      },
+      "connected_to_room_ids": [
+        "digital_forensics_room",
+        "legal_prep_room"
+      ]
+    },
+    {
+      "id": "vehicle_examination_hangar",
+      "name": "Vehicle Examination Hangar",
+      "properties": {
+        "type": "industrial",
+        "temperature": 25.0,
+        "humidity": 60.0
+      },
+      "connected_to_room_ids": [
+        "autopsy_toxicology_lab",
+        "legal_prep_room"
+      ]
+    },
+    {
+      "id": "legal_prep_room",
+      "name": "Legal Prep Room",
+      "properties": {
+        "type": "legal",
+        "temperature": 20.0,
+        "humidity": 45.0
+      },
+      "connected_to_room_ids": [
+        "detective_bullpen",
+        "vehicle_examination_hangar"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "stainless_steel_countertop_1",
+      "name": "Stainless Steel Countertop",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": 18.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "refrigerated_evidence_locker_1",
+      "name": "Refrigerated Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": -4.0,
+        "humidity": 10.0
+      },
+      "states": {
+        "is_open": false,
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "childs_car_seat_1",
+      "name": "Child’s Car Seat",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 8.5,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "sweat_stained",
+        "brand": "Graco"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "fathers_phone_1",
+      "name": "Father’s Phone",
+      "type": "ITEM",
+      "location_id": "in:refrigerated_evidence_locker_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "brand": "iPhone",
+        "model": "12",
+        "condition": "cracked_screen"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Zebra",
+        "condition": "frayed_cord",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "chain_of_custody_forms_1",
+      "name": "Chain-of-Custody Forms",
+      "type": "ITEM",
+      "location_id": "on:stainless_steel_countertop_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "paper",
+        "condition": "stacked_haphazardly"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "dead_ficus_plant_1",
+      "name": "Dead Ficus Plant",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "weight": 5.0,
+        "color": "brown",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_trash_bin_1",
+      "name": "Biohazard Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "color": "red",
+        "label": "CAUTION: BIOHAZARD"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          1.8
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "brand": "Dell",
+        "led_color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_laptop_1",
+      "name": "Encrypted Laptop",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "Dell",
+        "sticker": "Home Depot IT Dept.",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "usb_dongle_1",
+      "name": "USB Dongle",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "label": "Chick-fil-A Surveillance – 6/26/13",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "network_analyzer_1",
+      "name": "Network Analyzer",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "brand": "Fluke",
+        "display": "packet-loss_warnings",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "external_hdd_1",
+      "name": "External HDD",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "capacity": "500GB",
+        "used_space": "80%"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "password_strength_poster_1",
+      "name": "Password Strength Poster",
+      "type": "ITEM",
+      "location_id": "in:digital_forensics_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "cheesy_cartoon"
+      },
+      "states": {}
+    },
+    {
+      "id": "takeout_containers_1",
+      "name": "Takeout Containers",
+      "type": "ITEM",
+      "location_id": "in:digital_forensics_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "plastic",
+        "smell": "old_curry"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.5
+        ],
+        "weight": 500.0,
+        "capacity": "3-ton",
+        "condition": "grease_stains",
+        "is_container": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "suv_black_box_1",
+      "name": "SUV’s Black Box",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "weight": 25.0,
+        "color": "black",
+        "material": "metal",
+        "mount_location": "under_dashboard"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "brand": "FLIR",
+        "display": "124°F (6/26/13 14:22)",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "torque_wrench_set_1",
+      "name": "Torque Wrench Set",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "Snap-on",
+        "missing_part": "10mm_socket",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {
+        "is_sharp": false
+      }
+    },
+    {
+      "id": "shop_vac_1",
+      "name": "Shop Vac",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "weight": 10.0,
+        "color": "orange",
+        "brand": "Ridgid",
+        "condition": "clogged_with_leaves",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "nascar_poster_1",
+      "name": "NASCAR Poster",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "weight": 0.1,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_drip_pan_1",
+      "name": "Oil Drip Pan",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "metal",
+        "appearance": "rainbow_sheen"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "detective_desk_1",
+      "name": "Detective’s Desk",
+      "type": "FURNITURE",
+      "location_id": "in:detective_bullpen",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "cluttered"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Critical)",
+      "type": "ITEM",
+      "location_id": "on:detective_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "label": "BACKUP – DO NOT OVERWRITE",
+        "marks": "magnetic_swipe"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive (Distractor)",
+      "type": "ITEM",
+      "location_id": "in:detective_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "label": "none",
+        "marks": "none"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:detective_bullpen",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "Keurig",
+        "condition": "burnt_sludge",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "legal_binder_1",
+      "name": "Legal Binder",
+      "type": "ITEM",
+      "location_id": "in:legal_prep_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "leather",
+        "contents": "case_files"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "projector_screen_1",
+      "name": "Projector Screen",
+      "type": "FURNITURE",
+      "location_id": "in:legal_prep_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.1
+        ],
+        "weight": 15.0,
+        "material": "fabric",
+        "display": "surveillance_footage"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "obd_ii_dongle_1",
+      "name": "Dealer-Grade OBD-II Dongle",
+      "type": "ITEM",
+      "location_id": "in:digital_forensics_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "brand": "Bosch",
+        "location": "Misc. Hardware bin",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "cotton",
+        "condition": "stained",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:detective_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "brand": "Bic",
+        "ink_color": "blue",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Pencil Sharpener",
+      "type": "ITEM",
+      "location_id": "in:detective_bullpen",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "brand": "Staples",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "brand": "Elmer's",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_hangar",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "material": "bristle",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defroster_1",
+      "name": "Defroster",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "gray",
+        "brand": "Black+Decker",
+        "provides_abilities": [
+          "defrost"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "calibrate",
+    "clean",
+    "defrost",
+    "glue",
+    "load",
+    "open",
+    "sharpen",
+    "show",
+    "stop_playback",
+    "varnish",
+    "write",
+    "close"
+  ]
+}

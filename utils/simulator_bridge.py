@@ -390,19 +390,19 @@ class SimulatorBridge:
 
                     # 检测常见错误模式
                     if command_type == 'GOTO' and 'must be near' in message:
-                        logger.debug("GOTO命令失败原因分析: 智能体尝试移动到不可达位置")
+                        logger.debug("GOTO command failure analysis: Agent attempted to move to unreachable location")
                     elif command_type == 'GRAB' and 'must be near' in message:
-                        logger.debug("GRAB命令失败原因分析: 智能体尝试抓取不在近邻范围内的物体")
+                        logger.debug("GRAB command failure analysis: Agent attempted to grab object not in nearby range")
                     elif command_type == 'PLACE' and 'does not have' in message:
-                        logger.debug("PLACE命令失败原因分析: 智能体尝试放置未持有的物体")
+                        logger.debug("PLACE command failure analysis: Agent attempted to place object not in inventory")
                     elif 'invalid command' in message.lower():
-                        logger.debug("命令失败原因分析: 无效命令格式")
+                        logger.debug("Command failure analysis: Invalid command format")
 
             return status, message, data
 
         except Exception as e:
-            logger.exception(f"处理命令时出错: {e}")
-            return ActionStatus.FAILURE, f"处理命令出错: {str(e)}", None
+            logger.exception(f"Error occurred while processing command: {e}")
+            return ActionStatus.FAILURE, f"Command processing error: {str(e)}", None
     
     def find_objects_by_name(self, name: str) -> List[Dict[str, Any]]:
         """
@@ -632,7 +632,7 @@ class SimulatorBridge:
             if agents is None:
                 agents = self.get_all_agents()
             return self.simulator.world_state.describe_room_natural_language(room_id, agents, sim_config)
-        return f"无法描述房间 {room_id}，世界状态不可用"
+        return f"Unable to describe room {room_id}, world state unavailable"
     
     def describe_environment_natural_language(self, agents: Optional[Dict[str, Dict]] = None, 
                                              sim_config: Optional[Dict[str, Any]] = None) -> str:

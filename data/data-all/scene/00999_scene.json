@@ -1,0 +1,723 @@
+{
+  "description": "A bustling Toronto Bread Co. bakery and distribution center with production, packaging, and loading areas, filled with time-sensitive tasks and collaborative opportunities.",
+  "rooms": [
+    {
+      "id": "front_retail_counter",
+      "name": "Front Retail Counter",
+      "properties": {
+        "type": "retail"
+      },
+      "connected_to_room_ids": [
+        "bakery_production_area"
+      ]
+    },
+    {
+      "id": "bakery_production_area",
+      "name": "Bakery Production Area",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "front_retail_counter",
+        "packaging_quality_control",
+        "cold_storage_dry_goods"
+      ]
+    },
+    {
+      "id": "packaging_quality_control",
+      "name": "Packaging & Quality Control Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "bakery_production_area",
+        "loading_dock"
+      ]
+    },
+    {
+      "id": "cold_storage_dry_goods",
+      "name": "Cold Storage & Dry Goods",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "bakery_production_area"
+      ]
+    },
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "logistics"
+      },
+      "connected_to_room_ids": [
+        "packaging_quality_control"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "wooden_counter_1",
+      "name": "Varnished Wooden Counter",
+      "type": "FURNITURE",
+      "location_id": "in:front_retail_counter",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood",
+        "finish": "glossy"
+      },
+      "states": {}
+    },
+    {
+      "id": "cash_register_1",
+      "name": "Square Terminal Cash Register",
+      "type": "ITEM",
+      "location_id": "on:wooden_counter_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Square",
+        "model_number": "Terminal-X",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "display_rack_1",
+      "name": "Rotating Display Rack",
+      "type": "FURNITURE",
+      "location_id": "in:front_retail_counter",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "rotation_speed": "variable"
+      },
+      "states": {}
+    },
+    {
+      "id": "sesame_bun_1",
+      "name": "Sesame Bun Sample",
+      "type": "ITEM",
+      "location_id": "on:display_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "sesame",
+        "freshness": "high",
+        "is_halved": true
+      },
+      "states": {}
+    },
+    {
+      "id": "onion_bun_1",
+      "name": "Onion Bun Sample",
+      "type": "ITEM",
+      "location_id": "on:display_rack_1",
+      "properties": {
+        "weight": 0.25,
+        "type": "onion",
+        "freshness": "medium",
+        "is_halved": true,
+        "onion_visibility": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "order_clipboard_1",
+      "name": "Order Clipboard",
+      "type": "ITEM",
+      "location_id": "on:wooden_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "content": "Summerhill Market – 50 sesame buns, urgent pickup",
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Bakery Blend Coffee Machine",
+      "type": "ITEM",
+      "location_id": "on:wooden_counter_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "BakeryPro",
+        "water_level": "half",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "dough_mixer_1",
+      "name": "Industrial Dough Mixer",
+      "type": "FURNITURE",
+      "location_id": "in:bakery_production_area",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "capacity": "200L",
+        "material": "stainless_steel",
+        "is_container": true
+      },
+      "states": {
+        "is_broken": true,
+        "is_on": false
+      }
+    },
+    {
+      "id": "proofing_rack_1",
+      "name": "Proofing Rack",
+      "type": "FURNITURE",
+      "location_id": "in:bakery_production_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 60.0,
+        "capacity": "60 dough balls",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "onion_prep_bowl_1",
+      "name": "Red Onion Prep Bowl",
+      "type": "ITEM",
+      "location_id": "on:dough_mixer_1",
+      "properties": {
+        "weight": 1.5,
+        "content": "diced onions in oil",
+        "fill_level": "half",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:dough_mixer_1",
+      "properties": {
+        "weight": 1.0,
+        "precision": "+/-1g",
+        "last_use": "yeast measurement",
+        "provides_abilities": [
+          "measure",
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "dough_cutter_1",
+      "name": "Stainless Steel Dough Cutter",
+      "type": "ITEM",
+      "location_id": "in:bakery_production_area",
+      "properties": {
+        "weight": 0.8,
+        "material": "stainless_steel",
+        "handle_material": "rubber",
+        "stickiness": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:dough_mixer_1",
+      "properties": {
+        "weight": 0.3,
+        "time_remaining": "2min",
+        "is_beeping": true,
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Bun Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_quality_control",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.8
+        ],
+        "weight": 75.0,
+        "speed": "medium",
+        "provides_abilities": [
+          "turn_off"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "inspection_table_1",
+      "name": "Stainless Steel Inspection Table",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_quality_control",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 90.0,
+        "material": "stainless_steel",
+        "surface_condition": "scratched",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "rejected_buns_tray_1",
+      "name": "Rejected Buns Tray",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 1.2,
+        "content": "3 deformed sesame buns",
+        "rejection_reason": "too dark",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 3.0,
+        "ink_status": "out",
+        "led_color": "red"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "sealed_box_1",
+      "name": "Silverstein's Onion Buns Box",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 5.0,
+        "content": "onion buns",
+        "fragility": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glue_gun_1",
+      "name": "Glue Gun",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 0.7,
+        "glue_level": "low",
+        "is_dripping": true,
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "walk_in_fridge_1",
+      "name": "Walk-in Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 300.0,
+        "temperature": "4°C",
+        "condensation_level": "high",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flour_pallet_1",
+      "name": "Flour Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 250.0,
+        "sack_count": "10",
+        "sack_weight": "25kg each",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "yeast_fridge_1",
+      "name": "Yeast Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 120.0,
+        "key_location": "cash_register_1"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "red_onion_crate_1",
+      "name": "Red Onion Crate",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "weight": 15.0,
+        "content": "onions",
+        "fill_level": "half",
+        "spoilage": "some rotten onions at bottom"
+      },
+      "states": {}
+    },
+    {
+      "id": "hand_truck_1",
+      "name": "Broken Hand Truck",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "weight": 12.0,
+        "condition": "broken",
+        "wheel_status": "detached"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "spilled_flour_bag_1",
+      "name": "Spilled Flour Bag",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_dry_goods",
+      "properties": {
+        "weight": 5.0,
+        "condition": "torn",
+        "spill_trail": "leading to mixer"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "delivery_van_1",
+      "name": "Delivery Van",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 1500.0,
+        "door_status": "open",
+        "load_status": "half-loaded"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "weighing_platform_1",
+      "name": "Weighing Platform",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 50.0,
+        "current_load": "120kg",
+        "provides_abilities": [
+          "measure",
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "order_sheet_1",
+      "name": "Misplaced Order Sheet",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 0.1,
+        "content": "Dr. Butcher – 24 onion buns"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "unstable_crate_stack_1",
+      "name": "Unstable Crate Stack",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 40.0,
+        "label": "Kaiser Rolls – Handle Side Up",
+        "stability": "low"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "dolly_1",
+      "name": "Squeaky Dolly",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 15.0,
+        "wheel_condition": "squeaky"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "bungee_cords_1",
+      "name": "Frayed Bungee Cords",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1.0,
+        "condition": "frayed"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:bakery_production_area",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "cleanliness": "dirty",
+        "provides_abilities": [
+          "wipe",
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_toolkit_1",
+      "name": "Bakery Repair Toolkit",
+      "type": "ITEM",
+      "location_id": "in:packaging_quality_control",
+      "properties": {
+        "weight": 8.0,
+        "contents": "wrenches, screwdrivers, pliers",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_1",
+      "name": "25kg Flour Sack",
+      "type": "ITEM",
+      "location_id": "on:flour_pallet_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "cloth",
+        "brand": "Premium Flour Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_2",
+      "name": "25kg Flour Sack",
+      "type": "ITEM",
+      "location_id": "on:flour_pallet_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "cloth",
+        "brand": "Premium Flour Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_3",
+      "name": "25kg Flour Sack",
+      "type": "ITEM",
+      "location_id": "on:flour_pallet_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "cloth",
+        "brand": "Premium Flour Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_4",
+      "name": "25kg Flour Sack",
+      "type": "ITEM",
+      "location_id": "on:flour_pallet_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "cloth",
+        "brand": "Premium Flour Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_5",
+      "name": "25kg Flour Sack",
+      "type": "ITEM",
+      "location_id": "on:flour_pallet_1",
+      "properties": {
+        "weight": 25.0,
+        "material": "cloth",
+        "brand": "Premium Flour Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "yeast_jar_1",
+      "name": "Active Dry Yeast Jar",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "label_color": "blue",
+        "expiry": "next week",
+        "yeast_type": "active dry"
+      },
+      "states": {}
+    },
+    {
+      "id": "yeast_jar_2",
+      "name": "Instant Yeast Jar",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "label_color": "red",
+        "expiry": "next month",
+        "yeast_type": "instant"
+      },
+      "states": {}
+    },
+    {
+      "id": "yeast_jar_3",
+      "name": "Instant Yeast Jar",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "label_color": "red",
+        "expiry": "next month",
+        "yeast_type": "instant"
+      },
+      "states": {}
+    },
+    {
+      "id": "yeast_jar_4",
+      "name": "Instant Yeast Jar",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "label_color": "red",
+        "expiry": "next month",
+        "yeast_type": "instant"
+      },
+      "states": {}
+    },
+    {
+      "id": "sugar_jar_1",
+      "name": "Decorative Sugar Jar",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "label_color": "blue",
+        "content": "sugar",
+        "is_decorative": true
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "dry",
+    "glue",
+    "measure",
+    "open",
+    "repair",
+    "turn_off",
+    "turn_on",
+    "untie",
+    "wipe"
+  ]
+}

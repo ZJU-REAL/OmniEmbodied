@@ -1,0 +1,799 @@
+{
+  "description": "A bustling, semi-legal logistics depot operating near a national border, serving as a hub for both sanctioned and unsanctioned cargo movement. The environment is a high-stakes, chaotic workspace with heavy machinery, scattered tools, and hidden agendas.",
+  "rooms": [
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "inspection_bay"
+      ]
+    },
+    {
+      "id": "inspection_bay",
+      "name": "Inspection & Sorting Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "loading_dock",
+        "backroom_storage",
+        "admin_office"
+      ]
+    },
+    {
+      "id": "backroom_storage",
+      "name": "Backroom Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "inspection_bay"
+      ]
+    },
+    {
+      "id": "admin_office",
+      "name": "Admin Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "inspection_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "loading_ramp_1",
+      "name": "Hydraulic Loading Ramp",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "rusted_steel",
+        "condition": "partially_stuck"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "weigh_scale_1",
+      "name": "Digital Weigh Scale",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "ScaleMaster",
+        "condition": "flickering_display"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "priority_pallet_1",
+      "name": "Priority Shipment Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "plastic_wrapped",
+        "label": "smudged"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Battery-Powered Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "battery_level": 15,
+        "key_status": "in_ignition"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "hold_bin_1",
+      "name": "HOLD FOR CUSTOMS Bin",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "content": "unmarked_packages"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Broken Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "condition": "wheel_jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt System",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "size": [
+          5.0,
+          1.0,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "status": "jammed_at_section_3"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "xray_scanner_1",
+      "name": "X-ray Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "error_code": "ERROR_47"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "contraband_bin_1",
+      "name": "Suspected Contraband Bin",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "content": "metal_case_chemical_drum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "metal_case_1",
+      "name": "Sealed Metal Case",
+      "type": "ITEM",
+      "location_id": "in:contraband_bin_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "steel",
+        "hinges": "none_visible",
+        "requires": "code_or_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_1",
+      "name": "Leaking Chemical Drum",
+      "type": "ITEM",
+      "location_id": "in:contraband_bin_1",
+      "properties": {
+        "weight": 25.0,
+        "label": "NON-HAZARDOUS",
+        "smell": "acrid",
+        "cap_color": "blue",
+        "content": "handwritten_CORROSIVE"
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "customs_desk_1",
+      "name": "Customs Officer's Desk",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "customs_stamp_1",
+      "name": "Customs Officer's Stamp",
+      "type": "ITEM",
+      "location_id": "on:customs_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "ink_status": "wet",
+        "brand": "OfficialStampCo"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:customs_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "intermittent",
+        "brand": "ScanTech"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "customs_forms_1",
+      "name": "Blank Customs Forms",
+      "type": "ITEM",
+      "location_id": "on:customs_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "creased",
+        "quantity": "stack"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Heavy-Duty Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          3.0
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "bolted": "to_floor"
+      },
+      "states": {}
+    },
+    {
+      "id": "chain_link_cage_1",
+      "name": "Padlocked Chain-Link Cage",
+      "type": "FURNITURE",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "sign": "RESTRICTED",
+        "lock_type": "padlock"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "special_crate_1",
+      "name": "Special Handling Crate",
+      "type": "FURNITURE",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "label": "24-HR_EXPIRY",
+        "sticker_color": "red"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "floor_panel_1",
+      "name": "Hidden Floor Panel",
+      "type": "FURNITURE",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "condition": "loose",
+        "reveals": "crawlspace"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Rusted Crowbar",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 3.0,
+        "material": "rusted_steel",
+        "condition": "functional",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "manager_desk_1",
+      "name": "Cluttered Steel Desk",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "nameplate": "MANAGER",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_safe_1",
+      "name": "Floor Safe",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "digital_keypad",
+        "keypad_issue": "sticky_last_digit"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "master_keyring_1",
+      "name": "Master Keyring",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "keys": "missing_storage_cage_key",
+        "hook_location": "on_wall"
+      },
+      "states": {}
+    },
+    {
+      "id": "override_terminal_1",
+      "name": "Override Terminal",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "authentication": "two_factor",
+        "requirements": "password_fingerprint"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 1.0,
+        "status": "off-hook",
+        "sound": "dial_tone"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "key_drawer_1",
+      "name": "Labeled Key Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "slots": "some_empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 0.3,
+        "material": "bristle",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_can_1",
+      "name": "Paint Can",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "brand": "PaintMaster",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1.5,
+        "material": "cotton",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bucket_1",
+      "name": "Bucket",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1.0,
+        "content": "water",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {
+        "is_mopped": true
+      }
+    },
+    {
+      "id": "scrub_brush_1",
+      "name": "Scrub Brush",
+      "type": "ITEM",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "weight": 0.5,
+        "material": "stiff_bristles",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_agent_1",
+      "name": "Cleaning Agent",
+      "type": "ITEM",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "weight": 1.2,
+        "brand": "CleanFast",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {
+        "is_scrubbed": true
+      }
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 0.8,
+        "color": "dark_brown",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "clean_floor_1",
+      "name": "Clean Floor",
+      "type": "FURNITURE",
+      "location_id": "in:inspection_bay",
+      "properties": {
+        "size": [
+          5.0,
+          5.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "condition": "clean"
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:admin_office",
+      "properties": {
+        "weight": 1.8,
+        "brand": "VideoPro",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "media_player_1",
+      "name": "Media Player",
+      "type": "ITEM",
+      "location_id": "in:admin_office",
+      "properties": {
+        "weight": 2.5,
+        "brand": "MediaMaster",
+        "status": "playing"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "computer_1",
+      "name": "Computer",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 4.0,
+        "brand": "CompTech",
+        "status": "on"
+      },
+      "states": {
+        "is_installed": true
+      }
+    },
+    {
+      "id": "iron_1",
+      "name": "Hot Iron",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 1.2,
+        "brand": "IronMaster",
+        "temperature": "hot",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrinkled_fabric_1",
+      "name": "Wrinkled Fabric",
+      "type": "ITEM",
+      "location_id": "in:backroom_storage",
+      "properties": {
+        "weight": 0.5,
+        "material": "cotton",
+        "condition": "wrinkled"
+      },
+      "states": {
+        "is_ironed": false
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "ITEM",
+      "location_id": "in:admin_office",
+      "properties": {
+        "weight": 1.0,
+        "brand": "NetLink",
+        "status": "connected",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "pan_1",
+      "name": "Frying Pan",
+      "type": "ITEM",
+      "location_id": "in:admin_office",
+      "properties": {
+        "weight": 1.5,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Stove",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "brand": "CookMaster",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {
+        "is_fried": false
+      }
+    },
+    {
+      "id": "cover_sheet_1",
+      "name": "Cover Sheet",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "size": "large"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "paper_stack_1",
+      "name": "Paper Stack",
+      "type": "ITEM",
+      "location_id": "on:manager_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "pristine"
+      },
+      "states": {
+        "is_torn": false
+      }
+    }
+  ],
+  "abilities": [
+    "cover",
+    "disassemble",
+    "download",
+    "fry",
+    "iron",
+    "mop",
+    "open",
+    "paint",
+    "paste",
+    "record_video",
+    "scrub",
+    "stain",
+    "start_process",
+    "stop_playback",
+    "stop_process",
+    "tear",
+    "toggle",
+    "uninstall",
+    "unpack",
+    "close"
+  ]
+}

@@ -1,0 +1,625 @@
+{
+  "description": "A high-security radioactive materials laboratory with specialized zones for handling, analyzing, and securing radioactive isotopes, requiring multi-agent collaboration due to hazardous materials and intricate safety protocols.",
+  "rooms": [
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "entry_exit",
+        "atmosphere": "sterile, slightly humid",
+        "smell": "faint ozone"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_lab"
+      ]
+    },
+    {
+      "id": "main_analysis_lab",
+      "name": "Main Analysis Lab",
+      "properties": {
+        "type": "analysis",
+        "lighting": "bright LED panels",
+        "ceiling": "high"
+      },
+      "connected_to_room_ids": [
+        "decontamination_airlock",
+        "secure_storage_vault",
+        "monitoring_control_room"
+      ]
+    },
+    {
+      "id": "secure_storage_vault",
+      "name": "Secure Storage Vault",
+      "properties": {
+        "type": "storage",
+        "walls": "reinforced concrete",
+        "temperature": "cool",
+        "hum": "low"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_lab"
+      ]
+    },
+    {
+      "id": "monitoring_control_room",
+      "name": "Monitoring & Control Room",
+      "properties": {
+        "type": "control",
+        "walls": "glass",
+        "view": "overlooking the lab"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "decontamination_shower_1",
+      "name": "Two-person Decontamination Shower",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "nozzles": "ceiling-mounted"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "ppe_locker_1",
+      "name": "Lead-lined PPE Locker",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "lead",
+        "labels": "radiation_badges"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "geiger_counter_1",
+      "name": "Handheld Geiger Counter",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "battery": 67,
+        "color": "yellow",
+        "brand": "RadSafe",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sample_transfer_case_1",
+      "name": "Sample Transfer Case",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 12.0,
+        "seal": "broken",
+        "warning_light": "blinking_red",
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uv_lamp_1",
+      "name": "Wall-mounted UV Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.5
+        ],
+        "weight": 3.5,
+        "is_container": false,
+        "condition": "flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "glovebox_1",
+      "name": "Lead-shielded Glovebox",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "lead",
+        "gloves": "degraded"
+      },
+      "states": {
+        "is_open": false,
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "gamma_spectrometer_1",
+      "name": "Gamma Spectrometer",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "display": "CALIBRATION_REQUIRED"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "cobalt_pellet_1",
+      "name": "Cobalt-60 Pellet",
+      "type": "ITEM",
+      "location_id": "in:glovebox_1",
+      "properties": {
+        "weight": 0.5,
+        "encasement": "acrylic",
+        "radiation_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "unlabeled_vial_1",
+      "name": "Unlabeled Vial of Yellow Powder",
+      "type": "ITEM",
+      "location_id": "on:tray_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "suspected_material": "uranium_salt",
+        "temperature": "warm"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "lid": "ajar",
+        "balance": "unbalanced"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "liquid_nitrogen_dewar_1",
+      "name": "Liquid Nitrogen Dewar",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "fill_level": "half",
+        "condensation": "pooling"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tungsten_cask_1",
+      "name": "Tungsten Cask",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.7
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "tungsten",
+        "shield_type": "modular"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_door_panel_1",
+      "name": "Biometric Door Panel",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "requirement": "two_simultaneous_fingerprints"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "cesium_sample_1",
+      "name": "Misplaced Cesium-137 Sample",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.4,
+        "location": "behind_cask",
+        "radiation_level": "spiking"
+      },
+      "states": {}
+    },
+    {
+      "id": "damaged_shield_1",
+      "name": "Damaged Radiation Shield",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 8.0,
+        "damage": "cracked_corner",
+        "leak_type": "beta_particles"
+      },
+      "states": {
+        "is_sanded": false
+      }
+    },
+    {
+      "id": "monitoring_console_1",
+      "name": "Central Monitoring Console",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "screens": 3,
+        "screen_condition": "one_frozen"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_lever_1",
+      "name": "Emergency Shutdown Lever",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.5
+        ],
+        "weight": 4.0,
+        "is_container": false,
+        "cover": "glass"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "alarm_log_1",
+      "name": "Overridden Alarm Log",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.2,
+        "content": "repeated_false_alerts",
+        "material": "paper"
+      },
+      "states": {
+        "is_alarm_armed": false
+      }
+    },
+    {
+      "id": "spectrometer_feed_1",
+      "name": "Uncalibrated Spectrometer Feed",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.1,
+        "display": "erratic_data",
+        "connection": "wireless"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "paper_status": "out",
+        "error_light": "on"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "sound": "static",
+        "volume": "low"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:ppe_locker_1",
+      "properties": {
+        "weight": 0.1,
+        "grit": "medium",
+        "material": "abrasive",
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "temperature": "adjustable",
+        "brand": "Weller",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:kitchen_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "handle": "rubber",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
+      "type": "ITEM",
+      "location_id": "in:supply_closet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "pattern": "stars",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Sony",
+        "resolution": "4K",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:drawer_1",
+      "properties": {
+        "weight": 0.2,
+        "blade_material": "stainless_steel",
+        "handle_color": "black",
+        "provides_abilities": [
+          "unwrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tray_1",
+      "name": "Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "kitchen_cabinet_1",
+      "name": "Kitchen Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "supply_closet_1",
+      "name": "Supply Closet",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "drawer_1",
+      "name": "Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "open",
+    "pair",
+    "raise",
+    "record_video",
+    "sand",
+    "solder",
+    "unwrap",
+    "whisk",
+    "wrap"
+  ]
+}

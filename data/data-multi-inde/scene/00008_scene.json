@@ -1,0 +1,685 @@
+{
+  "description": "An abandoned marine research outpost with disarrayed equipment, scattered research materials, and heavy machinery requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_laboratory",
+      "name": "Main Laboratory",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "observation_deck",
+        "storage_supply_room",
+        "field_equipment_shed",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "main_laboratory"
+      ]
+    },
+    {
+      "id": "storage_supply_room",
+      "name": "Storage & Supply Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_laboratory",
+        "field_equipment_shed"
+      ]
+    },
+    {
+      "id": "field_equipment_shed",
+      "name": "Field Equipment Shed",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "storage_supply_room",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Living Quarters",
+      "properties": {
+        "type": "residential"
+      },
+      "connected_to_room_ids": [
+        "main_laboratory",
+        "field_equipment_shed"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dissection_table_1",
+      "name": "Stainless-Steel Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "bloodstained"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigeration_unit_1",
+      "name": "Broken Refrigeration Unit",
+      "type": "FURNITURE",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "metal",
+        "current_temperature": 12.0
+      },
+      "states": {
+        "is_open": true,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Wall-Mounted Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "inscription": "STORM WARNING"
+      },
+      "states": {}
+    },
+    {
+      "id": "pelican_specimen_jar_1",
+      "name": "Pelican Specimen Jar",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "glass",
+        "content": "formaldehyde",
+        "condition": "lid_loose"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Leica",
+        "model_number": "DM500"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "slide_1",
+      "name": "Microscope Slide",
+      "type": "ITEM",
+      "location_id": "on:microscope_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "condition": "cracked",
+        "label": "Plankton Sample #47"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_manual_1",
+      "name": "Emergency Manual",
+      "type": "ITEM",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "page": 23,
+        "content": "Generator Reset Procedure"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Eppendorf",
+        "model_number": "5424R"
+      },
+      "states": {
+        "is_running": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "weight": 0.8,
+        "material": "cotton",
+        "color": "white",
+        "condition": "stained"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "digital_logbook_1",
+      "name": "Digital Logbook",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "condition": "cracked",
+        "last_entry": "Storm surge imminent—evacuate samples"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Marine Safety Protocols Poster",
+      "type": "ITEM",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "faded"
+      },
+      "states": {
+        "is_ripped": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "inscription": "World's Best Ornithologist",
+        "content": "stale_coffee"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "field_notebooks_1",
+      "name": "Stack of Field Notebooks",
+      "type": "ITEM",
+      "location_id": "in:main_laboratory",
+      "properties": {
+        "weight": 2.0,
+        "material": "paper",
+        "condition": "water_damaged"
+      },
+      "states": {
+        "is_ripped": true
+      }
+    },
+    {
+      "id": "binoculars_1",
+      "name": "Tripod-Mounted Binoculars",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "brand": "Nikon",
+        "condition": "cracked_lens"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "weather_station_1",
+      "name": "Damaged Weather Station",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "condition": "anemometer_bent"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "pelican_tracker_1",
+      "name": "Pelican Tracking Device",
+      "type": "ITEM",
+      "location_id": "on:weather_station_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "last_signal": "Islet #3"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "storm_shutters_1",
+      "name": "Storm Shutters",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "condition": "rusted_hinge"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "folding_chair_1",
+      "name": "Folding Chair",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 3.5,
+        "is_container": true,
+        "condition": "unstable"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "flashlight_1",
+      "name": "Flashlight",
+      "type": "ITEM",
+      "location_id": "on:folding_chair_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "condition": "low_battery"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "birdwatching_checklist_1",
+      "name": "Birdwatching Checklist",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "taped"
+      },
+      "states": {}
+    },
+    {
+      "id": "chip_bag_1",
+      "name": "Empty Chip Bag",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "condition": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_tank_1",
+      "name": "Leaking Water Tank",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "condition": "leaking"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "crate_1",
+      "name": "Wooden Crate",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_parts_box_1",
+      "name": "Spare Parts Box",
+      "type": "ITEM",
+      "location_id": "in:crate_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "content": "assorted_parts"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "condition": "locked",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spark_plug_wrench_1",
+      "name": "Spark Plug Wrench",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "field_guidebook_1",
+      "name": "Field Guidebook",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.7,
+        "material": "paper",
+        "title": "Pelican Species of the Pacific"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_key_1",
+      "name": "Toolbox Key",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "generator_1",
+      "name": "Faulty Generator",
+      "type": "FURNITURE",
+      "location_id": "in:field_equipment_shed",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "condition": "faulty"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "nets_1",
+      "name": "Fishing Nets",
+      "type": "ITEM",
+      "location_id": "in:field_equipment_shed",
+      "properties": {
+        "weight": 4.0,
+        "material": "nylon",
+        "condition": "tangled"
+      },
+      "states": {
+        "is_ripped": true
+      }
+    },
+    {
+      "id": "waders_1",
+      "name": "Rubber Waders",
+      "type": "ITEM",
+      "location_id": "in:field_equipment_shed",
+      "properties": {
+        "weight": 2.5,
+        "material": "rubber",
+        "size": "large"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "bunk_bed_1",
+      "name": "Bunk Bed",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_light_1",
+      "name": "Flickering Emergency Light",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "personal_notes_1",
+      "name": "Personal Notes",
+      "type": "ITEM",
+      "location_id": "on:bunk_bed_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "content": "evacuation_plans"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sponge_1",
+      "name": "Sponge",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "foam",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:field_equipment_shed",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:storage_supply_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.15,
+        "material": "metal",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "open",
+    "repair",
+    "start_process",
+    "turn_off",
+    "turn_on",
+    "unseal",
+    "varnish",
+    "whisk"
+  ]
+}

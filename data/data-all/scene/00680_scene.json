@@ -1,0 +1,606 @@
+{
+  "description": "A high-security data processing facility where corrupted or improperly formatted records must be sanitized before migration to a secure database. The lab is a hybrid of a digital forensics workspace and a physical document sorting hub.",
+  "rooms": [
+    {
+      "id": "data_intake_hub",
+      "name": "Data Intake Hub",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sanitization_workstations",
+        "physical_archive_section"
+      ]
+    },
+    {
+      "id": "sanitization_workstations",
+      "name": "Sanitization Workstations",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "data_intake_hub",
+        "verification_chamber"
+      ]
+    },
+    {
+      "id": "physical_archive_section",
+      "name": "Physical Archive Section",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "data_intake_hub",
+        "verification_chamber"
+      ]
+    },
+    {
+      "id": "verification_chamber",
+      "name": "Verification Chamber",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "sanitization_workstations",
+        "physical_archive_section"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "sorting_table_1",
+      "name": "Heavy Steel Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:data_intake_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.9
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray",
+        "model_number": "ST-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tracking_board_1",
+      "name": "Wall-Mounted Tracking Board",
+      "type": "FURNITURE",
+      "location_id": "in:data_intake_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "aluminum",
+        "color": "white"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "shipping_crate_1",
+      "name": "Mislabeled Shipping Crate",
+      "type": "FURNITURE",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown",
+        "label": "NULL RECORDS – DO NOT MIGRATE"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "holo_terminal_1",
+      "name": "Glitching Holo-Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:data_intake_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "brand": "HoloTech"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "white",
+        "brand": "LabelMaster",
+        "model_number": "LP-100",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "intake_forms_1",
+      "name": "Stack of Blank Intake Forms",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "security_manual_1",
+      "name": "Coffee-Stained Security Manual",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "paper",
+        "title": "Oracle vs. SQL Server: NULL Handling Differences"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "gold",
+        "material": "metal",
+        "inscription": "MOST EFFICIENT DATA PURGE – 2010"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Adjustable-Height Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:sanitization_workstations",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Central Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:sanitization_workstations",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "terminal_1",
+      "name": "Terminal Stuck in a Loop",
+      "type": "FURNITURE",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "brand": "TechCorp"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "reference_card_1",
+      "name": "Physical NULLIF Reference Card",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "tape_drive_1",
+      "name": "Backup Tape Drive",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "plastic",
+        "brand": "DataSafe",
+        "label": "CORRUPT",
+        "serial_number": "DS-1234"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:sanitization_workstations",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "potted_cactus_1",
+      "name": "Dead Potted Cactus",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "clay"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "certificate_1",
+      "name": "Framed Certificate",
+      "type": "ITEM",
+      "location_id": "in:sanitization_workstations",
+      "properties": {
+        "weight": 2.5,
+        "color": "gold",
+        "material": "glass",
+        "title": "Advanced Data Scrubbing"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_section",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "ladder_1",
+      "name": "Broken Ladder",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_section",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "aluminum",
+        "color": "silver"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_section",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray",
+        "label": "LEGACY NULL CASES"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "misplaced_box_1",
+      "name": "Misplaced Box",
+      "type": "FURNITURE",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "cardboard",
+        "color": "brown",
+        "label": "EMPTY STRING CONVERSION SAMPLES – 2010"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wheeled_cart_1",
+      "name": "Wheeled Cart",
+      "type": "FURNITURE",
+      "location_id": "in:physical_archive_section",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Handheld Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:wheeled_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "brand": "ScanTech",
+        "model_number": "ST-200"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "poster_1",
+      "name": "Yellowed Poster",
+      "type": "ITEM",
+      "location_id": "in:physical_archive_section",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "paper",
+        "title": "TRIM YOUR DATA, NOT YOUR BUDGET!"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "magazines_1",
+      "name": "Pile of Outdated Industry Magazines",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "multicolor",
+        "material": "paper",
+        "title": "SQL Monthly"
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Dual Biometric Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:verification_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "brand": "SecureTech"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "secure_terminal_1",
+      "name": "Secure Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:verification_chamber",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "silver",
+        "brand": "SecureTech"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "marker_1",
+      "name": "Permanent Marker",
+      "type": "ITEM",
+      "location_id": "on:secure_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "write",
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealing_tape_1",
+      "name": "Sealing Tape",
+      "type": "ITEM",
+      "location_id": "on:secure_terminal_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "on:secure_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "microfiber",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:verification_chamber",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "plastic",
+        "brand": "CleanMaster",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:verification_chamber",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "plastic",
+        "brand": "WeighTech",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "label",
+    "open",
+    "pair",
+    "seal",
+    "stop_playback",
+    "vacuum",
+    "weigh",
+    "write",
+    "close"
+  ]
+}

@@ -1,0 +1,562 @@
+{
+  "description": "A high-security biomedical research lab with a Level-3 biohazard breach in the containment chamber, requiring multi-agent collaboration to diagnose, isolate, and neutralize the threat.",
+  "rooms": [
+    {
+      "id": "containment_chamber",
+      "name": "Containment Chamber",
+      "properties": {
+        "type": "sterile",
+        "hazmat_required": true
+      },
+      "connected_to_room_ids": [
+        "diagnostics_lab",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "diagnostics_lab",
+      "name": "Diagnostics Lab",
+      "properties": {
+        "type": "analytical"
+      },
+      "connected_to_room_ids": [
+        "containment_chamber",
+        "control_room"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "transition"
+      },
+      "connected_to_room_ids": [
+        "containment_chamber",
+        "control_room"
+      ]
+    },
+    {
+      "id": "control_room",
+      "name": "Control Room",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "diagnostics_lab",
+        "decontamination_airlock"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "nanocyte_culture_pod_1",
+      "name": "Nanocyte Culture Pod",
+      "type": "FURNITURE",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "reinforced_glass",
+        "status": "malfunctioning"
+      },
+      "states": {
+        "is_drained": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_panel_1",
+      "name": "Emergency Shutdown Panel",
+      "type": "FURNITURE",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_sample_1",
+      "name": "Biohazard Sample",
+      "type": "ITEM",
+      "location_id": "in:nanocyte_culture_pod_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "glowing_blue",
+        "state": "unstable"
+      },
+      "states": {}
+    },
+    {
+      "id": "hazmat_suit_1",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "weight": 3.0,
+        "condition": "torn_glove",
+        "certification": "invalid"
+      },
+      "states": {}
+    },
+    {
+      "id": "hazmat_suit_2",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "weight": 3.0,
+        "condition": "intact",
+        "certification": "valid"
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilization_spray_nozzle_1",
+      "name": "Sterilization Spray Nozzle",
+      "type": "ITEM",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "weight": 1.2,
+        "status": "clogged",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_oxygen_tank_1",
+      "name": "Emergency Oxygen Tank",
+      "type": "FURNITURE",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "contents": "oxygen"
+      },
+      "states": {}
+    },
+    {
+      "id": "electron_microscope_1",
+      "name": "Electron Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "status": "calibration_mode"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "refrigerated_sample_storage_1",
+      "name": "Refrigerated Sample Storage",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bio_scanner_1",
+      "name": "Bio-Scanner",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 8.0,
+        "fragility": "high",
+        "status": "needs_stabilization"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_reagent_set_1",
+      "name": "Chemical Reagent Set",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 2.5,
+        "vials": [
+          {
+            "color": "red",
+            "label": "printed",
+            "fill": "full"
+          },
+          {
+            "color": "green",
+            "label": "printed",
+            "fill": "full"
+          },
+          {
+            "color": "blue",
+            "label": "handwritten_corrosive",
+            "fill": "half_empty"
+          },
+          {
+            "color": "red",
+            "label": "printed",
+            "fill": "empty"
+          },
+          {
+            "color": "green",
+            "label": "printed",
+            "fill": "full"
+          }
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_centrifuge_1",
+      "name": "Lab Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "status": "unbalanced"
+      },
+      "states": {
+        "is_spinning": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "status": "jammed"
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "uv_sterilizer_1",
+      "name": "UV Sterilizer",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "status": "operational"
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "bio_waste_bin_1",
+      "name": "Bio-Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "contents": "hazardous"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_shower_1",
+      "name": "Emergency Shower",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          2.2
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "status": "ready"
+      },
+      "states": {
+        "is_pumped": false
+      }
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "status": "active"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "research_terminal_1",
+      "name": "Research Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "status": "logged_in"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "access_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "drain_tool_1",
+      "name": "Drain Tool",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 1.5,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilization_tool_1",
+      "name": "Sterilization Tool",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pump_tool_1",
+      "name": "Pump Tool",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_tool_1",
+      "name": "Whisk Tool",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 0.5,
+        "material": "wire",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plaster_tool_1",
+      "name": "Plaster Tool",
+      "type": "ITEM",
+      "location_id": "in:containment_chamber",
+      "properties": {
+        "weight": 1.2,
+        "material": "wood",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "moisten_tool_1",
+      "name": "Moisten Tool",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 0.3,
+        "material": "sponge",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soak_tool_1",
+      "name": "Soak Tool",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 1.0,
+        "material": "cloth",
+        "provides_abilities": [
+          "soak"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "disassemble_tool_1",
+      "name": "Disassemble Tool",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 2.5,
+        "material": "metal",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "compress_tool_1",
+      "name": "Compress Tool",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 4.0,
+        "material": "steel",
+        "provides_abilities": [
+          "compress"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "season_tool_1",
+      "name": "Season Tool",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_lab",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "compress",
+    "disassemble",
+    "drain",
+    "moisten",
+    "open",
+    "plaster",
+    "pump",
+    "season",
+    "soak",
+    "spin",
+    "sterilize",
+    "stop_process",
+    "whisk",
+    "close"
+  ]
+}

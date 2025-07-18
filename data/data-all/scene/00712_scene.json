@@ -1,0 +1,641 @@
+{
+  "description": "A high-altitude Observatory Research Station during a celestial anomaly, filled with scientific equipment, malfunctioning devices, and urgent tasks requiring multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "main_control_room",
+      "name": "Main Control Room",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "telescope_dome",
+        "equipment_storage",
+        "dormitory",
+        "generator_room",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "telescope_dome",
+      "name": "Telescope Dome",
+      "properties": {
+        "type": "observatory"
+      },
+      "connected_to_room_ids": [
+        "main_control_room",
+        "equipment_storage"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage & Workshop",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_control_room",
+        "telescope_dome",
+        "generator_room"
+      ]
+    },
+    {
+      "id": "dormitory",
+      "name": "Dormitory & Lounge",
+      "properties": {
+        "type": "living_quarters"
+      },
+      "connected_to_room_ids": [
+        "main_control_room"
+      ]
+    },
+    {
+      "id": "generator_room",
+      "name": "Emergency Generator Room",
+      "properties": {
+        "type": "utility"
+      },
+      "connected_to_room_ids": [
+        "main_control_room",
+        "equipment_storage"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Outdoor Observation Deck",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "main_control_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "command_console_1",
+      "name": "U-shaped Command Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "CC-X9000"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "aluminum",
+        "brand": "DataFort"
+      },
+      "states": {
+        "is_active": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_shutoff_1",
+      "name": "Emergency Shutoff Lever",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "red",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_pushed": true
+      }
+    },
+    {
+      "id": "astro_calibration_terminal_1",
+      "name": "Astro-calibration Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "security_level": "high",
+        "requires_keycards": 2
+      },
+      "states": {
+        "is_active": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "data_backup_drive_1",
+      "name": "Data Backup Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "black",
+        "brand": "QuantumSafe",
+        "capacity": "10TB"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "radio_transmitter_1",
+      "name": "Radio Transmitter",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "gray",
+        "brand": "ComTech",
+        "model": "RT-450"
+      },
+      "states": {
+        "is_active": true,
+        "is_recording": true
+      }
+    },
+    {
+      "id": "small_screwdriver_1",
+      "name": "Small Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "steel",
+        "provides_abilities": [
+          "insert"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "BrewMaster"
+      },
+      "states": {
+        "is_active": true,
+        "is_full": true
+      }
+    },
+    {
+      "id": "telescope_assembly_1",
+      "name": "Primary Telescope Assembly",
+      "type": "FURNITURE",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "size": [
+          4.0,
+          3.5,
+          5.0
+        ],
+        "weight": 3000.0,
+        "is_container": false,
+        "material": "titanium",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_active": true,
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "lens_coolant_tank_1",
+      "name": "Lens Coolant Tank",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 15.0,
+        "color": "silver",
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_empty": true
+      }
+    },
+    {
+      "id": "liquid_nitrogen_canister_1",
+      "name": "Liquid Nitrogen Canister",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 12.0,
+        "color": "blue",
+        "material": "steel",
+        "label": "CRYOGENIC - HANDLE WITH GLOVES",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shutter_crank_1",
+      "name": "Emergency Shutter Crank",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 8.0,
+        "color": "yellow",
+        "material": "iron",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Wheeled Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "chrome",
+        "material": "steel",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "voltmeter_1",
+      "name": "Voltmeter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "yellow",
+        "brand": "ElectroTest",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_generator_1",
+      "name": "Backup Generator",
+      "type": "FURNITURE",
+      "location_id": "in:generator_room",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 180.0,
+        "is_container": false,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_active": true,
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "fuel_drum_1",
+      "name": "Fuel Drum",
+      "type": "ITEM",
+      "location_id": "in:generator_room",
+      "properties": {
+        "weight": 80.0,
+        "color": "red",
+        "material": "steel"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "material": "metal",
+        "wheel_condition": "missing_one"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_coolant_1",
+      "name": "Chemical Coolant Canister",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "blue",
+        "material": "steel",
+        "label": "CRYOGENIC - HANDLE WITH GLOVES",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_coolant_2",
+      "name": "Chemical Coolant Canister",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "blue",
+        "material": "steel",
+        "label": "faded",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_coolant_3",
+      "name": "Chemical Coolant Canister",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "blue",
+        "material": "steel",
+        "label": "unmarked",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_thermometer_1",
+      "name": "Broken Thermometer",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "glass",
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "coolant_spray_can_1",
+      "name": "Coolant Spray Can",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 1.5,
+        "color": "green",
+        "brand": "FrostyCool",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "relief_valve_wrench_1",
+      "name": "Relief Valve Wrench",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "steel",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "manual_stack_1",
+      "name": "Pile of Manuals",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "paper"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Rolling Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "newtons_cradle_1",
+      "name": "Newton's Cradle",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "chrome",
+        "material": "steel",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "cracked_mug_1",
+      "name": "Cracked Mug",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic",
+        "inscription": "World's Best Astronomer",
+        "condition": "cracked",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paperclips_1",
+      "name": "Loose Paperclips",
+      "type": "ITEM",
+      "location_id": "in:cracked_mug_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "material": "metal",
+        "quantity": 12
+      },
+      "states": {}
+    },
+    {
+      "id": "telescope_photo_1",
+      "name": "Framed Photo",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "wood",
+        "content": "telescope_inauguration"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_fern_1",
+      "name": "Dead Potted Fern",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "ceramic",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "telescope_lens_cover_1",
+      "name": "Telescope Lens Cover",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 150.0,
+        "color": "black",
+        "material": "composite",
+        "diameter": "2m",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "in:telescope_dome",
+      "properties": {
+        "weight": 2.8,
+        "color": "black",
+        "brand": "ThermoVision",
+        "model": "TC-200"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "safety_posters_1",
+      "name": "Safety Protocol Posters",
+      "type": "ITEM",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "analog_clock_1",
+      "name": "Wall-mounted Analog Clock",
+      "type": "ITEM",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "plastic",
+        "time_stopped": "3:17"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "disassemble",
+    "empty",
+    "insert",
+    "mix",
+    "open",
+    "pull",
+    "stop_recording",
+    "close"
+  ]
+}

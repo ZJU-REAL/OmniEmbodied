@@ -1,0 +1,527 @@
+{
+  "description": "A high-stakes Network Operations Center (NOC) during a major service outage, featuring a main monitoring hub, server farm, diagnostic workbench, break area, and executive glass office.",
+  "rooms": [
+    {
+      "id": "main_monitoring_hub",
+      "name": "Main Monitoring Hub",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "server_farm",
+        "diagnostic_workbench",
+        "break_area",
+        "executive_office"
+      ]
+    },
+    {
+      "id": "server_farm",
+      "name": "Server Farm",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "diagnostic_workbench"
+      ]
+    },
+    {
+      "id": "diagnostic_workbench",
+      "name": "Diagnostic Workbench",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "server_farm"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "kitchenette"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    },
+    {
+      "id": "executive_office",
+      "name": "Executive Glass Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "video_wall_1",
+      "name": "12-Screen Video Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          4.0,
+          0.5,
+          2.5
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "brand": "Samsung",
+        "model_number": "WM-12X",
+        "resolution": "8K"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "command_console_1",
+      "name": "Central Command Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "alert_terminal_1",
+      "name": "Primary Alert Terminal",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 8.5,
+        "is_container": false,
+        "brand": "Dell",
+        "model_number": "P3222QE",
+        "touchscreen": true,
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "incident_logbook_1",
+      "name": "Physical Incident Logbook",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 1.2,
+        "is_container": false,
+        "material": "leather",
+        "color": "brown",
+        "pages": 200
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_button_1",
+      "name": "Red Emergency Override Button",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 0.5,
+        "is_container": false,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "headset_1",
+      "name": "Wireless Headset",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 0.3,
+        "is_container": false,
+        "brand": "Jabra",
+        "model_number": "Evolve2 65",
+        "battery_level": 20,
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "desk_lamp_1",
+      "name": "Adjustable Desk Lamp",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 1.8,
+        "is_container": false,
+        "brand": "IKEA",
+        "model_number": "TERTIAL",
+        "color": "black"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          0.6,
+          1.0,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "failed_node_1",
+      "name": "Failed Node #47X",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model_number": "PowerEdge R740",
+        "led_color": "orange"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "spare_hard_drive_1",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "is_container": false,
+        "brand": "Seagate",
+        "model_number": "Exos X16",
+        "capacity": "16TB",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "Kidde",
+        "type": "ABC",
+        "color": "red"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torque_screwdriver_1",
+      "name": "Torque Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "is_container": false,
+        "brand": "Wera",
+        "model_number": "05056490001",
+        "provides_abilities": [
+          "assemble",
+          "mount"
+        ]
+      },
+      "states": {
+        "is_assembled": false,
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "cable_crimper_1",
+      "name": "Cable Crimper",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "is_container": false,
+        "brand": "Klein Tools",
+        "model_number": "VDV226-110",
+        "provides_abilities": [
+          "compress"
+        ]
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_workbench",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "golden_router_1",
+      "name": "Golden Configuration Router",
+      "type": "ITEM",
+      "location_id": "in:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "is_container": false,
+        "brand": "Cisco",
+        "model_number": "ISR4331",
+        "color": "gold"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "is_container": false,
+        "brand": "SanDisk",
+        "model_number": "Ultra Fit",
+        "color": "red",
+        "capacity": "128GB",
+        "label": "Recovery v3.1",
+        "provides_abilities": [
+          "copy_file"
+        ]
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "is_container": false,
+        "brand": "SanDisk",
+        "model_number": "Ultra Fit",
+        "color": "blue",
+        "capacity": "128GB"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "is_container": false,
+        "brand": "Brightech",
+        "model_number": "LightView Pro",
+        "color": "black"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "is_container": false,
+        "brand": "Brother",
+        "model_number": "PT-D210",
+        "color": "white"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "is_container": true,
+        "material": "ceramic",
+        "color": "white",
+        "inscription": "World’s Okayest Engineer"
+      },
+      "states": {}
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Vending Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.7,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "brand": "Crane",
+        "model_number": "National 147",
+        "color": "beige"
+      },
+      "states": {
+        "is_active": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Energy Drink Can",
+      "type": "ITEM",
+      "location_id": "in:vending_machine_1",
+      "properties": {
+        "weight": 0.5,
+        "is_container": false,
+        "brand": "Red Bull",
+        "flavor": "Original",
+        "volume": "250ml"
+      },
+      "states": {}
+    },
+    {
+      "id": "executive_desk_1",
+      "name": "Executive Desk",
+      "type": "FURNITURE",
+      "location_id": "in:executive_office",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.75
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "mahogany",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_holder_1",
+      "name": "Manager Only Pen Holder",
+      "type": "ITEM",
+      "location_id": "on:executive_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "is_container": true,
+        "material": "glass",
+        "color": "clear"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "access_badge_1",
+      "name": "Access Badge",
+      "type": "ITEM",
+      "location_id": "in:pen_holder_1",
+      "properties": {
+        "weight": 0.1,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white",
+        "employee_name": "J. Smith"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "compress",
+    "copy_file",
+    "deactivate",
+    "mount",
+    "open",
+    "replace",
+    "type",
+    "close"
+  ]
+}

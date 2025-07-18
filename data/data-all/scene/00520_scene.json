@@ -1,0 +1,752 @@
+{
+  "description": "A high-security central banking reserve vault undergoing a quarterly audit and currency verification process, featuring interconnected zones with heavy containers, verification tools, and strict security protocols.",
+  "rooms": [
+    {
+      "id": "main_vault_chamber",
+      "name": "Main Vault Chamber",
+      "properties": {
+        "type": "secure_storage",
+        "climate_controlled": true,
+        "humidity": 40,
+        "temperature": 18
+      },
+      "connected_to_room_ids": [
+        "verification_station",
+        "security_hub",
+        "loading_dock"
+      ]
+    },
+    {
+      "id": "verification_station",
+      "name": "Verification Station",
+      "properties": {
+        "type": "workspace",
+        "has_security_cameras": true
+      },
+      "connected_to_room_ids": [
+        "main_vault_chamber",
+        "security_hub"
+      ]
+    },
+    {
+      "id": "security_hub",
+      "name": "Security Hub",
+      "properties": {
+        "type": "monitoring",
+        "has_alarm_system": true
+      },
+      "connected_to_room_ids": [
+        "main_vault_chamber",
+        "verification_station",
+        "loading_dock"
+      ]
+    },
+    {
+      "id": "loading_dock",
+      "name": "Loading Dock",
+      "properties": {
+        "type": "logistics",
+        "has_loading_equipment": true
+      },
+      "connected_to_room_ids": [
+        "main_vault_chamber",
+        "security_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_pallet_rack_1",
+      "name": "Steel Pallet Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "capacity": "500kg",
+        "max_height": 2.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "currency_crate_eur_1",
+      "name": "Currency Crate EUR-2024-B7",
+      "type": "ITEM",
+      "location_id": "in:steel_pallet_rack_1",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.4,
+          0.6,
+          0.8
+        ],
+        "seal_color": "blue",
+        "currency_type": "euro",
+        "barcode": "EUR-2024-B7",
+        "tamper_evident": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "currency_crate_eur_2",
+      "name": "Currency Crate EUR-2024-B8",
+      "type": "ITEM",
+      "location_id": "in:steel_pallet_rack_1",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.4,
+          0.6,
+          0.8
+        ],
+        "seal_color": "red",
+        "currency_type": "euro",
+        "barcode": "EUR-2024-B8",
+        "tamper_evident": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "discrepancy_crate_1",
+      "name": "Discrepancy Crate",
+      "type": "ITEM",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "weight": 20.0,
+        "size": [
+          0.4,
+          0.6,
+          0.8
+        ],
+        "seal_status": "torn",
+        "note": "Count mismatch - verify",
+        "currency_type": "mixed"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "hydraulic_safe_1",
+      "name": "3-Ton Hydraulic Safe",
+      "type": "FURNITURE",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 3000.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "high",
+        "access_control": "biometric_and_keycard"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "inspection_table_1",
+      "name": "Reinforced Inspection Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "bolted_down": true
+      },
+      "states": {}
+    },
+    {
+      "id": "gold_scanner_1",
+      "name": "Gold Bar Verification Scanner",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "status": "calibration_mode",
+        "brand": "VeriScan",
+        "model": "GS-5000"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "weight": 85.0,
+        "size": [
+          1.2,
+          0.6,
+          0.3
+        ],
+        "battery_level": 30,
+        "condition": "squeaky_wheels",
+        "brand": "LiftMaster"
+      },
+      "states": {}
+    },
+    {
+      "id": "ledger_tablet_1",
+      "name": "Digital Ledger Tablet",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.25,
+          0.17,
+          0.01
+        ],
+        "status": "locked",
+        "idle_timeout": 2,
+        "brand": "SecureTab"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "temperature_monitor_1",
+      "name": "Temperature/Humidity Monitor",
+      "type": "ITEM",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "display": "18°C, 40% RH",
+        "brand": "ClimateGuard"
+      },
+      "states": {}
+    },
+    {
+      "id": "high_precision_scale_1",
+      "name": "High-Precision Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 8.0,
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "max_capacity": 50,
+        "display": "0.00g",
+        "brand": "WeighRight"
+      },
+      "states": {}
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner/Printer",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 12.0,
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "status": "paper_jam",
+        "brand": "DocuScan"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "audit_sheets_1",
+      "name": "Stack of Audit Sheets",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.8,
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "condition": "coffee_stained",
+        "pages": 50
+      },
+      "states": {
+        "is_stapled": true,
+        "is_folded": false
+      }
+    },
+    {
+      "id": "uv_detector_1",
+      "name": "UV Counterfeit Detector",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.7,
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "battery_status": "low",
+        "condition": "flickering",
+        "brand": "SecureView"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:verification_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "key"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 4.0,
+        "size": [
+          0.3,
+          0.25,
+          0.2
+        ],
+        "status": "out_of_eur_50_stickers",
+        "brand": "LabelPro"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "cctv_station_1",
+      "name": "6-Screen CCTV Station",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "brand": "SecureWatch",
+        "screen_status": "one_frozen"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "biometric_terminal_1",
+      "name": "Biometric Logbook Terminal",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 3.5,
+        "size": [
+          0.3,
+          0.25,
+          0.15
+        ],
+        "last_entry": "J. Kowalski - 14:32",
+        "brand": "BioLog"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "security_keycard_1",
+      "name": "Vault Access Level 2 Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.05,
+        "size": [
+          0.085,
+          0.054,
+          0.001
+        ],
+        "access_level": 2,
+        "owner": "J. Kowalski"
+      },
+      "states": {}
+    },
+    {
+      "id": "fingerprint_scanner_1",
+      "name": "Fingerprint Scanner",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 1.2,
+        "size": [
+          0.15,
+          0.1,
+          0.08
+        ],
+        "status": "needs_recalibration",
+        "brand": "FingerSecure"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "hydraulic_platform_1",
+      "name": "Hydraulic Loading Platform",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.5
+        ],
+        "weight": 350.0,
+        "is_container": false,
+        "status": "half_raised",
+        "brand": "LiftTech"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "delivery_truck_1",
+      "name": "Reinforced Delivery Truck",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "size": [
+          6.0,
+          2.5,
+          2.8
+        ],
+        "weight": 2500.0,
+        "is_container": true,
+        "status": "doors_open",
+        "engine_status": "off"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "misplaced_crate_1",
+      "name": "Misplaced Euro Crate EUR-2024-C12",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.4,
+          0.6,
+          0.8
+        ],
+        "label": "EUR-2024-C12",
+        "manifest_discrepancy": "listed_as_C11"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 1500.0,
+        "size": [
+          2.5,
+          1.2,
+          2.0
+        ],
+        "keys_in_ignition": true,
+        "fuel_level": "near_empty",
+        "brand": "LiftKing"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_scale_1",
+      "name": "Pallet Scale",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          1.0,
+          1.0,
+          0.2
+        ],
+        "display": "OVERLOAD",
+        "brand": "WeighMax"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.4,
+        "size": [
+          0.2,
+          0.05,
+          0.05
+        ],
+        "brand": "SolderPro",
+        "temperature": "adjustable",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 0.6,
+        "size": [
+          0.25,
+          0.1,
+          0.03
+        ],
+        "brand": "GripMaster",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.1,
+          0.05,
+          0.02
+        ],
+        "brand": "OfficePro",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:verification_station",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.15,
+          0.08,
+          0.08
+        ],
+        "brand": "StickFast",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "ITEM",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.12,
+          0.08,
+          0.03
+        ],
+        "brand": "AccessControl",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "roller_1",
+      "name": "Heavy-Duty Roller",
+      "type": "ITEM",
+      "location_id": "in:loading_dock",
+      "properties": {
+        "weight": 8.0,
+        "size": [
+          0.5,
+          0.3,
+          0.3
+        ],
+        "brand": "FlatMaster",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hanger_1",
+      "name": "Wall Hook",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.2,
+        "size": [
+          0.1,
+          0.05,
+          0.05
+        ],
+        "brand": "HangRight",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "uniform_jacket_1",
+      "name": "Spare Uniform Jacket",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.8,
+        "size": [
+          0.6,
+          0.5,
+          0.05
+        ],
+        "size_label": "XL",
+        "condition": "clean"
+      },
+      "states": {
+        "is_hung_up": false,
+        "is_worn": false
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-Empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:inspection_table_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.1,
+          0.12
+        ],
+        "material": "ceramic",
+        "content": "coffee",
+        "stain_rings": true
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "shipping_label_scrap_1",
+      "name": "Blue Shipping Label Scrap",
+      "type": "ITEM",
+      "location_id": "in:main_vault_chamber",
+      "properties": {
+        "weight": 0.01,
+        "size": [
+          0.1,
+          0.05,
+          0.001
+        ],
+        "color": "blue",
+        "content": "partial_barcode"
+      },
+      "states": {
+        "is_torn": true
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "deactivate",
+    "flatten",
+    "fold",
+    "glue",
+    "hang_up",
+    "lock",
+    "loosen",
+    "open",
+    "solder",
+    "unstaple",
+    "wear"
+  ]
+}

@@ -1,0 +1,551 @@
+{
+  "description": "A high-stakes medical laboratory specializing in rapid blood analysis, cross-matching, and emergency transfusion preparation. The lab is designed for collaborative workflows between technicians, robotic assistants, and AI systems, where precise coordination is critical to avoid fatal mismatches.",
+  "rooms": [
+    {
+      "id": "receiving_sorting_bay",
+      "name": "Receiving & Sorting Bay",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_testing_lab"
+      ]
+    },
+    {
+      "id": "main_testing_lab",
+      "name": "Main Testing Lab",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "receiving_sorting_bay",
+        "refrigerated_storage_vault",
+        "robotic_prep_station",
+        "emergency_transfusion_prep_room"
+      ]
+    },
+    {
+      "id": "refrigerated_storage_vault",
+      "name": "Refrigerated Storage Vault",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_testing_lab"
+      ]
+    },
+    {
+      "id": "robotic_prep_station",
+      "name": "Robotic Prep Station",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_testing_lab"
+      ]
+    },
+    {
+      "id": "emergency_transfusion_prep_room",
+      "name": "Emergency Transfusion Prep Room",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_testing_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_sorting_table_1",
+      "name": "Steel Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "LAB-2000"
+      },
+      "states": {}
+    },
+    {
+      "id": "priority_sample_rack_1",
+      "name": "Priority Sample Rack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "incoming_cooler_1",
+      "name": "Incoming Cooler",
+      "type": "FURNITURE",
+      "location_id": "on:steel_sorting_table_1",
+      "properties": {
+        "size": [
+          0.45,
+          0.3,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "handheld_barcode_gun_1",
+      "name": "Handheld Barcode Gun",
+      "type": "ITEM",
+      "location_id": "on:steel_sorting_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Zebra",
+        "battery_level": 23,
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "brand": "Brother",
+        "ink_level": 0,
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Bin",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "faded_poster_1",
+      "name": "Faded Poster",
+      "type": "ITEM",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "faded",
+        "material": "paper",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:steel_sorting_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic",
+        "condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "SPIN-1500"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_workstation_1",
+      "name": "Microscope Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_typing_kit_1",
+      "name": "Blood Typing Kit",
+      "type": "ITEM",
+      "location_id": "on:microscope_workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "plastic",
+        "condition": "open",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "incubator_1",
+      "name": "Incubator",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": 37.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Pipette Set",
+      "type": "ITEM",
+      "location_id": "on:microscope_workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "material": "plastic",
+        "condition": "expired",
+        "provides_abilities": [
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_potted_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "ceramic",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "framed_certificate_1",
+      "name": "Framed Certificate",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 0.5,
+        "color": "gold",
+        "material": "wood",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerated_storage_vault_door_1",
+      "name": "Refrigerated Storage Vault Door",
+      "type": "FURNITURE",
+      "location_id": "in:refrigerated_storage_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.1
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blood_bank_freezer_1",
+      "name": "Blood Bank Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:refrigerated_storage_vault",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          1.8
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_arm_1",
+      "name": "Robotic Arm",
+      "type": "FURNITURE",
+      "location_id": "in:robotic_prep_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "spilled_vial_1",
+      "name": "Spilled Vial",
+      "type": "ITEM",
+      "location_id": "in:robotic_prep_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "pink",
+        "material": "glass",
+        "condition": "spilled",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "countdown_timer_1",
+      "name": "Countdown Timer",
+      "type": "ITEM",
+      "location_id": "in:emergency_transfusion_prep_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic",
+        "condition": "ticking"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "coombs_test_kit_1",
+      "name": "Coombs Test Kit",
+      "type": "ITEM",
+      "location_id": "in:emergency_transfusion_prep_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "condition": "open",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "maintenance_keycard_1",
+      "name": "Maintenance Keycard",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "new",
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:receiving_sorting_bay",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "wood",
+        "condition": "used",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "metal",
+        "condition": "functional",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Heater",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 2.5,
+        "color": "white",
+        "material": "plastic",
+        "condition": "new",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "half_full",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "in:main_testing_lab",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "cloth",
+        "condition": "used",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "disarm_alarm",
+    "download",
+    "dust",
+    "glue",
+    "heat_up",
+    "open",
+    "replace",
+    "scratch",
+    "sweep",
+    "unstaple"
+  ]
+}

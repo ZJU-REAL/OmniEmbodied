@@ -1,0 +1,792 @@
+{
+  "description": "A high-security server facility with two isolated database vaults (Accounts and BusinessData), requiring coordinated multi-agent operations for maintenance and access.",
+  "rooms": [
+    {
+      "id": "main_control_hub",
+      "name": "Main Control Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "accounts_vault",
+        "businessdata_vault",
+        "maintenance_closet",
+        "archives_nook"
+      ]
+    },
+    {
+      "id": "accounts_vault",
+      "name": "Accounts Vault",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    },
+    {
+      "id": "businessdata_vault",
+      "name": "BusinessData Vault",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    },
+    {
+      "id": "maintenance_closet",
+      "name": "Maintenance Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    },
+    {
+      "id": "archives_nook",
+      "name": "Archives Nook",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_control_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dual_monitoring_desk_1",
+      "name": "Dual Monitoring Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "monitor_setup_1",
+      "name": "Accounts Monitor Setup",
+      "type": "ITEM",
+      "location_id": "on:dual_monitoring_desk_1",
+      "properties": {
+        "weight": 15.0,
+        "brand": "Dell",
+        "model_number": "U2723QE"
+      },
+      "states": {
+        "is_active": false,
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "monitor_setup_2",
+      "name": "BusinessData Monitor Setup",
+      "type": "ITEM",
+      "location_id": "on:dual_monitoring_desk_1",
+      "properties": {
+        "weight": 15.0,
+        "brand": "Dell",
+        "model_number": "U2723QE"
+      },
+      "states": {
+        "is_active": false,
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "master_power_switch_1",
+      "name": "Master Power Switch",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "access_keycard_1",
+      "name": "BusinessData Access Keycard",
+      "type": "ITEM",
+      "location_id": "in:dual_monitoring_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "SecureKey",
+        "is_warped": true
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_scanner_calibrator_1",
+      "name": "Biometric Scanner Calibrator",
+      "type": "ITEM",
+      "location_id": "on:dual_monitoring_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "screen_condition": "cracked"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Office Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "brand": "HP",
+        "model_number": "LaserJet Pro",
+        "is_jammed": true,
+        "paper_status": "out"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "is_leaking": true,
+        "current_temperature": 22.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "acct_node_1_rack_1",
+      "name": "ACCT-Node-1 Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:accounts_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "corrupted_hard_drive_1",
+      "name": "Corrupted Hard Drive (Slot #7)",
+      "type": "ITEM",
+      "location_id": "in:acct_node_1_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "ACCT-2023-RECOVERY",
+        "smell": "burning"
+      },
+      "states": {
+        "is_inserted": true
+      }
+    },
+    {
+      "id": "fire_suppression_lever_1",
+      "name": "Fire Suppression Lever",
+      "type": "FURNITURE",
+      "location_id": "in:accounts_vault",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "is_stuck": true
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:accounts_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "IBM",
+        "display_message": "ERROR 47: TRANSACTION OVERFLOW"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "usb_hub_1",
+      "name": "USB Hub",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 0.2,
+        "missing_ports": 2,
+        "wire_condition": "exposed"
+      },
+      "states": {}
+    },
+    {
+      "id": "bd_node_alpha_1",
+      "name": "BD-Node-Alpha Disk Array",
+      "type": "FURNITURE",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 700.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature_status": "overheating",
+        "fan_speed": 100
+      },
+      "states": {}
+    },
+    {
+      "id": "coolant_valve_1",
+      "name": "Coolant Valve",
+      "type": "FURNITURE",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal",
+        "rust_status": "rusted"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safe_1",
+      "name": "BusinessData Vault Safe",
+      "type": "FURNITURE",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "master_key_1",
+      "name": "Archives Nook Master Key",
+      "type": "ITEM",
+      "location_id": "in:safe_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "gold"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:bd_node_alpha_1",
+      "properties": {
+        "weight": 0.3,
+        "current_input": "INPUT 3",
+        "is_stuck": true
+      },
+      "states": {}
+    },
+    {
+      "id": "logbook_1",
+      "name": "BusinessData Logbook",
+      "type": "ITEM",
+      "location_id": "on:bd_node_alpha_1",
+      "properties": {
+        "weight": 0.5,
+        "last_entry": "OVERRIDE ATTEMPTED – FAILED"
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "coolant_tank_1",
+      "name": "Coolant Tank",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "plastic",
+        "liquid_level": "half-full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Professional Toolbox",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 10.0,
+        "color": "red",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "cut",
+          "sand",
+          "measure"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "steel",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper (Grit 120)",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.1,
+        "grit": 120,
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_tape_1",
+      "name": "Measuring Tape",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "length": "5m",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_can_1",
+      "name": "Oil Can",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 1.5,
+        "liquid_level": "half-full",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_scanner_1",
+      "name": "Document Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:archives_nook",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Fujitsu"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "archives_safe_1",
+      "name": "Archives Nook Safe",
+      "type": "FURNITURE",
+      "location_id": "in:archives_nook",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "transaction_logs_1",
+      "name": "Transaction Logs Q2",
+      "type": "ITEM",
+      "location_id": "in:archives_nook",
+      "properties": {
+        "weight": 2.0,
+        "label": "Q2-2023"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "corrosive_bottle_1",
+      "name": "Chemical Bottle (Blue Cap)",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 1.0,
+        "cap_color": "blue",
+        "label": "CORROSIVE",
+        "liquid_level": "half-full"
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "blue_vase_1",
+      "name": "Decorative Blue Vase",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "is_fragile": true
+      },
+      "states": {}
+    },
+    {
+      "id": "bolt_cutters_1",
+      "name": "Bolt Cutters",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_1",
+      "name": "USB Keyboard",
+      "type": "ITEM",
+      "location_id": "on:dual_monitoring_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Logitech",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cable_duct_1",
+      "name": "Floor-to-Ceiling Cable Duct",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          2.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "led_status_lights_1",
+      "name": "LED Status Lights",
+      "type": "ITEM",
+      "location_id": "on:cable_duct_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "flickering"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:accounts_vault",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "brand": "SecuGen"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "overload_light_1",
+      "name": "OVERLOAD Warning Light",
+      "type": "ITEM",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "weight": 0.1,
+        "color": "red"
+      },
+      "states": {
+        "is_active": true,
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "server_blade_1",
+      "name": "Spare Server Blade",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 2.0,
+        "model_number": "DL380"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "paper_stack_1",
+      "name": "Paper Stack",
+      "type": "ITEM",
+      "location_id": "in:printer_1",
+      "properties": {
+        "weight": 0.5,
+        "quantity": 0
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "coffee_carafe_1",
+      "name": "Coffee Carafe",
+      "type": "ITEM",
+      "location_id": "in:coffee_maker_1",
+      "properties": {
+        "weight": 0.3,
+        "liquid_level": "half-full"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:coffee_maker_1",
+      "properties": {
+        "weight": 0.01,
+        "text": "DO NOT USE – LEAKS"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "energy_drink_can_1",
+      "name": "Crushed Energy Drink Can",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.05,
+        "brand": "Monster"
+      },
+      "states": {
+        "is_inflated": false
+      }
+    },
+    {
+      "id": "dust_layer_1",
+      "name": "Dust Layer",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 0.01,
+        "thickness": "thick"
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 0.01,
+        "text": "DON’T TOUCH SLOT 7"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "pizza_box_1",
+      "name": "Empty Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "weight": 0.2,
+        "date": "3 days ago"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "fake_plant_1",
+      "name": "Fake Plant",
+      "type": "ITEM",
+      "location_id": "in:businessdata_vault",
+      "properties": {
+        "weight": 1.0,
+        "condition": "dusty",
+        "leaf_damage": "dangling"
+      },
+      "states": {}
+    },
+    {
+      "id": "poster_1",
+      "name": "DATA INTEGRITY PROTOCOLS Poster",
+      "type": "ITEM",
+      "location_id": "in:main_control_hub",
+      "properties": {
+        "weight": 0.1,
+        "condition": "peeling"
+      },
+      "states": {
+        "is_folded": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "cut",
+    "deactivate",
+    "eject",
+    "fold",
+    "measure",
+    "open",
+    "sand",
+    "toggle",
+    "type",
+    "unpack",
+    "varnish",
+    "close"
+  ]
+}

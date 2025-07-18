@@ -1,0 +1,767 @@
+{
+  "description": "An advanced engine research laboratory dedicated to detonation combustion testing, featuring high-precision tools, volatile materials, and complex machinery requiring multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "main_testing_chamber",
+      "name": "Main Testing Chamber",
+      "properties": {
+        "type": "industrial",
+        "reinforcement": "polycarbonate_blast_panels"
+      },
+      "connected_to_room_ids": [
+        "control_monitoring_station",
+        "component_fabrication_bay"
+      ]
+    },
+    {
+      "id": "control_monitoring_station",
+      "name": "Control & Monitoring Station",
+      "properties": {
+        "type": "observation",
+        "glass_walls": true
+      },
+      "connected_to_room_ids": [
+        "main_testing_chamber",
+        "data_analysis_hub"
+      ]
+    },
+    {
+      "id": "component_fabrication_bay",
+      "name": "Component Fabrication & Assembly Bay",
+      "properties": {
+        "type": "workshop",
+        "machinery": [
+          "CNC",
+          "welding_stations",
+          "3D_printers"
+        ]
+      },
+      "connected_to_room_ids": [
+        "main_testing_chamber",
+        "fuel_storage"
+      ]
+    },
+    {
+      "id": "fuel_storage",
+      "name": "Fuel & Chemical Storage",
+      "properties": {
+        "type": "secured",
+        "hazard_level": "high"
+      },
+      "connected_to_room_ids": [
+        "component_fabrication_bay"
+      ]
+    },
+    {
+      "id": "data_analysis_hub",
+      "name": "Data Analysis & Collaboration Hub",
+      "properties": {
+        "type": "office",
+        "equipment": [
+          "touchscreens",
+          "whiteboards"
+        ]
+      },
+      "connected_to_room_ids": [
+        "control_monitoring_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "detonation_engine_prototype_1",
+      "name": "QT-AC Detonation Engine Prototype",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.2
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "model": "QT-AC",
+        "material": "titanium_alloy",
+        "sensor_embedded": true
+      },
+      "states": {
+        "is_mounted": false,
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "safety_shielding_1",
+      "name": "Reinforced Safety Shielding",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.1
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "polycarbonate",
+        "thickness": "10cm"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          4.0,
+          3.0,
+          0.5
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "capacity": "500kg",
+        "hook_type": "magnetic"
+      },
+      "states": {}
+    },
+    {
+      "id": "laser_ignition_array_1",
+      "name": "Laser Ignition Array",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "wavelength": "800nm",
+        "laser_count": 4,
+        "cooling_unit": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "photon_sensors_1",
+      "name": "High-Speed Photon Sensors",
+      "type": "ITEM",
+      "location_id": "on:detonation_engine_prototype_1",
+      "properties": {
+        "weight": 2.5,
+        "calibration": "radiation_spikes",
+        "connection": "wired",
+        "sensitivity": "high"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_panel_1",
+      "name": "Emergency Shutdown Panel",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "cover": "flip-up",
+        "linked_system": "nitrogen_flooding"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "hydraulic_lift_table_1",
+      "name": "Hydraulic Lift Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "height_adjustable": true,
+        "current_height": "75cm",
+        "condition": "grease_stained"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_trolley_1",
+      "name": "Tool Trolley",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "contents": [
+          "torque_wrenches",
+          "digital_oscilloscope",
+          "thermal_camera"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench (10-100Nm)",
+      "type": "ITEM",
+      "location_id": "in:tool_trolley_1",
+      "properties": {
+        "weight": 1.8,
+        "range": "10-100Nm",
+        "brand": "Snap-on",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_oscilloscope_1",
+      "name": "Digital Oscilloscope",
+      "type": "ITEM",
+      "location_id": "in:tool_trolley_1",
+      "properties": {
+        "weight": 3.2,
+        "brand": "Tektronix",
+        "model": "TBS2000",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "in:tool_trolley_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "FLIR",
+        "resolution": "320x240",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ventilation_ducts_1",
+      "name": "Ventilation Ducts",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          3.0
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "noise_level": "40dB",
+        "status_led": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 0.5,
+        "condition": "faded",
+        "text": "DETONATION ZONE: NO UNARMED ENTRY",
+        "graphic": "cartoon_explosion"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug (BOSS)",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 0.3,
+        "condition": "chipped",
+        "contents": "cold_espresso",
+        "inscription": "BOSS"
+      },
+      "states": {
+        "is_full": true,
+        "is_eaten": false
+      }
+    },
+    {
+      "id": "trophy_1",
+      "name": "Innovation in Propulsion 2028 Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dusty",
+        "material": "glass",
+        "obstruction": "tangled_ethernet_cable"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_workbench_1",
+      "name": "Diagnostic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "monitors": 6,
+        "display_content": [
+          "pressure_graphs",
+          "temperature_graphs",
+          "combustion_stability",
+          "error_logs"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Photonics Data Aggregator Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "blade_array": true,
+        "activity_status": "blinking"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "master_throttle_lever_1",
+      "name": "Master Throttle Lever",
+      "type": "ITEM",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "weight": 5.0,
+        "material": "steel",
+        "length": "30cm",
+        "operation": "two_handed",
+        "controls": "fuel_flow"
+      },
+      "states": {}
+    },
+    {
+      "id": "audio_alarm_panel_1",
+      "name": "Audio Alarm Panel",
+      "type": "ITEM",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "weight": 2.0,
+        "alert_message": "WARNING: PRESSURE SPIKE DETECTED",
+        "trigger_condition": "pressure_exceeds_150psi",
+        "visual_indicator": "flashing_yellow"
+      },
+      "states": {
+        "is_muted": false
+      }
+    },
+    {
+      "id": "wireless_headset_1",
+      "name": "Wireless Headset",
+      "type": "ITEM",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "weight": 0.4,
+        "battery_level": "70%",
+        "brand": "Plantronics"
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "status": "jammed",
+        "note": "FIX ME - LAST REPORT WAS 87 PAGES"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": [
+          "differential_equations",
+          "rocket_doodle"
+        ],
+        "condition": "half_erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "pizza_box_1",
+      "name": "Empty Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:control_monitoring_station",
+      "properties": {
+        "weight": 0.2,
+        "brand": "Tony's Engineering Fuel",
+        "condition": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "cnc_machine_1",
+      "name": "CNC Machine",
+      "type": "FURNITURE",
+      "location_id": "in:component_fabrication_bay",
+      "properties": {
+        "size": [
+          2.2,
+          1.8,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "model": "VMC-500",
+        "material": "steel"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "welding_station_1",
+      "name": "Welding Station",
+      "type": "FURNITURE",
+      "location_id": "in:component_fabrication_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "type": "TIG",
+        "brand": "Miller"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "object_3d_printer_1",
+      "name": "3D Printer",
+      "type": "FURNITURE",
+      "location_id": "in:component_fabrication_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "technology": "FDM",
+        "brand": "Ultimaker"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "hydrogen_dewar_1",
+      "name": "Hydrogen Dewar (200L)",
+      "type": "FURNITURE",
+      "location_id": "in:fuel_storage",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "capacity": "200L",
+        "contents": "cryogenic_hydrogen",
+        "hazard_level": "extreme"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fuel_canister_1",
+      "name": "Experimental Fuel Canister (Blue Valve)",
+      "type": "ITEM",
+      "location_id": "in:fuel_storage",
+      "properties": {
+        "weight": 12.0,
+        "label": "EXPERIMENTAL BLEND",
+        "valve_color": "blue",
+        "warning": "CORROSIVE - USE GLOVES",
+        "pressure": "300psi",
+        "pressure_status": "stuck"
+      },
+      "states": {
+        "is_pressure_checked": false,
+        "is_pure": true
+      }
+    },
+    {
+      "id": "fuel_canister_2",
+      "name": "Experimental Fuel Canister (Black Valve)",
+      "type": "ITEM",
+      "location_id": "in:fuel_storage",
+      "properties": {
+        "weight": 12.0,
+        "label": "EXPERIMENTAL BLEND",
+        "valve_color": "black",
+        "pressure": "250psi"
+      },
+      "states": {
+        "is_pressure_checked": false,
+        "is_pure": true
+      }
+    },
+    {
+      "id": "coolant_bottle_1",
+      "name": "Decorative Coolant Bottle",
+      "type": "ITEM",
+      "location_id": "in:fuel_storage",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "purpose": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:fuel_storage",
+      "properties": {
+        "weight": 0.8,
+        "range": "0-500psi",
+        "accuracy": "±1%",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "touchscreen_1",
+      "name": "Large Touchscreen",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.9,
+          0.1
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "resolution": "4K",
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_2",
+      "name": "Collaboration Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          2.4,
+          1.5,
+          0.05
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "content": [
+          "engine_diagrams",
+          "mathematical_formulas"
+        ],
+        "surface": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "conference_table_1",
+      "name": "Coffee-Stained Conference Table",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          3.0,
+          1.2,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood",
+        "stains": [
+          "coffee",
+          "pen_ink"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pan_1",
+      "name": "Frying Pan",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 1.2,
+        "material": "cast_iron",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_rack_1",
+      "name": "Seasoning Rack",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.5,
+        "contents": [
+          "salt",
+          "pepper",
+          "herbs"
+        ],
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Cleaning Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.7,
+        "contents": "disinfectant",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharp_knife_1",
+      "name": "Sharp Utility Knife",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "edge_condition": "sharp"
+      },
+      "states": {
+        "is_sharp": true
+      }
+    },
+    {
+      "id": "grinding_stone_1",
+      "name": "Grinding Stone",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 2.5,
+        "material": "carborundum",
+        "provides_abilities": [
+          "dull"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "check_pressure",
+    "dull",
+    "eat",
+    "empty",
+    "fry",
+    "mount",
+    "mute",
+    "open",
+    "photograph",
+    "season",
+    "spray",
+    "turn_on",
+    "close"
+  ]
+}

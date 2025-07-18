@@ -1,0 +1,873 @@
+{
+  "description": "A high-security Bio-Anomaly Containment Lab in a partially breached state, with flickering emergency lights, damaged containment units, and ominous biological residue. The lab is divided into four interconnected zones: Main Research Chamber, Specimen Storage Vault, Security & Monitoring Hub, and Decontamination Airlock.",
+  "rooms": [
+    {
+      "id": "main_research_chamber",
+      "name": "Main Research Chamber",
+      "properties": {
+        "type": "laboratory",
+        "lighting": "flickering",
+        "condition": "partially_breached"
+      },
+      "connected_to_room_ids": [
+        "specimen_storage_vault",
+        "security_monitoring_hub",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "specimen_storage_vault",
+      "name": "Specimen Storage Vault",
+      "properties": {
+        "type": "refrigerated_storage",
+        "temperature": "4.0",
+        "condition": "damaged"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    },
+    {
+      "id": "security_monitoring_hub",
+      "name": "Security & Monitoring Hub",
+      "properties": {
+        "type": "security",
+        "access_level": "restricted",
+        "condition": "secure"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "airlock",
+        "status": "malfunctioning",
+        "condition": "requires_override"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "bio_containment_pod_1",
+      "name": "Central Bio-Containment Pod (Breached)",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "material": "reinforced_glass",
+        "status": "breached",
+        "leak": "violet_mist"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "overhead_crane_system_1",
+      "name": "Overhead Crane System",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          4.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "max_load": 500.0,
+        "operation": "dual_agent"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_workstation_1",
+      "name": "Lab Workstation 1",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "clutter": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_workstation_2",
+      "name": "Lab Workstation 2",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "clutter": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_workstation_3",
+      "name": "Lab Workstation 3",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "clutter": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_zero_blood_sample_1",
+      "name": "Patient Zero Blood Sample (Sealed, Leaking)",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "contents": "corrosive_blood",
+        "hazard_level": "high",
+        "requires_hazmat": true
+      },
+      "states": {
+        "is_sprayed": true
+      }
+    },
+    {
+      "id": "emergency_lockdown_terminal_1",
+      "name": "Emergency Lockdown Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "override_type": "dual_key",
+        "security_level": "high"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "neural_scanner_1",
+      "name": "Damaged Neural Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "status": "sparking",
+        "requires_repair": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "portable_uv_sterilizer_1",
+      "name": "Portable UV Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "weight": 8.0,
+        "status": "active",
+        "sound": "humming",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "data_tablet_1",
+      "name": "Data Tablet 1",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_1",
+      "properties": {
+        "weight": 0.7,
+        "content": "fragmented_research_notes",
+        "battery_level": "low",
+        "brand": "TechCorp"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "data_tablet_2",
+      "name": "Data Tablet 2",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_2",
+      "properties": {
+        "weight": 0.7,
+        "content": "fragmented_research_notes",
+        "battery_level": "medium",
+        "brand": "TechCorp"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "data_tablet_3",
+      "name": "Data Tablet 3",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_3",
+      "properties": {
+        "weight": 0.7,
+        "content": "fragmented_research_notes",
+        "battery_level": "high",
+        "brand": "TechCorp"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "data_tablet_4",
+      "name": "Data Tablet 4",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_3",
+      "properties": {
+        "weight": 0.7,
+        "content": "fragmented_research_notes",
+        "battery_level": "critical",
+        "brand": "TechCorp"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "biohazard_suit_1",
+      "name": "Heavy-duty Biohazard Suit",
+      "type": "ITEM",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "weight": 5.0,
+        "condition": "partially_torn",
+        "size": "large",
+        "color": "yellow"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "biohazard_poster_1",
+      "name": "Faded Biohazard Level 5 Poster",
+      "type": "ITEM",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "weight": 0.1,
+        "condition": "peeling",
+        "content": "warning",
+        "age": "old"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug (World’s Best Demonologist)",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "chipped",
+        "content": "cold_coffee",
+        "inscription": "World’s Best Demonologist"
+      },
+      "states": {
+        "is_eaten": false
+      }
+    },
+    {
+      "id": "cryogenic_storage_rack_1",
+      "name": "Cryogenic Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage_vault",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "condition": "damaged",
+        "temperature": "4.0"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_power_backup_1",
+      "name": "Emergency Power Backup",
+      "type": "FURNITURE",
+      "location_id": "in:specimen_storage_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "status": "flickering",
+        "charge_level": "low"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "contaminated_specimen_jar_1",
+      "name": "Contaminated Specimen Jar (Glowing Green)",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "green",
+        "seal": "broken",
+        "label": "DO NOT OPEN",
+        "hazard_level": "extreme"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "sealed_blood_sample_1",
+      "name": "Sealed Blood Sample 1",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS001"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_2",
+      "name": "Sealed Blood Sample 2",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS002"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_3",
+      "name": "Sealed Blood Sample 3",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS003"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_4",
+      "name": "Sealed Blood Sample 4",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS004"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_5",
+      "name": "Sealed Blood Sample 5",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS005"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_6",
+      "name": "Sealed Blood Sample 6",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS006"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_7",
+      "name": "Sealed Blood Sample 7",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS007"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_8",
+      "name": "Sealed Blood Sample 8",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS008"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_9",
+      "name": "Sealed Blood Sample 9",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS009"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_10",
+      "name": "Sealed Blood Sample 10",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS010"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_11",
+      "name": "Sealed Blood Sample 11",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS011"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_blood_sample_12",
+      "name": "Sealed Blood Sample 12",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_storage_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "seal": "intact",
+        "barcode": "SBS012"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "protective_gloves_1",
+      "name": "Protective Gloves",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "condition": "torn",
+        "material": "latex",
+        "size": "medium"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "quarantine_protocol_manual_1",
+      "name": "Outdated Quarantine Protocol Manual",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "content": "ectoplasmic_residue",
+        "condition": "dusty",
+        "age": "5_years"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:specimen_storage_vault",
+      "properties": {
+        "weight": 0.3,
+        "frame": "dusty",
+        "date": "5_years_ago",
+        "subject": "unknown"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "surveillance_screens_1",
+      "name": "Surveillance Screens",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.5
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "status": "active",
+        "feed_count": "multiple"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "weapons_locker_1",
+      "name": "Locked Weapons Locker",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "security_level": "high",
+        "access": "restricted"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_controls_1",
+      "name": "Emergency Shutdown Controls",
+      "type": "FURNITURE",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "operation": "dual_switch",
+        "safety_level": "critical"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "repair_toolkit_1",
+      "name": "Repair Toolkit",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 7.0,
+        "contents": "tools",
+        "condition": "new",
+        "provides_abilities": [
+          "sew"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "weight": 0.1,
+        "access_level": "scientist",
+        "color": "blue",
+        "id_number": "SC001"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "decontamination_door_1",
+      "name": "Decontamination Airlock Door",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.2
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "status": "malfunctioning",
+        "override_required": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "override_panel_1",
+      "name": "Manual Override Panel",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.6,
+          0.2,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "operation": "dual_hand",
+        "safety_level": "critical"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "hazmat_suit_2",
+      "name": "Functional Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 5.5,
+        "condition": "new",
+        "size": "large",
+        "color": "yellow",
+        "provides_abilities": [
+          "wear"
+        ]
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "condition": "used",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 1.5,
+        "material": "wood",
+        "condition": "used",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_2",
+      "properties": {
+        "weight": 0.2,
+        "ink_color": "black",
+        "brand": "LabelPro",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_heater_1",
+      "name": "Portable Heater",
+      "type": "ITEM",
+      "location_id": "in:security_monitoring_hub",
+      "properties": {
+        "weight": 3.0,
+        "power_source": "electric",
+        "status": "off",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:lab_workstation_3",
+      "properties": {
+        "weight": 0.5,
+        "content": "disinfectant",
+        "capacity": "500ml",
+        "provides_abilities": [
+          "spray",
+          "moisten"
+        ]
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:repair_toolkit_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel_cotton",
+        "color": "black",
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {
+        "is_sewn": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "deactivate",
+    "eat",
+    "fold",
+    "heat_up",
+    "label",
+    "moisten",
+    "mop",
+    "open",
+    "sew",
+    "spray",
+    "sweep",
+    "wear"
+  ]
+}

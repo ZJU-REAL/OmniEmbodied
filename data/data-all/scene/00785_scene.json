@@ -1,0 +1,711 @@
+{
+  "description": "An aquatic research facility overrun by Black Brush Algae (BBA), requiring urgent multi-agent intervention to contain the outbreak, recalibrate equipment, and salvage critical specimens.",
+  "rooms": [
+    {
+      "id": "main_lab",
+      "name": "Main Lab Area",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "co2_storage",
+        "quarantine_zone",
+        "equipment_closet",
+        "observation_lounge"
+      ]
+    },
+    {
+      "id": "co2_storage",
+      "name": "CO₂ Storage & Injection Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "quarantine_zone",
+      "name": "Specimen Quarantine Zone",
+      "properties": {
+        "type": "quarantine"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "equipment_closet",
+      "name": "Equipment Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "observation_lounge",
+      "name": "Observation Lounge",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_research_table_1",
+      "name": "Central Research Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "surface_type": "water_resistant"
+      },
+      "states": {}
+    },
+    {
+      "id": "kessil_led_fixture_1",
+      "name": "Kessil A360X LED Fixture",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "Kessil",
+        "model_number": "A360X",
+        "current_height": 30.0,
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "aquarium_1",
+      "name": "180L Aquarium (BBA Infested)",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.9,
+          0.45,
+          0.6
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "glass",
+        "water_level": "full",
+        "algae_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "aquarium_2",
+      "name": "180L Aquarium (Healthy Plants)",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.9,
+          0.45,
+          0.6
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "glass",
+        "water_level": "full",
+        "algae_level": "low"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "aquarium_3",
+      "name": "180L Aquarium (Half-Drained)",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.9,
+          0.45,
+          0.6
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "glass",
+        "water_level": "half",
+        "algae_level": "medium"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "filtration_system_1",
+      "name": "Wall-Mounted Filtration System",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "plastic",
+        "status": "ERROR: CLOGGED"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "water_testing_kit_1",
+      "name": "Water Testing Kit",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "contents": [
+          "pH_reagent",
+          "nitrate_test_strips"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "ph_reagent_1",
+      "name": "pH Reagent (Leaking)",
+      "type": "ITEM",
+      "location_id": "in:water_testing_kit_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "state": "leaking",
+        "hazard": "corrosive"
+      },
+      "states": {}
+    },
+    {
+      "id": "nitrate_test_strips_1",
+      "name": "Nitrate Test Strips (Scattered)",
+      "type": "ITEM",
+      "location_id": "in:water_testing_kit_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "state": "scattered",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "algae_scraper_1",
+      "name": "Algae Scraper (Magnetic, Broken)",
+      "type": "ITEM",
+      "location_id": "in:aquarium_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "condition": "broken",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "co2_regulator_1",
+      "name": "CO₂ Regulator (Disconnected)",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "silver",
+        "status": "disconnected",
+        "hazard": "electrical"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "digital_light_timer_1",
+      "name": "Digital Light Timer (Flashing '12:00')",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "status": "unprogrammed"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "spare_aquarium_net_1",
+      "name": "Spare Aquarium Net (With Hole)",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "condition": "damaged",
+        "hole_size": "small"
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "spare_aquarium_net_2",
+      "name": "Spare Aquarium Net (Intact)",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "condition": "good"
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope (Lens Smudged)",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "status": "on",
+        "lens_condition": "smudged"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "co2_tank_1",
+      "name": "20kg CO₂ Tank (Empty)",
+      "type": "FURNITURE",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "steel",
+        "pressure": "empty",
+        "on_cart": true
+      },
+      "states": {}
+    },
+    {
+      "id": "co2_tank_2",
+      "name": "20kg CO₂ Tank (500 PSI, Leaking)",
+      "type": "FURNITURE",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "steel",
+        "pressure": "500_PSI",
+        "leak": "slight",
+        "on_cart": true
+      },
+      "states": {}
+    },
+    {
+      "id": "inline_co2_diffuser_1",
+      "name": "Inline CO₂ Diffuser (Clogged)",
+      "type": "ITEM",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "weight": 0.8,
+        "color": "clear",
+        "status": "clogged",
+        "connected_to": "eheim_canister_filter_1"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "eheim_canister_filter_1",
+      "name": "Eheim Canister Filter (Struggling)",
+      "type": "FURNITURE",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Eheim",
+        "status": "humming"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge (Faulty)",
+      "type": "ITEM",
+      "location_id": "on:co2_tank_2",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "status": "stuck_at_1000_PSI"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "spare_diffuser_1",
+      "name": "Spare Diffuser (In Packaging)",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "status": "new"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "emergency_shutoff_button_1",
+      "name": "Emergency Shutoff Button (Covered)",
+      "type": "ITEM",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "status": "covered",
+        "note": "Do NOT press - calibration in progress"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox (Missing 10mm Wrench)",
+      "type": "ITEM",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "weight": 4.0,
+        "color": "red",
+        "status": "open",
+        "missing_tool": "10mm_wrench"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "spare_tubing_1",
+      "name": "Spare Tubing (For Aquarium 3 Only)",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "label": "FOR AQUARIUM 3 ONLY",
+        "length": "2m"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:co2_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "last_inspection": "6_months_ago",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "quarantine_tank_1",
+      "name": "40L Quarantine Tank (Sealed)",
+      "type": "FURNITURE",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.4
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "glass",
+        "seal": "biohazard_tape",
+        "water_condition": "murky"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "uv_sterilizer_1",
+      "name": "UV Sterilizer (Unplugged)",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 2.5,
+        "color": "white",
+        "status": "unplugged",
+        "cord_condition": "tangled"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "bleach_spray_bottle_1",
+      "name": "Bleach Spray Bottle (For Algae Only)",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.6,
+        "color": "white",
+        "contents": "bleach",
+        "fill_level": "half",
+        "label": "FOR ALGAE ONLY",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "isolation_gloves_1",
+      "name": "Isolation Gloves (Torn)",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "condition": "torn",
+        "tear_location": "thumb"
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "quarantine_logbook_1",
+      "name": "Quarantine Logbook",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "last_entry": "Day 7 - BBA spreading to moss"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "portable_air_pump_1",
+      "name": "Portable Air Pump (Dead Battery)",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "status": "dead_battery"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "spare_filter_media_1",
+      "name": "Spare Filter Media (Dusty)",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "condition": "dusty",
+        "packaging": "plastic"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Quarantine Protocol",
+      "type": "ITEM",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "missing_page": "page_3"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "biohazard_cabinet_1",
+      "name": "Biohazard Cabinet (Locked)",
+      "type": "FURNITURE",
+      "location_id": "in:quarantine_zone",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard (Under TV Remote)",
+      "type": "ITEM",
+      "location_id": "in:observation_lounge",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access": "biohazard_cabinet"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "tv_remote_1",
+      "name": "TV Remote (Covered in Algae Glare)",
+      "type": "ITEM",
+      "location_id": "in:observation_lounge",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "condition": "glare_covered"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle (Blue Cap, Corrosive)",
+      "type": "ITEM",
+      "location_id": "in:biohazard_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "label": "CORROSIVE",
+        "fill_level": "half",
+        "hazard": "corrosive"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle (Torn Label)",
+      "type": "ITEM",
+      "location_id": "in:biohazard_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "label_condition": "torn",
+        "fill_level": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_3",
+      "name": "Chemical Bottle (Nearly Empty)",
+      "type": "ITEM",
+      "location_id": "in:biohazard_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "fill_level": "almost_empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:central_research_table_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "material": "glass",
+        "purpose": "decorative"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "damage",
+    "extinguish",
+    "hide",
+    "open",
+    "replace",
+    "show",
+    "stop_process",
+    "turn_off",
+    "turn_on",
+    "unpack"
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "description": "A modular road construction site command center housed in a repurposed shipping container, serving as the nerve center for equipment maintenance, safety inspections, and crew coordination.",
+  "rooms": [
+    {
+      "id": "equipment_inspection_bay",
+      "name": "Equipment Inspection Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "safety_planning_hub"
+      ]
+    },
+    {
+      "id": "safety_planning_hub",
+      "name": "Safety & Planning Hub",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "equipment_inspection_bay",
+        "parts_tools_storage"
+      ]
+    },
+    {
+      "id": "parts_tools_storage",
+      "name": "Parts & Tools Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "safety_planning_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_platform_1",
+      "name": "Hydraulic Lift Platform",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          0.5
+        ],
+        "weight": 1000.0,
+        "is_container": false,
+        "color": "yellow",
+        "condition": "scuffed",
+        "issue": "oil leak near rear piston"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_condition": "stained with grease and solvent rings"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_lever_1",
+      "name": "Disassembled Control Lever",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "condition": "detached wiring harness",
+        "note": "Faulty detent spring—DO NOT REINSTALL",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "diagnostic_laptop_1",
+      "name": "Diagnostic Laptop",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.0,
+        "condition": "cracked casing",
+        "display": "TRANSMISSION INTERLOCK FAILURE",
+        "provides_abilities": [
+          "verify",
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_verified": false,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "parts_washer_tub_1",
+      "name": "Parts Washer Tub",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "content": "hazy blue solvent with submerged gear fragments",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {
+        "is_pure": true
+      }
+    },
+    {
+      "id": "work_light_1",
+      "name": "Portable Work Light",
+      "type": "ITEM",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "weight": 1.5,
+        "type": "LED",
+        "condition": "flickering at 30% brightness",
+        "provides_abilities": [
+          "toggle",
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_toggled": false,
+        "is_on": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Wall-mounted Magnetic Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:safety_planning_hub",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "shift schedules, LOCKOUT/TAGOUT IN PROGRESS notice, hand-drawn map"
+      },
+      "states": {}
+    },
+    {
+      "id": "ppe_cabinet_1",
+      "name": "Locking PPE Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:safety_planning_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "condition": "one broken hinge",
+        "content": "two cracked hardhats, respirator with expired filters"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazard_report_binder_1",
+      "name": "Hazard Report Binder",
+      "type": "ITEM",
+      "location_id": "in:safety_planning_hub",
+      "properties": {
+        "weight": 2.0,
+        "content": "9/22/93 – Loader Incident – Unauthorized Lever Actuation highlighted",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "timeclock_1",
+      "name": "Biometric Timeclock",
+      "type": "ITEM",
+      "location_id": "in:safety_planning_hub",
+      "properties": {
+        "weight": 3.5,
+        "display": "ERROR: CALIBRATION NEEDED",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:safety_planning_hub",
+      "properties": {
+        "weight": 4.0,
+        "condition": "unlatched",
+        "content": "gauze wrappers spilling out",
+        "provides_abilities": [
+          "open",
+          "close"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Heavy-duty Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:parts_tools_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "condition": "overloaded, one shelf bent downward"
+      },
+      "states": {}
+    },
+    {
+      "id": "hazmat_locker_1",
+      "name": "Hazardous Materials Locker",
+      "type": "FURNITURE",
+      "location_id": "in:parts_tools_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "color": "bright orange",
+        "key_location": "hanging from a nail nearby"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "interlock_kit_1",
+      "name": "Replacement Interlock Kit",
+      "type": "ITEM",
+      "location_id": "in:hazmat_locker_1",
+      "properties": {
+        "weight": 1.8,
+        "sku": "IL-4492",
+        "label": "Prevents accidental reversal",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "impact_wrench_1",
+      "name": "Impact Wrench",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 4.5,
+        "condition": "battery dead, socket adapter stuck in chuck",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "grease_gun_1",
+      "name": "Grease Gun",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 2.2,
+        "condition": "leaking from nozzle",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Broken Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:parts_tools_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.5
+        ],
+        "weight": 75.0,
+        "condition": "fork bent",
+        "tag": "OUT OF SERVICE"
+      },
+      "states": {}
+    },
+    {
+      "id": "front_end_loader_1",
+      "name": "Front-end Loader",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "size": [
+          5.0,
+          2.5,
+          3.0
+        ],
+        "weight": 5000.0,
+        "condition": "partially disassembled, control panel exposed",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "counterweight_1",
+      "name": "Loader's Counterweight",
+      "type": "ITEM",
+      "location_id": "in:equipment_inspection_bay",
+      "properties": {
+        "weight": 250.0,
+        "material": "steel",
+        "requires": "two agents to lift"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_stained_rag_1",
+      "name": "Oil-stained Rag",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "soaked in hydraulic fluid",
+        "provides_abilities": [
+          "stain",
+          "moisten"
+        ]
+      },
+      "states": {
+        "is_dirty": false,
+        "is_moist": false
+      }
+    },
+    {
+      "id": "bench_charger_1",
+      "name": "Bench Charger",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "compatibility": "impact wrench battery",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "close",
+    "contaminate",
+    "mend",
+    "moisten",
+    "open",
+    "stain",
+    "toggle",
+    "turn_off",
+    "unscrew",
+    "verify"
+  ]
+}

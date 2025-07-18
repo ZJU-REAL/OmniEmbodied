@@ -1,0 +1,800 @@
+{
+  "description": "A high-security archaeological conservation lab tasked with preserving and analyzing newly unearthed artifacts from a Bronze Age burial site, featuring heavy fragile artifacts, time-sensitive conservation tasks, and strict security protocols.",
+  "rooms": [
+    {
+      "id": "receiving_decontamination_airlock",
+      "name": "Receiving & Decontamination Airlock",
+      "properties": {
+        "type": "decontamination"
+      },
+      "connected_to_room_ids": [
+        "primary_examination_bay"
+      ]
+    },
+    {
+      "id": "primary_examination_bay",
+      "name": "Primary Examination Bay",
+      "properties": {
+        "type": "examination"
+      },
+      "connected_to_room_ids": [
+        "receiving_decontamination_airlock",
+        "conservation_workstations"
+      ]
+    },
+    {
+      "id": "conservation_workstations",
+      "name": "Conservation Workstations",
+      "properties": {
+        "type": "conservation"
+      },
+      "connected_to_room_ids": [
+        "primary_examination_bay",
+        "secure_artifact_vault"
+      ]
+    },
+    {
+      "id": "secure_artifact_vault",
+      "name": "Secure Artifact Vault",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "conservation_workstations",
+        "forensics_analysis_room"
+      ]
+    },
+    {
+      "id": "forensics_analysis_room",
+      "name": "Forensics & Analysis Room",
+      "properties": {
+        "type": "analysis"
+      },
+      "connected_to_room_ids": [
+        "secure_artifact_vault"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "decontamination_shower_unit_1",
+      "name": "Industrial Decontamination Shower Unit",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "DC-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uv_sterilization_chamber_1",
+      "name": "UV Sterilization Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel_glass_composite",
+        "status_light": "yellow"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "unpacking_table_1",
+      "name": "Heavy-Duty Unpacking Table",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "reinforced_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "artifact_crate_1",
+      "name": "Sealed Artifact Crate",
+      "type": "FURNITURE",
+      "location_id": "on:unpacking_table_1",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood_metal_composite",
+        "inscription": "TRIALETI SITE – FRAGILE"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "decon_sprayer_wand_1",
+      "name": "Decon Sprayer Wand",
+      "type": "ITEM",
+      "location_id": "in:uv_sterilization_chamber_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "yellow",
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_scanner_1",
+      "name": "Digital Inventory Scanner",
+      "type": "ITEM",
+      "location_id": "on:unpacking_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "TechScan",
+        "model_number": "DS-450",
+        "condition": "glitching"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "protective_gear_rack_1",
+      "name": "Protective Gear Rack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "on:protective_gear_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "size": "large",
+        "material": "cotton"
+      },
+      "states": {}
+    },
+    {
+      "id": "respirator_1",
+      "name": "Respirator",
+      "type": "ITEM",
+      "location_id": "on:protective_gear_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "gray",
+        "size": "medium",
+        "brand": "SafeAir"
+      },
+      "states": {}
+    },
+    {
+      "id": "nitrile_gloves_1",
+      "name": "Nitrile Gloves",
+      "type": "ITEM",
+      "location_id": "on:protective_gear_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "size": "small",
+        "material": "nitrile"
+      },
+      "states": {}
+    },
+    {
+      "id": "eye_wash_station_1",
+      "name": "Emergency Eye Wash Station",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded_red",
+        "inscription": "CONTAMINATION PROTOCOLS – LEVEL 4"
+      },
+      "states": {}
+    },
+    {
+      "id": "field_notebooks_1",
+      "name": "Stack of Moldy Field Notebooks",
+      "type": "ITEM",
+      "location_id": "in:receiving_decontamination_airlock",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "condition": "water_damaged"
+      },
+      "states": {}
+    },
+    {
+      "id": "examination_table_1",
+      "name": "Anti-Static Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:primary_examination_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "anti_static_composite"
+      },
+      "states": {}
+    },
+    {
+      "id": "artifact_suspension_rig_1",
+      "name": "Overhead Rig for Artifact Suspension",
+      "type": "FURNITURE",
+      "location_id": "in:primary_examination_bay",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          3.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "max_load": "200kg",
+        "condition": "frayed_rope"
+      },
+      "states": {}
+    },
+    {
+      "id": "gold_ritual_vessel_1",
+      "name": "Partially Unwrapped Gold Ritual Vessel",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "tarnished_gold",
+        "material": "gold",
+        "inscription": "proto-Georgian script"
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "funerary_urn_1",
+      "name": "Broken Ceramic Funerary Urn",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "terracotta",
+        "material": "ceramic",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_shattered": false
+      }
+    },
+    {
+      "id": "anomaly_detector_1",
+      "name": "Magnetic Anomaly Detector",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 4.5,
+        "color": "black",
+        "brand": "MagTech",
+        "status": "WARNING: METAL INTERFERENCE"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Adjustable Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "condition": "flickering",
+        "bulb_type": "LED"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "digital_camera_1",
+      "name": "Digital Camera on Tripod",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Canon",
+        "model_number": "EOS 5D",
+        "condition": "SD_card_full"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World’s Best Archaeologist Mug",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "material": "ceramic",
+        "condition": "half_empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "pollen_samples_1",
+      "name": "Ancient Pollen Samples",
+      "type": "ITEM",
+      "location_id": "in:primary_examination_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "condition": "labeled_but_ignored"
+      },
+      "states": {}
+    },
+    {
+      "id": "electrolytic_reduction_tank_1",
+      "name": "Electrolytic Reduction Tank",
+      "type": "FURNITURE",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "plastic_steel",
+        "sign": "DO NOT TOUCH – ACTIVE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fume_extraction_hood_1",
+      "name": "Fume Extraction Hood",
+      "type": "FURNITURE",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel",
+        "filter_status": "62% clogged"
+      },
+      "states": {}
+    },
+    {
+      "id": "silver_torque_1",
+      "name": "Silver Torque in Bath",
+      "type": "ITEM",
+      "location_id": "in:electrolytic_reduction_tank_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "partially_cleaned_silver",
+        "material": "silver",
+        "condition": "bubbling"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "adhesive_applicator_1",
+      "name": "Precision Adhesive Applicator",
+      "type": "ITEM",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "condition": "clogged_nozzle",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wool_cloak_fragment_1",
+      "name": "Threadbare Wool Cloak Fragment",
+      "type": "ITEM",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wool",
+        "humidity": "45%"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "micro_tools_rack_1",
+      "name": "Micro-Tools Rack",
+      "type": "FURNITURE",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "size": [
+          0.8,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "missing_tool": "scalpel"
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "on:micro_tools_rack_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "white",
+        "condition": "calibration_drift_detected"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Dusty Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "weight": 1.0,
+        "color": "gold",
+        "material": "wood_metal",
+        "date": "3_years_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "pottery_shard_1",
+      "name": "Shattered Pottery Shard",
+      "type": "ITEM",
+      "location_id": "in:conservation_workstations",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "ceramic",
+        "condition": "discarded"
+      },
+      "states": {
+        "is_shattered": false
+      }
+    },
+    {
+      "id": "climate_controlled_vault_1",
+      "name": "Walk-In Climate-Controlled Vault",
+      "type": "FURNITURE",
+      "location_id": "in:secure_artifact_vault",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "thick_steel",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "artifact_shelving_1",
+      "name": "Modular Artifact Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:climate_controlled_vault_1",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "some_bent_racks"
+      },
+      "states": {}
+    },
+    {
+      "id": "gold_ingot_crate_1",
+      "name": "Locked Gold Ingot Crate",
+      "type": "FURNITURE",
+      "location_id": "on:artifact_shelving_1",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood_metal",
+        "missing_keycard": true
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "assyrian_tablet_1",
+      "name": "Damaged Assyrian Tablet",
+      "type": "ITEM",
+      "location_id": "on:artifact_shelving_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "clay",
+        "material": "clay",
+        "condition": "crumbling"
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "power_generator_1",
+      "name": "Backup Power Generator",
+      "type": "ITEM",
+      "location_id": "in:secure_artifact_vault",
+      "properties": {
+        "weight": 30.0,
+        "color": "red",
+        "fuel_gauge": "20%"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "dehumidifier_1",
+      "name": "Dehumidifier",
+      "type": "ITEM",
+      "location_id": "in:secure_artifact_vault",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "condition": "filter_alarm_beeping"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "inventory_clipboard_1",
+      "name": "Outdated Inventory Clipboard",
+      "type": "ITEM",
+      "location_id": "in:secure_artifact_vault",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "condition": "last_updated_weeks_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "cobweb_1",
+      "name": "Cobweb in Ceiling Corner",
+      "type": "ITEM",
+      "location_id": "in:secure_artifact_vault",
+      "properties": {
+        "weight": 0.01,
+        "color": "gray",
+        "condition": "ignored"
+      },
+      "states": {}
+    },
+    {
+      "id": "electron_microscope_1",
+      "name": "Scanning Electron Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "material": "metal_plastic",
+        "condition": "slow_boot_up"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "reconstruction_rig_1",
+      "name": "3D Artifact Reconstruction Rig",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "camera_array_misaligned"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "engraved_bone_1",
+      "name": "Fragment of Engraved Bone",
+      "type": "ITEM",
+      "location_id": "on:reconstruction_rig_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "ivory",
+        "material": "bone",
+        "condition": "software_crashed"
+      },
+      "states": {}
+    },
+    {
+      "id": "database_terminal_1",
+      "name": "Database Terminal",
+      "type": "ITEM",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "weight": 12.0,
+        "color": "beige",
+        "condition": "login_expired",
+        "is_container": true
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "laser_measurer_1",
+      "name": "Laser Distance Measurer",
+      "type": "ITEM",
+      "location_id": "on:database_terminal_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "condition": "low_battery"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_bookshelf_1",
+      "name": "Reference Bookshelf",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "book_blocking_scanner"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Half-Erased Equations",
+      "type": "ITEM",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "condition": "irrelevant_equations"
+      },
+      "states": {}
+    },
+    {
+      "id": "takeout_containers_1",
+      "name": "Empty Takeout Containers",
+      "type": "ITEM",
+      "location_id": "in:forensics_analysis_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "condition": "from_late_night_work"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "fold",
+    "open",
+    "plug_in",
+    "shatter",
+    "spray",
+    "close"
+  ]
+}

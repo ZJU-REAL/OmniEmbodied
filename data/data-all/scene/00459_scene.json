@@ -1,0 +1,696 @@
+{
+  "description": "A high-stakes basketball scouting lab with biomechanics equipment, video analysis stations, and a strength training area, designed for multi-agent collaboration and complex task execution.",
+  "rooms": [
+    {
+      "id": "biomechanics_lab",
+      "name": "Biomechanics Lab",
+      "properties": {
+        "type": "high_tech"
+      },
+      "connected_to_room_ids": [
+        "video_analysis_room",
+        "strength_conditioning_area",
+        "scouting_war_room"
+      ]
+    },
+    {
+      "id": "video_analysis_room",
+      "name": "Video Analysis Room",
+      "properties": {
+        "type": "control_hub"
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab",
+        "scouting_war_room"
+      ]
+    },
+    {
+      "id": "strength_conditioning_area",
+      "name": "Strength & Conditioning Area",
+      "properties": {
+        "type": "training"
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab",
+        "scouting_war_room"
+      ]
+    },
+    {
+      "id": "scouting_war_room",
+      "name": "Scouting War Room",
+      "properties": {
+        "type": "conference"
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab",
+        "video_analysis_room",
+        "strength_conditioning_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "motion_capture_rig_1",
+      "name": "Motion-Capture Rig",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "brand": "Vicon",
+        "model": "Vantage V5",
+        "camera_count": 8
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "force_plate_treadmill_1",
+      "name": "Force Plate Treadmill",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "brand": "Bertec",
+        "max_speed": "20 km/h"
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_examination_table_1",
+      "name": "Medical Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "has_pressure_sensors": true
+      },
+      "states": {}
+    },
+    {
+      "id": "emg_sensor_case_1",
+      "name": "EMG Sensor Case",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "missing_sensors": 1,
+        "last_used_on": "Subject #9"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "skeletal_model_1",
+      "name": "3D-Printed Skeletal Model",
+      "type": "ITEM",
+      "location_id": "on:medical_examination_table_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "body_part": "knee",
+        "stress_zones": "marked in red"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "Prospect 22 Dataset USB Drive",
+      "type": "ITEM",
+      "location_id": "in:locked_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "storage_capacity": "128GB",
+        "encryption": "AES-256"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_chair_1",
+      "name": "Hydraulic Treatment Chair",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "current_position": "reclined",
+        "is_stuck": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 8.0,
+        "material": "steel",
+        "quantity": 5,
+        "scattered": true
+      },
+      "states": {}
+    },
+    {
+      "id": "white_noise_machine_1",
+      "name": "White Noise Machine",
+      "type": "ITEM",
+      "location_id": "on:medical_examination_table_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "LectroFan",
+        "volume": "low"
+      },
+      "states": {
+        "is_on": false,
+        "is_muted": false
+      }
+    },
+    {
+      "id": "jersey_frame_1",
+      "name": "Framed Jersey of Draft Bust",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 2.5,
+        "player_name": "Redacted",
+        "draft_year": 2015,
+        "note": "Don't ignore red flags!"
+      },
+      "states": {}
+    },
+    {
+      "id": "ficus_plant_1",
+      "name": "Dead Ficus Plant",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 4.0,
+        "condition": "dead",
+        "dust_level": "high",
+        "pot_material": "ceramic"
+      },
+      "states": {}
+    },
+    {
+      "id": "triple_monitor_workstation_1",
+      "name": "Triple-Monitor Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "screen_issue": "flickering intermittently"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "led_status": "blinking erratically",
+        "requires_maintenance": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Magnetic Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "coded player notes",
+        "has_do_not_erase_note": true
+      },
+      "states": {}
+    },
+    {
+      "id": "game_tape_1",
+      "name": "Cousins vs. Gasol Game Tape",
+      "type": "ITEM",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "weight": 0.3,
+        "format": "VHS",
+        "misplaced": true,
+        "correct_location": "war_room"
+      },
+      "states": {}
+    },
+    {
+      "id": "scouting_tablet_1",
+      "name": "Scouting Tablet",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "iPad Pro",
+        "battery_level": "15%",
+        "requires_charging": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "encrypted_hard_drive_1",
+      "name": "Encrypted Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "capacity": "2TB",
+        "password_hint": "First round, 2010"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "coffee_stained_keyboard_1",
+      "name": "Coffee-Stained Keyboard",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 1.1,
+        "brand": "Logitech",
+        "sticky_keys": [
+          "spacebar"
+        ],
+        "cleanliness": "poor"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "broken_headset_1",
+      "name": "Broken Headset",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Bose",
+        "issue": "left earpiece silent",
+        "requires_repair": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "vertical_jump_platform_1",
+      "name": "Portable Vertical Jump Platform",
+      "type": "FURNITURE",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.3
+        ],
+        "weight": 180.0,
+        "is_container": false,
+        "requires_two_people": true,
+        "material": "aluminum"
+      },
+      "states": {}
+    },
+    {
+      "id": "weight_rack_1",
+      "name": "Weight Rack",
+      "type": "FURNITURE",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "capacity": "500 kg"
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_shake_bottle_1",
+      "name": "Protein Shake Bottle (Expired)",
+      "type": "ITEM",
+      "location_id": "on:weight_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "blue",
+        "seal_condition": "cracked",
+        "expiration_date": "2022-10-15",
+        "is_expired": true
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_shake_bottle_2",
+      "name": "Protein Shake Bottle",
+      "type": "ITEM",
+      "location_id": "on:weight_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "red",
+        "seal_condition": "intact",
+        "expiration_date": "2024-05-20",
+        "is_expired": false
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_shake_bottle_3",
+      "name": "Protein Shake Bottle",
+      "type": "ITEM",
+      "location_id": "on:weight_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "green",
+        "seal_condition": "intact",
+        "expiration_date": "2024-06-10",
+        "is_expired": false
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_shake_bottle_4",
+      "name": "Protein Shake Bottle",
+      "type": "ITEM",
+      "location_id": "on:weight_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "blue",
+        "seal_condition": "intact",
+        "expiration_date": "2024-04-30",
+        "is_expired": false
+      },
+      "states": {}
+    },
+    {
+      "id": "protein_shake_bottle_5",
+      "name": "Protein Shake Bottle",
+      "type": "ITEM",
+      "location_id": "on:weight_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "seal_condition": "intact",
+        "expiration_date": "2024-07-15",
+        "is_expired": false
+      },
+      "states": {}
+    },
+    {
+      "id": "draft_board_1",
+      "name": "Massive Draft Board",
+      "type": "FURNITURE",
+      "location_id": "in:scouting_war_room",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.1
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "current_year": "2024",
+        "has_player_rankings": true
+      },
+      "states": {}
+    },
+    {
+      "id": "scouting_binder_1",
+      "name": "Scouting Binder",
+      "type": "ITEM",
+      "location_id": "in:scouting_war_room",
+      "properties": {
+        "weight": 2.0,
+        "contains_keycard": true,
+        "player_profiles": "detailed",
+        "binder_color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_station_1",
+      "name": "Coffee Station",
+      "type": "FURNITURE",
+      "location_id": "in:scouting_war_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "coffee_machine_brand": "Keurig",
+        "water_level": "low"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Repair Toolbox",
+      "type": "ITEM",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "weight": 8.5,
+        "tools_included": [
+          "wrench",
+          "screwdriver",
+          "pliers"
+        ],
+        "provides_abilities": [
+          "loosen",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Cleaning Towel",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 0.3,
+        "material": "microfiber",
+        "cleanliness": "clean",
+        "provides_abilities": [
+          "dry",
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Fujitsu",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "peeler_1",
+      "name": "Vegetable Peeler",
+      "type": "ITEM",
+      "location_id": "in:scouting_war_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "peel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Power Drill",
+      "type": "ITEM",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "weight": 2.5,
+        "brand": "DeWalt",
+        "battery_level": "75%",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "weight": 3.0,
+        "type": "electric",
+        "provides_abilities": [
+          "inflate",
+          "pump"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "shovel_1",
+      "name": "Shovel",
+      "type": "ITEM",
+      "location_id": "in:strength_conditioning_area",
+      "properties": {
+        "weight": 2.0,
+        "material": "steel",
+        "handle_material": "wood",
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:scouting_war_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Feather Duster",
+      "type": "ITEM",
+      "location_id": "in:video_analysis_room",
+      "properties": {
+        "weight": 0.4,
+        "material": "feathers",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "dig",
+    "drill",
+    "dry",
+    "dust",
+    "inflate",
+    "loosen",
+    "mute",
+    "open",
+    "peel",
+    "pump",
+    "repair",
+    "scan",
+    "turn_on",
+    "whisk",
+    "close"
+  ]
+}

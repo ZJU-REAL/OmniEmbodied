@@ -1,0 +1,927 @@
+{
+  "description": "A cutting-edge Biolab Dermatology Research & Product Testing Facility with specialized zones for sample preparation, clinical testing, product formulation, and quality control.",
+  "rooms": [
+    {
+      "id": "sample_preparation_room",
+      "name": "Sample Preparation Room",
+      "properties": {
+        "type": "sterile_lab"
+      },
+      "connected_to_room_ids": [
+        "clinical_testing_pods",
+        "formulation_lab"
+      ]
+    },
+    {
+      "id": "clinical_testing_pods",
+      "name": "Clinical Testing Pods",
+      "properties": {
+        "type": "testing_area"
+      },
+      "connected_to_room_ids": [
+        "sample_preparation_room",
+        "observation_room"
+      ]
+    },
+    {
+      "id": "formulation_lab",
+      "name": "Formulation Lab",
+      "properties": {
+        "type": "chemical_lab"
+      },
+      "connected_to_room_ids": [
+        "sample_preparation_room",
+        "quality_control_station"
+      ]
+    },
+    {
+      "id": "quality_control_station",
+      "name": "Quality Control Station",
+      "properties": {
+        "type": "analysis_area"
+      },
+      "connected_to_room_ids": [
+        "formulation_lab",
+        "storage_hub"
+      ]
+    },
+    {
+      "id": "storage_hub",
+      "name": "Storage & Logistics Hub",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "quality_control_station",
+        "observation_room"
+      ]
+    },
+    {
+      "id": "observation_room",
+      "name": "Observation & Data Analysis Room",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "clinical_testing_pods",
+        "storage_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "laminar_flow_hood_1",
+      "name": "Laminar Flow Hood",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "filter_type": "HEPA"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "refrigerated_sample_drawer_1",
+      "name": "Refrigerated Sample Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "biopsy_station_1",
+      "name": "Biopsy Station",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Digital Display",
+      "type": "FURNITURE",
+      "location_id": "on:biopsy_station_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 8.5,
+        "is_container": false,
+        "zoom": "400x",
+        "has_touchscreen": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "petri_dish_1",
+      "name": "Sealed Petri Dish",
+      "type": "ITEM",
+      "location_id": "in:laminar_flow_hood_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Inflamed Follicle – Subject #7",
+        "material": "glass"
+      },
+      "states": {
+        "is_sterile": false,
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "sterile_scalpel_set_1",
+      "name": "Sterile Scalpel Set",
+      "type": "ITEM",
+      "location_id": "in:uv_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "requires_id": true,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "uv_cabinet_1",
+      "name": "UV Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "extraction_kit_1",
+      "name": "Ingrown Hair Extraction Kit",
+      "type": "ITEM",
+      "location_id": "on:biopsy_station_1",
+      "properties": {
+        "weight": 0.8,
+        "contents": [
+          "fine-tip tweezers",
+          "antiseptic swabs",
+          "biopsy punch"
+        ],
+        "material": "plastic"
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "lid_status": "ajar"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "ink_level": "low",
+        "is_jammed": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "biohazard_waste_bin_1",
+      "name": "Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "fill_level": "75%",
+        "needs_autoclave": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "weight": 0.1,
+        "title": "Proper Sterilization Protocol – Revision 3",
+        "condition": "faded"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Chipped Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:biopsy_station_1",
+      "properties": {
+        "weight": 0.3,
+        "contents": [
+          "pens"
+        ],
+        "condition": "chipped",
+        "has_stains": true
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_certificates_1",
+      "name": "Outdated Calibration Certificates",
+      "type": "ITEM",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "weight": 0.2,
+        "condition": "outdated"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "dermatology_chair_1",
+      "name": "Adjustable Dermatology Chair",
+      "type": "FURNITURE",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "has_restraints": true
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "camera_rig_1",
+      "name": "Overhead Camera Rig",
+      "type": "FURNITURE",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "resolution": "4K",
+        "has_flicker": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "bioskincare_dispenser_1",
+      "name": "BIOSKINCARE Dispenser",
+      "type": "ITEM",
+      "location_id": "on:dermatology_chair_1",
+      "properties": {
+        "weight": 3.0,
+        "requires_two_hands": true,
+        "fill_level": "30%"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "laser_device_1",
+      "name": "Laser Hair Removal Device",
+      "type": "ITEM",
+      "location_id": "on:dermatology_chair_1",
+      "properties": {
+        "weight": 4.5,
+        "error_code": "Coolant Low"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "patient_tablet_1",
+      "name": "Patient Consent Tablet",
+      "type": "ITEM",
+      "location_id": "on:dermatology_chair_1",
+      "properties": {
+        "weight": 0.6,
+        "status": "unfinished"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "skin_scanner_1",
+      "name": "Skin Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.7
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "needs_recalibration": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "weight": 0.2
+      },
+      "states": {
+        "is_pressed": false,
+        "is_covered": true
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Disposable Glove Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "is_jammed": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "before_after_photos_1",
+      "name": "Before/After Photos",
+      "type": "ITEM",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "weight": 0.5,
+        "content": "severe razor bump cases"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "tissue_box_1",
+      "name": "Box of Tissues",
+      "type": "ITEM",
+      "location_id": "in:clinical_testing_pods",
+      "properties": {
+        "weight": 0.4,
+        "fill_level": "partially used",
+        "is_spilled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "mixing_vat_1",
+      "name": "Industrial Mixing Vat",
+      "type": "FURNITURE",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "capacity": "50L"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "precision_scale_1",
+      "name": "Precision Scale",
+      "type": "FURNITURE",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "accuracy": "0.001g",
+        "is_unbalanced": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "enzyme_vial_1",
+      "name": "Bioactive Enzyme Vial",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "blue",
+        "label": "Do Not Expose to Light",
+        "is_light_sensitive": true
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "broken_pipette_1",
+      "name": "Broken Pipette",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.05,
+        "condition": "broken"
+      },
+      "states": {
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "batch_logbook_1",
+      "name": "Batch Logbook",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.7,
+        "last_entry": "Batch #44 – Viscosity 12% below target"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "FURNITURE",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "needs_recalibration": true,
+        "is_beeping": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "magnetic_stirrer_1",
+      "name": "Magnetic Stirrer",
+      "type": "FURNITURE",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 4.0,
+        "is_container": false
+      },
+      "states": {
+        "is_spinning": false,
+        "is_on": true
+      }
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 1.2,
+        "inscription": "Best Innovation in Dermatology 2022",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "coffee_stains_1",
+      "name": "Old Coffee Stains",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.0,
+        "location": "on the formulation whiteboard"
+      },
+      "states": {
+        "is_spread": false
+      }
+    },
+    {
+      "id": "viscosity_analyzer_1",
+      "name": "Viscosity Analyzer",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "microbial_test_kit_1",
+      "name": "Microbial Test Kit",
+      "type": "ITEM",
+      "location_id": "in:quality_control_station",
+      "properties": {
+        "weight": 1.0,
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "raw_materials_shelf_1",
+      "name": "Raw Materials Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:storage_hub",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "packaged_products_1",
+      "name": "Packaged Products",
+      "type": "ITEM",
+      "location_id": "in:storage_hub",
+      "properties": {
+        "weight": 15.0,
+        "quantity": 50
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "shipping_supplies_1",
+      "name": "Shipping Supplies",
+      "type": "ITEM",
+      "location_id": "in:storage_hub",
+      "properties": {
+        "weight": 10.0,
+        "contents": [
+          "boxes",
+          "bubble wrap",
+          "tape"
+        ]
+      },
+      "states": {
+        "is_spread": false
+      }
+    },
+    {
+      "id": "observation_screen_1",
+      "name": "Observation Screen",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "digital_microscope_1",
+      "name": "Digital Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 7.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ai_diagnostics_console_1",
+      "name": "AI-Assisted Diagnostics Console",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coolant_bottle_1",
+      "name": "Coolant Bottle",
+      "type": "ITEM",
+      "location_id": "in:locked_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "volume": "1L",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Supervisor's Keycard",
+      "type": "ITEM",
+      "location_id": "in:observation_room",
+      "properties": {
+        "weight": 0.05,
+        "access_level": "supervisor"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "Autoclave Sterilizer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.7,
+          1.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "water_source_1",
+      "name": "Lab Water Source",
+      "type": "FURNITURE",
+      "location_id": "in:sample_preparation_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Lab Knife",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "spread"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Precision Saw",
+      "type": "ITEM",
+      "location_id": "in:formulation_lab",
+      "properties": {
+        "weight": 0.7,
+        "material": "titanium",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "filter_1",
+      "name": "Microbial Filter",
+      "type": "ITEM",
+      "location_id": "in:quality_control_station",
+      "properties": {
+        "weight": 0.2,
+        "pore_size": "0.2um",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    }
+  ],
+  "abilities": [
+    "crack",
+    "deactivate",
+    "open",
+    "pour",
+    "press",
+    "purify",
+    "raise",
+    "rinse",
+    "saw",
+    "scan",
+    "spin",
+    "spread",
+    "sterilize",
+    "take_down",
+    "turn_off",
+    "turn_on",
+    "uncover",
+    "unleash",
+    "close"
+  ]
+}

@@ -438,7 +438,7 @@ class SimulationEngine:
         from ..environment.scene_validator import SceneValidator
         
         if not self.env_manager:
-            return False, ["模拟器未初始化"]
+            return False, ["Simulator not initialized"]
         
         # 构建场景数据结构
         scene_data = {
@@ -541,7 +541,7 @@ class SimulationEngine:
             
             return True
         except Exception as e:
-            print(f"加载智能体失败: {e}")
+            print(f"Failed to load agent: {e}")
             import traceback
             traceback.print_exc()
             return False
@@ -731,10 +731,10 @@ class SimulationEngine:
                 self.scene_abilities
             )
 
-            print(f"已根据场景abilities注册动作: {self.scene_abilities}")
+            print(f"Registered actions based on scene abilities: {self.scene_abilities}")
 
         except Exception as e:
-            print(f"注册场景特定动作失败: {e}")
+            print(f"Failed to register scene-specific actions: {e}")
             import traceback
             traceback.print_exc()
 

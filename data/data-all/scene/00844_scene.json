@@ -1,0 +1,763 @@
+{
+  "description": "A bustling auto dealership backlot and prep center where new cars are processed, prepped, and readied for delivery, featuring a vehicle intake bay, prep workshop, detail area, parts storage, and sales office.",
+  "rooms": [
+    {
+      "id": "vehicle_intake_bay",
+      "name": "Vehicle Intake Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "prep_workshop"
+      ]
+    },
+    {
+      "id": "prep_workshop",
+      "name": "Prep Workshop",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "vehicle_intake_bay",
+        "detail_area"
+      ]
+    },
+    {
+      "id": "detail_area",
+      "name": "Detail & Finish Area",
+      "properties": {
+        "type": "service"
+      },
+      "connected_to_room_ids": [
+        "prep_workshop",
+        "parts_storage"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts Storage Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "detail_area",
+        "sales_office"
+      ]
+    },
+    {
+      "id": "sales_office",
+      "name": "Sales Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "parts_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "car_transporter_1",
+      "name": "Car Transporter Trailer",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "size": [
+          10.0,
+          2.5,
+          3.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "ramp_position": "lowered"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "pneumatic_drill_1",
+      "name": "Pneumatic Drill",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "yellow",
+        "brand": "DeWalt",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Greasy Clipboard",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "inscription": "Manifest #4412 – 3/5 delivered"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "problem_car_1",
+      "name": "2024 Solaris Hybrid",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "size": [
+          4.5,
+          1.8,
+          1.5
+        ],
+        "weight": 1500.0,
+        "is_container": true,
+        "color": "silver",
+        "model": "Solaris Hybrid"
+      },
+      "states": {
+        "is_open": false,
+        "is_connected": false
+      }
+    },
+    {
+      "id": "shipping_crate_1",
+      "name": "Unopened Shipping Crate",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE: Headlight Assemblies (Left-Side Drive)"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Zebra",
+        "battery_level": 20
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_cart_1",
+      "name": "Dolly Cart",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_intake_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "wheel_condition": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "windshield_fluid_1",
+      "name": "Blue Windshield Fluid",
+      "type": "ITEM",
+      "location_id": "on:dolly_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "volume": "1 gallon"
+      },
+      "states": {}
+    },
+    {
+      "id": "windshield_fluid_2",
+      "name": "Orange Windshield Fluid",
+      "type": "ITEM",
+      "location_id": "on:dolly_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "orange",
+        "volume": "1 gallon"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift #1",
+      "type": "FURNITURE",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "status": "raised"
+      },
+      "states": {}
+    },
+    {
+      "id": "silver_sedan_1",
+      "name": "Silver Sedan",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          4.8,
+          1.8,
+          1.4
+        ],
+        "weight": 1600.0,
+        "is_container": true,
+        "color": "silver"
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_drip_pan_1",
+      "name": "Oil Drip Pan",
+      "type": "ITEM",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "tool_wall_1",
+      "name": "Tool Wall",
+      "type": "FURNITURE",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "size": [
+          2.5,
+          0.1,
+          1.5
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "pegboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_tablet_1",
+      "name": "Diagnostic Tablet",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "condition": "cracked screen",
+        "error_message": "Firmware Update Required"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "FURNITURE",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "lock_status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "hose_condition": "tangled"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "FURNITURE",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "solvent_condition": "murky"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sparkplug_1",
+      "name": "Sparkplug",
+      "type": "ITEM",
+      "location_id": "in:parts_washer_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "condition": "submerged"
+      },
+      "states": {}
+    },
+    {
+      "id": "work_order_clipboard_1",
+      "name": "Work Order Clipboard",
+      "type": "ITEM",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "condition": "coffee stained"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:prep_workshop",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "message": "DO NOT WASH—Matt’s lunch inside"
+      },
+      "states": {}
+    },
+    {
+      "id": "buffer_machine_1",
+      "name": "Buffer Machine",
+      "type": "FURNITURE",
+      "location_id": "in:detail_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "status": "off"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "wax_cart_1",
+      "name": "Wax Cart",
+      "type": "FURNITURE",
+      "location_id": "in:detail_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "contents": "synthetic wax"
+      },
+      "states": {}
+    },
+    {
+      "id": "boss_mug_1",
+      "name": "BOSS Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:wax_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic",
+        "condition": "cracked at rim"
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_1",
+      "name": "Shop Vacuum",
+      "type": "FURNITURE",
+      "location_id": "in:detail_area",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "status": "off"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "cleaning_supplies_1",
+      "name": "Cleaning Supplies Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:detail_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.3,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "scrub_brush_1",
+      "name": "Scrub Brush",
+      "type": "ITEM",
+      "location_id": "on:cleaning_supplies_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiber_towel_1",
+      "name": "Microfiber Towel",
+      "type": "ITEM",
+      "location_id": "on:cleaning_supplies_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bins_1",
+      "name": "Labeled Bins",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "hubcaps_1",
+      "name": "Loose Hubcaps",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "tire_stack_1",
+      "name": "Stack of Tires",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "coolant and lunch"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "alloy_rims_crate_1",
+      "name": "Limited-Edition Alloy Rims Crate",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "location": "buried under manuals"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:alloy_rims_crate_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "black",
+        "contents": "firmware update"
+      },
+      "states": {}
+    },
+    {
+      "id": "cluttered_desk_1",
+      "name": "Cluttered Desk",
+      "type": "FURNITURE",
+      "location_id": "in:sales_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "customer_agreements_1",
+      "name": "Customer Agreements Binder",
+      "type": "ITEM",
+      "location_id": "on:cluttered_desk_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "contents": "signed contracts"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "flat_screen_1",
+      "name": "Wall-Mounted Flat Screen",
+      "type": "FURNITURE",
+      "location_id": "in:sales_office",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "display": "delivery schedules"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "sold_placard_1",
+      "name": "Sold Placard",
+      "type": "ITEM",
+      "location_id": "on:cluttered_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "message": "Hold for Mrs. Liang—KEY IN DRAWER??"
+      },
+      "states": {}
+    },
+    {
+      "id": "key_fob_1",
+      "name": "Silver Key Fob",
+      "type": "ITEM",
+      "location_id": "in:cluttered_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "label": "Liang",
+        "rubber_band": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "key_fob_2",
+      "name": "Silver Key Fob",
+      "type": "ITEM",
+      "location_id": "in:cluttered_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "rubber_band": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "invoice_stack_1",
+      "name": "Invoice Stack",
+      "type": "ITEM",
+      "location_id": "on:cluttered_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "rubber_band": "green"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:cluttered_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:sales_office",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Computer Keyboard",
+      "type": "ITEM",
+      "location_id": "on:cluttered_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "connect",
+    "dry",
+    "mount",
+    "open",
+    "scrub",
+    "turn_on",
+    "type",
+    "unstaple",
+    "close"
+  ]
+}

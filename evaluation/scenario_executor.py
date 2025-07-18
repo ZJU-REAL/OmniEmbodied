@@ -343,17 +343,26 @@ class ScenarioExecutor:
             task_index = original_index + 1  # 使用原始任务索引（从1开始）
 
             logger.info(f"🔄 Independent任务 {task_index} (筛选后第{exec_index + 1}/{len(tasks_to_execute)}个): {task.get('task_description', 'Unknown')[:50]}...")
-            
+
             # 重新初始化模拟器（全新环境）
             self.simulator = self._initialize_simulator()
-            
-            # 重新创建智能体适配器（全新状态）
-            fresh_agent_adapter = AgentAdapter(
-                agent_adapter.agent_type, self.config, self.simulator, self.trajectory_recorder
+
+            # 为每个独立任务创建独立的轨迹记录器，使用任务特定的scenario_id
+            from .trajectory_recorder import TrajectoryRecorder
+            task_scenario_id = f"{self.scenario_id}_task_{task_index:05d}"
+            task_trajectory_recorder = TrajectoryRecorder(
+                scenario_id=task_scenario_id,
+                output_dir=self.output_dir,
+                agent_type=agent_adapter.agent_type
             )
-            
-            # 创建任务执行器
-            task_executor = TaskExecutor(self.simulator, fresh_agent_adapter, self.trajectory_recorder)
+
+            # 重新创建智能体适配器（全新状态，使用独立的轨迹记录器）
+            fresh_agent_adapter = AgentAdapter(
+                agent_adapter.agent_type, self.config, self.simulator, task_trajectory_recorder
+            )
+
+            # 创建任务执行器（使用独立的轨迹记录器）
+            task_executor = TaskExecutor(self.simulator, fresh_agent_adapter, task_trajectory_recorder)
 
             # 获取每个任务的最大步数配置
             max_steps_per_task = self.config.get('execution', {}).get('max_steps_per_task', 50)
@@ -376,7 +385,7 @@ class ScenarioExecutor:
             if not task_result.get('model_claimed_done', False):
                 logger.warning(f"⚠️ 任务 {task_index} 模型未输出DONE，Independent模式停止执行后续任务")
                 break
-        
+
         return {
             'mode': 'independent',
             'task_results': task_results,

@@ -1,0 +1,942 @@
+{
+  "description": "A high-tech Disneyland Park Operations Control Center (POCC) with multiple interconnected zones for managing ride operations, guest services, and park logistics.",
+  "rooms": [
+    {
+      "id": "main_dispatch_hub",
+      "name": "Main Dispatch Hub",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "technical_support_bay",
+        "fastpass_guest_services_desk",
+        "inventory_supply_room",
+        "break_room_cm_lounge"
+      ]
+    },
+    {
+      "id": "technical_support_bay",
+      "name": "Technical Support Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_dispatch_hub",
+        "inventory_supply_room"
+      ]
+    },
+    {
+      "id": "fastpass_guest_services_desk",
+      "name": "FastPass & Guest Services Desk",
+      "properties": {
+        "type": "service_area"
+      },
+      "connected_to_room_ids": [
+        "main_dispatch_hub",
+        "break_room_cm_lounge"
+      ]
+    },
+    {
+      "id": "inventory_supply_room",
+      "name": "Inventory & Supply Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_dispatch_hub",
+        "technical_support_bay"
+      ]
+    },
+    {
+      "id": "break_room_cm_lounge",
+      "name": "Break Room / CM Lounge",
+      "properties": {
+        "type": "rest_area"
+      },
+      "connected_to_room_ids": [
+        "main_dispatch_hub",
+        "fastpass_guest_services_desk"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "led_display_wall_1",
+      "name": "12-foot-wide curved LED display wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          3.66,
+          0.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "brand": "Samsung",
+        "model_number": "QLED-1200",
+        "resolution": "3840x2160"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "u_shaped_workstation_1",
+      "name": "Central U-shaped workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          0.75
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ergonomic_chair_1",
+      "name": "Ergonomic chair",
+      "type": "FURNITURE",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "brand": "Herman Miller",
+        "model": "Aeron",
+        "color": "graphite"
+      },
+      "states": {}
+    },
+    {
+      "id": "dual_monitor_1",
+      "name": "Dual monitor setup",
+      "type": "FURNITURE",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.3,
+          0.5
+        ],
+        "weight": 8.5,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "UltraSharp U2723QE",
+        "resolution": "2560x1440"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "headset_1",
+      "name": "Radio headset",
+      "type": "ITEM",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Sennheiser",
+        "model": "HMD 300",
+        "frequency": "general",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "headset_2",
+      "name": "Radio headset (Maintenance)",
+      "type": "ITEM",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Sennheiser",
+        "model": "HMD 300",
+        "frequency": "maintenance",
+        "sticker_color": "blue",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "malfunctioning_headset_1",
+      "name": "Malfunctioning radio headset",
+      "type": "ITEM",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Sennheiser",
+        "model": "HMD 300",
+        "condition": "static-filled",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true,
+        "is_broken": false
+      }
+    },
+    {
+      "id": "emergency_override_console_1",
+      "name": "Emergency override console",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glass_panel_1",
+      "name": "Glass panel",
+      "type": "FURNITURE",
+      "location_id": "on:emergency_override_console_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.01
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "tempered_glass",
+        "thickness": "10mm"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "CM keycard",
+      "type": "ITEM",
+      "location_id": "in:u_shaped_workstation_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "employee_id": "DL-427",
+        "access_level": "dispatch"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_2",
+      "name": "CM keycard",
+      "type": "ITEM",
+      "location_id": "in:break_room_cm_lounge",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "employee_id": "DL-428",
+        "access_level": "maintenance"
+      },
+      "states": {}
+    },
+    {
+      "id": "touchscreen_map_table_1",
+      "name": "Large touchscreen map table",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "brand": "Microsoft",
+        "model": "Surface Hub 2S",
+        "resolution": "3840x2160"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "HP",
+        "model": "LaserJet Pro M404n",
+        "paper_size": "A4"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fp_report_1",
+      "name": "FastPass redemption report",
+      "type": "ITEM",
+      "location_id": "on:printer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "content": "hourly_report",
+        "pages": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.02
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Quartet",
+        "surface": "porcelain"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_fan_1",
+      "name": "Desk fan",
+      "type": "FURNITURE",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "brand": "Vornado",
+        "speed_settings": 3
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "walt_disney_photo_1",
+      "name": "Framed photo of Walt Disney",
+      "type": "ITEM",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "weight": 1.5,
+        "frame_material": "wood",
+        "inscription": "\"It's kind of fun to do the impossible.\"",
+        "size": "8x10"
+      },
+      "states": {}
+    },
+    {
+      "id": "mickey_plush_1",
+      "name": "Stuffed Mickey plush",
+      "type": "ITEM",
+      "location_id": "in:main_dispatch_hub",
+      "properties": {
+        "weight": 0.5,
+        "color": "black_red",
+        "brand": "Disney",
+        "size": "medium"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-empty coffee cup",
+      "type": "ITEM",
+      "location_id": "on:u_shaped_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "inscription": "Property of CM #DL-427",
+        "liquid": "coffee",
+        "volume": "250ml"
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_duty_workbench_1",
+      "name": "Heavy-duty workbench",
+      "type": "FURNITURE",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_rack_1",
+      "name": "Wall-mounted tool rack",
+      "type": "FURNITURE",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal",
+        "hooks": 12
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic lift",
+      "type": "FURNITURE",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.5
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "capacity": "500kg",
+        "power_source": "electric"
+      },
+      "states": {}
+    },
+    {
+      "id": "animatronic_parrot_1",
+      "name": "Broken animatronic parrot from Pirates of the Caribbean",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "green_red",
+        "condition": "damaged",
+        "part": "left_wing_detached"
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "diagnostic_tablet_1",
+      "name": "Diagnostic tablet",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Apple",
+        "model": "iPad Pro",
+        "screen_size": "12.9",
+        "provides_abilities": [
+          "format",
+          "download"
+        ]
+      },
+      "states": {
+        "is_formatted": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "parts_crate_1",
+      "name": "Sealed parts crate for DHS Tower of Terror",
+      "type": "ITEM",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 75.0,
+        "priority": "high",
+        "destination": "FastPass desk",
+        "contents": "sensor_components"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering iron",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Weller",
+        "temperature": "350C",
+        "status": "warm",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling cart with labeled drawers",
+      "type": "FURNITURE",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "wheels": 4,
+        "drawers": 6
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screws_drawer_1",
+      "name": "Screws - Size 4",
+      "type": "ITEM",
+      "location_id": "in:rolling_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "type": "screws",
+        "size": "4",
+        "material": "steel",
+        "quantity": 100
+      },
+      "states": {}
+    },
+    {
+      "id": "battery_tester_1",
+      "name": "Battery tester",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Fluke",
+        "model": "BT100",
+        "status": "beeping",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Dusty \"Safety First!\" poster",
+      "type": "ITEM",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "weight": 0.2,
+        "size": "A3",
+        "year": 2015,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "lunchbox_1",
+      "name": "CM's forgotten lunchbox",
+      "type": "ITEM",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "status": "ajar",
+        "smell": "tuna",
+        "owner": "CM #DL-429"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ride_manuals_1",
+      "name": "Stack of outdated ride manuals",
+      "type": "ITEM",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "weight": 3.0,
+        "quantity": 12,
+        "condition": "outdated",
+        "top_manual": "Space Mountain 2012"
+      },
+      "states": {}
+    },
+    {
+      "id": "fastpass_terminal_1",
+      "name": "FastPass terminal",
+      "type": "FURNITURE",
+      "location_id": "in:fastpass_guest_services_desk",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "brand": "Disney",
+        "model": "FP-X2000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "guest_complaint_form_1",
+      "name": "Guest complaint form",
+      "type": "ITEM",
+      "location_id": "on:fastpass_terminal_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "yellow",
+        "status": "incomplete",
+        "fields": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "vip_tracker_1",
+      "name": "VIP guest tracker",
+      "type": "ITEM",
+      "location_id": "on:fastpass_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "type": "tablet",
+        "brand": "Apple",
+        "model": "iPad Mini",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First aid kit",
+      "type": "ITEM",
+      "location_id": "in:inventory_supply_room",
+      "properties": {
+        "weight": 2.0,
+        "size": "medium",
+        "contents": "bandages, antiseptic, gloves",
+        "expiration_date": "2025-12-31"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flashlight_1",
+      "name": "Flashlight",
+      "type": "ITEM",
+      "location_id": "in:inventory_supply_room",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Maglite",
+        "battery_status": "full",
+        "lumens": 250
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "spare_parts_shelf_1",
+      "name": "Spare parts shelf",
+      "type": "FURNITURE",
+      "location_id": "in:inventory_supply_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "shelves": 5,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "sensor_module_1",
+      "name": "Expedition Everest sensor module",
+      "type": "ITEM",
+      "location_id": "on:spare_parts_shelf_1",
+      "properties": {
+        "weight": 1.2,
+        "model": "EE-SEN-45",
+        "urgency": "high",
+        "compatibility": "Expedition Everest"
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "locker_1",
+      "name": "CM locker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room_cm_lounge",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "combination"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room_cm_lounge",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Keurig",
+        "model": "K-Elite"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Cast Member announcements bulletin board",
+      "type": "FURNITURE",
+      "location_id": "in:break_room_cm_lounge",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.02
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "cork",
+        "pins": 20
+      },
+      "states": {}
+    },
+    {
+      "id": "cm_announcement_1",
+      "name": "Cast Member announcement",
+      "type": "ITEM",
+      "location_id": "on:bulletin_board_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "content": "Mandatory training on Thursday",
+        "date": "2023-11-15"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Snap-on",
+        "torque_range": "10-100 Nm",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and thread",
+      "type": "ITEM",
+      "location_id": "in:rolling_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "length": "50m",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:rolling_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "brand": "Fiskars",
+        "blade_length": "15cm",
+        "provides_abilities": [
+          "unwrap",
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Craftsman",
+        "size": "10mm",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Stanley",
+        "type": "phillips",
+        "size": "#2",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:inventory_supply_room",
+      "properties": {
+        "weight": 3.0,
+        "brand": "3M",
+        "type": "UV",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "roller_1",
+      "name": "Roller",
+      "type": "ITEM",
+      "location_id": "in:technical_support_bay",
+      "properties": {
+        "weight": 2.5,
+        "type": "paint",
+        "width": "20cm",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray bottle",
+      "type": "ITEM",
+      "location_id": "in:inventory_supply_room",
+      "properties": {
+        "weight": 0.5,
+        "liquid": "disinfectant",
+        "volume": "500ml",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "damage",
+    "disconnect",
+    "download",
+    "flatten",
+    "format",
+    "loosen",
+    "mend",
+    "open",
+    "spray",
+    "sterilize",
+    "turn_on",
+    "unwrap",
+    "close"
+  ]
+}

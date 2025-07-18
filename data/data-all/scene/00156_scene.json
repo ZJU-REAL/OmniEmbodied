@@ -1,0 +1,875 @@
+{
+  "description": "A cutting-edge Neural Biochemistry Research Lab with advanced equipment for studying brain insulin production and neurodegenerative diseases.",
+  "rooms": [
+    {
+      "id": "main_research_chamber",
+      "name": "Main Research Chamber",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "cold_storage",
+        "data_analysis_hub",
+        "equipment_closet",
+        "breakroom"
+      ]
+    },
+    {
+      "id": "cold_storage",
+      "name": "Cold Storage & Sample Prep Room",
+      "properties": {
+        "type": "refrigerated"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    },
+    {
+      "id": "data_analysis_hub",
+      "name": "Data Analysis Hub",
+      "properties": {
+        "type": "computer_room"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    },
+    {
+      "id": "equipment_closet",
+      "name": "Equipment Maintenance Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    },
+    {
+      "id": "breakroom",
+      "name": "Breakroom & Observation Lounge",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_research_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_lab_bench_1",
+      "name": "Central Lab Bench",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "has_power_outlets": true,
+        "fume_extractor": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pipetting_station_1",
+      "name": "Automated Multi-Channel Pipetting Station",
+      "type": "FURNITURE",
+      "location_id": "on:central_lab_bench_1",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "requires_calibration": true,
+        "model": "RoboPipette-X7"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "High-Resolution Fluorescence Microscope",
+      "type": "FURNITURE",
+      "location_id": "on:central_lab_bench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "brand": "NanoView",
+        "magnification": "1000x"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "assay_kit_1",
+      "name": "Neural Insulin Assay Kit",
+      "type": "ITEM",
+      "location_id": "in:central_lab_bench_1",
+      "properties": {
+        "weight": 2.5,
+        "batch_number": "ALZ-114",
+        "contents": [
+          "synthetic_insulin",
+          "syringes",
+          "calibration_chip"
+        ]
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "electrophoresis_box_1",
+      "name": "Electrophoresis Gel Box",
+      "type": "FURNITURE",
+      "location_id": "on:central_lab_bench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "gel_progress": "70%"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "emergency_switch_1",
+      "name": "Emergency Shutoff Switch",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "color": "red",
+        "mount": "ceiling"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "rpm": 10000,
+        "time_remaining": "2:14"
+      },
+      "states": {
+        "is_locked": true,
+        "is_running": true
+      }
+    },
+    {
+      "id": "lab_coat_rack_1",
+      "name": "Lab Coat Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.2,
+          1.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Clean Lab Coat",
+      "type": "ITEM",
+      "location_id": "on:lab_coat_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "size": "large",
+        "condition": "clean"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "lab_coat_2",
+      "name": "Stained Lab Coat",
+      "type": "ITEM",
+      "location_id": "on:lab_coat_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "size": "medium",
+        "condition": "stained",
+        "stain_color": "blue"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:central_lab_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "LabTech",
+        "time_display": "00:08:32",
+        "sound": "beeping"
+      },
+      "states": {
+        "is_muted": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Research Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "content": "equations",
+        "has_note": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Decontamination Reminder",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "text": "Remember: Decontaminate before storage!"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Broken Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "status": "out_of_order",
+        "note": "Call IT"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Chemical Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "weight": 0.2,
+        "size": "A2",
+        "condition": "peeling",
+        "content": "exposure_protocols"
+      },
+      "states": {}
+    },
+    {
+      "id": "cryo_freezer_1",
+      "name": "-80°C Cryogenic Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          2.0
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "temperature": -80,
+        "warning_light": "blinking"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "filter": "HEPA",
+        "glove_condition": "torn"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "brain_sample_1",
+      "name": "Patient A7 Brain Tissue Sample",
+      "type": "ITEM",
+      "location_id": "in:cryo_freezer_1",
+      "properties": {
+        "weight": 0.5,
+        "barcode": "N3U-882K",
+        "packaging": "vacuum_sealed",
+        "alarm_system": true
+      },
+      "states": {
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "nitrogen_dewar_1",
+      "name": "Liquid Nitrogen Dewar",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "fill_level": "75%",
+        "pressure": "yellow_zone"
+      },
+      "states": {}
+    },
+    {
+      "id": "tube_rack_1",
+      "name": "Microcentrifuge Tube Rack",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.5,
+        "is_container": true,
+        "tube_count": 50,
+        "organization": "unordered"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_gloves_1",
+      "name": "Thermal Gloves",
+      "type": "ITEM",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "weight": 0.3,
+        "condition": "frayed",
+        "material": "insulated",
+        "size": "large"
+      },
+      "states": {
+        "is_sewn": false
+      }
+    },
+    {
+      "id": "obsolete_samples_1",
+      "name": "Obsolete Sample Jars",
+      "type": "ITEM",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "weight": 2.0,
+        "count": 6,
+        "label": "DISCONTINUED - 2003",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Dented Mini-Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "contents": "staff_lunches",
+        "noise": "loud_hum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "door_type": "mesh",
+        "drive_status": "degraded"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "brain_projector_1",
+      "name": "3D Brain Model Projector",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "current_display": "hippocampal_insulin_receptors"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "research_tablet_1",
+      "name": "Encrypted Research Tablet",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.6,
+        "brand": "TechPad",
+        "screen_message": "UPLOAD IN PROGRESS",
+        "security": "passcode_protected"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "backup_drive_1",
+      "name": "Backup Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.4,
+        "label": "FINAL ALZ DATA - DO NOT OVERWRITE",
+        "connection_status": "plugged_in",
+        "mount_status": "unmounted"
+      },
+      "states": {
+        "is_inserted": true
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Lab Printer",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "paper_status": "out",
+        "error_light": "on"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Sticky Keyboard",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.5,
+        "stains": "coffee",
+        "affected_keys": [
+          "CTRL",
+          "ALT"
+        ],
+        "brand": "KeyMaster"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "phd_degree_1",
+      "name": "Framed PhD Degree",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 1.2,
+        "field": "Neurochemistry",
+        "frame_condition": "crooked",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Succulent",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.3,
+        "pot_condition": "cracked",
+        "plant_condition": "dried_out",
+        "species": "succulent"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Maintenance Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 8.5,
+        "color": "red",
+        "contents": [
+          "wrenches",
+          "screwdrivers",
+          "pliers"
+        ],
+        "provides_abilities": [
+          "damage",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_kit_1",
+      "name": "Lens Cleaning Kit",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.7,
+        "contents": [
+          "lint_free_wipes",
+          "cleaning_solution"
+        ],
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_parts_1",
+      "name": "Spare Parts Bin",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 5.0,
+        "contents": [
+          "microscope_lenses",
+          "pipette_tips",
+          "circuit_boards"
+        ],
+        "organization": "unordered"
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_microscope_1",
+      "name": "Backup Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "status": "in_storage",
+        "model": "NanoView-Lite"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "breakroom_fridge_1",
+      "name": "Breakroom Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          0.8,
+          0.7,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": [
+          "food",
+          "drinks",
+          "cleaning_solution"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "observation_chair_1",
+      "name": "Observation Lounge Chair",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "leather",
+        "comfort": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "one_way_mirror_1",
+      "name": "One-Way Observation Glass",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "view": "main_lab",
+        "privacy": "one_way"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Lab Breakroom Mug",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "inscription": "World's Best Scientist",
+        "condition": "stained"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "lab_notebook_1",
+      "name": "Research Lab Notebook",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.5,
+        "pages": "filled",
+        "cover_color": "black",
+        "bookmark": "page_42"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "OfficePro",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "ScanMaster",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "water_purifier_1",
+      "name": "Lab Water Purifier",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.7
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "filter_type": "reverse_osmosis",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "lab_knife_1",
+      "name": "Laboratory Knife",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.3,
+        "blade_type": "scalpel",
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sewing_kit_1",
+      "name": "Emergency Sewing Kit",
+      "type": "ITEM",
+      "location_id": "in:equipment_closet",
+      "properties": {
+        "weight": 0.2,
+        "contents": [
+          "needles",
+          "thread",
+          "thimble"
+        ],
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "damage",
+    "deactivate",
+    "eject",
+    "fold",
+    "mute",
+    "open",
+    "purify",
+    "repair",
+    "scan",
+    "sew",
+    "slice",
+    "start_process",
+    "stop_process",
+    "thaw",
+    "turn_off",
+    "turn_on",
+    "unstaple",
+    "close"
+  ]
+}

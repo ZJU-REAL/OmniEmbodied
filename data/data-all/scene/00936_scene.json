@@ -1,0 +1,730 @@
+{
+  "description": "A high-tech autonomous vehicle testing and maintenance garage with a central vehicle bay, diagnostics station, parts storage, safety compliance area, and break room.",
+  "rooms": [
+    {
+      "id": "main_vehicle_bay",
+      "name": "Main Vehicle Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostics_station",
+        "parts_storage",
+        "safety_compliance",
+        "break_area"
+      ]
+    },
+    {
+      "id": "diagnostics_station",
+      "name": "Diagnostics & Software Station",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "main_vehicle_bay"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts & Tool Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_vehicle_bay"
+      ]
+    },
+    {
+      "id": "safety_compliance",
+      "name": "Safety & Compliance Corner",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_vehicle_bay"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_vehicle_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 2500.0,
+        "is_container": true,
+        "capacity": "2500 kg",
+        "material": "steel",
+        "condition": "slightly rusted"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead Crane",
+      "type": "FURNITURE",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "size": [
+          4.0,
+          3.0,
+          3.5
+        ],
+        "weight": 3000.0,
+        "is_container": false,
+        "capacity": "3-ton",
+        "material": "steel",
+        "condition": "hook slightly rusted"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rolling_tool_chest_1",
+      "name": "Rolling Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "drawer_labels": [
+          "Torque Wrenches",
+          "Socket Sets"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "autonomous_sedan_1",
+      "name": "Autonomous Sedan",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          4.8,
+          1.8,
+          1.5
+        ],
+        "weight": 1800.0,
+        "is_container": true,
+        "brand": "Tesla",
+        "model": "Model S",
+        "condition": "partially disassembled"
+      },
+      "states": {
+        "is_on": false,
+        "is_dirty": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "front_bumper_1",
+      "name": "Front Bumper",
+      "type": "ITEM",
+      "location_id": "on:autonomous_sedan_1",
+      "properties": {
+        "weight": 12.5,
+        "material": "plastic",
+        "serial_number": "PB-7742-9A",
+        "condition": "cracked near left parking sensor"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "lidar_array_1",
+      "name": "LiDAR Array",
+      "type": "ITEM",
+      "location_id": "on:autonomous_sedan_1",
+      "properties": {
+        "weight": 8.3,
+        "material": "metal and plastic",
+        "condition": "partially detached, one bolt missing, wires exposed"
+      },
+      "states": {
+        "is_loose": true
+      }
+    },
+    {
+      "id": "onboard_computer_1",
+      "name": "Onboard Computer",
+      "type": "ITEM",
+      "location_id": "in:autonomous_sedan_1",
+      "properties": {
+        "weight": 5.7,
+        "material": "plastic and metal",
+        "error_message": "PARK_ASSIST_FAULT (Code 47)"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "diagnostic_dongle_1",
+      "name": "Diagnostic Dongle",
+      "type": "ITEM",
+      "location_id": "in:autonomous_sedan_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "status": "Calibration Required"
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "impact_test_rig_1",
+      "name": "Impact Test Rig",
+      "type": "FURNITURE",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 350.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "powered off"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": [
+          "cordless drill",
+          "hex keys"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cordless_drill_1",
+      "name": "Cordless Drill",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 2.1,
+        "material": "plastic and metal",
+        "battery_level": "30%",
+        "brand": "DeWalt"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "hex_keys_1",
+      "name": "Hex Key Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "metal",
+        "missing_size": "4"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:main_vehicle_bay",
+      "properties": {
+        "weight": 5.5,
+        "material": "plastic",
+        "expiry_date": "next month",
+        "status": "unopened"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostics_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "label": "NEURAL_NET_VERIFIER_3"
+      },
+      "states": {
+        "is_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "golden_unit_ecu_1",
+      "name": "Golden Unit ECU",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic and metal",
+        "status": "locked in Faraday cage"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermal_printer_1",
+      "name": "Thermal Printer",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_station",
+      "properties": {
+        "weight": 4.3,
+        "material": "plastic",
+        "status": "jammed with half-printed error logs"
+      },
+      "states": {
+        "is_on": false,
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_station",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "message": "If Code 47, CHECK LIDAR FIRST -Jen"
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_duty_shelving_1",
+      "name": "Heavy Duty Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "metal",
+        "labels": [
+          "sensors",
+          "wiring harnesses",
+          "actuators"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "firmware_cabinet_1",
+      "name": "Firmware Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal",
+        "status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "inventory_drone_1",
+      "name": "Inventory Drone",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 3.5,
+        "material": "plastic and metal",
+        "status": "beeping during stock checks"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "incident_reports_desk_1",
+      "name": "Incident Reports Desk",
+      "type": "FURNITURE",
+      "location_id": "in:safety_compliance",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.75
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "incident reports",
+          "liability waivers"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "traffic_law_display_1",
+      "name": "Traffic Law Display",
+      "type": "ITEM",
+      "location_id": "in:safety_compliance",
+      "properties": {
+        "weight": 12.0,
+        "material": "metal and glass",
+        "status": "showing real-time traffic law updates"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "evidence_locker_1",
+      "name": "Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:safety_compliance",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": [
+          "damaged LiDAR sensor"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "damaged_lidar_1",
+      "name": "Damaged LiDAR Sensor",
+      "type": "ITEM",
+      "location_id": "in:evidence_locker_1",
+      "properties": {
+        "weight": 2.8,
+        "material": "plastic and metal",
+        "condition": "from prior collision"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          1.6
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": [
+          "energy drinks"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 15.0,
+        "material": "plastic and metal",
+        "condition": "broken door hinge"
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "couch_1",
+      "name": "Couch",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          2.2,
+          0.9,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "fabric",
+        "condition": "torn cushion"
+      },
+      "states": {
+        "is_torn": true
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 5.0,
+        "material": "cork",
+        "contents": [
+          "memes about robot uprising",
+          "faded OSHA poster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vending_machine_1",
+      "name": "Vending Machine",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 150.0,
+        "material": "metal and glass",
+        "status": "faint buzz"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "metal",
+        "size": "medium",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal and plastic",
+        "type": "Phillips",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cloth",
+        "color": "blue",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sponge_1",
+      "name": "Sponge",
+      "type": "ITEM",
+      "location_id": "in:break_area",
+      "properties": {
+        "weight": 0.1,
+        "material": "foam",
+        "color": "yellow",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "in:diagnostics_station",
+      "properties": {
+        "weight": 0.9,
+        "material": "plastic",
+        "type": "mechanical",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:safety_compliance",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal and plastic",
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.5,
+        "material": "wood and plastic",
+        "color": "brown",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_tape_1",
+      "name": "Packing Tape",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "color": "brown",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "in:safety_compliance",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic and metal",
+        "status": "requires code",
+        "provides_abilities": [
+          "arm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": false
+      }
+    }
+  ],
+  "abilities": [
+    "arm_alarm",
+    "clean",
+    "cut",
+    "open",
+    "pack",
+    "sweep",
+    "tighten",
+    "turn_on",
+    "type",
+    "unstaple",
+    "close"
+  ]
+}

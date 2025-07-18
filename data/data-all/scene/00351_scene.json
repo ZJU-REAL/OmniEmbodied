@@ -1,0 +1,751 @@
+{
+  "description": "A remote Arctic Cryogenics Research Station studying extreme cold adaptation and organ preservation, featuring a mix of high-tech medical equipment and rugged survival gear.",
+  "rooms": [
+    {
+      "id": "main_lab",
+      "name": "Main Lab & Cryo-Chamber",
+      "properties": {
+        "type": "laboratory",
+        "temperature": -78.0,
+        "humidity": 0.2
+      },
+      "connected_to_room_ids": [
+        "field_prep_room",
+        "storage_depot",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "field_prep_room",
+      "name": "Field Prep Room",
+      "properties": {
+        "type": "preparation",
+        "temperature": -10.0,
+        "humidity": 0.4
+      },
+      "connected_to_room_ids": [
+        "main_lab",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "storage_depot",
+      "name": "Storage & Supply Depot",
+      "properties": {
+        "type": "storage",
+        "temperature": 5.0,
+        "humidity": 0.3
+      },
+      "connected_to_room_ids": [
+        "main_lab",
+        "generator_room"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "observation",
+        "temperature": -20.0,
+        "humidity": 0.1
+      },
+      "connected_to_room_ids": [
+        "field_prep_room"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Living Quarters",
+      "properties": {
+        "type": "living",
+        "temperature": 18.0,
+        "humidity": 0.5
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "generator_room",
+      "name": "Backup Generator Room",
+      "properties": {
+        "type": "utility",
+        "temperature": 25.0,
+        "humidity": 0.6
+      },
+      "connected_to_room_ids": [
+        "storage_depot"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "cryo_freezer_1",
+      "name": "Industrial Cryogenic Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          2.2
+        ],
+        "weight": 350.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": -80.0,
+        "model_number": "CF-X9000",
+        "biometric_lock": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lab_bench_1",
+      "name": "Lab Bench",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "power_outlets": 4,
+        "usb_ports": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_station_1",
+      "name": "Microscope Station",
+      "type": "FURNITURE",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.5,
+        "is_container": false,
+        "magnification": "1000x",
+        "digital_display": true,
+        "brand": "Nikon"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "frog_sample_tray_1",
+      "name": "Frog Sample Tray",
+      "type": "ITEM",
+      "location_id": "in:cryo_freezer_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "glass",
+        "label": "Wood Frog #7—Glucose Levels High",
+        "sealed": true,
+        "specimen_state": "thawing"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Broken Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "error_code": "E-45",
+        "brand": "Eppendorf"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "defrost_kit_1",
+      "name": "Emergency Defrost Kit",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 3.5,
+        "color": "red",
+        "material": "plastic",
+        "fingerprint_override": true,
+        "contents": "rapid-thaw serum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lab_notebook_1",
+      "name": "Lab Notebook",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "paper",
+        "last_entry": "Day 147: Glycogen levels stable, but cell membrane integrity uncertain",
+        "page_count": 120
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "status": "empty",
+        "note": "OUT"
+      },
+      "states": {}
+    },
+    {
+      "id": "temp_monitor_1",
+      "name": "Temperature Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 1.2,
+        "is_container": false,
+        "current_temperature": -78.0,
+        "warning_light": true
+      },
+      "states": {}
+    },
+    {
+      "id": "team_photo_1",
+      "name": "Framed Photo of the Research Team",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.8,
+        "frame_material": "wood",
+        "glass": true,
+        "dust_level": "moderate"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.2,
+        "content": "CRYOHAZARD—DO NOT TOUCH EXPOSED SPECIMENS",
+        "material": "paper",
+        "condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_stain_1",
+      "name": "Coffee Stain",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "dark brown",
+        "age": "old",
+        "shape": "ring"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sample_table_1",
+      "name": "Sample Intake Table",
+      "type": "FURNITURE",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "aluminum",
+        "drainage_grooves": true,
+        "digital_scale": true
+      },
+      "states": {}
+    },
+    {
+      "id": "transport_crate_1",
+      "name": "Heavy-Duty Transport Crate",
+      "type": "FURNITURE",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "reinforced steel",
+        "wheels_locked": true,
+        "label": "FRAGILE—LIQUID NITROGEN"
+      },
+      "states": {}
+    },
+    {
+      "id": "soil_samples_1",
+      "name": "Frozen Soil Samples",
+      "type": "ITEM",
+      "location_id": "on:sample_table_1",
+      "properties": {
+        "weight": 2.5,
+        "packaging": "vacuum-sealed bags",
+        "label": "Site B-12, Permafrost Layer",
+        "temperature": -15.0
+      },
+      "states": {}
+    },
+    {
+      "id": "gps_tracker_1",
+      "name": "Broken GPS Tracker",
+      "type": "ITEM",
+      "location_id": "on:sample_table_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "broken",
+        "screen_status": "cracked",
+        "battery_compartment": "loose"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "thermal_boots_1",
+      "name": "Thermal Boots",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 1.8,
+        "pair_status": "missing_left",
+        "lining_material": "wool",
+        "size": "10"
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 2.0,
+        "status": "partially_open",
+        "contents": "bandages, antiseptic, scissors",
+        "expiry_date": "2025-06-01"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "bear_sign_1",
+      "name": "Polar Bear Warning Sign",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 0.5,
+        "message": "CAUTION: RECENT SIGHTINGS",
+        "material": "metal",
+        "condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "snow_shovel_1",
+      "name": "Dirty Snow Shovel",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 3.2,
+        "condition": "dirty",
+        "ice_present": true,
+        "handle_material": "wood"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "chemical_vial_1",
+      "name": "Chemical Vial #1",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "red",
+        "label_type": "printed",
+        "content": "unknown",
+        "fill_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_vial_2",
+      "name": "Chemical Vial #2",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "green",
+        "label_type": "printed",
+        "content": "unknown",
+        "fill_level": "sealed"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_vial_3",
+      "name": "Chemical Vial #3",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "blue",
+        "label_type": "handwritten",
+        "label_content": "GLUCOSE CONCENTRATE",
+        "fill_level": "half-empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_vial_4",
+      "name": "Chemical Vial #4",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "red",
+        "label_type": "printed",
+        "content": "unknown",
+        "fill_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_vial_5",
+      "name": "Chemical Vial #5",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "cap_color": "green",
+        "label_type": "printed",
+        "content": "unknown",
+        "fill_level": "sealed"
+      },
+      "states": {}
+    },
+    {
+      "id": "paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass",
+        "shape": "spherical",
+        "function": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Security Keycard",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access_level": "high",
+        "owner": "Dr. Smith"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "lock_type": "code",
+        "code_location": "lab notebook (page 23)"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "color": "white",
+        "condition": "used",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "UV Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 4.0,
+        "brand": "GermGuard",
+        "wavelength": "254nm",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shovel_1",
+      "name": "Field Shovel",
+      "type": "ITEM",
+      "location_id": "in:field_prep_room",
+      "properties": {
+        "weight": 2.5,
+        "material": "steel",
+        "handle": "fiberglass",
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Food Grater",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.5,
+        "material": "stainless steel",
+        "size": "medium",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Portable Heater",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 3.0,
+        "wattage": "1500W",
+        "safety_features": "tip-over switch",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Stainless Steel Whisk",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "length": "25cm",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "Document File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "drawers": 4,
+        "lock_type": "key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fertilizer_1",
+      "name": "Plant Fertilizer",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 2.0,
+        "type": "NPK 10-10-10",
+        "quantity": "5kg",
+        "provides_abilities": [
+          "fertilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "insulation_roll_1",
+      "name": "Fiberglass Insulation Roll",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 4.5,
+        "material": "fiberglass",
+        "thickness": "10cm",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "generator_1",
+      "name": "Backup Generator",
+      "type": "FURNITURE",
+      "location_id": "in:generator_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "fuel_type": "diesel",
+        "capacity": "10kW"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Mechanic's Toolbox",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 12.0,
+        "color": "red",
+        "tools_included": "wrench, screwdriver, pliers",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hammer_1",
+      "name": "Rubber Mallet",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 1.2,
+        "head_material": "rubber",
+        "handle_material": "wood",
+        "provides_abilities": [
+          "pulverize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "adjustable_wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:storage_depot",
+      "properties": {
+        "weight": 0.8,
+        "size": "10-inch",
+        "jaw_capacity": "25mm",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "clean",
+    "close",
+    "dig",
+    "disconnect",
+    "fertilize",
+    "grate",
+    "heat_up",
+    "hide",
+    "insulate",
+    "open",
+    "pulverize",
+    "repair",
+    "sterilize",
+    "turn_on",
+    "whisk"
+  ]
+}

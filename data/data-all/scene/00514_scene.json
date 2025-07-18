@@ -1,0 +1,765 @@
+{
+  "description": "A high-tech Network Operations Center (NOC) during a critical bandwidth crisis, featuring a main monitoring hub, hardware maintenance bay, documentation corner, and break room, filled with servers, routers, diagnostic tools, and emergency protocols.",
+  "rooms": [
+    {
+      "id": "main_monitoring_hub",
+      "name": "Main Monitoring Hub",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "hardware_maintenance_bay",
+        "documentation_corner",
+        "break_room"
+      ]
+    },
+    {
+      "id": "hardware_maintenance_bay",
+      "name": "Hardware Maintenance Bay",
+      "properties": {
+        "type": "maintenance"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    },
+    {
+      "id": "documentation_corner",
+      "name": "Documentation & Planning Corner",
+      "properties": {
+        "type": "documentation"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "break"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_command_desk_1",
+      "name": "Central Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          4.0,
+          1.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "ups_battery_bank_1",
+      "name": "UPS Battery Bank",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "battery_health": 62,
+        "color": "gray"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "router_access_terminal_1",
+      "name": "Router Access Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "Cisco",
+        "model_number": "NCS 540"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "packet_sniffer_rig_1",
+      "name": "Packet Sniffer Rig",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "black",
+        "brand": "Custom",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "gray",
+        "brand": "ATEN",
+        "model_number": "CS1764"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "open_frame_server_rack_1",
+      "name": "Open-Frame Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "cisco_router_1",
+      "name": "CISCO NCS 540 Router",
+      "type": "ITEM",
+      "location_id": "in:open_frame_server_rack_1",
+      "properties": {
+        "weight": 40.0,
+        "color": "gray",
+        "brand": "Cisco",
+        "model_number": "NCS 540"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "tool_pegboard_1",
+      "name": "Tool Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "voltage_meter_1",
+      "name": "Voltage Meter",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "Fluke",
+        "model_number": "87V"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "overheating_switch_1",
+      "name": "Juniper EX4300 Switch",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Juniper",
+        "model_number": "EX4300"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "locked_parts_bin_1",
+      "name": "Locked Parts Bin",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "brand": "Stanley",
+        "model_number": "STST140800",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Thermal Paste",
+      "type": "ITEM",
+      "location_id": "in:locked_parts_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "Arctic",
+        "model_number": "MX-4"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_corner",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "melamine",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_corner",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "maintenance_manual_1",
+      "name": "Maintenance Manual",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "brand": "Cisco",
+        "title": "NCS 540 Maintenance Guide"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Keurig",
+        "model_number": "K-Elite",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 4.0,
+        "color": "red",
+        "brand": "Dyson",
+        "model_number": "V11",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {
+        "is_vacuumed": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Weller",
+        "model_number": "WLC100",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "emergency_fire_blanket_1",
+      "name": "Emergency Fire Blanket",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "brand": "Kidde",
+        "model_number": "FA110"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Dented Stress Ball",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "COMCAST",
+        "inscription": "COMCAST MVP 2006"
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "frame_material": "wood",
+        "inscription": "Team of the Year 2023"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "donut_1",
+      "name": "Half-Eaten Donut",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "pink",
+        "flavor": "strawberry",
+        "condition": "half-eaten"
+      },
+      "states": {
+        "is_thrown": false
+      }
+    },
+    {
+      "id": "radio_1",
+      "name": "Static-Filled Radio",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "brand": "Sony",
+        "model_number": "ICF-506"
+      },
+      "states": {
+        "is_muted": false
+      }
+    },
+    {
+      "id": "p2p_traffic_policy_1",
+      "name": "P2P Traffic Policy Memo",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "content": "P2P Traffic Policy",
+        "condition": "partially obscured"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "fiber_backup_line_1",
+      "name": "Fiber Backup Line",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "label": "FIBER BACKUP LINE – DO NOT UNPLUG",
+        "length": "10m"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "spare_fiber_patch_cables_1",
+      "name": "Spare Fiber Patch Cables",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "orange",
+        "label": "TESTED 10/24",
+        "quantity": 5
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "voip_traffic_cable_1",
+      "name": "VOIP Traffic Cable",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "tag": "VOIP TRAFFIC",
+        "zip_tie_color": "blue"
+      },
+      "states": {
+        "is_pulled": true
+      }
+    },
+    {
+      "id": "bulk_data_cable_1",
+      "name": "Bulk Data Cable",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "tag": "BULK DATA",
+        "zip_tie_color": "red"
+      },
+      "states": {
+        "is_pulled": true
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Cold Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "brand": "Starbucks",
+        "content": "cold coffee"
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "brand": "Panasonic",
+        "model_number": "NN-SN966S"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "cork",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "pizza_coupon_1",
+      "name": "Pizza Coupon",
+      "type": "ITEM",
+      "location_id": "on:bulletin_board_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "red",
+        "brand": "Domino's",
+        "expiry_date": "12/31/2023"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "network_schematics_1",
+      "name": "Network Schematics",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "content": "Network topology diagram",
+        "condition": "pinned"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "incident_reports_1",
+      "name": "Incident Reports",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "manila",
+        "label": "Incident Reports (2005–Present)",
+        "quantity": "50+"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:central_command_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "Fujitsu",
+        "model_number": "ScanSnap iX1500",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_and_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:locked_parts_bin_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "steel and cotton",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:hardware_maintenance_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "brand": "No-Spill",
+        "model_number": "1455",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "sealing_tape_1",
+      "name": "Sealing Tape",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "brand": "3M",
+        "model_number": "Scotch 35",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dishes_and_cutlery_1",
+      "name": "Dishes and Cutlery",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "ceramic and stainless steel",
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {
+        "is_table_set": false
+      }
+    },
+    {
+      "id": "puzzle_board_1",
+      "name": "Puzzle Board",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "wood",
+        "brand": "Ravensburger",
+        "model_number": "2000pc"
+      },
+      "states": {
+        "is_solved": true
+      }
+    },
+    {
+      "id": "leashed_tool_1",
+      "name": "Leashed Tool",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "Klein",
+        "model_number": "D2000"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    }
+  ],
+  "abilities": [
+    "brew",
+    "close",
+    "deactivate",
+    "loosen",
+    "mend",
+    "mute",
+    "open",
+    "paste",
+    "refuel",
+    "scan",
+    "seal",
+    "set_table",
+    "shake",
+    "reset_puzzle",
+    "stack",
+    "throw",
+    "unleash",
+    "vacuum"
+  ]
+}

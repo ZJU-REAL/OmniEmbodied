@@ -1,0 +1,530 @@
+{
+  "description": "A modern, high-efficiency swine farrowing barn with climate-controlled zones, designed for piglet survival and worker productivity. The barn includes farrowing crate rows, a medical prep station, feed storage, observation hub, quarantine pen, and wash area.",
+  "rooms": [
+    {
+      "id": "farrowing_crate_rows",
+      "name": "Farrowing Crate Rows",
+      "properties": {
+        "type": "primary_zone"
+      },
+      "connected_to_room_ids": [
+        "medical_prep_station",
+        "feed_storage",
+        "observation_hub"
+      ]
+    },
+    {
+      "id": "medical_prep_station",
+      "name": "Medical Prep Station",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "farrowing_crate_rows",
+        "observation_hub"
+      ]
+    },
+    {
+      "id": "feed_storage",
+      "name": "Feed & Supply Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "farrowing_crate_rows",
+        "wash_area"
+      ]
+    },
+    {
+      "id": "observation_hub",
+      "name": "Observation & Data Hub",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "farrowing_crate_rows",
+        "medical_prep_station"
+      ]
+    },
+    {
+      "id": "quarantine_pen",
+      "name": "Quarantine/Recovery Pen",
+      "properties": {
+        "type": "isolation"
+      },
+      "connected_to_room_ids": [
+        "farrowing_crate_rows"
+      ]
+    },
+    {
+      "id": "wash_area",
+      "name": "Wash & Decon Area",
+      "properties": {
+        "type": "sanitation"
+      },
+      "connected_to_room_ids": [
+        "feed_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "farrowing_crate_1",
+      "name": "Farrowing Crate",
+      "type": "FURNITURE",
+      "location_id": "in:farrowing_crate_rows",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "FC-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "farrowing_crate_2",
+      "name": "Farrowing Crate",
+      "type": "FURNITURE",
+      "location_id": "in:farrowing_crate_rows",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "FC-2000"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "heat_mat_1",
+      "name": "Piglet Heat Mat",
+      "type": "ITEM",
+      "location_id": "in:farrowing_crate_1",
+      "properties": {
+        "weight": 3.5,
+        "size": [
+          0.6,
+          0.9,
+          0.05
+        ],
+        "material": "rubber",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "heat_mat_2",
+      "name": "Piglet Heat Mat",
+      "type": "ITEM",
+      "location_id": "in:farrowing_crate_2",
+      "properties": {
+        "weight": 3.5,
+        "size": [
+          0.6,
+          0.9,
+          0.05
+        ],
+        "material": "rubber"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "feed_bag_1",
+      "name": "50kg Feed Bag",
+      "type": "ITEM",
+      "location_id": "in:feed_storage",
+      "properties": {
+        "weight": 50.0,
+        "material": "polypropylene",
+        "color": "white"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "feed_bag_2",
+      "name": "50kg Feed Bag",
+      "type": "ITEM",
+      "location_id": "in:feed_storage",
+      "properties": {
+        "weight": 50.0,
+        "material": "polypropylene",
+        "color": "white"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "medical_counter_1",
+      "name": "Stainless-Steel Counter",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_station",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Vaccine Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oxytocin_vial_1",
+      "name": "Oxytocin Injection",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.1,
+        "volume": "10ml"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "surgical_kit_1",
+      "name": "Surgical Kit",
+      "type": "ITEM",
+      "location_id": "on:medical_counter_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "steel",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "farrowing_gloves_1",
+      "name": "Emergency Farrowing Gloves",
+      "type": "ITEM",
+      "location_id": "on:medical_counter_1",
+      "properties": {
+        "weight": 0.8,
+        "length": "shoulder",
+        "material": "latex"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "weigh_scale_1",
+      "name": "Piglet Weigh Scale",
+      "type": "ITEM",
+      "location_id": "on:medical_counter_1",
+      "properties": {
+        "weight": 5.0,
+        "max_capacity": 5.0,
+        "material": "plastic"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Pedal-Controlled Sink",
+      "type": "FURNITURE",
+      "location_id": "in:medical_prep_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 45.0,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "pallet_rack_1",
+      "name": "Pallet Rack",
+      "type": "FURNITURE",
+      "location_id": "in:feed_storage",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_scale_1",
+      "name": "Industrial Scale",
+      "type": "ITEM",
+      "location_id": "in:feed_storage",
+      "properties": {
+        "weight": 25.0,
+        "max_capacity": 500.0,
+        "material": "steel"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "iron_supplement_1",
+      "name": "Iron Supplement Bucket",
+      "type": "ITEM",
+      "location_id": "on:pallet_rack_1",
+      "properties": {
+        "weight": 15.0,
+        "volume": "20L"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:feed_storage",
+      "properties": {
+        "weight": 1.2,
+        "material": "wood",
+        "provides_abilities": [
+          "push",
+          "pull"
+        ]
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "observation_desk_1",
+      "name": "Observation Desk",
+      "type": "FURNITURE",
+      "location_id": "in:observation_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "monitor_1",
+      "name": "Dual Monitor",
+      "type": "ITEM",
+      "location_id": "on:observation_desk_1",
+      "properties": {
+        "weight": 8.0,
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Treatment Log Clipboard",
+      "type": "ITEM",
+      "location_id": "on:observation_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:observation_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "quarantine_pen_1",
+      "name": "Quarantine Pen",
+      "type": "FURNITURE",
+      "location_id": "in:quarantine_pen",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "heat_lamp_1",
+      "name": "Adjustable Heat Lamp",
+      "type": "ITEM",
+      "location_id": "in:quarantine_pen_1",
+      "properties": {
+        "weight": 2.0,
+        "temperature": 32.0,
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "boot_scrubber_1",
+      "name": "Boot Scrubber",
+      "type": "ITEM",
+      "location_id": "in:wash_area",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "disinfectant_spray_1",
+      "name": "Disinfectant Spray",
+      "type": "ITEM",
+      "location_id": "on:boot_scrubber_1",
+      "properties": {
+        "weight": 1.0,
+        "volume": "500ml",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "ppe_station_1",
+      "name": "PPE Station",
+      "type": "FURNITURE",
+      "location_id": "in:wash_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coveralls_1",
+      "name": "Protective Coveralls",
+      "type": "ITEM",
+      "location_id": "in:ppe_station_1",
+      "properties": {
+        "weight": 1.5,
+        "size": "XL"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "connect",
+    "disconnect",
+    "drain",
+    "empty",
+    "heat_up",
+    "open",
+    "pull",
+    "push",
+    "seal",
+    "take_down",
+    "turn_on",
+    "unstaple"
+  ]
+}

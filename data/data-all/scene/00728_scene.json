@@ -1,0 +1,787 @@
+{
+  "description": "A high-stakes Cardiac Emergency Research Lab & Community Screening Center, equipped for rapid response, genetic testing, and public outreach. The lab is part hospital, part research facility, with interconnected zones including an Emergency Simulation Bay, Diagnostic Lab, Screening Clinic, Data Hub, Supply Storage, and Staff Break Area.",
+  "rooms": [
+    {
+      "id": "emergency_simulation_bay",
+      "name": "Emergency Simulation Bay",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_lab",
+        "screening_clinic"
+      ]
+    },
+    {
+      "id": "diagnostic_lab",
+      "name": "Diagnostic Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "emergency_simulation_bay",
+        "data_hub",
+        "supply_storage"
+      ]
+    },
+    {
+      "id": "screening_clinic",
+      "name": "Screening Clinic",
+      "properties": {
+        "type": "clinical"
+      },
+      "connected_to_room_ids": [
+        "emergency_simulation_bay",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Hub",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_lab",
+        "screening_clinic",
+        "staff_break_area"
+      ]
+    },
+    {
+      "id": "supply_storage",
+      "name": "Supply Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_lab",
+        "staff_break_area"
+      ]
+    },
+    {
+      "id": "staff_break_area",
+      "name": "Staff Break Area",
+      "properties": {
+        "type": "recreational"
+      },
+      "connected_to_room_ids": [
+        "data_hub",
+        "supply_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_simulation_bay",
+      "properties": {
+        "size": [
+          180,
+          60,
+          90
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "blue",
+        "brand": "Medline",
+        "model_number": "CC-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "defibrillator_1",
+      "name": "Defibrillator",
+      "type": "ITEM",
+      "location_id": "on:crash_cart_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "yellow",
+        "brand": "Philips",
+        "model_number": "FRx",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "iv_stand_1",
+      "name": "IV Stand",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_simulation_bay",
+      "properties": {
+        "size": [
+          150,
+          30,
+          30
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "medical_mannequin_1",
+      "name": "Adjustable Medical Mannequin",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_simulation_bay",
+      "properties": {
+        "size": [
+          180,
+          50,
+          30
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "beige"
+      },
+      "states": {}
+    },
+    {
+      "id": "oxygen_tank_1",
+      "name": "Oxygen Tank",
+      "type": "ITEM",
+      "location_id": "in:emergency_simulation_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "green",
+        "brand": "Airgas",
+        "model_number": "O2-3000",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Bin",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_simulation_bay",
+      "properties": {
+        "size": [
+          60,
+          40,
+          80
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "echocardiogram_machine_1",
+      "name": "Echocardiogram Machine",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_lab",
+      "properties": {
+        "size": [
+          200,
+          80,
+          150
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white",
+        "brand": "GE Healthcare",
+        "model_number": "Vivid E95"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_lab",
+      "properties": {
+        "size": [
+          50,
+          50,
+          50
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "silver",
+        "brand": "Eppendorf",
+        "model_number": "5424R"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blood_vial_1",
+      "name": "Blood Vial - JIVANI, S.",
+      "type": "ITEM",
+      "location_id": "in:centrifuge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "glass",
+        "label": "CRY STUDY"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_vial_2",
+      "name": "Blood Vial - Generic",
+      "type": "ITEM",
+      "location_id": "in:centrifuge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_vial_3",
+      "name": "Blood Vial - Generic",
+      "type": "ITEM",
+      "location_id": "in:centrifuge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_vial_4",
+      "name": "Blood Vial - Generic",
+      "type": "ITEM",
+      "location_id": "in:centrifuge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_vial_5",
+      "name": "Blood Vial - Cracked",
+      "type": "ITEM",
+      "location_id": "in:centrifuge_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "glass",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_spilled": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_lab",
+      "properties": {
+        "size": [
+          30,
+          20,
+          40
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black",
+        "brand": "Olympus",
+        "model_number": "CX23"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_lab",
+      "properties": {
+        "size": [
+          60,
+          50,
+          80
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "color": "silver",
+        "brand": "Tuttnauer",
+        "model_number": "3870EA"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "ecg_machine_1",
+      "name": "ECG Machine",
+      "type": "FURNITURE",
+      "location_id": "in:screening_clinic",
+      "properties": {
+        "size": [
+          40,
+          30,
+          50
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white",
+        "brand": "GE Healthcare",
+        "model_number": "MAC 5500"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "ecg_machine_2",
+      "name": "ECG Machine",
+      "type": "FURNITURE",
+      "location_id": "in:screening_clinic",
+      "properties": {
+        "size": [
+          40,
+          30,
+          50
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white",
+        "brand": "GE Healthcare",
+        "model_number": "MAC 5500"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "consent_forms_1",
+      "name": "Consent Forms",
+      "type": "ITEM",
+      "location_id": "in:screening_clinic",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "paper",
+        "condition": "half_filled"
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_belongings_bin_1",
+      "name": "Patient Belongings Bin",
+      "type": "FURNITURE",
+      "location_id": "in:screening_clinic",
+      "properties": {
+        "size": [
+          60,
+          40,
+          40
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backpack_1",
+      "name": "Forgotten Backpack",
+      "type": "ITEM",
+      "location_id": "in:patient_belongings_bin_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "material": "nylon",
+        "brand": "North Face"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:patient_belongings_bin_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "plastic",
+        "brand": "Nalgene"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          200,
+          60,
+          100
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black",
+        "brand": "APC",
+        "model_number": "NetShelter SX"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vitals_monitor_1",
+      "name": "Live Vitals Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          50,
+          20,
+          40
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white",
+        "brand": "Philips",
+        "model_number": "IntelliVue MX40"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Research Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          120,
+          90,
+          2
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "melamine",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "medication_fridge_1",
+      "name": "Medication Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          100,
+          60,
+          80
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "white",
+        "brand": "Thermo Scientific",
+        "model_number": "TSX400"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Sterile Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "size": [
+          120,
+          40,
+          180
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "color": "silver"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rotor_lid_1",
+      "name": "Centrifuge Rotor Lid",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "silver",
+        "material": "metal",
+        "brand": "Eppendorf",
+        "model_number": "5424R"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "size": [
+          30,
+          20,
+          40
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "brand": "Keurig",
+        "model_number": "K-Classic"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "size": [
+          90,
+          60,
+          2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "cork",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_memorial_1",
+      "name": "Patient Memorial",
+      "type": "ITEM",
+      "location_id": "on:bulletin_board_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper",
+        "inscription": "In memory of those we couldn't save"
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "plastic",
+        "brand": "BD",
+        "model_number": "309628",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "cardboard",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lighter_1",
+      "name": "Lighter",
+      "type": "ITEM",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic",
+        "brand": "Bic",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "brand": "Elmer's",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "Charger",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Anker",
+        "model_number": "A2616",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          20,
+          20,
+          5
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "brand": "Cisco",
+        "model_number": "RV340",
+        "provides_abilities": [
+          "upload"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "software_installer_1",
+      "name": "Software Installer",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "plastic",
+        "brand": "Microsoft",
+        "model_number": "Windows10",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mounting_bracket_1",
+      "name": "Mounting Bracket",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "brand": "3M",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defroster_1",
+      "name": "Defroster",
+      "type": "ITEM",
+      "location_id": "in:supply_storage",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "plastic",
+        "brand": "Black+Decker",
+        "model_number": "HF100",
+        "provides_abilities": [
+          "defrost"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "defrost",
+    "glue",
+    "ignite",
+    "inject",
+    "install",
+    "mount",
+    "open",
+    "pack",
+    "recharge",
+    "upload",
+    "close"
+  ]
+}

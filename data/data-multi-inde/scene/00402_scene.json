@@ -1,0 +1,806 @@
+{
+  "description": "A high-rise office building under emergency response, featuring a lobby, emergency stairwell, incident floor, rooftop access area, and maintenance closet, with numerous interactive objects and collaborative challenges.",
+  "rooms": [
+    {
+      "id": "lobby",
+      "name": "Lobby",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "emergency_stairwell"
+      ]
+    },
+    {
+      "id": "emergency_stairwell",
+      "name": "Emergency Stairwell",
+      "properties": {
+        "type": "vertical_access"
+      },
+      "connected_to_room_ids": [
+        "lobby",
+        "incident_floor",
+        "maintenance_closet"
+      ]
+    },
+    {
+      "id": "incident_floor",
+      "name": "Incident Floor",
+      "properties": {
+        "type": "forensic_zone"
+      },
+      "connected_to_room_ids": [
+        "emergency_stairwell",
+        "rooftop_access"
+      ]
+    },
+    {
+      "id": "rooftop_access",
+      "name": "Rooftop Access Area",
+      "properties": {
+        "type": "rappelling_zone"
+      },
+      "connected_to_room_ids": [
+        "incident_floor"
+      ]
+    },
+    {
+      "id": "maintenance_closet",
+      "name": "Maintenance Closet",
+      "properties": {
+        "type": "staging_area"
+      },
+      "connected_to_room_ids": [
+        "emergency_stairwell"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "security_desk_1",
+      "name": "Security Desk",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "oak",
+        "model_number": "SD-3000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cctv_monitor_1",
+      "name": "CCTV Monitor",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Sony",
+        "is_container": false,
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "cctv_monitor_2",
+      "name": "CCTV Monitor",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Sony",
+        "is_container": false,
+        "condition": "working"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "brand": "HID",
+        "is_container": false
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "barricade_1",
+      "name": "Retractable Belt Barrier",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "barricade_2",
+      "name": "Retractable Belt Barrier",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "police_radio_1",
+      "name": "Police Radio",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Motorola",
+        "model_number": "XPR 7550",
+        "battery_level": 60,
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_bag_1",
+      "name": "Evidence Bag",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "brand": "Fisher",
+        "is_container": true,
+        "contents": "spray_paint_can"
+      },
+      "states": {
+        "is_wrapped": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "spray_paint_can_1",
+      "name": "Spray Paint Can",
+      "type": "ITEM",
+      "location_id": "in:evidence_bag_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "matte_black",
+        "brand": "Krylon",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lost_and_found_bin_1",
+      "name": "Lost & Found Bin",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "umbrella_1",
+      "name": "Umbrella",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_bin_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "Totes",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "earbuds_1",
+      "name": "Wireless Earbuds",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "Apple",
+        "condition": "missing_right"
+      },
+      "states": {}
+    },
+    {
+      "id": "lanyard_1",
+      "name": "Coffee-Stained Lanyard",
+      "type": "ITEM",
+      "location_id": "in:lost_and_found_bin_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paper_cups_1",
+      "name": "Paper Cups",
+      "type": "ITEM",
+      "location_id": "in:water_cooler_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "quantity": 50
+      },
+      "states": {}
+    },
+    {
+      "id": "blueprint_frame_1",
+      "name": "Framed Building Blueprint",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.05
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:blueprint_frame_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "inscription": "HVAC Shutdown?",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "ficus_plant_1",
+      "name": "Decorative Potted Ficus",
+      "type": "FURNITURE",
+      "location_id": "in:lobby",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "ceramic",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_door_1",
+      "name": "Heavy Fire Door",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "doorstop_1",
+      "name": "Rubber Doorstop",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "lighting_panel_1",
+      "name": "Emergency Lighting Panel",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "graffiti_stencil_1",
+      "name": "Discarded Graffiti Stencil",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 0.2,
+        "color": "cardboard",
+        "inscription": "CAPITOL LIES",
+        "provides_abilities": [
+          "carve"
+        ]
+      },
+      "states": {
+        "is_carved": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "Kidde",
+        "condition": "used",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "brand": "Johnson & Johnson",
+        "is_container": true,
+        "condition": "missing_bandages"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "utility_cart_1",
+      "name": "Utility Cart",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lightbulbs_1",
+      "name": "Spare Lightbulbs",
+      "type": "ITEM",
+      "location_id": "in:utility_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:utility_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "silver",
+        "brand": "Crescent",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_tag_1",
+      "name": "Graffiti Tag",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "inscription": "crude crown symbol",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {
+        "is_stained": true
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Old Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:emergency_stairwell",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "Styrofoam",
+        "condition": "crushed"
+      },
+      "states": {
+        "is_soaked": true
+      }
+    },
+    {
+      "id": "fireproof_safe_1",
+      "name": "Fireproof Safe",
+      "type": "FURNITURE",
+      "location_id": "in:incident_floor",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_stretcher_1",
+      "name": "Emergency Stretcher",
+      "type": "FURNITURE",
+      "location_id": "in:incident_floor",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          0.1
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "wet_floor_sign_1",
+      "name": "Wet Floor Sign",
+      "type": "ITEM",
+      "location_id": "in:incident_floor",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "condition": "knocked_over"
+      },
+      "states": {}
+    },
+    {
+      "id": "blood_smear_1",
+      "name": "Blood Smear",
+      "type": "ITEM",
+      "location_id": "in:incident_floor",
+      "properties": {
+        "weight": 0.0,
+        "color": "red",
+        "condition": "hidden"
+      },
+      "states": {
+        "is_stained": true
+      }
+    },
+    {
+      "id": "utility_shed_1",
+      "name": "Locked Utility Shed",
+      "type": "FURNITURE",
+      "location_id": "in:rooftop_access",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bolt_cutter_1",
+      "name": "Bolt Cutter",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "brand": "Irwin",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cable_ties_1",
+      "name": "Cable Ties",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "quantity": 20
+      },
+      "states": {}
+    },
+    {
+      "id": "fuse_box_1",
+      "name": "Fuse Box",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blown_fuse_1",
+      "name": "Blown Fuse",
+      "type": "ITEM",
+      "location_id": "in:fuse_box_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_fuse_1",
+      "name": "Spare Fuse",
+      "type": "ITEM",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "mop_bucket_1",
+      "name": "Mop Bucket",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_soaked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:mop_bucket_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "condition": "dirty",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medical_supplies_1",
+      "name": "Medical Supplies",
+      "type": "ITEM",
+      "location_id": "in:shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "contents": "bandages, antiseptic, gloves"
+      },
+      "states": {}
+    },
+    {
+      "id": "tools_1",
+      "name": "Tool Set",
+      "type": "ITEM",
+      "location_id": "in:shelving_unit_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "contents": "hammer, screwdriver, pliers",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anchor_point_1",
+      "name": "Heavy-Duty Anchor Point",
+      "type": "FURNITURE",
+      "location_id": "in:rooftop_access",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "rope_bag_1",
+      "name": "Rope Equipment Bag",
+      "type": "ITEM",
+      "location_id": "in:rooftop_access",
+      "properties": {
+        "weight": 10.0,
+        "color": "black",
+        "contents": "rope, carabiners, harness",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "carve",
+    "close",
+    "moisten",
+    "open",
+    "saw",
+    "scan_barcode",
+    "stain",
+    "turn_off",
+    "turn_on",
+    "write"
+  ]
+}

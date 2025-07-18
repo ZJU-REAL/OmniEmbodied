@@ -1,0 +1,884 @@
+{
+  "description": "A high-security biomedical research lab specializing in hazardous material containment and analysis, featuring interconnected zones with distinct purposes and numerous interactive objects requiring collaboration and tool use.",
+  "rooms": [
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "entry",
+        "security_level": "high"
+      },
+      "connected_to_room_ids": [
+        "sample_intake_storage"
+      ]
+    },
+    {
+      "id": "sample_intake_storage",
+      "name": "Sample Intake & Storage",
+      "properties": {
+        "type": "storage",
+        "temperature": "4°C"
+      },
+      "connected_to_room_ids": [
+        "decontamination_airlock",
+        "chemical_processing_bay"
+      ]
+    },
+    {
+      "id": "chemical_processing_bay",
+      "name": "Chemical Processing Bay",
+      "properties": {
+        "type": "processing",
+        "ventilation": "fume_hoods"
+      },
+      "connected_to_room_ids": [
+        "sample_intake_storage",
+        "sterile_research_room"
+      ]
+    },
+    {
+      "id": "sterile_research_room",
+      "name": "Sterile Research Room",
+      "properties": {
+        "type": "research",
+        "sterility": "high"
+      },
+      "connected_to_room_ids": [
+        "chemical_processing_bay",
+        "emergency_control_station"
+      ]
+    },
+    {
+      "id": "emergency_control_station",
+      "name": "Emergency Control Station",
+      "properties": {
+        "type": "control",
+        "monitoring": "active"
+      },
+      "connected_to_room_ids": [
+        "sterile_research_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "decontamination_shower_1",
+      "name": "Stainless-Steel Decontamination Shower",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "status": "operational"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uv_sterilization_chamber_1",
+      "name": "UV Sterilization Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "status_light": "green"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ppe_station_1",
+      "name": "Wall-Mounted PPE Station",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "biosensor_1",
+      "name": "Broken Biosensor",
+      "type": "ITEM",
+      "location_id": "on:ppe_station_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "status": "ERROR: CALIBRATION NEEDED",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "biohazard_waste_bin_1",
+      "name": "Sealed Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "capacity": "30L"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hand_scanner_1",
+      "name": "Digital Hand Scanner",
+      "type": "ITEM",
+      "location_id": "on:ppe_station_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "condition": "smudged",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "intercom_1",
+      "name": "Wall-Mounted Intercom",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "status": "static_buzzing",
+        "volume": "medium"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Peeling Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "condition": "peeling",
+        "message": "PROTOCOL 7: DECONTAMINATE BEFORE ENTERING"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Dusty Clipboard",
+      "type": "ITEM",
+      "location_id": "on:ppe_station_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "condition": "dusty",
+        "contents": "outdated_sign_in_sheets"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "refrigerated_vault_1",
+      "name": "Walk-In Refrigerated Vault",
+      "type": "FURNITURE",
+      "location_id": "in:sample_intake_storage",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": "4°C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_sorting_table_1",
+      "name": "Stainless-Steel Sample Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:sample_intake_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_bottle_1",
+      "name": "Mislabelled BPA-Free Sample Bottle",
+      "type": "ITEM",
+      "location_id": "on:sample_sorting_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "label": "CASE 47-X",
+        "material": "BPA-free_plastic"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "cryogenic_tube_1",
+      "name": "Cracked Cryogenic Storage Tube",
+      "type": "ITEM",
+      "location_id": "in:refrigerated_vault_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "frosted",
+        "condition": "cracked",
+        "leak": "nitrogen_vapor"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:sample_sorting_table_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "condition": "frayed_cable",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "slide_rack_1",
+      "name": "Microscope Slide Rack",
+      "type": "FURNITURE",
+      "location_id": "in:sample_intake_storage",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "half_empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Old Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:sample_sorting_table_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "brown",
+        "condition": "stained",
+        "contents": "pipette_tips"
+      },
+      "states": {
+        "is_rinsed": false
+      }
+    },
+    {
+      "id": "lab_manual_1",
+      "name": "Torn Lab Manual",
+      "type": "ITEM",
+      "location_id": "on:sample_sorting_table_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "blue",
+        "condition": "torn",
+        "page": "Hazardous Material Handling"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Fume Hood with Shattered Glass",
+      "type": "FURNITURE",
+      "location_id": "in:chemical_processing_bay",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "shattered_glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:chemical_processing_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "status": "RPM ERROR",
+        "rotor": "unbalanced"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "reagent_bottle_1",
+      "name": "Leaking BPA-Lined Reagent Bottle",
+      "type": "ITEM",
+      "location_id": "in:fume_hood_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "label": "CORROSIVE",
+        "material": "BPA-lined_plastic"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "chemical_cabinet_1",
+      "name": "Locked Chemical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:chemical_processing_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "lock_type": "keypad",
+        "condition": "worn_keypad"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "on:fume_hood_1",
+      "properties": {
+        "weight": 0.9,
+        "color": "white",
+        "status": "submerged_probe",
+        "solution": "unknown"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "stirrer_1",
+      "name": "Magnetic Stirrer",
+      "type": "ITEM",
+      "location_id": "on:fume_hood_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "gray",
+        "status": "on",
+        "noise": "faint_whirring"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "safety_checklist_1",
+      "name": "Yellowed Safety Checklist",
+      "type": "ITEM",
+      "location_id": "on:fume_hood_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "condition": "yellowed",
+        "last_checked": "3_months_ago"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "journals_1",
+      "name": "Stack of Old Journals",
+      "type": "ITEM",
+      "location_id": "on:fume_hood_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "various",
+        "titles": "Toxicology Reports, Vol. 12-15",
+        "condition": "old"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Confocal Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:sterile_research_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "status": "lens_misaligned",
+        "error_light": "blinking"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "flow_hood_1",
+      "name": "Laminar Flow Hood",
+      "type": "FURNITURE",
+      "location_id": "in:sterile_research_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "filter_efficiency": "62%",
+        "status": "operational"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "petri_dish_1",
+      "name": "Contaminated Petri Dish",
+      "type": "ITEM",
+      "location_id": "in:flow_hood_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "label": "STRAIN DELTA-9",
+        "contents": "fungal_growth"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "vial_stand_1",
+      "name": "Shattered Vial Stand",
+      "type": "FURNITURE",
+      "location_id": "in:sterile_research_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "condition": "shattered",
+        "contents": "glass_shards"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "thermal_cycler_1",
+      "name": "Thermal Cycler",
+      "type": "ITEM",
+      "location_id": "on:flow_hood_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "status": "lid_ajar",
+        "program": "paused"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:flow_hood_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "status": "needs_recalibration",
+        "battery": "low"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "team_photo_1",
+      "name": "Framed Team Photo",
+      "type": "ITEM",
+      "location_id": "in:sterile_research_room",
+      "properties": {
+        "weight": 0.8,
+        "color": "brown",
+        "condition": "dusty",
+        "date": "2012"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "fern_1",
+      "name": "Dead Fern",
+      "type": "ITEM",
+      "location_id": "in:sterile_research_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "condition": "dead",
+        "pot": "cracked_plastic"
+      },
+      "states": {
+        "is_rinsed": false
+      }
+    },
+    {
+      "id": "monitoring_console_1",
+      "name": "Central Monitoring Console",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "screens": "three_flickering",
+        "status": "one_offline"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "first_aid_cabinet_1",
+      "name": "First-Aid Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.6
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "condition": "cracked_glass",
+        "lock_type": "key"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "mercury_thermometer_1",
+      "name": "Spilled Mercury Thermometer",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "condition": "spilled",
+        "contents": "mercury_beads"
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "emergency_seal_1",
+      "name": "Partially Deployed Emergency Seal",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "size": [
+          2.5,
+          0.1,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "status": "stuck_at_30%",
+        "material": "rubber"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "radio_handset_1",
+      "name": "Radio Handset",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "status": "MAYDAY_button_depressed",
+        "condition": "operational"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "pressure": "red_zone",
+        "condition": "needs_service"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Chewed-Up Stress Ball",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "condition": "chewed_up",
+        "location": "keyboard"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "message": "CALL MAINTENANCE – AGAIN",
+        "condition": "sticky"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "saw_1",
+      "name": "Hand Saw",
+      "type": "ITEM",
+      "location_id": "in:chemical_processing_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "material": "steel",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "filter_1",
+      "name": "Water Filter",
+      "type": "ITEM",
+      "location_id": "in:chemical_processing_bay",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "ceramic",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "steel",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mop_1",
+      "name": "Industrial Mop",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "cotton",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "peeler_1",
+      "name": "Vegetable Peeler",
+      "type": "ITEM",
+      "location_id": "in:sample_intake_storage",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "peel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Access Keycard",
+      "type": "ITEM",
+      "location_id": "in:emergency_control_station",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "microfiber",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "lock",
+    "mop",
+    "open",
+    "peel",
+    "purify",
+    "saw",
+    "screw",
+    "start_process",
+    "tear",
+    "unplug",
+    "verify",
+    "wipe"
+  ]
+}

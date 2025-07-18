@@ -1,0 +1,529 @@
+{
+  "description": "A late-night emergency response in a high-end auto garage following a catastrophic vehicle fire, requiring multi-agent collaboration to secure the scene, preserve evidence, and stabilize the wreckage.",
+  "rooms": [
+    {
+      "id": "main_garage_bay",
+      "name": "Main Garage Bay",
+      "properties": {
+        "type": "industrial",
+        "hazard_level": "high",
+        "lighting": "flickering"
+      },
+      "connected_to_room_ids": [
+        "tool_storage",
+        "first_aid_zone",
+        "forensic_corner",
+        "office_room"
+      ]
+    },
+    {
+      "id": "tool_storage",
+      "name": "Tool & Equipment Storage",
+      "properties": {
+        "type": "workshop",
+        "hazard_level": "medium",
+        "lighting": "fluorescent"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "first_aid_zone",
+      "name": "First Aid & Triage Zone",
+      "properties": {
+        "type": "medical",
+        "hazard_level": "low",
+        "lighting": "bright"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "forensic_corner",
+      "name": "Forensic Investigation Corner",
+      "properties": {
+        "type": "investigation",
+        "hazard_level": "low",
+        "lighting": "focused"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "office_room",
+      "name": "Office & Surveillance Room",
+      "properties": {
+        "type": "administrative",
+        "hazard_level": "low",
+        "lighting": "dim"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Vehicle Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "partially_collapsed"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Industrial Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scorched"
+      },
+      "states": {}
+    },
+    {
+      "id": "porsche_wreck_1",
+      "name": "Burned Porsche Wreck",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          4.5,
+          1.8,
+          1.3
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "mixed",
+        "condition": "severely_damaged"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "roof_panel_1",
+      "name": "Porsche Roof Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          0.05
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "aluminum",
+        "condition": "warped"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "CO2 Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 5.5,
+        "color": "red",
+        "brand": "SafetyFirst",
+        "pressure": "green",
+        "condition": "nozzle_bent",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Containment Kit",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 3.2,
+        "color": "yellow",
+        "label": "ACID/FLAMMABLE ABSORBENT",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jaws_of_life_1",
+      "name": "Jaws of Life Hydraulic Cutter",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 8.7,
+        "color": "yellow",
+        "battery_level": 40,
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_chest_1",
+      "name": "Rolling Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "4-digit"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Corrosive Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "label": "CORROSIVE",
+        "hazard_level": "high",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Flammable Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "label": "FLAMMABLE",
+        "hazard_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "fume_extractor_1",
+      "name": "Portable Fume Extractor",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 12.0,
+        "color": "gray",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "stretcher_1",
+      "name": "Fold-out Stretcher",
+      "type": "FURNITURE",
+      "location_id": "in:first_aid_zone",
+      "properties": {
+        "size": [
+          2.0,
+          0.7,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "aluminum",
+        "condition": "unfolded"
+      },
+      "states": {}
+    },
+    {
+      "id": "defibrillator_1",
+      "name": "Automated Defibrillator",
+      "type": "ITEM",
+      "location_id": "on:stretcher_1",
+      "properties": {
+        "weight": 4.2,
+        "color": "white",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "evidence_table_1",
+      "name": "Folding Evidence Table",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.7
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "aluminum",
+        "condition": "uneven"
+      },
+      "states": {}
+    },
+    {
+      "id": "black_box_1",
+      "name": "Porsche Black Box (EDR)",
+      "type": "ITEM",
+      "location_id": "on:evidence_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "condition": "corrupted",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "laptop_1",
+      "name": "Forensic Laptop",
+      "type": "ITEM",
+      "location_id": "on:evidence_table_1",
+      "properties": {
+        "weight": 2.1,
+        "color": "silver",
+        "brand": "Dell",
+        "provides_abilities": [
+          "turn_off",
+          "scan"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "camera_1",
+      "name": "DSLR Camera",
+      "type": "ITEM",
+      "location_id": "on:evidence_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "Canon",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "desk_1",
+      "name": "Cluttered Office Desk",
+      "type": "FURNITURE",
+      "location_id": "in:office_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.75
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Tool Chest Code Note",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "inscription": "Code: 1984",
+        "provides_abilities": [
+          "rip"
+        ]
+      },
+      "states": {
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "cctv_monitor_1",
+      "name": "CCTV Monitor",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Samsung",
+        "provides_abilities": [
+          "turn_off"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Dented Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:desk_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "inscription": "World's Best Mechanic",
+        "condition": "dented",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "size": "medium",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Industrial Broom",
+      "type": "ITEM",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "weight": 1.8,
+        "color": "yellow",
+        "material": "plastic",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_1",
+      "name": "Oil-Stained Concrete Floor",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          10.0,
+          8.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "material": "concrete",
+        "condition": "stained",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {
+        "is_swept": false
+      }
+    }
+  ],
+  "abilities": [
+    "connect",
+    "cut",
+    "open",
+    "rip",
+    "scan",
+    "start_process",
+    "sweep",
+    "turn_off",
+    "unscrew",
+    "wipe",
+    "close"
+  ]
+}

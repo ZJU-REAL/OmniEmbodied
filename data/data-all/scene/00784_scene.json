@@ -1,0 +1,721 @@
+{
+  "description": "A 19th-century French colonial print shop and archive in Algiers, bustling with activity and filled with a mix of European industrial printing technology and traditional North African craftsmanship.",
+  "rooms": [
+    {
+      "id": "front_workshop",
+      "name": "Front Workshop (Printing Area)",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "darkroom_studio",
+        "archive_room",
+        "merchant_office"
+      ]
+    },
+    {
+      "id": "darkroom_studio",
+      "name": "Darkroom & Photography Studio",
+      "properties": {
+        "type": "studio"
+      },
+      "connected_to_room_ids": [
+        "front_workshop",
+        "archive_room"
+      ]
+    },
+    {
+      "id": "archive_room",
+      "name": "Archive & Binding Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "front_workshop",
+        "darkroom_studio",
+        "merchant_office"
+      ]
+    },
+    {
+      "id": "merchant_office",
+      "name": "Merchant’s Office (Front Counter)",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "front_workshop",
+        "archive_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "printing_press_1",
+      "name": "Cast-Iron Printing Press (Albion Model, 1860s)",
+      "type": "FURNITURE",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          2.2
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "cast_iron",
+        "model": "Albion",
+        "year": "1860s"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "typesetting_table_1",
+      "name": "Typesetting Table",
+      "type": "FURNITURE",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "oak",
+        "compartments": [
+          "arabic",
+          "latin"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lithographic_stone_rack_1",
+      "name": "Lithographic Stone Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood",
+        "labels": [
+          "french",
+          "arabic"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "lithographic_stone_1",
+      "name": "Lithographic Stone",
+      "type": "ITEM",
+      "location_id": "in:lithographic_stone_rack_1",
+      "properties": {
+        "weight": 50.0,
+        "material": "limestone",
+        "label": "french"
+      },
+      "states": {}
+    },
+    {
+      "id": "lithographic_stone_2",
+      "name": "Lithographic Stone",
+      "type": "ITEM",
+      "location_id": "in:lithographic_stone_rack_1",
+      "properties": {
+        "weight": 50.0,
+        "material": "limestone",
+        "label": "arabic"
+      },
+      "states": {}
+    },
+    {
+      "id": "damaged_printing_plate_1",
+      "name": "Damaged Printing Plate",
+      "type": "ITEM",
+      "location_id": "on:typesetting_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "copper",
+        "image": "colonial_map",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "ink_mixing_station_1",
+      "name": "Ink Mixing Station",
+      "type": "FURNITURE",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pigment_jar_1",
+      "name": "Pigment Jar (Bleu d’Outremer)",
+      "type": "ITEM",
+      "location_id": "in:ink_mixing_station_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "label": "Bleu d’Outremer",
+        "note": "Last Batch",
+        "lid_condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "pigment_jar_2",
+      "name": "Pigment Jar (Carmin)",
+      "type": "ITEM",
+      "location_id": "in:ink_mixing_station_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "label": "Carmin",
+        "lid_condition": "intact"
+      },
+      "states": {}
+    },
+    {
+      "id": "spilled_ink_jar_1",
+      "name": "Spilled Ink Jar",
+      "type": "ITEM",
+      "location_id": "on:ink_mixing_station_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "state": "spilled"
+      },
+      "states": {}
+    },
+    {
+      "id": "manuscript_in_progress_1",
+      "name": "Manuscript in Progress",
+      "type": "ITEM",
+      "location_id": "on:typesetting_table_1",
+      "properties": {
+        "weight": 1.2,
+        "condition": "half_bound",
+        "flags": "red_pencil"
+      },
+      "states": {}
+    },
+    {
+      "id": "drying_rack_1",
+      "name": "Drying Rack",
+      "type": "FURNITURE",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          1.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "freshly_printed_sheet_1",
+      "name": "Freshly Printed Sheet",
+      "type": "ITEM",
+      "location_id": "on:drying_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "state": "wet",
+        "content": "colonial_map"
+      },
+      "states": {}
+    },
+    {
+      "id": "apron_1",
+      "name": "Apron",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 0.3,
+        "condition": "ink_stained",
+        "provides_abilities": [
+          "wear"
+        ]
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "gloves_1",
+      "name": "Gloves",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 0.2,
+        "condition": "ink_stained",
+        "provides_abilities": [
+          "wear"
+        ]
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "gas_lamp_1",
+      "name": "Gas Lamp",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 2.0,
+        "state": "flickering",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colonial_propaganda_poster_1",
+      "name": "Colonial Propaganda Poster",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 0.2,
+        "condition": "peeling",
+        "content": "french"
+      },
+      "states": {}
+    },
+    {
+      "id": "chipped_ceramic_inkwell_1",
+      "name": "Chipped Ceramic Inkwell",
+      "type": "ITEM",
+      "location_id": "on:typesetting_table_1",
+      "properties": {
+        "weight": 0.4,
+        "condition": "chipped",
+        "use": "paperweight"
+      },
+      "states": {}
+    },
+    {
+      "id": "pigeon_feather_quill_1",
+      "name": "Pigeon Feather Quill",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 0.05,
+        "condition": "discarded"
+      },
+      "states": {}
+    },
+    {
+      "id": "bellows_camera_1",
+      "name": "Large Bellows Camera (Wooden, 1880s)",
+      "type": "FURNITURE",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "size": [
+          1.5,
+          1.2,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "material": "wood",
+        "year": "1880s"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bath_tub_1",
+      "name": "Chemical Bath Tub (Developer)",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 8.0,
+        "material": "porcelain",
+        "content": "developer"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bath_tub_2",
+      "name": "Chemical Bath Tub (Stop Bath)",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 8.0,
+        "material": "porcelain",
+        "content": "stop_bath"
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bath_tub_3",
+      "name": "Chemical Bath Tub (Fixer)",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 8.0,
+        "material": "porcelain",
+        "content": "fixer"
+      },
+      "states": {}
+    },
+    {
+      "id": "exposed_glass_plate_negative_1",
+      "name": "Exposed Glass Plate Negative",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 0.5,
+        "condition": "cracked",
+        "provides_abilities": [
+          "handle_with_care"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "silver_nitrate_bottle_1",
+      "name": "Silver Nitrate Bottle",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 0.3,
+        "content": "silver_nitrate",
+        "label": "Danger: Light-Sensitive",
+        "state": "nearly_empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "focusing_cloth_1",
+      "name": "Focusing Cloth",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 0.2,
+        "material": "velvet",
+        "condition": "worn",
+        "tear": "slightly"
+      },
+      "states": {}
+    },
+    {
+      "id": "drying_lines_1",
+      "name": "Drying Lines",
+      "type": "FURNITURE",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "material": "rope"
+      },
+      "states": {}
+    },
+    {
+      "id": "clothespins_1",
+      "name": "Clothespins",
+      "type": "ITEM",
+      "location_id": "on:drying_lines_1",
+      "properties": {
+        "weight": 0.05,
+        "quantity": 12,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "timer_clock_1",
+      "name": "Timer Clock",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 1.0,
+        "state": "ticking",
+        "needs": "winding"
+      },
+      "states": {}
+    },
+    {
+      "id": "failed_test_prints_1",
+      "name": "Failed Test Prints",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 0.3,
+        "condition": "discarded",
+        "location": "wastebasket"
+      },
+      "states": {}
+    },
+    {
+      "id": "antique_daguerreotype_1",
+      "name": "Antique Daguerreotype",
+      "type": "ITEM",
+      "location_id": "in:darkroom_studio",
+      "properties": {
+        "weight": 0.5,
+        "condition": "framed",
+        "tarnish": "slight"
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_shelf_unit_1",
+      "name": "Iron Shelf Unit",
+      "type": "FURNITURE",
+      "location_id": "in:archive_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "iron",
+        "condition": "overloaded"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ledger_1",
+      "name": "Ledger",
+      "type": "ITEM",
+      "location_id": "in:iron_shelf_unit_1",
+      "properties": {
+        "weight": 2.0,
+        "binding": "leather",
+        "content": "financial_records"
+      },
+      "states": {}
+    },
+    {
+      "id": "bookbinding_press_1",
+      "name": "Bookbinding Press",
+      "type": "FURNITURE",
+      "location_id": "in:archive_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "wood",
+        "mechanism": "screw_operated"
+      },
+      "states": {}
+    },
+    {
+      "id": "uncatalogued_manuscript_pile_1",
+      "name": "Uncatalogued Manuscript Pile",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 3.0,
+        "condition": "torn_pages",
+        "needs": "repair"
+      },
+      "states": {}
+    },
+    {
+      "id": "mismatched_leather_covers_1",
+      "name": "Mismatched Leather Covers",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 1.5,
+        "condition": "awaiting_rebinding",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_glass_1",
+      "name": "Magnifying Glass",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 0.2,
+        "location": "on_ledger",
+        "material": "glass_and_brass"
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_pot_1",
+      "name": "Glue Pot",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 0.8,
+        "state": "warm",
+        "stickiness": "slightly"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_cigar_box_1",
+      "name": "Dusty Cigar Box",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 0.5,
+        "content": "old_postage_stamps",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_portrait_1",
+      "name": "Faded Portrait",
+      "type": "ITEM",
+      "location_id": "in:archive_room",
+      "properties": {
+        "weight": 1.0,
+        "subject": "french_governor",
+        "hanging": "crookedly"
+      },
+      "states": {}
+    },
+    {
+      "id": "merchant_desk_1",
+      "name": "Merchant’s Desk",
+      "type": "FURNITURE",
+      "location_id": "in:merchant_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "abacus_1",
+      "name": "Abacus",
+      "type": "ITEM",
+      "location_id": "on:merchant_desk_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "wood_and_beads",
+        "use": "calculation"
+      },
+      "states": {}
+    },
+    {
+      "id": "ledger_book_1",
+      "name": "Ledger Book",
+      "type": "ITEM",
+      "location_id": "on:merchant_desk_1",
+      "properties": {
+        "weight": 1.5,
+        "content": "financial_records",
+        "condition": "well_used"
+      },
+      "states": {}
+    },
+    {
+      "id": "cigar_box_coins_1",
+      "name": "Cigar Box of Coins",
+      "type": "ITEM",
+      "location_id": "on:merchant_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "content": "coins",
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "rotary_telephone_1",
+      "name": "Rotary Telephone",
+      "type": "ITEM",
+      "location_id": "in:merchant_office",
+      "properties": {
+        "weight": 3.0,
+        "model": "wall_mounted",
+        "status": "rare"
+      },
+      "states": {}
+    },
+    {
+      "id": "shellac_resin_1",
+      "name": "Shellac Resin",
+      "type": "ITEM",
+      "location_id": "in:merchant_office",
+      "properties": {
+        "weight": 0.5,
+        "use": "repair",
+        "location": "locked_drawer"
+      },
+      "states": {}
+    },
+    {
+      "id": "typesetters_apron_1",
+      "name": "Typesetter’s Apron",
+      "type": "ITEM",
+      "location_id": "in:front_workshop",
+      "properties": {
+        "weight": 0.3,
+        "pocket_content": "key",
+        "provides_abilities": [
+          "wear"
+        ]
+      },
+      "states": {
+        "is_worn": false
+      }
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "open",
+    "repair",
+    "start_process",
+    "wear",
+    "close"
+  ]
+}

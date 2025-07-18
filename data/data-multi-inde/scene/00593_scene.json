@@ -1,0 +1,1054 @@
+{
+  "description": "HTC’s prototype assembly lab, a high-tech but slightly chaotic workspace with distinct zones for disassembly, component testing, quality control, and secure storage, filled with specialized tools, delicate electronics, and partially assembled prototypes.",
+  "rooms": [
+    {
+      "id": "disassembly_repair_station",
+      "name": "Disassembly & Repair Station",
+      "properties": {
+        "type": "workbench"
+      },
+      "connected_to_room_ids": [
+        "component_testing_bay",
+        "quality_control_desk"
+      ]
+    },
+    {
+      "id": "component_testing_bay",
+      "name": "Component Testing Bay",
+      "properties": {
+        "type": "sterile_zone"
+      },
+      "connected_to_room_ids": [
+        "disassembly_repair_station",
+        "secure_storage_vault"
+      ]
+    },
+    {
+      "id": "quality_control_desk",
+      "name": "Quality Control Desk",
+      "properties": {
+        "type": "inspection_area"
+      },
+      "connected_to_room_ids": [
+        "disassembly_repair_station",
+        "tool_supply_shelving"
+      ]
+    },
+    {
+      "id": "secure_storage_vault",
+      "name": "Secure Storage Vault",
+      "properties": {
+        "type": "secure_area"
+      },
+      "connected_to_room_ids": [
+        "component_testing_bay",
+        "tool_supply_shelving"
+      ]
+    },
+    {
+      "id": "tool_supply_shelving",
+      "name": "Tool & Supply Shelving",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "quality_control_desk",
+        "secure_storage_vault",
+        "break_area"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "ambient_zone"
+      },
+      "connected_to_room_ids": [
+        "tool_supply_shelving"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Steel-framed Anti-static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:disassembly_repair_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "matte_black",
+        "grounded": true
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_led_ring_lamp_1",
+      "name": "Magnifying LED Ring Lamp",
+      "type": "FURNITURE",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.5
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "color": "black",
+        "adjustable": true,
+        "flickering": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "micro_soldering_station_1",
+      "name": "Micro-soldering Station",
+      "type": "FURNITURE",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "scent": "burnt_metal"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "htc_m8_mini_prototype_1",
+      "name": "HTC One M8 Mini Prototype (Disassembled)",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic_metal",
+        "status": "disassembled",
+        "missing_screw": "M1.4x3mm_phillips"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "precision_screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "metal_foam",
+        "missing_bit": "M1.4",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "esd_safe_tweezers_1",
+      "name": "ESD-safe Tweezers (Bent)",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "condition": "bent"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "failed_unit_bin_1",
+      "name": "Failed Unit Bin",
+      "type": "FURNITURE",
+      "location_id": "in:disassembly_repair_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "cracked_display_panels"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_caliper_1",
+      "name": "Digital Caliper (Low Battery)",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal_plastic",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "usb_microscope_1",
+      "name": "USB Microscope",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "plastic_metal",
+        "plugged_in": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fume_extractor_1",
+      "name": "Fume Extractor",
+      "type": "FURNITURE",
+      "location_id": "in:disassembly_repair_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "sound": "humming"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "esd_hazard_poster_1",
+      "name": "ESD Hazard Zone Poster",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "condition": "faded_peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_can_1",
+      "name": "Energy Drink Can (Half-full)",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "aluminum",
+        "brand": "Monster_Ultra",
+        "contents": "half_full"
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note (Red Sharpie)",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "message": "CHECK_BATTERY_CONNECTOR",
+        "color": "red"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "anti_vibration_table_1",
+      "name": "Anti-vibration Table",
+      "type": "FURNITURE",
+      "location_id": "in:component_testing_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "rubber_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_oscilloscope_1",
+      "name": "Digital Oscilloscope",
+      "type": "FURNITURE",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "display": "flatline_signal"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle (Blue Cap, Corrosive)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "cap_color": "blue",
+        "label": "CORROSIVE_DO_NOT_OPEN",
+        "contents": "half_full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle (Red Cap)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "cap_color": "red",
+        "contents": "full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_3",
+      "name": "Chemical Bottle (Green Cap)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "cap_color": "green",
+        "contents": "full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_4",
+      "name": "Chemical Bottle (Yellow Cap)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "cap_color": "yellow",
+        "contents": "full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_5",
+      "name": "Chemical Bottle (Black Cap)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "cap_color": "black",
+        "contents": "full"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope (Cracked Slide Holder)",
+      "type": "FURNITURE",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "cracked_slide_holder"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera (Overheating Zone)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic_metal",
+        "display": "overheating_zone"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge (Lid Ajar)",
+      "type": "FURNITURE",
+      "location_id": "in:component_testing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "lid_status": "ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Pipette Set (Missing One)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "missing_pipette": true
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Safety Goggles (Scratched)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_certificate_1",
+      "name": "Employee of the Month Certificate",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper_glass",
+        "condition": "dusty",
+        "date": "6_months_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_locked_cabinet_1",
+      "name": "Biometric-locked Steel Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "biometric",
+        "requires": "dual_fingerprint"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "surveillance_camera_1",
+      "name": "Surveillance Camera",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.2
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "status": "active",
+        "led": "blinking_red"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "m8_mini_unit_1",
+      "name": "Prototype M8 Mini Unit (RFID-sealed)",
+      "type": "ITEM",
+      "location_id": "in:biometric_locked_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic_metal",
+        "seal": "RFID_anti_static_bag",
+        "label": "CONFIDENTIAL_DO_NOT_REMOVE"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "m8_mini_unit_2",
+      "name": "Prototype M8 Mini Unit (RFID-sealed)",
+      "type": "ITEM",
+      "location_id": "in:biometric_locked_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic_metal",
+        "seal": "RFID_anti_static_bag",
+        "label": "CONFIDENTIAL_DO_NOT_REMOVE"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "m8_mini_unit_3",
+      "name": "Prototype M8 Mini Unit (RFID-sealed)",
+      "type": "ITEM",
+      "location_id": "in:biometric_locked_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic_metal",
+        "seal": "RFID_anti_static_bag",
+        "label": "CONFIDENTIAL_DO_NOT_REMOVE"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard (Access Level 2)",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "access_level": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "last_inspection": "3_months_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "authorized_personnel_sign_1",
+      "name": "Authorized Personnel Only Sign",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "lunchbox_1",
+      "name": "Forgotten Lunchbox",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "status": "unopened"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "quality_control_desk_1",
+      "name": "Quality Control Desk",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_desk",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood_metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Monitor",
+      "type": "FURNITURE",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          0.4
+        ],
+        "weight": 7.0,
+        "is_container": false,
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_2",
+      "name": "Monitor",
+      "type": "FURNITURE",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          0.4
+        ],
+        "weight": 7.0,
+        "is_container": false,
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "prototype_jig_1",
+      "name": "3D-printed Prototype Jig",
+      "type": "ITEM",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "inspection_checklists_1",
+      "name": "Stack of Inspection Checklists",
+      "type": "ITEM",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "count": 15
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "tool_shelving_1",
+      "name": "Tool & Supply Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:tool_supply_shelving",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal_wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_parts_bin_1",
+      "name": "Spare Parts Bin (Labeled)",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic",
+        "label": "M1.4_SCREWS",
+        "contents": "screws"
+      },
+      "states": {
+        "is_labeled": true
+      }
+    },
+    {
+      "id": "cleaning_supplies_1",
+      "name": "Cleaning Supplies",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "plastic",
+        "contents": "rags_sprays"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "Keurig"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard (Scribbled Schematics)",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "scribbled_schematics"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "magnetic_parts_tray_1",
+      "name": "Magnetic Parts Tray",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "metal",
+        "contents": "screws_bits",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal_plastic",
+        "temperature": "high",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "contents": "half_full",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Drill",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal_plastic",
+        "battery_level": "full",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "ink_level": "low",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:anti_vibration_table_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass_metal",
+        "precision": "high",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "on:quality_control_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "layout": "qwerty",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_source_1",
+      "name": "Water Source (Sink)",
+      "type": "FURNITURE",
+      "location_id": "in:component_testing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "faucet": "functional",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic_metal",
+        "pressure": "high",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mixing_bowl_1",
+      "name": "Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "stainless_steel",
+        "size": "large",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mixing_spoon_1",
+      "name": "Mixing Spoon",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "length": "long",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal",
+        "holes": "small",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_hammer_1",
+      "name": "Heavy Hammer",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal_wood",
+        "head_weight": "heavy",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharp_knife_1",
+      "name": "Sharp Knife",
+      "type": "ITEM",
+      "location_id": "on:tool_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal_plastic",
+        "blade": "sharp",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "close",
+    "damage",
+    "drain",
+    "drill",
+    "glue",
+    "inflate",
+    "label",
+    "mix",
+    "open",
+    "rinse",
+    "show",
+    "solder",
+    "turn_off",
+    "turn_on",
+    "type",
+    "weigh",
+    "weld"
+  ]
+}

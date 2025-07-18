@@ -248,12 +248,12 @@ class ActionManager:
         # 如果没有找到智能体特定的动作，再查找全局动作类
         action_class = self.action_classes.get(command)
         if not action_class:
-            return None, f"未知命令: {command}"
-        
+            return None, f"Unknown command: {command}"
+
         # 使用动作类解析命令字符串
         action = action_class.from_command(command_str, agent_id)
         if not action:
-            return None, f"命令格式错误: {command_str}"
+            return None, f"Invalid command format: {command_str}"
         
         return action, None
     
@@ -274,7 +274,7 @@ class ActionManager:
             from ..core.enums import ActionType
             allowed_actions = [ActionType.CORP_GOTO, ActionType.CORP_PLACE]
             if action.action_type not in allowed_actions:
-                return False, "处于合作模式，只能执行合作搬运或放下"
+                return False, "In cooperative mode, only cooperative carrying or placing actions are allowed"
         return action.validate(
             self.world_state,
             self.env_manager,

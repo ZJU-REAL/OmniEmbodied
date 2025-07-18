@@ -1,0 +1,1062 @@
+{
+  "description": "A collaborative software development lab with interconnected zones for debugging, hardware maintenance, documentation, and tool storage, designed for multi-agent problem-solving.",
+  "rooms": [
+    {
+      "id": "main_development_bay",
+      "name": "Main Development Bay",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "server_hardware_rack",
+        "documentation_area",
+        "parts_storage"
+      ]
+    },
+    {
+      "id": "server_hardware_rack",
+      "name": "Server & Hardware Rack",
+      "properties": {
+        "type": "hardware"
+      },
+      "connected_to_room_ids": [
+        "main_development_bay"
+      ]
+    },
+    {
+      "id": "documentation_area",
+      "name": "Documentation & Whiteboard Area",
+      "properties": {
+        "type": "meeting"
+      },
+      "connected_to_room_ids": [
+        "main_development_bay"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts & Tool Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_development_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "6-meter-long Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_development_bay",
+      "properties": {
+        "size": [
+          6.0,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_1",
+      "name": "Workstation #1",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_2",
+      "name": "Workstation #2",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_3",
+      "name": "Workstation #3 (Debugging Rig)",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision"
+      },
+      "states": {
+        "is_on": true,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "workstation_4",
+      "name": "Workstation #4",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "power_strip_1",
+      "name": "Shared Rack-Mounted Power Strip",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "brand": "APC",
+        "outlets": 8
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cable_tray_1",
+      "name": "Overhead Cable Management Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_development_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_cable_1",
+      "name": "USB Cable",
+      "type": "ITEM",
+      "location_id": "in:cable_tray_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "length": "2m",
+        "connector_type": "USB-A to USB-B"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_cable_1",
+      "name": "Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:cable_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "length": "3m",
+        "category": "Cat6"
+      },
+      "states": {}
+    },
+    {
+      "id": "linker_script_1",
+      "name": "Printed Linker Script",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "pages": 5,
+        "condition": "annotated"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_logic_analyzer_1",
+      "name": "USB Logic Analyzer",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Saleae",
+        "model": "Logic 8",
+        "provides_abilities": [
+          "calibrate",
+          "verify"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "brand": "Brother",
+        "model": "PT-E550W"
+      },
+      "states": {
+        "is_open": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "model": "K-Elite"
+      },
+      "states": {
+        "is_on": true,
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "reference_manual_1",
+      "name": "Win32 Binary Internals",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "pages": 450,
+        "author": "Pietrek"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_manual_2",
+      "name": "GNU Toolchain Pitfalls",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "pages": 320,
+        "author": "Various"
+      },
+      "states": {}
+    },
+    {
+      "id": "debug_poster_1",
+      "name": "Debug First, Code Later Poster",
+      "type": "ITEM",
+      "location_id": "in:main_development_bay",
+      "properties": {
+        "weight": 0.5,
+        "size": "A2",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "rubiks_cube_1",
+      "name": "Dusty Rubik's Cube",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "condition": "partially solved"
+      },
+      "states": {}
+    },
+    {
+      "id": "team_photo_1",
+      "name": "Framed Team Photo",
+      "type": "ITEM",
+      "location_id": "in:main_development_bay",
+      "properties": {
+        "weight": 1.0,
+        "frame_material": "wood",
+        "orientation": "askew"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_cabinet_1",
+      "name": "2m-tall Server Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:server_hardware_rack",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "build_server_1",
+      "name": "Build Server",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "brand": "HP",
+        "model": "ProLiant"
+      },
+      "states": {
+        "is_on": true,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "test_machine_1",
+      "name": "Test Machine",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.7
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model": "PowerEdge"
+      },
+      "states": {
+        "is_on": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "network_switch_1",
+      "name": "Network Switch",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "Cisco",
+        "ports": 24
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "dimm_slot_1",
+      "name": "Empty DIMM Slot",
+      "type": "ITEM",
+      "location_id": "in:test_machine_1",
+      "properties": {
+        "weight": 0.1,
+        "type": "DDR4",
+        "capacity": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_printer_1",
+      "name": "Thermal Printer",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 4.0,
+        "is_container": false,
+        "brand": "Epson"
+      },
+      "states": {
+        "is_open": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "brand": "ATEN",
+        "inputs": 4
+      },
+      "states": {
+        "is_on": true,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "ups_1",
+      "name": "Rack-Mounted UPS",
+      "type": "FURNITURE",
+      "location_id": "in:server_cabinet_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "APC",
+        "capacity": "1500VA"
+      },
+      "states": {
+        "is_on": true,
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_hardware_rack",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "pieces": 6,
+        "brand": "Wera"
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_wrist_strap_1",
+      "name": "Anti-Static Wrist Strap",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "length": "1.5m"
+      },
+      "states": {}
+    },
+    {
+      "id": "do_not_power_off_note_1",
+      "name": "DO NOT POWER OFF Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:server_cabinet_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "text": "DO NOT POWER OFF"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "2.5m-wide Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "size": [
+          2.5,
+          0.02,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "surface": "porcelain"
+      },
+      "states": {}
+    },
+    {
+      "id": "corkboard_1",
+      "name": "Wall-Mounted Corkboard",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.05,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "cork"
+      },
+      "states": {}
+    },
+    {
+      "id": "bug_report_1",
+      "name": "Auto-import Crash Bug Report",
+      "type": "ITEM",
+      "location_id": "on:corkboard_1",
+      "properties": {
+        "weight": 0.05,
+        "pages": 2,
+        "bug_id": "PR4844"
+      },
+      "states": {}
+    },
+    {
+      "id": "bug_report_2",
+      "name": "DLL Linkage Issue Bug Report",
+      "type": "ITEM",
+      "location_id": "on:corkboard_1",
+      "properties": {
+        "weight": 0.05,
+        "pages": 3,
+        "bug_id": "PR4845"
+      },
+      "states": {}
+    },
+    {
+      "id": "red_string_1",
+      "name": "Red String",
+      "type": "ITEM",
+      "location_id": "on:corkboard_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "red",
+        "length": "1m"
+      },
+      "states": {}
+    },
+    {
+      "id": "printed_email_1",
+      "name": "Printed Email",
+      "type": "ITEM",
+      "location_id": "on:corkboard_1",
+      "properties": {
+        "weight": 0.1,
+        "pages": 1,
+        "condition": "annotated"
+      },
+      "states": {}
+    },
+    {
+      "id": "projector_1",
+      "name": "Projector",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "Epson",
+        "resolution": "1080p"
+      },
+      "states": {
+        "is_on": false,
+        "is_covered": true
+      }
+    },
+    {
+      "id": "wheeled_stool_1",
+      "name": "Wheeled Stool",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "weight": 2.0,
+        "pot_material": "clay",
+        "plant_type": "fern"
+      },
+      "states": {}
+    },
+    {
+      "id": "programming_books_1",
+      "name": "Stack of Outdated Programming Books",
+      "type": "ITEM",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "weight": 8.0,
+        "count": 12,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "sdram_bin_1",
+      "name": "SDRAM Modules Bin",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "capacity": "mixed",
+        "count": 10,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dimm_module_1",
+      "name": "16GB DDR4 DIMM Module",
+      "type": "ITEM",
+      "location_id": "in:sdram_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "capacity": "16GB",
+        "type": "DDR4",
+        "has_qc_sticker": true
+      },
+      "states": {}
+    },
+    {
+      "id": "dimm_module_2",
+      "name": "8GB DDR3 DIMM Module",
+      "type": "ITEM",
+      "location_id": "in:sdram_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "capacity": "8GB",
+        "type": "DDR3",
+        "has_qc_sticker": false
+      },
+      "states": {}
+    },
+    {
+      "id": "debug_cables_bin_1",
+      "name": "Debug Cables Bin",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "count": 15,
+        "types": "mixed"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_keyboards_bin_1",
+      "name": "Spare Keyboards Bin",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 5.0,
+        "count": 3,
+        "condition": "used"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Misplaced Keycard",
+      "type": "ITEM",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access_level": "engineer"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "FURNITURE",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 0.8,
+        "is_container": false,
+        "brand": "Dymo"
+      },
+      "states": {
+        "is_on": false,
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Box of Thermal Paste",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Arctic",
+        "remaining": "50%"
+      },
+      "states": {}
+    },
+    {
+      "id": "old_hdds_1",
+      "name": "Stack of Old HDDs",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 5.0,
+        "count": 5,
+        "label": "Do Not Use"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.5,
+        "material": "wood",
+        "year": "2016"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Weller",
+        "wattage": "60W",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:server_hardware_rack",
+      "properties": {
+        "weight": 5.0,
+        "type": "ABC",
+        "capacity": "5lbs",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 3.0,
+        "capacity": "5L",
+        "contents": "diesel",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_1",
+      "name": "Chemical Contaminant",
+      "type": "ITEM",
+      "location_id": "in:locked_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "type": "acid",
+        "concentration": "10%",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Clothes Iron",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Rowenta",
+        "temperature": "adjustable",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rake_1",
+      "name": "Garden Rake",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "width": "30cm",
+        "provides_abilities": [
+          "rake"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_set_1",
+      "name": "Seasoning Set",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.8,
+        "pieces": 12,
+        "container": "spice rack",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lawnmower_1",
+      "name": "Lawnmower",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "type": "electric",
+        "provides_abilities": [
+          "mow_lawn"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:documentation_area",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Canon",
+        "resolution": "24MP",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bucket_1",
+      "name": "Water Bucket",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 2.0,
+        "capacity": "10L",
+        "material": "plastic",
+        "provides_abilities": [
+          "soak"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Zebra",
+        "connection": "USB",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "close",
+    "contaminate",
+    "extinguish",
+    "iron",
+    "lower",
+    "mow_lawn",
+    "open",
+    "photograph",
+    "rake",
+    "refuel",
+    "scan_barcode",
+    "season",
+    "soak",
+    "solder",
+    "turn_off",
+    "turn_on",
+    "uncover",
+    "verify"
+  ]
+}

@@ -58,6 +58,10 @@ class TaskExecutor:
         # 设置任务描述给智能体
         task_description = task.get('task_description', '')
         self.agent_adapter.set_task(task_description)
+
+        # 设置当前任务索引给智能体（用于LLM交互记录）
+        if hasattr(self.agent_adapter, 'agent') and hasattr(self.agent_adapter.agent, '__dict__'):
+            self.agent_adapter.agent.current_task_index = task_index
         
         # 执行步骤循环
         execution_result = self._execute_step_loop(task, task_index, max_steps)
@@ -94,16 +98,13 @@ class TaskExecutor:
                 # 2. 获取执行的动作 - 从智能体的最后一次动作获取
                 action = self._get_last_action_from_agent()
 
-                # 3. 记录LLM交互（如果有）
-                llm_info = self._record_llm_interaction(task_index)
+                # 3. 检查是否有LLM交互（用于统计，不重复记录）
+                llm_info = self._get_llm_interaction_info()
                 if llm_info:
                     llm_interactions += 1
-                
-                # 4. 记录动作执行
-                agent_id = self._get_agent_id()
-                self._record_action_execution(task_index, step, action, status, message, result, agent_id)
 
-                # 5. 记录到轨迹记录器（确保轨迹文件被保存）
+                # 4. 记录动作执行到轨迹记录器
+                agent_id = self._get_agent_id()
                 try:
                     # 确保status是字符串格式
                     status_str = status.name if hasattr(status, 'name') else str(status)
@@ -172,25 +173,16 @@ class TaskExecutor:
             'execution_log': execution_log
         }
     
-    def _record_llm_interaction(self, task_index: int) -> Dict[str, Any]:
-        """记录LLM交互 - 按照文档格式要求"""
+    def _get_llm_interaction_info(self) -> Dict[str, Any]:
+        """获取LLM交互信息 - 仅用于统计，不重复记录"""
         try:
             # 尝试从智能体获取LLM交互信息
             if hasattr(self.agent_adapter, 'get_llm_interaction_info'):
                 llm_info = self.agent_adapter.get_llm_interaction_info()
                 if llm_info:
-                    # 按照文档要求的格式记录（索引由轨迹记录器内部管理）
-                    self.trajectory_recorder.record_llm_interaction(
-                        task_index, 0,  # 索引将被内部管理的索引覆盖
-                        llm_info.get('prompt', ''),
-                        llm_info.get('response', ''),
-                        llm_info.get('tokens_used', {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}),
-                        llm_info.get('response_time_ms', 0.0),
-                        llm_info.get('extracted_action', 'UNKNOWN')
-                    )
                     return llm_info
         except Exception as e:
-            logger.warning(f"记录LLM交互失败: {e}")
+            logger.warning(f"获取LLM交互信息失败: {e}")
 
         return None
 
@@ -242,18 +234,7 @@ class TaskExecutor:
             logger.warning(f"获取最后动作失败: {e}")
             return "UNKNOWN"
     
-    def _record_action_execution(self, task_index: int, step: int,
-                                action: str, status: ActionStatus,
-                                message: str, result: Dict[str, Any],
-                                agent_id: str = None):
-        """记录动作执行"""
-        try:
-            self.trajectory_recorder.record_action_execution(
-                task_index, step, action, status.value, message, result, agent_id
-            )
-        except Exception as e:
-            logger.error(f"记录动作执行失败: {e}")
-    
+
     def _record_task_completion(self, task_index: int, step: int):
         """记录任务完成状态"""
         try:

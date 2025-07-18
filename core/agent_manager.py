@@ -35,7 +35,7 @@ class AgentManager:
             BaseAgent: 创建的智能体实例
         """
         if agent_id in self.agents:
-            logger.warning(f"智能体ID已存在: {agent_id}，将被覆盖")
+            logger.warning(f"Agent ID already exists: {agent_id}, will be overwritten")
         
         agent = create_agent(agent_type, self.simulator, agent_id, config)
         self.agents[agent_id] = agent

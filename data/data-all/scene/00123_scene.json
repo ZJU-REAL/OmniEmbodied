@@ -1,0 +1,800 @@
+{
+  "description": "A hybrid Experimental Craft Brewery & Microbiological Testing Lab, blending industrial brewing equipment with sterile lab environments, featuring tart cherry-infused beer production and testing.",
+  "rooms": [
+    {
+      "id": "brewing_station",
+      "name": "Brewing Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "fermentation_chamber",
+        "ingredient_prep_zone"
+      ]
+    },
+    {
+      "id": "fermentation_chamber",
+      "name": "Fermentation Chamber",
+      "properties": {
+        "type": "temperature_controlled"
+      },
+      "connected_to_room_ids": [
+        "brewing_station",
+        "microbiology_lab"
+      ]
+    },
+    {
+      "id": "microbiology_lab",
+      "name": "Microbiology Lab",
+      "properties": {
+        "type": "sterile"
+      },
+      "connected_to_room_ids": [
+        "fermentation_chamber",
+        "tasting_lounge"
+      ]
+    },
+    {
+      "id": "ingredient_prep_zone",
+      "name": "Ingredient Prep Zone",
+      "properties": {
+        "type": "preparation"
+      },
+      "connected_to_room_ids": [
+        "brewing_station",
+        "storage_room"
+      ]
+    },
+    {
+      "id": "tasting_lounge",
+      "name": "Tasting & Quality Control Lounge",
+      "properties": {
+        "type": "bar"
+      },
+      "connected_to_room_ids": [
+        "microbiology_lab",
+        "storage_room"
+      ]
+    },
+    {
+      "id": "storage_room",
+      "name": "Storage & Logistics Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "ingredient_prep_zone",
+        "tasting_lounge"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "brew_kettle_1",
+      "name": "50L Stainless Steel Brew Kettle",
+      "type": "FURNITURE",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "scorched"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "mash_tun_1",
+      "name": "Industrial Mash Tun",
+      "type": "FURNITURE",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "stuck_valve"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hose_reel_1",
+      "name": "Overhead Hose Reel",
+      "type": "FURNITURE",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital Thermometer",
+      "type": "ITEM",
+      "location_id": "on:mash_tun_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "brand": "BrewTech",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cherry_puree_can_1",
+      "name": "Oregon Tart Cherry Puree Can",
+      "type": "ITEM",
+      "location_id": "on:brew_kettle_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "label": "Batch #47",
+        "state": "unopened"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wort_chiller_1",
+      "name": "Wort Chiller",
+      "type": "ITEM",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "weight": 8.0,
+        "material": "copper",
+        "condition": "clogged"
+      },
+      "states": {}
+    },
+    {
+      "id": "sanitizer_spray_1",
+      "name": "Sanitizer Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "weight": 1.2,
+        "color": "blue",
+        "contents": "Saniclean 3000",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "brewing_logs_1",
+      "name": "Brewing Logs",
+      "type": "ITEM",
+      "location_id": "on:brew_kettle_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "brown",
+        "condition": "incomplete"
+      },
+      "states": {}
+    },
+    {
+      "id": "rubber_gloves_1",
+      "name": "Stained Rubber Gloves",
+      "type": "ITEM",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "fermenter_1",
+      "name": "30-Gallon Conical Fermenter",
+      "type": "FURNITURE",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "hissing"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "co2_sensor_1",
+      "name": "CO2 Sensor Panel",
+      "type": "ITEM",
+      "location_id": "on:fermenter_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "condition": "alerting"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "glycol_system_1",
+      "name": "Glycol Cooling System",
+      "type": "FURNITURE",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "humming"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "hydrometer_1",
+      "name": "Hydrometer",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "condition": "floating"
+      },
+      "states": {}
+    },
+    {
+      "id": "airlock_1",
+      "name": "Airlock",
+      "type": "ITEM",
+      "location_id": "on:fermenter_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "condition": "bubbling"
+      },
+      "states": {}
+    },
+    {
+      "id": "racking_cane_1",
+      "name": "Racking Cane",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "wet"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_airlocks_1",
+      "name": "Spare Airlocks",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "fermentation_logs_1",
+      "name": "Fermentation Logs",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 0.7,
+        "color": "brown",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Containment Kit",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "condition": "unopened"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flow_hood_1",
+      "name": "Laminar Flow Hood",
+      "type": "FURNITURE",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "unbalanced"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "uncleaned"
+      },
+      "states": {}
+    },
+    {
+      "id": "petri_dishes_1",
+      "name": "Petri Dishes with Yeast Cultures",
+      "type": "ITEM",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "label": "Brettanomyces – DO NOT CROSS-CONTAMINATE"
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "pH Meter",
+      "type": "ITEM",
+      "location_id": "on:flow_hood_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "condition": "low_battery"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cherry_sample_1",
+      "name": "Cherry Sample Slide",
+      "type": "ITEM",
+      "location_id": "on:microscope_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "Tart – Michigan – Frozen"
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "size": [
+          0.7,
+          0.7,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "warm"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "pipettes_1",
+      "name": "Sterile Pipettes",
+      "type": "ITEM",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "quantity": 50
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Stained Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "cherry_pitter_1",
+      "name": "Cherry Pitter",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_zone",
+      "properties": {
+        "weight": 1.5,
+        "material": "stainless_steel",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "blender_1",
+      "name": "Industrial Blender",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_zone",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "clean"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:blender_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "condition": "calibrated"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Ingredient Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_zone",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "cold"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cherries_fresh_1",
+      "name": "Fresh Tart Cherries",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "state": "fresh"
+      },
+      "states": {}
+    },
+    {
+      "id": "cherries_frozen_1",
+      "name": "Frozen Tart Cherries",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "state": "frozen"
+      },
+      "states": {}
+    },
+    {
+      "id": "tasting_table_1",
+      "name": "Tasting Table",
+      "type": "FURNITURE",
+      "location_id": "in:tasting_lounge",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "clean"
+      },
+      "states": {
+        "is_table_set": true
+      }
+    },
+    {
+      "id": "sample_bottles_1",
+      "name": "Labeled Sample Bottles",
+      "type": "ITEM",
+      "location_id": "on:tasting_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "label": "Batch #47"
+      },
+      "states": {}
+    },
+    {
+      "id": "flavor_chart_1",
+      "name": "Flavor Note Chart",
+      "type": "ITEM",
+      "location_id": "on:tasting_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "condition": "filled"
+      },
+      "states": {}
+    },
+    {
+      "id": "sink_1",
+      "name": "Bar Sink",
+      "type": "FURNITURE",
+      "location_id": "in:tasting_lounge",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "glass_1",
+      "name": "Tasting Glass",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelves_1",
+      "name": "Storage Shelves",
+      "type": "FURNITURE",
+      "location_id": "in:storage_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "sturdy"
+      },
+      "states": {}
+    },
+    {
+      "id": "cherry_puree_cans_1",
+      "name": "Cherry Puree Cans",
+      "type": "ITEM",
+      "location_id": "on:shelves_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "quantity": 12
+      },
+      "states": {}
+    },
+    {
+      "id": "sanitizing_agents_1",
+      "name": "Sanitizing Agents",
+      "type": "ITEM",
+      "location_id": "on:shelves_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "blue",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_kegs_1",
+      "name": "Empty Kegs",
+      "type": "ITEM",
+      "location_id": "in:storage_room",
+      "properties": {
+        "weight": 10.0,
+        "material": "stainless_steel",
+        "quantity": 6
+      },
+      "states": {}
+    },
+    {
+      "id": "fermenter_lid_1",
+      "name": "Fermenter Lid",
+      "type": "ITEM",
+      "location_id": "in:fermentation_chamber",
+      "properties": {
+        "weight": 150.0,
+        "diameter": 1.5,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "cherry_drum_1",
+      "name": "Full Cherry Puree Drum",
+      "type": "ITEM",
+      "location_id": "in:storage_room",
+      "properties": {
+        "weight": 80.0,
+        "color": "red",
+        "state": "sealed"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:brewing_station",
+      "properties": {
+        "weight": 0.4,
+        "color": "silver",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:storage_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "FURNITURE",
+      "location_id": "in:microbiology_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "plastic",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "clear_table",
+    "copy",
+    "extinguish",
+    "open",
+    "refuel",
+    "screw",
+    "start_process",
+    "turn_off",
+    "turn_on",
+    "close"
+  ]
+}

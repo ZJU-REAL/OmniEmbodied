@@ -1,0 +1,981 @@
+{
+  "description": "An advanced neurobiology research lab specializing in ALS treatment development, in the immediate aftermath of a critical stem cell transplantation experiment. The lab is in a state of controlled disarray, with numerous interactive objects and collaborative challenges.",
+  "rooms": [
+    {
+      "id": "main_lab_floor",
+      "name": "Main Lab Floor",
+      "properties": {
+        "type": "experimental_zone"
+      },
+      "connected_to_room_ids": [
+        "cold_storage_room",
+        "microscopy_suite",
+        "data_analysis_hub",
+        "decontamination_area"
+      ]
+    },
+    {
+      "id": "cold_storage_room",
+      "name": "Cold Storage & Sample Prep Room",
+      "properties": {
+        "type": "climate_controlled"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    },
+    {
+      "id": "microscopy_suite",
+      "name": "Microscopy & Imaging Suite",
+      "properties": {
+        "type": "imaging"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    },
+    {
+      "id": "data_analysis_hub",
+      "name": "Data Analysis & Monitoring Hub",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    },
+    {
+      "id": "decontamination_area",
+      "name": "Decontamination & Equipment Lockers",
+      "properties": {
+        "type": "sterilization"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "dissection_table_1",
+      "name": "Surgical-grade Steel Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "adjustable_height": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_arm_1",
+      "name": "Robotic Assist Arm",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "status": "standby",
+        "gripper_type": "fine_motor"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_arm_2",
+      "name": "Robotic Assist Arm",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "status": "standby",
+        "gripper_type": "fine_motor"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Portable Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "filter_type": "HEPA",
+        "status_led": "Sterilization Cycle Pending"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "petri_dish_1",
+      "name": "GDNF-modified Stem Cell Culture",
+      "type": "ITEM",
+      "location_id": "in:biosafety_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "temperature": 4.0,
+        "label": "SOD1-Trial #7B / EXP-48Hr",
+        "sealed": true,
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dissection_tray_1",
+      "name": "Rat Spinal Cord Dissection Tray",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "stainless_steel",
+        "condition": "used",
+        "residual_saline": true,
+        "is_container": true
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "micro_scalpel_1",
+      "name": "Discarded Micro-scalpel",
+      "type": "ITEM",
+      "location_id": "on:dissection_tray_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "sharpness": "high",
+        "condition": "used"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "micropipette_set_1",
+      "name": "Calibrated Micropipette Set",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 1.2,
+        "range": "0.1µL - 1000µL",
+        "material": "plastic_metal",
+        "brand": "Eppendorf"
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_tip_1",
+      "name": "Misplaced 10µL Pipette Tip",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.01,
+        "size": "10µL",
+        "material": "plastic",
+        "color": "yellow"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "inhibitor_syringe_1",
+      "name": "Emergency Neural Inhibitor Syringe",
+      "type": "ITEM",
+      "location_id": "on:biosafety_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "safety_cap": true,
+        "loaded": true,
+        "holster_type": "magnetic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 45.0,
+        "last_run": "12,000 RPM – 10min",
+        "brand": "Eppendorf"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "eeg_monitor_1",
+      "name": "Portable EEG Monitor",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 3.5,
+        "battery": 23,
+        "display": "flatline",
+        "brand": "Nihon Kohden"
+      },
+      "states": {
+        "is_broken": false,
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "lab_notebook_1",
+      "name": "Digital Lab Notebook",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 0.8,
+        "entry": "Day 14 Post-Transplant",
+        "smudged": true,
+        "brand": "LabArchives"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "time_magazine_1",
+      "name": "Framed TIME Magazine Cover",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 1.2,
+        "title": "Stem Cells: The Future of Neurodegenerative Treatment",
+        "condition": "crooked",
+        "material": "glass_metal"
+      },
+      "states": {
+        "is_hung": true
+      }
+    },
+    {
+      "id": "sop_manual_1",
+      "name": "Stained SOP Manual",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 0.5,
+        "title": "ALS Model Handling Protocols v4.3",
+        "condition": "stained",
+        "coffee_rings": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "lab_fern_1",
+      "name": "Withered Lab-grown Fern",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 1.0,
+        "soil_condition": "dry",
+        "health": "neglected",
+        "species": "fern"
+      },
+      "states": {
+        "is_pruned": false
+      }
+    },
+    {
+      "id": "ultra_low_freezer_1",
+      "name": "-80°C Ultra-Low Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "temperature": -78.5,
+        "warning": "Door Ajar – 2min",
+        "is_container": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "liquid_nitrogen_dewar_1",
+      "name": "Liquid Nitrogen Dewar",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 180.0,
+        "capacity": "500L",
+        "pressure_valve": "hissing"
+      },
+      "states": {}
+    },
+    {
+      "id": "motor_neuron_samples_1",
+      "name": "Cryo-preserved Motor Neuron Samples",
+      "type": "ITEM",
+      "location_id": "in:ultra_low_freezer_1",
+      "properties": {
+        "weight": 0.3,
+        "label": "SOD1-G93A / Control Group / Batch 3",
+        "frosted": true,
+        "vial_material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_vial_1",
+      "name": "Broken Vial",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "weight": 0.1,
+        "contained_in": "absorbent hazard foam",
+        "material": "glass",
+        "hazard_level": "biohazard"
+      },
+      "states": {
+        "is_dirty": true,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "defrosting_tray_1",
+      "name": "Portable Defrosting Tray",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "weight": 2.0,
+        "temperature": 37.0,
+        "time_remaining": "5min",
+        "brand": "ThermoFisher"
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "weight": 1.5,
+        "status": "empty",
+        "glove_type": "nitrile",
+        "loose_glove": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "transport_cart_1",
+      "name": "Sample Transport Cart",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "wheels": "stuck",
+        "loose_strap": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Yellowed Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:ultra_low_freezer_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "DO NOT USE FOR FOOD – SERIOUSLY, JIM",
+        "color": "yellow",
+        "condition": "aged"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Outdated Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_room",
+      "properties": {
+        "weight": 0.2,
+        "title": "Cryogenic Burn First Aid",
+        "condition": "peeling",
+        "material": "paper"
+      },
+      "states": {
+        "is_hung": true
+      }
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "GDNF Stabilizer Bottle",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.8,
+        "label": "USE WITH N2 GLOVES",
+        "seal": "cracked but intact",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.8,
+        "label": "Standard Buffer",
+        "seal": "intact",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_3",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.8,
+        "label": "Solvent",
+        "seal": "intact",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_4",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.8,
+        "label": "Reagent",
+        "seal": "intact",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_5",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.8,
+        "label": "Control Solution",
+        "seal": "intact",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass",
+        "purpose": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "rat_cns_model_1",
+      "name": "3D-printed Rat CNS Model",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          0.3
+        ],
+        "weight": 75.0,
+        "fragility": "high",
+        "embedded_sensors": true
+      },
+      "states": {}
+    },
+    {
+      "id": "equipment_locker_1",
+      "name": "Locked Equipment Locker",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "replacement_battery_1",
+      "name": "Replacement Battery",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 0.5,
+        "compatibility": "EEG Monitor",
+        "voltage": "12V",
+        "brand": "Nihon Kohden"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "pockets": true,
+        "keycard_present": true
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_chamber_1",
+      "name": "UV Sterilization Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "status": "active"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wall_panel_1",
+      "name": "UV Chamber Control Panel",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 1.0,
+        "function": "deactivate UV",
+        "button_type": "touch"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "cleaning_brush_1",
+      "name": "Cleaning Brush",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.3,
+        "bristle_type": "stiff",
+        "handle_material": "plastic",
+        "provides_abilities": [
+          "scrub",
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "color": "blue",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.4,
+        "type": "Phillips",
+        "size": "medium",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Disinfectant Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.5,
+        "content": "ethanol",
+        "spray_type": "mist",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.6,
+        "blade_type": "bypass",
+        "handle_material": "rubber",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "capacity": "10 sheets",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "toaster_1",
+      "name": "Lab Toaster",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.25
+        ],
+        "weight": 3.0,
+        "slots": 2,
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 0.4,
+        "content": "coffee",
+        "material": "ceramic",
+        "color": "white"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "light_bulb_1",
+      "name": "Light Bulb",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 0.2,
+        "wattage": "60W",
+        "type": "LED",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "heavy_hammer_1",
+      "name": "Heavy Hammer",
+      "type": "ITEM",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "weight": 2.5,
+        "head_material": "steel",
+        "handle_material": "wood",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "High-end Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 25.0,
+        "magnification": "1000x",
+        "brand": "Zeiss"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "imaging_system_1",
+      "name": "Live-cell Imaging System",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "resolution": "4K",
+        "brand": "Leica"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "holographic_display_1",
+      "name": "Holographic Projection Display",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.8
+        ],
+        "weight": 70.0,
+        "technology": "laser",
+        "brand": "Holoxica"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "monitor_bank_1",
+      "name": "Bank of Monitors",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          2.0,
+          0.2,
+          1.5
+        ],
+        "weight": 60.0,
+        "count": 6,
+        "brand": "Dell"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "eeg_readout_1",
+      "name": "EEG/EMG Readout",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          0.6
+        ],
+        "weight": 20.0,
+        "channels": 32,
+        "brand": "Natus"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "power_outlet_1",
+      "name": "Power Outlet",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.2,
+        "voltage": "120V",
+        "outlets": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "power_outlet_2",
+      "name": "Power Outlet",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.2,
+        "voltage": "120V",
+        "outlets": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "power_outlet_3",
+      "name": "Power Outlet",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_area",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.2,
+        "voltage": "120V",
+        "outlets": 4
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "damage",
+    "drink",
+    "open",
+    "plug_in",
+    "prune",
+    "replace",
+    "scrub",
+    "shred",
+    "spray",
+    "toast",
+    "unplug",
+    "unscrew"
+  ]
+}

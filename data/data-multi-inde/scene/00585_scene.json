@@ -1,0 +1,552 @@
+{
+  "description": "A bustling industrial color research laboratory where teams collaborate on quality control for mass-produced crayons, featuring spectroscopy analysis, material preparation, data management, and storage areas.",
+  "rooms": [
+    {
+      "id": "spectroscopy_bay",
+      "name": "Spectroscopy Bay",
+      "properties": {
+        "type": "analytical"
+      },
+      "connected_to_room_ids": [
+        "material_prep_station",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "material_prep_station",
+      "name": "Material Prep Station",
+      "properties": {
+        "type": "production"
+      },
+      "connected_to_room_ids": [
+        "spectroscopy_bay",
+        "storage_loading_dock"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Hub",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "spectroscopy_bay",
+        "storage_loading_dock"
+      ]
+    },
+    {
+      "id": "storage_loading_dock",
+      "name": "Storage & Loading Dock",
+      "properties": {
+        "type": "logistics"
+      },
+      "connected_to_room_ids": [
+        "material_prep_station",
+        "data_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "spectrophotometer_1",
+      "name": "Industrial Spectrophotometer (X-Rite Color i7)",
+      "type": "FURNITURE",
+      "location_id": "in:spectroscopy_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "brand": "X-Rite",
+        "model": "Color i7",
+        "status": "Running calibration cycle"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sample_tray_1",
+      "name": "Crayon Sample Tray (24-slots)",
+      "type": "FURNITURE",
+      "location_id": "on:spectrophotometer_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.05
+        ],
+        "weight": 2.5,
+        "is_container": true,
+        "material": "plastic",
+        "slots": 24
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_bench_1",
+      "name": "Calibration Bench",
+      "type": "FURNITURE",
+      "location_id": "in:spectroscopy_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "lighting": "LED",
+        "lighting_condition": "flickering"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tile_1",
+      "name": "Calibration Tile (sRGB: Red)",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "ceramic",
+        "sRGB_value": "255,0,0"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "calibration_tile_2",
+      "name": "Calibration Tile (sRGB: Green)",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "material": "ceramic",
+        "sRGB_value": "0,255,0"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "calibration_tile_3",
+      "name": "Calibration Tile (sRGB: Blue)",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "ceramic",
+        "sRGB_value": "0,0,255"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "error_log_binder_1",
+      "name": "Error Log Binder",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "material": "paper_plastic",
+        "label": "QC Failures - FY2023",
+        "page_notes": "Batch #4421 - Hue deviation in Green-Yellow (ΔE > 3.0)"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Heavy-Duty Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:spectroscopy_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel_glass",
+        "status": "open"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "solvent_spray_1",
+      "name": "Solvent Spray Bottle (Isopropyl Alcohol, 70%)",
+      "type": "ITEM",
+      "location_id": "in:fume_hood_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "content": "Isopropyl Alcohol",
+        "concentration": "70%",
+        "nozzle_condition": "clogged",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "microfiber_cloth_1",
+      "name": "Microfiber Cloth Roll",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "microfiber",
+        "condition": "stained",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {
+        "is_scrubbed": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:calibration_bench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "plastic_metal",
+        "display": "0.00g",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "mixing_vat_1",
+      "name": "Industrial Mixing Vat",
+      "type": "FURNITURE",
+      "location_id": "in:material_prep_station",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "tag": "CLEAN BEFORE USE"
+      },
+      "states": {
+        "is_washed": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "pigment_rack_1",
+      "name": "Pigment Dispensing Rack",
+      "type": "FURNITURE",
+      "location_id": "in:material_prep_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood_glass",
+        "jars": 20,
+        "organization": "Pantone codes"
+      },
+      "states": {}
+    },
+    {
+      "id": "wax_melting_pot_1",
+      "name": "Wax Melting Pot",
+      "type": "ITEM",
+      "location_id": "on:mixing_vat_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "silver",
+        "material": "stainless_steel",
+        "temperature_display": "87°C",
+        "target_temperature": "95°C"
+      },
+      "states": {
+        "is_boiling": false
+      }
+    },
+    {
+      "id": "batch_log_1",
+      "name": "Batch #4421 Pigment Log",
+      "type": "ITEM",
+      "location_id": "on:mixing_vat_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "paper",
+        "content": "Green-Yellow: 5.2g Chrome Oxide (expired 06/2023?)"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "sample_cabinet_1",
+      "name": "Locked Sample Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:material_prep_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "keycard",
+        "required_keycards": 2
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dirty_beakers_1",
+      "name": "Dirty Beakers",
+      "type": "ITEM",
+      "location_id": "in:mixing_vat_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "clear",
+        "material": "glass",
+        "condition": "dirty",
+        "stack_count": 5
+      },
+      "states": {
+        "is_stacked": false,
+        "is_washed": true
+      }
+    },
+    {
+      "id": "stirrer_1",
+      "name": "Magnetic Stirrer",
+      "type": "ITEM",
+      "location_id": "on:mixing_vat_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "plastic_metal",
+        "status": "unplugged"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "ITEM",
+      "location_id": "in:material_prep_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "material": "plastic",
+        "status": "empty"
+      },
+      "states": {
+        "is_empty": true
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Dual-Monitor Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood_metal",
+        "monitors": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "URGENT: Batch #4421 Discrepancy Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "material": "paper",
+        "message": "URGENT: Batch #4421 Discrepancy"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Backup_DoNotDelete)",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "black",
+        "material": "plastic_metal",
+        "label": "Backup_DoNotDelete"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "gray",
+        "material": "plastic",
+        "status": "out of tape"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Storage Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:storage_loading_dock",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "shelves": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "crayon_box_1",
+      "name": "Approved Crayon Box (Batch #4420)",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "green",
+        "material": "cardboard",
+        "status": "approved",
+        "batch": "#4420"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "crayon_box_2",
+      "name": "Rejected Crayon Box (Batch #4421)",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "cardboard",
+        "status": "rejected",
+        "batch": "#4421"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:storage_loading_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "metal",
+        "fuel_type": "electric"
+      },
+      "states": {
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "shipping_crate_1",
+      "name": "Shipping Crate (Empty)",
+      "type": "ITEM",
+      "location_id": "in:storage_loading_dock",
+      "properties": {
+        "weight": 15.0,
+        "color": "brown",
+        "material": "wood",
+        "status": "empty"
+      },
+      "states": {
+        "is_empty": true
+      }
+    },
+    {
+      "id": "shipping_crate_2",
+      "name": "Shipping Crate (Full)",
+      "type": "ITEM",
+      "location_id": "in:storage_loading_dock",
+      "properties": {
+        "weight": 30.0,
+        "color": "brown",
+        "material": "wood",
+        "status": "full"
+      },
+      "states": {
+        "is_empty": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "open",
+    "scrub",
+    "spray",
+    "stack"
+  ]
+}

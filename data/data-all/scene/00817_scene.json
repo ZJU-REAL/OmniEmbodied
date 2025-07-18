@@ -1,0 +1,871 @@
+{
+  "description": "A high-security prison transfer facility in rural Illinois, retrofitted to temporarily house detainees from Guantanamo Bay. The facility features multiple layers of security, redundant checkpoints, and strict procedural controls.",
+  "rooms": [
+    {
+      "id": "main_security_checkpoint",
+      "name": "Main Security Checkpoint & Armory",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "processing_medical_wing",
+        "command_monitoring_center"
+      ]
+    },
+    {
+      "id": "processing_medical_wing",
+      "name": "Processing & Medical Wing",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "main_security_checkpoint",
+        "detainee_holding_cells"
+      ]
+    },
+    {
+      "id": "detainee_holding_cells",
+      "name": "Detainee Holding Cells",
+      "properties": {
+        "type": "detention"
+      },
+      "connected_to_room_ids": [
+        "processing_medical_wing",
+        "loading_dock_transport_bay"
+      ]
+    },
+    {
+      "id": "command_monitoring_center",
+      "name": "Command & Monitoring Center",
+      "properties": {
+        "type": "surveillance"
+      },
+      "connected_to_room_ids": [
+        "main_security_checkpoint",
+        "loading_dock_transport_bay"
+      ]
+    },
+    {
+      "id": "loading_dock_transport_bay",
+      "name": "Loading Dock & Transport Bay",
+      "properties": {
+        "type": "logistics"
+      },
+      "connected_to_room_ids": [
+        "detainee_holding_cells",
+        "command_monitoring_center"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "security_desk_1",
+      "name": "Reinforced Steel Security Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "size": [
+          3.0,
+          1.2,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SD-5000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fingerprint_scanner_1",
+      "name": "Fingerprint Scanner",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "SecureTech",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "retinal_id_terminal_1",
+      "name": "Retinal ID Terminal",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "brand": "BioSecure",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "weapons_locker_1",
+      "name": "Biometric Weapons Locker",
+      "type": "FURNITURE",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "taser_1",
+      "name": "Taser",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "yellow",
+        "brand": "StunTech",
+        "model_number": "T-2000"
+      },
+      "states": {}
+    },
+    {
+      "id": "baton_1",
+      "name": "Expandable Baton",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "material": "steel"
+      },
+      "states": {
+        "is_compressed": true
+      }
+    },
+    {
+      "id": "body_scanner_1",
+      "name": "Full-Body Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "brand": "ScanSafe"
+      },
+      "states": {}
+    },
+    {
+      "id": "guard_keycard_1",
+      "name": "Guard Keycard (Level 1)",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "clearance_level": 1,
+        "rfid_chip": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "guard_keycard_2",
+      "name": "Guard Keycard (Level 2)",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "clearance_level": 2,
+        "rfid_chip": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "master_override_fob_1",
+      "name": "Master Override Fob",
+      "type": "ITEM",
+      "location_id": "in:security_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "emergency_use": true
+      },
+      "states": {}
+    },
+    {
+      "id": "detainee_manifest_1",
+      "name": "Detainee Manifest Clipboard",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic"
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "weight": 3.5,
+        "color": "white",
+        "brand": "BrewMaster"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "surveillance_monitors_1",
+      "name": "Surveillance Monitors",
+      "type": "FURNITURE",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "size": [
+          1.5,
+          0.2,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "SecureView"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "intercom_1",
+      "name": "Wall-Mounted Intercom",
+      "type": "ITEM",
+      "location_id": "in:main_security_checkpoint",
+      "properties": {
+        "weight": 1.2,
+        "color": "gray",
+        "brand": "CommLink"
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_table_1",
+      "name": "Medical Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:processing_medical_wing",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_station_1",
+      "name": "Biometric Station",
+      "type": "FURNITURE",
+      "location_id": "in:processing_medical_wing",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "brand": "BioScan"
+      },
+      "states": {}
+    },
+    {
+      "id": "supply_cabinet_1",
+      "name": "Steel Supply Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:processing_medical_wing",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "detainee_file_1",
+      "name": "High-Risk Detainee File",
+      "type": "ITEM",
+      "location_id": "on:medical_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "sedative_vial_1",
+      "name": "Sedative Vial (Heavy)",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "contents": "sedative"
+      },
+      "states": {}
+    },
+    {
+      "id": "sedative_vial_2",
+      "name": "Sedative Vial (Mild)",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "contents": "tranquilizer"
+      },
+      "states": {}
+    },
+    {
+      "id": "panic_button_1",
+      "name": "Panic Button",
+      "type": "ITEM",
+      "location_id": "on:medical_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "emergency_use": true
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:processing_medical_wing",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "vitals_monitor_1",
+      "name": "Digital Vitals Monitor",
+      "type": "ITEM",
+      "location_id": "in:processing_medical_wing",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "brand": "MediTrack"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "cell_door_1",
+      "name": "Reinforced Steel Cell Door",
+      "type": "FURNITURE",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.5
+        ],
+        "weight": 250.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "surveillance_camera_1",
+      "name": "Pan-Tilt-Zoom Camera",
+      "type": "ITEM",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "SecureEye"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "bench_restraints_1",
+      "name": "Bench Restraints",
+      "type": "FURNITURE",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "detainee_bracelet_1",
+      "name": "Detainee ID Bracelet",
+      "type": "ITEM",
+      "location_id": "on:bench_restraints_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "orange",
+        "risk_level": "EXTREME"
+      },
+      "states": {}
+    },
+    {
+      "id": "hidden_shiv_1",
+      "name": "Hidden Shiv",
+      "type": "ITEM",
+      "location_id": "on:bench_restraints_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal"
+      },
+      "states": {
+        "is_sewn": false
+      }
+    },
+    {
+      "id": "guard_radio_1",
+      "name": "Dropped Guard Radio",
+      "type": "ITEM",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "CommTech"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "overhead_light_1",
+      "name": "Flickering Overhead Light",
+      "type": "ITEM",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "brand": "LightMaster"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "observation_window_1",
+      "name": "Reinforced Observation Window",
+      "type": "FURNITURE",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "bulletproof_glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "ventilation_grate_1",
+      "name": "Ventilation Grate",
+      "type": "ITEM",
+      "location_id": "in:detainee_holding_cells",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "command_console_1",
+      "name": "Security Command Console",
+      "type": "FURNITURE",
+      "location_id": "in:command_monitoring_center",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "brand": "SecureCommand"
+      },
+      "states": {}
+    },
+    {
+      "id": "surveillance_screens_1",
+      "name": "Surveillance Screen Array",
+      "type": "FURNITURE",
+      "location_id": "in:command_monitoring_center",
+      "properties": {
+        "size": [
+          3.0,
+          0.3,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "brand": "ViewMax"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "communication_radio_1",
+      "name": "Communication Radio",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "CommLink"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Document Printer",
+      "type": "ITEM",
+      "location_id": "in:command_monitoring_center",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "brand": "PrintPro",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Computer Keyboard",
+      "type": "ITEM",
+      "location_id": "on:command_console_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "KeyTech",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "loading_dock_door_1",
+      "name": "Armored Loading Dock Door",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock_transport_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          3.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Industrial Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock_transport_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 1500.0,
+        "is_container": false,
+        "fuel_type": "diesel"
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Diesel Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:loading_dock_transport_bay",
+      "properties": {
+        "weight": 10.0,
+        "color": "yellow",
+        "contents": "diesel",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "transfer_pod_1",
+      "name": "Armored Transfer Pod",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock_transport_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.0
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "restraint_chair_1",
+      "name": "Detainee Restraint Chair",
+      "type": "FURNITURE",
+      "location_id": "in:loading_dock_transport_bay",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "silver",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polishing Cloth",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_polish_1",
+      "name": "Metal Polish",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Power Drill",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spoon_1",
+      "name": "Stirring Spoon",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "stir"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Clothing Iron",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "white",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Document Photocopier",
+      "type": "ITEM",
+      "location_id": "in:command_monitoring_center",
+      "properties": {
+        "weight": 30.0,
+        "color": "gray",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scoop_1",
+      "name": "Plastic Scoop",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_wrap_1",
+      "name": "Plastic Wrap Roll",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "buckle",
+    "copy",
+    "decompress",
+    "drill",
+    "iron",
+    "loosen",
+    "open",
+    "polish",
+    "print",
+    "refuel",
+    "scoop",
+    "sew",
+    "stir",
+    "turn_off",
+    "type",
+    "verify",
+    "wrap",
+    "close"
+  ]
+}

@@ -1,0 +1,596 @@
+{
+  "description": "A covert underground firearms verification and modification workshop hidden beneath a gun show, featuring heavy machinery, security systems, and numerous interactive objects requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "front_entrance",
+      "name": "Front Entrance & Security Checkpoint",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "main_verification_bay"
+      ]
+    },
+    {
+      "id": "main_verification_bay",
+      "name": "Main Verification Bay",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "front_entrance",
+        "storage_armory",
+        "private_transaction_room",
+        "workshop_repair_station"
+      ]
+    },
+    {
+      "id": "storage_armory",
+      "name": "Storage & Armory",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_verification_bay"
+      ]
+    },
+    {
+      "id": "private_transaction_room",
+      "name": "Private Transaction Room",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "main_verification_bay"
+      ]
+    },
+    {
+      "id": "workshop_repair_station",
+      "name": "Workshop & Repair Station",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_verification_bay",
+        "back_exit"
+      ]
+    },
+    {
+      "id": "back_exit",
+      "name": "Back Exit & Emergency Tunnel",
+      "properties": {
+        "type": "exit"
+      },
+      "connected_to_room_ids": [
+        "workshop_repair_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reinforced_steel_door_1",
+      "name": "Reinforced Steel Door",
+      "type": "FURNITURE",
+      "location_id": "in:front_entrance",
+      "properties": {
+        "size": [
+          1.5,
+          0.03,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "guard_desk_1",
+      "name": "Guard Desk",
+      "type": "FURNITURE",
+      "location_id": "in:front_entrance",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "worn"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "id_scanner_1",
+      "name": "ID Scanner",
+      "type": "ITEM",
+      "location_id": "on:guard_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "SecurTech",
+        "led_color": "red",
+        "provides_abilities": [
+          "press"
+        ]
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "temporary_weapon_locker_1",
+      "name": "Temporary Weapon Locker",
+      "type": "FURNITURE",
+      "location_id": "in:front_entrance",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "electronic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "panic_button_1",
+      "name": "Panic Button",
+      "type": "ITEM",
+      "location_id": "in:guard_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "emergency_function": "silent_alarm",
+        "provides_abilities": [
+          "press"
+        ]
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Visitor Log",
+      "type": "ITEM",
+      "location_id": "on:guard_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "last_entry": "J. Mercer – 11:47 AM",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_coffee_machine_1",
+      "name": "Broken Coffee Machine",
+      "type": "ITEM",
+      "location_id": "on:guard_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "brand": "CoffeeMaster",
+        "condition": "leaking",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "wall_mounted_shotgun_1",
+      "name": "Wall-mounted Shotgun",
+      "type": "ITEM",
+      "location_id": "in:front_entrance",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "ammo_status": "loaded",
+        "security_lock": "magnetic",
+        "provides_abilities": [
+          "load"
+        ]
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "hydraulic_inspection_lift_1",
+      "name": "Hydraulic Inspection Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.5
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "max_load": "500kg",
+        "current_load": "AK-47 crate"
+      },
+      "states": {}
+    },
+    {
+      "id": "weighing_station_1",
+      "name": "Weighing Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "accuracy": "+/- 0.2kg",
+        "brand": "ScaleTech"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_light_kit_1",
+      "name": "Forensic Light Kit",
+      "type": "ITEM",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "weight": 4.0,
+        "color": "blue",
+        "function": "detect_tampered_serial_numbers",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "ballistic_gel_block_1",
+      "name": "Ballistic Gel Block",
+      "type": "ITEM",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "translucent",
+        "condition": "partially_melted",
+        "provides_abilities": [
+          "thaw"
+        ]
+      },
+      "states": {
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "firearm_jig_1",
+      "name": "Firearm Jig",
+      "type": "ITEM",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "weight": 8.0,
+        "color": "gray",
+        "function": "hold_rifles_for_inspection",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "size": [
+          0.9,
+          0.5,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "condition": "squeaky_wheels"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Checklist",
+      "type": "ITEM",
+      "location_id": "in:main_verification_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "content": "Serial # Check → Barrel Integrity → Firing Test",
+        "material": "melamine"
+      },
+      "states": {}
+    },
+    {
+      "id": "desktop_pc_1",
+      "name": "Desktop PC",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "status": "frozen",
+        "software": "outdated_ballistic_software",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "heavy_steel_shelving_1",
+      "name": "Heavy Steel Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "by_caliber"
+      },
+      "states": {}
+    },
+    {
+      "id": "padlocked_ammo_crate_1",
+      "name": "Padlocked Ammo Crate",
+      "type": "FURNITURE",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "lock_type": "padlock",
+        "content": "live_rounds"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mislabeled_rifle_case_1",
+      "name": "Mislabeled Rifle Case",
+      "type": "ITEM",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "label": "Hunting Gear",
+        "actual_content": "modified_AR-15",
+        "provides_abilities": [
+          "unroll"
+        ]
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "floor_safe_1",
+      "name": "Floor Safe",
+      "type": "FURNITURE",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.4
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "lock_type": "dual_key",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dolly_cart_1",
+      "name": "Dolly Cart",
+      "type": "ITEM",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "weight": 15.0,
+        "color": "red",
+        "condition": "bent_wheel",
+        "provides_abilities": [
+          "load"
+        ]
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "humidifier_1",
+      "name": "Humidifier",
+      "type": "ITEM",
+      "location_id": "in:storage_armory",
+      "properties": {
+        "weight": 7.0,
+        "color": "white",
+        "water_level": "low",
+        "function": "stabilize_gunpowder",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "metal_detector_1",
+      "name": "Metal Detector",
+      "type": "ITEM",
+      "location_id": "in:private_transaction_room",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "sensitivity": "high",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "biometric_lock_1",
+      "name": "Biometric Lock",
+      "type": "ITEM",
+      "location_id": "in:private_transaction_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "security_level": "high",
+        "provides_abilities": [
+          "press"
+        ]
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "lathe_1",
+      "name": "Lathe",
+      "type": "FURNITURE",
+      "location_id": "in:workshop_repair_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "function": "metal_working",
+        "condition": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_gear_1",
+      "name": "Welding Gear",
+      "type": "ITEM",
+      "location_id": "in:workshop_repair_station",
+      "properties": {
+        "weight": 10.0,
+        "color": "black",
+        "safety_level": "high",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "disassembled_firearm_1",
+      "name": "Disassembled Firearm",
+      "type": "ITEM",
+      "location_id": "on:lathe_1",
+      "properties": {
+        "weight": 4.0,
+        "color": "black",
+        "status": "in_progress",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "false_panel_1",
+      "name": "False Panel",
+      "type": "FURNITURE",
+      "location_id": "in:back_exit",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "concealment": "escape_route"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "storm_drain_1",
+      "name": "Storm Drain",
+      "type": "ITEM",
+      "location_id": "in:back_exit",
+      "properties": {
+        "weight": 0.0,
+        "color": "gray",
+        "exit_route": "to_street",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {
+        "is_drained": false
+      }
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "calibrate",
+    "connect",
+    "download",
+    "drain",
+    "load",
+    "open",
+    "press",
+    "thaw",
+    "unroll",
+    "close"
+  ]
+}

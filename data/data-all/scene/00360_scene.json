@@ -1,0 +1,731 @@
+{
+  "description": "A mid-sized, aging corporate data center undergoing a phased hardware upgrade during a critical 48-hour maintenance window. The scene includes a main server floor, staging area, network operations closet, and break room/storage area, all densely populated with interactive objects and furniture.",
+  "rooms": [
+    {
+      "id": "main_server_floor",
+      "name": "Main Server Floor",
+      "properties": {
+        "type": "server_room",
+        "temperature": 22.0,
+        "humidity": 45.0
+      },
+      "connected_to_room_ids": [
+        "staging_area",
+        "network_operations_closet"
+      ]
+    },
+    {
+      "id": "staging_area",
+      "name": "Staging Area",
+      "properties": {
+        "type": "workspace",
+        "lighting": "fluorescent",
+        "clutter_level": "high"
+      },
+      "connected_to_room_ids": [
+        "main_server_floor",
+        "break_room"
+      ]
+    },
+    {
+      "id": "network_operations_closet",
+      "name": "Network Operations Closet",
+      "properties": {
+        "type": "network_room",
+        "lighting": "flickering",
+        "size": "small"
+      },
+      "connected_to_room_ids": [
+        "main_server_floor"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room/Storage",
+      "properties": {
+        "type": "break_room",
+        "coffee_status": "empty",
+        "cleanliness": "messy"
+      },
+      "connected_to_room_ids": [
+        "staging_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "legacy_server_rack_a7_1",
+      "name": "Legacy Server Rack A7",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.2
+        ],
+        "weight": 600.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "BB-2000",
+        "capacity": "12U"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "beefy_box_1",
+      "name": "Beefy Box Server",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_rack_a7_1",
+      "properties": {
+        "weight": 80.0,
+        "size": [
+          0.5,
+          0.6,
+          0.2
+        ],
+        "material": "metal",
+        "generation": "legacy",
+        "status": "active",
+        "decommission_tag": false
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "beefy_box_2",
+      "name": "Beefy Box Server",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_rack_a7_1",
+      "properties": {
+        "weight": 80.0,
+        "size": [
+          0.5,
+          0.6,
+          0.2
+        ],
+        "material": "metal",
+        "generation": "legacy",
+        "status": "active",
+        "decommission_tag": true
+      },
+      "states": {}
+    },
+    {
+      "id": "modern_server_rack_b3_1",
+      "name": "Modern Server Rack B3",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.2
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "aluminum",
+        "model_number": "MB-3000",
+        "capacity": "12U"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blade_server_1",
+      "name": "Blade Server",
+      "type": "ITEM",
+      "location_id": "in:modern_server_rack_b3_1",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.3,
+          0.4,
+          0.1
+        ],
+        "material": "metal",
+        "generation": "modern",
+        "status": "active",
+        "hot_swappable": true
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_cable_tray_1",
+      "name": "Overhead Cable Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "size": [
+          3.0,
+          0.3,
+          0.2
+        ],
+        "weight": 50.0,
+        "material": "aluminum",
+        "condition": "rusted",
+        "cable_density": "high",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cat6_cable_1",
+      "name": "Cat6 Cable",
+      "type": "ITEM",
+      "location_id": "in:overhead_cable_tray_1",
+      "properties": {
+        "weight": 0.5,
+        "length": 5.0,
+        "color": "blue",
+        "connector_type": "RJ45"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "fiber_optic_cable_1",
+      "name": "Fiber Optic Cable",
+      "type": "ITEM",
+      "location_id": "in:overhead_cable_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "length": 3.0,
+        "color": "orange",
+        "connector_type": "LC"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "faulty_pdu_1",
+      "name": "Faulty PDU",
+      "type": "ITEM",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "weight": 15.0,
+        "size": [
+          0.5,
+          0.2,
+          0.1
+        ],
+        "material": "plastic",
+        "outlets": 12,
+        "breaker_status": "tripped",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "weight": 1.2,
+        "size": [
+          0.2,
+          0.1,
+          0.1
+        ],
+        "material": "plastic",
+        "brand": "Dymo",
+        "tape_status": "out",
+        "provides_abilities": [
+          "file"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dymo_tape_1",
+      "name": "Dymo LT-100 Tape Cartridge",
+      "type": "ITEM",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.05,
+          0.05,
+          0.02
+        ],
+        "material": "plastic",
+        "color": "black",
+        "compatibility": "Dymo"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_lift_1",
+      "name": "Hydraulic Server Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "material": "steel",
+        "max_capacity": 150.0,
+        "condition": "leaking",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true,
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 30.0,
+        "material": "metal",
+        "keyboard_condition": "sticky",
+        "monitor_status": "working"
+      },
+      "states": {
+        "is_pushed": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.3,
+          0.2,
+          0.6
+        ],
+        "material": "metal",
+        "inspection_status": "expired",
+        "type": "ABC"
+      },
+      "states": {}
+    },
+    {
+      "id": "temperature_alert_panel_1",
+      "name": "Temperature Alert Panel",
+      "type": "ITEM",
+      "location_id": "in:main_server_floor",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "material": "plastic",
+        "alert_status": "Zone 2 Overheat",
+        "temperature": 28.0
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "packing_material_pile_1",
+      "name": "Packing Material Pile",
+      "type": "FURNITURE",
+      "location_id": "in:staging_area",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.0
+        ],
+        "weight": 10.0,
+        "material": "mixed",
+        "contents": "foam peanuts, anti-static bags"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:staging_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "material": "steel",
+        "condition": "scratched",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "unopened_server_crate_1",
+      "name": "Unopened Server Crate",
+      "type": "FURNITURE",
+      "location_id": "in:staging_area",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "weight": 180.0,
+        "material": "wood",
+        "label": "FRAGILE",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Rusty Crowbar",
+      "type": "ITEM",
+      "location_id": "in:staging_area",
+      "properties": {
+        "weight": 3.0,
+        "size": [
+          0.8,
+          0.05,
+          0.02
+        ],
+        "material": "steel",
+        "condition": "rusty",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_clipboard_1",
+      "name": "Inventory Clipboard",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.3,
+          0.2,
+          0.02
+        ],
+        "material": "plastic",
+        "pages_missing": "2-4",
+        "pencil_attached": true
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "material": "plastic",
+        "ports_missing": "VGA",
+        "status": "unplugged"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:staging_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.3
+        ],
+        "weight": 50.0,
+        "material": "steel",
+        "condition": "squeaky",
+        "load_capacity": 1000.0
+      },
+      "states": {
+        "is_pushed": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "material": "plastic",
+        "battery_status": "low",
+        "brand": "Zebra"
+      },
+      "states": {}
+    },
+    {
+      "id": "patch_panel_1",
+      "name": "48-Port Patch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "material": "metal",
+        "ports_used": 36,
+        "cable_status": "unlabeled",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "unlabeled_cable_1",
+      "name": "Unlabeled Cable",
+      "type": "ITEM",
+      "location_id": "in:patch_panel_1",
+      "properties": {
+        "weight": 0.2,
+        "length": 1.0,
+        "color": "gray",
+        "connector_type": "RJ45"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "ip_schema_binder_1",
+      "name": "IP Schema Binder",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.3,
+          0.25,
+          0.05
+        ],
+        "material": "cardboard",
+        "contents": "empty",
+        "label": "IP Schema"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "toner_probe_1",
+      "name": "Toner Probe",
+      "type": "ITEM",
+      "location_id": "in:network_operations_closet",
+      "properties": {
+        "weight": 0.4,
+        "size": [
+          0.2,
+          0.1,
+          0.05
+        ],
+        "material": "plastic",
+        "battery_status": "dead",
+        "brand": "Fluke"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 2.5,
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "material": "plastic",
+        "carafe_status": "empty",
+        "note": "Clean Me",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "spare_keyboard_1",
+      "name": "Spare Keyboard",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.45,
+          0.15,
+          0.03
+        ],
+        "material": "plastic",
+        "condition": "new",
+        "layout": "QWERTY"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_oil_1",
+      "name": "Hydraulic Oil",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          0.2,
+          0.1,
+          0.1
+        ],
+        "material": "liquid",
+        "type": "ISO 32",
+        "volume_ml": 500,
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "funnel_1",
+      "name": "Plastic Funnel",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "size": [
+          0.15,
+          0.15,
+          0.2
+        ],
+        "material": "plastic",
+        "color": "red",
+        "condition": "used"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_valve_1",
+      "name": "Pressure Valve",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "material": "brass",
+        "operation": "manual",
+        "requires_two_hands": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pepperoni_pizza_1",
+      "name": "Pepperoni Pizza",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "size": [
+          0.3,
+          0.3,
+          0.05
+        ],
+        "material": "food",
+        "slices_left": 3,
+        "temperature": "room",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {
+        "is_served": false
+      }
+    },
+    {
+      "id": "paper_plate_1",
+      "name": "Paper Plate",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.2,
+          0.2,
+          0.01
+        ],
+        "material": "paper",
+        "color": "white",
+        "condition": "clean",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "file",
+    "open",
+    "pair",
+    "pull",
+    "repair",
+    "serve",
+    "stain",
+    "start_process",
+    "close"
+  ]
+}

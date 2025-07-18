@@ -1,0 +1,575 @@
+{
+  "description": "A bustling Drone Media Production Hub located in an urban loft-style workspace, featuring high-tech equipment and cluttered workspaces designed for collaborative drone operations, media editing, and equipment maintenance.",
+  "rooms": [
+    {
+      "id": "drone_launch_landing_pad",
+      "name": "Drone Launch & Landing Pad",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "drone_maintenance_station"
+      ]
+    },
+    {
+      "id": "drone_maintenance_station",
+      "name": "Drone Maintenance & Charging Station",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "drone_launch_landing_pad",
+        "editing_command_center"
+      ]
+    },
+    {
+      "id": "editing_command_center",
+      "name": "Editing & Command Center",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "drone_maintenance_station",
+        "equipment_storage_logistics"
+      ]
+    },
+    {
+      "id": "equipment_storage_logistics",
+      "name": "Equipment Storage & Logistics",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "editing_command_center"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "retractable_landing_grid_1",
+      "name": "Retractable Landing Grid",
+      "type": "FURNITURE",
+      "location_id": "in:drone_launch_landing_pad",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.1
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "aluminum",
+        "led_color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rf_signal_booster_1",
+      "name": "RF Signal Booster",
+      "type": "FURNITURE",
+      "location_id": "in:drone_launch_landing_pad",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "status_light": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "lehmann_la100_drone_1",
+      "name": "Lehmann LA100 Drone",
+      "type": "ITEM",
+      "location_id": "on:retractable_landing_grid_1",
+      "properties": {
+        "weight": 3.5,
+        "battery_level": 12,
+        "camera_model": "GoPro Hero 3",
+        "is_container": false
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "dji_phantom_drone_1",
+      "name": "DJI Phantom Drone",
+      "type": "ITEM",
+      "location_id": "on:retractable_landing_grid_1",
+      "properties": {
+        "weight": 2.8,
+        "battery_level": 45,
+        "gimbal_status": "misaligned",
+        "is_container": false
+      },
+      "states": {
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "emergency_retrieval_pole_1",
+      "name": "Emergency Retrieval Pole",
+      "type": "ITEM",
+      "location_id": "in:drone_launch_landing_pad",
+      "properties": {
+        "weight": 1.2,
+        "length": 3.0,
+        "material": "fiberglass",
+        "provides_abilities": [
+          "push"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "weather_display_1",
+      "name": "Weather Display",
+      "type": "ITEM",
+      "location_id": "in:drone_launch_landing_pad",
+      "properties": {
+        "weight": 0.8,
+        "wind_speed": 15,
+        "temperature": 22,
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:drone_maintenance_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "charging_rack_1",
+      "name": "Charging Rack",
+      "type": "FURNITURE",
+      "location_id": "in:drone_maintenance_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "slots": 6,
+        "led_status": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_toolset_1",
+      "name": "Calibration Toolset",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "connection_type": "USB",
+        "requires_software": true,
+        "provides_abilities": [
+          "start_engine",
+          "stop_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "battery_tester_1",
+      "name": "Battery Tester",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "swollen",
+        "hazard_level": "high",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "voltage": "erratic",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "l_shaped_desk_1",
+      "name": "L-Shaped Desk",
+      "type": "FURNITURE",
+      "location_id": "in:editing_command_center",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          0.7
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "High-Res Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 7.0,
+        "display": "live_feed",
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_2",
+      "name": "High-Res Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 7.0,
+        "display": "editing",
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_3",
+      "name": "High-Res Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 7.0,
+        "display": "editing",
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "audio_mixer_1",
+      "name": "Audio Mixer",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Yamaha",
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:editing_command_center",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "flight_paths"
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_duty_shelving_1",
+      "name": "Heavy-Duty Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_logistics",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "pelican_case_1",
+      "name": "Pelican Case",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_shelving_1",
+      "properties": {
+        "weight": 50.0,
+        "length": 1.0,
+        "label": "Lehmann LA100",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pelican_case_2",
+      "name": "Pelican Case",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_shelving_1",
+      "properties": {
+        "weight": 45.0,
+        "length": 0.8,
+        "label": "DJI Phantom",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gopro_accessory_rack_1",
+      "name": "GoPro Accessory Rack",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_logistics",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "lens_cleaner_1",
+      "name": "Lens Cleaner",
+      "type": "ITEM",
+      "location_id": "on:gopro_accessory_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "brand": "Zeiss",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_logistics",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazardous_waste_bin_1",
+      "name": "Hazardous Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_logistics",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "content": "damaged_LiPo_batteries"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "drone_controller_1",
+      "name": "Drone Controller",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "DJI",
+        "provides_abilities": [
+          "start_engine",
+          "stop_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "pieces": 12,
+        "provides_abilities": [
+          "uninstall"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_cable_1",
+      "name": "USB Cable",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "length": 1.0,
+        "connection_type": "USB-C",
+        "is_container": false
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "spare_battery_1",
+      "name": "Spare Battery",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.5,
+        "capacity": "high",
+        "status": "cooled",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_battery_2",
+      "name": "Spare Battery",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.5,
+        "capacity": "medium",
+        "status": "cooled",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_battery_3",
+      "name": "Spare Battery",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.5,
+        "capacity": "low",
+        "status": "cooled",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hard_drive_1",
+      "name": "External Hard Drive",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "capacity": "2TB",
+        "is_container": false
+      },
+      "states": {
+        "is_recording": true
+      }
+    },
+    {
+      "id": "sd_card_organizer_1",
+      "name": "SD Card Organizer",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "slots": 12,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_stained_post_it_1",
+      "name": "Coffee Stained Post-It",
+      "type": "ITEM",
+      "location_id": "in:pelican_case_1",
+      "properties": {
+        "weight": 0.01,
+        "content": "firmware_password",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "tangled_tether_line_1",
+      "name": "Tangled Tether Line",
+      "type": "ITEM",
+      "location_id": "in:drone_launch_landing_pad",
+      "properties": {
+        "weight": 0.8,
+        "length": 10.0,
+        "is_container": false
+      },
+      "states": {
+        "is_tied": true
+      }
+    }
+  ],
+  "abilities": [
+    "moisten",
+    "open",
+    "push",
+    "start_engine",
+    "stop_engine",
+    "stop_recording",
+    "turn_on",
+    "uninstall",
+    "untie",
+    "close"
+  ]
+}

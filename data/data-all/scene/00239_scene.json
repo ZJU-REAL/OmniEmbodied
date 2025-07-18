@@ -1,0 +1,842 @@
+{
+  "description": "A bustling, cluttered electronics repair workshop specializing in vintage and modern computer hardware, filled with half-disassembled machines, tangled cables, and shelves overflowing with components.",
+  "rooms": [
+    {
+      "id": "workbench_area",
+      "name": "Workbench Area",
+      "properties": {
+        "type": "repair_station"
+      },
+      "connected_to_room_ids": [
+        "component_shelves",
+        "testing_bay"
+      ]
+    },
+    {
+      "id": "component_shelves",
+      "name": "Component Shelves",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "workbench_area",
+        "storage_backroom"
+      ]
+    },
+    {
+      "id": "testing_bay",
+      "name": "Testing Bay",
+      "properties": {
+        "type": "diagnostic"
+      },
+      "connected_to_room_ids": [
+        "workbench_area"
+      ]
+    },
+    {
+      "id": "storage_backroom",
+      "name": "Storage/Backroom",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "component_shelves"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_workbench_1",
+      "name": "Steel-topped Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "stained_heat_resistant_mat"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Overhead Adjustable-arm Magnifying Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "light_type": "LED",
+        "condition": "flickering_slightly"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rolling_tool_chest_1",
+      "name": "Rolling Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "drawers": 6,
+        "condition": "one_drawer_stuck_halfway"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "patient_zero_pc_1",
+      "name": "Patient Zero PC",
+      "type": "FURNITURE",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "motherboard": "H61M/U3S3",
+        "issue": "HDMI_port_non_functional"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "precision_screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.5,
+        "missing_parts": "PH00_bit",
+        "material": "steel",
+        "brand": "Wiha"
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_wristband_1",
+      "name": "Anti-static Wristband",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "frayed_wire",
+        "color": "black",
+        "brand": "Rosewill"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "Soldering Station",
+      "type": "FURNITURE",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "temperature": 320.0,
+        "condition": "tin_residue_on_tip"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "usb_microscope_1",
+      "name": "USB Microscope",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.8,
+        "missing_parts": "lens_cap",
+        "storage": "foam_lined_case",
+        "brand": "Celestron"
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_tickets_1",
+      "name": "Stack of Repair Tickets",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "top_note": "HDMI_NO_SIGNAL_PRIORITY",
+        "material": "paper",
+        "clip_type": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "decoration": "1_Tech_decal",
+        "contents": "pens_and_melted_usb_drive",
+        "material": "ceramic",
+        "is_container": true
+      },
+      "states": {
+        "is_dirty": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "esd_poster_1",
+      "name": "ESD Danger Poster",
+      "type": "ITEM",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded_and_peeling",
+        "size": [
+          0.6,
+          0.4,
+          0.01
+        ],
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "motherboard_boxes_1",
+      "name": "Pile of Discarded Motherboard Boxes",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "contents": "cat_sleeping_on_one"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:component_shelves",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          3.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "condition": "slightly_leaning_left"
+      },
+      "states": {}
+    },
+    {
+      "id": "pegboard_wall_1",
+      "name": "Pegboard Wall",
+      "type": "FURNITURE",
+      "location_id": "in:component_shelves",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "condition": "outlined_shapes_for_missing_tools"
+      },
+      "states": {}
+    },
+    {
+      "id": "gpu_bin_1",
+      "name": "GPU Bin",
+      "type": "FURNITURE",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "contents": "three_gpus"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gtx_1050_ti_1",
+      "name": "GTX 1050 Ti",
+      "type": "ITEM",
+      "location_id": "in:gpu_bin_1",
+      "properties": {
+        "weight": 0.7,
+        "condition": "dusty",
+        "ports": "no_hdmi",
+        "brand": "NVIDIA"
+      },
+      "states": {}
+    },
+    {
+      "id": "rtx_2060_1",
+      "name": "RTX 2060",
+      "type": "ITEM",
+      "location_id": "in:gpu_bin_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "in_anti_static_bag",
+        "ports": "hdmi_displayport",
+        "brand": "NVIDIA"
+      },
+      "states": {}
+    },
+    {
+      "id": "mystery_gpu_1",
+      "name": "Mystery GPU",
+      "type": "ITEM",
+      "location_id": "in:gpu_bin_1",
+      "properties": {
+        "weight": 0.6,
+        "condition": "corroded_pins",
+        "label": "none",
+        "brand": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "ph00_screwdriver_bit_1",
+      "name": "PH00 Screwdriver Bit",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.05,
+        "location": "near_thermal_paste",
+        "material": "steel",
+        "size": "PH00"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_bins_1",
+      "name": "Labeled Parts Bins",
+      "type": "FURNITURE",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "labels": [
+          "10kΩ_Resistors",
+          "SATA_Cables"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dehumidifier_1",
+      "name": "Dehumidifier",
+      "type": "FURNITURE",
+      "location_id": "in:component_shelves",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "noisy"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "vintage_gaming_magazines_1",
+      "name": "Vintage Gaming Magazines",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "era": "1980s",
+        "condition": "stacked_unevenly",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_trophy_1",
+      "name": "Employee of the Month Trophy",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "year": 2013,
+        "condition": "chipped",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "test_monitor_array_1",
+      "name": "Test Monitor Array",
+      "type": "FURNITURE",
+      "location_id": "in:testing_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "monitors": 3
+      },
+      "states": {}
+    },
+    {
+      "id": "vga_monitor_1",
+      "name": "VGA-only Monitor",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 8.0,
+        "display": "No_Input",
+        "port": "VGA",
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "hdmi_monitor_1",
+      "name": "HDMI Monitor",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 8.5,
+        "display": "flickering",
+        "port": "HDMI",
+        "brand": "LG"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "dvi_monitor_1",
+      "name": "DVI Monitor",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 9.0,
+        "display": "GPU_stress_test",
+        "port": "DVI",
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 0.6,
+        "condition": "probes_tangled",
+        "mode": "continuity",
+        "brand": "Fluke"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:testing_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.05
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "notes": "HDMI_override_Check_BIOS"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_2",
+      "name": "Industrial Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:storage_backroom",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "contents": "20_CRT_monitors"
+      },
+      "states": {}
+    },
+    {
+      "id": "crt_monitor_1",
+      "name": "CRT Monitor",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_2",
+      "properties": {
+        "weight": 45.0,
+        "condition": "leaking_capacitor_fluid",
+        "size": "27_inch",
+        "brand": "Sony"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_backroom",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "keypad_entry",
+        "condition": "slight_hum_from_inside"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_motherboard_1",
+      "name": "Spare H61M/U3S3 Motherboard",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_2",
+      "properties": {
+        "weight": 1.2,
+        "condition": "in_original_box_seal_broken",
+        "model": "H61M/U3S3",
+        "brand": "ASRock"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_backroom",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "condition": "blocking_fire_extinguisher",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note with Code",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.01,
+        "condition": "obscured_by_coffee_stain",
+        "content": "keypad_code",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "keyboard_wrist_rest_1",
+      "name": "Decorative Keyboard Wrist Rest",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "hides_similar_numbers",
+        "material": "foam",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_keyboard_1",
+      "name": "Workbench Keyboard",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "condition": "coffee_stained",
+        "type": "mechanical",
+        "brand": "Logitech"
+      },
+      "states": {}
+    },
+    {
+      "id": "cat_1",
+      "name": "Cat",
+      "type": "ITEM",
+      "location_id": "on:motherboard_boxes_1",
+      "properties": {
+        "weight": 4.0,
+        "behavior": "batting_at_loose_screws",
+        "color": "tabby",
+        "breed": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "lighter_1",
+      "name": "Lighter",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.1,
+        "provides_abilities": [
+          "ignite"
+        ],
+        "fuel": "butane",
+        "color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "provides_abilities": [
+          "compress"
+        ],
+        "brand": "Dake"
+      },
+      "states": {}
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "stain"
+        ],
+        "type": "chemical",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 0.5,
+        "provides_abilities": [
+          "photograph"
+        ],
+        "brand": "Canon",
+        "resolution": "20MP"
+      },
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "FURNITURE",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "provides_abilities": [
+          "weigh"
+        ],
+        "brand": "Ozeri"
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "on:test_monitor_array_1",
+      "properties": {
+        "weight": 1.2,
+        "provides_abilities": [
+          "record_video"
+        ],
+        "brand": "Sony",
+        "resolution": "4K"
+      },
+      "states": {}
+    },
+    {
+      "id": "adjustable_wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.7,
+        "provides_abilities": [
+          "adjust"
+        ],
+        "size": "10_inch",
+        "brand": "Crescent"
+      },
+      "states": {}
+    },
+    {
+      "id": "media_player_1",
+      "name": "Media Player",
+      "type": "FURNITURE",
+      "location_id": "in:testing_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "brand": "Sony"
+      },
+      "states": {
+        "is_playing": false
+      }
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:rolling_tool_chest_1",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "varnish"
+        ],
+        "bristle_type": "synthetic",
+        "handle_material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "fertilizer_bag_1",
+      "name": "Fertilizer Bag",
+      "type": "ITEM",
+      "location_id": "in:storage_backroom",
+      "properties": {
+        "weight": 5.0,
+        "provides_abilities": [
+          "fertilize"
+        ],
+        "type": "NPK",
+        "brand": "Miracle-Gro"
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "in:coffee_mug_1",
+      "properties": {
+        "weight": 0.05,
+        "provides_abilities": [
+          "sign"
+        ],
+        "ink_color": "blue",
+        "brand": "Bic"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "adjust",
+    "compress",
+    "fertilize",
+    "ignite",
+    "open",
+    "photograph",
+    "play",
+    "record_video",
+    "sign",
+    "stain",
+    "turn_off",
+    "turn_on",
+    "varnish",
+    "weigh",
+    "close"
+  ]
+}

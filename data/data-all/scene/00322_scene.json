@@ -1,0 +1,460 @@
+{
+  "description": "A bustling hybrid commercial kitchen and hibachi dining space designed for multi-agent coordination, featuring a hibachi grill dining area, sushi preparation station, back kitchen with hot and cold zones, supply and storage room, and staff prep zone.",
+  "rooms": [
+    {
+      "id": "hibachi_dining_area",
+      "name": "Hibachi Grill Dining Area",
+      "properties": {
+        "type": "dining"
+      },
+      "connected_to_room_ids": [
+        "sushi_prep_station",
+        "back_kitchen"
+      ]
+    },
+    {
+      "id": "sushi_prep_station",
+      "name": "Sushi Preparation Station",
+      "properties": {
+        "type": "prep"
+      },
+      "connected_to_room_ids": [
+        "hibachi_dining_area",
+        "back_kitchen"
+      ]
+    },
+    {
+      "id": "back_kitchen",
+      "name": "Back Kitchen",
+      "properties": {
+        "type": "kitchen"
+      },
+      "connected_to_room_ids": [
+        "hibachi_dining_area",
+        "sushi_prep_station",
+        "supply_storage_room",
+        "staff_prep_zone"
+      ]
+    },
+    {
+      "id": "supply_storage_room",
+      "name": "Supply & Storage Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "back_kitchen"
+      ]
+    },
+    {
+      "id": "staff_prep_zone",
+      "name": "Staff Prep Zone",
+      "properties": {
+        "type": "staff"
+      },
+      "connected_to_room_ids": [
+        "back_kitchen"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hibachi_grill_1",
+      "name": "Hibachi Grill",
+      "type": "FURNITURE",
+      "location_id": "in:hibachi_dining_area",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "HG-2000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ventilation_hood_1",
+      "name": "Ventilation Hood",
+      "type": "FURNITURE",
+      "location_id": "in:hibachi_dining_area",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "aluminum",
+        "led_color": "white"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "chefs_toolkit_1",
+      "name": "Chef's Toolkit",
+      "type": "ITEM",
+      "location_id": "on:hibachi_grill_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "silver",
+        "brand": "Shun",
+        "provides_abilities": [
+          "serve",
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "diner_plate_1",
+      "name": "Diner Plate",
+      "type": "ITEM",
+      "location_id": "on:hibachi_grill_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "ceramic",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_served": false
+      }
+    },
+    {
+      "id": "onion_volcano_setup_1",
+      "name": "Onion Volcano Setup",
+      "type": "ITEM",
+      "location_id": "on:hibachi_grill_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "brown",
+        "material": "plastic",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sauce_caddy_1",
+      "name": "Sauce Caddy",
+      "type": "ITEM",
+      "location_id": "on:hibachi_grill_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "plastic",
+        "contents": "soy, ginger, spicy mayo"
+      },
+      "states": {
+        "is_combined": false
+      }
+    },
+    {
+      "id": "sushi_display_case_1",
+      "name": "Sushi Display Case",
+      "type": "FURNITURE",
+      "location_id": "in:sushi_prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "glass",
+        "current_temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "specialty_knife_set_1",
+      "name": "Specialty Knife Set",
+      "type": "ITEM",
+      "location_id": "in:sushi_display_case_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "silver",
+        "brand": "Global",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "snow_white_roll_ingredients_1",
+      "name": "Snow White Roll Ingredients",
+      "type": "ITEM",
+      "location_id": "in:sushi_display_case_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "various",
+        "material": "food",
+        "contents": "tempura shrimp, avocado, rice"
+      },
+      "states": {
+        "is_wrapped": false
+      }
+    },
+    {
+      "id": "rice_cooker_1",
+      "name": "Rice Cooker",
+      "type": "FURNITURE",
+      "location_id": "in:back_kitchen",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "model_number": "RC-3000"
+      },
+      "states": {
+        "is_on": false,
+        "is_boiling": false
+      }
+    },
+    {
+      "id": "industrial_stove_1",
+      "name": "Industrial Stove",
+      "type": "FURNITURE",
+      "location_id": "in:back_kitchen",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "walk_in_fridge_1",
+      "name": "Walk-in Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:back_kitchen",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "current_temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fish_delivery_crate_1",
+      "name": "Fish Delivery Crate",
+      "type": "FURNITURE",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "FRAGILE – UNLOAD WITH CARE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wasabi_paste_1",
+      "name": "Wasabi Paste",
+      "type": "ITEM",
+      "location_id": "in:walk_in_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "paste",
+        "expiration_date": "04/12"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "dishwasher_1",
+      "name": "Dishwasher",
+      "type": "FURNITURE",
+      "location_id": "in:back_kitchen",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.9
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "faulty nozzle"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "maintenance_wrench_1",
+      "name": "Maintenance Wrench",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_room",
+      "properties": {
+        "weight": 1.2,
+        "color": "yellow",
+        "material": "steel",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_rack_1",
+      "name": "Spice Rack",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "misaligned"
+      },
+      "states": {}
+    },
+    {
+      "id": "sesame_seeds_jar_1",
+      "name": "Sesame Seeds Jar",
+      "type": "ITEM",
+      "location_id": "on:spice_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "glass",
+        "contents": "crushed red pepper"
+      },
+      "states": {
+        "is_seasoned": false
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "jammed drawer"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chefs_apron_1",
+      "name": "Chef's Apron",
+      "type": "ITEM",
+      "location_id": "in:staff_prep_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "cotton",
+        "name_tag": "Chef Tanaka"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_mounted_schedule_1",
+      "name": "Wall Mounted Schedule",
+      "type": "FURNITURE",
+      "location_id": "in:staff_prep_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "condition": "overlapping shifts"
+      },
+      "states": {}
+    },
+    {
+      "id": "order_pads_stack_1",
+      "name": "Order Pads Stack",
+      "type": "ITEM",
+      "location_id": "on:wall_mounted_schedule_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "material": "paper",
+        "note": "VIP Table 3 – NO WASABI!"
+      },
+      "states": {
+        "is_copied": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "boil",
+    "combine",
+    "copy_file",
+    "drill",
+    "open",
+    "paste",
+    "season",
+    "serve",
+    "turn_on",
+    "close"
+  ]
+}

@@ -1,0 +1,1116 @@
+{
+  "description": "A cutting-edge neuroscience research laboratory focused on studying Alzheimer’s disease progression, specifically the spread of tau protein tangles in transgenic mice. The lab is designed for high-precision collaborative research, requiring coordinated efforts between scientists, lab technicians, and robotics assistants.",
+  "rooms": [
+    {
+      "id": "main_research_area",
+      "name": "Main Research Area",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "mouse_housing_zone",
+        "tissue_processing_room",
+        "data_analysis_hub",
+        "biohazard_chamber"
+      ]
+    },
+    {
+      "id": "mouse_housing_zone",
+      "name": "Mouse Housing & Testing Zone",
+      "properties": {
+        "type": "animal_facility"
+      },
+      "connected_to_room_ids": [
+        "main_research_area"
+      ]
+    },
+    {
+      "id": "tissue_processing_room",
+      "name": "Tissue Processing & Staining Room",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "main_research_area",
+        "biohazard_chamber"
+      ]
+    },
+    {
+      "id": "data_analysis_hub",
+      "name": "Data Analysis & Collaboration Hub",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_research_area"
+      ]
+    },
+    {
+      "id": "biohazard_chamber",
+      "name": "Biohazard & Sterilization Chamber",
+      "properties": {
+        "type": "containment"
+      },
+      "connected_to_room_ids": [
+        "main_research_area",
+        "tissue_processing_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "microscopy_station_1",
+      "name": "Anti-vibration Microscopy Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "AVM-2500",
+        "has_cooling": true,
+        "led_color": "white"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "digital_pathology_scanner_1",
+      "name": "4K Digital Pathology Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 220.0,
+        "is_container": false,
+        "material": "steel",
+        "brand": "Leica",
+        "requires_calibration": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "modular_lab_bench_1",
+      "name": "Modular Lab Bench System",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "has_power_outlets": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tau_sample_tray_1",
+      "name": "Tau Protein Sample Tray",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "plastic",
+        "label": "Tau-441, Batch #XK-09",
+        "temperature": -20.0,
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {
+        "is_measured": false
+      }
+    },
+    {
+      "id": "freezer_1",
+      "name": "-20°C Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.7,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": -20.0
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": false
+      }
+    },
+    {
+      "id": "live_cell_imaging_chamber_1",
+      "name": "Live-cell Imaging Chamber",
+      "type": "ITEM",
+      "location_id": "on:microscopy_station_1",
+      "properties": {
+        "weight": 8.5,
+        "material": "glass",
+        "display_type": "LCD",
+        "provides_abilities": [
+          "play",
+          "stop_playback"
+        ]
+      },
+      "states": {
+        "is_playing": false
+      }
+    },
+    {
+      "id": "antibody_fridge_1",
+      "name": "Antibody Storage Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "requires_biometric": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "calibration_pipette_set_1",
+      "name": "Calibration Pipette Set",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "plastic",
+        "range": "10µL-1000µL",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "eeg_headset_1",
+      "name": "Wireless EEG Headset",
+      "type": "ITEM",
+      "location_id": "on:charging_dock_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "battery_level": 23,
+        "brand": "NeuroTech",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "charging_dock_1",
+      "name": "Charging Dock",
+      "type": "FURNITURE",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.3,
+        "is_container": true,
+        "material": "plastic",
+        "charging_type": "wireless"
+      },
+      "states": {}
+    },
+    {
+      "id": "slide_storage_cabinet_1",
+      "name": "Microscope Slide Storage Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "slots_total": 200,
+        "slots_empty": 17
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Lab Safety Protocol Poster",
+      "type": "ITEM",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "material": "paper",
+        "year": 2018,
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "material": "ceramic",
+        "inscription": "World’s Okayest Neuroscientist",
+        "contents": "pens"
+      },
+      "states": {
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "research_photo_1",
+      "name": "Framed Research Team Photo",
+      "type": "ITEM",
+      "location_id": "in:main_research_area",
+      "properties": {
+        "weight": 0.7,
+        "color": "brown",
+        "material": "wood",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "rodent_housing_rack_1",
+      "name": "Ventilated Rodent Housing Rack",
+      "type": "FURNITURE",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "plastic",
+        "cages_total": 12,
+        "cages_occupied": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "observation_chamber_1",
+      "name": "Two-way Mirror Observation Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "material": "plastic",
+        "scan_type": "fingerprint",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "brain_extraction_kit_1",
+      "name": "Mouse Brain Extraction Kit",
+      "type": "ITEM",
+      "location_id": "in:biohazard_tray_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "material": "metal",
+        "contents": "scalpel, forceps, formaldehyde vials",
+        "biohazard_level": 2,
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_tray_1",
+      "name": "Sealed Biohazard Tray",
+      "type": "FURNITURE",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": true,
+        "material": "plastic",
+        "seal_type": "airtight"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "automated_feeder_1",
+      "name": "Automated Feeder",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 12.0,
+        "color": "white",
+        "material": "plastic",
+        "error_code": "E-47",
+        "issue": "jammed pellet dispenser",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "neural_recording_implant_1",
+      "name": "Wireless Neural Recording Implant",
+      "type": "ITEM",
+      "location_id": "on:docking_station_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "titanium",
+        "battery_level": 78,
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "docking_station_1",
+      "name": "Docking Station",
+      "type": "FURNITURE",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "weight": 0.2,
+        "is_container": true,
+        "material": "plastic",
+        "charging_type": "inductive"
+      },
+      "states": {}
+    },
+    {
+      "id": "temperature_monitor_1",
+      "name": "Temperature/Humidity Monitor",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "plastic",
+        "current_temp": 20.0,
+        "current_humidity": 45,
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "behavioral_scoring_sheets_1",
+      "name": "Behavioral Scoring Sheets",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "paper",
+        "condition": "coffee-stained",
+        "completion": "half-filled"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_treadmill_wheel_1",
+      "name": "Broken Treadmill Wheel",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "rubber",
+        "issue": "missing bolt",
+        "tilt_angle": 15,
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Chewed-up Stress Ball",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "foam",
+        "condition": "chewed"
+      },
+      "states": {
+        "is_smashed": false
+      }
+    },
+    {
+      "id": "lab_mice_sign_1",
+      "name": "Lab Mice Only Sign",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "plastic",
+        "has_doodle": true
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_water_bottle_1",
+      "name": "Leaking Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:mouse_housing_zone",
+      "properties": {
+        "weight": 0.6,
+        "color": "clear",
+        "material": "plastic",
+        "issue": "leaking",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "cryostat_microtome_1",
+      "name": "Cryostat Microtome",
+      "type": "FURNITURE",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "requires_calibration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "uv_light": "flickering"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sectioned_brain_slide_1",
+      "name": "Partially Sectioned Mouse Brain Slide",
+      "type": "ITEM",
+      "location_id": "on:cryostat_microtome_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "clear",
+        "material": "glass",
+        "stain_type": "tau_tangles",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "leaking_formalin_container_1",
+      "name": "Leaking Formalin Container",
+      "type": "ITEM",
+      "location_id": "in:fume_hood_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "material": "plastic",
+        "hazard_level": "high",
+        "requires_cleanup": true,
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "mislabeled_reagent_1",
+      "name": "Mislabeled Reagent Bottle",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "weight": 0.8,
+        "color": "clear",
+        "material": "glass",
+        "label": "PBS Buffer?",
+        "requires_verification": true,
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "metal",
+        "last_used": "2 hours ago"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "material": "plastic",
+        "countdown": "15:00",
+        "provides_abilities": [
+          "play",
+          "stop_playback"
+        ]
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "nitrile_gloves_1",
+      "name": "Box of Nitrile Gloves",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "nitrile",
+        "size": "M",
+        "quantity": "half-empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "no_food_sign_1",
+      "name": "No Food Sign",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellowed",
+        "material": "paper",
+        "has_note": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_tip_box_1",
+      "name": "Broken Pipette Tip Box",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "orange",
+        "material": "plastic",
+        "repurposed_as": "pen_holder"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Dusty Safety Goggles",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "holographic_projector_1",
+      "name": "Holographic Projector",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false,
+        "is_muted": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "melamine"
+      },
+      "states": {}
+    },
+    {
+      "id": "large_monitor_1",
+      "name": "Large Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "screen_size": "55 inch"
+      },
+      "states": {
+        "is_on": false,
+        "is_muted": true
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "cotton",
+        "pockets": [
+          "keycard"
+        ],
+        "owner": "distracted_scientist",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "access_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "absorbent_pads_1",
+      "name": "Absorbent Pads",
+      "type": "ITEM",
+      "location_id": "in:biohazard_chamber",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "polypropylene",
+        "absorption_capacity": "5L",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "maintenance_toolbox_1",
+      "name": "Maintenance Toolbox",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "contents": [
+          "replacement_gear",
+          "screwdriver",
+          "wrench"
+        ],
+        "provides_abilities": [
+          "replace",
+          "drill"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "replacement_gear_1",
+      "name": "Replacement Gear",
+      "type": "ITEM",
+      "location_id": "in:maintenance_toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "steel",
+        "size": "small",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "tau_sample_blue_1",
+      "name": "Blue-capped Tau Sample",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "glass",
+        "label": "CORROSIVE",
+        "hazard_level": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "tau_sample_green_1",
+      "name": "Green-capped Tau Sample",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "glass",
+        "label": "NON-HAZARDOUS"
+      },
+      "states": {}
+    },
+    {
+      "id": "tau_sample_green_2",
+      "name": "Green-capped Tau Sample",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "glass",
+        "label": "NON-HAZARDOUS"
+      },
+      "states": {}
+    },
+    {
+      "id": "tau_sample_green_3",
+      "name": "Green-capped Tau Sample",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "glass",
+        "label": "NON-HAZARDOUS"
+      },
+      "states": {}
+    },
+    {
+      "id": "tau_sample_green_4",
+      "name": "Green-capped Tau Sample",
+      "type": "ITEM",
+      "location_id": "in:freezer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "glass",
+        "label": "NON-HAZARDOUS"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass",
+        "shape": "spherical"
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "on:modular_lab_bench_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "material": "plastic",
+        "resolution": "24MP",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Feather Duster",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "feathers",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "microfiber",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drawer_1",
+      "name": "Utility Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:modular_lab_bench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "material": "plastic",
+        "scan_resolution": "1200dpi",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Paper Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:data_analysis_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.6
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic",
+        "shred_type": "cross-cut",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Electric Drill",
+      "type": "ITEM",
+      "location_id": "in:maintenance_toolbox_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "metal",
+        "battery_level": 75,
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "crack",
+    "drill",
+    "dust",
+    "measure",
+    "open",
+    "photograph",
+    "play",
+    "replace",
+    "scan",
+    "shred",
+    "smash",
+    "stop_playback",
+    "turn_on",
+    "unmute",
+    "verify"
+  ]
+}

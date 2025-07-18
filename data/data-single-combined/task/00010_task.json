@@ -1,0 +1,62 @@
+{
+  "task_background": "Prepare the Dakar Rally bivouac for emergency repairs and rider recovery in the scorching desert.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the diagnostic_laptop_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diagnostic_laptop_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, green coolant bottle and place it on the steel_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_bottle_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the oxygen_sensor_tester_1 to scan the gps_tracker_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the battery_charger_1 to disarm the alarm and then place it on the steel_workbench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "battery_charger_1",
+          "is_alarm_armed": false
+        },
+        {
+          "id": "battery_charger_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00010"
+}

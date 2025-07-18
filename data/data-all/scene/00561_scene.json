@@ -1,0 +1,454 @@
+{
+  "description": "A Firearms Safety Training & Certification Center with four interconnected zones: Classroom & Briefing Area, Secure Storage Vault, Simulation Range, and Maintenance & Inspection Bay. The scene is designed for multi-agent collaboration, featuring heavy objects, procedural checks, and dynamic hazards.",
+  "rooms": [
+    {
+      "id": "classroom",
+      "name": "Classroom & Briefing Area",
+      "properties": {
+        "type": "education"
+      },
+      "connected_to_room_ids": [
+        "storage_vault"
+      ]
+    },
+    {
+      "id": "storage_vault",
+      "name": "Secure Storage Vault",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "classroom",
+        "simulation_range"
+      ]
+    },
+    {
+      "id": "simulation_range",
+      "name": "Simulation Range",
+      "properties": {
+        "type": "training"
+      },
+      "connected_to_room_ids": [
+        "storage_vault",
+        "maintenance_bay"
+      ]
+    },
+    {
+      "id": "maintenance_bay",
+      "name": "Maintenance & Inspection Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "simulation_range"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "instructors_podium_1",
+      "name": "Instructor's Podium",
+      "type": "FURNITURE",
+      "location_id": "in:classroom",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "has_fingerprint_scanner": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "training_revolver_1",
+      "name": "Malfunctioning Training Revolver",
+      "type": "ITEM",
+      "location_id": "in:instructors_podium_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "legal_manuals_1",
+      "name": "Legal Manuals",
+      "type": "ITEM",
+      "location_id": "on:instructors_podium_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "material": "paper",
+        "has_sticky_notes": true
+      },
+      "states": {}
+    },
+    {
+      "id": "dummy_rounds_cabinet_1",
+      "name": "Locked Cabinet with Dummy Rounds",
+      "type": "FURNITURE",
+      "location_id": "in:classroom",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "requires_two_keys": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dummy_rounds_1",
+      "name": "Dummy Rounds",
+      "type": "ITEM",
+      "location_id": "in:dummy_rounds_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "quantity": 20
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "requires_dual_biometrics": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ammo_crate_1",
+      "name": "Ammo Crate (12GA SLUGS)",
+      "type": "FURNITURE",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "max_weight": 25.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ammo_crate_2",
+      "name": "Ammo Crate (9mm)",
+      "type": "FURNITURE",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "max_weight": 20.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glock_19_1",
+      "name": "Misplaced Glock 19",
+      "type": "ITEM",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "metal"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "weighted_shelf_1",
+      "name": "Weighted Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "has_rfid_alarm": true
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "fingerprint_wipes_1",
+      "name": "Fingerprint Wipes Dispenser",
+      "type": "ITEM",
+      "location_id": "in:storage_vault",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "plastic",
+        "quantity": 50
+      },
+      "states": {}
+    },
+    {
+      "id": "target_system_1",
+      "name": "Retractable Target System",
+      "type": "FURNITURE",
+      "location_id": "in:simulation_range",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "metal",
+        "is_jammed": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "target_crank_1",
+      "name": "Target System Crank",
+      "type": "ITEM",
+      "location_id": "in:simulation_range",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hot_barrel_light_1",
+      "name": "Hot Barrel Warning Light",
+      "type": "ITEM",
+      "location_id": "in:simulation_range",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic",
+        "is_faulty": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "brass_collection_bin_1",
+      "name": "Brass Collection Bin",
+      "type": "FURNITURE",
+      "location_id": "in:simulation_range",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false,
+        "is_full": true
+      }
+    },
+    {
+      "id": "gun_vise_1",
+      "name": "Gun Vise",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal",
+        "has_stripped_screw": true
+      },
+      "states": {}
+    },
+    {
+      "id": "corroded_beretta_1",
+      "name": "Corroded Beretta",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.9,
+        "color": "black",
+        "material": "metal",
+        "is_corroded": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "ultrasonic_cleaner_1",
+      "name": "Ultrasonic Cleaner",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "microfiber_cloths_1",
+      "name": "Microfiber Cloths",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "cloth"
+      },
+      "states": {
+        "is_soaked": true
+      }
+    },
+    {
+      "id": "led_magnifier_1",
+      "name": "LED Magnifier",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "material": "plastic",
+        "is_flickering": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "solvent_bottle_1",
+      "name": "Solvent Bottle (Blue Cap)",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "material": "glass",
+        "label": "CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "solvent_bottle_2",
+      "name": "Solvent Bottle (Red Cap)",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "glass",
+        "label": "NON-CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_vase_1",
+      "name": "Decorative Blue Vase",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "material": "ceramic"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "deactivate",
+    "empty",
+    "load",
+    "open",
+    "close"
+  ]
+}

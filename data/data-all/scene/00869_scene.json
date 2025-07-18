@@ -1,0 +1,690 @@
+{
+  "description": "A bustling hybrid data center and developer community hub, blending server infrastructure, analytics workstations, and community spaces, designed for multi-agent collaboration and complex task hierarchies.",
+  "rooms": [
+    {
+      "id": "server_room",
+      "name": "Server Room (Cold Aisle)",
+      "properties": {
+        "type": "industrial",
+        "temperature": 18.0,
+        "humidity": 45.0
+      },
+      "connected_to_room_ids": [
+        "monitoring_hub",
+        "tool_storage"
+      ]
+    },
+    {
+      "id": "monitoring_hub",
+      "name": "Monitoring Hub",
+      "properties": {
+        "type": "office",
+        "lighting": "fluorescent"
+      },
+      "connected_to_room_ids": [
+        "server_room",
+        "moderator_lounge"
+      ]
+    },
+    {
+      "id": "moderator_lounge",
+      "name": "Community Moderator Lounge",
+      "properties": {
+        "type": "lounge",
+        "ambiance": "casual"
+      },
+      "connected_to_room_ids": [
+        "monitoring_hub"
+      ]
+    },
+    {
+      "id": "tool_storage",
+      "name": "Tool & Parts Storage",
+      "properties": {
+        "type": "storage",
+        "organization": "cluttered"
+      },
+      "connected_to_room_ids": [
+        "server_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "server_rack_a7_1",
+      "name": "Server Rack A7",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-3000",
+        "rack_units": 42,
+        "cooling_required": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blade_server_1",
+      "name": "Blade Server (Slot 1)",
+      "type": "ITEM",
+      "location_id": "in:server_rack_a7_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "status_led": "green",
+        "model_number": "BS-500",
+        "capacity": "2TB"
+      },
+      "states": {}
+    },
+    {
+      "id": "blade_server_2",
+      "name": "Blade Server (Slot 4)",
+      "type": "ITEM",
+      "location_id": "in:server_rack_a7_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "status_led": "red",
+        "model_number": "BS-500",
+        "capacity": "2TB"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "hvac_unit_1",
+      "name": "HVAC Unit",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "aluminum",
+        "current_temperature": 18.0,
+        "filter_status": "clogged"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "cover_material": "plexiglass"
+      },
+      "states": {
+        "is_sealed": true,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "network_switch_panel_1",
+      "name": "Network Switch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "port_count": 24
+      },
+      "states": {}
+    },
+    {
+      "id": "cat6_cable_1",
+      "name": "Cat-6 Cable (Yellow Tag)",
+      "type": "ITEM",
+      "location_id": "on:network_switch_panel_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "length": "5m",
+        "is_plugged": false,
+        "label": "TEMP FIX – do not move"
+      },
+      "states": {}
+    },
+    {
+      "id": "access_keycard_reader_1",
+      "name": "Access Keycard Reader",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "clearance_level": 2,
+        "status": "ACCESS DENIED"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_wristband_1",
+      "name": "Anti-Static Wristband",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "size": "adjustable"
+      },
+      "states": {}
+    },
+    {
+      "id": "triple_monitor_workstation_1",
+      "name": "Triple-Monitor Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "plastic",
+        "screen_count": 3
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_terminal_1",
+      "name": "Admin Terminal",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model": "OptiPlex"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "usb_debug_dongle_1",
+      "name": "USB Debug Dongle",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "label": "Crash Logs – DO NOT REMOVE",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wireless_keyboard_1",
+      "name": "Wireless Keyboard",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "missing_key": "F5",
+        "battery_level": 75,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "brand": "HP",
+        "status": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "headset_1",
+      "name": "Headset",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "mic_status": "muted",
+        "brand": "Logitech"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_wall_1",
+      "name": "Whiteboard Wall",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.1
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "BUG: Stats not updating for beta metas"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:moderator_lounge",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "water_level": 50
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "sofa_1",
+      "name": "Sofa",
+      "type": "FURNITURE",
+      "location_id": "in:moderator_lounge",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "fabric",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:moderator_lounge",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "cork",
+        "content": "forum threads and user complaints"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_closet_1",
+      "name": "Tool Closet",
+      "type": "FURNITURE",
+      "location_id": "in:tool_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "spare_server_1",
+      "name": "Spare Server",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "model_number": "BS-500",
+        "capacity": "2TB"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "labeled_cables_1",
+      "name": "Labeled Cables",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "various",
+        "length": "10m",
+        "type": "Cat-6"
+      },
+      "states": {}
+    },
+    {
+      "id": "maintenance_tools_1",
+      "name": "Maintenance Tools",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "brand": "Stanley",
+        "provides_abilities": [
+          "assemble",
+          "tighten",
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_filter_1",
+      "name": "Water Filter",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "brand": "Brita",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Swingline",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "pattern": "stars",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "stainless steel",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "brand": "Rowenta",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Level 2 Keycard",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "clearance_level": 2,
+        "owner": "Admin"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note (Password)",
+      "type": "ITEM",
+      "location_id": "on:wireless_keyboard_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "content": "MetaHealth2024"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "dusty_poster_1",
+      "name": "Dusty 'SERVER ROOM RULES' Poster",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "condition": "coffee stained",
+        "content": "SERVER ROOM RULES"
+      },
+      "states": {}
+    },
+    {
+      "id": "abandoned_coffee_cup_1",
+      "name": "Abandoned Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:server_rack_a7_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "content": "half-full, cold",
+        "lipstick_mark": true
+      },
+      "states": {}
+    },
+    {
+      "id": "stack_of_reports_1",
+      "name": "Stack of Old Reports",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "beige",
+        "title": "Beta Site Metrics Q3",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "debugging_mug_1",
+      "name": "\"I ❤️ DEBUGGING\" Mug",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "content": "dried ink pens",
+        "condition": "chipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_plant_1",
+      "name": "Fake Plant",
+      "type": "ITEM",
+      "location_id": "in:monitoring_hub",
+      "properties": {
+        "weight": 1.5,
+        "color": "green",
+        "material": "plastic",
+        "condition": "covered in cobwebs"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "pressure": "green",
+        "expiry_date": "2025-06-01"
+      },
+      "states": {}
+    },
+    {
+      "id": "cable_tray_1",
+      "name": "Cable Tray",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "metal",
+        "content": "spare fiber-optic cables"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fiber_optic_cable_1",
+      "name": "Fiber Optic Cable (10Gbps, 5m)",
+      "type": "ITEM",
+      "location_id": "in:cable_tray_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "speed": "10Gbps",
+        "length": "5m"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "drain",
+    "install",
+    "iron",
+    "open",
+    "purify",
+    "scrape",
+    "tighten",
+    "unstaple",
+    "wrap",
+    "close"
+  ]
+}

@@ -1,0 +1,456 @@
+{
+  "description": "A bustling omakase sushi bar during peak dinner service, featuring specialized workstations, precision tools, and collaborative workflows.",
+  "rooms": [
+    {
+      "id": "cold_prep_station",
+      "name": "Cold Prep Station",
+      "properties": {
+        "type": "prep_area",
+        "temperature": "chilled",
+        "lighting": "task"
+      },
+      "connected_to_room_ids": [
+        "sushi_bar"
+      ]
+    },
+    {
+      "id": "hot_line",
+      "name": "Hot Line (Teppanyaki/Grill)",
+      "properties": {
+        "type": "cooking_area",
+        "temperature": "hot",
+        "ventilation": "exhaust_hood"
+      },
+      "connected_to_room_ids": [
+        "pass_through"
+      ]
+    },
+    {
+      "id": "sushi_bar",
+      "name": "Sushi Bar (Chef's Counter)",
+      "properties": {
+        "type": "service_area",
+        "atmosphere": "interactive",
+        "seating": "counter"
+      },
+      "connected_to_room_ids": [
+        "cold_prep_station",
+        "pass_through"
+      ]
+    },
+    {
+      "id": "pass_through",
+      "name": "Pass-Through & Expediting Area",
+      "properties": {
+        "type": "quality_control",
+        "equipment": "heat_lamps",
+        "workflow": "expediting"
+      },
+      "connected_to_room_ids": [
+        "hot_line",
+        "dish_storage"
+      ]
+    },
+    {
+      "id": "dish_storage",
+      "name": "Dish & Storage Annex",
+      "properties": {
+        "type": "utility",
+        "function": "cleaning",
+        "noise_level": "high"
+      },
+      "connected_to_room_ids": [
+        "pass_through"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "worktable_1",
+      "name": "Stainless-steel worktable",
+      "type": "FURNITURE",
+      "location_id": "in:cold_prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "surface": "chilled",
+        "condition": "scored"
+      },
+      "states": {}
+    },
+    {
+      "id": "sushi_case_1",
+      "name": "Glycol sushi case",
+      "type": "FURNITURE",
+      "location_id": "in:cold_prep_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "temperature": -2.0,
+        "capacity": "12_fish_varieties"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "yanagiba_knife_1",
+      "name": "Yanagiba knife (Yoichi)",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.5,
+        "length": 30.0,
+        "sharpness": "razor_sharp",
+        "sheath_material": "wood",
+        "handle_color": "blue",
+        "tip_type": "notched",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "marinating_bowl_1",
+      "name": "Plum sauce marinating bowl",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.8,
+        "diameter": 15.0,
+        "material": "porcelain",
+        "condition": "sticky_rim",
+        "contents": "plum_sauce"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "snapper_fillet_1",
+      "name": "Snapper fillet",
+      "type": "ITEM",
+      "location_id": "in:sushi_case_1",
+      "properties": {
+        "weight": 0.2,
+        "skin": "on",
+        "preparation": "scored",
+        "state": "raw",
+        "temperature": -1.5
+      },
+      "states": {
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital scale",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.7,
+        "max_capacity": 5.0,
+        "battery_status": "low",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_weighed": false
+      }
+    },
+    {
+      "id": "teppanyaki_griddle_1",
+      "name": "Teppanyaki griddle",
+      "type": "FURNITURE",
+      "location_id": "in:hot_line",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 95.0,
+        "material": "cast_iron",
+        "heat_distribution": "uneven",
+        "temperature": 180.0,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "beef_rolls_1",
+      "name": "Beef-asparagus rolls",
+      "type": "ITEM",
+      "location_id": "on:teppanyaki_griddle_1",
+      "properties": {
+        "weight": 0.3,
+        "quantity": 6,
+        "binding": "butchers_twine",
+        "state": "raw"
+      },
+      "states": {
+        "is_tied": false
+      }
+    },
+    {
+      "id": "tempura_batter_1",
+      "name": "Tempura batter bowl",
+      "type": "ITEM",
+      "location_id": "on:teppanyaki_griddle_1",
+      "properties": {
+        "weight": 5.0,
+        "volume": 5.0,
+        "consistency": "thick",
+        "contaminants": "scallop_bits"
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "infrared_thermometer_1",
+      "name": "Infrared thermometer",
+      "type": "ITEM",
+      "location_id": "on:teppanyaki_griddle_1",
+      "properties": {
+        "weight": 0.4,
+        "display_condition": "flickering",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_weighed": false
+      }
+    },
+    {
+      "id": "sake_keg_1",
+      "name": "Premium sake keg",
+      "type": "FURNITURE",
+      "location_id": "in:dish_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 150.0,
+        "material": "wood",
+        "contents": "premium_sake",
+        "seal_type": "wooden_tap"
+      },
+      "states": {}
+    },
+    {
+      "id": "fish_crate_1",
+      "name": "Ice-packed fish delivery crate",
+      "type": "FURNITURE",
+      "location_id": "in:dish_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 80.0,
+        "wheels": "stuck",
+        "contents": "assorted_fish",
+        "packing_material": "ice"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "knife_rack_1",
+      "name": "Decorative knife rack",
+      "type": "FURNITURE",
+      "location_id": "in:cold_prep_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.2,
+          0.3
+        ],
+        "weight": 3.5,
+        "material": "wood",
+        "functionality": "display_only",
+        "knives_included": "non_functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_nose_pliers_1",
+      "name": "Needle-nose pliers",
+      "type": "ITEM",
+      "location_id": "in:pass_through",
+      "properties": {
+        "weight": 0.3,
+        "size": "small",
+        "function": "unclogging",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ponzu_bottle_1",
+      "name": "Spicy ponzu bottle",
+      "type": "ITEM",
+      "location_id": "on:teppanyaki_griddle_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "spicy_ponzu",
+        "nozzle_condition": "clogged"
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "seasoning_set_1",
+      "name": "Premium seasoning set",
+      "type": "ITEM",
+      "location_id": "in:pass_through",
+      "properties": {
+        "weight": 1.2,
+        "contents": [
+          "sea_salt",
+          "yuzu_pepper",
+          "sansho"
+        ],
+        "container_type": "wooden_box",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unseasoned_tuna_1",
+      "name": "Unseasoned tuna block",
+      "type": "ITEM",
+      "location_id": "in:sushi_case_1",
+      "properties": {
+        "weight": 0.4,
+        "cut": "saku_block",
+        "freshness": "premium"
+      },
+      "states": {
+        "is_seasoned": false
+      }
+    },
+    {
+      "id": "sushi_mat_1",
+      "name": "Bamboo sushi mat",
+      "type": "ITEM",
+      "location_id": "in:sushi_bar",
+      "properties": {
+        "weight": 0.2,
+        "material": "bamboo",
+        "condition": "slightly_stained",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unassembled_roll_1",
+      "name": "Unassembled sushi roll ingredients",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.6,
+        "components": [
+          "rice",
+          "nori",
+          "cucumber",
+          "tuna"
+        ],
+        "prepared": false
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "damp_towel_1",
+      "name": "Damp towel",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "cotton",
+        "condition": "frayed",
+        "state": "damp"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "industrial_dishwasher_1",
+      "name": "Industrial dishwasher",
+      "type": "FURNITURE",
+      "location_id": "in:dish_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          1.5
+        ],
+        "weight": 200.0,
+        "capacity": "high",
+        "door_type": "heavy_duty"
+      },
+      "states": {
+        "is_open": false,
+        "is_engine_on": false
+      }
+    },
+    {
+      "id": "dishwasher_key_1",
+      "name": "Dishwasher ignition key",
+      "type": "ITEM",
+      "location_id": "in:pass_through",
+      "properties": {
+        "weight": 0.05,
+        "type": "ignition",
+        "compatibility": "industrial_dishwasher",
+        "provides_abilities": [
+          "start_engine"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "fold",
+    "open",
+    "scrape",
+    "season",
+    "shake",
+    "start_engine",
+    "thaw",
+    "tie",
+    "unpack",
+    "weigh",
+    "close"
+  ]
+}

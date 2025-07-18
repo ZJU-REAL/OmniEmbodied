@@ -1,0 +1,468 @@
+{
+  "description": "A high-security digital forensics lab with specialized equipment for analyzing corrupted memory dumps and enforcing strict pointer aliasing rules.",
+  "rooms": [
+    {
+      "id": "evidence_intake",
+      "name": "Evidence Intake & Verification Chamber",
+      "properties": {
+        "type": "sterile",
+        "airlock": true
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "forensic_workbench",
+      "name": "Forensic Workbench Area",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "evidence_intake",
+        "server_farm",
+        "collaboration_hub"
+      ]
+    },
+    {
+      "id": "server_farm",
+      "name": "Server Farm & Backup Vault",
+      "properties": {
+        "type": "cold_storage",
+        "temperature": -20
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "collaboration_hub",
+      "name": "Collaboration Hub",
+      "properties": {
+        "type": "meeting_space"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "examination_table_1",
+      "name": "Reinforced Titanium Examination Table",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "titanium",
+        "surface_type": "anti_static"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_sanitizer_1",
+      "name": "UV Sanitization Panel",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "hum_level": "low"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "evidence_bag_1",
+      "name": "Sealed Anti-Static Evidence Bag",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "anti_static_plastic",
+        "label": "Case #XK-77 – SUSPECT DRIVE",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false,
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "write_blocker_1",
+      "name": "Forensic Write-Blocker Device",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.3,
+        "connection_type": "USB-C",
+        "led_color": "green"
+      },
+      "states": {
+        "is_connected": true,
+        "is_on": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 1.2,
+        "capacity": 5.0,
+        "precision": 0.01,
+        "current_weight": 47.32
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:examination_table_1",
+      "properties": {
+        "weight": 0.4,
+        "last_scan": "14 minutes ago"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Heavy-Duty Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "cpu": "Threadripper 64-core",
+        "ram": "256GB"
+      },
+      "states": {
+        "is_on": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "disk_imager_1",
+      "name": "Forensic Disk Imager",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 5.0,
+        "model": "Tableau T8",
+        "last_used": "6 minutes ago"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "memory_dump_1",
+      "name": "Corrupted Memory Dump File",
+      "type": "ITEM",
+      "location_id": "in:workstation_1",
+      "properties": {
+        "weight": 0.01,
+        "recovery_status": "partial",
+        "flag": "aliasing violation"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "debugger_terminal_1",
+      "name": "Debugger Terminal",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 2.0,
+        "current_address": "0x7FFE0034",
+        "warning": "misaligned pointer conversion"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "reference_manual_1",
+      "name": "Strict Aliasing Rules Manual",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "current_page": 47,
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope Attachment",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "lens_condition": "dusty"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "42U Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.2
+        ],
+        "weight": 500.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "freezer_cabinet_1",
+      "name": "Biometric-Locked Freezer Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:server_farm",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": -20
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "raid_array_1",
+      "name": "RAID Array",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "functional_disks": 3,
+        "bad_sectors": 2
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "backup_tape_1",
+      "name": "Cryptographically Signed Backup Tape",
+      "type": "ITEM",
+      "location_id": "in:freezer_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "GOLDEN IMAGE – DO NOT OVERWRITE"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "ups_1",
+      "name": "Rack-Mounted UPS",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 15.0,
+        "battery_level": 87
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "fire_suppression_1",
+      "name": "Fire Suppression Control Panel",
+      "type": "ITEM",
+      "location_id": "in:server_farm",
+      "properties": {
+        "weight": 3.0,
+        "status": "armed"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Interactive Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:collaboration_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          0.05
+        ],
+        "weight": 25.0
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "Portable Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "weight": 2.5,
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.7,
+        "provides_abilities": [
+          "disassemble",
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "ITEM",
+      "location_id": "in:collaboration_hub",
+      "properties": {
+        "weight": 12.0,
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_1",
+      "name": "Anti-Static Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake",
+      "properties": {
+        "weight": 5.0,
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Scratched)",
+      "type": "ITEM",
+      "location_id": "in:evidence_bag_1",
+      "properties": {
+        "weight": 0.02,
+        "label_condition": "scratched",
+        "connector_condition": "bent"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive (Clean)",
+      "type": "ITEM",
+      "location_id": "in:evidence_bag_1",
+      "properties": {
+        "weight": 0.02,
+        "label_condition": "pristine",
+        "connector_condition": "straight"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Half-Empty Energy Drink Can",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "liquid_remaining": 0.5
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Warning Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "DO NOT CAST VOID* WITHOUT SANITY CHECK!"
+      },
+      "states": {
+        "is_torn": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "connect",
+    "disassemble",
+    "disconnect",
+    "open",
+    "save",
+    "shred",
+    "sterilize",
+    "tear",
+    "tighten",
+    "turn_off",
+    "turn_on",
+    "vacuum"
+  ]
+}

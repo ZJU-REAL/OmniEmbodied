@@ -1,0 +1,822 @@
+{
+  "description": "A high-security industrial bakery facility where the legendary Krispy Kreme secret recipe is stored, tested, and prepared for global distribution. The environment is dense with industrial kitchen machinery, locked containers, and security measures, requiring multi-agent coordination for production, quality control, and emergency troubleshooting.",
+  "rooms": [
+    {
+      "id": "vault_room",
+      "name": "Vault Room",
+      "properties": {
+        "type": "security_zone"
+      },
+      "connected_to_room_ids": [
+        "mixing_prep_lab",
+        "security_office"
+      ]
+    },
+    {
+      "id": "mixing_prep_lab",
+      "name": "Mixing & Prep Lab",
+      "properties": {
+        "type": "ingredient_zone"
+      },
+      "connected_to_room_ids": [
+        "vault_room",
+        "production_line"
+      ]
+    },
+    {
+      "id": "production_line",
+      "name": "Industrial Doughnut Production Line",
+      "properties": {
+        "type": "automated_zone"
+      },
+      "connected_to_room_ids": [
+        "mixing_prep_lab",
+        "quality_control"
+      ]
+    },
+    {
+      "id": "quality_control",
+      "name": "Quality Control & Packaging",
+      "properties": {
+        "type": "logistics_zone"
+      },
+      "connected_to_room_ids": [
+        "production_line",
+        "staff_break_room"
+      ]
+    },
+    {
+      "id": "security_office",
+      "name": "Security Office",
+      "properties": {
+        "type": "monitoring_zone"
+      },
+      "connected_to_room_ids": [
+        "vault_room",
+        "staff_break_room"
+      ]
+    },
+    {
+      "id": "staff_break_room",
+      "name": "Staff Break Room",
+      "properties": {
+        "type": "ambient_zone"
+      },
+      "connected_to_room_ids": [
+        "quality_control",
+        "security_office"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_vault_1",
+      "name": "Floor-mounted Steel Vault",
+      "type": "FURNITURE",
+      "location_id": "in:vault_room",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "maximum"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "ITEM",
+      "location_id": "on:steel_vault_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "SecuriTech",
+        "model_number": "BST-5000",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "display_case_1",
+      "name": "Reinforced Glass Display Case",
+      "type": "FURNITURE",
+      "location_id": "in:vault_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "glass",
+        "security_level": "high"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "original_recipe_1",
+      "name": "Vernon Rudolph's Original Handwritten Recipe",
+      "type": "ITEM",
+      "location_id": "in:display_case_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellowed",
+        "material": "paper",
+        "condition": "fragile"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "mystery_mix_canister_1",
+      "name": "Mystery Mix Canister",
+      "type": "ITEM",
+      "location_id": "in:steel_vault_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "stainless",
+        "material": "steel",
+        "rfid_tag": "KK-1937"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "emergency_button_1",
+      "name": "Emergency Shutdown Button",
+      "type": "ITEM",
+      "location_id": "in:vault_room",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "fire_suppression_1",
+      "name": "Wall-mounted Fire Suppression System",
+      "type": "FURNITURE",
+      "location_id": "in:vault_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "material": "metal",
+        "type": "CO2",
+        "provides_abilities": [
+          "spill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "security_terminal_1",
+      "name": "Security Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:vault_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "CyberSec",
+        "model_number": "CT-2000",
+        "provides_abilities": [
+          "arm_alarm",
+          "install"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_stool_1",
+      "name": "Steel Stool",
+      "type": "FURNITURE",
+      "location_id": "in:vault_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "material": "steel",
+        "condition": "scuffed"
+      },
+      "states": {}
+    },
+    {
+      "id": "vintage_photo_1",
+      "name": "Framed Vintage Photo",
+      "type": "ITEM",
+      "location_id": "in:vault_room",
+      "properties": {
+        "weight": 1.2,
+        "color": "sepia",
+        "material": "glass",
+        "subject": "Vernon Rudolph",
+        "year": 1933
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "confidential_stamp_1",
+      "name": "Dusty CONFIDENTIAL Stamp",
+      "type": "ITEM",
+      "location_id": "in:vault_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "wood",
+        "condition": "unused"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "safety_manual_1",
+      "name": "Old Safety Manual",
+      "type": "ITEM",
+      "location_id": "in:vault_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "paper",
+        "title": "Vault Protocol – 1973 Edition"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "mixing_vat_1",
+      "name": "Industrial Mixing Vat",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "capacity": "300L",
+        "material": "stainless_steel",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vat_lid_1",
+      "name": "Mixing Vat Lid",
+      "type": "ITEM",
+      "location_id": "on:mixing_vat_1",
+      "properties": {
+        "weight": 150.0,
+        "color": "silver",
+        "material": "steel",
+        "diameter": "1.5m",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_scale_1",
+      "name": "Floor Scale",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.1
+        ],
+        "weight": 30.0,
+        "max_capacity": "500kg",
+        "current_reading": "18.2kg"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ingredient_cabinet_1",
+      "name": "Locked Ingredient Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "keycard_required": "A"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "ingredient_cabinet_2",
+      "name": "Locked Ingredient Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "keycard_required": "B"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "mystery_mix_dispenser_1",
+      "name": "Mystery Mix Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.5
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "connected_to": "vault_room",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "silver",
+        "material": "steel",
+        "condition": "slightly_corroded"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "flush_valve_1",
+      "name": "Emergency Flush Valve",
+      "type": "ITEM",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "spill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "display": "Next Batch: 00:04:22"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "cotton",
+        "condition": "torn_sleeve"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Sink with Industrial Spray Nozzle",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {
+        "is_wet": false,
+        "is_rinsed": false
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard with Scribbled Ratios",
+      "type": "FURNITURE",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 15.0,
+        "material": "wood",
+        "condition": "partially_erased"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "RECIPE TEST #47 – FAILED Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:mixing_prep_lab",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "material": "paper"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "High-speed Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:production_line",
+      "properties": {
+        "size": [
+          5.0,
+          1.0,
+          0.8
+        ],
+        "weight": 200.0,
+        "material": "rubber",
+        "speed": "high"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fryer_1",
+      "name": "Industrial Fryer",
+      "type": "FURNITURE",
+      "location_id": "in:production_line",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 120.0,
+        "material": "stainless_steel",
+        "oil_capacity": "50L",
+        "provides_abilities": [
+          "melt"
+        ]
+      },
+      "states": {
+        "is_melted": false,
+        "is_on": false
+      }
+    },
+    {
+      "id": "glazing_station_1",
+      "name": "Glazing Station",
+      "type": "FURNITURE",
+      "location_id": "in:production_line",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 80.0,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "inspection_table_1",
+      "name": "Quality Inspection Table",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "packaging_machine_1",
+      "name": "Packaging Machine",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "material": "steel"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "security_monitor_1",
+      "name": "Security Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:security_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.0
+        ],
+        "weight": 25.0,
+        "material": "plastic",
+        "brand": "SecuriView"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "ITEM",
+      "location_id": "in:security_office",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_a_1",
+      "name": "Keycard A",
+      "type": "ITEM",
+      "location_id": "in:security_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic",
+        "access_level": "A"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "keycard_b_1",
+      "name": "Keycard B",
+      "type": "ITEM",
+      "location_id": "in:security_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic",
+        "access_level": "B"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {
+        "is_poured": false,
+        "is_on": false
+      }
+    },
+    {
+      "id": "notebook_1",
+      "name": "Scattered Notes",
+      "type": "ITEM",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "paper",
+        "condition": "scattered"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "material": "plastic",
+        "brand": "Dyson",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "freezer_1",
+      "name": "Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.8
+        ],
+        "weight": 70.0,
+        "material": "metal",
+        "provides_abilities": [
+          "freeze"
+        ]
+      },
+      "states": {
+        "is_frozen": false,
+        "is_on": false
+      }
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "steel",
+        "provides_abilities": [
+          "cut",
+          "damage"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "material": "feather",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "backpack_1",
+      "name": "Backpack",
+      "type": "ITEM",
+      "location_id": "in:staff_break_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "nylon",
+        "is_container": true
+      },
+      "states": {
+        "is_zipped": false
+      }
+    }
+  ],
+  "abilities": [
+    "arm_alarm",
+    "cut",
+    "damage",
+    "dust",
+    "freeze",
+    "hide",
+    "install",
+    "lock",
+    "melt",
+    "open",
+    "pour",
+    "rinse",
+    "show",
+    "spill",
+    "take_down",
+    "turn_on",
+    "uncover",
+    "vacuum",
+    "zip",
+    "close"
+  ]
+}

@@ -1,0 +1,571 @@
+{
+  "description": "A bustling jigsaw puzzle design studio with workstations for assembling prototype puzzles, quality control stations, and a packing area for final assembly.",
+  "rooms": [
+    {
+      "id": "design_prototyping_zone",
+      "name": "Design & Prototyping Zone",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "assembly_testing_zone"
+      ]
+    },
+    {
+      "id": "assembly_testing_zone",
+      "name": "Assembly & Testing Zone",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "design_prototyping_zone",
+        "material_storage_zone"
+      ]
+    },
+    {
+      "id": "material_storage_zone",
+      "name": "Material Storage & Prep Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "assembly_testing_zone",
+        "shipping_zone"
+      ]
+    },
+    {
+      "id": "shipping_zone",
+      "name": "Shipping & Final Inspection Zone",
+      "properties": {
+        "type": "shipping"
+      },
+      "connected_to_room_ids": [
+        "material_storage_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "large_format_printer_1",
+      "name": "Large-format Printer (Epson SureColor P9000)",
+      "type": "FURNITURE",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "brand": "Epson",
+        "model": "SureColor P9000"
+      },
+      "states": {
+        "is_open": false,
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "hydraulic_cutting_table_1",
+      "name": "Hydraulic Cutting Table",
+      "type": "FURNITURE",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "size": [
+          0.9,
+          0.6,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_welded": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (SanDisk Ultra 128GB)",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "blue",
+        "brand": "SanDisk",
+        "model": "Ultra",
+        "capacity": "128GB",
+        "label": "FALCON-1000"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "calibration_ruler_1",
+      "name": "Calibration Ruler (30cm)",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_cutting_table_1",
+      "properties": {
+        "weight": 0.1,
+        "length": "30cm",
+        "material": "steel",
+        "increments": "mm"
+      },
+      "states": {
+        "is_sharp": false
+      }
+    },
+    {
+      "id": "sample_puzzle_board_1",
+      "name": "Sample Puzzle Board (45x60cm, birchwood)",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_cutting_table_1",
+      "properties": {
+        "weight": 2.5,
+        "size": [
+          0.45,
+          0.6,
+          0.01
+        ],
+        "material": "birchwood",
+        "condition": "warped"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "wireless_keyboard_1",
+      "name": "Wireless Keyboard (Logitech K780)",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Logitech",
+        "model": "K780",
+        "condition": "sticky 'Ctrl' key"
+      },
+      "states": {
+        "is_paired": true
+      }
+    },
+    {
+      "id": "paper_tray_1",
+      "name": "Paper Tray (3/4 full, 200gsm matte sheets)",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 1.2,
+        "contents": "200gsm matte sheets",
+        "fill_level": "3/4"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp (adjustable arm, 5x zoom)",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_cutting_table_1",
+      "properties": {
+        "weight": 3.5,
+        "zoom": "5x",
+        "condition": "flickering slightly"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "framed_vintage_puzzle_1",
+      "name": "Framed Vintage Falcon Puzzle (1978 'Castle Garden' edition)",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 2.0,
+        "condition": "missing three pieces",
+        "year": "1978",
+        "title": "Castle Garden"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug ('World's Best Puzzle Designer')",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "pens and X-Acto blades",
+        "inscription": "World's Best Puzzle Designer"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "stack_rejected_prints_1",
+      "name": "Stack of Rejected Prints",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 1.8,
+        "condition": "slightly misaligned, crumpled edges"
+      },
+      "states": {
+        "is_shredded": false
+      }
+    },
+    {
+      "id": "adjustable_puzzle_table_1",
+      "name": "Adjustable-height Puzzle Table (120x80cm)",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.7
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "wood",
+        "edges": "non-slip rubber"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "mobile_lighting_rig_1",
+      "name": "Mobile Lighting Rig (LED panels)",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "type": "LED",
+        "condition": "one flickers intermittently"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "problematic_falcon_puzzle_1",
+      "name": "Problematic Falcon 1000-piece Puzzle",
+      "type": "ITEM",
+      "location_id": "on:adjustable_puzzle_table_1",
+      "properties": {
+        "weight": 3.0,
+        "condition": "partially assembled, 5mm too wide for the board",
+        "is_container": true
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "sorting_trays_1",
+      "name": "Set of Sorting Trays (6 compartments)",
+      "type": "ITEM",
+      "location_id": "on:adjustable_puzzle_table_1",
+      "properties": {
+        "weight": 1.5,
+        "compartments": 6,
+        "condition": "one cracked",
+        "labels": "EDGES / SKY / TREES / etc."
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_caliper_1",
+      "name": "Digital Caliper (Mitutoyo 150mm)",
+      "type": "ITEM",
+      "location_id": "on:adjustable_puzzle_table_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Mitutoyo",
+        "length": "150mm",
+        "condition": "battery low"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "rotating_stool_1",
+      "name": "Rotating Stool",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "one wobbly leg"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "reference_poster_1",
+      "name": "Reference Poster ('Puzzle Assembly Best Practices')",
+      "type": "ITEM",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "weight": 0.2,
+        "title": "Puzzle Assembly Best Practices"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "small_vacuum_1",
+      "name": "Small Vacuum (handheld)",
+      "type": "ITEM",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "weight": 1.8,
+        "type": "handheld",
+        "condition": "clogged with paper dust"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Half-empty Water Bottle",
+      "type": "ITEM",
+      "location_id": "on:adjustable_puzzle_table_1",
+      "properties": {
+        "weight": 0.4,
+        "contents": "water",
+        "fill_level": "half-empty"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "cat_hair_1",
+      "name": "Cat Hair",
+      "type": "ITEM",
+      "location_id": "on:problematic_falcon_puzzle_1",
+      "properties": {
+        "weight": 0.001,
+        "condition": "stuck to a puzzle piece, unnoticed"
+      },
+      "states": {
+        "is_moist": false
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note ('DO NOT TOUCH – ALMOST DONE')",
+      "type": "ITEM",
+      "location_id": "on:adjustable_puzzle_table_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "DO NOT TOUCH – ALMOST DONE"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "puzzle_shipping_crate_1",
+      "name": "Puzzle Shipping Crate (80x60x40cm)",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_zone",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "label": "FRAGILE"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:material_storage_zone",
+      "properties": {
+        "weight": 3.5,
+        "brand": "Lincoln Electric",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "USB Charger",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 0.2,
+        "type": "USB",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Cleaning Towel",
+      "type": "ITEM",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "key_1",
+      "name": "Supply Closet Key",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 0.05,
+        "type": "metal",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:material_storage_zone",
+      "properties": {
+        "weight": 0.8,
+        "size": "10-inch",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Knife Sharpener",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Clothing Iron",
+      "type": "ITEM",
+      "location_id": "in:material_storage_zone",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Rowenta",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Paper Shredder",
+      "type": "ITEM",
+      "location_id": "in:design_prototyping_zone",
+      "properties": {
+        "weight": 5.0,
+        "type": "cross-cut",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Water Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:assembly_testing_zone",
+      "properties": {
+        "weight": 0.5,
+        "contents": "water",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "drink",
+    "dry",
+    "iron",
+    "loosen",
+    "moisten",
+    "open",
+    "plug_in",
+    "recharge",
+    "sharpen",
+    "shred",
+    "unlock",
+    "unpair",
+    "unstaple",
+    "weld",
+    "close"
+  ]
+}

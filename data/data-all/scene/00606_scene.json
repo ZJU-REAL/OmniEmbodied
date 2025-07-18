@@ -1,0 +1,900 @@
+{
+  "description": "A rapidly deployed environmental monitoring field station near a hydrofracking site, featuring a sample processing lab, field command tent, and equipment storage yard.",
+  "rooms": [
+    {
+      "id": "sample_processing_lab",
+      "name": "Sample Processing Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "field_command_tent"
+      ]
+    },
+    {
+      "id": "field_command_tent",
+      "name": "Field Command Tent",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "sample_processing_lab",
+        "equipment_storage_yard"
+      ]
+    },
+    {
+      "id": "equipment_storage_yard",
+      "name": "Equipment Storage Yard",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "field_command_tent"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "Stainless Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "condition": "scratched",
+        "stains": "chemical_burns"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "SafeVent 3000 Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "model": "SafeVent 3000",
+        "filter_status": "amber"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "water_samples_1",
+      "name": "Contaminated Water Samples",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "quantity": 12,
+        "container": "rusted_tray",
+        "label": "Site 7B - High Sulfides",
+        "provides_abilities": [
+          "verify"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_verified": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "cracked_vial_1",
+      "name": "Cracked Water Vial",
+      "type": "ITEM",
+      "location_id": "in:water_samples_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "condition": "cracked",
+        "leaking": true
+      },
+      "states": {}
+    },
+    {
+      "id": "spectrometer_1",
+      "name": "Portable Spectrometer",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "error_code": "CALIBRATE SOURCE",
+        "brand": "LabTech",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "battery_pack_1",
+      "name": "Spectrometer Battery Pack",
+      "type": "ITEM",
+      "location_id": "on:stool_1",
+      "properties": {
+        "weight": 3.0,
+        "voltage": "12V",
+        "condition": "detached"
+      },
+      "states": {}
+    },
+    {
+      "id": "stool_1",
+      "name": "Lab Stool",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "material": "metal",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "magnetic_stirrer_1",
+      "name": "Magnetic Stirrer",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "state": "on",
+        "beaker_status": "empty_rattling"
+      },
+      "states": {}
+    },
+    {
+      "id": "regulation_binders_1",
+      "name": "DEC Regulation Binders",
+      "type": "ITEM",
+      "location_id": "on:filing_cabinet_1",
+      "properties": {
+        "weight": 4.0,
+        "edition": "2019",
+        "bookmarks": "sticky_notes"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dead_fern_1",
+      "name": "Dead Potted Fern",
+      "type": "ITEM",
+      "location_id": "on:filing_cabinet_1",
+      "properties": {
+        "weight": 1.5,
+        "condition": "dead",
+        "pot_material": "clay"
+      },
+      "states": {
+        "is_fertilized": false
+      }
+    },
+    {
+      "id": "fertilizer_1",
+      "name": "Plant Fertilizer",
+      "type": "ITEM",
+      "location_id": "in:storage_closet_1",
+      "properties": {
+        "weight": 2.0,
+        "type": "NPK",
+        "provides_abilities": [
+          "fertilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "storage_closet_1",
+      "name": "Storage Closet",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "folding_table_1",
+      "name": "Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "condition": "bent_leg"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Live Feed Monitor",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 6.0,
+        "display": "groundwater_pH_graphs",
+        "brand": "TechView"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "status": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "legal_documents_1",
+      "name": "Sealed Legal Documents",
+      "type": "ITEM",
+      "location_id": "in:fireproof_case_1",
+      "properties": {
+        "weight": 2.0,
+        "label": "Thompson v. DEC - Draft Injunction",
+        "confidential": true
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "fireproof_case_1",
+      "name": "Fireproof Case",
+      "type": "FURNITURE",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "lock_type": "combination"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "radio_transceiver_1",
+      "name": "Radio Transceiver",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 3.5,
+        "status": "muted",
+        "antenna_condition": "bent_45_degrees"
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_nose_pliers_1",
+      "name": "Needle-Nose Pliers",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "condition": "muddy"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "storage_locker_1",
+      "name": "Steel Storage Locker",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "condition": "dented_door"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "water_purifier_1",
+      "name": "Portable Water Purifier",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "weight": 12.0,
+        "status": "disassembled",
+        "filter_housing_weight": 12.0
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_core_samples_1",
+      "name": "Drill Core Samples",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "weight": 15.0,
+        "material": "PVC",
+        "dimensions": "1m x 10cm",
+        "leaking": true
+      },
+      "states": {}
+    },
+    {
+      "id": "biohazard_tarp_1",
+      "name": "Biohazard Tarp",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "condition": "contaminated"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheelbarrow_1",
+      "name": "Wheelbarrow",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          1.2,
+          0.7,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "tire_condition": "flat"
+      },
+      "states": {}
+    },
+    {
+      "id": "wetsuits_1",
+      "name": "Wetsuits",
+      "type": "ITEM",
+      "location_id": "on:rack_1",
+      "properties": {
+        "weight": 3.0,
+        "quantity": 3,
+        "condition": "one_sleeve_torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "rack_1",
+      "name": "Wetsuit Rack",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          1.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "press_machine_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "provides_abilities": [
+          "compress",
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "uncompressed_samples_1",
+      "name": "Uncompressed Soil Samples",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "weight": 8.0,
+        "material": "soil",
+        "container": "plastic_bags"
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "uneven_ground_1",
+      "name": "Uneven Ground Patch",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "surface": "muddy"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "alarm_system_1",
+      "name": "Security Alarm System",
+      "type": "ITEM",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "weight": 5.0,
+        "brand": "SecureTech",
+        "control_panel": "touchscreen",
+        "is_container": true
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "on:alarm_system_1",
+      "properties": {
+        "weight": 1.5,
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "signature_pad_1",
+      "name": "Electronic Signature Pad",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "SignHere",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unsigned_documents_1",
+      "name": "Unsigned Field Reports",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 1.0,
+        "quantity": 5,
+        "urgency": "high"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Document Photocopier",
+      "type": "FURNITURE",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "uncopied_documents_1",
+      "name": "Uncopied Regulations",
+      "type": "ITEM",
+      "location_id": "on:photocopier_1",
+      "properties": {
+        "weight": 0.8,
+        "pages": 12,
+        "importance": "mandatory"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "recording_device_1",
+      "name": "Audio Recording Device",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.7,
+        "brand": "SoundPro",
+        "status": "active"
+      },
+      "states": {
+        "is_recording": true
+      }
+    },
+    {
+      "id": "soil_samples_1",
+      "name": "Unplanted Soil Samples",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "weight": 5.0,
+        "container": "trays",
+        "fertility": "low"
+      },
+      "states": {
+        "is_planted": false
+      }
+    },
+    {
+      "id": "seeds_1",
+      "name": "Test Plant Seeds",
+      "type": "ITEM",
+      "location_id": "in:storage_closet_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "rapid_growth",
+        "provides_abilities": [
+          "plant"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "elevated_platform_1",
+      "name": "Elevated Monitoring Platform",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage_yard",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          3.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "position": "raised"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "control_button_1",
+      "name": "Platform Lowering Button",
+      "type": "ITEM",
+      "location_id": "on:elevated_platform_1",
+      "properties": {
+        "weight": 0.1,
+        "function": "lowering_mechanism"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "leaking_drum_1",
+      "name": "55-Gallon Chemical Waste Drum",
+      "type": "FURNITURE",
+      "location_id": "in:field_command_tent",
+      "properties": {
+        "size": [
+          0.9,
+          0.9,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "label": "CHEM WASTE",
+        "note": "LEAKS??"
+      },
+      "states": {}
+    },
+    {
+      "id": "pour_spout_1",
+      "name": "Chemical Pour Spout",
+      "type": "ITEM",
+      "location_id": "on:leaking_drum_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_containers_1",
+      "name": "Empty Sample Containers",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "quantity": 6,
+        "material": "glass"
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "cracked_wall_1",
+      "name": "Cracked Container Wall",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          2.0
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "damage": "cracked"
+      },
+      "states": {
+        "is_plastered": false
+      }
+    },
+    {
+      "id": "plaster_trowel_1",
+      "name": "Plaster Trowel",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "steel",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plaster_bag_1",
+      "name": "Plaster Mix",
+      "type": "ITEM",
+      "location_id": "in:storage_closet_1",
+      "properties": {
+        "weight": 5.0,
+        "type": "quick_set",
+        "status": "unmixed"
+      },
+      "states": {}
+    },
+    {
+      "id": "scraped_surface_1",
+      "name": "Contaminated Work Surface",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "contaminant": "chemical_residue"
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "scraper_tool_1",
+      "name": "Metal Scraper",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "steel",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unset_table_1",
+      "name": "Unset Analysis Table",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "purpose": "sample_prep"
+      },
+      "states": {
+        "is_table_set": false
+      }
+    },
+    {
+      "id": "lab_dishes_1",
+      "name": "Sterile Lab Dishes",
+      "type": "ITEM",
+      "location_id": "in:storage_closet_1",
+      "properties": {
+        "weight": 1.5,
+        "quantity": 12,
+        "sterility": "maintained"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_utensils_1",
+      "name": "Analysis Utensils",
+      "type": "ITEM",
+      "location_id": "in:drawer_1",
+      "properties": {
+        "weight": 2.0,
+        "contents": "spatulas, droppers, scoops",
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drawer_1",
+      "name": "Utility Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "compress",
+    "connect",
+    "copy",
+    "copy_file",
+    "disarm_alarm",
+    "fertilize",
+    "flatten",
+    "hide",
+    "lower",
+    "open",
+    "plant",
+    "plaster",
+    "pour",
+    "press",
+    "scrape",
+    "set_table",
+    "sign",
+    "stop_recording",
+    "verify"
+  ]
+}

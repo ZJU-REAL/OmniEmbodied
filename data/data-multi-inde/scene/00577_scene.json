@@ -1,0 +1,897 @@
+{
+  "description": "A bustling EcoTech Recycling Hub with distinct zones for intake, diagnostics, repair, and distribution, filled with electronics, tools, and reusable materials.",
+  "rooms": [
+    {
+      "id": "intake_sorting_bay",
+      "name": "Intake & Sorting Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_repair_workshop"
+      ]
+    },
+    {
+      "id": "diagnostic_repair_workshop",
+      "name": "Diagnostic & Repair Workshop",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "intake_sorting_bay",
+        "materials_storage_logistics"
+      ]
+    },
+    {
+      "id": "materials_storage_logistics",
+      "name": "Materials Storage & Logistics",
+      "properties": {
+        "type": "warehouse"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_repair_workshop",
+        "admin_quality_control_office"
+      ]
+    },
+    {
+      "id": "admin_quality_control_office",
+      "name": "Admin & Quality Control Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "materials_storage_logistics"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "conveyor_belt_1",
+      "name": "Heavy-duty Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "motorized": true,
+        "current_state": "paused"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "sorting_table_1",
+      "name": "Reinforced Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "rubberized"
+      },
+      "states": {}
+    },
+    {
+      "id": "sorting_table_2",
+      "name": "Reinforced Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "rubberized"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Wall-mounted Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "brand": "Zebra",
+        "model_number": "DS2208",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 3.2,
+        "color": "white",
+        "brand": "Dymo",
+        "model_number": "LabelWriter 450",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "crushed_laptop_1",
+      "name": "Partially Crushed Laptop",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "silver",
+        "brand": "Dell",
+        "model_number": "XPS 15",
+        "condition": "damaged",
+        "hazard": "battery_swollen"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "hazardous_waste_bin_1",
+      "name": "Locked Hazardous Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "plastic",
+        "lock_type": "dual_keycard"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "access_level": "admin",
+        "rfid_enabled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_2",
+      "name": "Foreman Keycard",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "access_level": "foreman",
+        "rfid_enabled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling Cart with Cables",
+      "type": "FURNITURE",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "wheels": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "max_capacity": 50.0,
+        "display_issue": "flickering"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "metal_detector_1",
+      "name": "Handheld Metal Detector",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_2",
+      "properties": {
+        "weight": 0.8,
+        "color": "yellow",
+        "battery_status": "low",
+        "provides_abilities": [
+          "scan"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "recycling_poster_1",
+      "name": "Faded Recycling Poster",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "condition": "faded",
+        "message": "Reduce, Reuse, Recycle!"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Coffee-stained Clipboard",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "condition": "stained",
+        "content": "incomplete_intake_log"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hula_hoop_1",
+      "name": "Green Hula Hoop",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "plastic",
+        "diameter": 0.9
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_station_1",
+      "name": "Modular Repair Station",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "features": [
+          "ESD_mat",
+          "magnifying_lamp",
+          "tool_rack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_station_2",
+      "name": "Modular Repair Station",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "features": [
+          "ESD_mat",
+          "magnifying_lamp",
+          "tool_rack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_workbench_1",
+      "name": "Industrial Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "features": [
+          "built_in_power_strips",
+          "soldering_stations"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Decommissioned Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "repurposed_for": "spare_parts_storage"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "smartphone_1",
+      "name": "Disassembled Smartphone",
+      "type": "ITEM",
+      "location_id": "on:repair_station_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "brand": "Apple",
+        "model_number": "iPhone 12",
+        "condition": "water_damage",
+        "missing_parts": "screws"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "crt_monitor_1",
+      "name": "Vintage CRT Monitor",
+      "type": "ITEM",
+      "location_id": "on:industrial_workbench_1",
+      "properties": {
+        "weight": 28.0,
+        "color": "beige",
+        "brand": "Sony",
+        "model_number": "Trinitron",
+        "condition": "frayed_power_cord"
+      },
+      "states": {
+        "is_pulled": true
+      }
+    },
+    {
+      "id": "diagnostic_tablet_1",
+      "name": "Locked Diagnostic Tablet",
+      "type": "ITEM",
+      "location_id": "on:repair_station_2",
+      "properties": {
+        "weight": 0.6,
+        "color": "black",
+        "brand": "Samsung",
+        "model_number": "Galaxy Tab S6",
+        "security_status": "password_protected"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:industrial_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "brand": "Weller",
+        "temperature_setting": "350C",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "parts_organizer_1",
+      "name": "Parts Organizer",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "drawer_labels": [
+          "Screws M2",
+          "Capacitors",
+          "LCD Connectors"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "3D Printer",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "brand": "Creality",
+        "model_number": "Ender 3",
+        "error_status": "filament_jam",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Half-drunk Energy Drink",
+      "type": "ITEM",
+      "location_id": "on:repair_station_2",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "brand": "Monster",
+        "flavor": "Ultra",
+        "volume_remaining": "50%"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "novelty_mug_1",
+      "name": "Novelty Mug",
+      "type": "ITEM",
+      "location_id": "on:repair_station_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "inscription": "World's Best Recycler",
+        "contents": "loose_resistors"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "pallet_hard_drives_1",
+      "name": "Pallet of Hard Drives",
+      "type": "FURNITURE",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "stability": "unstable",
+        "requires_straps": true
+      },
+      "states": {}
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          2.0
+        ],
+        "weight": 1500.0,
+        "is_container": false,
+        "fuel_type": "electric",
+        "provides_abilities": [
+          "start_process"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "power_supply_1",
+      "name": "Power Supply",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Corsair",
+        "model_number": "RM750x",
+        "condition": "faulty",
+        "markings": "TESTED - FAULTY"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "power_supply_2",
+      "name": "Power Supply",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Corsair",
+        "model_number": "RM750x",
+        "condition": "good"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "power_supply_3",
+      "name": "Power Supply",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Corsair",
+        "model_number": "RM750x",
+        "condition": "good"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "power_supply_4",
+      "name": "Power Supply",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Corsair",
+        "model_number": "RM750x",
+        "condition": "good"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "power_supply_5",
+      "name": "Power Supply",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "brand": "Corsair",
+        "model_number": "RM750x",
+        "condition": "good"
+      },
+      "states": {
+        "is_scanned": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Checklists",
+      "type": "FURNITURE",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "shift_schedules, quality_checklists"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "lock_type": "key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_2",
+      "name": "Dot-matrix Printer",
+      "type": "ITEM",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "weight": 8.0,
+        "color": "beige",
+        "brand": "Epson",
+        "model_number": "FX-2190",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "contents": "cold_coffee",
+        "location": "on_desk"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "type": "bubble_wrap",
+        "provides_abilities": [
+          "pack",
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "contents": "cleaning_solution",
+        "provides_abilities": [
+          "spray",
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Swingline",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "charger_1",
+      "name": "USB Charger",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "brand": "Anker",
+        "model_number": "A2146",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "in:admin_quality_control_office",
+      "properties": {
+        "weight": 3.5,
+        "color": "gray",
+        "brand": "Fujitsu",
+        "model_number": "ScanSnap iX1500",
+        "provides_abilities": [
+          "scan",
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "peeler_1",
+      "name": "Vegetable Peeler",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "brand": "OXO",
+        "provides_abilities": [
+          "peel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "masher_1",
+      "name": "Potato Masher",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "brand": "Cuisinart",
+        "provides_abilities": [
+          "mash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "leash_1",
+      "name": "Safety Leash",
+      "type": "ITEM",
+      "location_id": "in:intake_sorting_bay",
+      "properties": {
+        "weight": 0.4,
+        "color": "orange",
+        "material": "nylon",
+        "length": "2m"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "sealing_tool_1",
+      "name": "Heat Sealing Tool",
+      "type": "ITEM",
+      "location_id": "in:materials_storage_logistics",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "brand": "Uline",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_dispenser_1",
+      "name": "Water Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_repair_workshop",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "water_type": "filtered",
+        "provides_abilities": [
+          "fill"
+        ]
+      },
+      "states": {
+        "is_full": false
+      }
+    }
+  ],
+  "abilities": [
+    "copy",
+    "copy_file",
+    "deactivate",
+    "fill",
+    "mash",
+    "moisten",
+    "open",
+    "pack",
+    "peel",
+    "print",
+    "recharge",
+    "scan",
+    "seal",
+    "spray",
+    "start_process",
+    "take_down",
+    "unleash",
+    "unstaple",
+    "wrap",
+    "close"
+  ]
+}
