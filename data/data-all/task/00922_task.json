@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place microscope_1 on the filing_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_mug_1 on the central_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:central_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black microscope and place it in the archives_office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "in:archives_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red stapler and place it in the tool_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stapler_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken coffee_machine_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken desk_lamp_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "desk_lamp_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the microscope_eyepiece_1 to repair the only black microscope missing an eyepiece.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,84 @@
         {
           "id": "microscope_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrapping_paper_1 to wrap the folder labeled 'Projeto BNDES 1978'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "folder_1",
+          "is_wrapped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the mainframe_computer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mainframe_computer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the overhead_crane_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_crane_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic press to the machinery_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_press_1",
+          "location_id": "in:machinery_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving unit to the storage_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy centrifuge to the repair bay and repair it using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        },
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:machinery_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the chemical drum labeled 'Ácido Sulfúrico – Perigoso' to the storage_closet and close it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_drum_1",
+          "is_open": false
+        },
+        {
+          "id": "chemical_drum_1",
+          "location_id": "in:storage_closet"
         }
       ]
     }

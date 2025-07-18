@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the oil_drain_pan_1 under the audi_s4_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oil_drain_pan_1",
+          "location_id": ":oil_drain_pan_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the new_audi_oil_filter_1 in the audi_s4_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "new_audi_oil_filter_1",
+          "location_id": "in:audi_s4_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, plastic oil drain pan and place it under the car.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "oil_drain_pan_1",
+          "location_id": ":oil_drain_pan_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver, metal oil pressure gauge and plug it in.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "oil_pressure_gauge_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the impact_wrench_1 to assemble the engine_block_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "engine_block_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the oil_filter_wrench_1 to remove the faulty_oil_filter_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "faulty_oil_filter_1",
+          "location_id": "in:oil_drain_pan_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the torque_wrench_1 to measure and then assemble the new_audi_oil_filter_1 in the audi_s4_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,60 @@
         {
           "id": "new_audi_oil_filter_1",
           "location_id": "in:audi_s4_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the diagnostic_laptop_1 to diagnose the audi_s4_1 and then plug it in.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_laptop_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to plug in the pos_terminal_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pos_terminal_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the oil_drum_1 to the vehicle_service_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oil_drum_1",
+          "location_id": "in:vehicle_service_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_shelving_1 to the tool_parts_prep_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_shelving_1",
+          "location_id": "in:tool_parts_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the engine_block_1 to the steel_workbench_1 and assemble it using the impact_wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_block_1",
+          "location_id": "on:steel_workbench_1"
+        },
+        {
+          "id": "engine_block_1",
+          "is_assembled": true
         }
       ]
     }

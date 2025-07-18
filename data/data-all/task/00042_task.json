@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the broken_radar_gun_1 on the wooden_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "broken_radar_gun_1",
+          "location_id": "on:wooden_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the steel_bat_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "steel_bat_rack_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, wooden object in the main_equipment_storage and place it in the repair_maintenance_corner.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,98 @@
         {
           "id": "equipment_crate_1",
           "location_id": "in:repair_maintenance_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, leather item in the jersey_apparel_section and place it in the metal_locker_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lost_belt_1",
+          "location_id": "in:metal_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_bat_1 using the hot_glue_gun_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_bat_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the pitching_machine_1 using the broken_radar_gun_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pitching_machine_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the leatherman_multi_tool_1 to repair the half_stitched_glove_1 and place it in the metal_locker_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "half_stitched_glove_1",
+          "location_id": "in:metal_locker_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the repair_maintenance_corner and use the roll_of_friction_tape_1 to fix it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "small_fan_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pair the digital_locker_lock_1 with the metal_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_locker_lock_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_bat_rack_1 to the jersey_apparel_section.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_bat_rack_1",
+          "location_id": "in:jersey_apparel_section"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pitching_machine_1 to the repair_maintenance_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pitching_machine_1",
+          "location_id": "in:repair_maintenance_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the equipment_crate_1 to the hydration_first_aid_station and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "equipment_crate_1",
+          "location_id": "in:hydration_first_aid_station",
+          "is_open": true
         }
       ]
     }

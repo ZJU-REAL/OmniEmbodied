@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place prototype_controller_1 on debug_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "prototype_controller_1",
+          "location_id": "on:debug_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place usb_drive_1 on developer_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:developer_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black prototype controller with input lag warning and place it in the storage closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "prototype_controller_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red USB drive labeled 'BACKUP?' and connect it to the debug station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken dolly by mounting its detached wheel.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dolly_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to unscrew the network switch from the server rack.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "network_switch_1",
+          "is_screwed_in": false
+        }
+      ]
+    },
     {
       "task_description": "Use the sewing kit to repair the ripped prototype controller.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,84 @@
         {
           "id": "prototype_controller_1",
           "is_ripped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to label the USB drive with 'BACKUP' and place it on the developer's desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:developer_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to mount the server rack securely.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the testing rig.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "testing_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic press to the main testing bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:main_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the developer's steel desk to the breakroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "developer_desk_1",
+          "location_id": "in:breakroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the oven to the storage closet and clean it with the cleaning supplies.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oven_1",
+          "location_id": "in:storage_closet"
+        },
+        {
+          "id": "oven_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the testing rig to the server closet and connect it to the network switch.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "testing_rig_1",
+          "location_id": "in:server_closet"
+        },
+        {
+          "id": "network_switch_1",
+          "is_connected": true
         }
       ]
     }

@@ -10,9 +10,69 @@
         2.0,
         2.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the failing_feed_router_1 on the heavy_duty_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "failing_feed_router_1",
+          "location_id": "on:heavy_duty_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the emergency_broadcast_script_1 in the logistics_storage_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_broadcast_script_1",
+          "location_id": "in:logistics_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, blinking red feed router and place it on the heavy-duty workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "failing_feed_router_1",
+          "location_id": "on:heavy_duty_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken headset comms system using the repair kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "headset_comms_system_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the flickering adjustable studio lamp using the repair kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "adjustable_studio_lamp_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the repair kit to fix the only black, blinking red feed router and place it on the heavy-duty workbench.",
       "task_category": "compound_reasoning",
@@ -24,6 +84,68 @@
         {
           "id": "failing_feed_router_1",
           "location_id": "on:heavy_duty_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the only silver, flickering studio lamp and place it on the broadcasting console.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "adjustable_studio_lamp_1",
+          "is_broken": false
+        },
+        {
+          "id": "adjustable_studio_lamp_1",
+          "location_id": "on:broadcasting_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the emergency oxygen tank to the medical first aid station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_oxygen_tank_1",
+          "location_id": "in:medical_first_aid_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bulky equipment to the logistics storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bulky_equipment_1",
+          "location_id": "in:logistics_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, steel broadcasting console to the broadcast control room and repair its mounting.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broadcasting_console_1",
+          "is_broken": false
+        },
+        {
+          "id": "broadcasting_console_1",
+          "location_id": "in:broadcast_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, wooden medical supply cabinet to the medical first aid station and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_supply_cabinet_1",
+          "is_open": true
+        },
+        {
+          "id": "medical_supply_cabinet_1",
+          "location_id": "in:medical_first_aid_station"
         }
       ]
     }

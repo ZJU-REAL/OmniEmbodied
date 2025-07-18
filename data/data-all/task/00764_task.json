@@ -1,0 +1,184 @@
+{
+  "task_background": "Clean up and investigate an abandoned dump site containing hazardous waste and altered items requiring multi-agent collaboration.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the cardboard_box_1 on the dresser_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cardboard_box_1",
+          "location_id": "on:dresser_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the refrigerator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the main_dumping_zone and place it in the hazardous_waste_cluster.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:hazardous_waste_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only decorative glass bottle and place it in the altered_item_examination_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "glass_bottle_2",
+          "location_id": "in:altered_item_examination_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to compress the cardboard_box_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cardboard_box_1",
+          "is_compressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the bolt_cutters_1 to open the footlocker_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "footlocker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the angle_grinder_1 to pulverize the license_plates_1 and then place them in the hazardous_waste_cluster.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "license_plates_1",
+          "is_pulverized": true
+        },
+        {
+          "id": "license_plates_1",
+          "location_id": "in:hazardous_waste_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the marker_1 to label the plastic_jug_1 and then place it in the hazardous_waste_cluster.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "plastic_jug_1",
+          "is_labeled": true
+        },
+        {
+          "id": "plastic_jug_1",
+          "location_id": "in:hazardous_waste_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the drum_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drum_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the flashlight_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "flashlight_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerator_1 to the hazardous_waste_cluster.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": "in:hazardous_waste_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine_block_1 to the main_dumping_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_block_1",
+          "location_id": "in:main_dumping_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the boat_1 to the hazardous_waste_cluster and use the angle_grinder_1 to pulverize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "boat_1",
+          "location_id": "in:hazardous_waste_cluster"
+        },
+        {
+          "id": "boat_1",
+          "is_pulverized": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the drum_1 to the altered_item_examination_area and use the latex_gloves_1 to moisten it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "drum_1",
+          "location_id": "in:altered_item_examination_area"
+        },
+        {
+          "id": "drum_1",
+          "is_moist": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00764"
+}

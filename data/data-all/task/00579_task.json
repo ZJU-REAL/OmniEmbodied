@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place weight_plate_red_1 on the motorized_treadmill_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "weight_plate_red_1",
+          "location_id": "on:motorized_treadmill_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue-capped water bottle in the recovery lounge.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "water_bottle_blue_1",
+          "location_id": "in:recovery_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest weight plate and place it in the equipment storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "weight_plate_red_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the biometric armband with a cracked screen and place it on the coaches' desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "biometric_armband_21",
+          "location_id": "on:coaches_desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken ball machine using the repair kit.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "broken_ball_machine_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the paperclip to fix the jammed keycard slot on the sample fridge and then open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the treadmill belt that needs alignment and use the repair kit to fix it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "treadmill_belt_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency stop button in the recovery lounge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_stop_button_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the lab computer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_computer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydrostatic weighing tank to the recovery lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydrostatic_weighing_tank_1",
+          "location_id": "in:recovery_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryotherapy chamber to the sports science lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryotherapy_chamber_1",
+          "location_id": "in:sports_science_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the VO₂ Max Treadmill to the main training floor and start its engine.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vo2_max_treadmill_1",
+          "location_id": "in:main_training_floor"
+        },
+        {
+          "id": "vo2_max_treadmill_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the motion-capture rig to the film room and unmute the projector.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_capture_rig_1",
+          "location_id": "in:film_room"
+        },
+        {
+          "id": "projector_1",
+          "is_muted": false
         }
       ]
     }

@@ -12,11 +12,7 @@ import re
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple, Set
 
-try:
-    import pandas as pd
-    HAS_PANDAS = True
-except ImportError:
-    HAS_PANDAS = False
+import pandas as pd
 
 from utils.logger import get_logger
 
@@ -101,7 +97,7 @@ class TaskValidator:
 
                 # Apply task-level fixes
                 if 'tasks' in fixed_data:
-                    task_fixes = self._apply_task_fixes(fixed_data['tasks'], scene_data)
+                    task_fixes = self._apply_task_fixes(fixed_data['tasks'], scene_data, fixed_data)
                     fixes_applied.extend(task_fixes)
 
                 if fixes_applied:
@@ -242,7 +238,9 @@ class TaskValidator:
         task_description = task.get('task_description', '')
         if self._is_collaboration_move_task(task_description):
             task_objects = self._extract_task_objects(task, scene_objects)
-            constraint_violations = self._check_physical_constraints(task_objects, scene_objects)
+            # 从task_data中获取agents_config，如果没有则使用None
+            agents_config = getattr(self, '_current_agents_config', None)
+            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config)
             if constraint_violations:
                 for violation in constraint_violations:
                     errors.append(f"Task {task_index} physical constraint violation: {violation}")
@@ -295,31 +293,52 @@ class TaskValidator:
     def _check_location_id(self, location_id: str, task_index: int, check_index: int,
                           task_description: str, scene_objects: Dict[str, Any],
                           scene_rooms: Dict[str, Any]) -> List[str]:
-        """Check location_id without fixing."""
+        """Check location_id format and correctness."""
         errors = []
 
-        # Check if location_id has proper format (in:, on:, or :)
-        if not location_id.startswith(('in:', 'on:', ':')):
-            description_lower = task_description.lower()
-            has_in = ' in ' in description_lower or description_lower.startswith('in ')
-            has_on = ' on ' in description_lower or description_lower.startswith('on ')
+        if not location_id:
+            return errors
 
-            if has_in and has_on:
+        # Analyze task description for spatial prepositions
+        description_lower = task_description.lower()
+        has_in = ' in ' in description_lower or description_lower.startswith('in ')
+        has_on = ' on ' in description_lower or description_lower.startswith('on ')
+
+        # Determine correct prefix based on task description
+        if has_in and has_on:
+            correct_prefix = ":"  # Both present, use empty prefix
+        elif has_in:
+            correct_prefix = "in:"
+        elif has_on:
+            correct_prefix = "on:"
+        else:
+            correct_prefix = ":"  # Neither present, use empty prefix
+
+        # Extract base location (remove existing prefix if any)
+        if location_id.startswith(('in:', 'on:', ':')):
+            base_location = location_id.split(':', 1)[1] if ':' in location_id else location_id
+        else:
+            base_location = location_id
+
+        # Construct correct location_id
+        correct_location_id = f"{correct_prefix}{base_location}"
+
+        # Check if current location_id matches the expected format
+        if location_id != correct_location_id:
+            if correct_prefix == ":":
                 errors.append(f"Task {task_index} validation_check {check_index}: "
-                             f"location_id '{location_id}' should use format ':object_id' when both in/on are present")
-            elif has_in or has_on:
+                             f"location_id '{location_id}' should be '{correct_location_id}' (empty prefix - no spatial preposition found)")
+            elif correct_prefix == "in:":
                 errors.append(f"Task {task_index} validation_check {check_index}: "
-                             f"location_id '{location_id}' should have 'in:' or 'on:' prefix based on task description")
-            else:
+                             f"location_id '{location_id}' should be '{correct_location_id}' (in: prefix expected)")
+            elif correct_prefix == "on:":
                 errors.append(f"Task {task_index} validation_check {check_index}: "
-                             f"location_id '{location_id}' should use format ':object_id' when no spatial relationship is specified")
+                             f"location_id '{location_id}' should be '{correct_location_id}' (on: prefix expected)")
 
         # Check if target location exists
-        if ':' in location_id:
-            prefix, target = location_id.split(':', 1)
-            if target and target not in scene_objects and target not in scene_rooms:
-                errors.append(f"Task {task_index} validation_check {check_index}: "
-                             f"location_id target '{target}' does not exist in scene")
+        if base_location and base_location not in scene_objects and base_location not in scene_rooms:
+            errors.append(f"Task {task_index} validation_check {check_index}: "
+                         f"location_id target '{base_location}' does not exist in scene")
 
         return errors
 
@@ -381,19 +400,22 @@ class TaskValidator:
             agents_config = task_data['agents_config']
             if not isinstance(agents_config, list) or len(agents_config) != 2:
                 task_data['agents_config'] = [
-                    {"name": "robot_1", "max_grasp_limit": 1, "max_weight": 40.0, "max_size": [1.5, 1.5, 1.5]},
-                    {"name": "robot_2", "max_grasp_limit": 1, "max_weight": 40.0, "max_size": [1.5, 1.5, 1.5]}
+                    {"name": "robot_1", "max_grasp_limit": 1, "max_weight": 40.0},
+                    {"name": "robot_2", "max_grasp_limit": 1, "max_weight": 40.0}
                 ]
                 fixes.append("Fixed agents_config structure")
 
         return fixes
 
-    def _apply_task_fixes(self, tasks: List[Dict[str, Any]], scene_data: Dict[str, Any]) -> List[str]:
+    def _apply_task_fixes(self, tasks: List[Dict[str, Any]], scene_data: Dict[str, Any], task_data: Dict[str, Any]) -> List[str]:
         """Apply fixes to individual tasks."""
         fixes = []
 
         if not isinstance(tasks, list):
             return fixes
+
+        # Set current agents_config for physical constraint checking
+        self._current_agents_config = task_data.get('agents_config', [])
 
         # Get scene data for validation
         scene_objects = self._extract_scene_objects(scene_data)
@@ -420,6 +442,12 @@ class TaskValidator:
                 task, i, scene_objects, scene_rooms, scene_abilities
             )
             fixes.extend(task_fixes)
+
+            # Apply physical constraint fixes by adjusting agents_config
+            physical_fixes = self._apply_agents_config_fixes_for_task(
+                task, i, scene_objects, task_data
+            )
+            fixes.extend(physical_fixes)
 
         # Remove tasks in reverse order to maintain indices
         for task_index, reason in reversed(tasks_to_remove):
@@ -504,7 +532,8 @@ class TaskValidator:
             task_objects = self._extract_task_objects(task, scene_objects)
 
             # 检查物理约束违反（但不删除任务，而是标记需要修复）
-            constraint_violations = self._check_physical_constraints(task_objects, scene_objects)
+            agents_config = getattr(self, '_current_agents_config', None)
+            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config)
             if constraint_violations:
                 self.logger.info(f"Task {task_index}: Found physical constraint violations that can be auto-fixed: {constraint_violations}")
                 # 不删除任务，让修复逻辑处理
@@ -589,25 +618,28 @@ class TaskValidator:
 
         return task_objects
 
-    def _check_physical_constraints(self, task_objects: List[str], scene_objects: Dict[str, Any]) -> List[str]:
-        """检查物理约束违反"""
+    def _check_physical_constraints(self, task_objects: List[str], scene_objects: Dict[str, Any],
+                                  agents_config: List[Dict[str, Any]] = None) -> List[str]:
+        """检查物理约束违反 - 只检查重量，忽略尺寸"""
         violations = []
+
+        # 计算当前智能体的最大承重能力
+        if agents_config:
+            max_capacity = self._calculate_max_combined_weight(agents_config)
+        else:
+            max_capacity = 100.0  # 默认值
 
         for obj_id in task_objects:
             if obj_id in scene_objects:
                 obj = scene_objects[obj_id]
                 properties = obj.get('properties', {})
 
-                # 检查重量约束
+                # 检查重量约束 - 使用动态计算的承重能力
                 weight = properties.get('weight', 0)
-                if weight > 100:  # 假设两个机器人最大承重100kg
+                if weight > max_capacity:
                     violations.append(f"Object {obj_id} weight {weight}kg exceeds max capacity")
 
-                # 检查尺寸约束
-                size = properties.get('size', [0, 0, 0])
-                if isinstance(size, list) and len(size) >= 3:
-                    if any(dim > 1.5 for dim in size):  # 假设最大尺寸限制1.5
-                        violations.append(f"Object {obj_id} size {size} exceeds max dimensions")
+                # 删除尺寸约束检查 - 完全忽略size相关验证
 
         return violations
 
@@ -716,12 +748,9 @@ class TaskValidator:
                     )
                     fixes.extend(check_fixes)
 
-        # Fix physical constraints (新增)
+        # Fix physical constraints (新增) - 只记录需要修复的信息
         task_description = task.get('task_description', '')
         if self._is_collaboration_move_task(task_description):
-            # 需要传递完整的任务数据以获取agents_config
-            # 这里我们需要从上层获取完整的task_data
-            # 暂时使用默认配置，后续可以优化
             physical_fixes = self._apply_physical_constraint_fixes(
                 task, task_index, scene_objects
             )
@@ -763,31 +792,46 @@ class TaskValidator:
     def _apply_location_id_fixes(self, check: Dict[str, Any], task_index: int, check_index: int,
                                 task_description: str, scene_objects: Dict[str, Any],
                                 scene_rooms: Dict[str, Any]) -> List[str]:
-        """Apply fixes to location_id."""
+        """Apply fixes to location_id - checks both missing and incorrect prefixes."""
         fixes = []
-
         location_id = check.get('location_id', '')
 
-        # Fix location_id format
-        if not location_id.startswith(('in:', 'on:')):
-            description_lower = task_description.lower()
-            has_in = ' in ' in description_lower or description_lower.startswith('in ')
-            has_on = ' on ' in description_lower or description_lower.startswith('on ')
+        if not location_id:
+            return fixes
 
-            if has_in and has_on:
-                # Both present, keep original format (no prefix change)
-                check['location_id'] = f":{location_id}"
-                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id to use empty prefix (both in/on found, keeping original)")
-            elif has_in:
-                check['location_id'] = f"in:{location_id}"
-                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id to use 'in:' prefix")
-            elif has_on:
-                check['location_id'] = f"on:{location_id}"
-                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id to use 'on:' prefix")
-            else:
-                object_id = check.get('id', '')
-                check['location_id'] = f":{object_id}"
-                fixes.append(f"Task {task_index} check {check_index}: Set location_id to empty format")
+        # Analyze task description for spatial prepositions
+        description_lower = task_description.lower()
+        has_in = ' in ' in description_lower or description_lower.startswith('in ')
+        has_on = ' on ' in description_lower or description_lower.startswith('on ')
+
+        # Determine correct prefix based on task description
+        if has_in and has_on:
+            correct_prefix = ":"  # Both present, use empty prefix
+        elif has_in:
+            correct_prefix = "in:"
+        elif has_on:
+            correct_prefix = "on:"
+        else:
+            correct_prefix = ":"  # Neither present, use empty prefix
+
+        # Extract base location (remove existing prefix if any)
+        if location_id.startswith(('in:', 'on:', ':')):
+            base_location = location_id.split(':', 1)[1] if ':' in location_id else location_id
+        else:
+            base_location = location_id
+
+        # Construct correct location_id
+        correct_location_id = f"{correct_prefix}{base_location}"
+
+        # Apply fix if current location_id is incorrect
+        if location_id != correct_location_id:
+            check['location_id'] = correct_location_id
+            if correct_prefix == ":":
+                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id from '{location_id}' to '{correct_location_id}' (empty prefix - no spatial preposition found)")
+            elif correct_prefix == "in:":
+                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id from '{location_id}' to '{correct_location_id}' (in: prefix)")
+            elif correct_prefix == "on:":
+                fixes.append(f"Task {task_index} check {check_index}: Fixed location_id from '{location_id}' to '{correct_location_id}' (on: prefix)")
 
         return fixes
 
@@ -1015,56 +1059,40 @@ class TaskValidator:
 
     def _apply_physical_constraint_fixes(self, task: Dict[str, Any], task_index: int,
                                        scene_objects: Dict[str, Any]) -> List[str]:
-        """应用物理约束修复"""
+        """应用物理约束修复 - 只处理重量，通过调整智能体负载能力"""
         fixes = []
 
         # 获取任务中涉及的对象
         task_objects = self._extract_task_objects(task, scene_objects)
-
-        # 获取智能体配置，计算最大承重能力
-        agents_config = self._get_agents_config_from_context()
-        max_combined_weight = self._calculate_max_combined_weight(agents_config)
-        max_combined_size = self._calculate_max_combined_size(agents_config)
 
         for obj_id in task_objects:
             if obj_id in scene_objects:
                 obj = scene_objects[obj_id]
                 properties = obj.get('properties', {})
 
-                # 修复重量约束违反
+                # 处理重量约束 - 通过调整智能体负载能力而不是修改物体重量
                 weight = properties.get('weight', 0)
-                if weight > max_combined_weight:
-                    # 将重量调整为略低于最大承重
-                    new_weight = max_combined_weight * 0.9  # 留10%安全余量
-                    properties['weight'] = new_weight
-                    fixes.append(f"Task {task_index}: Reduced object {obj_id} weight from {weight}kg to {new_weight}kg for collaboration feasibility")
-                    self.logger.info(f"Fixed weight constraint for {obj_id}: {weight} -> {new_weight}")
+                if weight > 0:
+                    # 判断是否为协作任务
+                    task_description = task.get('task_description', '')
+                    is_collaboration = self._is_collaboration_move_task(task_description)
 
-                # 修复尺寸约束违反
-                size = properties.get('size', [0, 0, 0])
-                if isinstance(size, list) and len(size) >= 3:
-                    size_fixed = False
-                    new_size = size.copy()
+                    # 这里需要从上层传递task_data来修改agents_config
+                    # 暂时记录需要修复的信息，实际修复在上层进行
+                    fixes.append(f"Task {task_index}: Object {obj_id} weight {weight}kg requires agent capacity adjustment")
+                    self.logger.info(f"Identified weight constraint fix needed for {obj_id}: {weight}kg")
 
-                    for i, (dim, max_dim) in enumerate(zip(size, max_combined_size)):
-                        if dim > max_dim:
-                            new_size[i] = max_dim * 0.9  # 留10%安全余量
-                            size_fixed = True
-
-                    if size_fixed:
-                        properties['size'] = new_size
-                        fixes.append(f"Task {task_index}: Adjusted object {obj_id} size from {size} to {new_size} for collaboration feasibility")
-                        self.logger.info(f"Fixed size constraint for {obj_id}: {size} -> {new_size}")
+                # 完全删除尺寸约束修复逻辑
 
         return fixes
 
     def _get_agents_config_from_context(self) -> List[Dict[str, Any]]:
         """获取智能体配置（从上下文或使用默认值）"""
         # 这里可以从当前处理的任务数据中获取agents_config
-        # 为了简化，先使用默认配置
+        # 为了简化，先使用默认配置，删除max_size字段
         return [
-            {"name": "robot_1", "max_weight": 50.0, "max_size": [1.5, 1.5, 1.5]},
-            {"name": "robot_2", "max_weight": 50.0, "max_size": [1.5, 1.5, 1.5]}
+            {"name": "robot_1", "max_weight": 50.0},
+            {"name": "robot_2", "max_weight": 50.0}
         ]
 
     def _calculate_max_combined_weight(self, agents_config: List[Dict[str, Any]]) -> float:
@@ -1079,19 +1107,56 @@ class TaskValidator:
         # 返回最高的两个智能体的承重和
         return weights[0] + (weights[1] if len(weights) > 1 else 0)
 
-    def _calculate_max_combined_size(self, agents_config: List[Dict[str, Any]]) -> List[float]:
-        """计算智能体组合的最大尺寸能力"""
-        if not agents_config:
-            return [1.5, 1.5, 1.5]  # 默认值
+    # 删除 _calculate_max_combined_size 方法，不再需要尺寸计算
 
-        # 找到尺寸能力最大的智能体
-        max_sizes = []
-        for agent in agents_config:
-            agent_size = agent.get('max_size', [1.5, 1.5, 1.5])
-            if not max_sizes:
-                max_sizes = agent_size.copy()
+    def _apply_agents_config_fixes_for_task(self, task: Dict[str, Any], task_index: int,
+                                          scene_objects: Dict[str, Any], task_data: Dict[str, Any]) -> List[str]:
+        """为特定任务调整agents_config以满足物理约束"""
+        fixes = []
+
+        # 检查是否是协作搬运任务
+        task_description = task.get('task_description', '')
+        if not self._is_collaboration_move_task(task_description):
+            return fixes
+
+        # 获取任务中涉及的对象
+        task_objects = self._extract_task_objects(task, scene_objects)
+
+        # 获取当前的agents_config
+        agents_config = task_data.get('agents_config', [])
+        if not agents_config or len(agents_config) == 0:
+            return fixes
+
+        # 找到最重的物体
+        max_weight = 0
+        heaviest_obj_id = None
+
+        for obj_id in task_objects:
+            if obj_id in scene_objects:
+                obj = scene_objects[obj_id]
+                properties = obj.get('properties', {})
+                weight = properties.get('weight', 0)
+                if weight > max_weight:
+                    max_weight = weight
+                    heaviest_obj_id = obj_id
+
+        if max_weight > 0 and heaviest_obj_id:
+            # 判断是否为协作任务
+            is_collaboration = self._is_collaboration_move_task(task_description)
+
+            if is_collaboration and len(agents_config) >= 2:
+                # 多智能体协作：增加第一个智能体的负重能力
+                current_max_weight = agents_config[0].get('max_weight', 50.0)
+                if max_weight > current_max_weight:
+                    agents_config[0]['max_weight'] = max_weight + 10.0  # 增加10kg余量
+                    fixes.append(f"Task {task_index}: Increased first agent max_weight to {max_weight + 10.0}kg for object {heaviest_obj_id} ({max_weight}kg)")
+                    self.logger.info(f"Fixed weight constraint by increasing first agent capacity: {current_max_weight} -> {max_weight + 10.0}")
             else:
-                for i in range(min(len(max_sizes), len(agent_size))):
-                    max_sizes[i] = max(max_sizes[i], agent_size[i])
+                # 单智能体：修改智能体负载为物体重量
+                current_max_weight = agents_config[0].get('max_weight', 50.0)
+                if max_weight > current_max_weight:
+                    agents_config[0]['max_weight'] = max_weight
+                    fixes.append(f"Task {task_index}: Set agent max_weight to {max_weight}kg for object {heaviest_obj_id}")
+                    self.logger.info(f"Fixed weight constraint by setting agent capacity: {current_max_weight} -> {max_weight}")
 
-        return max_sizes if max_sizes else [1.5, 1.5, 1.5]
+        return fixes

@@ -6,6 +6,12 @@
       "max_grasp_limit": 1.5,
       "max_weight": 30.0,
       "max_size": 2.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 30.0,
+      "max_size": 2.0
     }
   ],
   "tasks": [
@@ -16,6 +22,116 @@
         {
           "id": "toolbox_1",
           "location_id": "on:industrial_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the barcode_scanner_1 to the managers_office.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "in:managers_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object on the workbench_1 and move it to the installation_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "in:installation_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the washing supplies to clean the dusty weatherproof cover and place it on the demo pergola.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "weatherproof_cover_1",
+          "is_washed": false
+        },
+        {
+          "id": "weatherproof_cover_1",
+          "location_id": "on:demo_pergola_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the power cable with red tape, unroll it, and connect it to the outdoor speaker set.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "power_cable_1",
+          "is_rolled": false
+        },
+        {
+          "id": "outdoor_speakers_1",
+          "is_rolled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to turn on the demo TV and unmute the outdoor speakers.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "demo_tv_1",
+          "is_on": true
+        },
+        {
+          "id": "outdoor_speakers_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pallet racking to the shipping dock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_racking_1",
+          "location_id": "in:shipping_dock"
+        }
+      ]
+    },
+    {
+      "task_description": "Transport the industrial shelving unit to the outdoor demo yard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:outdoor_demo_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy workbench to the installation bay and use the sealant gun to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:installation_bay"
+        },
+        {
+          "id": "workbench_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the demo pergola to the main warehouse and clean it with the washing supplies.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "demo_pergola_1",
+          "location_id": "in:main_warehouse"
+        },
+        {
+          "id": "demo_pergola_1",
+          "is_washed": false
         }
       ]
     }

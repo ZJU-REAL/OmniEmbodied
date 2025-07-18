@@ -1,0 +1,174 @@
+{
+  "task_background": "Secure and stabilize the auto garage after a catastrophic vehicle fire, ensuring safety, preserving evidence, and preparing for investigation.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place fire_extinguisher_1 on the floor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "location_id": "on:floor_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the defibrillator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the tool_storage and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_2",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue glass object on the workbench_1 and place it in the office_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "paperweight_1",
+          "location_id": "in:office_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the jaws_of_life_1 to cut the roof_panel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "roof_panel_1",
+          "is_cut": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to wipe the coffee_mug_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spill_kit_1 to clean the floor_1 and then sweep it with the broom_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "spill_kit_1",
+          "is_swept": false
+        },
+        {
+          "id": "floor_1",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the tool chest with a 4-digit lock, use the sticky_note_1 to open it, and retrieve the screwdriver_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "is_open": true
+        },
+        {
+          "id": "screwdriver_1",
+          "location_id": "in:main_garage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to turn off the porsche_wreck_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "porsche_wreck_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_lift_1 to the forensic_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:forensic_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the workbench_1 to the first_aid_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:first_aid_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the porsche_wreck_1 to the forensic_corner and connect the black_box_1 to the laptop_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "porsche_wreck_1",
+          "location_id": "in:forensic_corner"
+        },
+        {
+          "id": "black_box_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the roof_panel_1 to the evidence_table_1 and scan it with the camera_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "roof_panel_1",
+          "location_id": "on:evidence_table_1"
+        },
+        {
+          "id": "camera_1",
+          "is_scanned": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00804"
+}

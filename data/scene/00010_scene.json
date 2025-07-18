@@ -1,924 +1,683 @@
 {
-  "description": "A high-stakes Dakar Rally bivouac transformed into an emergency repair hub in the scorching desert, featuring a chaotic yet structured environment with mechanics, riders, and support staff working to salvage damaged bikes.",
+  "description": "A high-density electronics repair and quality assurance lab dedicated to refurbishing and testing HP Photosmart M22 cameras, featuring four interconnected zones: Incoming Inspection Bay, Repair Workstations, Testing & Calibration Zone, and Packaging & Shipping.",
   "rooms": [
     {
-      "id": "main_repair_tent",
-      "name": "Main Repair Tent",
+      "id": "incoming_inspection_bay",
+      "name": "Incoming Inspection Bay",
       "properties": {
         "type": "industrial"
       },
       "connected_to_room_ids": [
-        "parts_tools_storage",
-        "rider_recovery_area",
-        "fuel_fluid_station",
-        "damaged_bike_graveyard"
+        "repair_workstations"
       ]
     },
     {
-      "id": "parts_tools_storage",
-      "name": "Parts & Tools Storage",
+      "id": "repair_workstations",
+      "name": "Repair Workstations",
       "properties": {
-        "type": "storage"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "main_repair_tent"
+        "incoming_inspection_bay",
+        "testing_calibration_zone"
       ]
     },
     {
-      "id": "rider_recovery_area",
-      "name": "Rider Recovery Area",
+      "id": "testing_calibration_zone",
+      "name": "Testing & Calibration Zone",
       "properties": {
-        "type": "medical"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "main_repair_tent"
+        "repair_workstations",
+        "packaging_shipping"
       ]
     },
     {
-      "id": "fuel_fluid_station",
-      "name": "Fuel & Fluid Station",
+      "id": "packaging_shipping",
+      "name": "Packaging & Shipping",
       "properties": {
-        "type": "hazardous"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "main_repair_tent"
-      ]
-    },
-    {
-      "id": "damaged_bike_graveyard",
-      "name": "Damaged Bike Graveyard",
-      "properties": {
-        "type": "salvage"
-      },
-      "connected_to_room_ids": [
-        "main_repair_tent"
+        "testing_calibration_zone"
       ]
     }
   ],
   "objects": [
     {
-      "id": "steel_workbench_1",
-      "name": "Steel Workbench",
+      "id": "steel_receiving_table_1",
+      "name": "Steel Receiving Table",
       "type": "FURNITURE",
-      "location_id": "in:main_repair_tent",
+      "location_id": "in:incoming_inspection_bay",
       "properties": {
         "size": [
           2.0,
           1.0,
           0.9
         ],
-        "weight": 85.0,
+        "weight": 200.0,
         "is_container": true,
         "material": "steel",
-        "condition": "stained with oil and coolant"
-      },
-      "states": {}
-    },
-    {
-      "id": "hydraulic_motorcycle_lift_1",
-      "name": "Hydraulic Motorcycle Lift",
-      "type": "FURNITURE",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          1.2
-        ],
-        "weight": 120.0,
-        "is_container": false,
-        "material": "steel",
-        "condition": "stuck in half-raised position"
+        "surface_condition": "scuffed"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "portable_generator_1",
-      "name": "Portable Generator",
+      "id": "overhead_conveyor_belt_1",
+      "name": "Overhead Conveyor Belt",
       "type": "FURNITURE",
-      "location_id": "in:main_repair_tent",
+      "location_id": "in:incoming_inspection_bay",
       "properties": {
         "size": [
-          0.6,
-          0.4,
-          0.5
+          4.0,
+          0.5,
+          0.3
         ],
-        "weight": 55.0,
+        "weight": 150.0,
         "is_container": false,
-        "brand": "Honda",
-        "model_number": "EU2200i",
-        "current_noise_level": "loud"
-      },
-      "states": {
-        "is_on": true
-      }
-    },
-    {
-      "id": "honda_bike_3",
-      "name": "Honda Bike #3 (Barreda's)",
-      "type": "FURNITURE",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "size": [
-          2.1,
-          0.8,
-          1.2
-        ],
-        "weight": 140.0,
-        "is_container": false,
-        "brand": "Honda",
-        "model": "CRF450",
-        "condition": "missing fuel tank"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "burnt_bike_frame_1",
-      "name": "Burnt Bike Frame (Gonçalves')",
-      "type": "FURNITURE",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "size": [
-          1.8,
-          0.7,
-          1.0
-        ],
-        "weight": 95.0,
-        "is_container": false,
-        "material": "charred alloy",
-        "condition": "warped from heat"
+        "material": "steel",
+        "motor_status": "operational"
       },
       "states": {}
     },
     {
-      "id": "diagnostic_laptop_1",
-      "name": "Diagnostic Laptop",
+      "id": "defective_camera_1",
+      "name": "Defective Camera",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "on:steel_receiving_table_1",
       "properties": {
-        "weight": 2.5,
-        "brand": "Dell",
-        "model": "Latitude 5420",
-        "battery_level": 23,
-        "provides_abilities": [
-          "type",
-          "format",
-          "scan"
-        ]
+        "weight": 0.5,
+        "color": "black",
+        "model": "HP Photosmart M22",
+        "issue": "Battery Door Latch Broken",
+        "warranty_sticker": "blue"
       },
       "states": {
-        "is_on": true,
-        "is_typed": false,
-        "is_formatted": false,
-        "is_scanned": false
+        "is_open": false
       }
     },
     {
-      "id": "parts_tray_1",
-      "name": "Parts Tray",
+      "id": "defective_camera_2",
+      "name": "Defective Camera",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "on:steel_receiving_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "model": "HP Photosmart M22",
+        "issue": "No USB Cable",
+        "warranty_sticker": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_inspection_tablet_1",
+      "name": "Digital Inspection Tablet",
+      "type": "ITEM",
+      "location_id": "on:steel_receiving_table_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "brand": "Samsung",
+        "screen_status": "frozen"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "replacement_parts_box_1",
+      "name": "Replacement Parts Box",
+      "type": "ITEM",
+      "location_id": "on:steel_receiving_table_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "brown",
+        "material": "cardboard",
+        "contents": "spare battery doors, lenses",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:steel_receiving_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Zebra",
+        "status": "needs recalibration"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:steel_receiving_table_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "gray",
+        "brand": "Brother",
+        "paper_status": "out"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:steel_receiving_table_1",
       "properties": {
         "weight": 1.8,
-        "material": "plastic",
+        "color": "black",
+        "bulb_status": "flickering"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "pegboard_wall_1",
+      "name": "Pegboard Wall",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_inspection_bay",
+      "properties": {
+        "size": [
+          2.5,
+          0.1,
+          1.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:pegboard_wall_1",
+      "properties": {
+        "weight": 0.2,
         "color": "red",
-        "is_container": true
+        "type": "Phillips",
+        "size": "medium",
+        "provides_abilities": [
+          "uninstall"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workstations",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "wood",
+        "grounding_status": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_chest_1",
+      "name": "Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workstations",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "disassembled_camera_1",
+      "name": "Disassembled Camera",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "model": "HP Photosmart M22",
+        "status": "disassembled"
       },
       "states": {
         "is_open": true
       }
     },
     {
-      "id": "bent_throttle_cable_1",
-      "name": "Bent Throttle Cable",
+      "id": "micro_screwdriver_set_1",
+      "name": "Micro Screwdriver Set",
       "type": "ITEM",
-      "location_id": "in:parts_tray_1",
+      "location_id": "on:anti_static_workbench_1",
       "properties": {
         "weight": 0.3,
-        "material": "steel",
-        "condition": "bent"
-      },
-      "states": {}
-    },
-    {
-      "id": "sheared_bolt_1",
-      "name": "Sheared Bolt",
-      "type": "ITEM",
-      "location_id": "in:parts_tray_1",
-      "properties": {
-        "weight": 0.1,
-        "material": "steel",
-        "condition": "sheared"
-      },
-      "states": {}
-    },
-    {
-      "id": "cracked_clutch_cover_1",
-      "name": "Cracked Clutch Cover",
-      "type": "ITEM",
-      "location_id": "in:parts_tray_1",
-      "properties": {
-        "weight": 0.5,
-        "material": "aluminum",
-        "condition": "cracked"
-      },
-      "states": {}
-    },
-    {
-      "id": "knee_pad_stool_1",
-      "name": "Knee Pad Stool",
-      "type": "ITEM",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "weight": 1.2,
-        "material": "foam",
-        "condition": "one strap broken"
-      },
-      "states": {}
-    },
-    {
-      "id": "industrial_fan_1",
-      "name": "Industrial Fan",
-      "type": "ITEM",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "weight": 8.5,
-        "brand": "Stanley",
-        "condition": "blades caked in dust",
+        "color": "black",
+        "missing_tool": "1.5mm flathead",
         "provides_abilities": [
-          "wind_up"
+          "uninstall"
         ]
       },
-      "states": {
-        "is_on": true,
-        "is_wound_up": false
-      }
-    },
-    {
-      "id": "race_map_1",
-      "name": "Race Map",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.2,
-        "material": "paper",
-        "condition": "marked with hazards"
-      },
       "states": {}
     },
     {
-      "id": "empty_energy_drink_cans_1",
-      "name": "Empty Energy Drink Cans",
+      "id": "urgent_repair_tray_1",
+      "name": "Urgent Repair Tray",
       "type": "ITEM",
-      "location_id": "in:main_repair_tent",
-      "properties": {
-        "weight": 0.5,
-        "material": "aluminum",
-        "condition": "crushed",
-        "is_container": false
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "faded_sponsorship_banner_1",
-      "name": "Faded Sponsorship Banner",
-      "type": "ITEM",
-      "location_id": "in:main_repair_tent",
+      "location_id": "on:anti_static_workbench_1",
       "properties": {
         "weight": 1.0,
-        "material": "vinyl",
-        "condition": "peeling at edges"
-      },
-      "states": {}
-    },
-    {
-      "id": "rusted_shipping_container_1",
-      "name": "Rusted Shipping Container",
-      "type": "FURNITURE",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "size": [
-          6.0,
-          2.5,
-          2.6
-        ],
-        "weight": 2000.0,
-        "is_container": true,
-        "material": "steel",
-        "condition": "rusted"
+        "color": "red",
+        "contents": "camera with Error 47",
+        "priority": "high"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "heavy_duty_shelving_1",
-      "name": "Heavy-Duty Shelving Unit",
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "brand": "Fluke",
+        "display_status": "dim"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "temperature": "warm",
+        "provides_abilities": [
+          "roast"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "parts_organizer_1",
+      "name": "Parts Organizer",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "organization_status": "mis-sorted"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "light_sealed_testing_booth_1",
+      "name": "Light-Sealed Testing Booth",
       "type": "FURNITURE",
-      "location_id": "in:parts_tools_storage",
+      "location_id": "in:testing_calibration_zone",
       "properties": {
         "size": [
           2.0,
-          0.5,
-          1.8
+          2.0,
+          2.5
         ],
-        "weight": 75.0,
+        "weight": 250.0,
         "is_container": true,
-        "material": "steel"
-      },
-      "states": {}
-    },
-    {
-      "id": "fuel_pump_assembly_1",
-      "name": "Fuel Pump Assembly",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 3.5,
-        "brand": "Honda",
-        "model": "CRF450",
-        "condition": "new in box"
-      },
-      "states": {
-        "is_hidden": false
-      }
-    },
-    {
-      "id": "locked_tool_chest_1",
-      "name": "Locked Tool Chest",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 25.0,
         "material": "steel",
-        "is_container": true,
-        "condition": "locked"
+        "door_condition": "sticks"
       },
       "states": {
-        "is_open": false,
-        "is_locked": true
-      }
-    },
-    {
-      "id": "oxygen_sensor_tester_1",
-      "name": "Oxygen Sensor Tester",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.8,
-        "brand": "Bosch",
-        "condition": "new in case",
-        "provides_abilities": [
-          "scan"
-        ]
-      },
-      "states": {
-        "is_scanned": false
-      }
-    },
-    {
-      "id": "binder_of_manuals_1",
-      "name": "Binder of Manuals",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 2.0,
-        "material": "paper",
-        "condition": "dog-eared and coffee-stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "grease_stained_apron_1",
-      "name": "Grease-Stained Apron",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 0.8,
-        "material": "canvas",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "battery_charger_1",
-      "name": "Battery Charger",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 3.2,
-        "brand": "NOCO",
-        "condition": "error due to sand",
-        "provides_abilities": [
-          "disarm_alarm"
-        ]
-      },
-      "states": {
-        "is_alarm_armed": true
-      }
-    },
-    {
-      "id": "dusty_trophy_1",
-      "name": "Dusty Trophy",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 1.5,
-        "material": "metal",
-        "condition": "dusty"
-      },
-      "states": {}
-    },
-    {
-      "id": "torn_racing_gloves_1",
-      "name": "Torn Racing Gloves",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 0.3,
-        "material": "leather",
-        "condition": "torn"
-      },
-      "states": {}
-    },
-    {
-      "id": "outdated_parts_catalog_1",
-      "name": "Outdated Parts Catalog",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 0.7,
-        "material": "paper",
-        "condition": "outdated"
-      },
-      "states": {}
-    },
-    {
-      "id": "collapsible_field_cot_1",
-      "name": "Collapsible Field Cot",
-      "type": "FURNITURE",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "size": [
-          1.9,
-          0.7,
-          0.4
-        ],
-        "weight": 12.0,
-        "is_container": true,
-        "material": "canvas and aluminum",
-        "condition": "sweat-stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "wheeled_iv_stand_1",
-      "name": "Wheeled IV Stand",
-      "type": "FURNITURE",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          1.6
-        ],
-        "weight": 8.0,
-        "is_container": false,
-        "material": "stainless steel",
-        "condition": "empty bag dangling"
-      },
-      "states": {}
-    },
-    {
-      "id": "hydration_pack_1",
-      "name": "Hydration Pack",
-      "type": "ITEM",
-      "location_id": "on:collapsible_field_cot_1",
-      "properties": {
-        "weight": 1.2,
-        "material": "plastic",
-        "condition": "tube clogged with sand",
-        "is_container": true
-      },
-      "states": {
-        "is_full": true,
-        "is_drunk": false
-      }
-    },
-    {
-      "id": "gps_tracker_1",
-      "name": "GPS Tracker",
-      "type": "ITEM",
-      "location_id": "on:collapsible_field_cot_1",
-      "properties": {
-        "weight": 0.4,
-        "brand": "Garmin",
-        "condition": "battery critical",
-        "provides_abilities": [
-          "scan"
-        ]
-      },
-      "states": {
-        "is_scanned": false
-      }
-    },
-    {
-      "id": "cooler_box_1",
-      "name": "Cooler Box",
-      "type": "ITEM",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "weight": 4.0,
-        "material": "plastic",
-        "is_container": true,
-        "condition": "melted ice"
-      },
-      "states": {
-        "is_full": true,
-        "is_frozen": false,
         "is_open": false
       }
     },
     {
-      "id": "electrolyte_bottle_1",
-      "name": "Electrolyte Bottle",
-      "type": "ITEM",
-      "location_id": "in:cooler_box_1",
-      "properties": {
-        "weight": 0.5,
-        "material": "plastic",
-        "condition": "warm",
-        "is_container": true
-      },
-      "states": {
-        "is_full": true,
-        "is_drunk": false
-      }
-    },
-    {
-      "id": "folding_chair_1",
-      "name": "Folding Chair",
-      "type": "ITEM",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "weight": 2.5,
-        "material": "aluminum and fabric",
-        "condition": "one leg bent"
-      },
-      "states": {}
-    },
-    {
-      "id": "mud_caked_boots_1",
-      "name": "Mud-Caked Boots",
-      "type": "ITEM",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "weight": 1.8,
-        "material": "leather",
-        "condition": "mud-caked"
-      },
-      "states": {}
-    },
-    {
-      "id": "scribbled_note_1",
-      "name": "Scribbled Note",
-      "type": "ITEM",
-      "location_id": "on:collapsible_field_cot_1",
-      "properties": {
-        "weight": 0.1,
-        "material": "paper",
-        "condition": "scribbled"
-      },
-      "states": {}
-    },
-    {
-      "id": "warped_engine_block_1",
-      "name": "Warped Engine Block",
+      "id": "server_rack_1",
+      "name": "Server Rack",
       "type": "FURNITURE",
-      "location_id": "in:damaged_bike_graveyard",
+      "location_id": "in:testing_calibration_zone",
       "properties": {
         "size": [
           0.8,
-          0.5,
-          0.6
+          0.6,
+          2.0
         ],
-        "weight": 150.0,
-        "is_container": false,
-        "material": "aluminum",
-        "condition": "warped"
-      },
-      "states": {}
-    },
-    {
-      "id": "fuel_drum_1",
-      "name": "Fuel Drum",
-      "type": "FURNITURE",
-      "location_id": "in:fuel_fluid_station",
-      "properties": {
-        "size": [
-          0.9,
-          0.9,
-          1.2
-        ],
-        "weight": 80.0,
+        "weight": 250.0,
         "is_container": true,
         "material": "steel",
-        "condition": "full"
+        "requires_collaboration": true
       },
       "states": {
-        "is_full": true
+        "is_active": true,
+        "is_open": false
       }
     },
     {
-      "id": "fire_extinguisher_1",
-      "name": "Fire Extinguisher",
+      "id": "camera_on_test_stand_1",
+      "name": "Camera on Test Stand",
       "type": "ITEM",
-      "location_id": "in:fuel_fluid_station",
-      "properties": {
-        "weight": 5.0,
-        "material": "metal",
-        "condition": "mounted on post",
-        "provides_abilities": [
-          "spray"
-        ]
-      },
-      "states": {
-        "is_sprayed": false
-      }
-    },
-    {
-      "id": "jerrycan_1",
-      "name": "Jerrycan",
-      "type": "ITEM",
-      "location_id": "in:fuel_fluid_station",
-      "properties": {
-        "weight": 10.0,
-        "material": "plastic",
-        "is_container": true,
-        "condition": "full"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "funnel_1",
-      "name": "Funnel",
-      "type": "ITEM",
-      "location_id": "on:fuel_drum_1",
-      "properties": {
-        "weight": 0.2,
-        "material": "plastic",
-        "condition": "clean"
-      },
-      "states": {}
-    },
-    {
-      "id": "mechanic_glove_with_code_1",
-      "name": "Mechanic Glove with Code",
-      "type": "ITEM",
-      "location_id": "on:collapsible_field_cot_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "leather",
-        "condition": "worn",
-        "inscription": "Code: 1987"
-      },
-      "states": {}
-    },
-    {
-      "id": "distractor_glove_1",
-      "name": "Distractor Glove",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "leather",
-        "condition": "worn"
-      },
-      "states": {}
-    },
-    {
-      "id": "coolant_bottle_1",
-      "name": "Coolant Bottle (Leaking)",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "condition": "torn label, slow leak"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "coolant_bottle_2",
-      "name": "Coolant Bottle",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "condition": "intact"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "coolant_bottle_3",
-      "name": "Coolant Bottle",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "condition": "intact"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "coolant_bottle_4",
-      "name": "Coolant Bottle",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "condition": "intact"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "coolant_bottle_5",
-      "name": "Coolant Bottle",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "condition": "intact"
-      },
-      "states": {
-        "is_full": true
-      }
-    },
-    {
-      "id": "knife_1",
-      "name": "Utility Knife",
-      "type": "ITEM",
-      "location_id": "in:locked_tool_chest_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "steel",
-        "condition": "sharp",
-        "provides_abilities": [
-          "slice"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "staple_remover_1",
-      "name": "Staple Remover",
-      "type": "ITEM",
-      "location_id": "in:locked_tool_chest_1",
-      "properties": {
-        "weight": 0.1,
-        "material": "metal",
-        "condition": "functional",
-        "provides_abilities": [
-          "unstaple"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "stapled_documents_1",
-      "name": "Stapled Documents",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_1",
-      "properties": {
-        "weight": 0.2,
-        "material": "paper",
-        "condition": "stapled"
-      },
-      "states": {
-        "is_stapled": true
-      }
-    },
-    {
-      "id": "buckled_belt_1",
-      "name": "Buckled Belt",
-      "type": "ITEM",
-      "location_id": "in:rider_recovery_area",
-      "properties": {
-        "weight": 0.4,
-        "material": "leather",
-        "condition": "worn"
-      },
-      "states": {
-        "is_buckled": true
-      }
-    },
-    {
-      "id": "tied_rope_1",
-      "name": "Tied Rope",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
+      "location_id": "in:light_sealed_testing_booth_1",
       "properties": {
         "weight": 0.6,
-        "material": "nylon",
-        "condition": "tightly knotted"
+        "color": "black",
+        "mode": "Low-Light Mode",
+        "image_quality": "grainy"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "calibration_target_chart_1",
+      "name": "Calibration Target Chart",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "alignment": "misaligned"
+      },
+      "states": {}
+    },
+    {
+      "id": "golden_sample_m22_1",
+      "name": "Golden Sample M22",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "status": "reference unit",
+        "lock_code": "7426"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "colorimeter_1",
+      "name": "Colorimeter",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "calibration_status": "needs recalibration"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "sd_card_duplicator_1",
+      "name": "SD Card Duplicator",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "status": "jammed"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "monitor_1",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "display_status": "frozen"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "packing_conveyor_1",
+      "name": "Packing Conveyor",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_shipping",
+      "properties": {
+        "size": [
+          4.0,
+          0.8,
+          1.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_stacker_1",
+      "name": "Pallet Stacker",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_shipping",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "incomplete_refurb_box_1",
+      "name": "Incomplete Refurb Box",
+      "type": "ITEM",
+      "location_id": "on:packing_conveyor_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "missing_item": "wrist strap"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "rush_order_pallet_1",
+      "name": "Rush Order Pallet",
+      "type": "ITEM",
+      "location_id": "in:packaging_shipping",
+      "properties": {
+        "weight": 30.0,
+        "color": "wood",
+        "status": "half-packed",
+        "label_condition": "smudged"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "battery_inventory_cabinet_1",
+      "name": "Battery Inventory Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_shipping",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:packing_conveyor_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "tape_status": "out",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:packing_conveyor_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "calibration_status": "needs calibration",
+        "error": "+5g"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "daily_ship_goal_whiteboard_1",
+      "name": "Daily Ship Goal Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:packaging_shipping",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "current_count": "47",
+        "goal": "50"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "broken_fragile_stamp_1",
+      "name": "Broken FRAGILE Stamp",
+      "type": "ITEM",
+      "location_id": "on:packing_conveyor_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "ink_status": "dried out",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lubricant_spray_1",
+      "name": "Lubricant Spray",
+      "type": "ITEM",
+      "location_id": "in:incoming_inspection_bay",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "brand": "WD-40",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_usb_cable_1",
+      "name": "Spare USB Cable",
+      "type": "ITEM",
+      "location_id": "in:incoming_inspection_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "length": "1.8m",
+        "connector_type": "USB-A to Micro-USB"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "wrist_strap_1",
+      "name": "Wrist Strap",
+      "type": "ITEM",
+      "location_id": "in:repair_workstations",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "nylon"
       },
       "states": {
         "is_tied": true
       }
-    },
-    {
-      "id": "pot_1",
-      "name": "Pot",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 1.2,
-        "material": "stainless steel",
-        "condition": "clean",
-        "provides_abilities": [
-          "boil"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "portable_stove_1",
-      "name": "Portable Stove",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 3.5,
-        "material": "metal",
-        "condition": "functional",
-        "provides_abilities": [
-          "boil"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "water_container_1",
-      "name": "Water Container",
-      "type": "ITEM",
-      "location_id": "in:parts_tools_storage",
-      "properties": {
-        "weight": 5.0,
-        "material": "plastic",
-        "is_container": true,
-        "condition": "full"
-      },
-      "states": {
-        "is_full": true,
-        "is_boiling": false,
-        "is_frozen": false
-      }
     }
   ],
   "abilities": [
-    "boil",
     "close",
-    "disarm_alarm",
-    "drink",
-    "empty",
-    "format",
-    "hide",
+    "deactivate",
+    "grind",
     "open",
-    "scan",
-    "slice",
-    "spray",
-    "turn_off",
-    "turn_on",
-    "type",
-    "unbuckle",
-    "unstaple",
-    "untie",
-    "wind_up"
+    "pack",
+    "roast",
+    "sign",
+    "uninstall",
+    "unroll",
+    "untie"
   ]
 }

@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the field_radio_1 on the folding_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "field_radio_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the laptop_1 on the folding_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, olive_drab folding table and place the coffee_pot_1 on it.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,84 @@
         {
           "id": "coffee_pot_1",
           "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only Harris brand radio and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "field_radio_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilizer_1 to sterilize the syringe_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "syringe_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_set_1 to loosen the tied stretcher_1 and then unfold it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "stretcher_1",
+          "is_loose": true
+        },
+        {
+          "id": "stretcher_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only malfunctioning defibrillator, repair it using the wrench_set_1, and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "is_on": true
+        },
+        {
+          "id": "defibrillator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the surgical_table_1 to the medical_triage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "surgical_table_1",
+          "location_id": "in:medical_triage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the storage_container_1 to the supply_depot.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_container_1",
+          "location_id": "in:supply_depot"
         }
       ]
     }

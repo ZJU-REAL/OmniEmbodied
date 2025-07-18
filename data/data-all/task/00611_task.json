@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the warped_wok_1 on the anvil_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "warped_wok_1",
+          "location_id": "on:anvil_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the hand_hammer_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hand_hammer_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, carbon steel wok and place it in the testing_seasoning_station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "high_end_wok_1",
+          "location_id": "in:testing_seasoning_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and place it on the steel_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_thickness_gauge_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the digital flatness scanner to verify the flatness of the cheap thin wok.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "cheap_thin_wok_1",
           "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to label the mystery wok with its material and condition.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mystery_wok_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial burner.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_burner_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the fire extinguisher alarm.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ventilation hood to the storage_inspection_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ventilation_hood_1",
+          "location_id": "in:storage_inspection_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel shelving unit to the forging_repair_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_unit_1",
+          "location_id": "in:forging_repair_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy industrial burner to the repair bay and verify its condition using the infrared thermometer.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_burner_1",
+          "location_id": "in:forging_repair_station"
+        },
+        {
+          "id": "industrial_burner_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the ventilation hood to the repair bay and mount it securely using the adjustable clamp set.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ventilation_hood_1",
+          "location_id": "in:forging_repair_station"
+        },
+        {
+          "id": "ventilation_hood_1",
+          "is_mounted": true
         }
       ]
     }

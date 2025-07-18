@@ -10,6 +10,16 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,124 @@
         {
           "id": "id_scanner_1",
           "location_id": "on:consultation_pod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the touchscreen_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "touchscreen_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black item with a green LED and place it on the reception_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "id_scanner_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the consultation_pod_1 and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "touchscreen_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to wipe the ultrasound_machine_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "ultrasound_machine_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the highest magnification and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the sperm_bank_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sperm_bank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the pgd_workstation_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pgd_workstation_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_nitrogen_dewar_1 to the embryo_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_dewar_1",
+          "location_id": "in:embryo_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the surgical_table_1 to the cryopreservation room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "surgical_table_1",
+          "location_id": "in:cryopreservation"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the laminar_flow_hood_1 to the oocyte_retrieval room and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "laminar_flow_hood_1",
+          "location_id": "in:oocyte_retrieval"
+        },
+        {
+          "id": "laminar_flow_hood_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the co2_incubator_1 to the cryopreservation room and ensure it is closed.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "co2_incubator_1",
+          "location_id": "in:cryopreservation"
+        },
+        {
+          "id": "co2_incubator_1",
+          "is_open": false
         }
       ]
     }

@@ -10,9 +10,59 @@
         2.0,
         2.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 50.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the siege_engine_blueprint_1 on the weapon_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "siege_engine_blueprint_1",
+          "location_id": "on:weapon_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the brass_spyglass_1 on the stone_pedestal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "brass_spyglass_1",
+          "location_id": "on:stone_pedestal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glowing blue item and place it on the war_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "enchanted_shield_1",
+          "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with a false bottom and place it on the alchemy_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "dragon_breath_flask_1",
+          "location_id": "on:alchemy_workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Open the dragon_breath_flask_1 using the scissors_1.",
       "task_category": "tool_use",
@@ -20,6 +70,98 @@
         {
           "id": "dragon_breath_flask_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the misaligned astrolabe_1 and place it on the stone_pedestal_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "astrolabe_1",
+          "is_loose": false
+        },
+        {
+          "id": "astrolabe_1",
+          "location_id": "on:stone_pedestal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the hand_pump_1 to pump the cauldron_1 and then place it on the alchemy_workbench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cauldron_1",
+          "is_pumped": true
+        },
+        {
+          "id": "cauldron_1",
+          "location_id": "on:alchemy_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lever_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the lever_2.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lever_2",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stone_altar_1 to the center of the vault_of_aslan.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stone_altar_1",
+          "location_id": "in:vault_of_aslan"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collapsed_pillar_1 to the armory_hall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collapsed_pillar_1",
+          "location_id": "in:armory_hall"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the enchanted_shield_1 to the vault_of_aslan and place it on the stone_altar_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "enchanted_shield_1",
+          "location_id": "on:stone_altar_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the war_table_1 to the alchemists_workshop and place the siege_engine_blueprint_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:alchemists_workshop"
+        },
+        {
+          "id": "siege_engine_blueprint_1",
+          "location_id": "on:war_table_1"
         }
       ]
     }

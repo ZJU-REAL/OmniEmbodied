@@ -10,15 +10,147 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the property_tax_reform_binder_1 on the wooden_credenza_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "property_tax_reform_binder_1",
+          "location_id": "on:wooden_credenza_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Activate the rotary_phone_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rotary_phone_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red binder and place it on the mahogany_executive_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "property_tax_reform_binder_1",
+          "location_id": "on:mahogany_executive_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the binder with the CONFIDENTIAL stamp and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "property_tax_reform_binder_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the keyring_1 to open the wooden_credenza_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "wooden_credenza_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyring_1 to open the locked_safe_1 and then place the manila_envelope_1 inside.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "locked_safe_1",
+          "is_open": true
+        },
+        {
+          "id": "manila_envelope_1",
+          "location_id": "in:locked_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the policy binder with the most recent version and open it using the desk_organizer_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "policy_binder_red_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the alarm on the mini_safe_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_safe_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mahogany_executive_desk_1 to the policy_research_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mahogany_executive_desk_1",
+          "location_id": "in:policy_research_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bookshelf_1 to the print_supply_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:print_supply_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the communal_table_1 to the lounge_coffee_nook and then erase the large_whiteboard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "communal_table_1",
+          "location_id": "in:lounge_coffee_nook"
+        },
+        {
+          "id": "large_whiteboard_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filing_cabinet_1 to the legislators_desk_area and then open it using the keyring_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:legislators_desk_area"
+        },
+        {
+          "id": "filing_cabinet_1",
           "is_open": true
         }
       ]

@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the playbook_binder_1 on the filing_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "playbook_binder_1",
+          "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the wall_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wall_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black playbook binder labeled '2024 Defensive Shifts – CONFIDENTIAL' and place it on the oval_strategy_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "playbook_binder_1",
+          "location_id": "on:oval_strategy_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the whiteboard with defensive diagrams and move it to the equipment_training_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:equipment_training_area"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken_bat_1 using the toolbox_1.",
       "task_category": "tool_use",
@@ -20,6 +70,90 @@
         {
           "id": "broken_bat_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_machine_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to repair the pitching_machine_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "pitching_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the digital tablet with low battery and charge it by placing it on the oval_strategy_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_tablet_1",
+          "location_id": "on:oval_strategy_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the ball_cleaning_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ball_cleaning_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the gear_trunk_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gear_trunk_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_bat_rack_1 to the bullpen_pitching_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_bat_rack_1",
+          "location_id": "in:bullpen_pitching_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the oval_strategy_table_1 to the player_locker_lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oval_strategy_table_1",
+          "location_id": "in:player_locker_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial ball cleaning machine to the equipment_training_area and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ball_cleaning_machine_1",
+          "location_id": "in:equipment_training_area"
+        },
+        {
+          "id": "ball_cleaning_machine_1",
+          "is_on": true
         }
       ]
     }

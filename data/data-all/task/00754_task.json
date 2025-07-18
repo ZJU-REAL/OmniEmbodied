@@ -10,9 +10,49 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the hidden_ledger_1 on the reserved_table_4.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hidden_ledger_1",
+          "location_id": "on:reserved_table_4"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the chefs_knife_1 in the knife_block_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "chefs_knife_1",
+          "location_id": "in:knife_block_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the main_dining_area and place it in the kitchen.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "booth_1",
+          "location_id": "in:kitchen"
+        }
+      ]
+    },
     {
       "task_description": "Unseal the olive_oil_crate_1 using the crowbar_1.",
       "task_category": "tool_use",
@@ -20,6 +60,74 @@
         {
           "id": "olive_oil_crate_1",
           "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the dusty, blue item in the wine_rack_1 and pour it into the waiters_tray_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chianti_1968_1",
+          "location_id": "in:waiters_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the floor_safe_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "floor_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mahogany_bar_1 to the private_back_alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mahogany_bar_1",
+          "location_id": "in:private_back_alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the jukebox_1 to the basement_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "jukebox_1",
+          "location_id": "in:basement_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the walk_in_fridge_1 to the private_back_alley and unseal the false_back_panel_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_fridge_1",
+          "location_id": "in:private_back_alley"
+        },
+        {
+          "id": "false_back_panel_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_stove_1 to the basement_storage and stop its running process.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_stove_1",
+          "location_id": "in:basement_storage"
+        },
+        {
+          "id": "industrial_stove_1",
+          "is_running": false
         }
       ]
     }

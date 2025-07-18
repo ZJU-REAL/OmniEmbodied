@@ -10,9 +10,59 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the usb_sata_adapter_1 on the diagnostic_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_sata_adapter_1",
+          "location_id": "on:diagnostic_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 on the break_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:break_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black ceramic mug with the inscription '#1 Sysadmin' and place it in the break_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sysadmin_mug_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red toolbox and place it on the diagnostic_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "on:diagnostic_workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken problem_server_1 using the toolbox_1.",
       "task_category": "tool_use",
@@ -20,6 +70,97 @@
         {
           "id": "problem_server_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Defrost the mini_fridge_1 using the defroster_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_set_1 to unscrew the raspberry_pi_1 and then repair it using the toolbox_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "raspberry_pi_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the Dell dual monitor setup that is off and turn it on using the power button.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dual_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_cabinet_1 using the cabinet_key_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the storage_spare_parts.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:storage_spare_parts"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked_cabinet_1 to the break_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:diagnostic_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the mini_fridge_1 to the diagnostic_workbench and defrost it using the defroster_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "location_id": "on:diagnostic_workbench_1",
+          "is_frosted": false
         }
       ]
     }

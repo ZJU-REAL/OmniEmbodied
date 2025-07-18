@@ -90,17 +90,9 @@ class CentralizedAgent(BaseAgent):
         self.task_description = task_description
 
     def _get_system_prompt(self) -> str:
-        """获取包含动态动作描述的系统提示词"""
-        # 获取动态动作描述（传入两个智能体ID列表）
-        actions_description = ""
-        if self.bridge:
-            actions_description = self.bridge.get_agent_supported_actions_description(self.managed_agent_ids)
-
-        # 如果获取到动作描述，则插入到系统提示词中
-        if actions_description:
-            return f"{self.base_system_prompt}\n\n{actions_description}"
-        else:
-            return self.base_system_prompt
+        """获取系统提示词（不包含动态动作描述）"""
+        # 直接返回基础系统提示词，动作信息将在user prompt中提供
+        return self.base_system_prompt
 
     def _get_environment_description(self) -> str:
         """获取环境描述，根据配置决定详细程度和更新频率"""
@@ -182,6 +174,23 @@ class CentralizedAgent(BaseAgent):
         
         return "\n".join(status_info)
 
+    def _get_available_actions_list(self) -> str:
+        """获取可用动作列表"""
+        try:
+            if not self.bridge:
+                return "Available actions information unavailable"
+
+            # 直接使用现有的API调用，它会返回两个智能体的完整动作描述
+            # 包括基础动作、智能体特定动作和协作动作
+            actions_description = self.bridge.get_agent_supported_actions_description(self.managed_agent_ids)
+            if actions_description:
+                return actions_description
+            else:
+                return "Actions information unavailable"
+        except Exception as e:
+            logger.warning(f"获取可用动作列表时出错: {e}")
+            return "Available actions information unavailable"
+
     def _parse_prompt(self) -> str:
         """构建提示词"""
         # 历史记录摘要
@@ -189,13 +198,22 @@ class CentralizedAgent(BaseAgent):
         if self.history:
             # 使用配置的历史长度，如果是无限制(-1)则使用所有历史
             max_display_entries = len(self.history) if self.max_chat_history is None else self.max_chat_history
-            history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_display_entries)
+
+            # 获取历史记录格式配置
+            history_format_config = self.config.get('history', {}).get('format', {})
+
+            history_summary = self.prompt_manager.format_history(
+                self.mode,
+                self.history,
+                max_entries=max_display_entries,
+                config=history_format_config
+            )
 
         # 获取环境描述（根据配置）
         env_description = self._get_environment_description()
-        
-        # 获取智能体状态
-        agents_status = self._get_agents_status()
+
+        # 获取可用动作列表
+        available_actions_list = self._get_available_actions_list()
 
         # 格式化提示词
         prompt = self.prompt_manager.get_formatted_prompt(
@@ -204,7 +222,7 @@ class CentralizedAgent(BaseAgent):
             task_description=self.task_description,
             history_summary=history_summary,
             environment_description=env_description,
-            agents_status=agents_status
+            available_actions_list=available_actions_list
         )
 
         return prompt
@@ -386,8 +404,11 @@ class CentralizedAgent(BaseAgent):
                 serialized_result['status'] = serialize_status(serialized_result['status'])
             serialized_results[agent_id] = serialized_result
 
+        # 构建动作字符串，显示两个智能体的具体动作
+        action_str = f"agent_1={actions.get('agent_1', 'UNKNOWN')}, agent_2={actions.get('agent_2', 'UNKNOWN')}"
+
         history_entry = {
-            'action': 'COORDINATE',
+            'action': action_str,  # 显示具体的智能体动作而不是'COORDINATE'
             'result': {
                 'status': serialize_status(overall_status),
                 'message': combined_message,

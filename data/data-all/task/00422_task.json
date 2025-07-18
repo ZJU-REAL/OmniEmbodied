@@ -1,0 +1,118 @@
+{
+  "task_background": "Prepare the Aquatic Research & Supply Depot for a routine inspection and restock.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 0.5,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 0.5,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the pending_order_clipboard_1 on the industrial_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pending_order_clipboard_1",
+          "location_id": "on:industrial_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the cash_register_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cash_register_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass display tank and place it in the backroom_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "plant_display_tank_1",
+          "location_id": "in:backroom_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the box_cutter_1 to disassemble the damaged_return_box_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "damaged_return_box_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hazard_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazard_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_rack_1 to the marine_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_rack_1",
+          "location_id": "in:marine_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the priority_shipment_pallet_1 to the retail_front.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "priority_shipment_pallet_1",
+          "location_id": "in:retail_front"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:marine_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigerator with the ajar door to the backroom_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": "in:backroom_storage"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00422"
+}

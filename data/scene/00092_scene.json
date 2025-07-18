@@ -1,456 +1,435 @@
 {
-  "description": "A cutting-edge neurochemistry research lab specializing in olfactory receptor studies, featuring a sterile experiment zone, cluttered chemical storage area, and participant observation room.",
+  "description": "A cluttered, transitional computer lab where technicians are migrating from an old UNIX-based authentication system to a new PAM-based infrastructure. The lab is frozen in a state of mid-upgrade—half legacy, half modern—with critical server racks, tangled cables, and scattered documentation.",
   "rooms": [
     {
-      "id": "main_lab",
-      "name": "Main Lab",
+      "id": "legacy_server_cluster",
+      "name": "Legacy Server Cluster",
       "properties": {
-        "type": "experiment_zone"
+        "type": "server_room"
       },
       "connected_to_room_ids": [
-        "chemical_storage",
-        "observation_room"
+        "pam_migration_workbench",
+        "documentation_archive",
+        "debug_station"
       ]
     },
     {
-      "id": "chemical_storage",
-      "name": "Chemical Storage & Prep Room",
+      "id": "pam_migration_workbench",
+      "name": "PAM Migration Workbench",
       "properties": {
-        "type": "storage_area"
+        "type": "workbench"
       },
       "connected_to_room_ids": [
-        "main_lab"
+        "legacy_server_cluster",
+        "documentation_archive",
+        "debug_station"
       ]
     },
     {
-      "id": "observation_room",
-      "name": "Participant Observation Room",
+      "id": "documentation_archive",
+      "name": "Documentation Archive",
       "properties": {
-        "type": "monitoring_room"
+        "type": "archive"
       },
       "connected_to_room_ids": [
-        "main_lab"
+        "legacy_server_cluster",
+        "pam_migration_workbench",
+        "debug_station"
+      ]
+    },
+    {
+      "id": "debug_station",
+      "name": "Debug Station",
+      "properties": {
+        "type": "desk"
+      },
+      "connected_to_room_ids": [
+        "legacy_server_cluster",
+        "pam_migration_workbench",
+        "documentation_archive"
       ]
     }
   ],
   "objects": [
     {
-      "id": "fume_hood_1",
-      "name": "Fume Hood",
+      "id": "mainframe_rack_1",
+      "name": "Mainframe Rack",
       "type": "FURNITURE",
-      "location_id": "in:main_lab",
+      "location_id": "in:legacy_server_cluster",
       "properties": {
         "size": [
           1.8,
-          0.9,
+          0.8,
           2.0
         ],
-        "weight": 90.0,
+        "weight": 300.0,
         "is_container": true,
-        "material": "stainless_steel",
-        "model_number": "FH-2000"
+        "material": "steel",
+        "model_number": "SPARC-3000"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "eeg_cart_1",
-      "name": "EEG Cart",
+      "id": "emergency_power_unit_1",
+      "name": "Emergency Power Unit",
       "type": "FURNITURE",
-      "location_id": "in:main_lab",
+      "location_id": "in:legacy_server_cluster",
       "properties": {
         "size": [
           0.8,
           0.6,
-          1.2
+          0.5
         ],
-        "weight": 45.0,
-        "is_container": true,
-        "material": "metal",
-        "wheels_locked": true
+        "weight": 90.0,
+        "is_container": false,
+        "brand": "APC",
+        "battery_level": 12
       },
       "states": {}
     },
     {
-      "id": "olfactory_dispenser_1",
-      "name": "Olfactory Dispenser Rig",
+      "id": "server_auth3_1",
+      "name": "Server #4 (Auth3)",
       "type": "FURNITURE",
-      "location_id": "in:main_lab",
+      "location_id": "in:mainframe_rack_1",
       "properties": {
         "size": [
           0.5,
-          0.5,
-          0.3
+          0.4,
+          0.7
         ],
-        "weight": 15.0,
+        "weight": 25.0,
         "is_container": false,
-        "material": "plastic",
-        "nozzles": 12
+        "status": "unstable",
+        "label": "DO NOT POWER OFF"
       },
       "states": {
         "is_active": true
       }
     },
     {
-      "id": "test_batch_7d_1",
-      "name": "Test Batch #7D",
+      "id": "serial_debug_cable_1",
+      "name": "Serial Debug Cable",
       "type": "ITEM",
-      "location_id": "on:fume_hood_1",
+      "location_id": "on:mainframe_rack_1",
       "properties": {
-        "weight": 0.5,
-        "material": "glass",
-        "volume": "250mL",
-        "frosted": true,
-        "label": "missing"
+        "weight": 0.3,
+        "color": "black",
+        "condition": "bent",
+        "connector_type": "RS-232"
       },
       "states": {}
     },
     {
-      "id": "test_batch_7c_1",
-      "name": "Test Batch #7C",
-      "type": "ITEM",
-      "location_id": "on:fume_hood_1",
-      "properties": {
-        "weight": 0.5,
-        "material": "glass",
-        "volume": "250mL",
-        "frosted": false,
-        "label": "smudged"
-      },
-      "states": {}
-    },
-    {
-      "id": "autoclave_1",
-      "name": "Autoclave",
+      "id": "network_switch_1",
+      "name": "Network Switch",
       "type": "FURNITURE",
-      "location_id": "in:main_lab",
+      "location_id": "in:legacy_server_cluster",
       "properties": {
         "size": [
-          0.6,
-          0.5,
-          0.7
-        ],
-        "weight": 60.0,
-        "is_container": true,
-        "capacity": "60L",
-        "display": "CYCLE COMPLETE – 12 MIN REMAIN"
-      },
-      "states": {}
-    },
-    {
-      "id": "microscope_1",
-      "name": "Microscope",
-      "type": "FURNITURE",
-      "location_id": "in:main_lab",
-      "properties": {
-        "size": [
+          0.4,
           0.3,
-          0.2,
-          0.4
+          0.1
         ],
         "weight": 5.0,
-        "is_container": true,
-        "brand": "Olympus",
-        "model": "CX43",
-        "eyepiece_smudged": true
+        "is_container": false,
+        "status": "erratic",
+        "brand": "Cisco"
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
     },
     {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_cluster",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "pressure": "green",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "y2k_certificate_1",
+      "name": "Y2K Compliance Certificate",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_cluster",
+      "properties": {
+        "weight": 1.5,
+        "frame_material": "wood",
+        "glass_condition": "cracked",
+        "year": 1999
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_mat_1",
+      "name": "Anti-Static Mat",
       "type": "FURNITURE",
-      "location_id": "in:main_lab",
+      "location_id": "in:pam_migration_workbench",
       "properties": {
         "size": [
           1.2,
-          0.9,
-          0.02
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "surface": "stained",
-        "marker_present": true
-      },
-      "states": {
-        "is_written_on": false
-      }
-    },
-    {
-      "id": "marker_1",
-      "name": "Black Vented Low-Odor Marker",
-      "type": "ITEM",
-      "location_id": "on:whiteboard_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "type": "vented",
-        "cap_status": "uncapped",
-        "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "flammables_cabinet_1",
-      "name": "Flammables Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:chemical_storage",
-      "properties": {
-        "size": [
           0.8,
-          0.6,
-          1.5
+          0.01
         ],
-        "weight": 200.0,
+        "weight": 2.0,
         "is_container": true,
-        "material": "steel",
-        "keypad_status": "LOCKED",
-        "door_gap": "3mm"
+        "color": "blue",
+        "condition": "cluttered"
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
     },
     {
-      "id": "prep_table_1",
-      "name": "Prep Table",
+      "id": "pam_server_prototype_1",
+      "name": "PAM Server Prototype",
       "type": "FURNITURE",
-      "location_id": "in:chemical_storage",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          0.9
-        ],
-        "weight": 50.0,
-        "is_container": true,
-        "surface": "epoxy-coated",
-        "engraving": "DO NOT USE FOR ACIDS"
-      },
-      "states": {}
-    },
-    {
-      "id": "isopropanol_drum_1",
-      "name": "Isopropanol Drum",
-      "type": "ITEM",
-      "location_id": "in:chemical_storage",
-      "properties": {
-        "weight": 27.0,
-        "material": "HDPE",
-        "volume": "30L",
-        "label_status": "partially_torn",
-        "leaking": true,
-        "cap_status": "cross-threaded"
-      },
-      "states": {}
-    },
-    {
-      "id": "calibration_weights_1",
-      "name": "Calibration Weights Set",
-      "type": "ITEM",
-      "location_id": "on:prep_table_1",
-      "properties": {
-        "weight": 1.0,
-        "material": "metal",
-        "count": 5,
-        "missing_weight": "100g",
-        "replacement": "foil_wrapper"
-      },
-      "states": {}
-    },
-    {
-      "id": "ph_meter_1",
-      "name": "pH Meter",
-      "type": "ITEM",
-      "location_id": "on:prep_table_1",
-      "properties": {
-        "weight": 0.8,
-        "probe_status": "submerged",
-        "solution_condition": "cloudy",
-        "provides_abilities": [
-          "verify"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "glassware_drying_rack_1",
-      "name": "Glassware Drying Rack",
-      "type": "FURNITURE",
-      "location_id": "in:chemical_storage",
+      "location_id": "on:anti_static_mat_1",
       "properties": {
         "size": [
           0.4,
           0.3,
           0.2
         ],
-        "weight": 2.0,
-        "is_container": true,
-        "beakers_intact": 3,
-        "beakers_cracked": 1
-      },
-      "states": {}
-    },
-    {
-      "id": "janitor_closet_sign_1",
-      "name": "Janitor's Closet Sign",
-      "type": "ITEM",
-      "location_id": "in:chemical_storage",
-      "properties": {
-        "weight": 0.2,
-        "material": "plastic",
-        "mislabeled": true,
-        "actual_destination": "electrical_panel"
-      },
-      "states": {}
-    },
-    {
-      "id": "moldy_coffee_cup_1",
-      "name": "Moldy Coffee Cup",
-      "type": "ITEM",
-      "location_id": "on:prep_table_1",
-      "properties": {
-        "weight": 0.3,
-        "current_use": "pen_holder",
-        "pens_condition": "dried_out"
-      },
-      "states": {}
-    },
-    {
-      "id": "eeg_chair_1",
-      "name": "EEG Chair",
-      "type": "FURNITURE",
-      "location_id": "in:observation_room",
-      "properties": {
-        "size": [
-          0.7,
-          0.7,
-          1.1
-        ],
-        "weight": 75.0,
+        "weight": 5.0,
         "is_container": false,
-        "material": "leather",
-        "restraint_status": "missing_spring"
+        "label": "TEST – PAM_DEBUG=1",
+        "status": "barebones"
       },
       "states": {}
     },
     {
-      "id": "server_rack_1",
-      "name": "Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:observation_room",
-      "properties": {
-        "size": [
-          0.6,
-          0.5,
-          1.8
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "led_status": "blinking",
-        "warning_sticker": "NEURAL DATA – DO NOT POWER OFF"
-      },
-      "states": {}
-    },
-    {
-      "id": "stimulus_logbook_1",
-      "name": "Stimulus Logbook",
+      "id": "usb_serial_adapter_1",
+      "name": "USB-to-Serial Adapter",
       "type": "ITEM",
-      "location_id": "on:server_rack_1",
-      "properties": {
-        "weight": 0.5,
-        "current_page": "TEST 7D – SUBJECT 22: NAUSEA REPORTED",
-        "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {
-        "is_written_on": false
-      }
-    },
-    {
-      "id": "emergency_stop_button_1",
-      "name": "Emergency Stop Button",
-      "type": "ITEM",
-      "location_id": "in:observation_room",
-      "properties": {
-        "weight": 0.4,
-        "cover_status": "jammed",
-        "provides_abilities": [
-          "deactivate"
-        ]
-      },
-      "states": {
-        "is_active": true
-      }
-    },
-    {
-      "id": "intercom_1",
-      "name": "Intercom",
-      "type": "ITEM",
-      "location_id": "in:observation_room",
-      "properties": {
-        "weight": 0.6,
-        "sound_status": "crackling",
-        "volume_dial": "stuck_at_40%",
-        "provides_abilities": [
-          "deactivate"
-        ]
-      },
-      "states": {
-        "is_active": true
-      }
-    },
-    {
-      "id": "wall_clock_1",
-      "name": "Wall Clock",
-      "type": "ITEM",
-      "location_id": "in:observation_room",
-      "properties": {
-        "weight": 0.7,
-        "battery_status": "dead",
-        "displayed_time": "3:47"
-      },
-      "states": {}
-    },
-    {
-      "id": "diploma_1",
-      "name": "Framed Diploma",
-      "type": "ITEM",
-      "location_id": "in:observation_room",
-      "properties": {
-        "weight": 1.0,
-        "university": "University of Copenhagen",
-        "year": "1998",
-        "glass_condition": "cracked"
-      },
-      "states": {}
-    },
-    {
-      "id": "stress_ball_1",
-      "name": "Dusty Stress Ball",
-      "type": "ITEM",
-      "location_id": "in:observation_room",
-      "properties": {
-        "weight": 0.2,
-        "condition": "dusty",
-        "location": "behind_server_rack"
-      },
-      "states": {}
-    },
-    {
-      "id": "fine_gauge_wire_1",
-      "name": "Fine-Gauge Wire Tool",
-      "type": "ITEM",
-      "location_id": "in:microscope_1",
+      "location_id": "on:anti_static_mat_1",
       "properties": {
         "weight": 0.1,
-        "purpose": "nozzle_clearing",
+        "packaging": "blister",
+        "brand": "FTDI",
+        "requires_tool": "scissors"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oscilloscope_1",
+      "name": "Oscilloscope",
+      "type": "FURNITURE",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 4.0,
+        "is_container": false,
+        "status": "noise",
+        "missing_parts": "probe clips"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.8,
+        "status": "out_of_tape",
+        "partial_label": "…ity_Backup",
+        "brand": "Brother"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo (2003)",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.2,
+        "condition": "faded",
+        "year": 2003,
+        "location": "under_keyboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "zip_disks_1",
+      "name": "Pile of Zip Disks",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.5,
+        "quantity": 5,
+        "label_status": "unlabeled",
+        "condition": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "binder_7_04_1",
+      "name": "Binder #7-04",
+      "type": "ITEM",
+      "location_id": "in:documentation_archive",
+      "properties": {
+        "weight": 2.0,
+        "label": "login.c patches (2004-05)",
+        "condition": "cracked_spine",
+        "damage": "coffee_ring_page_43"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "red_flash_drive_1",
+      "name": "Red Flash Drive",
+      "type": "ITEM",
+      "location_id": "in:documentation_archive",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "activity_light": "flickering",
+        "status": "corrupt"
+      },
+      "states": {}
+    },
+    {
+      "id": "bsd_plushie_1",
+      "name": "BSD Mascot Plushie",
+      "type": "ITEM",
+      "location_id": "in:documentation_archive",
+      "properties": {
+        "weight": 0.3,
+        "condition": "missing_eye",
+        "location": "between_binders"
+      },
+      "states": {}
+    },
+    {
+      "id": "calendar_2005_1",
+      "name": "Outdated Calendar (July 2005)",
+      "type": "ITEM",
+      "location_id": "in:documentation_archive",
+      "properties": {
+        "weight": 0.4,
+        "month": "July",
+        "year": 2005,
+        "status": "wrong_month"
+      },
+      "states": {}
+    },
+    {
+      "id": "debug_monitor_1",
+      "name": "Debug Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:debug_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "type": "CRT",
+        "content": "README_scrolling"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Sticky-Note-Covered Keyboard",
+      "type": "ITEM",
+      "location_id": "in:debug_station",
+      "properties": {
+        "weight": 1.2,
+        "condition": "sticky_notes",
+        "brand": "IBM",
+        "model": "Model_M"
+      },
+      "states": {}
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "in:debug_station",
+      "properties": {
+        "weight": 0.7,
+        "status": "off_hook",
+        "sound": "dial_tone",
+        "brand": "AT&T"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.2,
+        "type": "Phillips",
+        "size": "#2",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper Sheet",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.1,
+        "grit": "120",
+        "brand": "3M",
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:debug_station",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Canon",
+        "megapixels": 12,
+        "provides_abilities": [
+          "photograph",
+          "record_video"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Digital Multimeter",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Fluke",
+        "model": "87V",
         "provides_abilities": [
           "verify"
         ]
@@ -458,92 +437,121 @@
       "states": {}
     },
     {
-      "id": "lab_coat_1",
-      "name": "Lab Coat",
+      "id": "eraser_1",
+      "name": "Whiteboard Eraser",
       "type": "ITEM",
-      "location_id": "in:main_lab",
-      "properties": {
-        "weight": 0.5,
-        "pockets": [
-          "keycard"
-        ],
-        "provides_abilities": [
-          "cover"
-        ],
-        "is_container": true
-      },
-      "states": {
-        "is_covered": false,
-        "is_open": false
-      }
-    },
-    {
-      "id": "keycard_1",
-      "name": "Keycard",
-      "type": "ITEM",
-      "location_id": "in:lab_coat_1",
-      "properties": {
-        "weight": 0.05,
-        "access_level": "storage_cabinet"
-      },
-      "states": {}
-    },
-    {
-      "id": "spray_bottle_1",
-      "name": "Spray Bottle",
-      "type": "ITEM",
-      "location_id": "on:prep_table_1",
-      "properties": {
-        "weight": 0.3,
-        "contents": "isopropanol",
-        "provides_abilities": [
-          "spray"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "shredder_1",
-      "name": "Document Shredder",
-      "type": "FURNITURE",
-      "location_id": "in:chemical_storage",
-      "properties": {
-        "size": [
-          0.4,
-          0.3,
-          0.5
-        ],
-        "weight": 12.0,
-        "is_container": true,
-        "provides_abilities": [
-          "shred"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "confidential_document_1",
-      "name": "Confidential Document",
-      "type": "ITEM",
-      "location_id": "on:shredder_1",
+      "location_id": "in:debug_station",
       "properties": {
         "weight": 0.1,
-        "content": "sensitive",
-        "status": "intact"
+        "color": "white",
+        "condition": "used",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "granola_bar_1",
+      "name": "Half-Eaten Granola Bar",
+      "type": "ITEM",
+      "location_id": "on:anti_static_mat_1",
+      "properties": {
+        "weight": 0.05,
+        "flavor": "chocolate_chip",
+        "condition": "half_eaten"
       },
       "states": {
-        "is_shredded": false
+        "is_eaten": false
       }
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.15,
+        "material": "stainless_steel",
+        "size": "medium",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_1",
+      "name": "Utility Dolly",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_cluster",
+      "properties": {
+        "weight": 8.0,
+        "capacity": 150,
+        "wheels": 4,
+        "condition": "buried"
+      },
+      "states": {}
+    },
+    {
+      "id": "pliers_1",
+      "name": "Needle-Nose Pliers",
+      "type": "ITEM",
+      "location_id": "in:pam_migration_workbench",
+      "properties": {
+        "weight": 0.25,
+        "material": "steel",
+        "length": "6_inch",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:debug_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "PAM cutover deadline: 6:00 PM",
+        "condition": "marked"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:legacy_server_cluster",
+      "properties": {
+        "weight": 1.0,
+        "time": "4:53 PM",
+        "style": "analog",
+        "condition": "working"
+      },
+      "states": {}
     }
   ],
   "abilities": [
-    "cover",
     "deactivate",
+    "eat",
+    "erase",
     "open",
-    "shred",
-    "spray",
+    "photograph",
+    "record_video",
+    "sand",
+    "unscrew",
     "verify",
-    "write",
     "close"
   ]
 }

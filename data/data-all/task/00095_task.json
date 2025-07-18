@@ -1,0 +1,162 @@
+{
+  "task_background": "Prepare the R/V Challenger for docking by addressing critical system failures and securing all research equipment.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 in the chemical_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:chemical_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the field_notebooks_1 on the bunk_bed_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "field_notebooks_1",
+          "location_id": "on:bunk_bed_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the main_lab and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "titan_sampler_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with a cracked pressure gauge and move it to the engine_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "titan_sampler_1",
+          "location_id": "in:engine_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the microscope_1 using the 4mm_hex_key_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the centrifuge_1 using the calibration_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the 24-inch pipe wrench to twist the coolant_valve_v12_1 to the correct position.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_valve_v12_1",
+          "is_twisted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the diesel_generator_1 using the 24-inch pipe wrench.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diesel_generator_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the sample_freezer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sample_freezer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fuel_drum_1 to the sample_storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_drum_1",
+          "location_id": "in:sample_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the backup_generator_1 to the engine_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_generator_1",
+          "location_id": "in:engine_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy titan_sampler_1 to the engine_room and repair it using the calibration_tool_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "titan_sampler_1",
+          "location_id": "in:engine_room"
+        },
+        {
+          "id": "titan_sampler_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy workbench_1 to the crew_quarters and secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:crew_quarters"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00095"
+}

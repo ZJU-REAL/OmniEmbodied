@@ -1,0 +1,134 @@
+{
+  "task_background": "Prepare the EU Diplomatic Crisis Coordination Center for an emergency summit by ensuring all critical systems are operational and the environment is properly set up.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the EU Summit 2023 Mug on the workstation.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "eu_summit_mug_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the Central Holotable.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "holotable_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the main crisis floor and place it in the technical closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "holotable_1",
+          "location_id": "in:technical_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red toolbox in the technical closet and bring it to the main crisis floor.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "in:main_crisis_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to disassemble the server rack in the technical closet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only yellow lubricant in the archives and use it to adjust the projector in the secure comms room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "projector_1",
+          "is_adjusted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the archive cabinet in the archives.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "archive_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to stop the backup generator in the technical closet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_generator_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the main crisis floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_crisis_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the water jug to the break room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_jug_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy archive cabinet to the main crisis floor and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "archive_cabinet_1",
+          "location_id": "in:main_crisis_floor"
+        },
+        {
+          "id": "archive_cabinet_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00741"
+}

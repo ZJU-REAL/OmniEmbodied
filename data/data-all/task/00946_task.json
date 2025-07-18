@@ -10,9 +10,29 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
     {
       "task_description": "Place the red priority tray on workstation_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +40,100 @@
         {
           "id": "priority_tray_1",
           "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the filing cabinet to the print archive nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:print_archive_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server rack with blinking erratically LED to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:print_archive_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Place monitor_2 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_2",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with the label #T-4492-VIOLENT and place it in the priority tray.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "in:priority_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the 55-inch touchscreen on the hot desk.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "touchscreen_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to unwrap the potato chips in the snack shelf.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chips_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked evidence cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the whiteboard to the supervisor's office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:supervisors_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy battery backup to the server data vault and plug it in.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_backup_1",
+          "location_id": "in:server_data_vault"
+        },
+        {
+          "id": "battery_backup_1",
+          "is_plugged_in": true
         }
       ]
     }

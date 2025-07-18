@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coded_journal_1 on the bookshelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coded_journal_1",
+          "location_id": "on:bookshelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_cup_1 in the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal object on the steel_worktable_1 and place it in the equipment_storage.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,80 @@
         {
           "id": "specimen_case_1",
           "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only cracked, blue vial in the specimen_case_1 and place it on the steel_worktable_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "archon_blood_vial_1",
+          "location_id": "on:steel_worktable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open the locked specimen_case_1 using the biometric security.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "specimen_case_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only scribbled notepad hidden on the crt_monitors_1 and solve its puzzle.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "notepad_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the reinforced_door_1 in the secure_archive_vault.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy steel_worktable_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_worktable_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_1 to the main_research_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:main_research_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy fireproof_safe_1 to the secure_archive_vault and open it using the combination_lock.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_safe_1",
+          "location_id": "in:secure_archive_vault"
+        },
+        {
+          "id": "fireproof_safe_1",
+          "is_open": true
         }
       ]
     }

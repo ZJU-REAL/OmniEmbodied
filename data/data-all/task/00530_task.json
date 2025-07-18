@@ -1,0 +1,112 @@
+{
+  "task_background": "Prepare the military supply depot for an incoming shipment of classified equipment by organizing, repairing, and securing all necessary items.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the scanning_station_1 on the inspection_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "scanning_station_1",
+          "location_id": "on:inspection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the magnifying_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "magnifying_lamp_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the receiving_bay and place it on the conveyor_belt_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "inspection_table_1",
+          "location_id": "on:conveyor_belt_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver-colored item on the shipping_pallet_1 and place it in the main_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "silver_magazine_1",
+          "location_id": "in:main_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the blast_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blast_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_shelving_1 to the maintenance_testing room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_shelving_1",
+          "location_id": "in:maintenance_testing"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the weapon_test_rig_1 to the secure_vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapon_test_rig_1",
+          "location_id": "in:secure_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gold_gear_crate_1 to the secure_vault and use the keycard_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gold_gear_crate_1",
+          "location_id": "in:secure_vault"
+        },
+        {
+          "id": "gold_gear_crate_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00530"
+}

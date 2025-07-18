@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the vulcan_serum_vial_1 on the central_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vulcan_serum_vial_1",
+          "location_id": "on:central_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the silicon_organism_1 in the isolation_chamber_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "silicon_organism_1",
+          "location_id": "in:isolation_chamber_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue glass object labeled 'Project T'Kaal – DO NOT EXPOSE TO LIGHT' and place it in the secure_storage_vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vulcan_serum_vial_1",
+          "location_id": "in:secure_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black object in the secure_storage_vault and move it to the engineering_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "black_box_1",
+          "location_id": "in:engineering_bay"
+        }
+      ]
+    },
     {
       "task_description": "Use the sandpaper_1 to smooth the scratched central_workbench_1.",
       "task_category": "compound_reasoning",
@@ -16,6 +62,74 @@
         {
           "id": "central_workbench_1",
           "is_sanded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to mend the broken_viewscreen_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_viewscreen_1",
+          "is_mended": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the blast_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blast_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the warp_coil_assembly_1 to the maintenance_tunnels.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "warp_coil_assembly_1",
+          "location_id": "in:maintenance_tunnels"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryo_canister_a7_1 to the engineering_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_canister_a7_1",
+          "location_id": "in:engineering_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the autoclave_1 to the maintenance_tunnels and dry it using the towel_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:maintenance_tunnels"
+        },
+        {
+          "id": "autoclave_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the isolation_chamber_1 to the secure_storage_vault and decompress it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "isolation_chamber_1",
+          "location_id": "in:secure_storage_vault"
+        },
+        {
+          "id": "isolation_chamber_1",
+          "is_compressed": false
         }
       ]
     }

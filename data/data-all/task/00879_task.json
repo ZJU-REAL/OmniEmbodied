@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place vial_1 on sorting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vial_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the handheld barcode scanner on the workstation in the data verification terminal.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, plastic container and place it in the bio-storage room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_box_1",
+          "location_id": "in:bio_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "document_shredder_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Use the calibration wrench to sharpen the scanner arm.",
       "task_category": "tool_use",
@@ -20,6 +70,88 @@
         {
           "id": "scanner_arm_1",
           "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label marker to label the cracked glass vial.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vial_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner to scan the unverified specimen tray and then place it in the bio-storage room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unverified_tray_1",
+          "is_scanned": true,
+          "location_id": "in:bio_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the water spray to moisten the rusted hinges of the tool cabinet and then open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tool_cabinet_1",
+          "is_moist": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the security alarm panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel cart to the equipment bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_cart_1",
+          "location_id": "in:equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the portable freezer unit to the specimen intake area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "freezer_unit_1",
+          "location_id": "in:specimen_intake"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "document_shredder_1",
+          "location_id": "in:equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hazardous reagent case to the bio-storage room and then freeze its contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "reagent_case_1",
+          "location_id": "in:bio_storage",
+          "is_frozen": true
         }
       ]
     }

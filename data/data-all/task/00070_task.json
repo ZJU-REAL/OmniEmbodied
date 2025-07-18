@@ -10,9 +10,39 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 15.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the digital_scales_1 on the overhead_ingredient_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_scales_1",
+          "location_id": "on:overhead_ingredient_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the vanilla_extract_bottle_1 in the industrial_mixing_bowl_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vanilla_extract_bottle_1",
+          "location_id": "in:industrial_mixing_bowl_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, silver-colored item on the stainless_steel_workbench_1 and place it in the industrial_mixing_bowl_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,96 @@
         {
           "id": "offset_palette_knife_1",
           "location_id": "in:industrial_mixing_bowl_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a melted tip and place it on the marble_cooling_slab_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "silicone_spatula_1",
+          "location_id": "on:marble_cooling_slab_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the wobbly wire_cooling_rack_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wire_cooling_rack_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the serrated_knife_1 to unseal the vanilla_extract_bottle_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vanilla_extract_bottle_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the laser_thermometer_1 to scan the temperature of the industrial_oven_1 and turn it off if it exceeds 330°C.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "industrial_oven_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a chipped condition and use the broom_1 to sweep it into the industrial_mixing_bowl_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "glass_measuring_cup_1",
+          "location_id": "in:industrial_mixing_bowl_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the overhead_ingredient_shelf_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_ingredient_shelf_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stainless_steel_workbench_1 to the packaging_quality_control station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stainless_steel_workbench_1",
+          "location_id": "in:packaging_quality_control"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_oven_1 to the ingredient_prep_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_oven_1",
+          "location_id": "in:ingredient_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_mixing_bowl_1 to the chocolate_tempering_station and use the silicone_spatula_1 to knead its contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_mixing_bowl_1",
+          "location_id": "in:chocolate_tempering_station"
         }
       ]
     }

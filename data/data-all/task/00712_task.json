@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the radio_transmitter_1 on the server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_transmitter_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the cracked_mug_1 in the equipment_storage.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cracked_mug_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the command_console_1 and place it in the equipment_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver item in the telescope_dome and place it on the tool_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lens_coolant_tank_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the small_screwdriver_1 to open the manual_stack_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "manual_stack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_set_1 to disassemble the backup_generator_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "backup_generator_1",
+          "is_assembled": false
+        }
+      ]
+    },
     {
       "task_description": "Use the relief_valve_wrench_1 to disassemble the largest, steel object in the generator_room and move it to the equipment_storage.",
       "task_category": "compound_reasoning",
@@ -21,6 +91,82 @@
           "id": "backup_generator_1",
           "is_assembled": false,
           "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the small_screwdriver_1 to open the cracked_mug_1 and empty its contents into the equipment_storage.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cracked_mug_1",
+          "is_full": false
+        },
+        {
+          "id": "paperclips_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pull the emergency_shutoff_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutoff_1",
+          "is_pushed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the astro_calibration_terminal_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "astro_calibration_terminal_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the telescope_lens_cover_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "telescope_lens_cover_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fuel_drum_1 to the generator_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_drum_1",
+          "location_id": "in:generator_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heaviest, steel object in the telescope_dome to the equipment_storage and use the wrench_set_1 to disassemble it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "telescope_lens_cover_1",
+          "location_id": "in:equipment_storage",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 to the equipment_storage and use the small_screwdriver_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:equipment_storage",
+          "is_open": true
         }
       ]
     }

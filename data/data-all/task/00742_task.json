@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_cup_1 on the central_lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "on:central_lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the task_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "task_lamp_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the black microscope with 40x magnification and place it in the cold_storage.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,106 @@
         {
           "id": "microscope_1",
           "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the main_research_lab and place it in the data_hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spectroscopy_machine_1",
+          "location_id": "in:data_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to assemble the broken centrifuge.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fire_extinguisher_1 to extinguish the leaking nitrogen_tank_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "nitrogen_tank_1",
+          "is_alight": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spoon_1 to scoop the cryo-box_1 and place it in the industrial_freezer_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cryo_box_1",
+          "location_id": "in:industrial_freezer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keycard_1 to open the primate_enclosure_1 and place the escaped lab_rat_1 inside.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lab_rat_1",
+          "location_id": "in:primate_enclosure_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the industrial_freezer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_freezer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the primate_enclosure_1 to the main_research_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "primate_enclosure_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the cold_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy whiteboard covered in graphs to the animal_habitats.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:animal_habitats"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the malfunctioning temperature_panel_1 to the data_hub for diagnostics.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "temperature_panel_1",
+          "location_id": "in:data_hub"
         }
       ]
     }

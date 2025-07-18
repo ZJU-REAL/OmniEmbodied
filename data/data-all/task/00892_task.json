@@ -10,15 +10,163 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the field_data_tablet_1 on the seismic_monitoring_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "field_data_tablet_1",
+          "location_id": "on:seismic_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the basalt_core_samples_1 in the fume_hood_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "basalt_core_samples_1",
+          "location_id": "in:fume_hood_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the central_analysis_table_1 and place it in the equipment_storage_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_spectrometer_1",
+          "location_id": "in:equipment_storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the highest hazard_level in the sample_preparation_room and place it in the fume_hood_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "contaminated_sample_jar_1",
+          "location_id": "in:fume_hood_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_spectrometer_1 using the alignment_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_spectrometer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Tighten the leaking_valve_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leaking_valve_1",
+          "is_loose": false
+        }
+      ]
+    },
     {
       "task_description": "Use the label_marker_1 to label the contaminated_sample_jar_1.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "contaminated_sample_jar_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the decontamination_spray_1 and towel_1 to clean the ultrasonic_cleaner_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ultrasonic_cleaner_1",
+          "water_level": "clean"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to toggle the seismic_monitoring_station_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "seismic_monitoring_station_1",
+          "is_toggled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency_oxygen_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_oxygen_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the damaged_rock_coring_drill_1 to the observation_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "damaged_rock_coring_drill_1",
+          "location_id": "in:observation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the large_capacity_pump_1 to the equipment_storage_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "large_capacity_pump_1",
+          "location_id": "in:equipment_storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the partially_disassembled_spectrometer_1 to the sample_preparation_room and repair it using the alignment_tool_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "partially_disassembled_spectrometer_1",
+          "location_id": "in:sample_preparation_room"
+        },
+        {
+          "id": "partially_disassembled_spectrometer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the glovebox_1 to the equipment_storage_bay and label it using the label_marker_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_1",
+          "location_id": "in:equipment_storage_bay"
+        },
+        {
+          "id": "glovebox_1",
           "is_labeled": true
         }
       ]

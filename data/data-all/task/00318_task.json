@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the artifact_terminal_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "artifact_terminal_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the mug_1 in the specimen_lab.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mug_1",
+          "location_id": "in:specimen_lab"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest rock sample in the supply_shelf_1 and place it on the workbench_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,118 @@
         {
           "id": "rock_sample_1",
           "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black artifact in the excavation_chamber and place it in the specimen_lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laser_scanner_1",
+          "location_id": "in:specimen_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge_1 using the repair_tools_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the loose components of the portable_crane_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "portable_crane_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair_tools_1 to fix the cracked handle of the geologists_hammer_1 and then place it on the tool_pegboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "geologists_hammer_1",
+          "is_broken": false
+        },
+        {
+          "id": "geologists_hammer_1",
+          "location_id": "on:tool_pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the excavation_chamber and use the repair_tools_1 to fix it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "floodlight_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the specimen_crate_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_crate_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dinosaur_ribcage_1 to the specimen_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dinosaur_ribcage_1",
+          "location_id": "in:specimen_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the saber_tooth_skull_1 to the entrance_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "saber_tooth_skull_1",
+          "location_id": "in:entrance_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy specimen_locker_1 to the equipment_nook and use the repair_tools_1 to fix its door.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_locker_1",
+          "location_id": "in:equipment_nook"
+        },
+        {
+          "id": "specimen_locker_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy workbench_1 to the deep_cavern and use the wrench_1 to tighten its legs.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:deep_cavern"
+        },
+        {
+          "id": "workbench_1",
+          "is_loose": false
         }
       ]
     }

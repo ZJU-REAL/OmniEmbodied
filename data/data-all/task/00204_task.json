@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 15.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the USB dongle labeled 'FIREWALL_OVERRIDE' on the forensics workbench.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_dongle_1",
+          "location_id": "in:forensics_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the compromised server located in the mainframe rack.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "compromised_server_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item in the server cluster and place it on the tool cart.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_switch_panel_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the only black item in the compromised server and move it to the forensics workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_dongle_1",
+          "location_id": "in:forensics_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the hex wrenches to loosen the compromised server.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "compromised_server_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty notepad on the forensics workbench using the cleaning rag.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "notepad_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the thermal camera to check the pressure of the router with the blinking red LED and then place it in the evidence lockup.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,70 @@
         {
           "id": "router_1",
           "location_id": "in:evidence_lockup"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the server cluster, use the hex wrenches to open it, and then place it on the forensics workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mainframe_rack_1",
+          "is_open": true
+        },
+        {
+          "id": "mainframe_rack_1",
+          "location_id": "in:forensics_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the biometric safe in the evidence lockup.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overflowing bookshelves from the archives & noise zone to the evidence lockup.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelves_1",
+          "location_id": "in:evidence_lockup"
+        }
+      ]
+    },
+    {
+      "task_description": "Transport the mainframe rack from the server cluster to the collaboration hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mainframe_rack_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the archives & noise zone that is uniquely broken to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_printer_1",
+          "location_id": "in:server_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the heavy evidence shelving in the evidence lockup that contains the sealed jiffy bag to the forensics workbench.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_shelving_1",
+          "location_id": "in:forensics_workbench"
         }
       ]
     }

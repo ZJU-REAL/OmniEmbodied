@@ -1,0 +1,162 @@
+{
+  "task_background": "Prepare the Arctic Cryogenics Research Station for an important specimen transfer and ensure all equipment is operational.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": 1.0
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the microscope_station_1 on the sample_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "location_id": "on:sample_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the lab_notebook_1 in the file_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lab_notebook_1",
+          "location_id": "in:file_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the chemical vial with a handwritten label and place it in the cryo_freezer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_vial_3",
+          "location_id": "in:cryo_freezer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the lab_bench_1 and place it in the storage_depot.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "paperweight_1",
+          "location_id": "in:storage_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge_1 using the toolbox_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty snow_shovel_1 using the cleaning_rag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "snow_shovel_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defrost_kit_1 to thaw the frog_sample_tray_1 and then place it on the lab_bench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "frog_sample_tray_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the broken GPS tracker, repair it using the toolbox_1, and place it in the field_prep_room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "is_broken": false,
+          "location_id": "in:field_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the generator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_drawer_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_drawer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the transport_crate_1 to the main_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transport_crate_1",
+          "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryo_freezer_1 to the storage_depot.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_freezer_1",
+          "location_id": "in:storage_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy transport_crate_1 to the observation_deck and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "transport_crate_1",
+          "location_id": "in:observation_deck",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy lab_bench_1 to the living_quarters and sterilize it using the sterilizer_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_bench_1",
+          "location_id": "in:living_quarters"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00351"
+}

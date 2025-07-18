@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the motion_sickness_kit_1 on the rotating_chair_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "motion_sickness_kit_1",
+          "location_id": "on:rotating_chair_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the reflex_hammer_1 on the medical_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "reflex_hammer_1",
+          "location_id": "on:medical_monitor_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the medical_motion_lab and place it in the equipment_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rotating_chair_1",
+          "location_id": "in:equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, SoundSleep branded item in the medical_motion_lab and place it on the payload_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "white_noise_machine_1",
+          "location_id": "on:payload_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sealing_tool_1 to seal the sample_container_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sample_container_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque_driver_1 to assemble the helmet_display_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "helmet_display_1",
+          "is_assembled": true
+        }
+      ]
+    },
     {
       "task_description": "Use the tiller_1 to till the hydroponic_garden_1 and then place the seasoning_kit_1 on the payload_table_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,88 @@
         {
           "id": "seasoning_kit_1",
           "location_id": "on:payload_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the battery_tester_1 to assemble the thruster_trainer_1 and then place it on the mission_console_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "thruster_trainer_1",
+          "is_assembled": true
+        },
+        {
+          "id": "thruster_trainer_1",
+          "location_id": "on:mission_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to buckle the space_suit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "space_suit_1",
+          "is_buckled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to load the oxygen_tank_1 onto the harness_system_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "is_loaded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the space_suit_rack_1 to the microgravity_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "space_suit_rack_1",
+          "location_id": "in:microgravity_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the payload_table_1 to the crew_lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "payload_table_1",
+          "location_id": "in:crew_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rotating_chair_1 to the microgravity_chamber and use the torque_driver_1 to assemble the thruster_trainer_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rotating_chair_1",
+          "location_id": "in:microgravity_chamber"
+        },
+        {
+          "id": "thruster_trainer_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the medical_monitor_1 to the mission_control and unmute the microphone_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_monitor_1",
+          "location_id": "in:mission_control"
+        },
+        {
+          "id": "microphone_1",
+          "is_muted": false
         }
       ]
     }

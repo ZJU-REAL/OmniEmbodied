@@ -10,9 +10,59 @@
         60.0,
         80.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 25.0,
+      "max_size": [
+        200.0,
+        60.0,
+        80.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the defibrillator_1 on the triage_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "location_id": "on:triage_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the functional stretcher_3 to the emergency_treatment_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "stretcher_3",
+          "location_id": "in:emergency_treatment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, functional IV stand and place it next to the triage_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "iv_stand_1",
+          "location_id": ":iv_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the blue stimpack with the highest potency and place it on the triage_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stimpack_1",
+          "location_id": "on:triage_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Open the locked stimpack_dispenser_1 using the hidden_key_1.",
       "task_category": "tool_use",
@@ -20,6 +70,46 @@
         {
           "id": "stimpack_dispenser_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the coffee-stained field manual and use it to mute the flickering vitals_monitor_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "vitals_monitor_1",
+          "is_muted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy shelving_unit_1 to the equipment_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:equipment_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Transport the sealed biohazard specimen bag to the biohazard waste bin.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_bag_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy anesthesia machine to the emergency treatment bay and ensure it is functional.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "anesthesia_machine_1",
+          "location_id": "in:emergency_treatment_bay"
         }
       ]
     }

@@ -10,6 +10,16 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,76 @@
         {
           "id": "sample_vial_2",
           "location_id": "on:specimen_freezer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the microscope_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_2",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue sample vial labeled 'Control Sample' and place it in the specimen freezer.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_vial_2",
+          "location_id": "in:specimen_freezer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest microscope and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the security_terminal_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dissection_table_1 to the living_quarters.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "location_id": "in:living_quarters"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biohazard_crate_1 to the main_laboratory.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biohazard_crate_1",
+          "location_id": "in:main_laboratory"
         }
       ]
     }

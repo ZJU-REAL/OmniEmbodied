@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_camera_1 on the failed_experiments_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_camera_1",
+          "location_id": "on:failed_experiments_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the usb_hub_1 in the control_nook.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_hub_1",
+          "location_id": "in:control_nook"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, red item on the central_workbench_1 and place it in the break_area.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,94 @@
         {
           "id": "led_ornament_1",
           "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red item on the central_workbench_1 and place it on the tool_wall_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "led_ornament_1",
+          "location_id": "on:tool_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_set_1 to assemble the prototype_triggertrap_1 and then place it on the tool_wall_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "prototype_triggertrap_1",
+          "is_assembled": true
+        },
+        {
+          "id": "prototype_triggertrap_1",
+          "location_id": "on:tool_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering_iron_1 to assemble the circuit_board_1 and then place it in the equipment_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "circuit_board_1",
+          "is_assembled": true
+        },
+        {
+          "id": "circuit_board_1",
+          "location_id": "in:equipment_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the overhead_lighting_rail_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_lighting_rail_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the motorized_camera_slider_1 to the main_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motorized_camera_slider_1",
+          "location_id": "in:main_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the live_feed_monitors_1 to the control_nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "live_feed_monitors_1",
+          "location_id": "in:control_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_panels_1",
+          "location_id": "in:storage_fabrication"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy LED panels that are flickering to the testing_stage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_panels_1",
+          "location_id": "in:testing_stage"
         }
       ]
     }

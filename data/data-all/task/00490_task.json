@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the bricked_tablet_1 on the steel_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bricked_tablet_1",
+          "location_id": "on:steel_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the master_keyring_1 in the document_safe_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_keyring_1",
+          "location_id": "in:document_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, failing external HDD and place it in the storage closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_hdd_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB hub with the HIGH PRIORITY sticker and place it on the steel_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_hub_5",
+          "location_id": "on:steel_desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the sandpaper to sand the rusty key box.",
       "task_category": "tool_use",
@@ -16,6 +62,108 @@
         {
           "id": "key_box_1",
           "condition": "sanded"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner charger to scan the barcode on the barcode scanner.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver set to open the broken coffee maker and then place it on the workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_open": true
+        },
+        {
+          "id": "coffee_maker_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, failing USB hub and use the screwdriver set to open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_hub_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lower the sliding ladder.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sliding_ladder_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the vending machine.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the main repair bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:main_repair_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the storage closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy document safe to the IT administrator’s office and use the master keyring to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "document_safe_1",
+          "location_id": "in:it_admin_office"
+        },
+        {
+          "id": "document_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the emergency backup box to the main repair bay and use the sandpaper to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_backup_box_1",
+          "location_id": "in:main_repair_bay"
+        },
+        {
+          "id": "emergency_backup_box_1",
+          "is_open": true
         }
       ]
     }

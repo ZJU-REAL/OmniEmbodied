@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the micro-screwdriver set on the conveyor belt.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "micro_screwdriver_set_1",
+          "location_id": "on:conveyor_belt_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the QR code scanner.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "qr_code_scanner_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black item labeled 'CRITICAL – DO NOT BEND' and place it on the packaging table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ips_display_box_1",
+          "location_id": "on:packaging_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the faulty lithium battery and place it in the soundproof booth.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lithium_battery_3",
+          "location_id": "in:soundproof_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the micro-screwdriver set to replace the NFC chips in the unfinished phone.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "unfinished_phone_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to cut the foam inserts.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "foam_inserts_1",
+          "is_cut": true
+        }
+      ]
+    },
     {
       "task_description": "Use the dead pixel detector to scan the golden sample phone and then place it on the diagnostic workstation.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,80 @@
         {
           "id": "golden_sample_phone_1",
           "location_id": "on:diagnostic_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the cracked tool, use it to scan the unfinished phone, and then place the phone on the packaging table.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unfinished_phone_1",
+          "location_id": "on:packaging_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the soundproof booth.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soundproof_booth_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the labeling machine.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "labeling_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy steel shelving unit to the main assembly floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_shelving_unit_1",
+          "location_id": "in:main_assembly_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the motherboard tray to the quality assurance chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motherboard_tray_1",
+          "location_id": "in:quality_assurance_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the diagnostic workstation to the packaging station and use the audio calibration rig to scan the golden sample phone.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "diagnostic_workstation_1",
+          "location_id": "in:packaging_shipping_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the anti-static workbench to the component storage area and use the keycard to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "anti_static_workbench_1",
+          "location_id": "in:component_storage_prep"
+        },
+        {
+          "id": "anti_static_workbench_1",
+          "is_open": true
         }
       ]
     }

@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the primary_terminal_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "primary_terminal_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the server_rack_3.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black server rack and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to replace the spare_hard_drive_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spare_hard_drive_1",
+          "is_replaced": true
+        }
+      ]
+    },
     {
       "task_description": "Use the thermal_paste_1 to varnish the overheating server rack and turn it off.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,66 @@
         {
           "id": "server_rack_3",
           "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency_power_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_power_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the manual_reroute_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "manual_reroute_panel_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the UPS battery unit to the network closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_battery_unit_1",
+          "location_id": "in:network_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack tray to the cache storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_tray_1",
+          "location_id": "in:cache_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "location_id": "in:cache_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the clogged overhead cooling vent to the break room and clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_cooling_vent_1",
+          "location_id": "in:break_room"
         }
       ]
     }

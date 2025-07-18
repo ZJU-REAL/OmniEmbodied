@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the BusinessData Monitor Setup on the Dual Monitoring Desk.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_setup_2",
+          "location_id": "on:dual_monitoring_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Accounts Monitor Setup on the Dual Monitoring Desk.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_setup_1",
+          "location_id": "on:dual_monitoring_desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the red USB Keyboard and place it on the Dual Monitoring Desk.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,90 @@
         {
           "id": "keyboard_1",
           "location_id": "on:dual_monitoring_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white BusinessData Access Keycard and place it on the Dual Monitoring Desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "access_keycard_1",
+          "location_id": "on:dual_monitoring_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard to type the last entry in the BusinessData Logbook.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "logbook_1",
+          "is_typed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to cut the graffiti on the Diagnostic Terminal.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "graffiti_1",
+          "is_cut": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the BusinessData Vault Safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the Master Power Switch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "master_power_switch_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Coolant Tank to the BusinessData Vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "coolant_tank_1",
+          "location_id": "in:businessdata_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Cable Duct to the Maintenance Closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cable_duct_1",
+          "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Printer to the Maintenance Closet and fix the paper jam.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:maintenance_closet"
+        },
+        {
+          "id": "printer_1",
+          "is_open": false
         }
       ]
     }

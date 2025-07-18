@@ -6,15 +6,142 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the overturned_mug_1 on the hexagonal_command_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "overturned_mug_1",
+          "location_id": "on:hexagonal_command_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the led_display_matrix_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_display_matrix_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the equipment_maintenance_bay and place it on the heavy_duty_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "motorized_parts_cabinet_1",
+          "location_id": "on:heavy_duty_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red object in the central_command_room and place it in the field_operations_prep_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_incident_console_1",
+          "location_id": "in:field_operations_prep_area"
+        }
+      ]
+    },
     {
       "task_description": "Unlock the motorized_parts_cabinet_1 using the keycard_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "motorized_parts_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to assemble the rolling_step_stool_1 in the data_server_room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "rolling_step_stool_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the marker_1 to write on the whiteboard_1 in the field_operations_prep_area.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the emergency_signal_override_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_signal_override_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the crane_arm_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "crane_arm_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sealed_crate_1 to the field_operations_prep_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sealed_crate_1",
+          "location_id": "in:field_operations_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the equipment_maintenance_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:equipment_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy_duty_workbench_1 to the central_command_room and use the torque_wrench_1 to adjust it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_workbench_1",
+          "location_id": "in:central_command_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gear_locker_1 to the equipment_maintenance_bay and unlock it using the keycard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gear_locker_1",
+          "location_id": "in:equipment_maintenance_bay",
           "is_locked": false
         }
       ]

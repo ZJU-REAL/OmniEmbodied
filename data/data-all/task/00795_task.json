@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.5,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the work_order_clipboard_1 on the cluttered_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "work_order_clipboard_1",
+          "location_id": "in:client_consultation"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the radio_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the solvent bottle with the blue cap and handwritten label and place it in the tool_lockers.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "solvent_bottle_1",
+          "location_id": "in:tool_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item in the material_storage room and place it in the main_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_1",
+          "location_id": "in:main_bay"
+        }
+      ]
+    },
     {
       "task_description": "Use the toolbox_key_1 to open the tool_cabinet_1.",
       "task_category": "tool_use",
@@ -16,6 +62,66 @@
         {
           "id": "tool_cabinet_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the tint roll labeled as 70% Llumar Ceramic but actually 50% and place it in the humidity_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mislabeled_tint_roll_1",
+          "location_id": "in:material_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the pressure_washer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pressure_washer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the humidity_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "humidity_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_lift_1 to the detailing_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:detailing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the tint_film_dispenser_1 to the tool_lockers.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tint_film_dispenser_1",
+          "location_id": "in:tool_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the steel_shelving_1 to the main_bay and organize its contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_1",
+          "location_id": "in:main_bay"
         }
       ]
     }

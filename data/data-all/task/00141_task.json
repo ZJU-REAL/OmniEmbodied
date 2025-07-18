@@ -1,0 +1,124 @@
+{
+  "task_background": "Organize and prepare the warehouse for an incoming shipment by ensuring all items are correctly placed, repaired, and labeled.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the shipping_manifest_tablet_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "shipping_manifest_tablet_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the barcode_scanner_1 on the digital_scale_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:digital_scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item in the workshop and place it on the tool_pegboard_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fuel_can_1",
+          "location_id": "on:tool_pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item in the storage_aisle with a 'Do Not Ship' label and place it in the workshop.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "antique_clock_1",
+          "location_id": "in:workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_tool_1 to calibrate the digital_scale_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to mount the wire_cutters_1 on the tool_pegboard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wire_cutters_1",
+          "location_id": "on:tool_pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hydraulic_loading_ramp_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_loading_ramp_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pallet_stack_a_1 to the sorting_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_stack_a_1",
+          "location_id": "in:sorting_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collapsed_shelf_unit_d5_1 to the workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collapsed_shelf_unit_d5_1",
+          "location_id": "in:workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the oversized_crate_1 to the workshop and use the crowbar_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oversized_crate_1",
+          "location_id": "in:workshop"
+        },
+        {
+          "id": "oversized_crate_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00141"
+}

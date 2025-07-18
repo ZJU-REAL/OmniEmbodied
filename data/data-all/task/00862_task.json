@@ -10,9 +10,39 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place blood_vial_1 on specimen_counter_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blood_vial_1",
+          "location_id": "on:specimen_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the biohazard_slot_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biohazard_slot_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Find the blood sample with the highest priority and place it in the hematology_analyzer_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,116 @@
         {
           "id": "blood_vial_1",
           "location_id": "in:hematology_analyzer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the analyzer with a low pressure warning and stop its process.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hematology_analyzer_2",
+          "is_running": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode_scanner_1 to scan the blood_vial_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "blood_vial_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_fluid_1 to replace the expired iron_reagent_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "iron_reagent_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the digital timer with a 15_min countdown and deactivate it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_timer_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the sample rack adapter that is misaligned and replace it using the spare_cartridges_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_rack_adapter_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the blood_fridge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blood_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the sample_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sample_rack_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the specimen_counter_1 to the central_analyzer_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_counter_1",
+          "location_id": "in:central_analyzer_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the centrifuge_1 to the microscope_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:microscope_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hematology_analyzer_1 that is operational to the storage_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hematology_analyzer_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the digital_microscope_1 with a loose focus knob to the central_analyzer_station.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_microscope_1",
+          "location_id": "in:central_analyzer_station"
         }
       ]
     }

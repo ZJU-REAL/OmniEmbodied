@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place mercury_sample_dish_1 on the floor of the main_experiment_chamber.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mercury_sample_dish_1",
+          "location_id": "in:main_experiment_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the high_speed_camera_array_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "high_speed_camera_array_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the hexagonal, gray acoustic dampener panel and place it in the control_monitoring_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "acoustic_dampener_panel_1",
+          "location_id": "in:control_monitoring_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the glass mercury sample dish labeled 'Biohazard - Do Not Open' and place it in the material_prep_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mercury_sample_dish_1",
+          "location_id": "in:material_prep_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fire_extinguisher_1 to extinguish the beeping fume_hood_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_alight": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the mercury_purifier_1 to purify the mercury in mercury_vial_7.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mercury_vial_7",
+          "is_pure": true
+        }
+      ]
+    },
     {
       "task_description": "Use the formatting_tool_1 to format the server_rack_1 with the blinking red drive.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,56 @@
         {
           "id": "server_rack_1",
           "is_formatted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defrosting_spray_1 to defrost the refrigerated_safe_1 and then open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "refrigerated_safe_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency_shutter_release_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutter_release_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the teflon_resonance_platform_1 to the mechanical_maintenance_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "teflon_resonance_platform_1",
+          "location_id": "in:mechanical_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated_safe_1 to the main_experiment_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_safe_1",
+          "location_id": "in:main_experiment_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the dismantled_resonance_emitter_1 to the material_prep_storage and use the scraper_tool_1 to clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "dismantled_resonance_emitter_1",
+          "location_id": "in:material_prep_storage"
         }
       ]
     }

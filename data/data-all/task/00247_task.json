@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the landline_phone_1 on the executive_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "landline_phone_1",
+          "location_id": "on:executive_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 in the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on the conference_table_1 and place it in the burn_box_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,128 @@
         {
           "id": "legal_briefs_1",
           "location_id": "in:burn_box_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass item with a broken base and place it in the recycling_bin_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "snow_globe_1",
+          "location_id": "in:recycling_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the coffee_maker_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the air_pump_1 to repair the dolly_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dolly_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to unseal the client_waivers_box_1 and place it on the executive_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "client_waivers_box_1",
+          "is_sealed": false
+        },
+        {
+          "id": "client_waivers_box_1",
+          "location_id": "on:executive_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only paper item with a coffee stain and use the shredder_1 to pulverize it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "legal_briefs_1",
+          "is_pulverized": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the laser_printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_printer_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_filing_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the executive_desk_1 to the main_bullpen.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "executive_desk_1",
+          "location_id": "in:main_bullpen"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_1 to the document_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:document_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fridge_1 to the break_room and use the air_pump_1 to repair its door.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "fridge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the conference_table_1 to the main_bullpen and use the cleaning_rag_1 to clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:main_bullpen"
+        },
+        {
+          "id": "conference_table_1",
+          "is_dirty": false
         }
       ]
     }

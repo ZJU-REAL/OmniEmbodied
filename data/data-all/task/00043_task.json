@@ -10,9 +10,29 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 0.5,
+      "max_weight": 25.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place encrypted_laptop_1 on server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "encrypted_laptop_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
     {
       "task_description": "Place the black USB drive with a smooth surface on the lab bench.",
       "task_category": "attribute_reasoning",
@@ -20,6 +40,124 @@
         {
           "id": "usb_drive_1",
           "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration tool to calibrate the UV lamp that is not calibrated.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "uv_lamp_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the biometric safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_safe_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the forensic lab annex.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:forensic_lab_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy weapons case to the main operations room and unlock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_case_1",
+          "location_id": "in:main_operations_room"
+        },
+        {
+          "id": "weapons_case_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the water bottle on the conference table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "water_bottle_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black USB drive and place it in the waste bin.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_3",
+          "location_id": "in:waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty printer using the forensic cleaning kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the encrypted laptop to format the MicroSD card labeled DECAF.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microsd_card_1",
+          "is_formatted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the sealed evidence locker.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the holographic city map to the balcony overwatch position.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "holographic_map_1",
+          "location_id": "in:balcony_overwatch"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy conference table to the disguise & logistics closet and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:disguise_logistics_closet"
+        },
+        {
+          "id": "conference_table_1",
+          "is_open": false
         }
       ]
     }

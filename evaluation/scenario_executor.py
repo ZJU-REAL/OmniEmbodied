@@ -41,9 +41,15 @@ class ScenarioExecutor:
         # 初始化模拟器
         self.simulator = self._initialize_simulator()
         
-        # 创建轨迹记录器，根据智能体类型选择合适的模式
+        # 创建轨迹记录器，根据智能体架构正确设置类型
         agent_class = self.config.get('agent_config', {}).get('agent_class', '')
-        agent_type = "single" if 'single' in agent_class else "multi"
+        # 根据智能体架构正确设置类型
+        if 'centralized' in agent_class.lower():
+            agent_type = "multi"  # centralized是多智能体架构
+        elif 'single' in agent_class.lower():
+            agent_type = "single"  # single是单智能体架构
+        else:
+            agent_type = "single"  # 默认单智能体
         self.trajectory_recorder = TrajectoryRecorder(scenario_id, output_dir, agent_type)
         
         # 创建CSV记录器
@@ -341,50 +347,67 @@ class ScenarioExecutor:
 
         for exec_index, (original_index, task) in enumerate(tasks_to_execute):
             task_index = original_index + 1  # 使用原始任务索引（从1开始）
+            task_trajectory_recorder = None
 
             logger.info(f"🔄 Independent任务 {task_index} (筛选后第{exec_index + 1}/{len(tasks_to_execute)}个): {task.get('task_description', 'Unknown')[:50]}...")
 
-            # 重新初始化模拟器（全新环境）
-            self.simulator = self._initialize_simulator()
-
-            # 为每个独立任务创建独立的轨迹记录器，使用任务特定的scenario_id
-            from .trajectory_recorder import TrajectoryRecorder
-            task_scenario_id = f"{self.scenario_id}_task_{task_index:05d}"
-            task_trajectory_recorder = TrajectoryRecorder(
-                scenario_id=task_scenario_id,
-                output_dir=self.output_dir,
-                agent_type=agent_adapter.agent_type
-            )
-
-            # 重新创建智能体适配器（全新状态，使用独立的轨迹记录器）
-            fresh_agent_adapter = AgentAdapter(
-                agent_adapter.agent_type, self.config, self.simulator, task_trajectory_recorder
-            )
-
-            # 创建任务执行器（使用独立的轨迹记录器）
-            task_executor = TaskExecutor(self.simulator, fresh_agent_adapter, task_trajectory_recorder)
-
-            # 获取每个任务的最大步数配置
-            max_steps_per_task = self.config.get('execution', {}).get('max_steps_per_task', 50)
-
-            # 执行任务
-            task_result = task_executor.execute_task(task, task_index, max_steps_per_task)
-            task_results.append(task_result)
-
-            # 记录到CSV
             try:
-                self._record_task_to_csv(task_result)
-                logger.debug(f"📊 Independent任务 {task_index} 已记录到CSV")
-            except Exception as csv_error:
-                logger.error(f"❌ 记录Independent任务 {task_index} 到CSV失败: {csv_error}")
+                # 重新初始化模拟器（全新环境）
+                self.simulator = self._initialize_simulator()
 
-            # 立即保存当前任务的执行日志
-            self._save_single_task_execution_log(task_result, 'independent')
+                # 为每个独立任务创建独立的轨迹记录器，使用任务特定的scenario_id
+                from .trajectory_recorder import TrajectoryRecorder
+                task_scenario_id = f"{self.scenario_id}_task_{task_index:05d}"
+                task_trajectory_recorder = TrajectoryRecorder(
+                    scenario_id=task_scenario_id,
+                    output_dir=self.output_dir,
+                    agent_type=agent_adapter.agent_type
+                )
 
-            # Independent模式：只有模型输出DONE才继续下一个任务
-            if not task_result.get('model_claimed_done', False):
-                logger.warning(f"⚠️ 任务 {task_index} 模型未输出DONE，Independent模式停止执行后续任务")
-                break
+                # 重新创建智能体适配器（全新状态，使用独立的轨迹记录器）
+                fresh_agent_adapter = AgentAdapter(
+                    agent_adapter.agent_type, self.config, self.simulator, task_trajectory_recorder
+                )
+
+                # 创建任务执行器（使用独立的轨迹记录器）
+                task_executor = TaskExecutor(self.simulator, fresh_agent_adapter, task_trajectory_recorder)
+
+                # 获取每个任务的最大步数配置
+                max_steps_per_task = self.config.get('execution', {}).get('max_steps_per_task', 50)
+
+                # 执行任务
+                task_result = task_executor.execute_task(task, task_index, max_steps_per_task)
+                task_results.append(task_result)
+
+                # 记录到CSV
+                try:
+                    self._record_task_to_csv(task_result)
+                    logger.debug(f"📊 Independent任务 {task_index} 已记录到CSV")
+                except Exception as csv_error:
+                    logger.error(f"❌ 记录Independent任务 {task_index} 到CSV失败: {csv_error}")
+
+                # 立即保存当前任务的执行日志
+                self._save_single_task_execution_log(task_result, 'independent')
+
+                # Independent模式：只有模型输出DONE才继续下一个任务
+                if not task_result.get('model_claimed_done', False):
+                    logger.warning(f"⚠️ 任务 {task_index} 模型未输出DONE，Independent模式停止执行后续任务")
+                    break
+
+            except Exception as task_error:
+                logger.error(f"❌ 任务 {task_index} 执行失败: {task_error}")
+                raise
+            finally:
+                # 关键：无论成功还是失败，都要关闭轨迹记录器
+                if task_trajectory_recorder is not None:
+                    try:
+                        task_trajectory_recorder.close()
+                        logger.debug(f"✅ 任务 {task_index} 轨迹记录器已关闭")
+                    except Exception as close_error:
+                        logger.error(f"❌ 关闭任务 {task_index} 轨迹记录器失败: {close_error}")
+
+                    # 清理引用
+                    del task_trajectory_recorder
 
         return {
             'mode': 'independent',

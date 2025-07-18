@@ -34,6 +34,9 @@ class TrajectoryRecorder:
         self._action_step_counter = 0  # 动作步骤计数器
         self._qa_interaction_counter = 0  # QA交互计数器
 
+        # 关闭状态标记
+        self._closed = False
+
         # 文件路径
         self.trajectory_file = os.path.join(output_dir, f"trajectories/{scenario_id}_trajectory.json")
         self.qa_file = os.path.join(output_dir, f"llm_qa/{scenario_id}_llm_qa.json")
@@ -61,6 +64,10 @@ class TrajectoryRecorder:
                                agent_id: str = None) -> None:
         """记录动作执行 - 立即写入磁盘，支持单智能体和多智能体格式"""
         with self.lock:
+            # 在锁内检查关闭状态，避免竞态条件
+            if self._closed:
+                logger.warning(f"⚠️ 尝试在已关闭的轨迹记录器上记录: {self.scenario_id}")
+                return
             # 递增动作步骤计数器
             self._action_step_counter += 1
             actual_step = self._action_step_counter
@@ -73,13 +80,13 @@ class TrajectoryRecorder:
             else:
                 status_str = str(status)
 
-            # 检测智能体类型并构建相应的轨迹格式
-            if isinstance(result, dict) and 'coordination_details' in result:
-                # 多智能体（中心化）模式：为每个智能体生成独立记录
+            # 基于智能体架构类型构建相应的轨迹格式
+            if self.agent_type == "multi":
+                # 多智能体模式：为每个智能体生成独立记录
                 action_data_list = self._build_multi_agent_action_data(
                     actual_step, action, status_str, message, result, agent_id
                 )
-                logger.debug(f"📝 记录中心化多智能体轨迹: {len(action_data_list)} 个智能体记录")
+                logger.debug(f"📝 记录多智能体轨迹: {len(action_data_list)} 个智能体记录")
 
                 # 为每个智能体记录分别追加到轨迹文件
                 for action_data in action_data_list:
@@ -221,6 +228,10 @@ class TrajectoryRecorder:
                               extracted_action: str) -> None:
         """记录LLM交互 - 立即写入磁盘，根据智能体类型使用不同格式"""
         with self.lock:
+            # 在锁内检查关闭状态，避免竞态条件
+            if self._closed:
+                logger.warning(f"⚠️ 尝试在已关闭的轨迹记录器上记录LLM交互: {self.scenario_id}")
+                return
             if self.agent_type == "single":
                 # 单智能体：使用传入的interaction_index，保持原有行为
                 actual_interaction_index = interaction_index if interaction_index > 0 else (self._qa_interaction_counter + 1)
@@ -274,6 +285,10 @@ class TrajectoryRecorder:
     def record_task_completion(self, task_index: int, step: int) -> None:
         """记录任务完成状态 - 立即写入磁盘"""
         with self.lock:
+            # 在锁内检查关闭状态，避免竞态条件
+            if self._closed:
+                logger.warning(f"⚠️ 尝试在已关闭的轨迹记录器上记录任务完成: {self.scenario_id}")
+                return
             completion_data = {
                 "subtask_index": task_index,
                 "completed_at": step
@@ -300,7 +315,48 @@ class TrajectoryRecorder:
                     os.remove(temp_file)
                 logger.error(f"保存执行日志失败: {e}")
                 raise
-    
+
+    def close(self):
+        """关闭记录器：强制保存数据并清理内存"""
+        if self._closed:
+            return  # 避免重复关闭
+
+        with self.lock:
+            try:
+                # 标记为已关闭（在保存之前，避免新的记录请求）
+                self._closed = True
+
+                # 1. 强制保存轨迹数据（即使没有新数据，也确保文件存在）
+                trajectory_data = self._load_trajectory_data()
+                if trajectory_data:
+                    self._save_trajectory_immediately(trajectory_data)
+                    logger.debug(f"💾 轨迹数据已强制保存: {self.scenario_id}")
+                else:
+                    logger.debug(f"📝 轨迹记录器关闭时无数据需要保存: {self.scenario_id}")
+
+                # 2. 强制保存QA数据
+                qa_data = self._load_qa_data()
+                if qa_data:
+                    self._save_qa_immediately(qa_data)
+                    logger.debug(f"💾 QA数据已强制保存: {self.scenario_id}")
+
+                logger.debug(f"📝 轨迹记录器已关闭: {self.scenario_id}")
+
+            except Exception as e:
+                logger.error(f"❌ 关闭轨迹记录器失败: {e}")
+                # 即使保存失败，也要标记为已关闭
+                self._closed = True
+                raise
+
+    def __del__(self):
+        """析构函数 - 确保数据不丢失"""
+        if not self._closed:
+            logger.warning(f"⚠️ 轨迹记录器未正确关闭，执行紧急保存: {self.scenario_id}")
+            try:
+                self.close()
+            except Exception as e:
+                logger.error(f"❌ 析构时保存失败: {e}")
+
     def _append_to_trajectory(self, task_index: int, action_data: Dict[str, Any]):
         """追加动作到轨迹文件"""
         # 读取现有轨迹数据

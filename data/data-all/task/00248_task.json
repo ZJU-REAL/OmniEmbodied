@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the banned_soda_cups_1 in the locked_case_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "banned_soda_cups_1",
+          "location_id": "in:locked_case_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_machine_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the retail_simulation_room and place it on the checkout_counter_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "location_id": "on:checkout_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a 'GOVT-APPROVED' label and place it in the retail_simulation_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "compliant_mini_cups_1",
+          "location_id": "in:retail_simulation_room"
+        }
+      ]
+    },
     {
       "task_description": "Use the saw to cut the legal_reference_books_1.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "legal_reference_books_1",
           "is_sawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the water_source_1 to rinse the chemical_bottles_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chemical_bottles_1",
+          "is_rinsed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a 'plugged_in' status and save its data.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_saved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the secure_server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "secure_server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the alarm_system_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_system_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_shelving_unit_1 to the policy_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_shelving_unit_1",
+          "location_id": "in:policy_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_monitor_wall_1 to the reaction_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_monitor_wall_1",
+          "location_id": "in:reaction_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the 3D printer to the data_hub and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "d_printer_1",
+          "location_id": "in:data_hub"
+        },
+        {
+          "id": "d_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the robotic_civilians_1 to the retail_simulation_room and unpack them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_civilians_1",
+          "location_id": "in:retail_simulation_room"
+        },
+        {
+          "id": "robotic_civilians_1",
+          "is_packed": false
         }
       ]
     }

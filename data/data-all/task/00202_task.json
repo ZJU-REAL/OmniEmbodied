@@ -6,9 +6,35 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the migration_terminal_1 on the dashboard_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "migration_terminal_1",
+          "location_id": "on:dashboard_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the debugging_toolkit_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "debugging_toolkit_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the pristine debugging USB and place it on the command_desk_1.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,114 @@
         {
           "id": "usb_2",
           "location_id": "on:command_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the command_desk_1 and place it in the storage_cabinet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "migration_terminal_1",
+          "location_id": "in:storage_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to disassemble the toolbox_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal_scanner_1 to deactivate the drive_array_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drive_array_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black debugging USB with the scratched label and use it to uninstall the coffee_machine_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_installed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the server_farm_annex and use the screwdriver_1 to open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the backup_drive_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_drive_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dashboard_wall_1 to the storage_logistics_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dashboard_wall_1",
+          "location_id": "in:storage_logistics_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the developer_workbenches.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:developer_workbenches"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the backup_drive_1 to the server_farm_annex and use the thermal_scanner_1 to deactivate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_drive_1",
+          "location_id": "in:server_farm_annex"
+        },
+        {
+          "id": "backup_drive_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the command_desk_1 to the break_room and unplug the headset_charger_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "command_desk_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "headset_charger_1",
+          "is_plugged_in": false
         }
       ]
     }

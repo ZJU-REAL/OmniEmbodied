@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place lenovo_tablet_1 on anti_static_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lenovo_tablet_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place lenovo_tablet_2 in hazardous_materials_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lenovo_tablet_2",
+          "location_id": "in:hazardous_materials_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black Lenovo IdeaPad A1 Tablet with a cracked screen and place it on the anti-static workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lenovo_tablet_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the Lenovo IdeaPad A1 Tablet with a blue warranty sticker and place it in the hazardous materials bin.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lenovo_tablet_2",
+          "location_id": "in:hazardous_materials_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner to scan lenovo_tablet_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "lenovo_tablet_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to wrap oem_cables_box_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "oem_cables_box_1",
+          "is_wrapped": true
+        }
+      ]
+    },
     {
       "task_description": "Use the digital multimeter to check the continuity of lenovo_tablet_3 and then place it on the packing station.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,80 @@
         {
           "id": "lenovo_tablet_3",
           "location_id": "on:packing_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering station to repair the microscope's misaligned focus knob and then place it on the tool cart.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the fume extractor.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_extractor_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the reinforced steel rolling cart to the diagnostic and repair station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_rolling_cart_1",
+          "location_id": "in:diagnostic_repair_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial metal shelving to the shipping and quality control area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:shipping_quality_control"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy microscope to the packing station and wrap it with bubble wrap.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:packing_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy tool cart to the storage and parts inventory and lock the cabinet.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "location_id": "in:storage_parts_inventory"
+        },
+        {
+          "id": "locked_cabinet_1",
+          "is_locked": true
         }
       ]
     }

@@ -1,0 +1,774 @@
+{
+  "description": "A chaotic backstage area of a teen reality TV set, divided into four zones: Green Room, Props & Wardrobe Storage, Control Booth, and Stage Adjacent area. The scene is cluttered with equipment, props, and personal items, requiring multi-agent coordination for tasks like moving heavy equipment, repairing props, and managing last-minute crises.",
+  "rooms": [
+    {
+      "id": "green_room",
+      "name": "Green Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "props_storage",
+        "control_booth"
+      ]
+    },
+    {
+      "id": "props_storage",
+      "name": "Props & Wardrobe Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "green_room",
+        "stage_adjacent"
+      ]
+    },
+    {
+      "id": "control_booth",
+      "name": "Control Booth",
+      "properties": {
+        "type": "production"
+      },
+      "connected_to_room_ids": [
+        "green_room",
+        "stage_adjacent"
+      ]
+    },
+    {
+      "id": "stage_adjacent",
+      "name": "Stage Adjacent",
+      "properties": {
+        "type": "transition"
+      },
+      "connected_to_room_ids": [
+        "props_storage",
+        "control_booth"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "velvet_couch_1",
+      "name": "Worn-out Velvet Couch",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.7
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "velvet",
+        "color": "burgundy",
+        "condition": "stained"
+      },
+      "states": {
+        "is_plastered": false
+      }
+    },
+    {
+      "id": "makeup_vanity_1",
+      "name": "Makeup Vanity",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "white",
+        "lighting": "Hollywood-style bulbs"
+      },
+      "states": {}
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "brand": "Igloo",
+        "condition": "broken hinge"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "script_binder_1",
+      "name": "Script Binder",
+      "type": "ITEM",
+      "location_id": "on:velvet_couch_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "label": "REVISED FINAL DRAFT 9/17",
+        "condition": "dog-eared"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tabloid_magazine_1",
+      "name": "Tabloid Magazine",
+      "type": "ITEM",
+      "location_id": "on:velvet_couch_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "multicolor",
+        "title": "Teen Mom Bong Scandal",
+        "condition": "open"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "personal_safe_1",
+      "name": "Personal Safe",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "brand": "SentrySafe",
+        "lock_type": "4-digit code"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "Mr. Coffee",
+        "condition": "out of order"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:makeup_vanity_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "beige",
+        "brand": "AT&T",
+        "condition": "off-hook"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "wardrobe_rack_1",
+      "name": "Rolling Wardrobe Rack",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "tangled hanger"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_plant_1",
+      "name": "Dying Potted Plant",
+      "type": "ITEM",
+      "location_id": "on:makeup_vanity_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "type": "fern",
+        "condition": "dying"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Graffiti-covered Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:green_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          1.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "cork",
+        "condition": "graffiti-covered"
+      },
+      "states": {}
+    },
+    {
+      "id": "gossip_magazines_1",
+      "name": "Stack of Gossip Magazines",
+      "type": "ITEM",
+      "location_id": "on:velvet_couch_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "multicolor",
+        "condition": "stacked",
+        "note": "DO NOT SHOW CAST"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:props_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "label": "Glassware – Fragile!"
+      },
+      "states": {}
+    },
+    {
+      "id": "wardrobe_rack_2",
+      "name": "Large Rolling Wardrobe Rack",
+      "type": "FURNITURE",
+      "location_id": "in:props_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "jammed wheels"
+      },
+      "states": {}
+    },
+    {
+      "id": "bong_prop_1",
+      "name": "Broken Bong Prop",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "glass",
+        "condition": "cracked at base"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "script_revision_1",
+      "name": "Misplaced Script Revision",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "condition": "stuck between bins"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "costume_trunk_1",
+      "name": "Locked Costume Trunk",
+      "type": "FURNITURE",
+      "location_id": "in:props_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "key missing"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "contents": "screwdrivers, pliers, duct tape",
+        "provides_abilities": [
+          "assemble",
+          "cut"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Brother",
+        "condition": "low on tape",
+        "last_label": "DO NOT TOUCH"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "shoe_boxes_1",
+      "name": "Leaning Tower of Shoe Boxes",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 3.0,
+        "color": "various",
+        "condition": "about to topple"
+      },
+      "states": {
+        "is_loaded": true
+      }
+    },
+    {
+      "id": "mannequin_torso_1",
+      "name": "Dusty Mannequin Torso",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 4.0,
+        "color": "white",
+        "condition": "missing an arm"
+      },
+      "states": {
+        "is_dusted": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Half-empty Water Bottle",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "condition": "condensation rings"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "extension_cord_1",
+      "name": "Frayed Extension Cord",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "condition": "frayed",
+        "length": "10 feet"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "control_desk_1",
+      "name": "Large Control Desk",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "covered in monitors"
+      },
+      "states": {}
+    },
+    {
+      "id": "swivel_chair_1",
+      "name": "Swivel Chair",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "leather",
+        "condition": "squeaky wheels"
+      },
+      "states": {}
+    },
+    {
+      "id": "audio_mixer_1",
+      "name": "Malfunctioning Audio Mixer",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Yamaha",
+        "condition": "feedback screech"
+      },
+      "states": {
+        "is_tuned": false
+      }
+    },
+    {
+      "id": "sd_card_1",
+      "name": "Critical SD Card",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "label": "EPISODE 9 MASTER",
+        "condition": "left on edge"
+      },
+      "states": {
+        "is_saved": false
+      }
+    },
+    {
+      "id": "emergency_phone_1",
+      "name": "Red Emergency Phone",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "red",
+        "brand": "Panasonic",
+        "condition": "direct line to stage manager"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "HP",
+        "condition": "out of paper"
+      },
+      "states": {
+        "is_loaded": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "melamine",
+        "condition": "scribbled with changes"
+      },
+      "states": {}
+    },
+    {
+      "id": "donut_1",
+      "name": "Half-eaten Donut",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "pink",
+        "flavor": "frosted",
+        "condition": "half-eaten"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "coffee_stain_1",
+      "name": "Coffee Stain",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.0,
+        "color": "brown",
+        "shape": "continent",
+        "condition": "dried"
+      },
+      "states": {
+        "is_moist": false
+      }
+    },
+    {
+      "id": "quiet_sign_1",
+      "name": "Peeling Quiet on Set Sign",
+      "type": "ITEM",
+      "location_id": "in:control_booth",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic",
+        "condition": "peeling"
+      },
+      "states": {
+        "is_plastered": false
+      }
+    },
+    {
+      "id": "vhs_tapes_1",
+      "name": "Stack of Old VHS Tapes",
+      "type": "ITEM",
+      "location_id": "in:control_booth",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "label": "ARCHIVE – DO NOT ERASE",
+        "condition": "stacked"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "trowel_1",
+      "name": "Trowel",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:control_booth",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Zebra",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "watering_can_1",
+      "name": "Watering Can",
+      "type": "ITEM",
+      "location_id": "in:props_storage",
+      "properties": {
+        "weight": 1.0,
+        "color": "green",
+        "material": "metal",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "key_1",
+      "name": "Safe Key",
+      "type": "ITEM",
+      "location_id": "in:personal_safe_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "Xerox",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tuner_1",
+      "name": "Instrument Tuner",
+      "type": "ITEM",
+      "location_id": "in:control_booth",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Korg",
+        "provides_abilities": [
+          "tune_instrument"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "FURNITURE",
+      "location_id": "in:control_booth",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "plastic",
+        "brand": "Linksys",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "close",
+    "copy",
+    "copy_file",
+    "cut",
+    "download",
+    "empty",
+    "lock",
+    "open",
+    "plaster",
+    "save",
+    "scan_barcode",
+    "stop_playback",
+    "tune_instrument",
+    "unload",
+    "untie",
+    "water"
+  ]
+}

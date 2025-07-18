@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the black ledger on the conference table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "black_ledger_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the projector in the war room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "projector_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on the conference table and place it in the vault.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "label_printer_1",
           "location_id": "in:vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver-colored, metal item in the conference table and uncover it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_hard_drive_1",
+          "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the carving knife to carve the stress ball.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "stress_ball_1",
+          "is_carved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale to weigh the uncashed checks envelope.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "uncashed_checks_1",
+          "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the war room and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "projector_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the decryption key to uncover the encrypted hard drive.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_hard_drive_1",
+          "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fireproof safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the biometric lock panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_lock_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel-framed conference table to the analyst pit.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:analyst_pit"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-gauge steel shelving to the war room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_1",
+          "location_id": "in:war_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the jam-prone photocopier to the vault and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:vault"
+        },
+        {
+          "id": "photocopier_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the document shredder to the analyst pit and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "document_shredder_1",
+          "location_id": "in:analyst_pit"
+        },
+        {
+          "id": "document_shredder_1",
+          "is_on": true
         }
       ]
     }

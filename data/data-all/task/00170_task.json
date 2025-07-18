@@ -10,9 +10,79 @@
         200,
         200
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        200,
+        200,
+        200
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place dash_winningham_bat_1 on central_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dash_winningham_bat_1",
+          "location_id": "on:central_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blood-stained compression sleeve in the industrial washer.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blood_stained_sleeve_1",
+          "location_id": "in:industrial_washer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the main locker room and place it in the equipment maintenance bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "player_locker_1",
+          "location_id": "in:equipment_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the cracked maple bat and place it on the bat lathe station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cracked_maple_bat_1",
+          "location_id": "on:bat_lathe_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the cracked maple bat using the epoxy and clamp.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cracked_maple_bat_1",
+          "is_cracked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Disconnect the hydraulic pitching machine using the calibration wrench.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hydraulic_pitching_machine_1",
+          "is_connected": false
+        }
+      ]
+    },
     {
       "task_description": "Use the epoxy to repair the cracked framed team photo and place it on the metal desk.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,50 @@
         {
           "id": "framed_photo_1",
           "location_id": "on:metal_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked filing cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the equipment cart to the laundry cleaning station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "equipment_cart_1",
+          "location_id": "in:laundry_cleaning_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic pitching machine to the main locker room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_pitching_machine_1",
+          "location_id": "in:main_locker_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial washer to the equipment maintenance bay and disconnect it using the calibration wrench.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_washer_1",
+          "location_id": "in:equipment_maintenance_bay"
+        },
+        {
+          "id": "industrial_washer_1",
+          "is_connected": false
         }
       ]
     }

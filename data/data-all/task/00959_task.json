@@ -10,15 +10,157 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the digital check-in tablet (check_in_tablet_1) on the sorting table 1 (sorting_table_1).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "check_in_tablet_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the handheld barcode scanner (barcode_scanner_1) in the storage room (storage_room).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal sorting table and place the label printer (label_printer_1) on it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red, plastic container and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_bin_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the glue dispenser (glue_dispenser_1) to fix the wobbly leg of the folding table (folding_table_1).",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "folding_table_1",
+          "is_glued": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench (wrench_1) to tighten the squeaky wheel of the rolling cart (rolling_cart_1).",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "rolling_cart_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the whisk (whisk_1) to whisk the coffee in the coffee pot (coffee_pot_1) and then place it on the folding table (folding_table_1).",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_pot_1",
+          "is_whisked": true
+        },
+        {
+          "id": "coffee_pot_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the broom (broom_1) to sweep the sorting area (sorting_area) and then place the broom in the storage room (storage_room).",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broom_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked supply cabinet (supply_cabinet_1) using the silver key (cabinet_key_1).",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial metal shelving (metal_shelving_1) to the sorting area (sorting_area).",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_1",
+          "location_id": "in:sorting_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overloaded garment rack (garment_rack_1) to the storage room (storage_room).",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "garment_rack_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, rusted metal shelving (metal_shelving_1) to the sorting area (sorting_area) and use the wrench (wrench_1) to tighten any loose parts.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_1",
+          "location_id": "in:sorting_area"
+        },
+        {
+          "id": "metal_shelving_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, unstable garment rack (garment_rack_1) to the storage room (storage_room) and use the glue dispenser (glue_dispenser_1) to stabilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "garment_rack_1",
+          "location_id": "in:storage_room"
+        },
+        {
+          "id": "garment_rack_1",
           "is_glued": true
         }
       ]

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the vintage_cash_register_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vintage_cash_register_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the decoy_phone_1 on the main_counter_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "decoy_phone_1",
+          "location_id": "on:main_counter_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on the surveillance_desk_1 and place it on the packing_station_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,112 @@
         {
           "id": "monitor_1",
           "location_id": "on:packing_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a biometric_scanner and place it on the component_bins_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encryption_key_burner_1",
+          "location_id": "on:component_bins_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wire_cutters_1 to dull the screwdriver_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "screwdriver_1",
+          "is_sharp": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering_iron_1 to weld the broken_radio_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_radio_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the signal_detector_1 to verify the encrypted_router_1 and then place it on the anti_static_workbench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_router_1",
+          "is_verified": true,
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a hidden_key, open it, and use the faraday_cage_key_1 to open the faraday_cage_locker_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "telecom_repair_manual_1",
+          "is_open": true
+        },
+        {
+          "id": "faraday_cage_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the signal_jammer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "signal_jammer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the surveillance_desk_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "surveillance_desk_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the monitoring_logistics_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:monitoring_logistics_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the anti_static_workbench_1 to the front_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "anti_static_workbench_1",
+          "location_id": "in:front_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the signal_jammer_1 to the faraday_cage_locker_1 and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "signal_jammer_1",
+          "location_id": "in:faraday_cage_locker_1",
+          "is_on": true
         }
       ]
     }

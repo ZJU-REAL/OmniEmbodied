@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the bin_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:bin_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the magnifying_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "magnifying_lamp_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, brass gear and place it in the gear_assembly_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "brass_gear_2",
+          "location_id": "in:gear_assembly_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only blue, glowing item and verify it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "thrumming_core_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Open the locked tool_chest_1 using the safe_key_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the precision_screwdriver_set_1 to calibrate the gear_assembly_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,58 @@
         {
           "id": "gear_assembly_1",
           "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the pulley_system_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pulley_system_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_crate_stack_1 to the lift_system.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_crate_stack_1",
+          "location_id": "in:lift_system"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mechanical_lift_1 to the main_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mechanical_lift_1",
+          "location_id": "in:main_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked_safe_1 to the security_hub and open it using the safe_key_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_safe_1",
+          "location_id": "in:security_hub",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the metal_drum_1 to the lift_system and open it using the gloves_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_drum_1",
+          "location_id": "in:lift_system",
+          "is_open": true
         }
       ]
     }

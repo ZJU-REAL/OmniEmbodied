@@ -1,0 +1,717 @@
+{
+  "description": "A high-stakes Data Recovery Lab under urgent pressure, featuring a failed DroboPro 8-bay storage array, server racks, forensic workstations, and specialized tools for data recovery and hardware repair.",
+  "rooms": [
+    {
+      "id": "main_workbench_area",
+      "name": "Main Workbench Area",
+      "properties": {
+        "type": "workbench"
+      },
+      "connected_to_room_ids": [
+        "server_rack_zone",
+        "parts_tools_storage",
+        "forensic_imaging_station"
+      ]
+    },
+    {
+      "id": "server_rack_zone",
+      "name": "Server Rack Zone",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area",
+        "emergency_power_cooling"
+      ]
+    },
+    {
+      "id": "parts_tools_storage",
+      "name": "Parts & Tools Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    },
+    {
+      "id": "forensic_imaging_station",
+      "name": "Forensic Imaging Station",
+      "properties": {
+        "type": "forensic_workspace"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area",
+        "documentation_whiteboard_corner"
+      ]
+    },
+    {
+      "id": "documentation_whiteboard_corner",
+      "name": "Documentation & Whiteboard Corner",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "forensic_imaging_station"
+      ]
+    },
+    {
+      "id": "emergency_power_cooling",
+      "name": "Emergency Power & Cooling",
+      "properties": {
+        "type": "utility"
+      },
+      "connected_to_room_ids": [
+        "server_rack_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "6ft Steel-Reinforced Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_condition": "scuffed",
+        "is_bolted_down": true
+      },
+      "states": {}
+    },
+    {
+      "id": "led_lamp_1",
+      "name": "Swing-Arm LED Lamp",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.1,
+          0.3
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "light_color": "white",
+        "is_flickering": true,
+        "is_adjustable": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "anti_static_mat_1",
+      "name": "Anti-Static Mat",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "rubber",
+        "condition": "worn",
+        "has_stain": true,
+        "stain_type": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "drobo_pro_1",
+      "name": "DroboPro 8-Bay Unit",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 12.5,
+        "is_container": true,
+        "model": "DroboPro",
+        "serial_number": "DPX-8821-L4",
+        "status_lights": "flashing_red",
+        "is_partially_disassembled": true
+      },
+      "states": {
+        "is_open": true,
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "seagate_drive_1",
+      "name": "3TB Seagate IronWolf Drive",
+      "type": "ITEM",
+      "location_id": "in:drobo_pro_1",
+      "properties": {
+        "weight": 0.6,
+        "capacity": "3TB",
+        "model": "IronWolf",
+        "label": "Primary Array",
+        "sata_connector_condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "seagate_drive_2",
+      "name": "3TB Seagate IronWolf Drive",
+      "type": "ITEM",
+      "location_id": "in:drobo_pro_1",
+      "properties": {
+        "weight": 0.6,
+        "capacity": "3TB",
+        "model": "IronWolf",
+        "label": "Primary Array",
+        "sata_connector_condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "seagate_drive_3",
+      "name": "3TB Seagate IronWolf Drive",
+      "type": "ITEM",
+      "location_id": "in:drobo_pro_1",
+      "properties": {
+        "weight": 0.6,
+        "capacity": "3TB",
+        "model": "IronWolf",
+        "label": "Primary Array",
+        "sata_connector_condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "seagate_drive_4",
+      "name": "3TB Seagate IronWolf Drive",
+      "type": "ITEM",
+      "location_id": "in:drobo_pro_1",
+      "properties": {
+        "weight": 0.6,
+        "capacity": "3TB",
+        "model": "IronWolf",
+        "label": "Primary Array",
+        "sata_connector_condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_forensic_dock_1",
+      "name": "USB 3.0 Forensic Dock",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "interface": "USB 3.0",
+        "connected_drive": "Backup_Alpha",
+        "is_write_blocked": true
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Logbook",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "current_page": "RAID-6 failure - parity mismatch? Check S/N: DPX-8821-L4"
+      },
+      "states": {
+        "is_written_on": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "Hot-Air Soldering Station",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "nozzle_condition": "bent",
+        "temperature_setting": "idle",
+        "brand": "Hakko"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "tape_status": "out",
+        "last_label": "DO NOT POWER OFF",
+        "brand": "Brother"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "connected_devices": [
+          "monitor_1",
+          "keyboard_1",
+          "mouse_1"
+        ],
+        "current_display": "terminal_commands"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World’s Best SysAdmin Mug",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "text_condition": "faded",
+        "contents": "loose_screws"
+      },
+      "states": {}
+    },
+    {
+      "id": "raid_poster_1",
+      "name": "RAID Levels Explained Poster",
+      "type": "ITEM",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "coffee_ring_stains"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "sata_cables_1",
+      "name": "Loose SATA Cables",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "tangled",
+        "length": "0.5m",
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "42U Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "size": [
+          2.1,
+          0.8,
+          1.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "fill_status": "partial"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "synology_nas_1",
+      "name": "Synology RS2416+ NAS",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "status_lights": "green",
+        "current_display": "BIOS_settings"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "patch_panel_1",
+      "name": "Patch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.1,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "labeling_status": "mixed",
+        "port_condition": "some_crossed_out"
+      },
+      "states": {}
+    },
+    {
+      "id": "secondary_drobo_1",
+      "name": "Secondary DroboPro Unit",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 12.5,
+        "is_container": true,
+        "label": "Cold Storage",
+        "status_lights": "green"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iscsi_switch_1",
+      "name": "iSCSI Switch",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "port_status": "blinking_amber",
+        "faulty_port": 3,
+        "connected_device": "failed_array"
+      },
+      "states": {}
+    },
+    {
+      "id": "lto_tape_drive_1",
+      "name": "LTO-7 Tape Backup Drive",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "eject_button_status": "stuck",
+        "requires_two_person_lift": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rack_kvm_1",
+      "name": "Rack-Mounted KVM",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 4.0,
+        "current_display": "BIOS_settings",
+        "connected_to": "synology_nas_1"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "spare_power_supplies_1",
+      "name": "Spare Power Supplies",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "quantity": 3,
+        "condition": "tested_ok",
+        "container": "plastic_bin"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_certificate_1",
+      "name": "Employee of the Month Certificate",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "dusty",
+        "date": "2018"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:server_rack_zone",
+      "properties": {
+        "weight": 5.5,
+        "type": "ABC",
+        "status": "expired",
+        "last_inspection": "2_years_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:parts_tools_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "wheels": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "pegboard_1",
+      "name": "Wall-Mounted Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:parts_tools_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.9
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood",
+        "tool_hooks": 15
+      },
+      "states": {}
+    },
+    {
+      "id": "precision_screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 0.7,
+        "pieces": 12,
+        "brand": "iFixit",
+        "case_material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_drives_1",
+      "name": "Spare Hard Drives",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 2.5,
+        "quantity": 5,
+        "capacity": "3TB",
+        "model": "Seagate IronWolf"
+      },
+      "states": {}
+    },
+    {
+      "id": "sas_to_usb_adapter_1",
+      "name": "SAS-to-USB Adapter",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "interface": "SAS/USB",
+        "brand": "StarTech",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_pc_1",
+      "name": "Forensic PC",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_imaging_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "os": "Linux",
+        "write_blocker_installed": true
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "anti_static_worksurface_1",
+      "name": "Anti-Static Worksurface",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_imaging_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.7,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "rubberized",
+        "cleanliness": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:documentation_whiteboard_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "content": "network_diagrams, recovery_protocols",
+        "marker_color": "black"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "ups_1",
+      "name": "Backup UPS Unit",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_power_cooling",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 22.0,
+        "is_container": false,
+        "battery_status": "charged",
+        "runtime": "30_minutes"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "air_vent_1",
+      "name": "Noisy Air Vent",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_power_cooling",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.3
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "noise_level": "high",
+        "cooling_efficiency": "struggling"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polishing Cloth",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "yellow",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Digital Calibration Tool",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Fluke",
+        "model": "789",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:rolling_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "brand": "Dymo",
+        "tape_color": "white",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "close",
+    "label",
+    "load",
+    "open",
+    "polish",
+    "take_down",
+    "turn_off",
+    "turn_on"
+  ]
+}

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place guest_folio_binder_1 on the magnetic_whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "guest_folio_binder_1",
+          "location_id": "on:magnetic_whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the dispatch_radio_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dispatch_radio_console_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver-colored container and place it in the staff_break_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "steel_supply_cart_1",
+          "location_id": "in:staff_break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, leather object and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "guest_folio_binder_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the duster_1 to dust the coffee_cup_1.",
       "task_category": "tool_use",
@@ -20,6 +70,112 @@
         {
           "id": "coffee_cup_1",
           "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to uninstall the software_device_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "software_device_1",
+          "is_installed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the harvesting_tool_1 to harvest the plant_1 and then place it in the maintenance_closet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "plant_1",
+          "is_harvested": true
+        },
+        {
+          "id": "plant_1",
+          "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the saw_1 to saw the stacked_boxes_1 and then unstack them.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "stacked_boxes_1",
+          "is_sawn": true
+        },
+        {
+          "id": "stacked_boxes_1",
+          "is_sawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial_washing_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_washing_machine_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the steel_supply_cart_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_supply_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_washing_machine_1 to the maintenance_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_washing_machine_1",
+          "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ac_unit_1 to the staff_break_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ac_unit_1",
+          "location_id": "in:staff_break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy steel_supply_cart_1 to the main_dispatch_office and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_supply_cart_1",
+          "location_id": "in:main_dispatch_office"
+        },
+        {
+          "id": "steel_supply_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the golf_bag_1 to the valet_luggage_storage and then unpack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "golf_bag_1",
+          "location_id": "in:valet_luggage_storage"
+        },
+        {
+          "id": "golf_bag_1",
+          "is_packed": false
         }
       ]
     }

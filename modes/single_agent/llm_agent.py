@@ -163,7 +163,16 @@ class LLMAgent(BaseAgent):
         if self.history:
             # 使用配置的历史长度，如果是无限制(-1)则使用所有历史
             max_display_entries = len(self.history) if self.max_chat_history is None else self.max_chat_history
-            history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_display_entries)
+
+            # 获取历史记录格式配置
+            history_format_config = self.config.get('history', {}).get('format', {})
+
+            history_summary = self.prompt_manager.format_history(
+                self.mode,
+                self.history,
+                max_entries=max_display_entries,
+                config=history_format_config
+            )
 
         # 获取环境描述（根据配置）
         env_description = self._get_environment_description()

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the golden_mic_1 on the music_stand_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "golden_mic_1",
+          "location_id": "on:music_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the lyric_notebook_1 on the desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lyric_notebook_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal object in the main_recording_studio and place it in the hallway_storage_closet.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,104 @@
         {
           "id": "mixing_console_1",
           "location_id": "in:hallway_storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, leather-bound item in the lounge_green_room and place it on the desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lyric_notebook_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser_1 to clean the written-on music_stand_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "music_stand_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the duster_1 to clean the dusty mixing_console_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mixing_console_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the road_cases_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "road_cases_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to check the pressure in the fog_machine_1 using the pressure_gauge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fog_machine_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the leather_sofa_1 to the home_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "leather_sofa_1",
+          "location_id": "in:home_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mini_fridge_1 to the main_recording_studio.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "location_id": "in:main_recording_studio"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy mixing_console_1 that is dusty to the hallway_storage_closet and clean it with the duster_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mixing_console_1",
+          "location_id": "in:hallway_storage_closet"
+        },
+        {
+          "id": "mixing_console_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy road_cases_1 labeled 'PYRO – DO NOT OPEN' to the main_recording_studio and verify their contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "road_cases_1",
+          "location_id": "in:main_recording_studio"
+        },
+        {
+          "id": "road_cases_1",
+          "is_open": true
         }
       ]
     }

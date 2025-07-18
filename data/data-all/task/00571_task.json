@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the power_drill_1 on the tool_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "power_drill_1",
+          "location_id": "on:tool_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the magnetic_wrench_1 on the multi_axis_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "magnetic_wrench_1",
+          "location_id": "on:multi_axis_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel wrench and place it on the tool_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "magnetic_wrench_2",
+          "location_id": "on:tool_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only blue, flexible_polymer item and place it in the equipment_lockers.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "leaking_coolant_line_1",
+          "location_id": "in:equipment_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Purify the leaking_coolant_line_1 using the insulated_gloves_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leaking_coolant_line_1",
+          "is_pure": true
+        }
+      ]
+    },
     {
       "task_description": "Use the handheld_spectrometer_1 to verify the mislabeled_valve_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,84 @@
         {
           "id": "mislabeled_valve_1",
           "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the magnetic_wrench_2 to assemble the avionics_box_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "avionics_box_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to verify the calibration_jig_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "calibration_jig_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to mount the power_drill_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "power_drill_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_actuator_1 to the primary_work_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_actuator_1",
+          "location_id": "in:primary_work_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the detached_thruster_module_1 to the equipment_lockers.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "detached_thruster_module_1",
+          "location_id": "in:equipment_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the main_fuel_console_1 to the fuel_control_station and verify it using the handheld_spectrometer_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "main_fuel_console_1",
+          "location_id": "in:fuel_control_station"
+        },
+        {
+          "id": "main_fuel_console_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central_repair_gantry_1 to the primary_work_deck and assemble it using the magnetic_wrench_2.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_repair_gantry_1",
+          "location_id": "in:primary_work_deck"
+        },
+        {
+          "id": "central_repair_gantry_1",
+          "is_assembled": true
         }
       ]
     }

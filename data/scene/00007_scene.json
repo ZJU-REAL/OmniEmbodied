@@ -1,888 +1,1345 @@
 {
-  "description": "A repurposed urban warehouse transformed into a bustling volunteer center where diverse groups collaborate on sustainability projects, featuring areas for donation sorting, tool repair, vertical farming, education, and volunteer coordination.",
+  "description": "A decommissioned nuclear power plant control room and security hub repurposed as a research facility, featuring heavy machinery, security protocols, and environmental hazards requiring multi-agent coordination.",
   "rooms": [
     {
-      "id": "main_donation_sorting_floor",
-      "name": "Main Donation Sorting Floor",
+      "id": "main_control_room",
+      "name": "Main Control Room",
       "properties": {
-        "type": "industrial",
-        "ceiling_height": 4.5,
-        "floor_material": "concrete"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "tool_repair_workshop",
-        "vertical_farm_pods",
-        "community_classroom",
-        "break_area"
+        "security_checkpoint",
+        "reactor_monitoring_corridor"
       ]
     },
     {
-      "id": "tool_repair_workshop",
-      "name": "Tool Repair Workshop",
+      "id": "security_checkpoint",
+      "name": "Security Checkpoint & Armory",
       "properties": {
-        "type": "workshop",
-        "ceiling_height": 3.0,
-        "floor_material": "epoxy_coated_concrete"
+        "type": "security"
       },
       "connected_to_room_ids": [
-        "main_donation_sorting_floor"
+        "main_control_room",
+        "emergency_storage_closet"
       ]
     },
     {
-      "id": "vertical_farm_pods",
-      "name": "Vertical Farm Pods",
+      "id": "reactor_monitoring_corridor",
+      "name": "Reactor Monitoring Corridor",
       "properties": {
-        "type": "agricultural",
-        "ceiling_height": 3.2,
-        "floor_material": "drainage_tiles"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "main_donation_sorting_floor"
+        "main_control_room"
       ]
     },
     {
-      "id": "community_classroom",
-      "name": "Community Classroom",
+      "id": "emergency_storage_closet",
+      "name": "Emergency Storage Closet",
       "properties": {
-        "type": "educational",
-        "ceiling_height": 2.8,
-        "floor_material": "linoleum"
+        "type": "storage"
       },
       "connected_to_room_ids": [
-        "main_donation_sorting_floor"
-      ]
-    },
-    {
-      "id": "break_area",
-      "name": "Break Area/Volunteer Check-In",
-      "properties": {
-        "type": "lounge",
-        "ceiling_height": 2.5,
-        "floor_material": "vinyl_plank"
-      },
-      "connected_to_room_ids": [
-        "main_donation_sorting_floor"
+        "security_checkpoint"
       ]
     }
   ],
   "objects": [
     {
-      "id": "industrial_shelving_1",
-      "name": "Steel Industrial Shelving",
+      "id": "central_control_console_1",
+      "name": "Central Control Console",
       "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
+      "location_id": "in:main_control_room",
       "properties": {
         "size": [
           3.0,
-          0.6,
-          3.0
+          2.0,
+          1.0
         ],
         "weight": 85.0,
         "is_container": true,
         "material": "steel",
-        "color": "grey",
-        "is_anchored": true
+        "model_number": "CC-5000"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "packing_station_1",
-      "name": "Packing Station",
-      "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
-      "properties": {
-        "size": [
-          2.5,
-          0.8,
-          0.9
-        ],
-        "weight": 35.0,
-        "is_container": true,
-        "material": "plywood",
-        "color": "stained_wood",
-        "leg_material": "sawhorse"
-      },
-      "states": {}
-    },
-    {
-      "id": "donation_bin_7",
-      "name": "Donation Bin #7",
-      "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
-      "properties": {
-        "size": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "material": "plastic",
-        "color": "blue",
-        "label": "TEST BEFORE SORTING"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "pallet_jack_1",
-      "name": "Pallet Jack",
-      "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.2
-        ],
-        "weight": 55.0,
-        "is_container": false,
-        "material": "steel",
-        "color": "red",
-        "wheel_condition": "rusted_left_side",
-        "max_load": 1000.0
-      },
-      "states": {
-        "is_lowered": false
-      }
-    },
-    {
-      "id": "barcode_scanner_1",
-      "name": "Barcode Scanner",
+      "id": "monitor_1",
+      "name": "Monitor",
       "type": "ITEM",
-      "location_id": "on:industrial_shelving_1",
+      "location_id": "on:central_control_console_1",
       "properties": {
-        "weight": 0.5,
-        "color": "black",
-        "brand": "Zebra",
-        "model": "DS2208",
-        "screen_condition": "cracked",
-        "provides_abilities": [
-          "turn_on"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "fragile_sticker_roll_1",
-      "name": "FRAGILE Sticker Roll",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "red",
-        "material": "paper",
-        "remaining_percent": 50,
-        "adhesive_strength": "medium"
-      },
-      "states": {}
-    },
-    {
-      "id": "hydraulic_workbench_1",
-      "name": "Hydraulic Workbench",
-      "type": "FURNITURE",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          0.8
-        ],
-        "weight": 75.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "black",
-        "surface_condition": "oil_stained"
-      },
-      "states": {
-        "is_lowered": false
-      }
-    },
-    {
-      "id": "parts_washer_1",
-      "name": "Parts Washer",
-      "type": "FURNITURE",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "size": [
-          0.6,
-          0.5,
-          0.4
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "stainless_steel",
-        "color": "silver",
-        "condition": "dented"
-      },
-      "states": {
-        "is_sealed": true
-      }
-    },
-    {
-      "id": "broken_belt_sander_1",
-      "name": "Broken Belt Sander",
-      "type": "ITEM",
-      "location_id": "on:hydraulic_workbench_1",
-      "properties": {
-        "weight": 12.0,
-        "color": "yellow",
-        "brand": "DeWalt",
-        "voltage": "120V",
-        "missing_parts": [
-          "guard"
-        ],
-        "warning_label": "NEEDS NEW MOTOR - DO NOT PLUG IN"
-      },
-      "states": {
-        "is_on": false,
-        "is_broken": true
-      }
-    },
-    {
-      "id": "torque_wrench_1",
-      "name": "Calibrated Torque Wrench",
-      "type": "ITEM",
-      "location_id": "in:red_toolbox_1",
-      "properties": {
-        "weight": 1.5,
-        "color": "red",
-        "brand": "Snap-on",
-        "drive_size": "1/2",
-        "torque_range": "20-150 ft-lb",
-        "provides_abilities": [
-          "tighten"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "red_toolbox_1",
-      "name": "Red Toolbox",
-      "type": "FURNITURE",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "size": [
-          0.5,
-          0.3,
-          0.2
-        ],
-        "weight": 8.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "red",
-        "lock_type": "combination",
-        "lock_code": "5555"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "soldering_iron_1",
-      "name": "Soldering Iron",
-      "type": "ITEM",
-      "location_id": "on:hydraulic_workbench_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "brand": "Weller",
-        "wattage": "60W",
-        "tip_condition": "crusty",
-        "provides_abilities": [
-          "turn_on"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "hydroponic_tower_1",
-      "name": "Hydroponic Tower",
-      "type": "FURNITURE",
-      "location_id": "in:vertical_farm_pods",
-      "properties": {
-        "size": [
-          0.8,
-          0.8,
-          1.8
-        ],
-        "weight": 120.0,
-        "is_container": true,
-        "material": "plastic",
-        "color": "white",
-        "requires_anchoring": true
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "ph_calibration_fluid_1",
-      "name": "pH Calibration Fluid",
-      "type": "ITEM",
-      "location_id": "in:hydroponic_tower_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "clear",
-        "material": "glass",
-        "bottle_type": "30ml_blue_dropper",
-        "label": "4.0-7.0",
-        "provides_abilities": [
-          "pour"
-        ]
-      },
-      "states": {
-        "is_sealed": true
-      }
-    },
-    {
-      "id": "nutrient_mix_bottle_1",
-      "name": "Nutrient Mix Bottle",
-      "type": "ITEM",
-      "location_id": "in:hydroponic_tower_1",
-      "properties": {
-        "weight": 0.15,
-        "color": "clear",
-        "material": "plastic",
-        "bottle_type": "50ml_clear_cap",
-        "label": "NUTRIENT MIX"
-      },
-      "states": {
-        "is_sealed": true
-      }
-    },
-    {
-      "id": "projector_1",
-      "name": "Classroom Projector",
-      "type": "ITEM",
-      "location_id": "in:community_classroom",
-      "properties": {
-        "weight": 3.5,
-        "color": "white",
-        "brand": "Epson",
-        "model": "PowerLite",
-        "provides_abilities": [
-          "turn_on"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "breaker_box_1",
-      "name": "Breaker Box",
-      "type": "FURNITURE",
-      "location_id": "in:community_classroom",
-      "properties": {
-        "size": [
-          0.4,
-          0.3,
-          0.1
-        ],
         "weight": 5.0,
-        "is_container": false,
-        "material": "metal",
-        "color": "grey",
-        "label": "AV EQUIP"
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
       },
       "states": {
-        "is_open": false
+        "is_on": false
       }
     },
     {
-      "id": "ladder_1",
-      "name": "Extension Ladder",
+      "id": "monitor_2",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_3",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_4",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_5",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_6",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_7",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_8",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_9",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_10",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_11",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_12",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "reactor_shutdown_panel_1",
+      "name": "Reactor Shutdown Panel",
       "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
+      "location_id": "in:main_control_room",
       "properties": {
         "size": [
           1.0,
           0.5,
-          3.0
-        ],
-        "weight": 25.0,
-        "is_container": false,
-        "material": "aluminum",
-        "color": "silver",
-        "max_height": 4.0
-      },
-      "states": {
-        "is_lowered": false
-      }
-    },
-    {
-      "id": "insulated_screwdriver_1",
-      "name": "Rubber-Handled Screwdriver",
-      "type": "ITEM",
-      "location_id": "in:red_toolbox_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "yellow",
-        "brand": "Klein",
-        "handle_material": "rubber",
-        "tip_type": "phillips",
-        "provides_abilities": [
-          "screw",
-          "tighten"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "keurig_machine_1",
-      "name": "Keurig Coffee Machine",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 4.0,
-        "color": "black",
-        "brand": "Keurig",
-        "model": "K-Classic",
-        "provides_abilities": [
-          "turn_on"
-        ],
-        "is_container": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "broken_vending_machine_1",
-      "name": "Broken Vending Machine",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          1.8,
-          0.8,
-          1.9
-        ],
-        "weight": 250.0,
-        "is_container": true,
-        "material": "metal",
-        "color": "red",
-        "brand": "Coke"
-      },
-      "states": {
-        "is_on": false,
-        "is_broken": true
-      }
-    },
-    {
-      "id": "cast_iron_bathtub_1",
-      "name": "Cast-Iron Bathtub",
-      "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
-      "properties": {
-        "size": [
-          1.7,
-          0.8,
-          0.6
-        ],
-        "weight": 200.0,
-        "is_container": true,
-        "material": "cast_iron",
-        "color": "white",
-        "condition": "vintage"
-      },
-      "states": {}
-    },
-    {
-      "id": "pallet_jack_2",
-      "name": "Pallet Jack (Needs Repair)",
-      "type": "FURNITURE",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.2
-        ],
-        "weight": 55.0,
-        "is_container": false,
-        "material": "steel",
-        "color": "red",
-        "condition": "broken_hydraulics",
-        "max_load": 1000.0
-      },
-      "states": {
-        "is_broken": true,
-        "is_lowered": false
-      }
-    },
-    {
-      "id": "air_pump_1",
-      "name": "Air Pump",
-      "type": "ITEM",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "weight": 2.0,
-        "color": "blue",
-        "brand": "Campbell Hausfeld",
-        "power_source": "electric",
-        "provides_abilities": [
-          "pump",
-          "inflate"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "flat_tire_1",
-      "name": "Flat Tire",
-      "type": "ITEM",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "weight": 8.0,
-        "color": "black",
-        "material": "rubber",
-        "size": "16_inch",
-        "condition": "punctured"
-      },
-      "states": {
-        "is_inflated": false
-      }
-    },
-    {
-      "id": "varnish_can_1",
-      "name": "Varnish Can",
-      "type": "ITEM",
-      "location_id": "on:hydraulic_workbench_1",
-      "properties": {
-        "weight": 1.5,
-        "color": "brown",
-        "brand": "Minwax",
-        "type": "polyurethane",
-        "volume_remaining": 0.75,
-        "provides_abilities": [
-          "varnish"
-        ]
-      },
-      "states": {
-        "is_sealed": true
-      }
-    },
-    {
-      "id": "varnish_brush_1",
-      "name": "Varnish Brush",
-      "type": "ITEM",
-      "location_id": "on:hydraulic_workbench_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "brown",
-        "material": "bristle",
-        "handle_material": "wood",
-        "bristle_type": "natural",
-        "provides_abilities": [
-          "varnish"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "unvarnished_table_1",
-      "name": "Unvarnished Table",
-      "type": "FURNITURE",
-      "location_id": "in:tool_repair_workshop",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          0.7
-        ],
-        "weight": 25.0,
-        "is_container": false,
-        "material": "wood",
-        "color": "natural",
-        "surface_condition": "unfinished"
-      },
-      "states": {
-        "is_varnished": false
-      }
-    },
-    {
-      "id": "syringe_1",
-      "name": "Syringe",
-      "type": "ITEM",
-      "location_id": "in:red_toolbox_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "clear",
-        "material": "plastic",
-        "capacity": "10ml",
-        "needle_gauge": "18",
-        "provides_abilities": [
-          "inject"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "uninjected_vaccine_1",
-      "name": "Uninjected Vaccine Vial",
-      "type": "ITEM",
-      "location_id": "in:industrial_shelving_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "clear",
-        "material": "glass",
-        "contents": "flu_vaccine",
-        "volume": "5ml",
-        "seal_type": "rubber_stopper"
-      },
-      "states": {
-        "is_injected": false
-      }
-    },
-    {
-      "id": "spray_bottle_1",
-      "name": "Spray Bottle",
-      "type": "ITEM",
-      "location_id": "in:vertical_farm_pods",
-      "properties": {
-        "weight": 0.3,
-        "color": "green",
-        "material": "plastic",
-        "contents": "pesticide",
-        "nozzle_setting": "mist",
-        "provides_abilities": [
-          "spray"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "unsprayed_plant_1",
-      "name": "Unsprayed Tomato Plant",
-      "type": "ITEM",
-      "location_id": "in:hydroponic_tower_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "green",
-        "species": "tomato",
-        "health": "infested",
-        "growth_stage": "flowering"
-      },
-      "states": {
-        "is_sprayed": false
-      }
-    },
-    {
-      "id": "photocopier_1",
-      "name": "Photocopier",
-      "type": "FURNITURE",
-      "location_id": "in:community_classroom",
-      "properties": {
-        "size": [
-          0.8,
-          0.7,
-          1.2
-        ],
-        "weight": 65.0,
-        "is_container": true,
-        "material": "plastic",
-        "color": "white",
-        "brand": "Xerox",
-        "provides_abilities": [
-          "copy",
-          "turn_on"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "uncopied_document_1",
-      "name": "Uncopied Volunteer Form",
-      "type": "ITEM",
-      "location_id": "on:photocopier_1",
-      "properties": {
-        "weight": 0.02,
-        "color": "white",
-        "material": "paper",
-        "content_type": "registration_form",
-        "pages": 2
-      },
-      "states": {
-        "is_copied": false
-      }
-    },
-    {
-      "id": "potato_masher_1",
-      "name": "Potato Masher",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.4,
-        "color": "silver",
-        "material": "stainless_steel",
-        "handle_material": "wood",
-        "head_shape": "wavy",
-        "provides_abilities": [
-          "mash"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "unmashed_potatoes_1",
-      "name": "Unmashed Potatoes",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 1.5,
-        "color": "yellow",
-        "material": "food",
-        "cooked": true,
-        "container": "pot",
-        "quantity": "2lbs"
-      },
-      "states": {
-        "is_mashed": false
-      }
-    },
-    {
-      "id": "phone_charger_1",
-      "name": "Phone Charger",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.1,
-        "color": "white",
-        "brand": "Apple",
-        "connector_type": "lightning",
-        "length": "1m",
-        "provides_abilities": [
-          "recharge"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "uncharged_phone_1",
-      "name": "Uncharged Smartphone",
-      "type": "ITEM",
-      "location_id": "on:keurig_machine_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "black",
-        "brand": "iPhone",
-        "model": "12",
-        "battery_percent": 5
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "push_door_1",
-      "name": "Push Door",
-      "type": "FURNITURE",
-      "location_id": "in:main_donation_sorting_floor",
-      "properties": {
-        "size": [
-          0.9,
-          0.1,
-          2.1
+          0.5
         ],
         "weight": 30.0,
         "is_container": false,
-        "material": "wood",
-        "color": "brown",
-        "hinge_type": "double_action"
+        "material": "steel",
+        "color": "red"
       },
       "states": {
-        "is_pushed": true
+        "is_open": false
       }
     },
     {
-      "id": "stackable_chair_1",
-      "name": "Stackable Chair",
+      "id": "overhead_emergency_siren_1",
+      "name": "Overhead Emergency Siren",
       "type": "FURNITURE",
-      "location_id": "in:community_classroom",
+      "location_id": "in:main_control_room",
       "properties": {
         "size": [
           0.5,
           0.5,
-          0.8
+          0.5
         ],
-        "weight": 4.0,
+        "weight": 15.0,
         "is_container": false,
-        "material": "plastic",
-        "color": "blue",
-        "max_stack": 10
+        "material": "steel",
+        "color": "red"
       },
       "states": {
-        "is_stacked": false
+        "is_on": false
       }
     },
     {
-      "id": "stackable_chair_2",
-      "name": "Stackable Chair",
+      "id": "industrial_grade_server_rack_1",
+      "name": "Industrial-Grade Server Rack",
       "type": "FURNITURE",
-      "location_id": "in:community_classroom",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "master_control_terminal_1",
+      "name": "Master Control Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "MCT-1000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "radiation_alarm_panel_1",
+      "name": "Radiation Alarm Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
       "properties": {
         "size": [
           0.5,
           0.5,
-          0.8
+          0.5
         ],
-        "weight": 4.0,
+        "weight": 10.0,
         "is_container": false,
         "material": "plastic",
-        "color": "blue",
-        "max_stack": 10
+        "color": "yellow"
       },
       "states": {
-        "is_stacked": false
+        "is_on": false
       }
     },
     {
-      "id": "safety_vest_1",
-      "name": "Safety Vest",
+      "id": "manual_coolant_release_valve_1",
+      "name": "Manual Coolant Release Valve",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "steel",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "paper_logbook_1",
+      "name": "Paper Logbook",
       "type": "ITEM",
-      "location_id": "on:industrial_shelving_1",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "paper"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "desk_telephone_1",
+      "name": "Desktop Telephone",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Panasonic",
+        "model_number": "KX-TG7645"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "clipboard_with_checklist_1",
+      "name": "Clipboard with Checklist",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
       "properties": {
         "weight": 0.3,
-        "color": "orange",
-        "material": "polyester",
-        "size": "XL",
-        "reflective_strips": 2
+        "color": "white",
+        "material": "plastic"
       },
       "states": {
-        "is_worn": false
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "on:central_control_console_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "Mr. Coffee",
+        "model_number": "BVMC-SJX33GT"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_tool_cart_1",
+      "name": "Steel Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibrated_wrench_1",
+      "name": "Calibrated Wrench",
+      "type": "ITEM",
+      "location_id": "in:steel_tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "silver",
+        "material": "steel",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "geiger_counter_1",
+      "name": "Geiger Counter",
+      "type": "ITEM",
+      "location_id": "in:steel_tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "brand": "Ludlum",
+        "model_number": "Model 3"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_safety_posters_1",
+      "name": "Faded Safety Posters",
+      "type": "ITEM",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "faded",
+        "material": "paper"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "dusty_trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "gold",
+        "material": "metal"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "outdated_blueprints_1",
+      "name": "Outdated Blueprints",
+      "type": "ITEM",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "paper"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mismatched_chairs_1",
+      "name": "Mismatched Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "mismatched_chairs_2",
+      "name": "Mismatched Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "mismatched_chairs_3",
+      "name": "Mismatched Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "reinforced_steel_door_1",
+      "name": "Reinforced Steel Door",
+      "type": "FURNITURE",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.1
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "surveillance_wall_1",
+      "name": "Surveillance Wall",
+      "type": "FURNITURE",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          0.1
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_13",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_14",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_15",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_16",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_17",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_18",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_19",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_20",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_21",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_22",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "on:surveillance_wall_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Dell",
+        "model_number": "U2719D"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "weapons_locker_1",
+      "name": "Weapons Locker",
+      "type": "FURNITURE",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "stun_baton_1",
+      "name": "Stun Baton",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Taser",
+        "model_number": "X26P"
+      },
+      "states": {}
+    },
+    {
+      "id": "stun_baton_2",
+      "name": "Stun Baton",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Taser",
+        "model_number": "X26P"
+      },
+      "states": {}
+    },
+    {
+      "id": "stun_baton_3",
+      "name": "Stun Baton",
+      "type": "ITEM",
+      "location_id": "in:weapons_locker_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Taser",
+        "model_number": "X26P"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_control_room_keycard_1",
+      "name": "Spare Control Room Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_radio_1",
+      "name": "Emergency Radio",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Motorola",
+        "model_number": "RMU2040"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "access_log_terminal_1",
+      "name": "Access Log Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "security_desk_1",
+      "name": "Security Desk",
+      "type": "FURNITURE",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "key_fob_1",
+      "name": "Key Fob",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "key_fob_2",
+      "name": "Key Fob",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "key_fob_3",
+      "name": "Key Fob",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "id_badge_1",
+      "name": "ID Badge",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "id_badge_2",
+      "name": "ID Badge",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "id_badge_3",
+      "name": "ID Badge",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flashlight_1",
+      "name": "Flashlight",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Maglite",
+        "model_number": "ML150LR"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "no_unauthorized_entry_sign_1",
+      "name": "No Unauthorized Entry Sign",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "empty_coffee_cup_1",
+      "name": "Empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "old_newspapers_1",
+      "name": "Old Newspapers",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "reactor_monitoring_panel_1",
+      "name": "Reactor Monitoring Panel",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_corridor",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "radiation_alert_system_1",
+      "name": "Radiation Alert System",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_corridor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "yellow"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_storage_shelf_1",
+      "name": "Emergency Storage Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_storage_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          2.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazmat_suit_1",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_shelf_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "hazmat_suit_2",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_shelf_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "hazmat_suit_3",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_shelf_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "first_aid_kit_2",
+      "name": "First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_shelf_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_tools_1",
+      "name": "Backup Tools",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_shelf_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "coolant_tank_1",
+      "name": "Coolant Tank",
+      "type": "FURNITURE",
+      "location_id": "in:reactor_monitoring_corridor",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_control_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_2",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_3",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_4",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_5",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_checkpoint",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_6",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_7",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_8",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "green",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_9",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:emergency_storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
       }
     }
   ],
   "abilities": [
-    "copy",
-    "copy_file",
-    "inflate",
-    "inject",
-    "lower",
-    "mash",
+    "disassemble",
     "open",
-    "pour",
-    "pull",
-    "pump",
-    "recharge",
-    "screw",
-    "spray",
-    "stack",
-    "tighten",
     "turn_on",
-    "varnish",
-    "wear",
+    "unpack",
     "close"
   ]
 }

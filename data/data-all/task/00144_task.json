@@ -6,9 +6,75 @@
       "max_grasp_limit": 2,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the elastic_test_membrane_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "elastic_test_membrane_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the calibration_weights_1 in the material_storage_prep_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "location_id": "in:material_storage_prep_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver item in the main_experimentation_chamber and place it in the tool_equipment_locker.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "location_id": "in:tool_equipment_locker"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the translucent blue polymer item and place it in the material_storage_prep_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "elastic_test_membrane_1",
+          "location_id": "in:material_storage_prep_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defroster_1 to defrost the refrigerated_storage_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "refrigerated_storage_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the spill_containment_tray_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spill_containment_tray_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench_1 to open the pneumatic_adjustable_rig_1 and then place the emergency_release_lever_1 inside.",
       "task_category": "compound_reasoning",
@@ -20,6 +86,80 @@
         {
           "id": "emergency_release_lever_1",
           "location_id": "in:pneumatic_adjustable_rig_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black plastic item with an LCD display, turn it on, and place it on the main_control_console_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_tension_gauge_1",
+          "is_on": true
+        },
+        {
+          "id": "digital_tension_gauge_1",
+          "location_id": "on:main_control_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_steel_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_steel_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_shelving_unit_1 to the main_experimentation_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_shelving_unit_1",
+          "location_id": "in:main_experimentation_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated_storage_1 to the tool_equipment_locker.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_storage_1",
+          "location_id": "in:tool_equipment_locker"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the main_control_console_1 to the material_storage_prep_bay and use the screwdriver_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "main_control_console_1",
+          "location_id": "in:material_storage_prep_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the pneumatic_adjustable_rig_1 to the control_monitoring_station and use the wrench_1 to adjust its position.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pneumatic_adjustable_rig_1",
+          "location_id": "in:control_monitoring_station"
         }
       ]
     }

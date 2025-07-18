@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 15.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place handheld_radio_1 on the topographic_map_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "handheld_radio_1",
+          "location_id": "on:topographic_map_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the radio_dispatch_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_dispatch_station_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the handheld radio with the lowest battery level and place it on the digital_scale_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "handheld_radio_1",
+          "location_id": "on:digital_scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the CRT monitor that is flickering and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Use the cabinet_key_1 to unlock the locked_metal_cabinet_1.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "locked_metal_cabinet_1",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the handheld radio with the full battery level and use it to replace the walkie_talkie_1 on the perimeter_observation_deck.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "handheld_radio_2",
+          "location_id": "in:perimeter_observation_deck"
+        },
+        {
+          "id": "walkie_talkie_1",
+          "location_id": "on:radio_dispatch_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the catch pole with the good condition and use it to secure the animal_crate_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "catch_pole_2",
+          "location_id": "in:animal_crate_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the spotlight_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spotlight_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the refrigerator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the lion_transport_cage_1 to the medical_prep_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lion_transport_cage_1",
+          "location_id": "in:medical_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the animal_crate_1 to the perimeter_observation_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "animal_crate_1",
+          "location_id": "in:perimeter_observation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the supply_cabinet_1 to the medical_prep_station and unlock it using the combination written on the paper underneath.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_cabinet_1",
+          "location_id": "in:medical_prep_station"
+        },
+        {
+          "id": "supply_cabinet_1",
+          "is_eaten": true
         }
       ]
     }

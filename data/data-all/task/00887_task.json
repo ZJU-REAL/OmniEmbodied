@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the stack_error_logs_1 on the central_command_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "stack_error_logs_1",
+          "location_id": "on:central_command_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the unlabeled_usb_drive_1 in the debug_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "unlabeled_usb_drive_1",
+          "location_id": "in:debug_workstation_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal laptop and place it on the debug_workstation_2.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,107 @@
         {
           "id": "laptop_1",
           "location_id": "on:debug_workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and activate it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "primary_control_terminal_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to open the toolbox_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the network_cable_tester_1 to check the only black, metal server rack and activate it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only coffee-stained, white stack of papers and tear it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "stack_error_logs_1",
+          "is_torn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the kill_switch_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "kill_switch_lever_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency_supply_closet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_supply_closet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the emergency_battery_1 to the server_rack_alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_battery_1",
+          "location_id": "in:server_rack_alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the led_status_wall_1 to the breakout_lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_status_wall_1",
+          "location_id": "in:breakout_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:debug_workstations"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the only steel, black backup hardware to the server rack alley and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_hardware_1",
+          "location_id": "in:server_rack_alley",
+          "is_active": true
         }
       ]
     }

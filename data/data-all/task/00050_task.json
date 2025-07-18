@@ -1,0 +1,154 @@
+{
+  "task_background": "Prepare the automotive workshop for a major vehicle retrofit project by organizing tools, repairing equipment, and setting up workstations.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.5
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the turbo_kit_1 on the diagnostics_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "turbo_kit_1",
+          "location_id": "on:diagnostics_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the oem_ecu_1 in the parts_rolling_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oem_ecu_1",
+          "location_id": "in:parts_rolling_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the orange aftermarket tuner ECU and place it on the diagnostics_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "tuner_ecu_1",
+          "location_id": "on:diagnostics_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black coffee mug and place it on the coffee_maker_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:coffee_maker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the air_compressor_1 using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "air_compressor_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the welding_station_1 using the welder_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "welding_station_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the grater_1 to grate the coffee_beans_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_beans_1",
+          "is_grated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_brush_1 and cleaning_agent_1 to scrub the oil_spill_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "oil_spill_1",
+          "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the diagnostic_computer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diagnostic_computer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the cnc_mill_1 using the repair_kit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cnc_mill_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine_block_1 to the parts_fabrication_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_block_1",
+          "location_id": "in:parts_fabrication_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the welding_station_1 to the vehicle_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "welding_station_1",
+          "location_id": "in:vehicle_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy parts_rolling_cart_1 to the diagnostics_station and repair its dented left side using the repair_kit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "parts_rolling_cart_1",
+          "location_id": "in:diagnostics_station"
+        },
+        {
+          "id": "parts_rolling_cart_1",
+          "is_paired": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00050"
+}

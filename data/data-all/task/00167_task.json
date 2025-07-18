@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Canon EOS R5 with RF 15-35mm Lens on the Manfrotto 058B Triaut Tripod.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "camera_1",
+          "location_id": "on:tripod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Exposure Remote Trigger on the tripod.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "remote_trigger_1",
+          "location_id": "on:tripod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, chrome mirror ball rig and uncover it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mirror_ball_rig_1",
+          "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only blue keycard in the tool drawer and place it on the workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keycard_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the lens cleaning kit to clean the Canon EOS R5 with RF 15-35mm Lens.",
       "task_category": "tool_use",
@@ -20,6 +70,87 @@
         {
           "id": "camera_1",
           "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the vacuum cleaner to clean the dusty safety poster.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "safety_poster_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the lens cleaning kit to clean the only camera with image stabilization disabled and then photograph it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "camera_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tool drawer to loosen the lens calibration jig and then place it on the workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lens_calibration_jig_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the overhead lighting grid.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lighting_grid_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 360° Mirror Ball Rig to the equipment prep station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mirror_ball_rig_1",
+          "location_id": "in:equipment_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked equipment cabinet to the main shooting bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_cabinet_1",
+          "location_id": "in:main_shooting_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy photocopier that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:equipment_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the spare mirror ball in the foam-lined crate to the main shooting bay and uncover it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "spare_mirror_ball_1",
+          "location_id": "in:main_shooting_bay",
+          "is_covered": false
         }
       ]
     }

@@ -430,7 +430,7 @@ class EnvironmentGraph:
                         size = props.get('size')
                         if size is not None and isinstance(size, (list, tuple)) and len(size) == 3:
                             length, width, height = size  # [长,宽,高]
-                            lines.append(f"{prefix}    - Size: {length}m × {width}m × {height}m (L×W×H)")
+                            lines.append(f"{prefix}    - Size: {length}m x {width}m x {height}m (L x W x H)")
                         else:
                             if 'length' in props:
                                 lines.append(f"{prefix}    - Length: {props['length']}m")

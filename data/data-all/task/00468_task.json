@@ -6,9 +6,75 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place atm_skimmer_1 on work_mat_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "atm_skimmer_1",
+          "location_id": "on:work_mat_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_cup_1 in evidence_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "in:evidence_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the decontamination table and place it in the forensic workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "atm_skimmer_1",
+          "location_id": "in:forensic_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the digital forensics station and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_tap_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the UV light wand to photograph the ATM skimmer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "atm_skimmer_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver set to cut the false keypad overlay.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "false_keypad_1",
+          "is_cut": true
+        }
+      ]
+    },
     {
       "task_description": "Use the multimeter to check the RF transmitter chip and then plug it into the forensic workstation.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,84 @@
         {
           "id": "rf_transmitter_1",
           "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a partially scratched serial number on the work mat and photograph it using the USB microscope.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "rf_transmitter_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked forensic tool cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the fume extractor.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_extractor_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the faraday cage enclosure to the collaborative area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "faraday_cage_1",
+          "location_id": "in:collaborative_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the decontamination table to the secure storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "decontamination_table_1",
+          "location_id": "in:secure_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy forensic workstation to the evidence intake and plug it in.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "forensic_workstation_1",
+          "location_id": "in:evidence_intake"
+        },
+        {
+          "id": "forensic_workstation_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the whiteboard to the digital forensics station and unstack the case files.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:digital_forensics"
+        },
+        {
+          "id": "case_files_1",
+          "is_stacked": false
         }
       ]
     }

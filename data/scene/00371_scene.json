@@ -1,0 +1,796 @@
+{
+  "description": "A gritty, grease-stained workshop where a team of aging hillclimbers prepares their flame-painted bikes for the next AMA National Championship. The space is equal parts mechanical haven and chaotic clubhouse, filled with half-finished modifications, trophies from past glories, and the lingering scent of oil and Red Man tobacco.",
+  "rooms": [
+    {
+      "id": "machine_bay",
+      "name": "Machine Bay",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "parts_prep_zone",
+        "lounge"
+      ]
+    },
+    {
+      "id": "parts_prep_zone",
+      "name": "Parts & Prep Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "machine_bay",
+        "lounge"
+      ]
+    },
+    {
+      "id": "lounge",
+      "name": "Lounge",
+      "properties": {
+        "type": "relaxation"
+      },
+      "connected_to_room_ids": [
+        "machine_bay",
+        "parts_prep_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_bike_lift_1",
+      "name": "Hydraulic Bike Lift",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "max_load": 500.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "midnight_ghost_1",
+      "name": "The Midnight Ghost",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_bike_lift_1",
+      "properties": {
+        "size": [
+          2.1,
+          0.8,
+          1.1
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "color": "orange-flame",
+        "model": "1972 Harley hillclimber"
+      },
+      "states": {
+        "is_engine_on": false,
+        "is_covered": true
+      }
+    },
+    {
+      "id": "welding_station_1",
+      "name": "Welding Station",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "oxygen_level": 30,
+        "acetylene_level": 15
+      },
+      "states": {
+        "is_welded": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "arc_welder_1",
+      "name": "Arc Welder",
+      "type": "ITEM",
+      "location_id": "on:welding_station_1",
+      "properties": {
+        "weight": 12.5,
+        "brand": "Lincoln Electric",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "welding_mask_1",
+      "name": "Welding Mask",
+      "type": "ITEM",
+      "location_id": "on:welding_station_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "cracked",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_chain_hoist_1",
+      "name": "Overhead Chain Hoist",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "capacity": "3-ton",
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "engine_block_1",
+      "name": "Disassembled Engine Block",
+      "type": "ITEM",
+      "location_id": "on:overhead_chain_hoist_1",
+      "properties": {
+        "weight": 150.0,
+        "material": "aluminum",
+        "condition": "used"
+      },
+      "states": {}
+    },
+    {
+      "id": "bent_front_fork_1",
+      "name": "Bent Front Fork",
+      "type": "ITEM",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "weight": 12.0,
+        "length": 1.2,
+        "condition": "dented",
+        "material": "steel"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "fork_straightening_jig_1",
+      "name": "Fork Straightening Jig",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "missing_part": "alignment gauge"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "faulty_kill_switch_1",
+      "name": "Faulty Kill Switch",
+      "type": "ITEM",
+      "location_id": "on:midnight_ghost_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Buddy’s—DON’T TOUCH",
+        "condition": "broken"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "spare_kill_switch_1",
+      "name": "Spare Kill Switch",
+      "type": "ITEM",
+      "location_id": "in:parts_prep_zone",
+      "properties": {
+        "weight": 0.2,
+        "condition": "new",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_fuel_canister_1",
+      "name": "Empty Fuel Canister",
+      "type": "ITEM",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "weight": 1.5,
+        "label": "NITRO BLEND",
+        "capacity": "5-gallon",
+        "condition": "missing cap"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "fuel_mixing_station_1",
+      "name": "Fuel Mixing Station",
+      "type": "FURNITURE",
+      "location_id": "in:parts_prep_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "methanol_jug_1",
+      "name": "Methanol Jug",
+      "type": "ITEM",
+      "location_id": "on:fuel_mixing_station_1",
+      "properties": {
+        "weight": 5.0,
+        "label": "Methanol",
+        "condition": "sealed",
+        "color": "white"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "nitromethane_jug_1",
+      "name": "Nitromethane Jug",
+      "type": "ITEM",
+      "location_id": "on:fuel_mixing_station_1",
+      "properties": {
+        "weight": 1.0,
+        "label": "30% NITRO",
+        "condition": "open",
+        "color": "blue"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "funnel_1",
+      "name": "Greasy Funnel",
+      "type": "ITEM",
+      "location_id": "on:fuel_mixing_station_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "greasy",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_tool_cart_1",
+      "name": "Rolling Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 3.0,
+        "sizes": "10mm–24mm",
+        "missing": "17mm",
+        "material": "chrome-vanadium"
+      },
+      "states": {}
+    },
+    {
+      "id": "impact_gun_1",
+      "name": "Impact Gun",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 2.5,
+        "condition": "dead battery",
+        "brand": "DeWalt"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "calipers_1",
+      "name": "Calipers",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "rusted shut",
+        "material": "steel"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "parts_tray_1",
+      "name": "Parts Tray",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "contents": "pistons, valve springs, exhaust pipe",
+        "condition": "used",
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "exhaust_pipe_1",
+      "name": "Chrome Exhaust Pipe",
+      "type": "ITEM",
+      "location_id": "in:parts_tray_1",
+      "properties": {
+        "weight": 1.5,
+        "condition": "scratched",
+        "material": "chrome"
+      },
+      "states": {}
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.7
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "pressure": 90,
+        "condition": "leaking"
+      },
+      "states": {
+        "is_on": true,
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "check_pressure"
+        ],
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_of_shame_1",
+      "name": "Wall of Shame",
+      "type": "FURNITURE",
+      "location_id": "in:lounge",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "contents": "framed photo of a bike mid-crash"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_shelf_1",
+      "name": "Trophy Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:lounge",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "1974 AMA 2nd Place cup",
+        "condition": "tarnished"
+      },
+      "states": {
+        "is_dusted": false
+      }
+    },
+    {
+      "id": "ama_trophy_1",
+      "name": "1974 AMA 2nd Place Cup",
+      "type": "ITEM",
+      "location_id": "on:trophy_shelf_1",
+      "properties": {
+        "weight": 1.0,
+        "condition": "used as ashtray",
+        "material": "silver"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "SAFETY THIRD! Poster",
+      "type": "ITEM",
+      "location_id": "in:lounge",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World’s Best Brother-in-Law Mug",
+      "type": "ITEM",
+      "location_id": "on:trophy_shelf_1",
+      "properties": {
+        "weight": 0.4,
+        "condition": "cracked",
+        "contents": "loose bolts"
+      },
+      "states": {}
+    },
+    {
+      "id": "sagging_couch_1",
+      "name": "Sagging Couch",
+      "type": "FURNITURE",
+      "location_id": "in:lounge",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "fabric",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "beer_fridge_1",
+      "name": "Beer Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:lounge",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "brand": "Frigidaire"
+      },
+      "states": {
+        "is_open": false,
+        "is_frozen": false
+      }
+    },
+    {
+      "id": "pa_speaker_1",
+      "name": "PA Speaker",
+      "type": "FURNITURE",
+      "location_id": "in:lounge",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "condition": "crackling static"
+      },
+      "states": {
+        "is_on": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "wire_strippers_1",
+      "name": "Wire Strippers",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "provides_abilities": [
+          "verify"
+        ],
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "ignition_key_1",
+      "name": "Ignition Key",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "provides_abilities": [
+          "start_engine"
+        ],
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "in:parts_prep_zone",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "dust"
+        ],
+        "material": "feather"
+      },
+      "states": {}
+    },
+    {
+      "id": "carving_knife_1",
+      "name": "Carving Knife",
+      "type": "ITEM",
+      "location_id": "in:parts_prep_zone",
+      "properties": {
+        "weight": 0.4,
+        "provides_abilities": [
+          "carve",
+          "slice"
+        ],
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.05,
+        "provides_abilities": [
+          "sign"
+        ],
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolled_blueprints_1",
+      "name": "Rolled Blueprints",
+      "type": "ITEM",
+      "location_id": "on:rolling_tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "bike wiring diagram",
+        "condition": "coffee-stained"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "tied_rope_1",
+      "name": "Tied Rope",
+      "type": "ITEM",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "weight": 0.7,
+        "length": 2.0,
+        "material": "nylon"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "covered_bike_1",
+      "name": "Bike Cover",
+      "type": "ITEM",
+      "location_id": "on:midnight_ghost_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "canvas",
+        "color": "black"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "inserted_usb_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:pa_speaker_1",
+      "properties": {
+        "weight": 0.02,
+        "contents": "last year’s hillclimb commentary"
+      },
+      "states": {
+        "is_inserted": true
+      }
+    },
+    {
+      "id": "sealed_oil_bottle_1",
+      "name": "Sealed Oil Bottle",
+      "type": "ITEM",
+      "location_id": "on:fuel_mixing_station_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "label": "Motor Oil"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "unsealed_oil_bottle_1",
+      "name": "Unsealed Oil Bottle",
+      "type": "ITEM",
+      "location_id": "on:fuel_mixing_station_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "label": "Motor Oil"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "zipped_tool_bag_1",
+      "name": "Zipped Tool Bag",
+      "type": "ITEM",
+      "location_id": "in:parts_prep_zone",
+      "properties": {
+        "weight": 2.0,
+        "contents": "miscellaneous tools",
+        "color": "black"
+      },
+      "states": {
+        "is_zipped": false
+      }
+    },
+    {
+      "id": "flickering_light_1",
+      "name": "Flickering Fluorescent Light",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.1
+        ],
+        "weight": 5.0,
+        "condition": "frayed cord"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "task_lamp_1",
+      "name": "Task Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:machine_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.5
+        ],
+        "weight": 3.0,
+        "condition": "frayed cord"
+      },
+      "states": {
+        "is_on": false
+      }
+    }
+  ],
+  "abilities": [
+    "carve",
+    "check_pressure",
+    "dust",
+    "eject",
+    "open",
+    "sign",
+    "slice",
+    "start_engine",
+    "turn_off",
+    "turn_on",
+    "uncover",
+    "unroll",
+    "untie",
+    "verify",
+    "weld",
+    "zip",
+    "close"
+  ]
+}

@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place break_even_report_1 on whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "break_even_report_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off desk_phone_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "desk_phone_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest USB drive on the central worktable and place it in the archive storage closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_5",
+          "location_id": "in:archive_storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass paperweight on the central worktable and place it on the whiteboard.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blue_paperweight_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the flathead screwdriver to open the jammed filing cabinet.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the red marker to press the button on the locked laptop.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_laptop_1",
+          "is_pressed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the flathead screwdriver to open Jason's stuck desk drawer and retrieve the IT cabinet key.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,74 @@
         {
           "id": "it_cabinet_key_1",
           "location_id": "in:main_workspace"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the whiteboard.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect the network switch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "network_switch_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central worktable to the server/printer nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_worktable_1",
+          "location_id": "in:server_printer_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the archive storage closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:archive_storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy filing cabinet to the main workspace and use the flathead screwdriver to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:main_workspace"
+        },
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the old safe to the main workspace and use the IT cabinet key to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "old_safe_1",
+          "location_id": "in:main_workspace"
+        },
+        {
+          "id": "old_safe_1",
+          "is_open": true
         }
       ]
     }

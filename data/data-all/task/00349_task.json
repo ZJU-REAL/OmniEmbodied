@@ -6,9 +6,35 @@
       "max_grasp_limit": 30.0,
       "max_weight": 30.0,
       "max_size": 50.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": 50.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place hydrometer_1 on the microscope_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hydrometer_1",
+          "location_id": "on:microscope_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pH meter with low battery status on the sample_cabinet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ph_meter_1",
+          "location_id": "on:sample_cabinet_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken pallet jack in the storage supply closet.",
       "task_category": "tool_use",
@@ -16,6 +42,94 @@
         {
           "id": "pallet_jack_1",
           "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Sharpen the dull laboratory knife using the sharpening tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "lab_knife_1",
+          "is_sharp": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the sticky residue from the digital scale using the cleaning rag.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Adjust the misaligned microscope station and then place the hydrometer on it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "is_adjusted": true
+        },
+        {
+          "id": "hydrometer_1",
+          "location_id": "on:microscope_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to adjust the fermentation control panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fermentation_panel_1",
+          "is_adjusted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to press the centrifuge start button.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "start_button_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy metal shelving unit to the main testing floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_1",
+          "location_id": "in:main_testing_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the laboratory freezer to the fermentation monitoring station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_freezer_1",
+          "location_id": "in:fermentation_monitoring_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy stainless steel workbench to the storage supply closet and clean its scratched surface.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "stainless_workbench_1",
+          "location_id": "in:storage_supply_closet"
+        },
+        {
+          "id": "stainless_workbench_1",
+          "is_dirty": false
         }
       ]
     }

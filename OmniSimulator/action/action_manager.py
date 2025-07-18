@@ -146,6 +146,56 @@ class ActionManager:
         else:
             print("场景中没有不需要工具的属性动作需要注册")
 
+    def _get_agent_current_abilities(self, agent_id: str) -> set:
+        """
+        获取智能体当前具有的所有能力
+
+        Args:
+            agent_id: 智能体ID
+
+        Returns:
+            set: 智能体当前能力集合
+        """
+        try:
+            agent = self.agent_manager.get_agent(agent_id)
+            if agent and hasattr(agent, 'abilities'):
+                # 确保返回集合类型
+                if isinstance(agent.abilities, set):
+                    return agent.abilities
+                elif isinstance(agent.abilities, (list, tuple)):
+                    return set(agent.abilities)
+                else:
+                    return set()
+            return set()
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(f"获取智能体 {agent_id} 能力时出错: {e}")
+            return set()
+
+    def _get_common_abilities(self, agent_ids: list) -> set:
+        """
+        获取多个智能体的共同能力
+
+        Args:
+            agent_ids: 智能体ID列表
+
+        Returns:
+            set: 所有智能体都具有的能力集合
+        """
+        if not agent_ids:
+            return set()
+
+        # 获取第一个智能体的能力作为基准
+        common_abilities = self._get_agent_current_abilities(agent_ids[0])
+
+        # 与其他智能体的能力求交集
+        for agent_id in agent_ids[1:]:
+            agent_abilities = self._get_agent_current_abilities(agent_id)
+            common_abilities = common_abilities.intersection(agent_abilities)
+
+        return common_abilities
+
     @classmethod
     def unregister_ability_action(cls, action_name: str, agent_id: str):
         """
@@ -416,6 +466,7 @@ class ActionManager:
         all_agent_specific_actions = {}  # {action_name: (description, agents_list)}
 
         for current_agent_id in agent_ids:
+            # 3.1 静态注册的动作（现有逻辑）
             if current_agent_id in self.agent_action_classes:
                 for action_name, action_class in self.agent_action_classes[current_agent_id].items():
                     if action_class == AttributeAction and not action_name.startswith('CORP_'):
@@ -426,6 +477,23 @@ class ActionManager:
 
                             if action_name not in all_agent_specific_actions:
                                 all_agent_specific_actions[action_name] = (description, [])
+                            all_agent_specific_actions[action_name][1].append(current_agent_id)
+
+            # 3.2 基于当前能力的动态动作（新增）
+            agent_abilities = self._get_agent_current_abilities(current_agent_id)
+            for ability in agent_abilities:
+                ability_lower = ability.lower()
+                if ability_lower in AttributeAction.action_configs:
+                    config = AttributeAction.action_configs[ability_lower]
+                    requires_tool = config.get('requires_tool', True)
+
+                    if requires_tool:
+                        action_name = ability.upper()
+                        description = config.get('description', 'No description available')
+
+                        if action_name not in all_agent_specific_actions:
+                            all_agent_specific_actions[action_name] = (description, [])
+                        if current_agent_id not in all_agent_specific_actions[action_name][1]:
                             all_agent_specific_actions[action_name][1].append(current_agent_id)
 
         if all_agent_specific_actions:
@@ -534,6 +602,40 @@ class ActionManager:
                         descriptions.append(f"  - {description} (cooperative)")
                         descriptions.append(f"  - Example: {action_name} {agent_list} device_1")
                     descriptions.append("")
+
+        # 6. 基于共同能力的协作动作（新增部分）
+        if not is_single_agent:
+            common_abilities = self._get_common_abilities(agent_ids)
+
+            if common_abilities:
+                descriptions.append("== Cooperative Ability Actions ==")
+
+                for ability in sorted(common_abilities):
+                    ability_lower = ability.lower()
+                    if ability_lower in AttributeAction.action_configs:
+                        config = AttributeAction.action_configs[ability_lower]
+                        requires_tool = config.get('requires_tool', True)
+
+                        # 只显示需要工具的协作能力动作
+                        if requires_tool:
+                            action_name = f"CORP_{ability.upper()}"
+                            description = config.get('description', 'No description available')
+
+                            if len(agent_ids) == 2:
+                                # 两个智能体的具体格式
+                                agent_pair = ",".join(agent_ids)
+                                descriptions.append(f"{action_name} {agent_pair} <object_id>")
+                                descriptions.append(f"  - {description} (cooperative)")
+                                descriptions.append(f"  - Both agents have the required ability")
+                                descriptions.append(f"  - Example: {action_name} {agent_pair} device_1")
+                            else:
+                                # 多个智能体的通用格式
+                                agent_list = ",".join(agent_ids)
+                                descriptions.append(f"{action_name} {agent_list} <object_id>")
+                                descriptions.append(f"  - {description} (cooperative)")
+                                descriptions.append(f"  - All agents have the required ability")
+                                descriptions.append(f"  - Example: {action_name} {agent_list} device_1")
+                            descriptions.append("")
 
         descriptions.append("=== END OF ACTIONS ===")
 

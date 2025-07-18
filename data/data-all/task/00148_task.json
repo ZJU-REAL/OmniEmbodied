@@ -1,0 +1,169 @@
+{
+  "task_background": "Prepare the hackerspace for an upcoming open-source hardware workshop by organizing tools, repairing equipment, and setting up workstations.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the industrial_shelving_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:industrial_shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the dual_monitor_setup_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dual_monitor_setup_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the industrial_workbench_1 and place it in the toolbox_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "on:industrial_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device on the industrial_shelving_unit_1 and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken raspberry_pi_4_1 using the repair_toolkit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "raspberry_pi_4_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the toolbox_1 using the keycard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair_toolkit_1 to fix the largest, wooden item in the main_workbench_area that is broken.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "industrial_workbench_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a 'kernel panic' inscription and repair it using the repair_toolkit_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "raspberry_pi_4_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the laser_cutter_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_cutter_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the toolbox_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_unit_1 to the main_workbench_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_unit_1",
+          "location_id": "in:main_workbench_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the electronics_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:electronics_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "creality_3d_printer_1",
+          "location_id": "in:printing_cnc_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_workbench_1 to the lounge_planning_zone and repair it using the repair_toolkit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_workbench_1",
+          "location_id": "in:lounge_planning_zone",
+          "is_broken": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00148"
+}

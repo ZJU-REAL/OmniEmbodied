@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place laptop_1 on the LCD screen.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "location_id": "on:lcd_screen_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the silver laptop on the charging station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laptop_2",
+          "location_id": "on:charging_station_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the stapler to staple the flight manifest.",
       "task_category": "tool_use",
@@ -20,6 +50,80 @@
         {
           "id": "flight_manifest_1",
           "is_stapled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black laptop and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "laptop_3",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red emergency folder and place it on the bulletin board.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_protocols_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the generator.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the medical cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel shelving unit to the passenger assistance area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:passenger_assistance"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the portable generator to the central command table.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "location_id": "in:central_command"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the mini fridge to the break room and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "mini_fridge_1",
+          "is_on": true
         }
       ]
     }

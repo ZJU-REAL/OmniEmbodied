@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Turn on the global_shipment_map_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "global_shipment_map_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pen_1 on worktable_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pen_1",
+          "location_id": "on:worktable_2"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest steel worktable and move it to the loading_dock.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,108 @@
         {
           "id": "worktable_4",
           "location_id": "in:loading_dock"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black RFID scanner with low battery and place it on worktable_3.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rfid_scanner_1",
+          "location_id": "on:worktable_3"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to tighten the wobbly wheel on hand_truck_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hand_truck_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the photocopier_1 to copy the customs_forms_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "customs_forms_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to sign the shipping_manifests_1 and then place them in the filing_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "shipping_manifests_1",
+          "is_signed": true
+        },
+        {
+          "id": "shipping_manifests_1",
+          "location_id": "in:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering_iron_1 to repair the flickering dock_light_1 and then turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dock_light_1",
+          "is_on": false
+        },
+        {
+          "id": "dock_light_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the freight_conveyor_belt_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "freight_conveyor_belt_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the priority_shipment_crate_1 to the qa_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "priority_shipment_crate_1",
+          "location_id": "in:qa_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_1 to the main_monitoring_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:main_monitoring_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the walmart_pallet_1 to the archive_room and use the screwdriver_1 to secure its wrapping.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "walmart_pallet_1",
+          "location_id": "in:archive_room"
+        },
+        {
+          "id": "walmart_pallet_1",
+          "is_screwed_in": true
         }
       ]
     }

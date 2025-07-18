@@ -10,13 +10,169 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
     {
+      "task_description": "Place the custom_bike_frame_1 on the steel_workbench_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "custom_bike_frame_1",
+          "location_id": "on:steel_workbench_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wrench_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wrench_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
       "task_description": "Find the heaviest steel workbench and place the torque_driver_1 on it.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
+        {
+          "id": "torque_driver_1",
+          "location_id": "on:steel_workbench_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only matte black bike frame and place it in the parts_storage_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "custom_bike_frame_1",
+          "location_id": "in:parts_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the stiff_bristle_brush_1 to scrape the bent_derailleur_hanger_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "bent_derailleur_hanger_1",
+          "is_scraped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sharpening_stone_1 to sharpen the saw_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "saw_1",
+          "is_sawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the staining_agent_1 to stain the wooden_practice_ramp_1 and then place it in the training_zone.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wooden_practice_ramp_1",
+          "is_dirty": true
+        },
+        {
+          "id": "wooden_practice_ramp_1",
+          "location_id": "in:training_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_tool_1 to calibrate the torque_driver_1 and then place it on the pegboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "torque_driver_1",
+          "is_calibrated": true
+        },
+        {
+          "id": "torque_driver_1",
+          "location_id": "on:pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lower the hydraulic_bike_lift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_bike_lift_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the wheel_truing_stand_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wheel_truing_stand_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_bike_lift_1 to the training_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_bike_lift_1",
+          "location_id": "in:training_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_workbench_1 to the parts_storage_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_workbench_1",
+          "location_id": "in:parts_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the wooden_practice_ramp_1 to the main_workshop_bay and use the staining_agent_1 to stain it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "wooden_practice_ramp_1",
+          "location_id": "in:main_workshop_bay"
+        },
+        {
+          "id": "wooden_practice_ramp_1",
+          "is_dirty": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the steel_workbench_2 to the training_zone and place the torque_driver_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_workbench_2",
+          "location_id": "in:training_zone"
+        },
         {
           "id": "torque_driver_1",
           "location_id": "on:steel_workbench_2"

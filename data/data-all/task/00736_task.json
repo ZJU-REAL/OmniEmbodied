@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on the filing_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the weather_radar_monitor.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white coffee mug with the inscription 'World's Best Umpire' and clean it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black-striped helmet and place it on the treatment_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "helmet_5",
+          "location_id": "on:treatment_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_bat_handle_1 using the sandpaper.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_bat_handle_1",
+          "is_sanded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dusty mannequin using the cleaning_rag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mannequin_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the sandpaper to repair the broken_bat_handle_1 and then place it on the steel_shelving_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,74 @@
         {
           "id": "broken_bat_handle_1",
           "location_id": "on:steel_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white helmet with blue stripes, clean it, and place it on the treatment_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "helmet_1",
+          "is_dirty": false
+        },
+        {
+          "id": "helmet_1",
+          "location_id": "on:treatment_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the safe_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the ball_polishing_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ball_polishing_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 400kg pitch roller to the main_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pitch_roller_1",
+          "location_id": "in:main_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_shelving_1 to the pitch_maintenance.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_1",
+          "location_id": "in:pitch_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crate of match-ready balls to the pitch_maintenance and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crate_match_balls_1",
+          "location_id": "in:pitch_maintenance"
+        },
+        {
+          "id": "crate_match_balls_1",
+          "is_open": true
         }
       ]
     }

@@ -1,0 +1,602 @@
+{
+  "description": "An abandoned asbestos mine cleanup site with hazardous materials, heavy machinery, and a nearby rural village. The scene is designed for multi-agent collaboration in environmental cleanup and safety management.",
+  "rooms": [
+    {
+      "id": "contaminated_slope",
+      "name": "Contaminated Slope",
+      "properties": {
+        "type": "industrial",
+        "hazard_level": "extreme"
+      },
+      "connected_to_room_ids": [
+        "decontamination_station",
+        "equipment_depot",
+        "village_encroachment"
+      ]
+    },
+    {
+      "id": "decontamination_station",
+      "name": "Decontamination & Medical Station",
+      "properties": {
+        "type": "medical",
+        "hazard_level": "moderate"
+      },
+      "connected_to_room_ids": [
+        "contaminated_slope",
+        "monitoring_post"
+      ]
+    },
+    {
+      "id": "equipment_depot",
+      "name": "Equipment & Storage Depot",
+      "properties": {
+        "type": "storage",
+        "hazard_level": "low"
+      },
+      "connected_to_room_ids": [
+        "contaminated_slope",
+        "monitoring_post"
+      ]
+    },
+    {
+      "id": "village_encroachment",
+      "name": "Village Encroachment",
+      "properties": {
+        "type": "residential",
+        "hazard_level": "low"
+      },
+      "connected_to_room_ids": [
+        "contaminated_slope"
+      ]
+    },
+    {
+      "id": "monitoring_post",
+      "name": "Monitoring & Command Post",
+      "properties": {
+        "type": "command",
+        "hazard_level": "none"
+      },
+      "connected_to_room_ids": [
+        "decontamination_station",
+        "equipment_depot"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "collapsed_mine_shaft_1",
+      "name": "Collapsed Mine Shaft Entrance",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "rusted_steel",
+        "condition": "collapsed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "asbestos_tailings_pile_1",
+      "name": "Asbestos Tailings Pile",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "size": [
+          30.0,
+          3.0,
+          3.0
+        ],
+        "weight": 1000.0,
+        "is_container": false,
+        "material": "asbestos_mixed_rock",
+        "hazard_level": "extreme"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Eroded Conveyor Belt Structure",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "size": [
+          10.0,
+          1.5,
+          1.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "rusted_metal",
+        "condition": "partially_buried"
+      },
+      "states": {}
+    },
+    {
+      "id": "asbestos_rock_1",
+      "name": "Asbestos-Laden Rock",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 25.0,
+        "color": "gray",
+        "material": "asbestos_rock",
+        "hazard_level": "high"
+      },
+      "states": {
+        "is_wrapped": false
+      }
+    },
+    {
+      "id": "asbestos_rock_2",
+      "name": "Asbestos-Laden Rock",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 50.0,
+        "color": "gray",
+        "material": "asbestos_rock",
+        "hazard_level": "high"
+      },
+      "states": {
+        "is_wrapped": false
+      }
+    },
+    {
+      "id": "hydraulic_drum_1",
+      "name": "Leaking Drum of Hydraulic Fluid",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 80.0,
+        "color": "blue",
+        "material": "metal",
+        "label": "HIL Ltd. Mine Equipment, 1982",
+        "is_leaking": true
+      },
+      "states": {}
+    },
+    {
+      "id": "air_filtration_unit_1",
+      "name": "Broken Air Filtration Unit",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "condition": "broken",
+        "missing_part": "pressure_valve"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "water_sprayer_1",
+      "name": "Portable Water Sprayer",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 15.0,
+        "color": "yellow",
+        "material": "plastic",
+        "water_level": 50,
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "warning_sign_1",
+      "name": "Warning Sign",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "condition": "faded",
+        "is_knocked_over": true
+      },
+      "states": {}
+    },
+    {
+      "id": "mining_cart_1",
+      "name": "Abandoned Mining Cart",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "rusted_metal",
+        "condition": "partially_filled"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_helmet_1",
+      "name": "Discarded Safety Helmet",
+      "type": "ITEM",
+      "location_id": "in:contaminated_slope",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "condition": "cracked",
+        "logo": "HIL Mining Co."
+      },
+      "states": {}
+    },
+    {
+      "id": "mobile_lab_1",
+      "name": "Mobile Lab Trailer",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "size": [
+          6.0,
+          2.5,
+          3.0
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "functional"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazmat_shower_1",
+      "name": "Hazmat Shower Unit",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "plastic",
+        "water_pressure": "low",
+        "nozzle_condition": "clogged"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "test_kit_1",
+      "name": "Asbestos Test Kit",
+      "type": "ITEM",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "material": "plastic",
+        "condition": "cracked_vial",
+        "provides_abilities": [
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oxygen_tank_1",
+      "name": "Oxygen Tank",
+      "type": "ITEM",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "weight": 10.0,
+        "color": "green",
+        "material": "metal",
+        "filter_status": "expired"
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_cabinet_1",
+      "name": "First-Aid Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "key_location": "rusted_mine_cart_wheel"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "medical_cot_1",
+      "name": "Foldable Medical Cot",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "fabric_metal",
+        "condition": "torn_cover"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Patient Logs",
+      "type": "ITEM",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "wood_metal",
+        "condition": "smudged_entry"
+      },
+      "states": {}
+    },
+    {
+      "id": "air_sampler_1",
+      "name": "Portable Air Sampler",
+      "type": "ITEM",
+      "location_id": "in:decontamination_station",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "material": "plastic_metal",
+        "calibration_status": "overdue"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "bulldozer_1",
+      "name": "Bulldozer",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "size": [
+          5.0,
+          2.5,
+          3.0
+        ],
+        "weight": 8000.0,
+        "is_container": false,
+        "material": "metal",
+        "fuel_status": "empty",
+        "key_status": "in_ignition"
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "waste_container_1",
+      "name": "Sealed Waste Container",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "ASBESTOS - DO NOT OPEN"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ppe_locker_1",
+      "name": "PPE Locker",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "code_location": "under_desk"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "winch_system_1",
+      "name": "Broken Winch System",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "broken"
+      },
+      "states": {
+        "is_soldered": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "weight": 10.0,
+        "color": "red",
+        "material": "metal",
+        "missing_tool": "wrench",
+        "provides_abilities": [
+          "solder",
+          "scratch"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fuel_canister_1",
+      "name": "Spare Fuel Canister",
+      "type": "ITEM",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "weight": 5.0,
+        "color": "yellow",
+        "material": "metal",
+        "condition": "leaking",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Crackling Radio",
+      "type": "ITEM",
+      "location_id": "in:village_encroachment",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "plastic_metal",
+        "condition": "static"
+      },
+      "states": {
+        "is_on": true,
+        "is_playing": false
+      }
+    },
+    {
+      "id": "wrapping_material_1",
+      "name": "Plastic Wrapping Material",
+      "type": "ITEM",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "weight": 1.0,
+        "color": "clear",
+        "material": "plastic",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Industrial Broom",
+      "type": "ITEM",
+      "location_id": "in:equipment_depot",
+      "properties": {
+        "weight": 3.0,
+        "color": "green",
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Portable Printer",
+      "type": "ITEM",
+      "location_id": "in:monitoring_post",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    }
+  ],
+  "abilities": [
+    "fold",
+    "open",
+    "play",
+    "print",
+    "refuel",
+    "rinse",
+    "scratch",
+    "solder",
+    "sweep",
+    "turn_off",
+    "turn_on",
+    "wrap",
+    "close"
+  ]
+}

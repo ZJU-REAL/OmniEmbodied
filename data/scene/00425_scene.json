@@ -1,0 +1,821 @@
+{
+  "description": "A specialized vascular research clinic with diagnostic imaging, interventional procedure, and recovery zones, designed for high-stakes medical teamwork.",
+  "rooms": [
+    {
+      "id": "diagnostic_imaging_suite",
+      "name": "Diagnostic Imaging Suite",
+      "properties": {
+        "type": "medical_imaging"
+      },
+      "connected_to_room_ids": [
+        "interventional_procedure_room",
+        "consultation_office"
+      ]
+    },
+    {
+      "id": "interventional_procedure_room",
+      "name": "Interventional Procedure Room",
+      "properties": {
+        "type": "surgical"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_imaging_suite",
+        "supply_scrub_room"
+      ]
+    },
+    {
+      "id": "physiotherapy_recovery_zone",
+      "name": "Physiotherapy & Recovery Zone",
+      "properties": {
+        "type": "patient_care"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_imaging_suite",
+        "staff_break_nook"
+      ]
+    },
+    {
+      "id": "supply_scrub_room",
+      "name": "Supply & Scrub Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "interventional_procedure_room",
+        "consultation_office"
+      ]
+    },
+    {
+      "id": "consultation_office",
+      "name": "Consultation Office",
+      "properties": {
+        "type": "administrative"
+      },
+      "connected_to_room_ids": [
+        "diagnostic_imaging_suite",
+        "supply_scrub_room"
+      ]
+    },
+    {
+      "id": "staff_break_nook",
+      "name": "Staff Break Nook",
+      "properties": {
+        "type": "break_room"
+      },
+      "connected_to_room_ids": [
+        "physiotherapy_recovery_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "mri_scanner_1",
+      "name": "MRI Scanner (Siemens Magnetom Spectra)",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "size": [
+          2.2,
+          1.8,
+          2.0
+        ],
+        "weight": 3000.0,
+        "is_container": false,
+        "model_number": "Spectra",
+        "status": "READY"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "ultrasound_cart_1",
+      "name": "Ultrasound Cart (GE Logiq E10)",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "brand": "GE",
+        "screen_content": "Doppler flow image of pelvic veins"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "contrast_media_injector_1",
+      "name": "Contrast Media Injector",
+      "type": "ITEM",
+      "location_id": "on:ultrasound_cart_1",
+      "properties": {
+        "weight": 5.2,
+        "pressure_setting": 300,
+        "contents": "gadolinium",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "transducer_probe_1",
+      "name": "Ergonomic Transducer Probe (ABDOMINAL)",
+      "type": "ITEM",
+      "location_id": "in:ultrasound_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "type": "ABDOMINAL",
+        "material": "plastic",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "transducer_probe_2",
+      "name": "Ergonomic Transducer Probe (PELVIC)",
+      "type": "ITEM",
+      "location_id": "in:ultrasound_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "type": "PELVIC",
+        "material": "plastic",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "transducer_probe_3",
+      "name": "Ergonomic Transducer Probe (LYMPHATIC)",
+      "type": "ITEM",
+      "location_id": "in:ultrasound_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "type": "LYMPHATIC",
+        "material": "plastic",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "obstruction": "partially obscured by sensor cable"
+      },
+      "states": {}
+    },
+    {
+      "id": "lead_apron_1",
+      "name": "Lead Apron (Size L)",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "weight": 3.5,
+        "size": "L",
+        "condition": "good",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "lead_apron_2",
+      "name": "Lead Apron (Size M)",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "weight": 3.0,
+        "size": "M",
+        "condition": "crumpled",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "noise_canceling_headphones_1",
+      "name": "Noise-Canceling Headphones",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "weight": 0.3,
+        "battery_level": 23,
+        "brand": "Sony",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "weight": 2.1,
+        "status": "misaligned",
+        "brand": "SecurTech",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "fluoroscopy_table_1",
+      "name": "Fluoroscopy Table (Toshiba Infinix-i)",
+      "type": "FURNITURE",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.0
+        ],
+        "weight": 250.0,
+        "capacity": 250,
+        "status": "lowered"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "radiation_shield_glass_1",
+      "name": "Radiation Shield Glass",
+      "type": "FURNITURE",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.5
+        ],
+        "weight": 150.0,
+        "condition": "slight smudge"
+      },
+      "states": {}
+    },
+    {
+      "id": "embolization_coil_tray_1",
+      "name": "Embolization Coil Tray",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 2.5,
+        "contents": "12 units, sizes 3mm-8mm",
+        "missing": "5mm NYLON",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "sclerosant_vial_1",
+      "name": "Sclerosant Vial (0.5% Polidocanol)",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 0.1,
+        "concentration": "0.5%",
+        "cap_color": "blue",
+        "label": "TESTED 04/24",
+        "provides_abilities": [
+          "shake"
+        ]
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "sclerosant_vial_2",
+      "name": "Sclerosant Vial (0.5% Polidocanol)",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 0.1,
+        "concentration": "0.5%",
+        "cap_color": "blue",
+        "label": "smudged",
+        "provides_abilities": [
+          "shake"
+        ]
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "sclerosant_vial_3",
+      "name": "Sclerosant Vial (1.0% Polidocanol)",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 0.1,
+        "concentration": "1.0%",
+        "cap_color": "blue",
+        "label": "TESTED 04/24",
+        "provides_abilities": [
+          "shake"
+        ]
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "laser_fiber_optic_guide_1",
+      "name": "Laser Fiber Optic Guide",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 0.5,
+        "status": "sterile",
+        "expiry": "next month",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "iv_pole_1",
+      "name": "IV Pole",
+      "type": "FURNITURE",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          1.8
+        ],
+        "weight": 8.0,
+        "wheels": "locked",
+        "saline_level": "30%"
+      },
+      "states": {}
+    },
+    {
+      "id": "surgical_cautery_pen_1",
+      "name": "Surgical Cautery Pen",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 0.3,
+        "condition": "tip charred",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {
+        "is_scraped": false
+      }
+    },
+    {
+      "id": "foot_pedal_1",
+      "name": "Foot Pedal",
+      "type": "ITEM",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "weight": 1.2,
+        "status": "tangled cord",
+        "function": "table adjustment"
+      },
+      "states": {}
+    },
+    {
+      "id": "adjustable_recliner_1",
+      "name": "Adjustable Recliner",
+      "type": "FURNITURE",
+      "location_id": "in:physiotherapy_recovery_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 35.0,
+        "material": "vinyl",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "compression_garment_1",
+      "name": "Compression Garment (Size M)",
+      "type": "ITEM",
+      "location_id": "in:physiotherapy_recovery_zone",
+      "properties": {
+        "weight": 0.5,
+        "size": "M",
+        "material": "nylon",
+        "provides_abilities": [
+          "fold"
+        ]
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "cryotherapy_station_1",
+      "name": "Cryotherapy Station",
+      "type": "FURNITURE",
+      "location_id": "in:physiotherapy_recovery_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 50.0,
+        "contents": "ice packs, chilled water bottles"
+      },
+      "states": {}
+    },
+    {
+      "id": "glass_cabinet_1",
+      "name": "Glass Cabinet (Supplies)",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": "gloves, sterile drapes"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "narcotics_drawer_1",
+      "name": "Narcotics Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "security": "dual authentication"
+      },
+      "states": {
+        "is_locked": false
+      }
+    },
+    {
+      "id": "dr_kwon_keycard_1",
+      "name": "Dr. Kwon's Keycard",
+      "type": "ITEM",
+      "location_id": "in:consultation_office",
+      "properties": {
+        "weight": 0.1,
+        "owner": "Dr. Kwon",
+        "location": "under stack of files",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_log_1",
+      "name": "Patient Log",
+      "type": "ITEM",
+      "location_id": "in:consultation_office",
+      "properties": {
+        "weight": 0.8,
+        "location": "whiteboard",
+        "content": "treatment plans",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "keurig_machine_1",
+      "name": "Keurig Machine",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_nook",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.4
+        ],
+        "weight": 5.0,
+        "status": "operational",
+        "contents": "assorted pods"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_nook",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "half-empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mri_phantom_dummy_1",
+      "name": "MRI Phantom Dummy",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_imaging_suite",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "purpose": "calibration"
+      },
+      "states": {}
+    },
+    {
+      "id": "lead_lined_supply_cart_1",
+      "name": "Lead-Lined Supply Cart",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 200.0,
+        "contents": "fully loaded",
+        "mobility": "requires steering"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "weight": 1.2,
+        "purpose": "instrument adjustment",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "in:consultation_office",
+      "properties": {
+        "weight": 0.1,
+        "ink_color": "black",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilizer_machine_1",
+      "name": "Sterilizer Machine",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 80.0,
+        "status": "operational",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:consultation_office",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Sony",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "suture_kit_1",
+      "name": "Suture Kit",
+      "type": "ITEM",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "weight": 0.3,
+        "contents": "needle and thread",
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {
+        "is_sewn": false
+      }
+    },
+    {
+      "id": "toaster_1",
+      "name": "Toaster",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_nook",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.25
+        ],
+        "weight": 2.5,
+        "status": "operational",
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bread_slice_1",
+      "name": "Bread Slice",
+      "type": "ITEM",
+      "location_id": "in:staff_break_nook",
+      "properties": {
+        "weight": 0.05,
+        "type": "whole wheat",
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {
+        "is_toasted": false
+      }
+    },
+    {
+      "id": "press_machine_1",
+      "name": "Press Machine",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 90.0,
+        "purpose": "deforming objects",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "test_vial_1",
+      "name": "Test Vial",
+      "type": "ITEM",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {
+        "is_crushed": false
+      }
+    },
+    {
+      "id": "flickering_light_1",
+      "name": "Flickering Fluorescent Light",
+      "type": "FURNITURE",
+      "location_id": "in:supply_scrub_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.1
+        ],
+        "weight": 3.0,
+        "status": "flickering",
+        "urgency": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "iv_pump_1",
+      "name": "IV Pump",
+      "type": "FURNITURE",
+      "location_id": "in:interventional_procedure_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 4.0,
+        "status": "beeping",
+        "battery": "low"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "crush",
+    "fold",
+    "hang_up",
+    "label",
+    "lock",
+    "open",
+    "photograph",
+    "raise",
+    "record_video",
+    "scrape",
+    "sew",
+    "shake",
+    "sterilize",
+    "toast",
+    "type",
+    "close"
+  ]
+}

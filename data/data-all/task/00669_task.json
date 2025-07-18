@@ -10,9 +10,49 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the damaged_drone_1 on the briefing_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "damaged_drone_1",
+          "location_id": "on:briefing_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the overhead_projector_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "overhead_projector_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item and place it in the equipment_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "damaged_drone_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
     {
       "task_description": "Use the toolbox_1 to screw in the damaged_drone_1.",
       "task_category": "tool_use",
@@ -20,6 +60,84 @@
         {
           "id": "damaged_drone_1",
           "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to screw in the broken_generator_1 and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_generator_1",
+          "is_screwed_in": true
+        },
+        {
+          "id": "broken_generator_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the radio_console_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "radio_console_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the projector_screen_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "projector_screen_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_situation_table_1 to the briefing_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_situation_table_1",
+          "location_id": "in:briefing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the blood_refrigerator_1 to the medical_triage_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blood_refrigerator_1",
+          "location_id": "in:medical_triage_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked_document_cabinet_1 to the briefing_room and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_document_cabinet_1",
+          "location_id": "in:briefing_room"
+        },
+        {
+          "id": "locked_document_cabinet_1",
+          "is_open": true
         }
       ]
     }

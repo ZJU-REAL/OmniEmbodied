@@ -6,9 +6,65 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the crt_monitor_1 on the bulletin_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the phone_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "phone_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, beige item on the front_desk_1 and place it in the second_floor_hallway.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "in:second_floor_hallway"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only sticky-note-covered item on the front_desk_1 and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "phone_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the key_cabinet_1 using the keyring_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "key_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
     {
       "task_description": "Use the charger_1 to recharge the power_drill_1 and then turn it on.",
       "task_category": "compound_reasoning",
@@ -16,6 +72,64 @@
         {
           "id": "power_drill_1",
           "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the vending_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the safe_1 to the ground_floor_lobby.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "location_id": "in:ground_floor_lobby"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the laminate_flooring_1 to the unit_203.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laminate_flooring_1",
+          "location_id": "in:unit_203"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the photocopier_1 to the ground_floor_lobby and use it to copy the signed lease_document_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:ground_floor_lobby"
+        },
+        {
+          "id": "lease_document_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the drywall_panel_1 to the unit_305 and use the glue_dispenser_1 to attach it to the half_painted_wall_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "drywall_panel_1",
+          "location_id": "in:unit_305"
+        },
+        {
+          "id": "half_painted_wall_1",
+          "is_glued": true
         }
       ]
     }

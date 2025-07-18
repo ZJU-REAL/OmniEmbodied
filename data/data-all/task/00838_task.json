@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the almucantar_staff_1 on the adjustable_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "almucantar_staff_1",
+          "location_id": "on:adjustable_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the calipers_1 in the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calipers_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the tarnished brass tool and place it in the tool_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calipers_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the half-full chemical bottle with a blue cap and place it on the central_worktable_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "location_id": "on:central_worktable_1"
+        }
+      ]
+    },
     {
       "task_description": "Open the locked tool_chest_1 using the sticky_note_1.",
       "task_category": "tool_use",
@@ -20,6 +70,47 @@
         {
           "id": "tool_chest_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the overstuffed shelving_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_worktable_1 to the observation_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_worktable_1",
+          "location_id": "in:observation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the equatorial_mount_1 to the main_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "equatorial_mount_1",
+          "location_id": "in:main_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the telescope_1 to the storage_closet and hide it using the lab_coat_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "telescope_1",
+          "location_id": "in:storage_closet",
+          "is_hidden": true
         }
       ]
     }

@@ -1,0 +1,166 @@
+{
+  "task_background": "Secure and neutralize a Level-3 biohazard breach in the biomedical research lab.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the biohazard_sample_1 in the bio_waste_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biohazard_sample_1",
+          "location_id": "in:bio_waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the emergency_shutdown_panel_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_panel_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the glowing blue biohazard sample and place it in the bio-waste bin.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "biohazard_sample_1",
+          "location_id": "in:bio_waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the intact hazmat suit and place it in the decontamination airlock.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hazmat_suit_2",
+          "location_id": "in:decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilization tool to sterilize the UV sterilizer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "uv_sterilizer_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the drain tool to drain the nanocyte culture pod.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "nanocyte_culture_pod_1",
+          "is_drained": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilization tool to sterilize the largest container in the containment chamber.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "nanocyte_culture_pod_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the drain tool to drain the malfunctioning nanocyte culture pod.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "nanocyte_culture_pod_1",
+          "is_drained": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency_shutdown_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the emergency oxygen tank to the decontamination airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_oxygen_tank_1",
+          "location_id": "in:decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the electron microscope to the control room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "electron_microscope_1",
+          "location_id": "in:control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy nanocyte culture pod to the decontamination airlock and sterilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "nanocyte_culture_pod_1",
+          "location_id": "in:decontamination_airlock"
+        },
+        {
+          "id": "nanocyte_culture_pod_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy refrigerated sample storage to the diagnostics lab and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_sample_storage_1",
+          "location_id": "in:diagnostics_lab"
+        },
+        {
+          "id": "refrigerated_sample_storage_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00902"
+}

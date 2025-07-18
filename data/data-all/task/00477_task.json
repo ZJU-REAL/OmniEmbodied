@@ -10,15 +10,125 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place training_ball_1 on the triple_monitor_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "training_ball_1",
+          "location_id": "on:triple_monitor_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place radar_gun_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radar_gun_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest training ball and place it in the equipment_storage.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
         {
           "id": "training_ball_3",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the cracked training ball and place it on the workbench for repair.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "training_ball_2",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pump to inflate the water cooler.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "water_cooler_1",
+          "is_pumped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the motion sensor that needs re-pairing and place it on the charging dock.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "motion_sensor_2",
+          "location_id": "on:sensor_charging_dock_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the cryotherapy pod.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryotherapy_pod_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the adjustable pitching mound to the main training floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "adjustable_pitching_mound_1",
+          "location_id": "in:main_training_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the player lockers to the locker area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "player_lockers_1",
+          "location_id": "in:locker_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the motion-capture rig to the data analysis station and align its cameras.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_capture_rig_1",
+          "location_id": "in:data_analysis_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the resistance band system to the equipment storage and adjust its tension to the highest setting.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "resistance_band_system_1",
           "location_id": "in:equipment_storage"
         }
       ]

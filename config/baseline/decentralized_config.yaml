@@ -43,13 +43,22 @@ communication:
     - "status_update"     # Status update
     - "strategy_discussion" # Strategy discussion
 
+# 历史记录格式配置
+history:
+  max_history_length: 10  # -1 表示不限制历史长度
+  # 历史记录格式配置
+  format:
+    include_thought: true   # 是否在历史记录中包含Thought内容
+    show_execution_status: true  # 是否显示执行状态
+
 # Task execution settings
 execution:
   max_total_steps: 300  # Maximum total execution steps
+  max_steps_per_task: 20  # Maximum steps per subtask (每个任务的最大步数)
 
-# Task evaluator settings
+# Task evaluator settings (保持向后兼容)
 task_evaluator:
-  max_steps_per_task: 30  # Maximum steps per subtask
+  max_steps_per_task: 30  # Maximum steps per subtask (已废弃，请使用execution.max_steps_per_task)
 
 # Evaluation mode settings
 evaluation:

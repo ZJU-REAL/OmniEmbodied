@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 100.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the misplaced customs seal on the dockmaster’s terminal.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "customs_seal_1",
+          "location_id": "on:dockmaster_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the calibration tool on the barcode printer.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_tool_1",
+          "location_id": "on:barcode_printer_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the red customs seal with the inscription 'SHANGHAI PORT AUTHORITY' and place it on the dockmaster’s terminal.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,108 @@
         {
           "id": "customs_seal_1",
           "location_id": "on:dockmaster_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the sealed sample case with the blue hazard stripe and move it to the high-value storage vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_case_1",
+          "location_id": "in:high_value_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the climate control panel in the high-value storage vault using the maintenance manual.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "climate_control_panel_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner to scan the mislabelled crate.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mislabelled_crate_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest, heaviest container in the dockyard and use the forklift to move it to the main sorting floor.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "refrigerated_container_1",
+          "location_id": "in:main_sorting_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device (climate control panel) in the high-value storage vault and repair it using the maintenance manual.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "climate_control_panel_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the stuck cargo ramp.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cargo_ramp_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 40-ton gantry crane to the main sorting floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gantry_crane_1",
+          "location_id": "in:main_sorting_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated container to the customs inspection office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_container_1",
+          "location_id": "in:customs_inspection_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, jammed vending machine to the repair bay and fix it using the maintenance manual.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "location_id": "in:worker_break_room",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, bent shelving unit to the repair bay and fix it using the saw and maintenance manual.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_a7_1",
+          "location_id": "in:main_sorting_floor",
+          "is_broken": false
         }
       ]
     }

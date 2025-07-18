@@ -117,21 +117,20 @@ class TaskGenerator(BaseGenerator):
             # Add metadata (abilities now stored in scene, not task)
             task_data['scene_id'] = scene_id
 
-            # Note: Task validation is disabled
-            # To enable validation, uncomment the following lines:
-            # is_valid, errors, fixed_task_data, fixes_applied = self.task_validator.validate_and_fix_task_data(
-            #     task_data, scene_data, auto_fix=True
-            # )
-            # if fixes_applied:
-            #     self.logger.info(f"[Thread {thread_id}] Applied {len(fixes_applied)} automatic fixes:")
-            #     for fix in fixes_applied:
-            #         self.logger.info(f"[Thread {thread_id}]   - {fix}")
-            #     task_data = fixed_task_data
-            # if not is_valid:
-            #     self.logger.error(f"[Thread {thread_id}] Validation failed for scene {scene_id} with {len(errors)} errors:")
-            #     for error in errors:
-            #         self.logger.error(f"[Thread {thread_id}]   - {error}")
-            #     return None
+            # Task validation is enabled
+            is_valid, errors, fixed_task_data, fixes_applied = self.task_validator.validate_and_fix_task_data(
+                task_data, scene_data, auto_fix=True
+            )
+            if fixes_applied:
+                self.logger.info(f"[Thread {thread_id}] Applied {len(fixes_applied)} automatic fixes:")
+                for fix in fixes_applied:
+                    self.logger.info(f"[Thread {thread_id}]   - {fix}")
+                task_data = fixed_task_data
+            if not is_valid:
+                self.logger.error(f"[Thread {thread_id}] Validation failed for scene {scene_id} with {len(errors)} errors:")
+                for error in errors:
+                    self.logger.error(f"[Thread {thread_id}]   - {error}")
+                return None
 
             # Step 6: Save task file
             task_filename = f"{str(scene_id).zfill(5)}_task.json"

@@ -1,51 +1,35 @@
 {
-  "task_background": "Prepare the controversial chemical research lab for a critical safety inspection by resolving hazards and organizing materials.",
+  "task_background": "Prepare the military barracks for an upcoming high-stakes inspection by ensuring all equipment is properly stored, cleaned, and maintained.",
   "agents_config": [
     {
       "name": "robot_1",
       "max_grasp_limit": 1.0,
-      "max_weight": 30.0,
-      "max_size": 1.5
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
     {
-      "task_description": "Place bpa_sample_tray_1 in the fume_hood_1.",
-      "task_category": "direct_command",
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the mini-fridge.",
+      "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "bpa_sample_tray_1",
-          "location_id": "in:fume_hood_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Find the heaviest, glass item in the toxicology_section and place it on the central_lab_bench_1.",
-      "task_category": "attribute_reasoning",
-      "validation_checks": [
-        {
-          "id": "chemical_bottle_1",
-          "location_id": "on:central_lab_bench_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Use the decontamination_cloth_1 and chemical_polish_1 to polish the microscope_station_1.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "microscope_station_1",
-          "is_polished": true
-        }
-      ]
-    },
-    {
-      "task_description": "Find the only item labeled 'CORROSIVE – DO NOT MIX' in the toxicology_section and use the contaminant_1 to contaminate it.",
-      "task_category": "compound_reasoning",
-      "validation_checks": [
-        {
-          "id": "chemical_bottle_1",
-          "is_pure": false
+          "id": "mini_fridge_1",
+          "is_on": false
         }
       ]
     }

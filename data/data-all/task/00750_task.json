@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the remote field outpost for an upcoming high-precision aerial photography survey mission.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the robotic_camera_sled_1 on the gyro_stabilized_tripod_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "robotic_camera_sled_1",
+          "location_id": "on:gyro_stabilized_tripod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the ground_marking_spray_1 in the storage_maintenance room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ground_marking_spray_1",
+          "location_id": "in:storage_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the capture_bay and lower it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "motorized_gantry_system_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the flickering display in the capture_bay and move it to the control_hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wind_sensor_pole_1",
+          "location_id": "in:control_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to disconnect the overloaded_power_strip_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "overloaded_power_strip_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tiny_hex_key_1 to open the emi_shield_panel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "emi_shield_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the lens case with the red dot calibration mark and close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lens_case_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spray_bottle_1 to moisten the corner_torn calibration_target_booklet_1 and then close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_target_booklet_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the stove_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stove_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the motorized_gantry_system_1 to the storage_maintenance room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motorized_gantry_system_1",
+          "location_id": "in:storage_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_server_rack_1 to the capture_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_server_rack_1",
+          "location_id": "in:capture_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the workbench_1 with the scratched surface to the control_hub and then turn on the stove_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:control_hub"
+        },
+        {
+          "id": "stove_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gyro_stabilized_tripod_1 to the storage_maintenance room and then use the screwdriver_1 to unscrew the battery_compartment of the gps_logger_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gyro_stabilized_tripod_1",
+          "location_id": "in:storage_maintenance"
+        },
+        {
+          "id": "gps_logger_1",
+          "is_screwed_in": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00750"
+}

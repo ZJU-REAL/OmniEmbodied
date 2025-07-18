@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place gaming_pc_1 on steel_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "gaming_pc_1",
+          "location_id": "on:steel_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place monitor_1 on steel_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:steel_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black gaming PC with blue RGB lighting and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gaming_pc_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the monitor with the brand Dell and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to tighten the loose screws in the survivor_mug_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "loose_screws_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to clean the dirty gaming_pc_2.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "gaming_pc_2",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver to tighten the loose screws in the survivor_mug_1 and then place the mug on the metal_shelves_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,64 @@
         {
           "id": "survivor_mug_1",
           "location_id": "on:metal_shelves_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to clean the dirty gaming_pc_2 and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "gaming_pc_2",
+          "is_dirty": false
+        },
+        {
+          "id": "gaming_pc_2",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked footlocker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "footlocker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy metal_shelves_1 to the main_gaming_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelves_1",
+          "location_id": "in:main_gaming_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy diesel_generator_1 to the scavengers_stash.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diesel_generator_1",
+          "location_id": "in:scavengers_stash"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy microwave_1 to the power_cooling_station and use the wrench to tighten any loose parts.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "microwave_1",
+          "location_id": "in:power_cooling_station"
+        },
+        {
+          "id": "microwave_1",
+          "is_loose": false
         }
       ]
     }

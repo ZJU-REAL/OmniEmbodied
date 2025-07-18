@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the reservation_book_1 on the host_stand_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "reservation_book_1",
+          "location_id": "on:host_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wine_bottle_1 on the wine_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wine_bottle_1",
+          "location_id": "on:wine_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black coat and place it on the coat_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coat_1",
+          "location_id": "on:coat_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the wine bottle with the red wax seal and place it on the wine_shelf_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wine_bottle_1",
+          "location_id": "on:wine_shelf_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the bottle_opener_1 to unseal the wine_bottle_1.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "wine_bottle_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the light_bulb_1 to replace the flickering bulb in the chandelier_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chandelier_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to wash the prep_table_1 and then polish it with the polish_cloth_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "prep_table_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the wooden pizza peel and use it to scrape the pizza_oven_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "pizza_oven_1",
+          "is_scraped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the photocopier_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the coat_rack_1 to the storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "coat_rack_1",
+          "location_id": "in:storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the kitchen.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:kitchen"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the pizza_oven_1 to the storage room and use the air_pump_1 to inflate its tires.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pizza_oven_1",
+          "location_id": "in:storage"
+        },
+        {
+          "id": "pizza_oven_1",
+          "is_inflated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigerator_1 to the dining room and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": "in:dining_room"
+        },
+        {
+          "id": "refrigerator_1",
+          "is_on": true
         }
       ]
     }

@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,148 @@
         {
           "id": "nec_d3_227_tape_reel_1",
           "location_id": "on:microscope_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the chipped coffee mug in the contaminant bin.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:contaminant_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black handheld device and place it on the analyst desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "radiation_scanner_1",
+          "location_id": "on:analyst_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only yellow cleaning tool and place it next to the stainless steel rack.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "decontamination_sprayer_1",
+          "location_id": "in:media_intake_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the decontamination sprayer to scrub the stainless steel rack.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "stainless_steel_rack_1",
+          "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to sign the reference manual.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "reference_manual_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the gold-plated recovery cable to pair the terminal array with the mainframe rack.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "terminal_array_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the staple remover to unstaple the post-it notes and then place them on the whiteboard.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "post_it_notes_1",
+          "is_stapled": false
+        },
+        {
+          "id": "post_it_notes_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the hot-air rework station.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hot_air_rework_station_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the contaminant bin.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "contaminant_bin_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the robotic tape loader to the cold storage vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_tape_loader_1",
+          "location_id": "in:cold_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mainframe rack to the forensic workbench cluster.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mainframe_rack_1",
+          "location_id": "in:forensic_workbench_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the IBM 3390 Disk Drive to the data extraction hub and use the gold-plated recovery cable to pair it with the terminal array.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ibm_3390_disk_drive_1",
+          "location_id": "in:data_extraction_hub"
+        },
+        {
+          "id": "terminal_array_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigerated shelving to the media intake airlock and use the decontamination sprayer to scrub it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_shelving_1",
+          "location_id": "in:media_intake_airlock"
+        },
+        {
+          "id": "refrigerated_shelving_1",
+          "is_locked": true
         }
       ]
     }

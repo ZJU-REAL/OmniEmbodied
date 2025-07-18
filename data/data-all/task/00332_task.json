@@ -6,9 +6,55 @@
       "max_grasp_limit": 2,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the relay_tracker_tablet_1 on the security_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "relay_tracker_tablet_1",
+          "location_id": "on:security_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the route_map_1 on the uniform_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "route_map_1",
+          "location_id": "on:uniform_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red toolbox and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and place it in the equipment_repair_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:equipment_repair_bay"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken relay_tracker_tablet_1.",
       "task_category": "tool_use",
@@ -16,6 +62,87 @@
         {
           "id": "relay_tracker_tablet_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken welding_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "welding_kit_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to repair the largest, wooden table's only flashing red device.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to sign the security_keycard_1 and place it on the security_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "security_keycard_1",
+          "is_signed": true,
+          "location_id": "on:security_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the sealed emergency_torch_case_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_torch_case_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy steel workbench to the main_operations_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:main_operations_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic press to the equipment_repair_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:equipment_repair_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:equipment_repair_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy projection wall to the ceremonial_prep_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "projection_wall_1",
+          "location_id": "in:ceremonial_prep_room"
         }
       ]
     }

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place red_button_1 on whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "red_button_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_cup_1 in the minifridge_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "in:minifridge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the medical bay and place it on the treatment_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "location_id": "on:treatment_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the main tactical hub and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "holographic_display_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Repair the cracked screen of tactical_tablet_1 using the polish_cloth_1.",
       "task_category": "tool_use",
@@ -20,6 +70,100 @@
         {
           "id": "tactical_tablet_1",
           "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the locked_cabinet_1 using the spare_keycard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the digital_scale_1 to weigh the projector_bulb_1 and then place it in the storage_closet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "projector_bulb_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only magnetic whiteboard in the main tactical hub and write on it using the whiteboard_marker_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the red_button_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "red_button_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the triple_monitor_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "triple_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the holographic_display_1 to the analyst_den.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "holographic_display_1",
+          "location_id": "in:analyst_den"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the treatment_table_1 to the main_tactical_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "treatment_table_1",
+          "location_id": "in:main_tactical_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy shelving_unit_1 to the medical bay and unlock it using the spare_keycard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:medical_bay"
+        },
+        {
+          "id": "shelving_unit_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the projector_bulb_1 to the main_tactical_hub and install it in the holographic_display_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "projector_bulb_1",
+          "location_id": "in:holographic_display_1"
         }
       ]
     }

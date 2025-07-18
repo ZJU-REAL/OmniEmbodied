@@ -1,0 +1,158 @@
+{
+  "task_background": "Emergency response and infrastructure repair at the Golden Gate Bridge during a violent storm, featuring flooded sections, structural damage, and heavy machinery requiring multi-agent collaboration.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 40.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 40.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the steel_pipe_1 in the staging_area.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "steel_pipe_1",
+          "location_id": "in:staging_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the radio_1 on the folding_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the bridge_deck_westbound and move it to the staging_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "guardrail_1",
+          "location_id": "in:staging_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the bridge_deck_westbound and move it to the command_post.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stress_sensor_1",
+          "location_id": "in:command_post"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the jaw_of_life_1 to damage the flipped tractor_trailer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tractor_trailer_1",
+          "is_broken": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the battery_charger_1 to recharge the floodlight_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "floodlight_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the insulated_cutters_1 to cut the live electrical_wire_1 and then move it to the staging_area.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "electrical_wire_1",
+          "location_id": "in:staging_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to measure the cable_tension in the support_tower and then adjust the scaffolding_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "scaffolding_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the first_aid_kit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "first_aid_kit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the winch_1 to the bridge_deck_westbound.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "winch_1",
+          "location_id": "in:bridge_deck_westbound"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the flatbed_truck_1 to the traffic_control.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "flatbed_truck_1",
+          "location_id": "in:traffic_control"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy scaffolding_1 to the bridge_deck_westbound and use the drill_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "scaffolding_1",
+          "location_id": "in:bridge_deck_westbound"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy generator_1 to the staging_area and use the wrench_1 to loosen its components.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "location_id": "in:staging_area"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00126"
+}

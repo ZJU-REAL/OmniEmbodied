@@ -10,15 +10,163 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Neumann U87 Microphone on the music stand.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "neumann_microphone_1",
+          "location_id": "on:music_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the roll of FRAGILE Tape on the shipping scale.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fragile_tape_1",
+          "location_id": "on:shipping_scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver microphone with the warning label and place it in the vocal isolation booth.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "neumann_microphone_1",
+          "location_id": "in:vocal_isolation_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black spiral-bound notebook and place it on the mixing console.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lyric_notebook_1",
+          "location_id": "on:mixing_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering iron to tighten the buzzing tweeter on the Yamaha HS8 Monitor Speaker.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "monitor_speaker_left_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the glue dispenser to fix the warped shelving unit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "is_glued": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black Behringer mixer with the broken jack and turn it on.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "headphone_mixer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red hard drive labeled with today's date and place it in the server rack.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "final_master_hard_drive_1",
+          "location_id": "in:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm control panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "control_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the multi-monitor social media setup.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_setup_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 1940s Wurlitzer Electric Piano to the storage lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wurlitzer_piano_1",
+          "location_id": "in:storage_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the mixing station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:mixing_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the unstable vinyl pallet to the shipping area and secure it with the fragile tape.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vinyl_pallet_1",
+          "location_id": "in:merch_packing_zone"
+        },
+        {
+          "id": "fragile_tape_1",
+          "location_id": "on:vinyl_pallet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the 48-channel mixing console to the live recording booth and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mixing_console_1",
+          "location_id": "in:live_recording_booth"
+        },
+        {
+          "id": "mixing_console_1",
           "is_on": true
         }
       ]

@@ -10,9 +10,49 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place peptide_vial_1 in the fume_hood_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "peptide_vial_1",
+          "location_id": "in:fume_hood_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black peptide vial on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "peptide_vial_3",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilizer to sterilize the pipette_set_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pipette_set_1",
+          "is_sterile": true
+        }
+      ]
+    },
     {
       "task_description": "Measure the Zn²⁺ Stock Solution using the measuring tape.",
       "task_category": "compound_reasoning",
@@ -20,6 +60,118 @@
         {
           "id": "zn_stock_solution_1",
           "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the biohazard_fridge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biohazard_fridge_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ITC-500 to the spectroscopy_suite.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "itc_500_1",
+          "location_id": "in:spectroscopy_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the UV Sterilizer to the supply_closet and sterilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "uv_sterilizer_1",
+          "location_id": "in:supply_closet"
+        },
+        {
+          "id": "uv_sterilizer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue peptide vial in the cold_storage.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "peptide_vial_2",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the workbench and place it in the supply_closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the broom to sweep the main_wet_lab.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "main_wet_lab",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Measure the pH of the Zn²⁺ Stock Solution using the pH meter and place it in the cold_storage.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "zn_stock_solution_1",
+          "is_measured": true
+        },
+        {
+          "id": "ph_meter_1",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hazard_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazard_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the CD-200 to the spectroscopy_suite.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cd_200_1",
+          "location_id": "in:spectroscopy_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the workbench to the main_wet_lab and sterilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:main_wet_lab"
+        },
+        {
+          "id": "workbench_1",
+          "is_sterile": true
         }
       ]
     }

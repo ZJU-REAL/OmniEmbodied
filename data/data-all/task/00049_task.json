@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place frame_segment_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "frame_segment_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the neon pigment jar in the design_nook.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "neon_pigment_jar_1",
+          "location_id": "in:design_nook"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest marble slab and place it in the showroom.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,106 @@
         {
           "id": "marble_slab_1",
           "location_id": "in:showroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the neon-yellow frame segment that is unwelded and place it in the material_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "frame_segment_1",
+          "location_id": "in:material_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken clamp using the flattening roller.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_clamp_1",
+          "is_flat": true
+        }
+      ]
+    },
+    {
+      "task_description": "Refuel the forklift using the fuel can.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "is_fueled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding torch to weld the neon-yellow frame segment on the central workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "frame_segment_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the upholstery gun to flatten the rock-shaped cushion panel.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cushion_panel_1",
+          "is_flat": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the gantry crane.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gantry_crane_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the marble slab with the irregular vein pattern to the main workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "marble_slab_1",
+          "location_id": "in:main_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the half-assembled couch to the showroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "half_assembled_couch_1",
+          "location_id": "in:showroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial laser cutter to the design nook for calibration.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_cutter_1",
+          "location_id": "in:design_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the water-jet cutter station to the main workshop and ensure it is operational.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_jet_cutter_1",
+          "location_id": "in:main_workshop"
         }
       ]
     }

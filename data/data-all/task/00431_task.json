@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the probiotic_trial_kit_1 in the incubator_3.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "probiotic_trial_kit_1",
+          "location_id": "in:incubator_3"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the refrigerator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the sample_processing_storage and place it in the waste_bin_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a calibration error and place it on the sample_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ph_meter_1",
+          "location_id": "on:sample_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge_1 using the screwdriver_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_paired": true
+        }
+      ]
+    },
     {
       "task_description": "Use the pipette_set_1 to measure the misplaced_slide_1 and place it in the incubator_2.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,56 @@
         {
           "id": "misplaced_slide_1",
           "location_id": "in:incubator_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the grinder_1 to grind the contaminated petri_dish_1 and place it in the waste_bin_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "petri_dish_1",
+          "location_id": "in:waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disconnect the co2_tank_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "co2_tank_1",
+          "is_connected": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ultra_low_freezer_1 to the collaborative_workspace.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ultra_low_freezer_1",
+          "location_id": "in:collaborative_workspace"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the electron_microscope_1 to the sample_processing_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "electron_microscope_1",
+          "location_id": "in:sample_processing_storage"
         }
       ]
     }

@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the digital manifest tablet on the sorting table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "manifest_tablet_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the inspection conveyor belt.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black digital manifest tablet with low battery and place it on the admin office desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "manifest_tablet_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vaccine crate with the highest temperature and move it to the cold storage vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vaccine_crate_1",
+          "location_id": "in:cold_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to unwrap the contamination test kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "test_kit_1",
+          "is_wrapped": false
+        }
+      ]
+    },
     {
       "task_description": "Use the soldering iron to repair the broken temperature logger.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,80 @@
         {
           "id": "temperature_logger_1",
           "is_soldered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vaccine crate labeled 'EXPERIMENTAL' and use the dolly to move it to the dispatch loading zone.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "vaccine_crate_1",
+          "location_id": "in:dispatch_loading_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial forklift.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm on the refrigeration unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the vaccine pallet to the dispatch loading zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vaccine_pallet_1",
+          "location_id": "in:dispatch_loading_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial pallet racking to the main sorting floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_racking_1",
+          "location_id": "in:main_sorting_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "location_id": "in:quality_control_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sealed medical crate to the cold storage vault and use the keycard to unlock the refrigeration unit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_crate_1",
+          "location_id": "in:cold_storage_vault"
+        },
+        {
+          "id": "refrigeration_unit_1",
+          "is_locked": false
         }
       ]
     }

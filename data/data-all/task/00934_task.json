@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the computer_terminal_1 on the glass_display_podium_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "computer_terminal_1",
+          "location_id": "on:glass_display_podium_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the financing_binder_1 in the sales_counter_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "financing_binder_1",
+          "location_id": "in:sales_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the sales_counter_1 and place it in the parts_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "customer_complaint_log_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver item in the showroom_floor that is a container and place it in the service_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "silver_blue_sl_special_1",
+          "location_id": "in:service_bay"
+        }
+      ]
+    },
     {
       "task_description": "Use the staple_remover_1 to unstaple the repair_order_1.",
       "task_category": "tool_use",
@@ -20,6 +70,102 @@
         {
           "id": "repair_order_1",
           "is_stapled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the grease_stained_mug_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "grease_stained_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the drill_1 to drill the metal_sheet_1 and then place it in the tool_chest_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "metal_sheet_1",
+          "is_drilled": true
+        },
+        {
+          "id": "metal_sheet_1",
+          "location_id": "in:tool_chest_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item in the service_bay that is both dirty and made of metal, clean it with the cleaning_rag_1, and place it on the workbench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dented_oil_can_1",
+          "is_dirty": false
+        },
+        {
+          "id": "dented_oil_can_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the forklift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pallet_of_rust_proofing_kits_1 to the service_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_of_rust_proofing_kits_1",
+          "location_id": "in:service_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the transmission_1 to the parts_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transmission_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy_steel_shelving_unit_1 to the backlot_inventory and verify its contents with the verification_tool_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_steel_shelving_unit_1",
+          "location_id": "in:backlot_inventory"
+        },
+        {
+          "id": "inventory_clipboard_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the tool_chest_1 to the showroom_floor and use the drill_1 to drill the metal_sheet_1 inside it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "location_id": "in:showroom_floor"
+        },
+        {
+          "id": "metal_sheet_1",
+          "is_drilled": true
         }
       ]
     }

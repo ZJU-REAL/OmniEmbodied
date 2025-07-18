@@ -6,9 +6,35 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the burner_phone_1 on the conference_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "burner_phone_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pen_1 on the conference_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pen_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal object in the asset_vault and place it on the industrial_scale_1.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,108 @@
         {
           "id": "gold_ingot_1",
           "location_id": "on:industrial_scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blinking light in the deal_room and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "document_shredder_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the industrial_scale_1 using the calibration_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "industrial_scale_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to unwrap the stack of bearer_bonds_1 and then place them on the conference_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "bearer_bonds_1",
+          "is_stacked": true
+        },
+        {
+          "id": "bearer_bonds_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pressure_gauge_1 to check the pressure of the fire_extinguisher_1 and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "is_pressure_checked": true
+        },
+        {
+          "id": "fire_extinguisher_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the biometric_briefcase_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_briefcase_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the safety_deposit_boxes_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safety_deposit_boxes_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 10-seat Mahogany Conference Table to the dispatch_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:dispatch_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Wall of Safety Deposit Boxes to the verification_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safety_deposit_boxes_1",
+          "location_id": "in:verification_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the mini-fridge_1 to the back_office and then turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "location_id": "in:back_office"
+        },
+        {
+          "id": "mini_fridge_1",
+          "is_on": true
         }
       ]
     }

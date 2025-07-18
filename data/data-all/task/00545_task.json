@@ -1,0 +1,160 @@
+{
+  "task_background": "Prepare the automotive R&D garage for a critical prototype testing session between rival teams Honda and Nissan.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the diagnostic_tablet_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diagnostic_tablet_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wrench_10mm_1 on the central_tool_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wrench_10mm_1",
+          "location_id": "on:central_tool_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the wrench with the red grip and place it on the hydraulic_lift_nissan_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wrench_12mm_1",
+          "location_id": "on:hydraulic_lift_nissan_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the workbench and place it on the desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the greasy_rag_1 to clean the civic_si_engine_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "civic_si_engine_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the air_impact_wrench_1 to disconnect the se_r_differential_1 from the hydraulic_lift_nissan_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "se_r_differential_1",
+          "location_id": "in:main_garage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the greasy_rag_1 to clean the workbench_1 and then place the wrench_10mm_1 on it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "is_dirty": false
+        },
+        {
+          "id": "wrench_10mm_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard_1 to type a report on the overheating_ecu_1 and then place it on the desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "overheating_ecu_1",
+          "is_typed": true
+        },
+        {
+          "id": "overheating_ecu_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine_hoist_1 to the main_garage_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_hoist_1",
+          "location_id": "in:main_garage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the dyno_testing_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:dyno_testing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydraulic_lift_honda_1 to the parts_storage and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_honda_1",
+          "location_id": "in:parts_storage"
+        },
+        {
+          "id": "hydraulic_lift_honda_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00545"
+}

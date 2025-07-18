@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the ergonomic_chair_1 on the floor in the main_investigation_hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ergonomic_chair_1",
+          "location_id": "in:main_investigation_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the investigator_mug_1 on the evidence_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "investigator_mug_1",
+          "location_id": "on:evidence_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, steel U-shaped workstation and place the cybersecurity_trophy_1 on it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cybersecurity_trophy_1",
+          "location_id": "on:u_shaped_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver evidence table and place the stack_of_public_records_1 on it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stack_of_public_records_1",
+          "location_id": "on:evidence_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to unscrew the disassembled_server_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "disassembled_server_1",
+          "is_screwed_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the marker_1 to label the misplaced_case_folder_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "misplaced_case_folder_1",
+          "is_labeled": true
+        }
+      ]
+    },
     {
       "task_description": "Use the forensic_toolkit_1 to open the archive_box_1 and then label it with the marker_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,60 @@
         {
           "id": "archive_box_1",
           "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the photocopier_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the retinal_scanner_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "retinal_scanner_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fireproof_server_rack_1 to the forensics_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_server_rack_1",
+          "location_id": "in:forensics_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence_table_1 to the meeting_nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_table_1",
+          "location_id": "in:meeting_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, silver evidence table to the secure_records_vault and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_table_1",
+          "location_id": "in:secure_records_vault"
+        },
+        {
+          "id": "evidence_table_1",
+          "is_open": true
         }
       ]
     }

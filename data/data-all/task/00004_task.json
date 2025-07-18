@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the debug_controller_1 on the shelf_of_shame_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "debug_controller_1",
+          "location_id": "on:shelf_of_shame_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the ergonomic_keyboard_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ergonomic_keyboard_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the war_table_1 and place it in the motion_capture_stage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "frame_data_binder_1",
+          "location_id": "in:motion_capture_stage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a missing keycap and place it on the bug_board_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ergonomic_keyboard_1",
+          "location_id": "on:bug_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Mount the vader_helmet_1 onto the calibration_stand_1 using the hex_wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vader_helmet_1",
+          "is_mounted": true
+        }
+      ]
+    },
     {
       "task_description": "Use the thermal_paste_1 to fix the debug_controller_1 and then place it on the war_table_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +84,88 @@
         {
           "id": "debug_controller_1",
           "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only document that needs signing, sign it with the pen_1, and place it on the war_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "star_wars_document_1",
+          "is_signed": true
+        },
+        {
+          "id": "star_wars_document_1",
+          "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the white_noise_generator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "white_noise_generator_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the tool_cart_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the war_table_1 to the motion_capture_stage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:motion_capture_stage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the main_development_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_development_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the press_1 to the qa_testing_corner and use the screwdriver_1 to mount it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:qa_testing_corner"
+        },
+        {
+          "id": "press_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fridge_1 to the main_development_floor and drain the expired_yogurt_1 using the colander_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": "in:main_development_floor"
+        },
+        {
+          "id": "expired_yogurt_1",
+          "is_drained": true
         }
       ]
     }

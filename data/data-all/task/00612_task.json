@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the saucepan_demi_glace_1 on the plating_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "saucepan_demi_glace_1",
+          "location_id": "on:plating_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the sous_vide_circulator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sous_vide_circulator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless_steel item on the refrigerated_worktable_1 and place it in the main_kitchen.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "tray_quenelles_1",
+          "location_id": "in:main_kitchen"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red ticket in the expedition_pass and place it on the heated_pass_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ticket_42_1",
+          "location_id": "on:heated_pass_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the flickering burner on the french_top_range_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "french_top_range_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sealing_tool_1 to seal the squeeze_bottle_1 with the garlic odor.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "squeeze_bottle_1",
+          "is_sealed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver_1 to fix the dim display on the gram_scale_1 and then turn it on.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,60 @@
         {
           "id": "gram_scale_1",
           "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only broken porcelain item on the heated_pass_1 and use the welding_torch_1 to repair it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "espresso_cup_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the walk_in_fridge_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_fridge_door_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stockpot_veal_stock_1 to the prep_kitchen.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stockpot_veal_stock_1",
+          "location_id": "in:prep_kitchen"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ice_sculpture_1 to the expedition_pass.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ice_sculpture_1",
+          "location_id": "in:expedition_pass"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, scratched plating_table_1 to the dining_room and use the broom_1 to sweep the area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "plating_table_1",
+          "location_id": "in:dining_room"
+        },
+        {
+          "id": "dining_room",
+          "is_swept": false
         }
       ]
     }

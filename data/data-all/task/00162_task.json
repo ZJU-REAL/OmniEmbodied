@@ -6,15 +6,159 @@
       "max_grasp_limit": 2,
       "max_weight": 50.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the master_keycard_1 on the central_monitoring_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_keycard_1",
+          "location_id": "on:central_monitoring_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the hazmat_suit_2 on the hanger_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hazmat_suit_2",
+          "location_id": "on:hanger_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the hazmat suit with a tear in the left sleeve and place it in the contaminated_sample_tray_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hazmat_suit_2",
+          "location_id": "in:contaminated_sample_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vial labeled 'DO NOT OPEN' and place it in the decontamination_spray_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vial_do_not_open_1",
+          "location_id": "in:decontamination_spray_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the particle_accelerator_nozzle_1 using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "particle_accelerator_nozzle_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Refuel the decontamination_spray_station_1 using the fuel_pump_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "decontamination_spray_station_1",
+          "is_pumped": true
+        }
+      ]
+    },
     {
       "task_description": "Find the calibration terminal with a beam misalignment error and repair it using the calibration_tools_1.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "calibration_terminal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the backup UPS that is beeping and recharge it using the charger_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "backup_ups_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency_shutdown_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_lever_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the secure_server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "secure_server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_nitrogen_tank_1 to the main_experiment_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_tank_1",
+          "location_id": "in:main_experiment_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cosmic_ray_emitter_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cosmic_ray_emitter_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the secure_server_rack_1 to the equipment_storage and repair it using the repair_kit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "secure_server_rack_1",
+          "location_id": "in:equipment_storage"
+        },
+        {
+          "id": "secure_server_rack_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the particle_detector_1 to the main_experiment_chamber and repair it using the calibration_tools_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "particle_detector_1",
+          "location_id": "in:main_experiment_chamber"
+        },
+        {
+          "id": "particle_detector_1",
           "is_broken": false
         }
       ]

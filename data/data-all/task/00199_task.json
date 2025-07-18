@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the encrypted_hard_drive_1 on the holographic_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "encrypted_hard_drive_1",
+          "location_id": "on:holographic_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the server_monitoring_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "server_monitoring_wall_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, 1TB encrypted hard drive and place it in the evidence_cabinet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_hard_drive_1",
+          "location_id": "in:evidence_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red, magnetic screwdriver and place it on the forensic_workstation_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "magnetic_screwdriver_1",
+          "location_id": "on:forensic_workstation_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the scanner_1 to scan the usb_drive_1.",
       "task_category": "tool_use",
@@ -20,6 +70,108 @@
         {
           "id": "usb_drive_1",
           "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fire_extinguisher_1 to extinguish the overheating_server_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "overheating_server_1",
+          "is_eaten": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the magnetic_screwdriver_1 to unseal the server_rack_a_1 and then turn off the overheating_server_1 inside.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_a_1",
+          "is_eaten": true
+        },
+        {
+          "id": "overheating_server_1",
+          "is_eaten": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with the label 'Z-2024' and use the scanner_1 to scan it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_4",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial_safe_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the holographic_table_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "holographic_table_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_a_1 to the main_forensic_workroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_a_1",
+          "location_id": "in:main_forensic_workroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_safe_2 to the break_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_safe_2",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the overheating_server_1 to the tool_cart_1 and use the fire_extinguisher_1 to extinguish it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "overheating_server_1",
+          "location_id": "in:tool_cart_1"
+        },
+        {
+          "id": "overheating_server_1",
+          "is_eaten": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the evidence_cabinet_1 to the secure_server_closet and use the keycard_1 to unlock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_cabinet_1",
+          "location_id": "in:secure_server_closet"
+        },
+        {
+          "id": "evidence_cabinet_1",
+          "is_open": false
         }
       ]
     }

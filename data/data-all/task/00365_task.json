@@ -10,15 +10,171 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the oil_lamp_1 on the bookshelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oil_lamp_1",
+          "location_id": "on:bookshelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the decoy_lever_1 in the oak_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "decoy_lever_1",
+          "location_id": "in:oak_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black leather book with a silver clasp and place it on the oak_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vampiric_bestiary_1",
+          "location_id": "on:oak_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest metal object on the oak_desk_1 and place it in the main_research_lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "typewriter_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver_1 to open the real_switch_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "real_switch_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the insulated_gloves_1 to unseal the black_blood_vial_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "black_blood_vial_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the microscope on the centrifuge, turn it on, and place it on the whiteboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": true
+        },
+        {
+          "id": "microscope_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the synthetic hemoglobin in the blood bank, purify it using the filter_1, and place it on the centrifuge_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "synthetic_hemoglobin_1",
+          "is_pure": true
+        },
+        {
+          "id": "synthetic_hemoglobin_1",
+          "location_id": "on:centrifuge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the centrifuge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the blood_bank_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blood_bank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the observation_window_1 to the main_research_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "observation_window_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the filing_cabinets_1 to the forgotten_library.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinets_1",
+          "location_id": "in:forgotten_library"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the centrifuge_1 to the blood_storage and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:blood_storage"
+        },
+        {
+          "id": "centrifuge_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the cryo_tank_1 to the vampire_holding_wing and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_tank_1",
+          "location_id": "in:vampire_holding_wing"
+        },
+        {
+          "id": "cryo_tank_1",
           "is_open": true
         }
       ]

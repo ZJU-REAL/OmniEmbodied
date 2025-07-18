@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the barcode_scanner_1 on the shelving_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the clipboard_1 on the desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, steel item on the sorting_table_1 and place it on the shelving_unit_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,106 @@
         {
           "id": "priority_salvage_crate_1",
           "location_id": "on:shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the malfunctioning electronic device on the sorting_table_1 and place it in the precision_electronics_corner.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "in:precision_electronics_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Drain the leaking coolant drum using the colander_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coolant_drum_1",
+          "is_drained": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to screw in the missing battery compartment screws on the prototype electric scooter.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "electric_scooter_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Label the organizer tray with the marker_1 to indicate its contents.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "organizer_tray_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the monitor in the office.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked supply cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the partially dismantled industrial motor to the main workshop floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_motor_1",
+          "location_id": "in:main_workshop_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the conveyor belt assembly to the salvage sorting bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "location_id": "in:salvage_sorting_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy welding station to the precision electronics corner and ensure it is functional.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "welding_station_1",
+          "location_id": "in:precision_electronics_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial vise to the workbench and align its jaws.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_vise_1",
+          "location_id": "on:workbench_1"
         }
       ]
     }

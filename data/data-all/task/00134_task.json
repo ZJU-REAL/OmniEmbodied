@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the employee_plaque_1 on the ethics_dashboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "employee_plaque_1",
+          "location_id": "on:ethics_dashboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the sticky_note_1 on the compliance_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sticky_note_1",
+          "location_id": "on:compliance_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red object in the main_testing_chamber and place it in the ai_storage_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_lever_1",
+          "location_id": "in:ai_storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a flickering light in the main_testing_chamber and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "led_panel_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Use the specialized_adapter_1 to start the engine of the diagnostic_tool_1 and then place it on the compliance_terminal_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +74,84 @@
         {
           "id": "diagnostic_tool_1",
           "location_id": "on:compliance_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a coffee stain in the monitoring_station and use the polish_cloth_1 to clean it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "incident_logbook_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the overhead_crane_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_crane_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the process_controller_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "process_controller_1",
+          "is_running": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the decommissioned_prototype_1 to the ethics_archive.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "decommissioned_prototype_1",
+          "location_id": "in:ethics_archive"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the drone_charging_1 to the main_testing_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drone_charging_1",
+          "location_id": "in:main_testing_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the ai_chassis_1 to the monitoring_station and use the diagnostic_tool_1 to start its engine.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ai_chassis_1",
+          "location_id": "in:monitoring_station"
+        },
+        {
+          "id": "diagnostic_tool_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the debate_table_1 to the main_testing_chamber and use the drawing_pad_1 to draw on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "debate_table_1",
+          "location_id": "in:main_testing_chamber"
+        },
+        {
+          "id": "drawing_pad_1",
+          "is_drawn": true
         }
       ]
     }

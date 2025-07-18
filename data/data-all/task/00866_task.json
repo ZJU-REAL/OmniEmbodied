@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place pvc_pipe_1 on sorting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pvc_pipe_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the heaviest, white plastic object on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "plastic_drum_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the cordless drill to mount the hasp latch onto the plastic drum.",
       "task_category": "compound_reasoning",
@@ -16,6 +42,80 @@
         {
           "id": "hasp_latch_1",
           "location_id": "on:plastic_drum_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the drill press.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drill_press_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the metal shelving unit to the construction area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_1",
+          "location_id": "in:construction_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the pallet with stacked drums to the composting station and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_1",
+          "location_id": "in:composting_station"
+        },
+        {
+          "id": "pallet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the measuring_tape_1 in the toolbox.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "measuring_tape_1",
+          "location_id": "in:toolbox_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the longest, white item and place it in the material storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "pvc_pipe_1",
+          "location_id": "in:material_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the toolbox.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-duty workbench to the sorting table area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:sorting_table"
         }
       ]
     }

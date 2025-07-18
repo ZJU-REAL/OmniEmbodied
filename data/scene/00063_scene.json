@@ -1,390 +1,970 @@
 {
-  "description": "A bustling live sports broadcast studio mid-production, featuring a main broadcast stage, control room, props & equipment storage, and green room, all filled with technical equipment, props, and furniture in various states of disarray.",
+  "description": "A dilapidated church-turned-storage facility for supernatural artifacts, blending gothic decay with clinical urgency. The space is filled with ancient religious symbols, occult tools, and modern research equipment, requiring collaborative efforts to manage heavy relics and solve layered puzzles.",
   "rooms": [
     {
-      "id": "main_broadcast_stage",
-      "name": "Main Broadcast Stage",
+      "id": "nave",
+      "name": "The Nave",
       "properties": {
-        "type": "broadcast"
+        "type": "central_hall"
       },
       "connected_to_room_ids": [
-        "control_room",
-        "props_storage",
-        "green_room"
+        "chancel",
+        "reliquary",
+        "scriptorium",
+        "vestibule"
       ]
     },
     {
-      "id": "control_room",
-      "name": "Control Room",
+      "id": "chancel",
+      "name": "The Chancel",
       "properties": {
-        "type": "technical"
+        "type": "altar_area"
       },
       "connected_to_room_ids": [
-        "main_broadcast_stage",
-        "props_storage"
+        "nave",
+        "reliquary"
       ]
     },
     {
-      "id": "props_storage",
-      "name": "Props & Equipment Storage",
+      "id": "reliquary",
+      "name": "The Reliquary",
       "properties": {
-        "type": "storage"
+        "type": "secure_storage"
       },
       "connected_to_room_ids": [
-        "main_broadcast_stage",
-        "control_room",
-        "green_room"
+        "nave",
+        "chancel"
       ]
     },
     {
-      "id": "green_room",
-      "name": "Green Room / Guest Prep Area",
+      "id": "scriptorium",
+      "name": "The Scriptorium",
       "properties": {
-        "type": "waiting"
+        "type": "research_station"
       },
       "connected_to_room_ids": [
-        "main_broadcast_stage",
-        "props_storage"
+        "nave"
+      ]
+    },
+    {
+      "id": "vestibule",
+      "name": "The Vestibule",
+      "properties": {
+        "type": "entrance"
+      },
+      "connected_to_room_ids": [
+        "nave"
       ]
     }
   ],
   "objects": [
     {
-      "id": "anchor_desk_1",
-      "name": "Anchor Desk",
+      "id": "iron_cross_1",
+      "name": "Wrought-Iron Cross",
       "type": "FURNITURE",
-      "location_id": "in:main_broadcast_stage",
+      "location_id": "in:nave",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.1
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "iron",
+        "inscription": "Enochian script",
+        "glow_intensity": 0.5
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "reinforced_dolly_1",
+      "name": "Reinforced Dolly",
+      "type": "FURNITURE",
+      "location_id": "in:nave",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "steel",
+        "capacity_kg": 200,
+        "wheel_condition": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "worktable_1",
+      "name": "Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:nave",
       "properties": {
         "size": [
           2.5,
           1.0,
-          0.8
+          0.9
         ],
-        "weight": 80.0,
+        "weight": 40.0,
         "is_container": true,
-        "material": "faux_woodgrain",
-        "brand": "SetDesign Pro"
+        "material": "steel",
+        "surface_condition": "scratched",
+        "stability": "wobbly"
       },
       "states": {}
     },
     {
-      "id": "microphone_1",
-      "name": "Sennheiser MD 46 Microphone",
-      "type": "ITEM",
-      "location_id": "on:anchor_desk_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "black",
-        "brand": "Sennheiser",
-        "model_number": "MD 46",
-        "is_functional": false,
-        "provides_abilities": []
-      },
-      "states": {
-        "is_loose": true
-      }
-    },
-    {
-      "id": "microphone_2",
-      "name": "Sennheiser MD 46 Microphone",
-      "type": "ITEM",
-      "location_id": "on:anchor_desk_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "black",
-        "brand": "Sennheiser",
-        "model_number": "MD 46",
-        "is_functional": true,
-        "provides_abilities": []
-      },
-      "states": {}
-    },
-    {
-      "id": "led_backdrop_1",
-      "name": "LED Backdrop Wall",
+      "id": "crate_42_1",
+      "name": "Crate #42",
       "type": "FURNITURE",
-      "location_id": "in:main_broadcast_stage",
+      "location_id": "in:nave",
       "properties": {
         "size": [
-          4.0,
-          0.1,
-          3.0
+          0.6,
+          0.6,
+          0.9
         ],
-        "weight": 60.0,
-        "is_container": false,
-        "brand": "LEDTech",
-        "model_number": "WallPro-4000"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "camera_dolly_1",
-      "name": "Robotic Camera Rig",
-      "type": "FURNITURE",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "size": [
-          3.0,
-          1.5,
-          1.8
-        ],
-        "weight": 200.0,
-        "is_container": false,
-        "brand": "CameraMotion",
-        "model_number": "DollyMaster-XL"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "script_binder_1",
-      "name": "Emergency Script Binder",
-      "type": "ITEM",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "weight": 5.0,
-        "color": "red",
-        "material": "leather",
+        "weight": 15.0,
         "is_container": true,
-        "contents": "last-minute stat corrections"
+        "material": "wood",
+        "warning_label": "DO NOT OPEN – LIGHT-SENSITIVE"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "teleprompter_1",
-      "name": "Faulty Teleprompter",
+      "id": "silver_dagger_1",
+      "name": "Silver Dagger",
       "type": "ITEM",
-      "location_id": "in:main_broadcast_stage",
+      "location_id": "in:crate_42_1",
       "properties": {
-        "weight": 8.0,
-        "color": "black",
-        "brand": "PrompterPro",
-        "model_number": "PT-2000",
-        "is_container": false
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "guest_chair_1",
-      "name": "Hydraulic Studio Chair",
-      "type": "FURNITURE",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "size": [
-          0.6,
-          0.6,
-          1.0
-        ],
-        "weight": 50.0,
-        "is_container": false,
-        "brand": "ChairMaster",
-        "model_number": "Hydra-500"
-      },
-      "states": {
-        "is_lowered": false
-      }
-    },
-    {
-      "id": "headset_1",
-      "name": "Beyerdynamic DT 290 Headset",
-      "type": "ITEM",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "brand": "Beyerdynamic",
-        "model_number": "DT 290",
-        "battery_level": "low",
-        "provides_abilities": []
+        "weight": 0.5,
+        "material": "silver",
+        "inscription": "Mercy",
+        "sharpness": "high",
+        "provides_abilities": [
+          "scratch"
+        ]
       },
       "states": {}
     },
     {
-      "id": "on_air_sign_1",
-      "name": "On Air Sign",
-      "type": "ITEM",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "weight": 1.5,
-        "color": "red",
-        "brand": "StudioGear",
-        "model_number": "OA-100",
-        "is_container": false
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "coffee_mug_1",
-      "name": "Channel 31 Branded Mug",
-      "type": "ITEM",
-      "location_id": "in:main_broadcast_stage",
-      "properties": {
-        "weight": 0.4,
-        "color": "white",
-        "material": "ceramic",
-        "brand": "Channel 31",
-        "contents": "coffee"
-      },
-      "states": {
-        "is_drunk": false
-      }
-    },
-    {
-      "id": "control_console_1",
-      "name": "Master Control Console",
+      "id": "uv_lamp_1",
+      "name": "Industrial UV Lamp",
       "type": "FURNITURE",
-      "location_id": "in:control_room",
+      "location_id": "in:nave",
       "properties": {
         "size": [
-          4.0,
+          0.5,
+          0.5,
+          1.8
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "metal",
+        "cord_condition": "frayed",
+        "switch_label": "HOLD TO ACTIVATE"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:nave",
+      "properties": {
+        "size": [
           0.8,
+          0.5,
           0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": "wrenches, duct tape, Geiger counter"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_13mm_1",
+      "name": "13mm Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "size": "13mm",
+        "provides_abilities": [
+          "weld",
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duct_tape_1",
+      "name": "Duct Tape",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "adhesive",
+        "remaining": "half",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "geiger_counter_1",
+      "name": "Geiger Counter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "display": "stuck at 0.3 µSv/h",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_chair_1",
+      "name": "Folding Chair",
+      "type": "FURNITURE",
+      "location_id": "in:nave",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "aluminum",
+        "hinge_condition": "loose"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_tapestry_1",
+      "name": "Faded Tapestry",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 2.0,
+        "material": "fabric",
+        "depiction": "lamb bleeding into a chalice",
+        "condition": "moth-eaten"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_pew_1",
+      "name": "Dusty Pew",
+      "type": "FURNITURE",
+      "location_id": "in:nave",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "wood",
+        "inscription": "J + M"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_rosary_1",
+      "name": "Broken Rosary",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "condition": "scattered",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defaced_altar_1",
+      "name": "Defaced Altar",
+      "type": "FURNITURE",
+      "location_id": "in:chancel",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.2
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "marble",
+        "inscription": "pentagram",
+        "strap_condition": "missing buckle"
+      },
+      "states": {}
+    },
+    {
+      "id": "weeping_angel_statue_1",
+      "name": "Weeping Angel Statue",
+      "type": "FURNITURE",
+      "location_id": "in:chancel",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.8
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "marble",
+        "chain_condition": "rusted",
+        "arm_condition": "detached"
+      },
+      "states": {}
+    },
+    {
+      "id": "detached_arm_1",
+      "name": "Detached Arm",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 15.0,
+        "material": "marble",
+        "clenched_item": "scrap of parchment",
+        "provides_abilities": [
+          "shake"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scalpel_1",
+      "name": "Scalpel",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "blade_condition": "nicked",
+        "provides_abilities": [
+          "scratch",
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bone_saw_1",
+      "name": "Bone Saw",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "teeth_condition": "rusted",
+        "provides_abilities": [
+          "scratch"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "holy_water_syringe_1",
+      "name": "Holy Water Syringe",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "label": "Holy Water – 10mL",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {
+        "is_injected": false
+      }
+    },
+    {
+      "id": "lead_lined_box_1",
+      "name": "Lead-Lined Box",
+      "type": "FURNITURE",
+      "location_id": "in:chancel",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "lead",
+        "lock_type": "padlock",
+        "humming": "faint"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:chancel",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "wheel_condition": "squeaky",
+        "height_setting": "MAX"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "document_condition": "water-damaged",
+        "content": "autopsy report"
+      },
+      "states": {}
+    },
+    {
+      "id": "candle_stubs_1",
+      "name": "Candle Stubs",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.1,
+        "material": "wax",
+        "container": "chipped saucer",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "peeling_fresco_1",
+      "name": "Peeling Fresco",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 5.0,
+        "material": "paint",
+        "depiction": "Archangel Michael",
+        "condition": "scratched out"
+      },
+      "states": {}
+    },
+    {
+      "id": "lead_lined_cabinet_d_1",
+      "name": "Lead-Lined Cabinet D",
+      "type": "FURNITURE",
+      "location_id": "in:reliquary",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
         ],
         "weight": 120.0,
         "is_container": true,
-        "brand": "BroadcastTech",
-        "model_number": "MasterControl-XL"
-      },
-      "states": {}
-    },
-    {
-      "id": "graphics_pc_1",
-      "name": "Glitching Graphics PC",
-      "type": "ITEM",
-      "location_id": "on:control_console_1",
-      "properties": {
-        "weight": 8.0,
-        "color": "silver",
-        "brand": "Apple",
-        "model_number": "Mac Pro",
-        "error_code": "GFX_LOAD_FAIL",
-        "provides_abilities": []
-      },
-      "states": {}
-    },
-    {
-      "id": "usb_drive_1",
-      "name": "USB Drive with Backups",
-      "type": "ITEM",
-      "location_id": "in:props_storage",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "brand": "Samsung",
-        "model_number": "T5 SSD",
-        "label": "GFX_MASTER",
-        "provides_abilities": [
-          "copy_file"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "toolbox_1",
-      "name": "Toolbox",
-      "type": "ITEM",
-      "location_id": "in:props_storage",
-      "properties": {
-        "weight": 5.0,
-        "color": "red",
-        "material": "metal",
-        "is_container": true,
-        "contents": "screwdrivers, gaffer tape, multimeter",
-        "provides_abilities": [
-          "loosen"
-        ]
+        "material": "lead",
+        "keyhole_condition": "scratched"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "trophy_1",
-      "name": "Lombardi Replica Trophy",
+      "id": "preserved_organs_1",
+      "name": "Preserved Organs",
       "type": "ITEM",
-      "location_id": "in:props_storage",
+      "location_id": "in:reliquary",
       "properties": {
-        "weight": 10.0,
-        "color": "silver",
-        "material": "metal",
-        "is_fragile": true,
-        "condition": "detached_base"
+        "weight": 1.0,
+        "material": "biological",
+        "preservation": "formaldehyde",
+        "label_language": "Latin"
+      },
+      "states": {}
+    },
+    {
+      "id": "glass_case_1",
+      "name": "Glass Case",
+      "type": "FURNITURE",
+      "location_id": "in:reliquary",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "glass",
+        "alarm_condition": "missing batteries"
       },
       "states": {
-        "is_mounted": false
+        "is_open": false
       }
     },
     {
-      "id": "glue_1",
-      "name": "Glue Tube",
+      "id": "desiccated_hand_1",
+      "name": "Desiccated Hand",
       "type": "ITEM",
-      "location_id": "in:props_storage",
+      "location_id": "in:glass_case_1",
       "properties": {
-        "weight": 0.2,
-        "color": "white",
-        "brand": "Gluemaster",
-        "model_number": "GM-100",
+        "weight": 0.3,
+        "material": "biological",
+        "clutching": "rusted nail",
+        "label": "Exhibit 7-C: Possible True Cross Fragment"
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_panel_1",
+      "name": "Alarm Panel",
+      "type": "ITEM",
+      "location_id": "in:reliquary",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "battery_slots": 2,
+        "error_message": "ERROR 04",
         "provides_abilities": [
-          "mount"
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "tarnished_key_1",
+      "name": "Tarnished Key",
+      "type": "ITEM",
+      "location_id": "in:scriptorium",
+      "properties": {
+        "weight": 0.05,
+        "material": "brass",
+        "keyhole_match": "Cabinet D",
+        "provides_abilities": [
+          "open"
         ]
       },
       "states": {}
     },
     {
-      "id": "jacket_1",
-      "name": "Guest's Jacket",
-      "type": "ITEM",
-      "location_id": "in:green_room",
+      "id": "chalkboard_1",
+      "name": "Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:scriptorium",
       "properties": {
-        "weight": 1.2,
-        "color": "navy",
-        "material": "wool",
-        "pocket_condition": "torn_lining",
-        "is_container": true,
-        "contents": "teleprompter reset key"
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "slate",
+        "content": "equations and demonic sigils",
+        "condition": "partially erased"
       },
-      "states": {
-        "is_covered": true
-      }
+      "states": {}
     },
     {
-      "id": "script_pages_1",
-      "name": "Script Pages",
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
       "type": "ITEM",
-      "location_id": "in:green_room",
+      "location_id": "in:scriptorium",
       "properties": {
-        "weight": 0.5,
-        "color": "white",
+        "weight": 0.2,
+        "material": "ceramic",
+        "inscription": "WORLD’S BEST EXORCIST",
+        "condition": "chipped",
+        "contents": "pens, wilted rose"
+      },
+      "states": {}
+    },
+    {
+      "id": "bible_1",
+      "name": "Bible",
+      "type": "ITEM",
+      "location_id": "in:scriptorium",
+      "properties": {
+        "weight": 1.5,
         "material": "paper",
-        "condition": "coffee_stained",
+        "bookmark_condition": "torn page",
         "provides_abilities": [
-          "shred"
+          "solve_puzzle"
         ]
       },
       "states": {
-        "is_shredded": false
+        "is_solved": false
+      }
+    },
+    {
+      "id": "oak_doors_1",
+      "name": "Oak Doors",
+      "type": "FURNITURE",
+      "location_id": "in:vestibule",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.1
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "oak",
+        "bar_mechanism": "sliding steel beam"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keypad_entry_1",
+      "name": "Keypad Entry System",
+      "type": "ITEM",
+      "location_id": "in:vestibule",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "error_message": "ERROR 04",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:vestibule",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "expiration": "2019",
+        "provides_abilities": [
+          "deflate"
+        ]
+      },
+      "states": {
+        "is_inflated": true
+      }
+    },
+    {
+      "id": "clipboard_2",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "in:vestibule",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "document_condition": "damp",
+        "content": "inventory list"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_shards_1",
+      "name": "Blue Glass Shards",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "color": "blue",
+        "origin": "shattered stained window"
+      },
+      "states": {}
+    },
+    {
+      "id": "corrosive_vial_1",
+      "name": "Corrosive Vial",
+      "type": "ITEM",
+      "location_id": "in:reliquary",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "cap_color": "blue",
+        "label": "CAUTION: CORROSIVE"
+      },
+      "states": {}
+    },
+    {
+      "id": "holy_water_vial_1",
+      "name": "Holy Water Vial",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "volume": "10mL",
+        "provides_abilities": [
+          "inject",
+          "soak"
+        ]
+      },
+      "states": {
+        "is_injected": false,
+        "is_soaked": false
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 0.1,
+        "material": "cloth",
+        "condition": "dirty",
+        "provides_abilities": [
+          "wipe",
+          "dry"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:vestibule",
+      "properties": {
+        "weight": 1.0,
+        "material": "wood",
+        "bristles": "stiff",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {
+        "is_swept": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "temperature": "high",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "metal",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "salt_shaker_1",
+      "name": "Salt Shaker",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "contents": "salt",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "herb_jar_1",
+      "name": "Herb Jar",
+      "type": "ITEM",
+      "location_id": "in:scriptorium",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "contents": "dried herbs",
+        "label": "Protection Blend",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rolled_parchment_1",
+      "name": "Rolled Parchment",
+      "type": "ITEM",
+      "location_id": "in:scriptorium",
+      "properties": {
+        "weight": 0.1,
+        "material": "parchment",
+        "content": "ancient script",
+        "provides_abilities": [
+          "unroll"
+        ]
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "wet_towel_1",
+      "name": "Wet Towel",
+      "type": "ITEM",
+      "location_id": "in:chancel",
+      "properties": {
+        "weight": 0.4,
+        "material": "cloth",
+        "condition": "damp",
+        "provides_abilities": [
+          "dry",
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "uneven_rug_1",
+      "name": "Uneven Rug",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 2.0,
+        "material": "fabric",
+        "condition": "bunched",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "scoop_1",
+      "name": "Scoop",
+      "type": "ITEM",
+      "location_id": "in:reliquary",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "size": "small",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "loose_dirt_1",
+      "name": "Loose Dirt",
+      "type": "ITEM",
+      "location_id": "in:nave",
+      "properties": {
+        "weight": 0.5,
+        "material": "soil",
+        "location": "around dolly wheels",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {
+        "is_scooped": false
+      }
+    },
+    {
+      "id": "food_rations_1",
+      "name": "Food Rations",
+      "type": "ITEM",
+      "location_id": "in:scriptorium",
+      "properties": {
+        "weight": 0.3,
+        "material": "food",
+        "packaging": "MRE",
+        "provides_abilities": [
+          "eat"
+        ]
+      },
+      "states": {
+        "is_eaten": false
       }
     }
   ],
   "abilities": [
-    "copy_file",
-    "drink",
-    "loosen",
-    "lower",
-    "mount",
+    "dry",
+    "eat",
+    "flatten",
+    "deflate",
+    "inject",
     "open",
-    "shred",
-    "turn_on",
-    "uncover",
+    "pair",
+    "scoop",
+    "scratch",
+    "season",
+    "shake",
+    "soak",
+    "solder",
+    "solve_puzzle",
+    "sweep",
+    "toggle",
+    "unroll",
+    "weld",
+    "wipe",
     "close"
   ]
 }

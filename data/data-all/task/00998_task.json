@@ -10,9 +10,59 @@
         50,
         50
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 20.0,
+      "max_size": [
+        50,
+        50,
+        50
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the wooden spoon on the butcher block countertop.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wooden_spoon_1",
+          "location_id": "on:butcher_block_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the garlic cloves in the cold prep station.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "garlic_cloves_1",
+          "location_id": "in:cold_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless steel item in the main cooking hub and place it in the storage pantry corner.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "roasting_pan_1",
+          "location_id": "in:storage_pantry_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a charred tip and place it in the dining transition zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wooden_spoon_1",
+          "location_id": "in:dining_transition_zone"
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench to tighten the wobbly step stool.",
       "task_category": "tool_use",
@@ -20,6 +70,112 @@
         {
           "id": "step_stool_1",
           "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser to clean the chalkboard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chalkboard_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the chef's knife to chop the yellow onions and place them in the glass mixing bowl.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "yellow_onions_1",
+          "is_chopped": true
+        },
+        {
+          "id": "yellow_onions_1",
+          "location_id": "in:mixing_bowl_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the bay leaves to season the brisket and place it in the roasting pan.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "brisket_1",
+          "is_seasoned": true
+        },
+        {
+          "id": "brisket_1",
+          "location_id": "in:roasting_pan_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the gas range.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gas_range_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the mini fridge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the butcher block countertop to the dining transition zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "butcher_block_1",
+          "location_id": "in:dining_transition_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the folding table to the main cooking hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "folding_table_1",
+          "location_id": "in:main_cooking_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy mini fridge to the cold prep station and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "location_id": "in:cold_prep_station"
+        },
+        {
+          "id": "mini_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gas range to the storage pantry corner and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gas_range_1",
+          "location_id": "in:storage_pantry_corner"
+        },
+        {
+          "id": "gas_range_1",
+          "is_on": true
         }
       ]
     }

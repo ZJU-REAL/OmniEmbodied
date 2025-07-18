@@ -10,9 +10,59 @@
         1.0,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.0,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place ceramic_krater_fragment_1 on artifact_display_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ceramic_krater_fragment_1",
+          "location_id": "on:artifact_display_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_mug_1 in cleaning_prep_station.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:cleaning_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, terracotta-colored ceramic item and place it on the central examination table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ceramic_amphora_1",
+          "location_id": "on:central_examination_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a flickering display and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "computer_monitor_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken microscope using the replacement lens.",
       "task_category": "tool_use",
@@ -20,6 +70,100 @@
         {
           "id": "broken_microscope_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unseal the locked tool chest using the combination code.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_tool_chest_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the precision tools to repair the only broken object with a frayed power cord.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a cracked base and use the ultrasonic cleaner to prepare it for restoration.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ceramic_amphora_1",
+          "location_id": "on:ultrasonic_cleaner_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the heavy metal shelving unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_metal_shelving_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the overhead UV lamp array.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_uv_lamp_array_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy metal shelving unit to the main conservation workroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_metal_shelving_unit_1",
+          "location_id": "in:main_conservation_workroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fume hood to the artifact storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:artifact_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer that is jammed to the cleaning prep station for repair.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:cleaning_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sealed lead-lined box to the documentation office and unseal it using the precision tools.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sealed_lead_lined_box_1",
+          "location_id": "in:documentation_office"
+        },
+        {
+          "id": "sealed_lead_lined_box_1",
+          "is_sealed": false
         }
       ]
     }

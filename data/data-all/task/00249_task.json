@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place tau_sample_tray_1 on modular_lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tau_sample_tray_1",
+          "location_id": "on:modular_lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place blue_paperweight_1 on slide_storage_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blue_paperweight_1",
+          "location_id": "on:slide_storage_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel microscope station and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscopy_station_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass, LCD live-cell imaging chamber and play it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "live_cell_imaging_chamber_1",
+          "is_playing": true
+        }
+      ]
+    },
+    {
+      "task_description": "Replace the leaking formalin container in the fume hood.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leaking_formalin_container_1",
+          "is_replaced": true
+        }
+      ]
+    },
     {
       "task_description": "Use the camera to photograph the partially sectioned mouse brain slide.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,70 @@
         {
           "id": "sectioned_brain_slide_1",
           "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration pipette set to measure the tau protein sample tray.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tau_sample_tray_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to verify the mislabeled reagent bottle.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mislabeled_reagent_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the antibody storage fridge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "antibody_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the digital pathology scanner to the tissue processing room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_pathology_scanner_1",
+          "location_id": "in:tissue_processing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the observation chamber to the biohazard chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "observation_chamber_1",
+          "location_id": "in:biohazard_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fume hood to the biohazard chamber and replace its UV light.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:biohazard_chamber"
+        },
+        {
+          "id": "fume_hood_1",
+          "is_replaced": true
         }
       ]
     }

@@ -6,9 +6,35 @@
       "max_grasp_limit": 2,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the KVM Switch on the tool cart.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "kvm_switch_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black blade server in the diagnostic station.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blade_server_7_1",
+          "location_id": "in:diagnostic_station"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest black item in the server rack and place it on the tool cart.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,132 @@
         {
           "id": "blade_server_7_1",
           "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only gray network switch in the server rack and unplug it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_switch_hub_1",
+          "is_plugged_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal paste to cool the hot blade server.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "blade_server_7_1",
+          "is_hot": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver set to open the server rack.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "server_rack_alpha_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to print labels for the mystery cable bin and then combine the cables.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_combined": true
+        },
+        {
+          "id": "mystery_cable_bin_1",
+          "is_combined": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the polish cloth to polish the whiteboard and then close the tool cart.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_polished": true
+        },
+        {
+          "id": "tool_cart_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the emergency cutoff switch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_cutoff_switch_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the triple monitor setup.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "triple_monitor_setup_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the UPS battery bank to the diagnostic station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_battery_bank_1",
+          "location_id": "in:diagnostic_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the air conditioner to the break area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "air_conditioner_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the overloaded shelving unit to the backup power area and use the sealant gun to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "overloaded_shelving_unit_1",
+          "location_id": "in:backup_power_area"
+        },
+        {
+          "id": "overloaded_shelving_unit_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the printer to the cable closet and unpair the spare router.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:cable_closet"
+        },
+        {
+          "id": "spare_router_1",
+          "is_printed": true
         }
       ]
     }

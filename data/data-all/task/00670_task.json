@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the laser_cutter_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laser_cutter_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the gem_sorting_tray_4 in the gem_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "gem_sorting_tray_4",
+          "location_id": "in:gem_vault"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, clear gem and place it in the secure_case_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,104 @@
         {
           "id": "uncut_diamond_1",
           "location_id": "in:secure_case_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black plastic item containing ethanol and place it on the diamond_cutting_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gem_cleaning_kit_1",
+          "location_id": "on:diamond_cutting_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_hydraulic_jack_1 using the welding_torch_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_hydraulic_jack_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the digital_scale_1 using the charger_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fountain_pen_1 to write on the blueprints_1 and then place them in the filing_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "blueprints_1",
+          "is_written_on": true
+        },
+        {
+          "id": "blueprints_1",
+          "location_id": "in:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the vault_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vault_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the diamond_cutting_station_1 to the center of the main_workroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diamond_cutting_station_1",
+          "location_id": "in:main_workroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fallen_display_stand_1 to the tool_shed.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fallen_display_stand_1",
+          "location_id": "in:tool_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the polishing_wheel_1 to the tool_shed and use the welding_torch_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "polishing_wheel_1",
+          "location_id": "in:tool_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the steel_safe_1 to the gem_vault and open it using the keycard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_safe_1",
+          "location_id": "in:gem_vault"
+        },
+        {
+          "id": "steel_safe_1",
+          "is_open": true
         }
       ]
     }

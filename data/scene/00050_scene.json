@@ -1,1092 +1,657 @@
 {
-  "description": "A high-tech automotive prototyping and customization workshop with a fleet of retrofitted performance wagons, bustling with collaborative engineering activities.",
+  "description": "A bustling real estate title company office mid-transaction of selling a property held in a revocable trust, featuring a main reception area, document processing room, notary & signing office, and title research station.",
   "rooms": [
     {
-      "id": "vehicle_bay",
-      "name": "Vehicle Bay",
+      "id": "main_reception",
+      "name": "Main Reception & Waiting Area",
       "properties": {
-        "type": "industrial"
+        "type": "reception"
       },
       "connected_to_room_ids": [
-        "parts_fabrication_room",
-        "diagnostics_station",
-        "break_area"
+        "document_processing_room",
+        "notary_signing_office"
       ]
     },
     {
-      "id": "parts_fabrication_room",
-      "name": "Parts & Fabrication Room",
-      "properties": {
-        "type": "industrial"
-      },
-      "connected_to_room_ids": [
-        "vehicle_bay",
-        "diagnostics_station"
-      ]
-    },
-    {
-      "id": "diagnostics_station",
-      "name": "Diagnostics & Software Station",
+      "id": "document_processing_room",
+      "name": "Document Processing Room",
       "properties": {
         "type": "office"
       },
       "connected_to_room_ids": [
-        "vehicle_bay",
-        "parts_fabrication_room"
+        "main_reception",
+        "title_research_station"
       ]
     },
     {
-      "id": "break_area",
-      "name": "Break Area",
+      "id": "notary_signing_office",
+      "name": "Notary & Signing Office",
       "properties": {
-        "type": "lounge"
+        "type": "office"
       },
       "connected_to_room_ids": [
-        "vehicle_bay"
+        "main_reception"
+      ]
+    },
+    {
+      "id": "title_research_station",
+      "name": "Title Research Station",
+      "properties": {
+        "type": "research"
+      },
+      "connected_to_room_ids": [
+        "document_processing_room"
       ]
     }
   ],
   "objects": [
     {
-      "id": "hydraulic_lift_1",
-      "name": "Hydraulic Lift",
+      "id": "reception_desk_1",
+      "name": "Walnut Reception Desk",
       "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          3.0,
-          2.5,
-          2.2
-        ],
-        "weight": 2500.0,
-        "is_container": false,
-        "capacity": "2.5-ton",
-        "condition": "grease_streaks"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "engine_crane_1",
-      "name": "Engine Crane",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
+      "location_id": "in:main_reception",
       "properties": {
         "size": [
           2.0,
-          1.5,
-          2.5
-        ],
-        "weight": 500.0,
-        "is_container": false,
-        "max_load": "500kg",
-        "wheels_locked": true
-      },
-      "states": {}
-    },
-    {
-      "id": "parts_rolling_cart_1",
-      "name": "Parts Rolling Cart",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.2,
           0.8,
-          1.0
+          0.9
         ],
         "weight": 45.0,
         "is_container": true,
-        "condition": "dented_left_side",
-        "label": "WRX TURBO PARTS – DO NOT MOVE"
+        "material": "walnut",
+        "surface_condition": "scratched"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "saab_9_2x_aero_1",
-      "name": "Saab 9-2X Aero Chassis",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          4.5,
-          1.8,
-          1.5
-        ],
-        "weight": 1500.0,
-        "is_container": true,
-        "condition": "hood_open_engine_removed",
-        "vin_sticker": "partially_scratched_off"
-      },
-      "states": {
-        "is_engine_on": true
-      }
-    },
-    {
-      "id": "turbo_kit_1",
-      "name": "Aftermarket Turbo Kit",
+      "id": "dual_monitor_setup_1",
+      "name": "Dual Monitor Setup",
       "type": "ITEM",
-      "location_id": "in:parts_rolling_cart_1",
+      "location_id": "on:reception_desk_1",
       "properties": {
-        "weight": 32.0,
-        "size": [
-          0.8,
-          0.5,
-          0.4
-        ],
-        "model": "Garrett GTX3071R",
-        "condition": "in_foam-lined_crate"
-      },
-      "states": {}
-    },
-    {
-      "id": "oem_ecu_1",
-      "name": "OEM ECU",
-      "type": "ITEM",
-      "location_id": "on:parts_rolling_cart_1",
-      "properties": {
-        "weight": 1.5,
+        "weight": 5.5,
         "color": "black",
-        "model": "OEM"
-      },
-      "states": {}
-    },
-    {
-      "id": "tuner_ecu_1",
-      "name": "Aftermarket Tuner ECU",
-      "type": "ITEM",
-      "location_id": "on:parts_rolling_cart_1",
-      "properties": {
-        "weight": 1.5,
-        "color": "orange",
-        "model": "Tuner",
-        "note": "FLASH IN PROGRESS"
-      },
-      "states": {}
-    },
-    {
-      "id": "impact_wrench_1",
-      "name": "Impact Wrench",
-      "type": "ITEM",
-      "location_id": "on:saab_9_2x_aero_1",
-      "properties": {
-        "weight": 3.5,
-        "voltage": "18V",
-        "battery_level": "30%",
-        "condition": "left_on_tire"
-      },
-      "states": {}
-    },
-    {
-      "id": "parts_washer_1",
-      "name": "Parts Washer",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.0,
-          0.8,
-          1.2
-        ],
-        "weight": 60.0,
-        "is_container": true,
-        "status": "on_solvent_low"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "camshaft_1",
-      "name": "Camshaft",
-      "type": "ITEM",
-      "location_id": "in:parts_washer_1",
-      "properties": {
-        "weight": 5.0,
-        "condition": "half-cleaned"
-      },
-      "states": {}
-    },
-    {
-      "id": "air_compressor_1",
-      "name": "Air Compressor",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.5,
-          1.0,
-          1.2
-        ],
-        "weight": 80.0,
-        "is_container": false,
-        "condition": "leaking_at_hose_coupling",
-        "pressure": "60 PSI"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "wrc_photo_1",
-      "name": "Framed Photo",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 2.0,
-        "subject": "2003 Subaru WRC team",
-        "condition": "glass_cracked"
-      },
-      "states": {}
-    },
-    {
-      "id": "oil_spill_1",
-      "name": "Oil Spill",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 0.1,
-        "condition": "old_soaked_into_concrete",
-        "smell": "synthetic_blend"
-      },
-      "states": {}
-    },
-    {
-      "id": "energy_drink_cans_1",
-      "name": "Discarded Energy Drink Cans",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 0.5,
-        "condition": "crushed_rolling_under_shelving"
-      },
-      "states": {}
-    },
-    {
-      "id": "cnc_mill_1",
-      "name": "CNC Mill",
-      "type": "FURNITURE",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "size": [
-          2.0,
-          1.5,
-          1.8
-        ],
-        "weight": 300.0,
-        "is_container": false,
-        "error_code": "E-04: Tool Bit Overheat"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "chemical_bottle_1",
-      "name": "Unlabeled Chemical Bottle",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 1.0,
-        "cap_color": "blue",
-        "label": "CORROSIVE – HF ETCHANT",
-        "condition": "peeling_label_half-full"
-      },
-      "states": {}
-    },
-    {
-      "id": "chemical_bottle_2",
-      "name": "Unlabeled Chemical Bottle",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 1.0,
-        "cap_color": "red",
-        "label": "SOLVENT",
-        "condition": "full"
-      },
-      "states": {}
-    },
-    {
-      "id": "saab_grille_emblem_1",
-      "name": "1950s Saab Grille Emblem",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.5,
-        "condition": "nailed_to_wall"
-      },
-      "states": {}
-    },
-    {
-      "id": "diagnostics_desk_1",
-      "name": "Diagnostics Desk",
-      "type": "FURNITURE",
-      "location_id": "in:diagnostics_station",
-      "properties": {
-        "size": [
-          1.8,
-          0.8,
-          0.7
-        ],
-        "weight": 50.0,
-        "is_container": true,
-        "condition": "cluttered"
-      },
-      "states": {}
-    },
-    {
-      "id": "monitor_1",
-      "name": "Computer Monitor",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 5.0,
         "brand": "Dell",
-        "status": "running_dyno_software"
+        "screen_condition": "one flickering"
       },
       "states": {
-        "is_on": false
+        "is_on": true
       }
     },
     {
-      "id": "monitor_2",
-      "name": "Computer Monitor",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 5.0,
-        "brand": "HP",
-        "status": "running_dyno_software"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "monitor_3",
-      "name": "Computer Monitor",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 5.0,
-        "brand": "Acer",
-        "status": "running_dyno_software"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "obd_ii_dongle_1",
-      "name": "OBD-II Dongle",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 0.2,
-        "brand": "ELM327",
-        "condition": "stacked"
-      },
-      "states": {}
-    },
-    {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
+      "id": "document_dropbox_1",
+      "name": "Weighted Document Dropbox",
       "type": "FURNITURE",
-      "location_id": "in:diagnostics_station",
+      "location_id": "in:main_reception",
       "properties": {
         "size": [
-          1.5,
-          1.0,
-          0.1
-        ],
-        "weight": 20.0,
-        "is_container": true,
-        "content": "fuel-air_ratio_notes"
-      },
-      "states": {}
-    },
-    {
-      "id": "mini_fridge_1",
-      "name": "Mini Fridge",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          0.8,
-          0.6,
-          0.7
-        ],
-        "weight": 40.0,
-        "is_container": true,
-        "condition": "dented_broken_handle"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "coffee_maker_1",
-      "name": "Coffee Maker",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 3.0,
-        "condition": "stained_with_decades_of_drips",
-        "is_container": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "bulletin_board_1",
-      "name": "Bulletin Board",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          1.2,
-          0.9,
-          0.05
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "content": "faded_rally_posters"
-      },
-      "states": {}
-    },
-    {
-      "id": "repair_kit_1",
-      "name": "Repair Kit",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 5.0,
-        "contents": "assorted_tools",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "screwdriver_1",
-      "name": "Screwdriver",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.5,
-        "type": "Phillips",
-        "provides_abilities": [
-          "unscrew"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "pen_1",
-      "name": "Pen",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "provides_abilities": [
-          "sign"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "coolant_spray_1",
-      "name": "Coolant Spray",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 0.8,
-        "brand": "CRC",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "infrared_thermometer_1",
-      "name": "Infrared Thermometer",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.3,
-        "brand": "Fluke",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "blue_cap_bottle_1",
-      "name": "Blue Cap Bottle",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 1.0,
-        "cap_color": "blue",
-        "label": "CORROSIVE – HF ETCHANT",
-        "condition": "peeling_label_half-full"
-      },
-      "states": {}
-    },
-    {
-      "id": "blue_glass_paperweight_1",
-      "name": "Blue Glass Paperweight",
-      "type": "ITEM",
-      "location_id": "on:shelf_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "blue",
-        "material": "glass"
-      },
-      "states": {}
-    },
-    {
-      "id": "shelf_1",
-      "name": "Industrial Shelving",
-      "type": "FURNITURE",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "size": [
-          2.0,
           0.5,
-          2.0
-        ],
-        "weight": 60.0,
-        "is_container": true,
-        "condition": "labeled_bins"
-      },
-      "states": {}
-    },
-    {
-      "id": "welding_station_1",
-      "name": "Welding Station",
-      "type": "FURNITURE",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "size": [
-          1.5,
-          1.0,
-          1.8
-        ],
-        "weight": 120.0,
-        "is_container": true,
-        "condition": "half-finished_exhaust_pipes"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "exhaust_pipe_1",
-      "name": "Exhaust Pipe",
-      "type": "ITEM",
-      "location_id": "on:welding_station_1",
-      "properties": {
-        "weight": 8.0,
-        "condition": "half-finished"
-      },
-      "states": {}
-    },
-    {
-      "id": "welder_1",
-      "name": "Welder",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 15.0,
-        "brand": "Lincoln",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "engine_block_1",
-      "name": "Engine Block",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 200.0,
-        "condition": "removed_from_chassis"
-      },
-      "states": {}
-    },
-    {
-      "id": "chain_hoist_1",
-      "name": "Chain Hoist",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.0,
-          1.0,
-          2.0
-        ],
-        "weight": 80.0,
-        "is_container": false,
-        "max_load": "1000kg"
-      },
-      "states": {}
-    },
-    {
-      "id": "power_tool_charging_station_1",
-      "name": "Power Tool Charging Station",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.0,
           0.5,
-          0.5
-        ],
-        "weight": 20.0,
-        "is_container": false,
-        "status": "wall-mounted"
-      },
-      "states": {}
-    },
-    {
-      "id": "epoxy_floor_1",
-      "name": "Epoxy-Coated Floor",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          10.0,
-          10.0,
-          0.1
-        ],
-        "weight": 0.0,
-        "is_container": true,
-        "features": "drain_grates"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "drain_grate_1",
-      "name": "Drain Grate",
-      "type": "ITEM",
-      "location_id": "in:epoxy_floor_1",
-      "properties": {
-        "weight": 5.0,
-        "material": "steel",
-        "condition": "grease_streaks"
-      },
-      "states": {}
-    },
-    {
-      "id": "pneumatic_wrench_1",
-      "name": "Pneumatic Wrench",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 4.0,
-        "brand": "Ingersoll Rand",
-        "status": "hissing"
-      },
-      "states": {}
-    },
-    {
-      "id": "diagnostic_computer_1",
-      "name": "Diagnostic Computer",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 10.0,
-        "brand": "Dell",
-        "status": "humming"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "fuel_air_ratio_notes_1",
-      "name": "Fuel-Air Ratio Notes",
-      "type": "ITEM",
-      "location_id": "on:whiteboard_1",
-      "properties": {
-        "weight": 0.1,
-        "content": "technical_notes"
-      },
-      "states": {}
-    },
-    {
-      "id": "rally_poster_1",
-      "name": "Rally Poster",
-      "type": "ITEM",
-      "location_id": "on:bulletin_board_1",
-      "properties": {
-        "weight": 0.1,
-        "condition": "faded"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_1",
-      "name": "Coffee Mug",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_2",
-      "name": "Coffee Mug",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "white",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_3",
-      "name": "Coffee Mug",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_4",
-      "name": "Coffee Mug",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "red",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_5",
-      "name": "Coffee Mug",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "green",
-        "condition": "stained"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_beans_1",
-      "name": "Coffee Beans",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.5,
-        "type": "Arabica",
-        "condition": "whole"
-      },
-      "states": {
-        "is_grated": false
-      }
-    },
-    {
-      "id": "grater_1",
-      "name": "Grater",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.4,
-        "material": "stainless_steel",
-        "provides_abilities": [
-          "grate"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "cleaning_brush_1",
-      "name": "Cleaning Brush",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 0.3,
-        "material": "nylon",
-        "provides_abilities": [
-          "scrub"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "cleaning_agent_1",
-      "name": "Cleaning Agent",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 1.0,
-        "brand": "Simple Green",
-        "provides_abilities": [
-          "scrub"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "cutting_tool_1",
-      "name": "Cutting Tool",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.5,
-        "type": "utility_knife",
-        "provides_abilities": [
-          "cut"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "pruning_shears_1",
-      "name": "Pruning Shears",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.6,
-        "brand": "Fiskars",
-        "provides_abilities": [
-          "prune"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "bluetooth_dongle_1",
-      "name": "Bluetooth Dongle",
-      "type": "ITEM",
-      "location_id": "on:diagnostics_desk_1",
-      "properties": {
-        "weight": 0.1,
-        "brand": "TP-Link",
-        "status": "unpaired"
-      },
-      "states": {
-        "is_paired": false
-      }
-    },
-    {
-      "id": "bluetooth_speaker_1",
-      "name": "Bluetooth Speaker",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 1.0,
-        "brand": "JBL",
-        "status": "unpaired"
-      },
-      "states": {
-        "is_paired": false
-      }
-    },
-    {
-      "id": "puzzle_cube_1",
-      "name": "Puzzle Cube",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.2,
-        "type": "Rubik's",
-        "condition": "unsolved"
-      },
-      "states": {
-        "is_solved": false
-      }
-    },
-    {
-      "id": "cover_tarp_1",
-      "name": "Cover Tarp",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "weight": 2.0,
-        "material": "canvas",
-        "size": "large"
-      },
-      "states": {
-        "is_covered": false
-      }
-    },
-    {
-      "id": "push_cart_1",
-      "name": "Push Cart",
-      "type": "FURNITURE",
-      "location_id": "in:vehicle_bay",
-      "properties": {
-        "size": [
-          1.5,
-          1.0,
-          1.2
+          0.8
         ],
         "weight": 30.0,
         "is_container": true,
-        "condition": "empty"
+        "material": "steel",
+        "label": "Urgent Deeds Only"
       },
       "states": {
-        "is_pushed": false
+        "is_open": false
       }
     },
     {
-      "id": "cracked_windshield_1",
-      "name": "Cracked Windshield",
-      "type": "ITEM",
-      "location_id": "in:vehicle_bay",
+      "id": "property_board_1",
+      "name": "Wall-Mounted Property Board",
+      "type": "FURNITURE",
+      "location_id": "in:main_reception",
       "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.2
+        ],
         "weight": 15.0,
-        "condition": "cracked"
-      },
-      "states": {
-        "is_cracked": false
-      }
-    },
-    {
-      "id": "masher_1",
-      "name": "Masher",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.4,
-        "material": "stainless_steel",
-        "provides_abilities": [
-          "mash"
+        "is_container": false,
+        "material": "cork",
+        "markers": [
+          "Sold",
+          "Pending",
+          "Trust-Held"
         ]
       },
       "states": {}
     },
     {
-      "id": "potatoes_1",
-      "name": "Potatoes",
+      "id": "trust_document_folder_1",
+      "name": "Misplaced Trust Document Folder",
       "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "on:coffee_table_1",
       "properties": {
-        "weight": 1.0,
-        "condition": "raw"
+        "weight": 0.8,
+        "color": "manila",
+        "label": "Smith Family Trust – DO NOT FILE"
       },
       "states": {
-        "is_mashed": false
+        "is_filed": false
       }
     },
     {
-      "id": "soaking_basin_1",
-      "name": "Soaking Basin",
+      "id": "sign_in_sheet_1",
+      "name": "Sign-In Sheet",
       "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 2.0,
-        "material": "plastic",
-        "provides_abilities": [
-          "soak"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "dirty_rag_1",
-      "name": "Dirty Rag",
-      "type": "ITEM",
-      "location_id": "in:parts_fabrication_room",
-      "properties": {
-        "weight": 0.2,
-        "condition": "dirty"
-      },
-      "states": {
-        "is_soaked": false
-      }
-    },
-    {
-      "id": "stirring_spoon_1",
-      "name": "Stirring Spoon",
-      "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "on:reception_desk_1",
       "properties": {
         "weight": 0.1,
-        "material": "wood",
-        "provides_abilities": [
-          "stir"
-        ]
+        "color": "white",
+        "condition": "smudged ink"
       },
       "states": {}
     },
     {
-      "id": "coffee_pot_1",
-      "name": "Coffee Pot",
+      "id": "barcode_scanner_1",
+      "name": "Malfunctioning Barcode Scanner",
       "type": "ITEM",
-      "location_id": "on:coffee_maker_1",
+      "location_id": "on:reception_desk_1",
       "properties": {
         "weight": 0.5,
-        "contents": "coffee",
-        "condition": "stained"
+        "color": "black",
+        "brand": "Zebra",
+        "error_light": "blinking"
       },
       "states": {
-        "is_stirred": false
+        "is_on": true
       }
     },
     {
-      "id": "engine_stop_button_1",
-      "name": "Engine Stop Button",
-      "type": "ITEM",
-      "location_id": "on:saab_9_2x_aero_1",
+      "id": "coffee_station_1",
+      "name": "Coffee Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_reception",
       "properties": {
-        "weight": 0.1,
-        "color": "red",
-        "provides_abilities": [
-          "stop_engine"
-        ]
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic",
+        "note": "Out of Creamer"
       },
       "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "brand": "HP",
+        "jam_light": "on",
+        "paper_sizes": "mismatched"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "property_appraisal_books_1",
+      "name": "Stack of Property Appraisal Books",
+      "type": "ITEM",
+      "location_id": "on:reception_desk_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "various",
+        "years": "2015–2023",
+        "condition": "some water-damaged"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Floor-to-Ceiling Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "metal",
+        "drawer_condition": "one stuck halfway open"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "industrial_scanner_1",
+      "name": "Large Industrial Scanner",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 25.0,
+        "color": "gray",
+        "brand": "Fujitsu",
+        "alert": "Calibration Needed"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "condition": "5 minutes slow",
+        "sound": "ticking loudly"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_envelope_1",
+      "name": "Sealed Evidence Envelope",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "manila",
+        "label": "Smith Trust – Original Deed, DO NOT OPEN WITHOUT NOTARY"
+      },
+      "states": {
+        "is_open": false,
+        "is_filed": true
+      }
+    },
+    {
+      "id": "discrepancy_file_1",
+      "name": "Red-Flagged Discrepancy File",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "contents": "deed missing a witness signature"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "brand": "Brother",
+        "alert": "REPLACE CARTRIDGE"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "shredder_1",
+      "name": "Shredder",
+      "type": "ITEM",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "bin_capacity": "90% full"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Rolling Cart",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "wheel_condition": "wobbly",
+        "contents": "loaded with case files"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_binder_1",
+      "name": "Reference Binder",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "title": "County Notary Requirements – 2024 Edition"
+      },
+      "states": {}
+    },
+    {
+      "id": "signing_table_1",
+      "name": "Heavy Oak Signing Table",
+      "type": "FURNITURE",
+      "location_id": "in:notary_signing_office",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "oak",
+        "stains": "ink stains near the center"
+      },
+      "states": {}
+    },
+    {
+      "id": "notary_seal_press_1",
+      "name": "Notary Seal Press",
+      "type": "ITEM",
+      "location_id": "on:signing_table_1",
+      "properties": {
+        "weight": 10.0,
+        "color": "gold",
+        "operation_force": "10kg"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_safe_1",
+      "name": "Wall Safe",
+      "type": "FURNITURE",
+      "location_id": "in:notary_signing_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "keypad_condition": "Low Battery warning"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "deed_waiting_notarization_1",
+      "name": "Deed Waiting for Notarization",
+      "type": "ITEM",
+      "location_id": "on:signing_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "missing": "trustee’s secondary ID"
+      },
+      "states": {}
+    },
+    {
+      "id": "witness_registry_book_1",
+      "name": "Official Witness Registry Book",
+      "type": "ITEM",
+      "location_id": "on:signing_table_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "gold-embossed",
+        "last_entry": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_pen_1",
+      "name": "Broken Pen",
+      "type": "ITEM",
+      "location_id": "on:signing_table_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "condition": "leaking ink"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiche_reader_1",
+      "name": "Microfiche Reader",
+      "type": "ITEM",
+      "location_id": "on:research_desk_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "beige",
+        "temperature": "warm to the touch",
+        "fan_noise": "intermittent"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "legal_reference_library_1",
+      "name": "Legal Reference Library",
+      "type": "FURNITURE",
+      "location_id": "in:title_research_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.3,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "organization": "alphabetized, but Property Law Vol. 4 misfiled"
+      },
+      "states": {}
+    },
+    {
+      "id": "county_plots_map_1",
+      "name": "Large Map of County Plots",
+      "type": "ITEM",
+      "location_id": "in:title_research_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "multicolored",
+        "condition": "one corner torn, held by tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "highlighted_deed_record_1",
+      "name": "Highlighted Deed Record",
+      "type": "ITEM",
+      "location_id": "on:research_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "contents": "showing an old lien unresolved"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_glass_1",
+      "name": "Magnifying Glass",
+      "type": "ITEM",
+      "location_id": "in:research_desk_drawer_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "lens cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Disconnected Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:research_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "beige",
+        "condition": "cord chewed by something"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "replacement_battery_1",
+      "name": "Replacement 9V Battery",
+      "type": "ITEM",
+      "location_id": "in:reception_desk_drawer_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "brand": "Duracell"
+      },
+      "states": {}
+    },
+    {
+      "id": "receptionist_badge_1",
+      "name": "Receptionist’s ID Badge",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "blue",
+        "name": "Jane Doe",
+        "title": "Receptionist"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_table_1",
+      "name": "Coffee Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_reception",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_1",
+      "name": "Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:document_processing_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.75
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "research_desk_1",
+      "name": "Research Desk",
+      "type": "FURNITURE",
+      "location_id": "in:title_research_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "research_desk_drawer_1",
+      "name": "Research Desk Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:research_desk_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "reception_desk_drawer_1",
+      "name": "Reception Desk Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:reception_desk_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "wood",
+        "lock_type": "swipe card"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "on:coffee_station_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "Keurig",
+        "pot_status": "half-full",
+        "smell": "stale",
+        "is_container": true
+      },
+      "states": {
+        "is_on": true
+      }
     }
   ],
   "abilities": [
-    "close",
-    "cover",
-    "crack",
-    "cut",
-    "grate",
-    "mash",
     "open",
-    "pair",
-    "prune",
-    "push",
-    "repair",
-    "scrub",
-    "sign",
-    "soak",
-    "solve_puzzle",
-    "stir",
-    "stop_engine",
+    "turn_off",
     "turn_on",
-    "unscrew"
+    "close"
   ]
 }

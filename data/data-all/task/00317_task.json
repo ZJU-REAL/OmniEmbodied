@@ -6,9 +6,75 @@
       "max_grasp_limit": 2,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on the control_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:control_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the led_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_wall_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black monitor on the control_desk_1 and unmute it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_muted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only blue-capped dream extract vial and place it in the centrifuge_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "dream_extract_vial_1",
+          "location_id": "in:centrifuge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the towel_1 to dry the wet red_sneaker_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "red_sneaker_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to unwrap the dusty VHS tapes_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vhs_tapes_1",
+          "is_wrapped": false
+        }
+      ]
+    },
     {
       "task_description": "Find the only jammed printer in the main_observation_room, use the sterilizer_1 to clean it, and then copy a file to it.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,64 @@
         {
           "id": "printer_1",
           "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to sync the dream_scrubber_console_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dream_scrubber_console_1",
+          "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the holographic_brain_mapper_1 to the patient_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "holographic_brain_mapper_1",
+          "location_id": "in:patient_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryo_stasis_pod_1 to the neuro_analysis_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_stasis_pod_1",
+          "location_id": "in:neuro_analysis_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the centrifuge_1 to the staff_break_room and spin it to stabilize the Ditto Cells inside.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:staff_break_room"
+        },
+        {
+          "id": "centrifuge_1",
+          "is_spinning": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the microscope_station_1 to the data_archive and open its container to access the contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "location_id": "in:data_archive"
+        },
+        {
+          "id": "microscope_station_1",
+          "is_open": true
         }
       ]
     }

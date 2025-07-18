@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place target_dossier_1 on bulletin_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "target_dossier_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place empty_ammo_crate_1 in armory_tool_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "empty_ammo_crate_1",
+          "location_id": "in:armory_tool_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the strategic_map_table_1 and place it in the armory_tool_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "location_id": "in:armory_tool_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a frayed cord in the armory_tool_bay and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "grinder_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the toolbox_key_1 to open the locked_toolbox_1 and retrieve the bent_metal_rod_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +74,60 @@
         {
           "id": "bent_metal_rod_1",
           "location_id": "in:armory_tool_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only functional rifle on the weapons_rack_1 and use it to ignite the smoking_generator_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "smoking_generator_1",
+          "is_alight": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pull the emergency_shutoff_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutoff_lever_1",
+          "location_id": "in:central_command_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collapsed_steel_girder_1 to the generator_alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collapsed_steel_girder_1",
+          "location_id": "in:generator_alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the weapons_rack_1 to the central_command_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_rack_1",
+          "location_id": "in:central_command_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy diesel_generator_2 that is functional to the central_command_hub and connect it to the extension_cord_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "diesel_generator_2",
+          "location_id": "in:central_command_hub"
+        },
+        {
+          "id": "extension_cord_1",
+          "location_id": "in:central_command_hub"
         }
       ]
     }

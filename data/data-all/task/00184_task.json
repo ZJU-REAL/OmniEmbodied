@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Turn on the facial_recognition_kiosk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "facial_recognition_kiosk_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the mounted_tablet_1 on the confiscation_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mounted_tablet_1",
+          "location_id": "on:confiscation_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, mounted tablet with a battery level of 12 and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mounted_tablet_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red, plastic suspicious item bin and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "suspicious_item_bin_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver_1 to tighten the loose emergency_stop_button_1.",
       "task_category": "tool_use",
@@ -20,6 +70,97 @@
         {
           "id": "emergency_stop_button_1",
           "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_cloth_1 to polish the smudged biometric_pad_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "biometric_pad_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest, wooden table in the secondary inspection zone and use the screwdriver_1 to stabilize it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "interrogation_table_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, polyester suitcase on the conveyor belt and unzip it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wedged_suitcase_1",
+          "is_zipped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the evidence_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the full_body_scanner_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "full_body_scanner_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the logistics_storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:logistics_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the conveyor_belt_system_1 to the technical_maintenance closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_system_1",
+          "location_id": "in:technical_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, black contraband_locker_1 to the logistics_storage room and secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "contraband_locker_1",
+          "location_id": "in:logistics_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the large, metal full_body_scanner_1 to the technical_maintenance closet and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "full_body_scanner_1",
+          "location_id": "in:technical_maintenance",
+          "is_on": true
         }
       ]
     }

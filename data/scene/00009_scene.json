@@ -1,617 +1,728 @@
 {
-  "description": "A high-stakes pit lane and team garage complex at Homestead-Miami Speedway, featuring a live pit bay, primary team garage, tire storage zone, data analysis booth, equipment alley, and charity donation station.",
+  "description": "A high-pressure biomedical research lab in chaos after a critical system failure corrupts their experimental documentation. The team must rebuild their research archive before a grant review committee arrives in 90 minutes. The lab is packed with physical samples, digital backups, and fragmented notes, requiring agents to collaborate under time pressure.",
   "rooms": [
     {
-      "id": "live_pit_bay",
-      "name": "Live Pit Bay",
+      "id": "main_workroom",
+      "name": "Main Workroom",
       "properties": {
-        "type": "pit_area"
+        "type": "central_collaboration_zone"
       },
       "connected_to_room_ids": [
-        "primary_team_garage",
-        "tire_storage_zone"
+        "sample_archive",
+        "print_assembly_station",
+        "server_closet",
+        "breakroom"
       ]
     },
     {
-      "id": "primary_team_garage",
-      "name": "Primary Team Garage",
+      "id": "sample_archive",
+      "name": "Sample Archive",
       "properties": {
-        "type": "workshop"
+        "type": "refrigerated_storage"
       },
       "connected_to_room_ids": [
-        "live_pit_bay",
-        "data_analysis_booth",
-        "equipment_alley"
+        "main_workroom"
       ]
     },
     {
-      "id": "tire_storage_zone",
-      "name": "Tire Storage & Prep Zone",
+      "id": "print_assembly_station",
+      "name": "Print & Assembly Station",
       "properties": {
-        "type": "storage"
+        "type": "printing_zone"
       },
       "connected_to_room_ids": [
-        "live_pit_bay",
-        "equipment_alley"
+        "main_workroom"
       ]
     },
     {
-      "id": "data_analysis_booth",
-      "name": "Data Analysis Booth",
+      "id": "server_closet",
+      "name": "Server Closet",
       "properties": {
-        "type": "office"
+        "type": "restricted_access"
       },
       "connected_to_room_ids": [
-        "primary_team_garage"
+        "main_workroom"
       ]
     },
     {
-      "id": "equipment_alley",
-      "name": "Equipment & Logistics Alley",
+      "id": "breakroom",
+      "name": "Breakroom",
       "properties": {
-        "type": "storage"
+        "type": "distraction_zone"
       },
       "connected_to_room_ids": [
-        "primary_team_garage",
-        "tire_storage_zone",
-        "charity_donation_station"
-      ]
-    },
-    {
-      "id": "charity_donation_station",
-      "name": "Charity Donation Station",
-      "properties": {
-        "type": "display"
-      },
-      "connected_to_room_ids": [
-        "equipment_alley"
+        "main_workroom"
       ]
     }
   ],
   "objects": [
     {
-      "id": "hydraulic_jack_system_1",
-      "name": "Hydraulic Jack System",
+      "id": "central_collaboration_table_1",
+      "name": "Central Collaboration Table",
       "type": "FURNITURE",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "size": [
-          1.5,
-          1.0,
-          0.5
-        ],
-        "weight": 95.0,
-        "is_container": false,
-        "material": "steel",
-        "capacity": "3-ton",
-        "condition": "scuffed"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "fuel_rig_1",
-      "name": "Fuel Rig",
-      "type": "FURNITURE",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "size": [
-          1.2,
-          0.8,
-          1.5
-        ],
-        "weight": 85.0,
-        "is_container": true,
-        "material": "aluminum",
-        "capacity": "20-gallon",
-        "nozzle_position": "safe"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "used_firehawk_1",
-      "name": "Used Firehawk Tire",
-      "type": "ITEM",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "weight": 25.0,
-        "color": "black",
-        "type": "slick",
-        "condition": "uneven_wear"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "used_firehawk_2",
-      "name": "Used Firehawk Tire",
-      "type": "ITEM",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "weight": 25.0,
-        "color": "black",
-        "type": "slick",
-        "condition": "good"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "impact_wrench_1",
-      "name": "Impact Wrench",
-      "type": "ITEM",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "weight": 3.5,
-        "color": "red",
-        "battery_level": "23%",
-        "torque_setting": "140 Nm",
-        "provides_abilities": [
-          "mount",
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "cooling_fan_1",
-      "name": "Cooling Fan",
-      "type": "ITEM",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "weight": 8.0,
-        "color": "black",
-        "condition": "rattling_bearing"
-      },
-      "states": {
-        "is_running": false
-      }
-    },
-    {
-      "id": "radio_headset_dock_1",
-      "name": "Radio Headset Dock",
-      "type": "FURNITURE",
-      "location_id": "in:live_pit_bay",
-      "properties": {
-        "size": [
-          0.3,
-          0.2,
-          0.1
-        ],
-        "weight": 2.0,
-        "is_container": false,
-        "condition": "charging",
-        "battery_status": "low_battery"
-      },
-      "states": {}
-    },
-    {
-      "id": "engine_dyno_rig_1",
-      "name": "Engine Dyno Rig",
-      "type": "FURNITURE",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "size": [
-          2.0,
-          1.5,
-          1.8
-        ],
-        "weight": 250.0,
-        "is_container": false,
-        "error_code": "ERROR 47: O2 SENSOR"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "overhead_crane_1",
-      "name": "Overhead Crane",
-      "type": "FURNITURE",
-      "location_id": "in:primary_team_garage",
+      "location_id": "in:main_workroom",
       "properties": {
         "size": [
           3.0,
-          2.0,
-          2.5
-        ],
-        "weight": 500.0,
-        "is_container": false,
-        "max_load": "1.5 tons",
-        "hook_condition": "bent"
-      },
-      "states": {}
-    },
-    {
-      "id": "tire_pressure_gauge_1",
-      "name": "Tire Pressure Gauge",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 0.5,
-        "color": "yellow",
-        "last_calibration": "3 days ago",
-        "provides_abilities": [
-          "adjust"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "spare_ecu_unit_1",
-      "name": "Spare ECU Unit",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 1.2,
-        "color": "black",
-        "packaging": "anti-static bag",
-        "label": "WET SETUP ONLY"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "cordless_drill_1",
-      "name": "Cordless Drill",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 2.0,
-        "color": "blue",
-        "condition": "bit_stuck",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "kettle_1",
-      "name": "Kettle",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 1.5,
-        "color": "silver",
-        "state": "boiling"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "tire_warmer_machine_1",
-      "name": "Tire Warmer Machine",
-      "type": "FURNITURE",
-      "location_id": "in:tire_storage_zone",
-      "properties": {
-        "size": [
-          1.0,
-          0.8,
-          1.2
-        ],
-        "weight": 45.0,
-        "is_container": false,
-        "temperature": "200°F"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "pyrometer_1",
-      "name": "Pyrometer",
-      "type": "ITEM",
-      "location_id": "in:tire_storage_zone",
-      "properties": {
-        "weight": 0.8,
-        "color": "black",
-        "function": "tread_analysis",
-        "provides_abilities": [
-          "adjust"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "fresh_firehawk_1",
-      "name": "Fresh Firehawk Tire",
-      "type": "ITEM",
-      "location_id": "in:tire_storage_zone",
-      "properties": {
-        "weight": 25.0,
-        "color": "black",
-        "type": "slick",
-        "barcode": "FH-001"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "fresh_firehawk_2",
-      "name": "Fresh Firehawk Tire",
-      "type": "ITEM",
-      "location_id": "in:tire_storage_zone",
-      "properties": {
-        "weight": 25.0,
-        "color": "black",
-        "type": "rain",
-        "barcode": "FH-002"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "pallet_jack_1",
-      "name": "Pallet Jack",
-      "type": "FURNITURE",
-      "location_id": "in:equipment_alley",
-      "properties": {
-        "size": [
           1.5,
-          0.8,
-          0.5
+          0.8
         ],
-        "weight": 60.0,
-        "is_container": false,
-        "load_capacity": "150kg"
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_condition": "scratched"
       },
       "states": {}
     },
     {
-      "id": "pallet_of_tires_1",
-      "name": "Pallet of Fresh Tires",
+      "id": "workstation_1",
+      "name": "Workstation 1",
       "type": "FURNITURE",
-      "location_id": "in:equipment_alley",
+      "location_id": "on:central_collaboration_table_1",
       "properties": {
         "size": [
           1.2,
-          1.2,
-          1.2
+          0.6,
+          0.7
         ],
-        "weight": 150.0,
+        "weight": 25.0,
         "is_container": true,
-        "contents": "four_fresh_tires"
+        "monitor_condition": "flickering",
+        "keyboard_condition": "missing_enter_key"
       },
-      "states": {}
+      "states": {
+        "is_on": false
+      }
     },
     {
-      "id": "locked_cabinet_1",
-      "name": "Locked Cabinet",
+      "id": "workstation_2",
+      "name": "Workstation 2",
       "type": "FURNITURE",
-      "location_id": "in:equipment_alley",
+      "location_id": "on:central_collaboration_table_1",
       "properties": {
         "size": [
-          1.0,
-          0.5,
-          1.8
+          1.2,
+          0.6,
+          0.7
         ],
-        "weight": 30.0,
+        "weight": 25.0,
         "is_container": true,
-        "lock_type": "key",
-        "key_location": "crew_chief_pocket"
+        "monitor_condition": "functional",
+        "keyboard_condition": "functional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_3",
+      "name": "Workstation 3",
+      "type": "FURNITURE",
+      "location_id": "on:central_collaboration_table_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "monitor_condition": "functional",
+        "keyboard_condition": "functional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "bibtex_reference_binder_1",
+      "name": "BibTeX Reference Binder",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "condition": "torn_page",
+        "provides_abilities": [
+          "open"
+        ]
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "o2_sensor_toolkit_1",
-      "name": "O2 Sensor Toolkit",
+      "id": "bibtex_reference_binder_2",
+      "name": "BibTeX Reference Binder",
       "type": "ITEM",
-      "location_id": "in:locked_cabinet_1",
+      "location_id": "on:workstation_2",
       "properties": {
         "weight": 2.5,
-        "color": "red",
-        "provides_abilities": [
-          "repair"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "garage_laptop_1",
-      "name": "Garage Laptop",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 2.0,
         "color": "black",
-        "password": "Firehawk2024",
+        "condition": "intact",
         "provides_abilities": [
-          "adjust"
+          "open"
         ]
       },
       "states": {
-        "is_running": false
+        "is_open": false
       }
     },
     {
-      "id": "infant_car_seat_1",
-      "name": "Unassembled Infant Car Seat",
+      "id": "bibtex_reference_binder_3",
+      "name": "BibTeX Reference Binder",
       "type": "ITEM",
-      "location_id": "in:charity_donation_station",
+      "location_id": "on:workstation_3",
       "properties": {
-        "weight": 8.0,
-        "color": "blue",
-        "condition": "unassembled"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "infant_car_seat_2",
-      "name": "Unassembled Infant Car Seat",
-      "type": "ITEM",
-      "location_id": "in:charity_donation_station",
-      "properties": {
-        "weight": 8.0,
-        "color": "pink",
-        "condition": "unassembled"
-      },
-      "states": {
-        "is_mounted": false
-      }
-    },
-    {
-      "id": "folding_table_1",
-      "name": "Folding Table",
-      "type": "FURNITURE",
-      "location_id": "in:charity_donation_station",
-      "properties": {
-        "size": [
-          1.8,
-          0.8,
-          0.7
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "check_framed_1",
-      "name": "Framed Check from Bridgestone/Firestone",
-      "type": "ITEM",
-      "location_id": "in:charity_donation_station",
-      "properties": {
-        "weight": 1.0,
-        "color": "white",
-        "amount": "$2,500",
-        "frame_material": "wood"
-      },
-      "states": {}
-    },
-    {
-      "id": "varnish_brush_1",
-      "name": "Varnish Brush",
-      "type": "ITEM",
-      "location_id": "in:primary_team_garage",
-      "properties": {
-        "weight": 0.3,
-        "color": "brown",
-        "bristle_type": "synthetic",
+        "weight": 2.5,
+        "color": "black",
+        "condition": "intact",
         "provides_abilities": [
-          "varnish"
+          "open"
         ]
       },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "corrupted_latex_usb_1",
+      "name": "Corrupted LaTeX USB Stick",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "label": "FINAL_DRAFT_DO_NOT_DELETE"
+      },
       "states": {}
     },
     {
-      "id": "towel_1",
-      "name": "Towel",
+      "id": "grant_submission_checklist_1",
+      "name": "Grant Submission Checklist",
       "type": "ITEM",
-      "location_id": "in:primary_team_garage",
+      "location_id": "on:central_collaboration_table_1",
       "properties": {
         "weight": 0.2,
         "color": "white",
-        "material": "cotton",
-        "provides_abilities": [
-          "dry"
-        ]
+        "condition": "coffee_stained",
+        "missing_items": 2
       },
       "states": {}
     },
     {
-      "id": "pencil_1",
-      "name": "Pencil",
-      "type": "ITEM",
-      "location_id": "in:data_analysis_booth",
+      "id": "reference_manager_terminal_1",
+      "name": "Reference Manager Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_workroom",
       "properties": {
-        "weight": 0.1,
-        "color": "yellow",
-        "lead_type": "HB",
-        "provides_abilities": [
-          "draw"
-        ]
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "status": "locked",
+        "requires_2fa": true
       },
       "states": {}
     },
     {
-      "id": "air_pump_1",
-      "name": "Air Pump",
+      "id": "yubikey_1",
+      "name": "Yubikey",
       "type": "ITEM",
-      "location_id": "in:tire_storage_zone",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "model": "YubiKey 5"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:central_collaboration_table_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "status": "tape_jam",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "document_scanner_1",
+      "name": "Document Scanner",
+      "type": "ITEM",
+      "location_id": "on:central_collaboration_table_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "gray",
+        "status": "faulty_lid_sensor",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "industrial_freezer_1",
+      "name": "Industrial Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_archive",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": -12.0,
+        "target_temperature": -20.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "binder_shelves_1",
+      "name": "Binder Shelves",
+      "type": "FURNITURE",
+      "location_id": "in:sample_archive",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "condition": "leaning"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "critical_sample_tray_1",
+      "name": "Critical Sample Tray",
+      "type": "ITEM",
+      "location_id": "in:industrial_freezer_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "clear",
+        "label": "URGENT: DO NOT THAW",
+        "vial_condition": "one_cracked"
+      },
+      "states": {
+        "is_frozen": true
+      }
+    },
+    {
+      "id": "handwritten_lab_journal_1",
+      "name": "Handwritten Lab Journal",
+      "type": "ITEM",
+      "location_id": "in:binder_shelves_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "red",
+        "author": "Dr. Kowalski",
+        "content": "key_equation"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "portable_label_printer_1",
+      "name": "Portable Label Printer",
+      "type": "ITEM",
+      "location_id": "on:binder_shelves_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "status": "out_of_tape",
+        "provides_abilities": [
+          "fill"
+        ]
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "microcentrifuge_1",
+      "name": "Microcentrifuge",
+      "type": "ITEM",
+      "location_id": "on:binder_shelves_1",
+      "properties": {
+        "weight": 4.0,
+        "color": "gray",
+        "status": "idle",
+        "provides_abilities": [
+          "thaw"
+        ]
+      },
+      "states": {
+        "is_frozen": false
+      }
+    },
+    {
+      "id": "high_speed_printer_1",
+      "name": "High-Speed Printer",
+      "type": "FURNITURE",
+      "location_id": "in:print_assembly_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "status": "jammed",
+        "jammed_material": "melted_transparency_film"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "maintenance_toolkit_1",
+      "name": "Maintenance Toolkit",
+      "type": "ITEM",
+      "location_id": "on:central_collaboration_table_1",
       "properties": {
         "weight": 5.0,
         "color": "red",
-        "pressure_range": "0-150 PSI",
+        "contents": [
+          "heat_resistant_spatula",
+          "screwdriver",
+          "wrench"
+        ],
         "provides_abilities": [
-          "pump"
-        ]
+          "saw",
+          "tighten",
+          "disassemble"
+        ],
+        "is_container": true
       },
-      "states": {}
+      "states": {
+        "is_open": false
+      }
     },
     {
-      "id": "whisk_1",
-      "name": "Whisk",
+      "id": "heat_resistant_spatula_1",
+      "name": "Heat-Resistant Spatula",
       "type": "ITEM",
-      "location_id": "in:primary_team_garage",
+      "location_id": "in:maintenance_toolkit_1",
       "properties": {
         "weight": 0.3,
         "color": "silver",
         "material": "stainless_steel",
         "provides_abilities": [
-          "whisk"
+          "slice"
         ]
       },
       "states": {}
     },
     {
-      "id": "staple_remover_1",
-      "name": "Staple Remover",
+      "id": "backup_drive_array_1",
+      "name": "Backup Drive Array",
+      "type": "FURNITURE",
+      "location_id": "in:server_closet",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "status": "disconnected"
+      },
+      "states": {}
+    },
+    {
+      "id": "latex_documentation_server_1",
+      "name": "LaTeX Documentation Server",
+      "type": "FURNITURE",
+      "location_id": "in:server_closet",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "status": "io_error"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "broken_microwave_1",
+      "name": "Broken Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "door_condition": "ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "content": "half_erased_workflow_diagram"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee Cup",
       "type": "ITEM",
-      "location_id": "in:data_analysis_booth",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "content": "half_drunk_coffee",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "safety_manual_1",
+      "name": "Safety Manual",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "edition": "outdated"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_countdown_timer_1",
+      "name": "Digital Countdown Timer",
+      "type": "FURNITURE",
+      "location_id": "in:main_workroom",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.05
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "time_remaining": "90:00"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "lab_safety_poster_1",
+      "name": "Lab Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_workroom",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "condition": "peeling_corners",
+        "year": "2019"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "darwin_fish_toy_1",
+      "name": "Stuffed Darwin Fish Toy",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "significance": "inside_joke"
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_chemical_bottles_1",
+      "name": "Expired Chemical Bottles",
+      "type": "ITEM",
+      "location_id": "in:sample_archive",
+      "properties": {
+        "weight": 2.0,
+        "color": "various",
+        "status": "do_not_use"
+      },
+      "states": {}
+    },
+    {
+      "id": "corrosive_bottle_1",
+      "name": "Corrosive Bottle",
+      "type": "ITEM",
+      "location_id": "in:sample_archive",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "label": "CORROSIVE",
+        "fill_level": "half_full"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:central_collaboration_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "single_glove_1",
+      "name": "Single Glove",
+      "type": "ITEM",
+      "location_id": "on:central_collaboration_table_1",
       "properties": {
         "weight": 0.1,
+        "color": "purple",
+        "pair_status": "missing"
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:maintenance_toolkit_1",
+      "properties": {
+        "weight": 0.4,
         "color": "black",
         "provides_abilities": [
-          "unstaple"
+          "prune"
         ]
       },
       "states": {}
     },
     {
-      "id": "fire_extinguisher_1",
-      "name": "Fire Extinguisher",
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
       "type": "ITEM",
-      "location_id": "in:live_pit_bay",
+      "location_id": "in:server_closet",
       "properties": {
-        "weight": 6.0,
+        "weight": 2.0,
         "color": "red",
-        "type": "ABC",
         "provides_abilities": [
-          "extinguish"
+          "refuel"
+        ]
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:sample_archive",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "provides_abilities": [
+          "wipe"
         ]
       },
       "states": {}
     }
   ],
   "abilities": [
-    "adjust",
-    "draw",
-    "dry",
-    "extinguish",
-    "mount",
+    "close",
+    "disassemble",
+    "fill",
+    "inject",
     "open",
-    "pump",
-    "repair",
-    "start_process",
-    "stop_process",
-    "unstaple",
-    "varnish",
-    "whisk",
-    "close"
+    "prune",
+    "record_video",
+    "refuel",
+    "saw",
+    "slice",
+    "take_down",
+    "thaw",
+    "tighten",
+    "turn_off",
+    "turn_on",
+    "wipe"
   ]
 }

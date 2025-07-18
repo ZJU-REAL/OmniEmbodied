@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the tactical_slider_console_1 on workstation_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tactical_slider_console_1",
+          "location_id": "on:workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the data_drive_red_1 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "data_drive_red_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only wrapped data drive and place it on workstation_5.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "data_drive_blue_1",
+          "location_id": "on:workstation_5"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest calibration weight and place it on the physio_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_weight_20kg_1",
+          "location_id": "on:physio_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the pump to inflate the deflated football.",
       "task_category": "tool_use",
@@ -20,6 +70,104 @@
         {
           "id": "deflated_football_1",
           "is_inflated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to screw in the tactical_slider_console_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tactical_slider_console_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only unwrapped data drive that is red and use the scissors to unwrap it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "data_drive_blue_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only diagnostic screen that is not mounted and use the screwdriver to mount it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_screen_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lower the motion-capture rig.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_capture_rig_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hydrotherapy tub.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydrotherapy_tub_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the leg-press machine to the medical recovery corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "leg_press_machine_1",
+          "location_id": "in:medical_recovery_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the holotable to the biomechanics testing zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "holotable_1",
+          "location_id": "in:biomechanics_testing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the diagnostic screen to the main tactical hub and mount it using the screwdriver.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "diagnostic_screen_1",
+          "location_id": "in:main_tactical_hub"
+        },
+        {
+          "id": "diagnostic_screen_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydrotherapy tub to the medical recovery corner and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydrotherapy_tub_1",
+          "location_id": "in:medical_recovery_corner"
+        },
+        {
+          "id": "hydrotherapy_tub_1",
+          "is_open": true
         }
       ]
     }

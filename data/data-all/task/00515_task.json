@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the ledger_1 on the reinforced_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ledger_1",
+          "location_id": "on:reinforced_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the quill_1 on the spice_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "quill_1",
+          "location_id": "on:spice_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, brass item on the oak_desk_1 and place it in the artifact_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "brass_globe_1",
+          "location_id": "in:artifact_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only cracked glass item on the spice_shelf_1 and place it on the weighing_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spice_jar_1",
+          "location_id": "on:weighing_station_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the alabaster_vase_1 using the wrench_1.",
       "task_category": "tool_use",
@@ -20,6 +70,86 @@
         {
           "id": "alabaster_vase_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Tighten the loose oak_desk_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "oak_desk_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the magnifying_glass_1 to measure the torn scrap of vellum_1 and then place it in the secure_archive.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "vellum_scrap_1",
+          "location_id": "in:secure_archive"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calipers_1 to measure the papyrus_scroll_1 and then place it in the locked_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "papyrus_scroll_1",
+          "location_id": "in:locked_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sarcophagus_fragment_1 to the main_study.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sarcophagus_fragment_1",
+          "location_id": "in:main_study"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the glass_display_case_1 to the secure_archive.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "glass_display_case_1",
+          "location_id": "in:secure_archive"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy oak_desk_1 that is stained to the artifact_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oak_desk_1",
+          "location_id": "in:artifact_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy bookshelf_1 that is sagging to the spice_corner.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:spice_corner"
         }
       ]
     }

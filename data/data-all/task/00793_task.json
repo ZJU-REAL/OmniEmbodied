@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the security_analysts_laptop_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "security_analysts_laptop_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the kvm_switch_1 in the labeled_cable_trays_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "kvm_switch_1",
+          "location_id": "in:labeled_cable_trays_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red USB hardware token with the inscription 'EMERGENCY ADMIN' and place it on the central_command_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_hardware_token_1",
+          "location_id": "on:central_command_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black noise-canceling headsets and place them in the break_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "noise_canceling_headsets_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torx_screwdriver_1 to tighten the compromised_cacti_server_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "compromised_cacti_server_1",
+          "is_loose": false
+        }
+      ]
+    },
     {
       "task_description": "Find the red labeled cable trays and use them to organize the spare_fiber_optic_cables_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,50 @@
         {
           "id": "spare_fiber_optic_cables_1",
           "location_id": "in:labeled_cable_trays_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the rackmount_server_enclosure_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_enclosure_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the rackmount_server_enclosure_1 to the server_room_b.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_enclosure_1",
+          "location_id": "in:server_room_b"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the uninterruptible_power_supply_1 to the tool_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uninterruptible_power_supply_1",
+          "location_id": "in:tool_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central_command_desk_1 to the break_area and open it to retrieve the incident_report_binder_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_command_desk_1",
+          "location_id": "in:break_area"
+        },
+        {
+          "id": "central_command_desk_1",
+          "is_open": true
         }
       ]
     }

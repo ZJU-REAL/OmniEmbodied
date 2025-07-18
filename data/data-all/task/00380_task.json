@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the sterilization_wand_1 on the scanning_arch_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sterilization_wand_1",
+          "location_id": "on:scanning_arch_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the biohazard_disposal_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biohazard_disposal_unit_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest steel object in the decontamination_airlock and place it in the industrial_enchantment_floor.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "scanning_arch_1",
+          "location_id": "in:industrial_enchantment_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only yellow item in the decontamination_airlock and unpack it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hazmat_suit_1",
+          "is_packed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the mounting_tool_1 to mount the rune_etching_laser_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "rune_etching_laser_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the insulation_roll_1 to insulate the thaumic_furnace_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "thaumic_furnace_1",
+          "is_insulated": true
+        }
+      ]
+    },
     {
       "task_description": "Use the drying_towel_1 to dry the spilled anti_necrotic_serum_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,68 @@
         {
           "id": "anti_necrotic_serum_1",
           "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the intercom_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "intercom_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to insert the quarantine_override_keypad_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "quarantine_override_keypad_1",
+          "is_inserted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the scanning_arch_1 to the industrial_enchantment_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "scanning_arch_1",
+          "location_id": "in:industrial_enchantment_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the thaumic_furnace_1 to the bio_containment_vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "thaumic_furnace_1",
+          "location_id": "in:bio_containment_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the conveyor_belt_1 to the decontamination_airlock and use the crushing_press_1 to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "location_id": "in:decontamination_airlock",
+          "is_crushed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the necrotic_sample_stasis_pod_1 to the industrial_enchantment_floor and use the staining_agent_1 to stain it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "necrotic_sample_stasis_pod_1",
+          "location_id": "in:industrial_enchantment_floor",
+          "is_dirty": true
         }
       ]
     }

@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the broken_enchanted_sword_1 on the reinforced_wooden_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "broken_enchanted_sword_1",
+          "location_id": "on:reinforced_wooden_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the bucket_of_water_1 next to the makeshift_furnace_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bucket_of_water_1",
+          "location_id": ":bucket_of_water_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, wooden item in the forge_crafting_zone and place it in the storage_scrap_heap.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,132 @@
         {
           "id": "manual_bellows_system_1",
           "location_id": "in:storage_scrap_heap"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item glowing faintly and place it on the giant_stone_anvil_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_enchanted_sword_1",
+          "location_id": "on:giant_stone_anvil_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_wagon_wheel_1 using the whetstone_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_wagon_wheel_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Scrub the oversized_tongs_1 using the wooden_mallet_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "oversized_tongs_1",
+          "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the whetstone_1 to sand the broken_enchanted_sword_1 and then place it on the reinforced_wooden_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_enchanted_sword_1",
+          "is_sanded": true
+        },
+        {
+          "id": "broken_enchanted_sword_1",
+          "location_id": "on:reinforced_wooden_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the bucket_of_water_1 to fill the lantern_1 and then place it on the wooden_stool_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lantern_1",
+          "is_full": true
+        },
+        {
+          "id": "lantern_1",
+          "location_id": "on:wooden_stool_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the brass_scales_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "brass_scales_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_reagent_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_reagent_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stack_of_iron_ingots_1 to the living_quarters.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stack_of_iron_ingots_1",
+          "location_id": "in:living_quarters"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the giant_wooden_crate_1 to the forge_crafting_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "giant_wooden_crate_1",
+          "location_id": "in:forge_crafting_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaning_tower_of_logs_1 to the forge_crafting_zone and use the oversized_tongs_1 to stabilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "leaning_tower_of_logs_1",
+          "location_id": "in:forge_crafting_zone"
+        },
+        {
+          "id": "oversized_tongs_1",
+          "location_id": ":oversized_tongs_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the giant_hay_bed_1 to the storage_scrap_heap and use the wooden_mallet_1 to flatten it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "giant_hay_bed_1",
+          "location_id": "in:storage_scrap_heap"
+        },
+        {
+          "id": "wooden_mallet_1",
+          "location_id": ":wooden_mallet_1"
         }
       ]
     }

@@ -1,0 +1,112 @@
+{
+  "task_background": "Prepare the electronics repair lab for a new batch of HP Photosmart M22 cameras by inspecting, repairing, testing, and packaging them.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 10.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 10.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place defective_camera_1 on anti_static_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "defective_camera_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place defective_camera_2 on anti_static_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "defective_camera_2",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black camera with a blue warranty sticker and place it on the anti-static workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "defective_camera_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the camera with a broken battery door latch and place it on the anti-static workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "defective_camera_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the tool_chest_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the replacement_parts_box_1 to the repair workstations.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "replacement_parts_box_1",
+          "location_id": "in:repair_workstations"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the packaging and shipping area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:packaging_shipping"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rush_order_pallet_1 to the packaging conveyor and pack it using the tape_dispenser_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rush_order_pallet_1",
+          "location_id": "on:packing_conveyor_1"
+        },
+        {
+          "id": "rush_order_pallet_1",
+          "is_packed": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00733"
+}

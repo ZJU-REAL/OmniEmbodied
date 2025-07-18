@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the usb_drive_1 on the performance_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:performance_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the oscilloscope_1 in the thermal_analysis_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oscilloscope_1",
+          "location_id": "in:thermal_analysis_bay"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item in the benchmarking_arena and place it in the tool_closet.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,120 @@
         {
           "id": "overlord_server_rack_1",
           "location_id": "in:tool_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only frayed, green item in the benchmarking_arena and place it in the thermal_analysis_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fpga_array_1",
+          "location_id": "in:thermal_analysis_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken coffee machine in the collaboration_hub.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Dry the wet coffee stain in the benchmarking_arena.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_stain_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard to type on the throttle_control_terminal_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "throttle_control_terminal_1",
+          "is_typed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal_paste to spread on the cryo_module_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cryo_module_1",
+          "is_pure": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the liquid_cooling_manifold_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_cooling_manifold_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the file_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "file_cabinet_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the throttle_control_terminal_1 to the thermal_analysis_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "throttle_control_terminal_1",
+          "location_id": "in:thermal_analysis_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_cooling_manifold_1 to the benchmarking_arena.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_cooling_manifold_1",
+          "location_id": "in:benchmarking_arena"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy dummy_load_1 to the tool_closet and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "dummy_load_1",
+          "location_id": "in:tool_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy tool_cart_1 to the collaboration_hub and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "location_id": "in:collaboration_hub"
+        },
+        {
+          "id": "tool_cart_1",
+          "is_open": true
         }
       ]
     }

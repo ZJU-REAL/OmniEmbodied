@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the test_tubes_1 on the biosafety_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "test_tubes_1",
+          "location_id": "on:biosafety_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the master_keycard_1 on the documentation_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_keycard_1",
+          "location_id": "on:documentation_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass item in the main_lab_floor and place it in the materials_lockers.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "potted_fern_1",
+          "location_id": "in:materials_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the main_lab_floor and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microplate_reader_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Label the solvent_bottle_1 using the label_marker_1.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "solvent_bottle_1",
           "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the verification_device_1 to verify the contaminated_sample_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "contaminated_sample_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the loose ribbon cable in the hplc_machine_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hplc_machine_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to sync the microplate_reader_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "microplate_reader_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spill_containment_1 to the process_engineering_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spill_containment_1",
+          "location_id": "in:process_engineering_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the emergency_shower_1 to the main_lab_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shower_1",
+          "location_id": "in:main_lab_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the bioreactor_1 to the process_engineering_bay and tighten its loose components using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bioreactor_1",
+          "location_id": "in:process_engineering_bay"
+        },
+        {
+          "id": "bioreactor_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigeration_unit_1 to the materials_lockers and verify its contents using the verification_device_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "location_id": "in:materials_lockers"
+        },
+        {
+          "id": "reagent_bottle_1",
+          "is_verified": true
         }
       ]
     }

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the decoy_ledger_1 on the customer_orders_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "decoy_ledger_1",
+          "location_id": "on:customer_orders_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the glue_pot_1 in the cellar.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "glue_pot_1",
+          "location_id": "in:cellar"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the workbench and place it in the cellar.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "glue_pot_1",
+          "location_id": "in:cellar"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only leather item on the workbench and place it on the customer_orders_board_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "decoy_ledger_1",
+          "location_id": "on:customer_orders_board_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the fuel_can_1 to refuel the oil_lamp_1.",
       "task_category": "tool_use",
@@ -20,6 +70,96 @@
         {
           "id": "oil_lamp_1",
           "is_fueled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to fix the paper_guillotine_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "paper_guillotine_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cipher_wheel_1 to solve the puzzle in the decoy_ledger_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "decoy_ledger_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the polish_cloth_1 to polish the guild_certificate_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "guild_certificate_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect the printing_press_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printing_press_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to uncover the radio_transmitter_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "radio_transmitter_1",
+          "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ink_barrel_1 to the front_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ink_barrel_1",
+          "location_id": "in:front_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the paper_cutter_1 to the cellar.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "paper_cutter_1",
+          "location_id": "in:cellar"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printing_press_1 that is not connected to the front_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printing_press_1",
+          "location_id": "in:front_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaky_barrel_1 that is in the cellar to the back_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "leaky_barrel_1",
+          "location_id": "in:back_room"
         }
       ]
     }

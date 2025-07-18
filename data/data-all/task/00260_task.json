@@ -10,9 +10,39 @@
         300,
         300
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 50.0,
+      "max_weight": 50.0,
+      "max_size": [
+        300,
+        300,
+        300
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_cup_1 on the folding_chair_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "on:folding_chair_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the traffic_cone_1 to the neighbor_driveway.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "traffic_cone_1",
+          "location_id": "in:neighbor_driveway"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, yellow object in the front_yard and move it to the porch.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "safety_fence_1",
           "location_id": "in:porch"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing, official vehicle in the street and turn off its engine.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "council_van_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to unlock the safety_fence_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "safety_fence_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pear_basket_1 to harvest the pear_tree_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pear_tree_1",
+          "is_harvested": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest, steel object in the front_yard that is a container and close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "safety_fence_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the document_scanner_1 to scan the approved_clipboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "approved_clipboard_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the floodlight_tower_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "floodlight_tower_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to unlock the safety_fence_1 using the official_stamp_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safety_fence_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fence_panel_1 to the alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fence_panel_1",
+          "location_id": "in:alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the portable_generator_1 to the porch.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "portable_generator_1",
+          "location_id": "in:porch"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heaviest, steel object in the front_yard to the street and unlock it using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "safety_fence_1",
+          "location_id": "in:street"
+        },
+        {
+          "id": "safety_fence_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the pear_tree_1 to the neighbor_driveway and harvest it using the pear_basket_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pear_tree_1",
+          "location_id": "in:neighbor_driveway"
+        },
+        {
+          "id": "pear_tree_1",
+          "is_harvested": true
         }
       ]
     }

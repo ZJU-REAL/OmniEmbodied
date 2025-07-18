@@ -1,657 +1,751 @@
 {
-  "description": "A gritty boxing gym retrofitted with an ad-hoc medical testing lab, blending athletic training with mandatory HIV screenings. The environment is rich with heavy equipment, medical tools, and procedural clutter requiring multi-agent coordination.",
+  "description": "A Forward Operating Base (FOB) in the Iraqi desert under threat from an incoming sandstorm and enemy probing attacks. The FOB is a hub of logistical chaos with mechanics, medics, and infantry working together under deteriorating conditions.",
   "rooms": [
     {
-      "id": "main_training_floor",
-      "name": "Main Training Floor",
+      "id": "command_tent",
+      "name": "Command Tent",
       "properties": {
-        "type": "training_area"
+        "type": "central_hub"
       },
       "connected_to_room_ids": [
-        "medical_screening_corner",
-        "locker_room"
+        "motor_pool",
+        "medical_triage",
+        "outer_perimeter",
+        "supply_depot",
+        "communications_array"
       ]
     },
     {
-      "id": "medical_screening_corner",
-      "name": "Medical Screening Corner",
+      "id": "motor_pool",
+      "name": "Motor Pool",
       "properties": {
-        "type": "medical_area"
+        "type": "vehicle_maintenance"
       },
       "connected_to_room_ids": [
-        "main_training_floor",
-        "office_admin_closet"
+        "command_tent",
+        "supply_depot"
       ]
     },
     {
-      "id": "locker_room",
-      "name": "Locker Room",
+      "id": "medical_triage",
+      "name": "Medical Triage",
       "properties": {
-        "type": "changing_area"
+        "type": "field_hospital"
       },
       "connected_to_room_ids": [
-        "main_training_floor",
-        "equipment_storage"
+        "command_tent",
+        "supply_depot"
       ]
     },
     {
-      "id": "office_admin_closet",
-      "name": "Office/Admin Closet",
+      "id": "outer_perimeter",
+      "name": "Outer Perimeter",
       "properties": {
-        "type": "administrative"
+        "type": "defensive_ring"
       },
       "connected_to_room_ids": [
-        "medical_screening_corner"
+        "command_tent"
       ]
     },
     {
-      "id": "equipment_storage",
-      "name": "Equipment Storage",
+      "id": "supply_depot",
+      "name": "Supply Depot",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
-        "locker_room"
+        "command_tent",
+        "motor_pool",
+        "medical_triage"
+      ]
+    },
+    {
+      "id": "communications_array",
+      "name": "Communications Array",
+      "properties": {
+        "type": "comms"
+      },
+      "connected_to_room_ids": [
+        "command_tent"
       ]
     }
   ],
   "objects": [
     {
-      "id": "boxing_ring_1",
-      "name": "Regulation Boxing Ring",
+      "id": "folding_table_1",
+      "name": "Folding Metal Table",
       "type": "FURNITURE",
-      "location_id": "in:main_training_floor",
+      "location_id": "in:command_tent",
       "properties": {
         "size": [
-          4.0,
-          4.0,
-          1.2
-        ],
-        "weight": 85.0,
-        "is_container": false,
-        "material": "canvas_and_steel",
-        "condition": "stained"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "heavy_bag_1",
-      "name": "Industrial Hanging Heavy Bag",
-      "type": "FURNITURE",
-      "location_id": "in:main_training_floor",
-      "properties": {
-        "size": [
+          1.5,
           0.8,
-          0.8,
-          1.5
-        ],
-        "weight": 150.0,
-        "is_container": false,
-        "material": "leather",
-        "condition": "cracked"
-      },
-      "states": {
-        "is_replaced": false
-      }
-    },
-    {
-      "id": "hiv_test_kit_cart_1",
-      "name": "HIV Test Kit Cart",
-      "type": "FURNITURE",
-      "location_id": "in:main_training_floor",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.9
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "metal",
-        "condition": "worn"
-      },
-      "states": {
-        "is_open": false,
-        "is_full": true
-      }
-    },
-    {
-      "id": "weight_bench_1",
-      "name": "Weight Bench",
-      "type": "FURNITURE",
-      "location_id": "in:main_training_floor",
-      "properties": {
-        "size": [
-          1.8,
-          0.7,
-          0.5
-        ],
-        "weight": 40.0,
-        "is_container": true,
-        "material": "steel_and_vinyl",
-        "capacity": "120kg"
-      },
-      "states": {}
-    },
-    {
-      "id": "first_aid_station_1",
-      "name": "First-Aid Station",
-      "type": "FURNITURE",
-      "location_id": "in:main_training_floor",
-      "properties": {
-        "size": [
-          0.6,
-          0.3,
-          0.4
+          0.7
         ],
         "weight": 15.0,
         "is_container": true,
-        "material": "plastic",
-        "condition": "missing_bandages"
+        "material": "metal",
+        "color": "olive_drab"
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
     },
     {
-      "id": "centrifuge_machine_1",
-      "name": "Centrifuge Machine XL-2000",
-      "type": "FURNITURE",
-      "location_id": "in:medical_screening_corner",
+      "id": "field_radio_1",
+      "name": "Field Radio",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
       "properties": {
-        "size": [
-          0.8,
-          0.8,
-          0.6
-        ],
-        "weight": 200.0,
+        "weight": 3.5,
         "is_container": false,
-        "material": "steel",
-        "condition": "error_code_47"
+        "brand": "Harris",
+        "model_number": "RF-7800H"
       },
       "states": {
-        "is_calibrated": false,
+        "is_on": false
+      }
+    },
+    {
+      "id": "laptop_1",
+      "name": "Laptop",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 2.0,
+        "is_container": false,
+        "brand": "Panasonic",
+        "model_number": "Toughbook-31"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "metal_briefcase_1",
+      "name": "Locked Metal Briefcase",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 5.0,
+        "is_container": true
+      },
+      "states": {
         "is_open": false
       }
     },
     {
-      "id": "blood_sample_rack_1",
-      "name": "Blood Sample Rack",
+      "id": "landline_phone_1",
+      "name": "Broken Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.5,
+        "is_container": false
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "coffee_pot_1",
+      "name": "Coffee Pot",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "propane_stove_1",
+      "name": "Propane Stove",
       "type": "FURNITURE",
-      "location_id": "in:medical_screening_corner",
+      "location_id": "in:command_tent",
       "properties": {
         "size": [
           0.5,
           0.3,
-          0.4
+          0.2
         ],
-        "weight": 5.0,
-        "is_container": true,
-        "material": "plastic",
-        "capacity": "12_tubes"
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Coleman"
       },
       "states": {
-        "is_open": false,
-        "is_full": true
+        "is_on": false
       }
     },
     {
-      "id": "biohazard_bin_1",
-      "name": "Biohazard Bin",
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
       "type": "FURNITURE",
-      "location_id": "in:medical_screening_corner",
+      "location_id": "in:command_tent",
       "properties": {
         "size": [
-          0.6,
-          0.6,
-          0.9
+          1.2,
+          0.9,
+          0.05
         ],
         "weight": 12.0,
-        "is_container": true,
-        "material": "plastic",
-        "condition": "overfilled"
+        "is_container": false,
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "led_lantern_1",
+      "name": "LED Lantern",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.8,
+        "is_container": false,
+        "brand": "Streamlight"
       },
       "states": {
-        "is_open": false,
-        "is_full": true
+        "is_on": false
       }
     },
     {
-      "id": "glove_dispenser_1",
-      "name": "Glove Dispenser",
+      "id": "apache_helicopter_1",
+      "name": "Disabled Apache Helicopter",
       "type": "FURNITURE",
-      "location_id": "in:medical_screening_corner",
+      "location_id": "in:motor_pool",
       "properties": {
         "size": [
-          0.4,
-          0.3,
-          0.2
+          14.6,
+          3.8,
+          4.0
         ],
-        "weight": 3.0,
-        "is_container": true,
-        "material": "plastic",
-        "condition": "empty"
+        "weight": 5200.0,
+        "is_container": false,
+        "model_number": "AH-64E"
       },
       "states": {
-        "is_open": false,
-        "is_full": false
+        "is_broken": true
       }
     },
     {
-      "id": "filing_cabinet_1",
-      "name": "Dented Filing Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:office_admin_closet",
+      "id": "engine_block_1",
+      "name": "Engine Block",
+      "type": "ITEM",
+      "location_id": "in:motor_pool",
       "properties": {
-        "size": [
-          0.8,
-          0.5,
-          1.2
-        ],
-        "weight": 55.0,
-        "is_container": true,
-        "material": "metal",
-        "condition": "dented"
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "in:motor_pool",
+      "properties": {
+        "weight": 10.0,
+        "is_container": true
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "broken_faucet_1",
-      "name": "Broken Faucet",
-      "type": "FURNITURE",
-      "location_id": "in:locker_room",
-      "properties": {
-        "size": [
-          0.3,
-          0.2,
-          0.2
-        ],
-        "weight": 2.5,
-        "is_container": false,
-        "material": "metal",
-        "condition": "leaking"
-      },
-      "states": {
-        "is_loose": false
-      }
-    },
-    {
-      "id": "printer_1",
-      "name": "Jammed Printer",
-      "type": "FURNITURE",
-      "location_id": "in:equipment_storage",
-      "properties": {
-        "size": [
-          0.5,
-          0.4,
-          0.3
-        ],
-        "weight": 18.0,
-        "is_container": false,
-        "material": "plastic",
-        "condition": "jammed"
-      },
-      "states": {
-        "is_open": false,
-        "is_inserted": true
-      }
-    },
-    {
-      "id": "test_vials_1",
-      "name": "Unsealed Test Vials",
+      "id": "fuel_drum_1",
+      "name": "Leaking Fuel Drum",
       "type": "ITEM",
-      "location_id": "in:hiv_test_kit_cart_1",
+      "location_id": "in:motor_pool",
       "properties": {
-        "weight": 0.2,
-        "color": "clear",
-        "material": "glass",
-        "expiry": "02/1993",
-        "provides_abilities": [
-          "measure"
-        ]
+        "weight": 80.0,
+        "is_container": true,
+        "contents": "JP-8"
+      },
+      "states": {
+        "is_leaking": true
+      }
+    },
+    {
+      "id": "fuel_drum_2",
+      "name": "Fuel Drum",
+      "type": "ITEM",
+      "location_id": "in:motor_pool",
+      "properties": {
+        "weight": 80.0,
+        "is_container": true,
+        "contents": "diesel"
       },
       "states": {}
     },
     {
-      "id": "clipboard_1",
-      "name": "Clipboard with Incomplete Forms",
+      "id": "fuel_drum_3",
+      "name": "Fuel Drum",
       "type": "ITEM",
-      "location_id": "on:hiv_test_kit_cart_1",
+      "location_id": "in:motor_pool",
       "properties": {
-        "weight": 0.5,
-        "color": "brown",
-        "material": "wood_and_metal",
-        "condition": "missing_pen"
-      },
-      "states": {
-        "is_hidden": true
-      }
-    },
-    {
-      "id": "barbell_1",
-      "name": "Barbell with Mismatched Plates",
-      "type": "ITEM",
-      "location_id": "on:weight_bench_1",
-      "properties": {
-        "weight": 45.0,
-        "color": "black",
-        "material": "steel",
-        "condition": "uneven_load"
-      },
-      "states": {
-        "is_pushed": true
-      }
-    },
-    {
-      "id": "antiseptic_spray_1",
-      "name": "Expired Antiseptic Spray",
-      "type": "ITEM",
-      "location_id": "in:first_aid_station_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "white",
-        "material": "plastic",
-        "expiry": "1991",
-        "provides_abilities": [
-          "extinguish"
-        ]
+        "weight": 80.0,
+        "is_container": true,
+        "contents": "diesel"
       },
       "states": {}
     },
     {
-      "id": "test_tube_7",
-      "name": "Blood Sample Tube #7",
+      "id": "fuel_drum_4",
+      "name": "Fuel Drum",
       "type": "ITEM",
-      "location_id": "in:blood_sample_rack_1",
+      "location_id": "in:motor_pool",
       "properties": {
-        "weight": 0.1,
-        "color": "red",
-        "material": "glass",
-        "label": "JOHNSON, E. – 11/04/92",
-        "provides_abilities": [
-          "scan_barcode"
-        ]
-      },
-      "states": {
-        "is_hidden": true
-      }
-    },
-    {
-      "id": "centrifuge_key_1",
-      "name": "Centrifuge Reset Key",
-      "type": "ITEM",
-      "location_id": "in:filing_cabinet_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "material": "metal",
-        "condition": "tarnished",
-        "provides_abilities": [
-          "calibrate"
-        ]
-      },
-      "states": {
-        "is_hidden": true
-      }
-    },
-    {
-      "id": "wrench_1",
-      "name": "Adjustable Wrench",
-      "type": "ITEM",
-      "location_id": "in:equipment_storage",
-      "properties": {
-        "weight": 1.2,
-        "color": "silver",
-        "material": "steel",
-        "condition": "rusty",
-        "provides_abilities": [
-          "loosen",
-          "replace"
-        ]
+        "weight": 80.0,
+        "is_container": true,
+        "contents": "diesel"
       },
       "states": {}
     },
     {
-      "id": "pressure_gauge_1",
-      "name": "Tire Pressure Gauge",
+      "id": "fuel_drum_5",
+      "name": "Fuel Drum",
       "type": "ITEM",
-      "location_id": "in:equipment_storage",
+      "location_id": "in:motor_pool",
       "properties": {
-        "weight": 0.3,
-        "color": "yellow",
-        "material": "plastic_and_metal",
-        "condition": "functional",
-        "provides_abilities": [
-          "check_pressure"
-        ]
+        "weight": 80.0,
+        "is_container": true,
+        "contents": "diesel"
       },
       "states": {}
     },
     {
-      "id": "fire_extinguisher_1",
-      "name": "Fire Extinguisher",
+      "id": "battery_charger_1",
+      "name": "Jerry-rigged Battery Charger",
       "type": "ITEM",
-      "location_id": "in:medical_screening_corner",
+      "location_id": "in:motor_pool",
       "properties": {
         "weight": 5.0,
-        "color": "red",
-        "material": "metal",
-        "condition": "charged",
-        "provides_abilities": [
-          "extinguish"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "barcode_scanner_1",
-      "name": "Handheld Barcode Scanner",
-      "type": "ITEM",
-      "location_id": "in:office_admin_closet",
-      "properties": {
-        "weight": 0.4,
-        "color": "black",
-        "material": "plastic",
-        "condition": "functional",
-        "provides_abilities": [
-          "scan_barcode"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "plaster_trowel_1",
-      "name": "Plastering Trowel",
-      "type": "ITEM",
-      "location_id": "in:equipment_storage",
-      "properties": {
-        "weight": 0.7,
-        "color": "orange",
-        "material": "metal_and_wood",
-        "condition": "worn",
-        "provides_abilities": [
-          "plaster"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "alarm_control_panel_1",
-      "name": "Security Alarm Control Panel",
-      "type": "ITEM",
-      "location_id": "in:office_admin_closet",
-      "properties": {
-        "weight": 2.5,
-        "color": "gray",
-        "material": "plastic_and_metal",
-        "condition": "functional",
-        "provides_abilities": [
-          "arm_alarm"
-        ]
+        "is_container": false
       },
       "states": {
-        "is_alarm_armed": false
+        "is_broken": true
       }
     },
     {
-      "id": "tableware_set_1",
-      "name": "Boxed Tableware Set",
+      "id": "repair_manual_1",
+      "name": "Grease-stained Repair Manual",
       "type": "ITEM",
-      "location_id": "in:equipment_storage",
+      "location_id": "in:motor_pool",
       "properties": {
-        "weight": 3.0,
-        "color": "white",
-        "material": "ceramic_and_metal",
-        "condition": "new",
-        "provides_abilities": [
-          "set_table"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "red_glass_trophy_1",
-      "name": "Decorative Red Glass Trophy",
-      "type": "ITEM",
-      "location_id": "in:main_training_floor",
-      "properties": {
-        "weight": 1.8,
-        "color": "red",
-        "material": "glass",
-        "condition": "dusty"
+        "weight": 0.5,
+        "is_container": false
       },
       "states": {
-        "is_hidden": true
+        "is_open": false
       }
     },
     {
-      "id": "dented_metal_fan_1",
-      "name": "Dented Metal Fan",
-      "type": "ITEM",
-      "location_id": "in:main_training_floor",
+      "id": "surgical_table_1",
+      "name": "Collapsible Surgical Table",
+      "type": "FURNITURE",
+      "location_id": "in:medical_triage",
       "properties": {
-        "weight": 4.5,
-        "color": "silver",
-        "material": "metal",
-        "condition": "bent_blade"
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": false
       },
       "states": {
-        "is_muted": true
+        "is_folded": true
       }
     },
     {
-      "id": "rubber_bands_1",
-      "name": "Box of Rubber Bands",
+      "id": "defibrillator_1",
+      "name": "Malfunctioning Defibrillator",
       "type": "ITEM",
-      "location_id": "in:office_admin_closet",
+      "location_id": "in:medical_triage",
       "properties": {
-        "weight": 0.2,
-        "color": "assorted",
-        "material": "rubber",
-        "condition": "new"
+        "weight": 4.0,
+        "is_container": false,
+        "brand": "Philips"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "blood_bag_1",
+      "name": "Refrigerated Blood Bag",
+      "type": "ITEM",
+      "location_id": "in:medical_triage",
+      "properties": {
+        "weight": 0.3,
+        "is_container": false,
+        "blood_type": "O+"
+      },
+      "states": {
+        "is_frozen": false
+      }
+    },
+    {
+      "id": "stretcher_1",
+      "name": "Stretcher",
+      "type": "FURNITURE",
+      "location_id": "in:medical_triage",
+      "properties": {
+        "size": [
+          2.1,
+          0.6,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false
       },
       "states": {
         "is_tied": true
       }
     },
     {
-      "id": "fight_posters_1",
-      "name": "Assorted Fight Posters",
+      "id": "clipboard_1",
+      "name": "Clipboard",
       "type": "ITEM",
-      "location_id": "in:locker_room",
+      "location_id": "in:medical_triage",
       "properties": {
-        "weight": 0.3,
-        "color": "multicolored",
-        "material": "paper",
-        "condition": "torn"
-      },
-      "states": {
-        "is_hidden": true
-      }
-    },
-    {
-      "id": "disposable_gowns_1",
-      "name": "Box of Disposable Gowns",
-      "type": "ITEM",
-      "location_id": "in:medical_screening_corner",
-      "properties": {
-        "weight": 2.0,
-        "color": "blue",
-        "material": "polypropylene",
-        "condition": "unopened"
+        "weight": 0.2,
+        "is_container": false
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "osha_poster_1",
-      "name": "Faded OSHA Poster",
-      "type": "ITEM",
-      "location_id": "in:medical_screening_corner",
+      "id": "sandbag_nest_1",
+      "name": "Sandbagged Machine-gun Nest",
+      "type": "FURNITURE",
+      "location_id": "in:outer_perimeter",
       "properties": {
-        "weight": 0.1,
-        "color": "faded",
-        "material": "paper",
-        "condition": "coffee_stained"
+        "size": [
+          2.0,
+          2.0,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "concertina_wire_1",
+      "name": "Concertina Wire",
+      "type": "ITEM",
+      "location_id": "in:outer_perimeter",
+      "properties": {
+        "weight": 20.0,
+        "is_container": false
       },
       "states": {
-        "is_hidden": true
+        "is_tied": true
       }
     },
     {
-      "id": "graffiti_mirror_1",
-      "name": "Graffiti on Mirrors",
+      "id": "observation_tower_1",
+      "name": "Cracked Observation Tower",
+      "type": "FURNITURE",
+      "location_id": "in:outer_perimeter",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          10.0
+        ],
+        "weight": 500.0,
+        "is_container": false
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "storage_container_1",
+      "name": "Storage Container",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          1.2
+        ],
+        "weight": 100.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "crate_1",
+      "name": "Crate",
       "type": "ITEM",
-      "location_id": "in:main_training_floor",
+      "location_id": "in:supply_depot",
       "properties": {
         "weight": 15.0,
-        "color": "silver",
-        "material": "glass",
-        "inscription": "NO GLOVE NO LOVE"
+        "is_container": true,
+        "contents": "MREs"
       },
       "states": {
-        "is_plastered": false
+        "is_open": false
       }
     },
     {
-      "id": "bowe_vs_holyfield_poster_1",
-      "name": "\"Bowe vs. Holyfield\" Fight Poster",
+      "id": "crate_2",
+      "name": "Crate",
       "type": "ITEM",
-      "location_id": "in:main_training_floor",
+      "location_id": "in:supply_depot",
       "properties": {
-        "weight": 0.2,
-        "color": "multicolored",
-        "material": "paper",
-        "condition": "partially_torn"
+        "weight": 20.0,
+        "is_container": true,
+        "contents": "medical_supplies"
       },
       "states": {
-        "is_hidden": true
+        "is_open": false
+      }
+    },
+    {
+      "id": "crate_3",
+      "name": "Crate",
+      "type": "ITEM",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "rifle_parts"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "unmarked_crate_1",
+      "name": "Unmarked Crate",
+      "type": "ITEM",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "weight": 30.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "satellite_dish_1",
+      "name": "Satellite Dish",
+      "type": "ITEM",
+      "location_id": "in:communications_array",
+      "properties": {
+        "weight": 50.0,
+        "is_container": false
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "radio_set_1",
+      "name": "Radio Set",
+      "type": "ITEM",
+      "location_id": "in:communications_array",
+      "properties": {
+        "weight": 15.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "backup_generator_1",
+      "name": "Backup Generator",
+      "type": "ITEM",
+      "location_id": "in:communications_array",
+      "properties": {
+        "weight": 60.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 3.0,
+        "is_container": false,
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:storage_container_1",
+      "properties": {
+        "weight": 0.1,
+        "is_container": false,
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:storage_container_1",
+      "properties": {
+        "weight": 0.2,
+        "is_container": false,
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Saw",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 1.5,
+        "is_container": false,
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.1,
+        "is_container": false,
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:command_tent",
+      "properties": {
+        "weight": 1.0,
+        "is_container": false,
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Stove",
+      "type": "FURNITURE",
+      "location_id": "in:command_tent",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "provides_abilities": [
+          "cook",
+          "roast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "freezer_1",
+      "name": "Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:medical_triage",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "provides_abilities": [
+          "freeze"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "Sterilizer",
+      "type": "ITEM",
+      "location_id": "in:medical_triage",
+      "properties": {
+        "weight": 5.0,
+        "is_container": false,
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "in:command_tent",
+      "properties": {
+        "weight": 2.0,
+        "is_container": false,
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": true
       }
     }
   ],
   "abilities": [
-    "arm_alarm",
-    "calibrate",
-    "check_pressure",
-    "eject",
-    "empty",
-    "extinguish",
+    "close",
+    "cook",
+    "disarm_alarm",
+    "freeze",
+    "inject",
     "loosen",
-    "measure",
     "open",
-    "plaster",
-    "pull",
-    "replace",
-    "scan_barcode",
-    "set_table",
-    "show",
-    "unmute",
-    "untie",
-    "close"
+    "record_video",
+    "roast",
+    "sand",
+    "saw",
+    "slice",
+    "sterilize",
+    "turn_on",
+    "unfold",
+    "untie"
   ]
 }

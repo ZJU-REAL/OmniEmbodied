@@ -10,9 +10,39 @@
         0.8,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        0.8,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place script_binder_1 on makeup_vanity_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "script_binder_1",
+          "location_id": "on:makeup_vanity_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the half-eaten donut in the mini fridge.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "donut_1",
+          "location_id": "in:mini_fridge_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the black script binder labeled 'REVISED FINAL DRAFT 9/17' and place it on the control desk.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,98 @@
         {
           "id": "script_binder_1",
           "location_id": "on:control_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal furniture item in the green room and move it to the props storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wardrobe_rack_1",
+          "location_id": "in:props_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the trowel to plaster the peeling quiet on set sign.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "quiet_sign_1",
+          "is_plastered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to fix the broken hinge on the mini fridge and then close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "is_open": false
+        },
+        {
+          "id": "mini_fridge_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to lock the personal safe using the safe key.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "personal_safe_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the large rolling wardrobe rack with jammed wheels to the stage adjacent area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wardrobe_rack_2",
+          "location_id": "in:stage_adjacent"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit labeled 'Glassware – Fragile!' to the green room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:green_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy control desk to the props storage and then unload it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "control_desk_1",
+          "location_id": "in:props_storage"
+        },
+        {
+          "id": "control_desk_1",
+          "is_loaded": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the velvet couch to the control booth and then plaster it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "velvet_couch_1",
+          "location_id": "in:control_booth"
+        },
+        {
+          "id": "velvet_couch_1",
+          "is_plastered": true
         }
       ]
     }

@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the mechanical_keyboard_1 on the hexagonal_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mechanical_keyboard_1",
+          "location_id": "on:hexagonal_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black item on desk_1 and place it in the break_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "conference_proceedings_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only infrared-reflective marker and hide it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "marker_1",
+          "is_hidden": true
+        }
+      ]
+    },
     {
       "task_description": "Use the toolbox_1 to assemble the optical_computing_rig_1.",
       "task_category": "tool_use",
@@ -20,6 +70,108 @@
         {
           "id": "optical_computing_rig_1",
           "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the precision_scale_1 to weigh the notebook_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "precision_scale_1",
+          "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fuel_can_1 to refuel the quantum_computer_1 and then turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "quantum_computer_1",
+          "is_fueled": true
+        },
+        {
+          "id": "fuel_can_1",
+          "is_fueled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the dusty, various-colored paper item on desk_1 and use the photocopier_1 to copy it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the faraday_cage_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "faraday_cage_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the digital_blackboard_1 to the whiteboard_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_blackboard_1",
+          "location_id": "in:whiteboard_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy photocopier_1 to the secure_computation_chamber and then use it to copy the notebook_2.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:secure_computation_chamber"
+        },
+        {
+          "id": "photocopier_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the couch_1 to the main_research_floor and then use the sewing_kit_1 to repair the scattered_papers_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "couch_1",
+          "location_id": "in:main_research_floor"
+        },
+        {
+          "id": "scattered_papers_1",
+          "is_sewn": true
         }
       ]
     }

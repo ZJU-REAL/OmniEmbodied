@@ -1,0 +1,702 @@
+{
+  "description": "An advanced underwater robotics research lab after hours, featuring heavy machinery, precision repair stations, and time-sensitive operations requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_workbench_area",
+      "name": "Main Workbench Area",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "water_testing_tank",
+        "storage_parts_lockers",
+        "control_station",
+        "emergency_decontamination_zone",
+        "break_nook"
+      ]
+    },
+    {
+      "id": "water_testing_tank",
+      "name": "Water Testing Tank",
+      "properties": {
+        "type": "testing"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    },
+    {
+      "id": "storage_parts_lockers",
+      "name": "Storage & Parts Lockers",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    },
+    {
+      "id": "control_station",
+      "name": "Control Station",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    },
+    {
+      "id": "emergency_decontamination_zone",
+      "name": "Emergency Decontamination Zone",
+      "properties": {
+        "type": "safety"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    },
+    {
+      "id": "break_nook",
+      "name": "Break Nook",
+      "properties": {
+        "type": "rest"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reinforced_steel_worktable_1",
+      "name": "Reinforced Steel Worktable",
+      "type": "FURNITURE",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "size": [
+          6.0,
+          1.5,
+          0.9
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray",
+        "adjustable_clamps": true,
+        "power_outlets": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "size": [
+          8.0,
+          2.0,
+          3.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "max_load": 250.0,
+        "status": "idle",
+        "hook_attached": true
+      },
+      "states": {}
+    },
+    {
+      "id": "neptune_7_drone_1",
+      "name": "Neptune-7 Underwater Drone",
+      "type": "FURNITURE",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.6
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "model": "Neptune-7",
+        "missing_thruster": "left",
+        "leaking_fluid": "hydraulic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "biohazard_canister_1",
+      "name": "Biohazard Canister",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 30.0,
+        "label": "Corrosive – Coolant Residue",
+        "material": "steel",
+        "color": "yellow"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "calibration_jig_1",
+      "name": "Calibration Jig",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 5.2,
+        "adjustable_clamps": true,
+        "error_light": "red",
+        "material": "aluminum"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "digital_torque_wrench_1",
+      "name": "Digital Torque Wrench",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "battery_level": 23,
+        "brand": "Snap-On",
+        "model": "TechAngle"
+      },
+      "states": {}
+    },
+    {
+      "id": "waterproof_case_1",
+      "name": "Waterproof Case",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 3.0,
+        "label": "DO NOT OPEN – STATIC-SENSITIVE",
+        "contents": "backup drone processors",
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uv_sterilizer_1",
+      "name": "Portable UV Sterilizer",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 4.5,
+        "status": "running",
+        "brand": "GermGuard",
+        "model": "UV-3000"
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety First Poster",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 0.2,
+        "year": 2018,
+        "condition": "peeling",
+        "coffee_stain": true
+      },
+      "states": {}
+    },
+    {
+      "id": "technical_manuals_1",
+      "name": "Technical Manuals Stack",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 2.3,
+        "top_manual": "Deep-Sea Pressure Resistance, Vol. 3",
+        "condition": "outdated"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Innovation Trophy",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 1.8,
+        "award": "Best Innovation in Marine Robotics 2020",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "acrylic_tank_1",
+      "name": "Reinforced Acrylic Tank",
+      "type": "FURNITURE",
+      "location_id": "in:water_testing_tank",
+      "properties": {
+        "size": [
+          5.0,
+          5.0,
+          3.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "contents": "saltwater",
+        "material": "acrylic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_arm_1",
+      "name": "Retractable Robotic Arm",
+      "type": "FURNITURE",
+      "location_id": "in:water_testing_tank",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.5
+        ],
+        "weight": 75.0,
+        "status": "Low Hydraulic Pressure",
+        "rail_mounted": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "thruster_module_1",
+      "name": "Malfunctioning Thruster Module",
+      "type": "ITEM",
+      "location_id": "in:acrylic_tank_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "NP7-TX45",
+        "bubbles": "intermittent",
+        "material": "titanium"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "waterproof_tablet_1",
+      "name": "Waterproof Control Tablet",
+      "type": "ITEM",
+      "location_id": "on:acrylic_tank_1",
+      "properties": {
+        "weight": 0.8,
+        "ip_rating": "IP68",
+        "battery_level": 57,
+        "display": "Leak Detected"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "drainage_pump_control_1",
+      "name": "Drainage Pump Control Panel",
+      "type": "ITEM",
+      "location_id": "in:water_testing_tank",
+      "properties": {
+        "weight": 1.2,
+        "switch_mode": "Manual",
+        "brand": "FlowTech"
+      },
+      "states": {}
+    },
+    {
+      "id": "net_pole_1",
+      "name": "Net on Retractable Pole",
+      "type": "ITEM",
+      "location_id": "in:water_testing_tank",
+      "properties": {
+        "weight": 1.5,
+        "length": "retractable",
+        "material": "aluminum"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "depth_gauge_sticker_1",
+      "name": "Faded Depth Gauge Sticker",
+      "type": "ITEM",
+      "location_id": "on:acrylic_tank_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded",
+        "color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "screw_holder_mug_1",
+      "name": "Coffee Mug Screw Holder",
+      "type": "ITEM",
+      "location_id": "on:acrylic_tank_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "assorted bolts",
+        "original_purpose": "coffee mug",
+        "material": "ceramic"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_cabinet_1",
+      "name": "Heavy-Duty Metal Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_parts_lockers",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "waterproof_sealant_1",
+      "name": "Waterproof Sealant Tube",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "cap_color": "blue",
+        "label": "Fast-Cure – 5 Min.",
+        "fill_level": "half-empty",
+        "residue": true
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "waterproof_sealant_2",
+      "name": "Waterproof Sealant Tube",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "cap_color": "red",
+        "label": "Standard-Cure – 24 Hr.",
+        "fill_level": "full",
+        "residue": false
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "waterproof_sealant_3",
+      "name": "Waterproof Sealant Tube",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "cap_color": "black",
+        "label": "Flexible-Cure – 12 Hr.",
+        "fill_level": "quarter-empty",
+        "residue": true
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "blue_tinted_beaker_1",
+      "name": "Blue-Tinted Beaker",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "purpose": "decorative",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_tinted_beaker_2",
+      "name": "Blue-Tinted Beaker",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "purpose": "decorative",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Underwater Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:metal_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "contents": "various tools",
+        "waterproof_rating": "IP67",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "control_desk_1",
+      "name": "Control Desk",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Computer Monitor",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Dell",
+        "model": "UltraSharp",
+        "screen_size": 27,
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_2",
+      "name": "Computer Monitor",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Dell",
+        "model": "UltraSharp",
+        "screen_size": 27,
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "status": "flickering",
+        "brand": "HP"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Technical Schematics Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:control_station",
+      "properties": {
+        "weight": 10.0,
+        "content": "technical schematics",
+        "condition": "covered",
+        "material": "melamine"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "decontamination_shower_1",
+      "name": "Chemical Shower",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_decontamination_zone",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "type": "emergency",
+        "drainage": "grates"
+      },
+      "states": {}
+    },
+    {
+      "id": "warning_light_1",
+      "name": "Blinking Warning Light",
+      "type": "ITEM",
+      "location_id": "in:emergency_decontamination_zone",
+      "properties": {
+        "weight": 1.0,
+        "status": "intermittent",
+        "color": "red",
+        "brand": "Honeywell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 3.0,
+        "brand": "Keurig",
+        "model": "Elite",
+        "water_level": "low"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "safety_posters_1",
+      "name": "Expired Safety Posters",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 0.5,
+        "condition": "expired",
+        "year": 2018,
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_plant_1",
+      "name": "Dead Potted Plant",
+      "type": "ITEM",
+      "location_id": "in:break_nook",
+      "properties": {
+        "weight": 2.0,
+        "status": "dead",
+        "pot_material": "ceramic",
+        "plant_type": "fern"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Greasy Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "on:reinforced_steel_worktable_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "greasy",
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_towels_1",
+      "name": "Paper Towels",
+      "type": "ITEM",
+      "location_id": "in:storage_parts_lockers",
+      "properties": {
+        "weight": 0.3,
+        "count": 50,
+        "brand": "Bounty",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "ink_color": "black",
+        "brand": "Sharpie",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Whiteboard Eraser",
+      "type": "ITEM",
+      "location_id": "on:control_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "felt",
+        "brand": "Expo",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "erase",
+    "label",
+    "open",
+    "repair",
+    "turn_on",
+    "unpack",
+    "wipe",
+    "close"
+  ]
+}

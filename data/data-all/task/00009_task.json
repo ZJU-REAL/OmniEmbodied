@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the impact_wrench_1 on the radio_headset_dock_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "impact_wrench_1",
+          "location_id": "on:radio_headset_dock_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the used_firehawk_1 in the tire_storage_zone.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "used_firehawk_1",
+          "location_id": "in:tire_storage_zone"
+        }
+      ]
+    },
     {
       "task_description": "Find the black tire with uneven wear and place it in the charity_donation_station.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,114 @@
         {
           "id": "used_firehawk_1",
           "location_id": "in:charity_donation_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red tool with a battery level of 23% and place it in the primary_team_garage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "impact_wrench_1",
+          "location_id": "in:primary_team_garage"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the hydraulic_jack_system_1 using the impact_wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hydraulic_jack_system_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the engine_dyno_rig_1 using the o2_sensor_toolkit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "engine_dyno_rig_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the impact_wrench_1 to mount the fresh_firehawk_1 in the live_pit_bay.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fresh_firehawk_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tire_pressure_gauge_1 to adjust the fresh_firehawk_2 in the tire_storage_zone.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fresh_firehawk_2",
+          "is_adjusted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pallet_of_tires_1 to the charity_donation_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_of_tires_1",
+          "location_id": "in:charity_donation_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine_dyno_rig_1 to the equipment_alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_dyno_rig_1",
+          "location_id": "in:equipment_alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydraulic_jack_system_1 to the primary_team_garage and repair it using the impact_wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_jack_system_1",
+          "location_id": "in:primary_team_garage"
+        },
+        {
+          "id": "hydraulic_jack_system_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fuel_rig_1 to the equipment_alley and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_rig_1",
+          "location_id": "in:equipment_alley"
+        },
+        {
+          "id": "fuel_rig_1",
+          "is_open": true
         }
       ]
     }

@@ -1,0 +1,715 @@
+{
+  "description": "A high-tech archival facility dedicated to salvaging and organizing lost digital knowledge, featuring a server recovery bay, data verification lab, archival storage vault, and admin hub.",
+  "rooms": [
+    {
+      "id": "server_recovery_bay",
+      "name": "Server Recovery Bay",
+      "properties": {
+        "type": "industrial",
+        "temperature": "cold",
+        "humidity": "low"
+      },
+      "connected_to_room_ids": [
+        "data_verification_lab"
+      ]
+    },
+    {
+      "id": "data_verification_lab",
+      "name": "Data Verification Lab",
+      "properties": {
+        "type": "workspace",
+        "lighting": "bright",
+        "noise_level": "moderate"
+      },
+      "connected_to_room_ids": [
+        "server_recovery_bay",
+        "archival_storage_vault",
+        "admin_hub"
+      ]
+    },
+    {
+      "id": "archival_storage_vault",
+      "name": "Archival Storage Vault",
+      "properties": {
+        "type": "storage",
+        "temperature": "16°C",
+        "humidity": "40%"
+      },
+      "connected_to_room_ids": [
+        "data_verification_lab"
+      ]
+    },
+    {
+      "id": "admin_hub",
+      "name": "Admin & Coordination Hub",
+      "properties": {
+        "type": "office",
+        "lighting": "dim",
+        "noise_level": "low"
+      },
+      "connected_to_room_ids": [
+        "data_verification_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "main_server_rack_1",
+      "name": "Main Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_recovery_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "partially_dismantled",
+        "exposed_leds": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "main_server_rack_2",
+      "name": "Main Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_recovery_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "powered_on",
+        "exposed_leds": false
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "FURNITURE",
+      "location_id": "in:server_recovery_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plexiglass",
+        "access_required": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "failing_drive_47_1",
+      "name": "Failing Drive #47",
+      "type": "ITEM",
+      "location_id": "in:main_server_rack_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "status_led": "flickering_amber",
+        "connection": "intermittent",
+        "model": "3.5” HDD"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "unlabeled_rack_3_1",
+      "name": "Unlabeled Rack #3",
+      "type": "FURNITURE",
+      "location_id": "in:server_recovery_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 280.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "unknown"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_recovery_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": [
+          "screwdrivers",
+          "anti-static_wristbands",
+          "label_printer"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "network_tester_1",
+      "name": "Network Tester",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "status": "PING_TIMEOUT",
+        "cable_condition": "frayed"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "do_not_touch_post_it_1",
+      "name": "DO NOT TOUCH Post-It",
+      "type": "ITEM",
+      "location_id": "on:main_server_rack_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "condition": "faded",
+        "text": "DO NOT TOUCH"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "forensic_workstation_1",
+      "name": "Forensic Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "plastic",
+        "monitors": 3,
+        "display": "hex_editor"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "reference_library_1",
+      "name": "Reference Library",
+      "type": "FURNITURE",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.3,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "data_recovery_manuals"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "corrupted_thread_8821_1",
+      "name": "Corrupted Thread #8821",
+      "type": "ITEM",
+      "location_id": "on:forensic_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "format": "digital",
+        "status": "partially_recovered",
+        "missing_content": "key_replies"
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "solved_tagging_terminal_1",
+      "name": "Solved? Tagging Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "interface": "touchscreen"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "noise_canceling_headphones_1",
+      "name": "Noise-Canceling Headphones",
+      "type": "ITEM",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "condition": "cracked",
+        "brand": "Sony"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "external_hdd_dock_1",
+      "name": "External HDD Dock",
+      "type": "FURNITURE",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 0.5,
+        "is_container": true,
+        "material": "plastic",
+        "status": "empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "automated_retrieval_arm_1",
+      "name": "Automated Retrieval Arm",
+      "type": "FURNITURE",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "metal",
+        "status": "AWAITING_REQUEST"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "climate_control_panel_1",
+      "name": "Climate Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "plastic",
+        "temperature": "16°C",
+        "humidity": "40%"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "tape_backup_solved_2011_1",
+      "name": "Tape Backup SOLVED-2011",
+      "type": "ITEM",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "dusty",
+        "format": "LTO"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "orphaned_hard_drive_bin_1",
+      "name": "Orphaned Hard Drive Bin",
+      "type": "FURNITURE",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "unprocessed_drives"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "battery": "72%",
+        "status": "charging"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "dispatcher_terminal_1",
+      "name": "Dispatcher Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic",
+        "monitors": 2,
+        "display": "active_recovery_jobs"
+      },
+      "states": {
+        "is_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "corkboard_map_1",
+      "name": "Corkboard Map",
+      "type": "FURNITURE",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "cork",
+        "markings": [
+          "LOST",
+          "RECOVERED",
+          "NEEDS_VERIFICATION"
+        ]
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "master_keycard_1",
+      "name": "Master Keycard",
+      "type": "ITEM",
+      "location_id": "in:dispatcher_terminal_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "access_level": "master",
+        "status": "locked"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "urgent_case_file_1",
+      "name": "Urgent Case File",
+      "type": "ITEM",
+      "location_id": "on:dispatcher_terminal_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "label": "CRITICAL: UNANSWERED THREADS",
+        "contents": "important_documents"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "weight": 0.6,
+        "color": "beige",
+        "status": "off-hook",
+        "sound": "dial_tone"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 4.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "half-full_cold_coffee"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "type": "phillips",
+        "size": "medium"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "anti_static_wristband_1",
+      "name": "Anti-Static Wristband",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "fabric",
+        "size": "adjustable"
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "brand": "Brother",
+        "status": "ready"
+      },
+      "states": {
+        "is_loaded": false
+      }
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "bristle_type": "synthetic",
+        "size": "medium"
+      },
+      "states": {
+        "provides_abilities": [
+          "paint"
+        ]
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "metal",
+        "condition": "new"
+      },
+      "states": {
+        "provides_abilities": [
+          "unstaple"
+        ]
+      }
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "microfiber",
+        "condition": "clean"
+      },
+      "states": {
+        "provides_abilities": [
+          "wipe"
+        ]
+      }
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "in:data_verification_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "ink_color": "black",
+        "tip_size": "fine"
+      },
+      "states": {
+        "provides_abilities": [
+          "label"
+        ]
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "power_source": "electric",
+        "status": "ready"
+      },
+      "states": {
+        "provides_abilities": [
+          "vacuum"
+        ]
+      }
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:archival_storage_vault",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "contents": "glue",
+        "condition": "full"
+      },
+      "states": {
+        "provides_abilities": [
+          "glue"
+        ]
+      }
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
+      "type": "ITEM",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "paper",
+        "pattern": "holiday"
+      },
+      "states": {
+        "provides_abilities": [
+          "wrap"
+        ]
+      }
+    },
+    {
+      "id": "iron_1",
+      "name": "Iron",
+      "type": "ITEM",
+      "location_id": "in:admin_hub",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "power_source": "electric",
+        "temperature_setting": "high"
+      },
+      "states": {
+        "provides_abilities": [
+          "iron"
+        ]
+      }
+    }
+  ],
+  "abilities": [
+    "buckle",
+    "load",
+    "lower",
+    "open",
+    "show",
+    "turn_on",
+    "unmute",
+    "close"
+  ]
+}

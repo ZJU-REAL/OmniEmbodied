@@ -6,15 +6,139 @@
       "max_grasp_limit": 2,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the triaging_clipboard_1 on the pegboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "triaging_clipboard_1",
+          "location_id": "on:pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the digital_scale_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal item on the conveyor_belt_1 and place it on the steel_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stained_glass_window_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only multicolored item on the conveyor_belt_1 and place it on the pegboard_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stained_glass_window_1",
+          "location_id": "on:pegboard_1"
+        }
+      ]
+    },
     {
       "task_description": "Clean the dirty porcelain_sink_1 using the cleaning_rag_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "porcelain_sink_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only white, ceramic item on the pegboard_1 and clean it using the sponge_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the industrial_kiln_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_kiln_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the card_catalog_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "card_catalog_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mechanical_bird_1 to the archives.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mechanical_bird_1",
+          "location_id": "in:archives"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pneumatic_crate_lifter_1 to the restoration_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pneumatic_crate_lifter_1",
+          "location_id": "in:restoration_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy industrial_shelving_1 to the kiln_room and seal it using the sealant_gun_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:kiln_room"
+        },
+        {
+          "id": "industrial_shelving_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy steel_workbench_1 to the receiving_bay and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_workbench_1",
+          "location_id": "in:receiving_bay"
+        },
+        {
+          "id": "steel_workbench_1",
           "is_dirty": false
         }
       ]

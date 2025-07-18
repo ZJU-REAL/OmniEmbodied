@@ -10,15 +10,143 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the silver_platter_1 on the teak_wet_bar_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "silver_platter_1",
+          "location_id": "on:teak_wet_bar_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the control_panel_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "control_panel_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, green bottle in the champagne_crate_1 and place it on the marble_dining_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wine_bottle_1",
+          "location_id": "on:marble_dining_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the dusty, ceramic vase on the marble_dining_table_1 and clean it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "green_vase_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_set_1 to tighten the fuel_valve_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fuel_valve_1",
+          "is_loose": false
+        }
+      ]
+    },
     {
       "task_description": "Find the dirty espresso_machine_1 and clean it using the cleaning_cloth_1.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "espresso_machine_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the scratched marble_dining_table_1 and clean it using the cleaning_cloth_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "marble_dining_table_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the wine_cellar_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wine_cellar_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the champagne_crate_1 to the dining_salon.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "champagne_crate_1",
+          "location_id": "in:dining_salon"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the supply_crates_1 to the engine_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_crates_1",
+          "location_id": "in:engine_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy diesel_engine_1 to the foredeck_storage and tighten its fuel_valve_1 using the wrench_set_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "diesel_engine_1",
+          "location_id": "in:foredeck_storage"
+        },
+        {
+          "id": "fuel_valve_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the marble_dining_table_1 to the main_deck_lounge and clean it using the cleaning_cloth_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "marble_dining_table_1",
+          "location_id": "in:main_deck_lounge"
+        },
+        {
+          "id": "marble_dining_table_1",
           "is_dirty": false
         }
       ]

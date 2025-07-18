@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the torque_wrench_1 on the modular_grid_mount_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_1",
+          "location_id": "on:modular_grid_mount_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the spare_bolts_m6_12_1 in the tool_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "spare_bolts_m6_12_1",
+          "location_id": "in:tool_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the assembly_bay and place it in the storage_wall.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "modular_grid_mount_1",
+          "location_id": "in:storage_wall"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only aluminum object on the modular_grid_mount_1 and place it in the validation_station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "grid_module_a7_1",
+          "location_id": "in:validation_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sandpaper_1 to sand the sheared_bolt_m6_12_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sheared_bolt_m6_12_1",
+          "is_sanded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale_1 to weigh the mismatched_tiles_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mismatched_tiles_1",
+          "is_weighed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the sandpaper_1 to smooth the cracked tile on module_d14_1 and place it in the heavy_duty_racks_1.",
       "task_category": "compound_reasoning",
@@ -21,6 +91,68 @@
           "id": "module_d14_1",
           "location_id": "in:heavy_duty_racks_1",
           "is_sanded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the heavy_duty_racks_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_racks_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the laser_alignment_rig_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_alignment_rig_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the module_d14_1 to the assembly_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "module_d14_1",
+          "location_id": "in:assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_grid_mount_1 to the storage_wall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_grid_mount_1",
+          "location_id": "in:storage_wall"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 that is online to the archives_corner and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:archives_corner",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the projection_table_1 that is warm to the touch to the assembly_bay and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "projection_table_1",
+          "location_id": "in:assembly_bay",
+          "is_open": true
         }
       ]
     }

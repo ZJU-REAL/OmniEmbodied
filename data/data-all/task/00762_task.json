@@ -10,15 +10,139 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Heisman Trophy Replica on the DJ Booth.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "heisman_trophy_1",
+          "location_id": "on:dj_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the broken crystal glass in the backstage supply room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "broken_crystal_glass_1",
+          "location_id": "in:backstage_supply"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal item in the VIP lounge and place it in the backstage supply room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "champagne_ice_tub_1",
+          "location_id": "in:backstage_supply"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glowing item in the VIP lounge and place it on the DJ Booth.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wireless_tip_jar_1",
+          "location_id": "on:dj_booth_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken circular velvet booth.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "circular_velvet_booth_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the VIP tablet using the spare keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vip_tablet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the only flickering vanity light in the private restroom.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "vanity_light_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked liquor cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_liquor_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the broken ID verification terminal.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "id_verification_terminal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the VIP lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:vip_lounge_main"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the coat rack to the backstage supply room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "coat_rack_1",
+          "location_id": "in:backstage_supply"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy DJ booth to the backstage supply room and repair the tangled cables.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "dj_booth_1",
+          "location_id": "in:backstage_supply"
+        },
+        {
+          "id": "tangled_cables_1",
           "is_broken": false
         }
       ]

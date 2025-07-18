@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place primary_terminal_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "primary_terminal_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the interactive_display_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "interactive_display_wall_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black CompuTech terminal and place it in the storage closet.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "primary_terminal_1",
           "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest broken item on the central workbench and place it in the server rack zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "external_hard_drive_array_1",
+          "location_id": "in:server_rack_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken microscope with digital overlay.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Purify the corrosive chemical bottle.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "is_pure": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the largest broken item on the dual-monitor desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and repair it using the repair kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "primary_terminal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the cooling unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server rack.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the interactive display wall to the filtering QA station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "interactive_display_wall_1",
+          "location_id": "in:filtering_qa_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central workbench to the storage closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_workbench_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server rack to the main data hub and repair the faulty server node inside.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_data_hub"
+        },
+        {
+          "id": "faulty_server_node_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the cooling unit to the storage closet and insulate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "location_id": "in:storage_closet"
+        },
+        {
+          "id": "cooling_unit_1",
+          "is_insulated": true
         }
       ]
     }

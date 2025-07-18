@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the USB rescue drive_1 on the l_shaped_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_rescue_drive_1",
+          "location_id": "on:l_shaped_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the network_diagnostic_tablet_1 on the l_shaped_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "network_diagnostic_tablet_1",
+          "location_id": "on:l_shaped_workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the USB drive with the red cap and place it in the external_hdd_dock_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,118 @@
         {
           "id": "usb_drive_1",
           "location_id": "on:external_hdd_dock_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the server rack key with a small scratch near the teeth and place it on the primary_server_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_key_1",
+          "location_id": "on:primary_server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the master_key_1 to unseal the server_rack_door_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "server_rack_door_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_set_1 to tighten the loose components on the test_rig_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "test_rig_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the AVG recovery guide_1 to solve the puzzle on the desk_drawer_1 and open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "desk_drawer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife_1 to slice the bread_1 and spread butter_1 on it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "bread_1",
+          "is_sliced": true
+        },
+        {
+          "id": "butter_1",
+          "is_sliced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked desk_drawer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "desk_drawer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_cooling_fan_1 to the hardware_repair_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_cooling_fan_1",
+          "location_id": "in:hardware_repair_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the crt_monitor_1 to the diagnostic_workstation_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "in:diagnostic_workstation_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the primary_server_rack_1 to the hardware_repair_bay and use the screwdriver_set_1 to tighten its components.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "primary_server_rack_1",
+          "location_id": "in:hardware_repair_bay"
+        },
+        {
+          "id": "primary_server_rack_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the l_shaped_workbench_1 to the main_server_room and use the hammer_1 to damage the authorized_personnel_sign_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "l_shaped_workbench_1",
+          "location_id": "in:main_server_room"
+        },
+        {
+          "id": "authorized_personnel_sign_1",
+          "is_broken": true
         }
       ]
     }

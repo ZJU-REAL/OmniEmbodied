@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place microscope_1 on lab_table_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:lab_table_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_mug_1 in the sink_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:sink_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black microscope and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device on the lab_table_1 and place it in the supply_closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "volcano_experiment_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
     {
       "task_description": "Use the duster_1 to dust the whiteboard_1.",
       "task_category": "tool_use",
@@ -20,6 +70,70 @@
         {
           "id": "whiteboard_1",
           "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defroster_1 to defrost the refrigerator_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tuner_1 to tune the clock_1 and wind it up.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clock_1",
+          "is_wound_up": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the supply_closet_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_closet_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fume_hood_1 to the teacher_prep_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:teacher_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the main_lab_classroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:main_lab_classroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the aging refrigerator_1 to the main_lab_classroom and defrost it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": "in:main_lab_classroom"
+        },
+        {
+          "id": "refrigerator_1",
+          "is_frosted": false
         }
       ]
     }

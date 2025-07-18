@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place bioreactor_1 on the modular_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bioreactor_1",
+          "location_id": "on:modular_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the bio_printer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bio_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass bioreactor and place it in the specimen_archive.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "bioreactor_1",
+          "location_id": "in:specimen_archive"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red holographic projector and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "holographic_projector_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Clean the dusty eye_wash_station_1 using the ultrasonic_cleaner_1.",
       "task_category": "tool_use",
@@ -20,6 +70,66 @@
         {
           "id": "eye_wash_station_1",
           "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the mixing bowl and spoon to mix the nutrient solution in chemical_bottle_2.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_2",
+          "is_mixed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the living concrete prototype to the material_testing_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "living_concrete_prototype_1",
+          "location_id": "in:material_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mycelium growth chamber to the central_collaboration_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mycelium_growth_chamber_1",
+          "location_id": "in:central_collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bio_printer_1",
+          "location_id": "in:utility_maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy document cabinet to the observation_deck.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "document_cabinet_1",
+          "location_id": "in:observation_deck"
         }
       ]
     }

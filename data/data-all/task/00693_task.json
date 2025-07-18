@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on workstation_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the electric_kettle_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "electric_kettle_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the USB drive with the red cap and place it on workstation_2.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,87 @@
         {
           "id": "usb_drive_1",
           "location_id": "on:workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the ergonomic chair with a wobbly wheel and place it in the archive_filing_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ergonomic_chair_4",
+          "location_id": "in:archive_filing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keycard_1 to unseal the locked_drawer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_drawer_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with the inscription 'DeLauro Paycheck Fairness Act – FINAL DRAFT' and mount it on the laptop_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial_printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the janitorial_closet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "janitorial_closet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy filing cabinet to the conference_strategy_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:conference_strategy_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the large magnetic whiteboard to the archive_filing_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:archive_filing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the wheeled presentation easel to the central_research_hub and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "presentation_easel_1",
+          "location_id": "in:central_research_hub",
+          "is_on": true
         }
       ]
     }

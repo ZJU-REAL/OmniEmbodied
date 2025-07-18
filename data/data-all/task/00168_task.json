@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the blue glass paperweight on the isolation table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blue_glass_paperweight_1",
+          "location_id": "on:isolation_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the data drive on the central console.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "data_drive_1",
+          "location_id": "on:central_console_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, blue cryogenic canister and place it in the main lab.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,116 @@
         {
           "id": "cryogenic_canister_1",
           "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver calibration laser with an alignment offset of 3 and place it on the tool cart.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_laser_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken supercooled electromagnet using the repair kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "supercooled_electromagnet_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the industrial vacuum to clean the vacuum chamber.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vacuum_chamber_1",
+          "is_vacuumed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the precision measurement set to measure and then repair the flickering monitor on the central console.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "central_console_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the antique clockwork mechanism and wind it up.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clockwork_device_1",
+          "is_wound_up": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency shutdown panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_panel_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to calibrate the calibration laser.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "calibration_laser_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic lift to the storage and prep area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:storage_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gantry crane to the control room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gantry_crane_1",
+          "location_id": "in:control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy particle accelerator chamber to the main lab and repair it using the repair kit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "particle_accelerator_chamber_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the isotope cabinet to the main lab and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "isotope_cabinet_1",
+          "is_open": true
         }
       ]
     }

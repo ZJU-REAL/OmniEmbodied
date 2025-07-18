@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the vintage_cash_register_1 on the wooden_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vintage_cash_register_1",
+          "location_id": "on:wooden_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the oak_counter_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oak_counter_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver item on the oak_counter_1 and place it in the examination_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rotary_phone_1",
+          "location_id": "in:examination_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the examination_room and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "kerosene_lantern_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Use the fake_spool_1 to unlock the patient_files_1.",
       "task_category": "tool_use",
@@ -20,6 +70,90 @@
         {
           "id": "patient_files_1",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sewing_scissors_1 to unwrap the blood_pressure_cuff_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "blood_pressure_cuff_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the mop_1 to clean the sterilization_station floor.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sterilization_station",
+          "is_mopped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the medicine_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "medicine_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_examination_table_1 to the recovery_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "examination_table_1",
+          "location_id": "in:recovery_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cast_iron_autoclave_1 to the back_alley_exit.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:back_alley_exit"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heaviest discarded_machinery_1 in the back_alley_exit to the sterilization_station.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "discarded_machinery_1",
+          "location_id": "in:sterilization_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gas_powered_boiling_water_tank_1 to the examination_room and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "boiling_water_tank_1",
+          "location_id": "in:examination_room"
+        },
+        {
+          "id": "boiling_water_tank_1",
+          "is_on": true
         }
       ]
     }

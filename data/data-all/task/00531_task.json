@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_cup_1 on the biosafety_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "on:biosafety_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the microscope_1 on the ai_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:ai_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, plastic_metal_composite AI Terminal Console and place it in the security_hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ai_terminal_1",
+          "location_id": "in:security_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless_steel furniture in the main_laboratory and place it in the storage_annex.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cryo_chamber_1",
+          "location_id": "in:storage_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the purifier_1 to purify the contaminated_sample_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "contaminated_sample_1",
+          "is_pure": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spray_bottle_1 to spray the graffiti_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "graffiti_1",
+          "is_sprayed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the computer_1 to format the mainframe_terminal_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,74 @@
         {
           "id": "mainframe_terminal_1",
           "is_formatted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the watering_can_1 to water the dead_plant_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dead_plant_1",
+          "is_watered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the weapons_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety_workstation_1 to the storage_annex.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_workstation_1",
+          "location_id": "in:storage_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collapsed_tunnel_1 to the main_laboratory.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collapsed_tunnel_1",
+          "location_id": "in:main_laboratory"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the unstable_crates_1 to the security_hub and use the compressor_1 to compress them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "unstable_crates_1",
+          "location_id": "in:security_hub"
+        },
+        {
+          "id": "unstable_crates_1",
+          "is_compressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the shelving_unit_1 to the main_laboratory and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:main_laboratory"
+        },
+        {
+          "id": "shelving_unit_1",
+          "is_open": true
         }
       ]
     }

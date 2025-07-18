@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_phone_1 on the war_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_phone_1",
+          "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the snmp_mug_1 on the workstation_6.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "snmp_mug_1",
+          "location_id": "on:workstation_6"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal_wood workstation and place the tux_penguin_1 on it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "tux_penguin_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red item in the main_operations_floor and place it on the workstation_2.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_phone_1",
+          "location_id": "on:workstation_2"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken printer_1 using the crimper_kit_1.",
       "task_category": "tool_use",
@@ -16,6 +62,112 @@
         {
           "id": "printer_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the phillips_screwdriver_1 to open the locked_cabinet_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only broken Cisco device in the server_alley, use the thermal_paste_1 to repair it, and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cisco_catalyst_9500_1",
+          "is_pasted": true
+        },
+        {
+          "id": "cisco_catalyst_9500_1",
+          "is_pasted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only workstation with a yellow item, erase its writing, and place the label_maker_1 on it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "crisis_clipboard_1",
+          "is_written_on": false
+        },
+        {
+          "id": "label_maker_1",
+          "location_id": "on:workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the master_switch_console_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "master_switch_console_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_r7_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_r7_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the war_table_1 to the storage_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_r7_1 to the main_operations_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_r7_1",
+          "location_id": "in:main_operations_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crash_cart_1 to the main_operations_floor and use the water_bottle_1 to water the coffee_mug_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crash_cart_1",
+          "location_id": "in:main_operations_floor"
+        },
+        {
+          "id": "coffee_mug_1",
+          "is_watered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the whiteboard_1 to the server_alley and erase its writing.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:server_alley"
+        },
+        {
+          "id": "whiteboard_1",
+          "is_written_on": false
         }
       ]
     }

@@ -1,1218 +1,698 @@
 {
-  "description": "A high-pressure data migration command center in a corporate server room converted into a war room, with teams collaborating to transition from a legacy RDBMS to a modern NoSQL solution.",
+  "description": "A mobile carnival assembly yard with a partially dismantled Ferris Wheel, maintenance hub, electronics station, supply depot, and team break area.",
   "rooms": [
     {
-      "id": "main_monitoring_hub",
-      "name": "Main Monitoring Hub",
+      "id": "maintenance_hub",
+      "name": "Maintenance Hub",
       "properties": {
-        "type": "workstation"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "legacy_server_racks",
-        "nosql_deployment_zone",
-        "documentation_planning_corner"
+        "ferris_wheel_zone",
+        "electronics_station",
+        "supply_depot"
       ]
     },
     {
-      "id": "legacy_server_racks",
-      "name": "Legacy Server Racks",
+      "id": "ferris_wheel_zone",
+      "name": "Ferris Wheel Assembly Zone",
       "properties": {
-        "type": "server_room"
+        "type": "assembly"
       },
       "connected_to_room_ids": [
-        "main_monitoring_hub",
-        "nosql_deployment_zone"
+        "maintenance_hub",
+        "supply_depot"
       ]
     },
     {
-      "id": "nosql_deployment_zone",
-      "name": "NoSQL Deployment Zone",
+      "id": "electronics_station",
+      "name": "Electronics & Control Station",
       "properties": {
-        "type": "server_room"
+        "type": "technical"
       },
       "connected_to_room_ids": [
-        "main_monitoring_hub",
-        "legacy_server_racks",
-        "documentation_planning_corner"
+        "maintenance_hub",
+        "team_break_area"
       ]
     },
     {
-      "id": "documentation_planning_corner",
-      "name": "Documentation & Planning Corner",
+      "id": "supply_depot",
+      "name": "Supply & Parts Depot",
       "properties": {
-        "type": "office"
+        "type": "storage"
       },
       "connected_to_room_ids": [
-        "main_monitoring_hub",
-        "nosql_deployment_zone"
+        "maintenance_hub",
+        "ferris_wheel_zone"
+      ]
+    },
+    {
+      "id": "team_break_area",
+      "name": "Team Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "electronics_station",
+        "perimeter_checkpoint"
+      ]
+    },
+    {
+      "id": "perimeter_checkpoint",
+      "name": "Perimeter & Security Checkpoint",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "team_break_area"
       ]
     }
   ],
   "objects": [
     {
-      "id": "curved_workstation_desk_1",
-      "name": "10-meter-long Curved Workstation Desk",
+      "id": "steel_workbench_1",
+      "name": "Steel Workbench",
       "type": "FURNITURE",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "in:maintenance_hub",
       "properties": {
         "size": [
-          10.0,
-          0.8,
+          2.5,
+          1.2,
           0.9
         ],
-        "weight": 85.0,
+        "weight": 120.0,
         "is_container": true,
         "material": "steel",
-        "color": "black"
+        "color": "gray"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "adjustable_monitor_1",
-      "name": "Adjustable Monitor",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
+      "id": "hydraulic_lift_1",
+      "name": "Heavy-duty Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_hub",
       "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D",
-        "is_container": true
+        "size": [
+          1.8,
+          1.2,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "capacity": "3 tons",
+        "condition": "oily"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 3.5,
+        "length": "1m",
+        "max_torque": "300Nm",
+        "provides_abilities": [
+          "adjust"
+        ],
+        "condition": "missing calibration sticker"
+      },
+      "states": {}
+    },
+    {
+      "id": "bearing_housing_1",
+      "name": "Cracked Bearing Housing",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 8.0,
+        "diameter": "30cm",
+        "material": "steel",
+        "color": "silver",
+        "tag": "REPLACE"
       },
       "states": {
-        "is_on": false
+        "is_verified": false
       }
     },
     {
-      "id": "adjustable_monitor_2",
-      "name": "Adjustable Monitor",
+      "id": "ferris_wheel_manual_1",
+      "name": "Grease-stained Manual",
       "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
+      "location_id": "on:steel_workbench_1",
       "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D"
+        "weight": 1.2,
+        "title": "Ferris Wheel Assembly, 4th Ed.",
+        "page": 87,
+        "condition": "stained"
       },
       "states": {
-        "is_on": false
+        "is_open": true
       }
     },
     {
-      "id": "adjustable_monitor_3",
-      "name": "Adjustable Monitor",
+      "id": "industrial_fan_1",
+      "name": "Industrial Floor Fan",
       "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "adjustable_monitor_4",
-      "name": "Adjustable Monitor",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "adjustable_monitor_5",
-      "name": "Adjustable Monitor",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "adjustable_monitor_6",
-      "name": "Adjustable Monitor",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 5.5,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "U2719D"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "led_strip_lighting_1",
-      "name": "LED Strip Lighting",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 2.3,
-        "color": "white",
-        "brand": "Philips"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "network_switch_1",
-      "name": "24-port Network Switch",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 4.7,
-        "color": "black",
-        "brand": "Cisco"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "migration_dashboard_1",
-      "name": "Migration Dashboard",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 3.2,
-        "color": "black",
-        "brand": "Samsung",
-        "model_number": "LU28R55"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "emergency_rollback_terminal_1",
-      "name": "Emergency Rollback Terminal",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 6.8,
-        "color": "black",
-        "brand": "HP",
-        "model_number": "EliteDesk 800",
-        "is_container": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "abort_button_1",
-      "name": "Physical Red ABORT Button",
-      "type": "ITEM",
-      "location_id": "on:emergency_rollback_terminal_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "red"
-      },
-      "states": {
-        "is_covered": true
-      }
-    },
-    {
-      "id": "schema_validation_printer_1",
-      "name": "Schema Validation Printer",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "in:maintenance_hub",
       "properties": {
         "weight": 15.0,
-        "color": "white",
-        "brand": "Brother",
-        "model_number": "HL-L8360CDW",
-        "is_jammed": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "noise_canceling_headset_1",
-      "name": "Noise-canceling Headset",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "brand": "Bose",
-        "model_number": "QC35 II"
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "noise_canceling_headset_2",
-      "name": "Noise-canceling Headset",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "brand": "Bose",
-        "model_number": "QC35 II"
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "label_maker_1",
-      "name": "Label Maker",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 0.8,
-        "color": "gray",
-        "brand": "Brother",
-        "model_number": "PT-D210",
-        "is_container": true
-      },
-      "states": {
-        "is_on": false,
-        "is_open": false
-      }
-    },
-    {
-      "id": "usb_hub_1",
-      "name": "USB Hub",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "black",
-        "brand": "Anker",
-        "model_number": "AH231",
-        "is_container": true
-      },
-      "states": {
-        "is_on": false,
-        "is_open": false
-      }
-    },
-    {
-      "id": "usb_drive_1",
-      "name": "USB Drive",
-      "type": "ITEM",
-      "location_id": "in:usb_hub_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "SanDisk",
-        "model_number": "Ultra Fit"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "usb_drive_2",
-      "name": "USB Drive",
-      "type": "ITEM",
-      "location_id": "in:usb_hub_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "SanDisk",
-        "model_number": "Ultra Fit"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "usb_drive_3",
-      "name": "USB Drive",
-      "type": "ITEM",
-      "location_id": "in:usb_hub_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "SanDisk",
-        "model_number": "Ultra Fit"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "usb_drive_4",
-      "name": "USB Drive",
-      "type": "ITEM",
-      "location_id": "in:usb_hub_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "red",
-        "brand": "SanDisk",
-        "model_number": "Ultra Fit",
-        "inscription": "FINAL BACKUP"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "usb_drive_5",
-      "name": "USB Drive",
-      "type": "ITEM",
-      "location_id": "in:usb_hub_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "SanDisk",
-        "model_number": "Ultra Fit"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "sticky_notes_1",
-      "name": "Sticky Notes",
-      "type": "ITEM",
-      "location_id": "on:adjustable_monitor_1",
-      "properties": {
-        "weight": 0.01,
-        "color": "yellow",
-        "brand": "Post-it"
-      },
-      "states": {
-        "is_written_on": false
-      }
-    },
-    {
-      "id": "energy_bar_1",
-      "name": "Half-eaten Energy Bar",
-      "type": "ITEM",
-      "location_id": "on:curved_workstation_desk_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "brown",
-        "brand": "Clif"
-      },
-      "states": {
-        "is_wrapped": false
-      }
-    },
-    {
-      "id": "employee_photo_1",
-      "name": "Employee of the Month Photo (2019)",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 0.5,
-        "color": "silver",
-        "frame_material": "metal",
-        "is_hanging": true
-      },
-      "states": {}
-    },
-    {
-      "id": "server_rack_1",
-      "name": "2-meter-tall Steel Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "size": [
-          0.6,
-          0.8,
-          2.0
-        ],
-        "weight": 95.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "black"
-      },
-      "states": {}
-    },
-    {
-      "id": "server_rack_2",
-      "name": "2-meter-tall Steel Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "size": [
-          0.6,
-          0.8,
-          2.0
-        ],
-        "weight": 95.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "black"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "server_rack_3",
-      "name": "2-meter-tall Steel Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "size": [
-          0.6,
-          0.8,
-          2.0
-        ],
-        "weight": 95.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "black"
-      },
-      "states": {}
-    },
-    {
-      "id": "server_rack_4",
-      "name": "2-meter-tall Steel Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "size": [
-          0.6,
-          0.8,
-          2.0
-        ],
-        "weight": 95.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "black"
-      },
-      "states": {}
-    },
-    {
-      "id": "last_backup_indicator_1",
-      "name": "Last Backup Indicator Light",
-      "type": "ITEM",
-      "location_id": "on:server_rack_3",
-      "properties": {
-        "weight": 0.1,
-        "color": "green"
+        "type": "oscillating",
+        "condition": "bent blade"
       },
       "states": {
         "is_on": true
       }
     },
     {
-      "id": "manual_shutdown_panel_1",
-      "name": "Manual Shutdown Panel",
-      "type": "ITEM",
-      "location_id": "on:server_rack_1",
+      "id": "tackboard_1",
+      "name": "Tackboard with Inspection Checklists",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_hub",
       "properties": {
-        "weight": 2.5,
-        "color": "gray"
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "condition": "marked with red X"
+      },
+      "states": {}
+    },
+    {
+      "id": "dirty_rags_1",
+      "name": "Dirty Rags in Wire Basket",
+      "type": "ITEM",
+      "location_id": "in:maintenance_hub",
+      "properties": {
+        "weight": 2.0,
+        "smell": "solvent",
+        "color": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Faded Safety First Poster",
+      "type": "ITEM",
+      "location_id": "in:maintenance_hub",
+      "properties": {
+        "weight": 0.5,
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "engineer_mug_1",
+      "name": "World's Best Engineer Mug",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "contents": "loose bolts",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_clipboard_1",
+      "name": "Dented Metal Clipboard",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "contents": "outdated parts order form",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "ferris_wheel_frame_1",
+      "name": "Main Wheel Frame Segment",
+      "type": "FURNITURE",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "size": [
+          13.25,
+          2.5,
+          2.5
+        ],
+        "weight": 2500.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "partially dismantled"
+      },
+      "states": {}
+    },
+    {
+      "id": "roller_stand_1",
+      "name": "Steel Roller Stand",
+      "type": "FURNITURE",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "weight": 50.0,
+        "capacity": "2.5 tons",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          6.0
+        ],
+        "weight": 500.0,
+        "capacity": "5 tons",
+        "condition": "frayed cable"
+      },
+      "states": {}
+    },
+    {
+      "id": "axle_joint_1",
+      "name": "Misaligned Axle Joint",
+      "type": "ITEM",
+      "location_id": "on:ferris_wheel_frame_1",
+      "properties": {
+        "weight": 25.0,
+        "diameter": "50cm",
+        "material": "chrome-plated steel",
+        "condition": "missing bolts"
       },
       "states": {
-        "is_locked": false
+        "is_connected": false
       }
     },
     {
-      "id": "shutdown_key_1",
-      "name": "Shutdown Key",
+      "id": "hydraulic_piston_1",
+      "name": "Leaking Hydraulic Piston",
       "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "on:ferris_wheel_frame_1",
       "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "is_bent": true,
-        "provides_abilities": [
-          "lock"
-        ]
+        "weight": 18.0,
+        "length": "1.8m",
+        "tag": "TEST BEFORE REUSE",
+        "condition": "leaking"
       },
       "states": {}
     },
     {
-      "id": "shutdown_key_2",
-      "name": "Shutdown Key",
+      "id": "led_light_strip_1",
+      "name": "Loose LED Light Strip",
       "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "on:ferris_wheel_frame_1",
       "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "lanyard": "Backup Team",
-        "provides_abilities": [
-          "lock"
-        ]
+        "weight": 2.0,
+        "voltage": "12V",
+        "water_resistance": "water-resistant",
+        "condition": "dangling"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "portable_generator_1",
+      "name": "Portable Diesel Generator",
+      "type": "ITEM",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "weight": 400.0,
+        "power": "10kW",
+        "fuel": "diesel",
+        "condition": "idling"
+      },
+      "states": {
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "wheel_panels_1",
+      "name": "Stack of Wheel Panels",
+      "type": "ITEM",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "weight": 150.0,
+        "material": "fiberglass",
+        "dimensions": "2m x 1m",
+        "condition": "leaning"
       },
       "states": {}
     },
     {
-      "id": "shutdown_key_3",
-      "name": "Shutdown Key",
+      "id": "extension_cords_1",
+      "name": "Orange Extension Cords",
       "type": "ITEM",
-      "location_id": "in:curved_workstation_desk_1",
+      "location_id": "in:ferris_wheel_zone",
       "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "provides_abilities": [
-          "lock"
-        ]
+        "weight": 5.0,
+        "length": "20m",
+        "color": "orange",
+        "condition": "snaking"
       },
       "states": {}
     },
     {
-      "id": "legacy_tape_drive_1",
-      "name": "Legacy Tape Drive",
+      "id": "wheel_banner_1",
+      "name": "Discarded Wheel of Wonder Banner",
       "type": "ITEM",
-      "location_id": "in:server_rack_2",
+      "location_id": "in:ferris_wheel_zone",
       "properties": {
-        "weight": 50.0,
-        "color": "beige",
-        "brand": "IBM",
-        "model_number": "LTO-6",
+        "weight": 3.0,
+        "condition": "half-torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "shipping_container_1",
+      "name": "Repurposed Shipping Container",
+      "type": "FURNITURE",
+      "location_id": "in:electronics_station",
+      "properties": {
+        "size": [
+          6.0,
+          2.4,
+          2.6
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Control Panel",
+      "type": "ITEM",
+      "location_id": "in:shipping_container_1",
+      "properties": {
+        "weight": 25.0,
+        "condition": "blown fuse",
         "is_container": true
       },
       "states": {
-        "is_spinning": true,
-        "is_open": false
+        "is_connected": false
       }
     },
     {
-      "id": "unlabeled_backup_tape_1",
-      "name": "Unlabeled Backup Tape",
+      "id": "diagnostic_laptop_1",
+      "name": "Diagnostic Laptop",
       "type": "ITEM",
-      "location_id": "in:legacy_tape_drive_1",
+      "location_id": "on:control_panel_1",
       "properties": {
-        "weight": 0.2,
-        "color": "black"
-      },
-      "states": {
-        "is_saved": false
-      }
-    },
-    {
-      "id": "vacuum_cleaner_1",
-      "name": "Dusty Vacuum Cleaner",
-      "type": "ITEM",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "weight": 8.5,
-        "color": "red",
-        "brand": "Dyson",
-        "model_number": "V11"
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "fire_extinguisher_1",
-      "name": "Fire Extinguisher",
-      "type": "ITEM",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "weight": 5.0,
-        "color": "red",
-        "brand": "Kidde"
-      },
-      "states": {
-        "is_sealed": false
-      }
-    },
-    {
-      "id": "maintenance_cart_1",
-      "name": "Wheeled Maintenance Cart",
-      "type": "FURNITURE",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "size": [
-          0.8,
-          0.5,
-          0.9
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "gray"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "screwdriver_1",
-      "name": "Screwdriver",
-      "type": "ITEM",
-      "location_id": "in:maintenance_cart_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "yellow",
-        "brand": "Klein Tools",
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Latitude",
         "provides_abilities": [
-          "unscrew"
+          "type",
+          "scan",
+          "verify"
         ]
       },
-      "states": {}
+      "states": {
+        "is_on": false
+      }
     },
     {
-      "id": "thermal_paste_1",
-      "name": "Thermal Paste",
+      "id": "wiring_harness_1",
+      "name": "Wiring Harness",
       "type": "ITEM",
-      "location_id": "in:maintenance_cart_1",
+      "location_id": "in:shipping_container_1",
+      "properties": {
+        "weight": 3.0,
+        "condition": "disconnected"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "spare_fuse_1",
+      "name": "20A Ceramic Fuse",
+      "type": "ITEM",
+      "location_id": "in:supply_depot",
       "properties": {
         "weight": 0.1,
-        "color": "gray",
-        "brand": "Arctic"
-      },
-      "states": {
-        "is_sealed": false
-      }
-    },
-    {
-      "id": "sql_poster_1",
-      "name": "Yellowed SQL Best Practices Poster",
-      "type": "ITEM",
-      "location_id": "in:legacy_server_racks",
-      "properties": {
-        "weight": 0.2,
-        "color": "yellow",
-        "is_hanging": true
+        "amperage": "20A",
+        "material": "ceramic",
+        "label": "partially obscured by grease"
       },
       "states": {}
     },
     {
-      "id": "mongodb_cluster_1",
-      "name": "MongoDB Sharded Cluster",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
       "properties": {
-        "weight": 30.0,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "PowerEdge R740"
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 1500.0,
+        "capacity": "2.5 tons",
+        "condition": "ready"
       },
       "states": {
-        "is_on": false
+        "is_engine_on": false
       }
     },
     {
-      "id": "mongodb_cluster_2",
-      "name": "MongoDB Sharded Cluster",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
+      "id": "labeled_bins_1",
+      "name": "Labeled Bins",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
       "properties": {
-        "weight": 30.0,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "PowerEdge R740"
+        "size": [
+          1.0,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic"
       },
       "states": {
-        "is_on": false
+        "is_open": false
       }
     },
     {
-      "id": "mongodb_cluster_3",
-      "name": "MongoDB Sharded Cluster",
+      "id": "folding_chairs_1",
+      "name": "Folding Chairs",
       "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 30.0,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "PowerEdge R740"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "cooling_unit_1",
-      "name": "Modular Cooling Unit",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 45.0,
-        "color": "white",
-        "brand": "Liebert"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "schema_test_terminal_1",
-      "name": "Schema Test Terminal",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
+      "location_id": "in:team_break_area",
       "properties": {
         "weight": 5.0,
-        "color": "black",
-        "brand": "Apple",
-        "model_number": "iMac 27\""
+        "quantity": 4,
+        "material": "metal",
+        "color": "black"
       },
-      "states": {
-        "is_on": false
-      }
+      "states": {}
     },
     {
-      "id": "index_optimization_dashboard_1",
-      "name": "Index Optimization Dashboard",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
+      "id": "coffee_station_1",
+      "name": "Coffee Station",
+      "type": "FURNITURE",
+      "location_id": "in:team_break_area",
       "properties": {
-        "weight": 3.5,
-        "color": "black",
-        "brand": "LG",
-        "model_number": "27UK850-W"
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "contents": "coffee supplies"
       },
       "states": {
-        "is_on": false
+        "is_open": false
       }
     },
     {
-      "id": "emergency_killswitch_1",
-      "name": "Emergency Killswitch",
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board of Maintenance Schedules",
+      "type": "FURNITURE",
+      "location_id": "in:team_break_area",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "contents": "schedules"
+      },
+      "states": {}
+    },
+    {
+      "id": "chain_link_fence_1",
+      "name": "Chain-link Fencing",
+      "type": "FURNITURE",
+      "location_id": "in:perimeter_checkpoint",
+      "properties": {
+        "size": [
+          10.0,
+          0.1,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "guard_booth_1",
+      "name": "Guard Booth",
+      "type": "FURNITURE",
+      "location_id": "in:perimeter_checkpoint",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "fiberglass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "visitor_logbook_1",
+      "name": "Visitor Logbook",
       "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
+      "location_id": "in:guard_booth_1",
       "properties": {
         "weight": 1.5,
-        "color": "red"
+        "condition": "partially filled",
+        "provides_abilities": [
+          "type",
+          "verify"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "floodlights_1",
+      "name": "Temporary Floodlights",
+      "type": "ITEM",
+      "location_id": "in:perimeter_checkpoint",
+      "properties": {
+        "weight": 12.0,
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "tarp_canopy_1",
+      "name": "Weatherproof Tarp Canopy",
+      "type": "ITEM",
+      "location_id": "in:ferris_wheel_zone",
+      "properties": {
+        "weight": 20.0,
+        "material": "vinyl",
+        "condition": "flapping loose"
       },
       "states": {
         "is_covered": true
       }
     },
     {
-      "id": "spare_rack_rails_1",
-      "name": "Spare Rack Rails",
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
       "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 12.0,
-        "color": "black",
-        "material": "steel",
-        "length": "3m"
-      },
-      "states": {}
-    },
-    {
-      "id": "esd_wrist_straps_1",
-      "name": "ESD Wrist Straps",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 0.2,
-        "color": "black",
-        "is_tangled": true
-      },
-      "states": {}
-    },
-    {
-      "id": "mongodb_manuals_1",
-      "name": "Unopened Box of MongoDB Certified Admin Manuals",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 3.0,
-        "color": "white"
-      },
-      "states": {
-        "is_sealed": true
-      }
-    },
-    {
-      "id": "nosql_poster_1",
-      "name": "NoSQL = No Problem! Motivational Poster",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 0.3,
-        "color": "multicolor",
-        "is_hanging": true
-      },
-      "states": {}
-    },
-    {
-      "id": "red_bull_cans_1",
-      "name": "Empty Red Bull Cans",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 0.1,
-        "color": "silver"
-      },
-      "states": {
-        "is_crushed": false
-      }
-    },
-    {
-      "id": "server_screw_1",
-      "name": "Mismatched Server Screw",
-      "type": "ITEM",
-      "location_id": "in:nosql_deployment_zone",
-      "properties": {
-        "weight": 0.01,
-        "color": "silver",
-        "material": "steel"
-      },
-      "states": {}
-    },
-    {
-      "id": "whiteboard_1",
-      "name": "Floor-to-ceiling Whiteboard",
-      "type": "FURNITURE",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "size": [
-          3.0,
-          0.1,
-          2.5
-        ],
-        "weight": 40.0,
-        "is_container": false,
-        "material": "melamine",
-        "color": "white"
-      },
-      "states": {}
-    },
-    {
-      "id": "filing_cabinet_1",
-      "name": "Overflowing Filing Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "size": [
-          0.5,
-          0.6,
-          1.8
-        ],
-        "weight": 60.0,
-        "is_container": true,
-        "material": "metal",
-        "color": "gray"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "critical_dependencies_binder_1",
-      "name": "Critical Dependencies Binder",
-      "type": "ITEM",
-      "location_id": "in:filing_cabinet_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "black"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "data_flow_risks_map_1",
-      "name": "Hand-drawn Data Flow Risks Mind Map",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 0.2,
-        "color": "white"
-      },
-      "states": {
-        "is_written_on": true
-      }
-    },
-    {
-      "id": "laser_printer_1",
-      "name": "Laser Printer",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 20.0,
-        "color": "black",
-        "brand": "HP",
-        "model_number": "LaserJet Pro MFP M428fdw",
-        "is_jammed": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "mongodb_book_1",
-      "name": "MongoDB: The Definitive Guide",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 1.5,
-        "color": "blue"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "potted_fern_1",
-      "name": "Dying Potted Fern",
-      "type": "ITEM",
-      "location_id": "on:filing_cabinet_1",
-      "properties": {
-        "weight": 2.0,
-        "color": "green"
-      },
-      "states": {
-        "is_wrung": false
-      }
-    },
-    {
-      "id": "stress_ball_1",
-      "name": "Rubber Duck Stress Ball",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 0.2,
-        "color": "yellow"
-      },
-      "states": {
-        "is_squeezed": false
-      }
-    },
-    {
-      "id": "y2k_mug_1",
-      "name": "I Survived Y2K Mug",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 0.4,
-        "color": "white",
-        "is_container": true
-      },
-      "states": {
-        "is_dirty": true,
-        "is_open": false
-      }
-    },
-    {
-      "id": "paperclip_1",
-      "name": "Paperclip",
-      "type": "ITEM",
-      "location_id": "in:label_maker_1",
-      "properties": {
-        "weight": 0.01,
-        "color": "silver",
-        "material": "metal",
-        "provides_abilities": [
-          "scrape"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "debugging_manual_1",
-      "name": "Debugging Manual",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 0.8,
-        "color": "blue"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "maintenance_toolkit_1",
-      "name": "Maintenance Toolkit",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
-      "properties": {
-        "weight": 5.0,
-        "color": "red",
-        "provides_abilities": [
-          "unscrew",
-          "scrape"
-        ],
-        "is_container": true
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "battery_charger_1",
-      "name": "Battery Charger",
-      "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "in:supply_depot",
       "properties": {
         "weight": 0.5,
-        "color": "black",
-        "brand": "Anker",
+        "brand": "Zebra",
         "provides_abilities": [
-          "recharge"
+          "scan_barcode"
         ]
       },
       "states": {}
     },
     {
-      "id": "network_cable_1",
-      "name": "Network Cable",
+      "id": "labeled_parts_1",
+      "name": "Labeled Parts with Barcodes",
       "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "in:supply_depot",
       "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "length": "2m"
+        "weight": 2.0,
+        "condition": "labeled",
+        "barcode": "present"
       },
       "states": {
-        "is_paired": false
+        "is_barcode_scanned": false
       }
     },
     {
-      "id": "network_cable_2",
-      "name": "Network Cable",
+      "id": "wrapped_component_1",
+      "name": "Wrapped Component",
       "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "in:supply_depot",
       "properties": {
-        "weight": 0.3,
-        "color": "yellow",
-        "length": "2m"
+        "weight": 5.0,
+        "condition": "new",
+        "wrapping": "plastic"
       },
       "states": {
-        "is_paired": false
+        "is_wrapped": true
       }
     },
     {
-      "id": "network_cable_3",
-      "name": "Network Cable",
+      "id": "scissors_1",
+      "name": "Scissors",
       "type": "ITEM",
-      "location_id": "in:main_monitoring_hub",
+      "location_id": "on:steel_workbench_1",
       "properties": {
         "weight": 0.3,
-        "color": "green",
-        "length": "2m"
-      },
-      "states": {
-        "is_paired": false
-      }
-    },
-    {
-      "id": "marker_1",
-      "name": "Dry-erase Marker",
-      "type": "ITEM",
-      "location_id": "in:y2k_mug_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "is_dry": true,
         "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "marker_2",
-      "name": "Dry-erase Marker",
-      "type": "ITEM",
-      "location_id": "in:y2k_mug_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "blue",
-        "is_dry": true,
-        "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "marker_3",
-      "name": "Dry-erase Marker",
-      "type": "ITEM",
-      "location_id": "in:y2k_mug_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "red",
-        "is_dry": true,
-        "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "cleaning_rag_1",
-      "name": "Cleaning Rag",
-      "type": "ITEM",
-      "location_id": "in:maintenance_toolkit_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "white",
-        "provides_abilities": [
-          "scrape"
-        ]
-      },
-      "states": {
-        "is_dirty": false
-      }
-    },
-    {
-      "id": "plastic_wrap_1",
-      "name": "Plastic Wrap",
-      "type": "ITEM",
-      "location_id": "in:documentation_planning_corner",
-      "properties": {
-        "weight": 0.2,
-        "color": "clear",
-        "provides_abilities": [
-          "wrap"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "screwdriver_2",
-      "name": "Screwdriver",
-      "type": "ITEM",
-      "location_id": "in:maintenance_toolkit_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "red",
-        "brand": "Wera",
-        "provides_abilities": [
-          "unscrew"
+          "unwrap"
         ]
       },
       "states": {}
     }
   ],
   "abilities": [
-    "lock",
+    "adjust",
+    "close",
+    "connect",
     "open",
-    "pair",
-    "recharge",
-    "save",
-    "scrape",
-    "squeeze",
+    "scan",
+    "scan_barcode",
     "turn_off",
     "turn_on",
+    "type",
     "uncover",
-    "unscrew",
-    "wrap",
-    "wring",
-    "write",
-    "close"
+    "unwrap",
+    "verify"
   ]
 }

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place case_file_4472_1 on the evidence_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "case_file_4472_1",
+          "location_id": "on:evidence_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the unscanned_barcode_1 on the war_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "unscanned_barcode_1",
+          "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel furniture in the main_investigation_floor and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only wooden container in the private_office and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "locked_drawer_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Scan the barcode on case_file_4472_1 using the barcode_scanner_1.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "case_file_4472_1",
           "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the poster_roller_1 to flatten the unflattened_poster_1 on the war_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unflattened_poster_1",
+          "is_flat": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the glue_dispenser_1 to glue the unglued_papers_1 on the microscope_station_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unglued_papers_1",
+          "is_glued": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unmute the radio_dispatch_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "radio_dispatch_1",
+          "is_muted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unmute the printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_muted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the war_table_1 to the private_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:private_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence_locker_1 to the main_investigation_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_1",
+          "location_id": "in:main_investigation_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the drone_1 to the main_investigation_floor and combine it with the drone_battery_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "drone_1",
+          "location_id": "in:main_investigation_floor"
+        },
+        {
+          "id": "drone_battery_1",
+          "is_combined": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fridge_1 to the break_room and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "fridge_1",
+          "is_open": true
         }
       ]
     }

@@ -10,6 +10,16 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,144 @@
         {
           "id": "ipsc_culture_plate_1",
           "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the microscope_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the CO₂ incubator with the lowest CO₂ level and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "co2_incubator_3",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the culture plate labeled 'BATCH-7B-REPROG' and place it in the emergency_culture_freeze_kit_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ipsc_culture_plate_2",
+          "location_id": "in:emergency_culture_freeze_kit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the uv_sterilizer_wand_1 to wash the contaminated_lab_coat_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "contaminated_lab_coat_1",
+          "is_washed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the decontamination_solution_1 to wash the lab_coat_rack_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "lab_coat_rack_1",
+          "is_washed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the iPSC culture plate with the 'Possible Teratoma Risk' note and dispose of it in the biohazard bin.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ipsc_culture_plate_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the backup_keycard_1 to open the minus_80_freezer_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "minus_80_freezer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the next_gen_sequencer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "next_gen_sequencer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_nitrogen_dewar_1 to the main_culture_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_dewar_1",
+          "location_id": "in:main_culture_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety_cabinet_1 to the genomic_analysis_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:genomic_analysis_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the high_speed_centrifuge_1 to the decontamination_waste_lock and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "high_speed_centrifuge_1",
+          "location_id": "in:decontamination_waste_lock"
+        },
+        {
+          "id": "high_speed_centrifuge_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the minus_80_freezer_1 to the observation_control_room and use the backup_keycard_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "minus_80_freezer_1",
+          "location_id": "in:observation_control_room"
+        },
+        {
+          "id": "minus_80_freezer_1",
+          "is_open": true
         }
       ]
     }

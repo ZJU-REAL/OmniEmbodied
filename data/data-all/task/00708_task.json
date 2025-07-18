@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place petri_dish_1 on biopsy_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "petri_dish_1",
+          "location_id": "on:biopsy_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on microscope_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless steel container and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laminar_flow_hood_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blue cap and move it to the quality_control_station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "enzyme_vial_1",
+          "location_id": "in:quality_control_station"
+        }
+      ]
+    },
     {
       "task_description": "Use the sterilizer_1 to sterilize the extraction_kit_1.",
       "task_category": "tool_use",
@@ -20,6 +70,106 @@
         {
           "id": "extraction_kit_1",
           "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the water_source_1 to rinse the coffee_stains_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_stains_1",
+          "is_rinsed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the microbial_test_kit_1 to purify the enzyme_vial_1 and then place it in the refrigerator.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "enzyme_vial_1",
+          "is_pure": true
+        },
+        {
+          "id": "enzyme_vial_1",
+          "location_id": "in:refrigerated_sample_drawer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife_1 to spread the coffee_stains_1 and then turn on the magnetic_stirrer_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_stains_1",
+          "is_spread": true
+        },
+        {
+          "id": "magnetic_stirrer_1",
+          "is_spread": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the observation_screen_1 and the digital_microscope_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "observation_screen_1",
+          "is_on": true
+        },
+        {
+          "id": "digital_microscope_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the laminar_flow_hood_1 to the clinical_testing_pods.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laminar_flow_hood_1",
+          "location_id": "in:clinical_testing_pods"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dermatology_chair_1 to the sample_preparation_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dermatology_chair_1",
+          "location_id": "in:sample_preparation_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the mixing_vat_1 to the storage_hub and then use the saw_1 to cut the broken_pipette_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mixing_vat_1",
+          "location_id": "in:storage_hub"
+        },
+        {
+          "id": "broken_pipette_1",
+          "is_sawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the raw_materials_shelf_1 to the formulation_lab and then use the filter_1 to purify the enzyme_vial_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "raw_materials_shelf_1",
+          "location_id": "in:formulation_lab"
+        },
+        {
+          "id": "enzyme_vial_1",
+          "is_pure": true
         }
       ]
     }

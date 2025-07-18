@@ -6,9 +6,75 @@
       "max_grasp_limit": 1,
       "max_weight": 20.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the cracked touchscreen POS system on the central workbench.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pos_system_1",
+          "location_id": "on:central_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the diagnostic tablet in the problem bin.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diagnostic_tablet_1",
+          "location_id": "in:problem_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black iPod Touch with a sticky button and place it on the microscope station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ipod_touch_1",
+          "location_id": "on:microscope_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue iPad flex cable and place it on the central workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "flex_cable_2",
+          "location_id": "on:central_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tweezers to damage the unresponsive iPod Touch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "ipod_touch_2",
+          "is_broken": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver set to unscrew the jammed label printer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "is_labeled": true
+        }
+      ]
+    },
     {
       "task_description": "Use the label marker to label the final check clipboard and place it on the testing booth.",
       "task_category": "compound_reasoning",
@@ -20,6 +86,74 @@
         {
           "id": "final_check_clipboard_1",
           "location_id": "on:testing_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked Li-Ion battery cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the digital microscope station.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the main repair floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:main_repair_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stainless steel counter to the parts storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stainless_steel_counter_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the iPod testing rig to the central workbench and connect it to the USB hub.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ipod_testing_rig_1",
+          "location_id": "on:central_workbench_1"
+        },
+        {
+          "id": "usb_hub_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the testing booth to the main repair floor and turn on the iPod testing rig.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "testing_booth_1",
+          "location_id": "in:main_repair_floor"
+        },
+        {
+          "id": "ipod_testing_rig_1",
+          "is_on": true
         }
       ]
     }

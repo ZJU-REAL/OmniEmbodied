@@ -191,7 +191,15 @@ class AutonomousAgent(BaseAgent):
         # 格式化行动历史
         history_summary = ""
         if self.history:
-            history_summary = self.prompt_manager.format_history(self.mode, self.history, max_entries=max_history_in_prompt)
+            # 获取历史记录格式配置
+            history_format_config = self.config.get('history', {}).get('format', {})
+
+            history_summary = self.prompt_manager.format_history(
+                self.mode,
+                self.history,
+                max_entries=max_history_in_prompt,
+                config=history_format_config
+            )
         
         # 获取环境描述
         env_description = ""

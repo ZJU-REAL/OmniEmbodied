@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the sign_in_sheet_1 on the coffee_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sign_in_sheet_1",
+          "location_id": "on:coffee_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the barcode_scanner_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the reception_desk_1 and place it in the document_dropbox_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:document_dropbox_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a blinking error light and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the only water-damaged appraisal book and file it in the filing_cabinet_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +70,46 @@
         {
           "id": "property_appraisal_books_1",
           "location_id": "in:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the stuck drawer in the filing_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to turn on the microfiche_reader_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "microfiche_reader_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_scanner_1 to the title_research_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_scanner_1",
+          "location_id": "in:title_research_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the legal_reference_library_1 to the document_processing_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "legal_reference_library_1",
+          "location_id": "in:document_processing_room"
         }
       ]
     }

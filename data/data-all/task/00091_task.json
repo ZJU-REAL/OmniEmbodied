@@ -6,9 +6,65 @@
       "max_grasp_limit": 1.0,
       "max_weight": 50.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_kit_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_kit_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the survey_tablet_1 on the desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "survey_tablet_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the equipment_storage and place it in the main_training_floor.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "overhead_crane_1",
+          "location_id": "in:main_training_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, cracked item in the lost_and_found_bin_1 and place it on the shelf_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "walkie_talkie_1",
+          "location_id": "on:shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Sterilize the training_dummy_1 using the sterilizer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "training_dummy_1",
+          "is_sterile": true
+        }
+      ]
+    },
     {
       "task_description": "Use the network_router_1 to download the survey_form_1 and place it on the desk_1.",
       "task_category": "compound_reasoning",
@@ -17,6 +73,47 @@
           "id": "survey_form_1",
           "is_downloaded": true,
           "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the coffee_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the security_barrier_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_barrier_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the main_training_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_training_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the training_course_obstacle_1 to the break_room and stack it with training_course_obstacle_2.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "training_course_obstacle_1",
+          "location_id": "in:break_room",
+          "is_stacked": true
         }
       ]
     }

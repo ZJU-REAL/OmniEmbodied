@@ -76,24 +76,40 @@ class PromptManager:
         template = self.get_prompt_template(mode, template_key, default_value)
         return self.format_template(template, **kwargs)
     
-    def format_history(self, mode: str, history: List[Dict[str, Any]], max_entries: int = 20) -> str:
+    def format_history(self, mode: str, history: List[Dict[str, Any]], max_entries: int = 20, config: Optional[Dict[str, Any]] = None) -> str:
         """
         格式化历史记录
-        
+
         Args:
             mode: 模式名称
             history: 历史记录列表
             max_entries: 最大条目数
-            
+            config: 历史记录格式配置，可选
+                - include_thought: 是否在历史记录中包含Thought内容 (默认: True)
+                - show_execution_status: 是否显示执行状态 (默认: True，centralized模式除外)
+
         Returns:
             str: 格式化后的历史记录
         """
         if not history:
             return ""
+
+        # 获取配置，设置默认值
+        if config is None:
+            config = {}
+        include_thought = config.get('include_thought', True)
+        show_execution_status = config.get('show_execution_status', mode != "centralized")
         
         # 获取历史记录模板
         history_template = self.get_prompt_template(mode, "history_template", "Recent Action History:\n{history_entries}")
-        entry_template = self.get_prompt_template(mode, "history_entry_template", "{index}. Action: {action}, Result: {status}, Message: {message}")
+
+        # 根据配置决定是否显示execution_status
+        if show_execution_status:
+            # 显示execution_status
+            entry_template = self.get_prompt_template(mode, "history_entry_template", "{index}. Action: {action}, Result: {status}, Message: {message}")
+        else:
+            # 不显示execution_status
+            entry_template = self.get_prompt_template(mode, "history_entry_template", "{index}. Action: {action}, Result: {message}")
         
         # 格式化历史条目
         entries = []
@@ -112,17 +128,30 @@ class PromptManager:
                 status = entry.get('status', '')
                 message = entry.get('message', '')
 
-            # 如果有LLM回复，优先显示完整回复；否则只显示动作
-            if llm_response:
-                # 显示完整的LLM回复（包含思考和动作）
-                formatted_entry = f"{i+1}. {llm_response}\n   Execution Result: {status} - {message}"
+            # 如果有LLM回复，根据配置决定是否显示
+            if llm_response and include_thought:
+                # 根据配置决定是否显示execution_status
+                if show_execution_status:
+                    # 显示execution_status
+                    formatted_entry = f"{i+1}. {llm_response}\n   Execution Result: {status} - {message}"
+                else:
+                    # 不显示execution_status
+                    formatted_entry = f"{i+1}. {llm_response}\n   Execution Result: {message}"
             else:
-                # 回退到原有格式
-                formatted_entry = self.format_template(entry_template,
-                                                      index=i+1,
-                                                      action=action,
-                                                      status=status,
-                                                      message=message)
+                # 不显示LLM回复（Thought），回退到原有格式
+                if show_execution_status:
+                    # 显示status
+                    formatted_entry = self.format_template(entry_template,
+                                                          index=i+1,
+                                                          action=action,
+                                                          status=status,
+                                                          message=message)
+                else:
+                    # 不显示status
+                    formatted_entry = self.format_template(entry_template,
+                                                          index=i+1,
+                                                          action=action,
+                                                          message=message)
             entries.append(formatted_entry)
         
         # 组合所有条目

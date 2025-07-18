@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the rehearsal_notebook_1 on the rolling_racks_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rehearsal_notebook_1",
+          "location_id": "on:rolling_racks_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wireless_mic_1 in the control_booth.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wireless_mic_1",
+          "location_id": "in:control_booth"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item in the backstage_storage and place it in the janitors_closet.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,104 @@
         {
           "id": "locked_toolbox_1",
           "location_id": "in:janitors_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only multicolor paper item on the main_dance_floor and place it in the backstage_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "motivational_posters_1",
+          "location_id": "in:backstage_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken vacuum cleaner in the janitors_closet using the wrench from the locked toolbox.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_vacuum_cleaner_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser to clean the written-on rehearsal notebook and then place it on the rolling racks.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "rehearsal_notebook_1",
+          "is_written_on": false
+        },
+        {
+          "id": "rehearsal_notebook_1",
+          "location_id": "on:rolling_racks_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to mount the spare bulb in the overhead lighting rig to fix its flickering.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "overhead_lighting_rig_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the main generator by checking its pressure with the pressure gauge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pressure_gauge_1",
+          "location_id": "in:control_booth"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to polish the dusty trophy using the polish cloth.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dusty_trophy_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mirror wall to the backstage storage area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mirror_wall_1",
+          "location_id": "in:backstage_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overhead lighting rig to the control booth.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_lighting_rig_1",
+          "location_id": "in:control_booth"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy fallen speaker to the janitors closet and use the wrench to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fallen_speaker_1",
+          "location_id": "in:janitors_closet"
+        },
+        {
+          "id": "fallen_speaker_1",
+          "is_open": false
         }
       ]
     }

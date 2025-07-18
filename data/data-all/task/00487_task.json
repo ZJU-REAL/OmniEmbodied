@@ -1,0 +1,152 @@
+{
+  "task_background": "Prepare the Biolab Zeta for the final stages of GlycoFlex development, ensuring all equipment is functional, samples are properly stored, and the lab is organized for high-stakes research.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place glycoflex_vial_1 on lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "glycoflex_vial_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the ultra_low_freezer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ultra_low_freezer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vial with a blue cap and place it in the cold_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "glycoflex_vial_1",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest furniture in the main_research_bay and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "robotic_arm_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_kit_1 to measure the spectrophotometer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spectrophotometer_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering_iron_1 to repair the broken_microscope_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_microscope_1",
+          "is_soldered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the lab and use the multimeter_1 to measure it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "error_code_display_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety_cabinet_1 to the collaboration_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the robotic_arm_1 to the equipment_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_arm_1",
+          "location_id": "in:equipment_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "error_code_display_1",
+          "location_id": "in:equipment_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the liquid_nitrogen_dewar_1 to the main_research_bay and ensure its valve is closed.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_dewar_1",
+          "location_id": "in:main_research_bay"
+        },
+        {
+          "id": "liquid_nitrogen_valve_1",
+          "is_open": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00487"
+}

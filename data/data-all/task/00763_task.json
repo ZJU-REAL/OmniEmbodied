@@ -10,15 +10,160 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the broken Geiger counter (geiger_counter_1) on the examination table (examination_table_1).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "geiger_counter_1",
+          "location_id": "on:examination_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the patient file tablet (patient_file_tablet_1) in the blood sample rack (blood_sample_rack_1).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "patient_file_tablet_1",
+          "location_id": "in:blood_sample_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless-steel decon shower and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "decon_shower_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only open PPE locker and close it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ppe_locker_2",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken Geiger counter (geiger_counter_1) using the repair kit (repair_kit_1).",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "geiger_counter_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken flashlight (flashlight_1) using the batteries (batteries_2).",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "flashlight_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the repair kit (repair_kit_2) to fix the only broken, ceiling-mounted scanner array (scanner_array_1).",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "scanner_array_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox (toolbox_1) to repair the only broken, red defibrillator (defibrillator_1).",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the broken glovebox workstation (glovebox_workstation_1).",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_workstation_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the broken fume hood (fume_hood_1).",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the lead-lined glovebox workstation (glovebox_workstation_1) to the storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_workstation_1",
+          "location_id": "in:storage_equipment_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial fume hood (fume_hood_1) to the storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:storage_equipment_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy autoclave (autoclave_1) that is broken to the repair bay and fix it using the repair kit (repair_kit_3).",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:assessment_triage_bay",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy shelving unit (shelving_unit_1) that contains the Geiger counter kit to the assessment bay and repair the kit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:assessment_triage_bay"
+        },
+        {
+          "id": "geiger_counter_kit_1",
           "is_broken": false
         }
       ]

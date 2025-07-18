@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the grey archival box labeled 'Booth-214' on the heavy-duty sorting table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "archival_box_1",
+          "location_id": "on:sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the document scanner with the paper jam error.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "document_scanner_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the tarnished silver ring with the inscription 'Always' and polish it.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,90 @@
         {
           "id": "silver_ring_1",
           "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the damaged music box that plays 'Twinkle Twinkle' using the micro-screwdriver set.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "damaged_music_box_1",
+          "is_playing": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the polish cloth to polish the half-completed ceramic doll's head in the 3D printer enclosure.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ceramic_doll_head_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the shattered smartphone in the grey archival box and use the hand truck to move it to the forensic analysis nook.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "shattered_smartphone_1",
+          "location_id": "in:forensic_analysis_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the UV light table in the forensic analysis nook.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uv_light_table_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to close the 3D printer enclosure in the memorial reconstruction bay.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "object_3d_printer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the memorial reconstruction bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_unit_1",
+          "location_id": "in:memorial_reconstruction_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Transport the server rack to the private reflection alcove.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:private_reflection_alcove"
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the compression press to the forensic analysis nook and use it to compress the cold case file.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "compression_press_1",
+          "location_id": "in:forensic_analysis_nook"
+        },
+        {
+          "id": "cold_case_file_1",
+          "is_compressed": true
         }
       ]
     }

@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place design_tablet_1 on the central_collaboration_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "design_tablet_1",
+          "location_id": "on:central_collaboration_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the blueprint_display_1 in the design_studio.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blueprint_display_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the central_collaboration_table_1 and place it in the design_studio.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sealed_sample_case_1",
+          "location_id": "in:design_studio"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver item on the central_collaboration_table_1 and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rotary_engine_prototype_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque_wrench_1 to loosen the rear_passenger_door_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "rear_passenger_door_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pressure_gauge_1 to check the pressure of the air_compressor_hose_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "air_compressor_hose_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
     {
       "task_description": "Use the scanner_1 to scan the design_tablet_1 and then place it in the tool_caddy_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,74 @@
         {
           "id": "design_tablet_1",
           "location_id": "in:tool_caddy_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the glue_dispenser_1 to glue the fragile_sensor_array_1 and then place it in the foam_crate_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fragile_sensor_array_1",
+          "is_glued": true
+        },
+        {
+          "id": "fragile_sensor_array_1",
+          "location_id": "in:foam_crate_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the driver_simulator_pod_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "driver_simulator_pod_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_3d_printer_1 to the prototype_assembly_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_3d_printer_1",
+          "location_id": "in:prototype_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the component_shelving_1 to the testing_diagnostics_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "component_shelving_1",
+          "location_id": "in:testing_diagnostics_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the telemetry_dashboard_1 that is uniquely aluminum to the design_studio and then turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "telemetry_dashboard_1",
+          "location_id": "in:design_studio"
+        },
+        {
+          "id": "telemetry_dashboard_1",
+          "is_on": true
         }
       ]
     }

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the precision_scale_1 on the stainless_steel_worktable_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "precision_scale_1",
+          "location_id": "on:stainless_steel_worktable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the walk_in_refrigerator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "walk_in_refrigerator_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Find the red silicone spatula and place it in the quality_control_lab.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,114 @@
         {
           "id": "silicone_spatula_2",
           "location_id": "in:quality_control_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the rum bottle with the cracked seal and place it in the ingredient_prep_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rum_bottle_1",
+          "location_id": "in:ingredient_prep_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to unwrap the frozen_blackberries_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "frozen_blackberries_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defroster_1 to defrost the frozen_blackberries_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "frozen_blackberries_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_set_1 to disassemble the industrial_planetary_mixer_1 for cleaning.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "industrial_planetary_mixer_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flour sifter with compacted flour and use the hammer_1 to pulverize the clog.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "flour_sifter_1",
+          "is_pulverized": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to plug in the thermal_imaging_camera_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "thermal_imaging_camera_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dough_sheeter_1 to the mixing_batter_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dough_sheeter_1",
+          "location_id": "in:mixing_batter_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_ingredient_rack_1 to the quality_control_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_ingredient_rack_1",
+          "location_id": "in:quality_control_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the stone_deck_oven_1 to the quality_control_lab and use the welding_torch_1 to repair its interior.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "stone_deck_oven_1",
+          "location_id": "in:quality_control_lab"
+        },
+        {
+          "id": "stone_deck_oven_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_planetary_mixer_1 to the ingredient_prep_storage and use the spray_bottle_1 to clean its bowl.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_planetary_mixer_1",
+          "location_id": "in:ingredient_prep_storage"
+        },
+        {
+          "id": "industrial_planetary_mixer_1",
+          "is_sprayed": true
         }
       ]
     }

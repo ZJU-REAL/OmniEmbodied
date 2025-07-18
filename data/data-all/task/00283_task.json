@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_cup_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the microscope_1 to the observation_hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "in:observation_hub"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, orange specimen and place it in the dissection_workstation_1.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,106 @@
         {
           "id": "gnetophyte_specimen_7",
           "location_id": "in:dissection_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only broken microscope in the observation_hub and place it in the repair_kit_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_2",
+          "location_id": "in:repair_kit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken conveyor_belt_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Dry the wet spill_cart_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spill_cart_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the only broken microscope in the microscopy_lab.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pollen_harvest_kit_1 to untie the gnetophyte_specimen_7.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "gnetophyte_specimen_7",
+          "is_tied": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the cryogenic_storage_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_storage_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_nitrogen_tank_1 to the seed_processing_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_tank_1",
+          "location_id": "in:seed_processing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydroponic_rack_system_1 to the microscopy_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_rack_system_1",
+          "location_id": "in:microscopy_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy cryogenic_storage_unit_1 that is uniquely compressed to the supply_airlock.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_storage_unit_1",
+          "location_id": "in:supply_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy seed_press_1 that is uniquely not crushed to the central_growth_chamber.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_press_1",
+          "location_id": "in:central_growth_chamber"
         }
       ]
     }

@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the torque_wrench_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the grease_gun_1 in the tool_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "grease_gun_1",
+          "location_id": "in:tool_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, new BelAZ tire and place it in the tire_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spare_tire_1",
+          "location_id": "in:tire_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue-capped, factory-sealed hydraulic valve and place it on the foremans_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hydraulic_valve_7b_1",
+          "location_id": "on:foremans_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the workbench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the ignition_key_1 to start the engine of the BelAZ 75600.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "belaz_75600_1",
+          "is_engine_on": true
+        }
+      ]
+    },
     {
       "task_description": "Use the grinder_1 to grind the rusted steel shelving and then clean it with the duster_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,56 @@
         {
           "id": "steel_shelving_1",
           "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flickering work light, replace its frayed cord, and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "work_light_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hydraulic_lift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_fluid_drum_1 to the main_service_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_fluid_drum_1",
+          "location_id": "in:main_service_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spare_tire_1 to the main_service_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spare_tire_1",
+          "location_id": "in:main_service_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_fan_1 to the foremans_office and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_fan_1",
+          "is_dusted": false
         }
       ]
     }

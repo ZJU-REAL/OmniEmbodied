@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the overturned_pewter_cauldron_1 on the iron_cauldron_stand_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "overturned_pewter_cauldron_1",
+          "location_id": "on:iron_cauldron_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the intact_jar_powdered_moonstone_1 on the long_pine_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "intact_jar_powdered_moonstone_1",
+          "location_id": "on:long_pine_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest glass jar and place it on the mahogany_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "shattered_jar_dragon_blood_1",
+          "location_id": "on:mahogany_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver knife and place it on the oak_shelving_unit_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "abandoned_silver_knife_1",
+          "location_id": "on:oak_shelving_unit_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken_stirring_rod_1 using the sharpener_1.",
       "task_category": "tool_use",
@@ -20,6 +70,88 @@
         {
           "id": "broken_stirring_rod_1",
           "is_sharp": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the unstable_everlight_lantern_1 using the calibration_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "unstable_everlight_lantern_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the key_to_desk_1 to unlock the mahogany_desk_1 and then close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mahogany_desk_1",
+          "is_open": false
+        },
+        {
+          "id": "mahogany_desk_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only marble mortar and pestle, use it to mix the powdered_moonstone_1 with water from the decanter_self_refilling_water_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "intact_jar_powdered_moonstone_1",
+          "is_mixed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overturned_pewter_cauldron_1 to the corner of the classroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overturned_pewter_cauldron_1",
+          "location_id": "in:potions_classroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the oak_shelving_unit_1 to the opposite wall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oak_shelving_unit_1",
+          "location_id": "in:potions_classroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy long_pine_table_1 to the center of the room and then use the trowel_1 to plaster its stained surface.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "long_pine_table_1",
+          "location_id": "in:potions_classroom"
+        },
+        {
+          "id": "long_pine_table_1",
+          "is_plastered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the mahogany_desk_1 to the front of the room and then use the screwdriver_1 to fix its ajar drawer.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mahogany_desk_1",
+          "location_id": "in:potions_classroom"
+        },
+        {
+          "id": "mahogany_desk_1",
+          "is_screwed_in": true
         }
       ]
     }

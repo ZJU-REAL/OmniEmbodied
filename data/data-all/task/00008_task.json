@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the satellite_phone_1 on the bulletin_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "satellite_phone_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the roster_clipboard_1 in the file_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "roster_clipboard_1",
+          "location_id": "in:file_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, broken satellite phone and place it in the communications_hut.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "satellite_phone_1",
+          "location_id": "in:communications_hut"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal furniture in the main_operations_tent and place it in the supply_storage_yard.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:supply_storage_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken satellite_phone_1 using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "satellite_phone_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the forklift_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the repair kit to fix the largest, metal table's only flashing red device.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,66 @@
         {
           "id": "conference_table_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the mop to clean the main_operations_tent floor.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "main_operations_tent",
+          "is_mopped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the supply_crate_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the vaccine_cooler_1 to the medical_triage_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vaccine_cooler_1",
+          "location_id": "in:medical_triage_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the file_cabinet_1 to the supply_storage_yard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "file_cabinet_1",
+          "location_id": "in:supply_storage_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy photocopier that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:vehicle_maintenance_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaking fuel drum to the vehicle_maintenance_area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_drum_1",
+          "location_id": "in:vehicle_maintenance_area"
         }
       ]
     }

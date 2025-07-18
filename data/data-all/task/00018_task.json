@@ -10,9 +10,39 @@
         0.8,
         0.8
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        0.8,
+        0.8,
+        0.8
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the radio_transceiver_1 on the emergency_procedures_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_transceiver_1",
+          "location_id": "on:emergency_procedures_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_maker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on the central_workbench_1 and place it in the wet_lab_section.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,110 @@
         {
           "id": "computer_1",
           "location_id": "in:wet_lab_section"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass item with a blue color on the central_workbench_1 and place it in the lab_sink_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blue_glass_paperweight_1",
+          "location_id": "in:lab_sink_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_centrifuge_1 using the toolbox_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the portable_toxicity_meter_1 using the battery_charger_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "portable_toxicity_meter_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the dusting_cloth_1 to dust the glass_beaker_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "glass_beaker_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to weld the gas_valve on the bunsen_burner_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "bunsen_burner_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the uv_sterilization_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uv_sterilization_cabinet_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the contaminated_gear_bin_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "contaminated_gear_bin_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the algal_toxin_monitor_1 to the outdoor_sampling_dock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "algal_toxin_monitor_1",
+          "location_id": "in:outdoor_sampling_dock"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the press_1 to the decontamination_airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central_workbench_1 to the wet_lab_section and repair any broken items on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_workbench_1",
+          "location_id": "in:wet_lab_section"
+        },
+        {
+          "id": "broken_centrifuge_1",
+          "is_broken": false
         }
       ]
     }

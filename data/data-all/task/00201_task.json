@@ -10,15 +10,159 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the debug_terminal_1 on the server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "debug_terminal_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_machine_1 in the break room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black USB drive and place it in the storage closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_2",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to open the spare_parts_box_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spare_parts_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the whiteboard_marker_1 to write on the whiteboard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
     {
       "task_description": "Use the diagnostic_equipment_1 to unscrew and open the backup_server_1.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "backup_server_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only bootable red USB drive and use it to turn on the test_machine_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "test_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the keylock_override_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "keylock_override_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the HVAC control panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hvac_control_panel_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the L-shaped Workstation Cluster to the testing lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "l_shaped_workstation_1",
+          "location_id": "in:testing_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Floor-standing Server Rack to the server room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:server_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "location_id": "in:testing_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the 2m-tall Server Rack to the main development floor and use the screwdriver_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_2",
+          "location_id": "in:main_development_floor"
+        },
+        {
+          "id": "server_rack_2",
           "is_open": true
         }
       ]

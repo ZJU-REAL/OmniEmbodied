@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the digital_camera_1 on the tripod_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_camera_1",
+          "location_id": "on:tripod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the stuffed_rabbit_1 in the crib_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "stuffed_rabbit_1",
+          "location_id": "in:crib_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, charred wooden object in the living room and place it in the basement.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,108 @@
         {
           "id": "collapsed_sofa_1",
           "location_id": "in:basement"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a red ribbon in the nursery and place it on the crib.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stuffed_rabbit_1",
+          "location_id": "on:crib_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to calibrate the digital_camera_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_camera_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the grinder_1 to grind the contents of the toolbox_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_ground": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a faint LED in the nursery, use the wrench_1 to calibrate it, and place it in the crib.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "baby_monitor_1",
+          "is_calibrated": true
+        },
+        {
+          "id": "baby_monitor_1",
+          "location_id": "in:crib_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the basement, use the press_1 to crush it, and place it in the toolbox.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "water_heater_1",
+          "is_crushed": true
+        },
+        {
+          "id": "water_heater_1",
+          "location_id": "in:toolbox_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the metal_box_1 using the radiator_key_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collapsed_sofa_1 to the basement.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collapsed_sofa_1",
+          "location_id": "in:basement"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the water_heater_1 to the living room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_heater_1",
+          "location_id": "in:living_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heaviest, steel object in the basement to the living room and use the press_1 to crush it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_heater_1",
+          "location_id": "in:living_room"
+        },
+        {
+          "id": "water_heater_1",
+          "is_crushed": true
         }
       ]
     }

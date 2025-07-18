@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place crt_monitor_1 on the floor_mounted_server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "on:floor_mounted_server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_machine_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black CRT monitor with the brand RetroTech and place it in the maintenance_closet.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,110 @@
         {
           "id": "crt_monitor_1",
           "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the rotary phone with a blinking light and unplug it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rotary_phone_1",
+          "is_plugged_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defrosting_tool_1 to thaw the cryo_panel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cryo_panel_1",
+          "is_frozen": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the dust_cloth_1 to dust the central_command_console_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "central_command_console_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the thermal printer with a paper jam and use the sterilizer_1 to sterilize it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "thermal_printer_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the cartridge with a cracked condition and use the dust_cloth_1 to clean it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cartridge_2b9_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the hydraulic_lift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the past_archive_vault_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "past_archive_vault_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the data_cartridge_5x1_1 to the active_retrieval_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "data_cartridge_5x1_1",
+          "location_id": "in:active_retrieval_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_data_rack_1 to the future_lock_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_data_rack_1",
+          "location_id": "in:future_lock_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the floor_mounted_server_rack_1 to the maintenance_closet and use the sterilizer_1 to sterilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "floor_mounted_server_rack_1",
+          "location_id": "in:maintenance_closet"
+        },
+        {
+          "id": "floor_mounted_server_rack_1",
+          "is_sterile": true
         }
       ]
     }

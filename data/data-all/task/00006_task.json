@@ -6,9 +6,65 @@
       "max_grasp_limit": 30.0,
       "max_weight": 30.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the migration_dashboard_1 on the curved_workstation_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "migration_dashboard_1",
+          "location_id": "on:curved_workstation_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the adjustable_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "adjustable_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red USB drive labeled 'FINAL BACKUP' and save its contents.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_4",
+          "is_saved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black monitor and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "adjustable_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the shutdown_key_1 to lock the manual_shutdown_panel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "manual_shutdown_panel_1",
+          "is_locked": true
+        }
+      ]
+    },
     {
       "task_description": "Find the only flashing red device (abort_button_1) and uncover it using the paperclip_1.",
       "task_category": "compound_reasoning",
@@ -16,6 +72,76 @@
         {
           "id": "abort_button_1",
           "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black monitor (adjustable_monitor_1) and turn it on using the power button.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "adjustable_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the mongodb_cluster_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mongodb_cluster_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the manual_shutdown_panel_1 using shutdown_key_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "manual_shutdown_panel_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the legacy_tape_drive_1 to the documentation_planning_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "legacy_tape_drive_1",
+          "location_id": "in:documentation_planning_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cooling_unit_1 to the legacy_server_racks.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "location_id": "in:legacy_server_racks"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy laser_printer_1 that is jammed to the maintenance_cart_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_printer_1",
+          "location_id": "in:maintenance_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy filing_cabinet_1 that is closed to the nosql_deployment_zone.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:nosql_deployment_zone"
         }
       ]
     }

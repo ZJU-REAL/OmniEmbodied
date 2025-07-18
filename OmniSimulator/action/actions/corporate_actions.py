@@ -176,48 +176,57 @@ class CorpGotoAction(BaseAction):
 
 class CorpPlaceAction(BaseAction):
     """合作放置动作"""
-    
-    def __init__(self, agent_id: str, agents: List[str], target_object: str, location: str):
+
+    def __init__(self, agent_id: str, agents: List[str], target_object: str, location: str, preposition: str = "in"):
         """
         初始化合作放置动作
-        
+
         Args:
             agent_id: 主要智能体ID
             agents: 参与合作的所有智能体ID列表
             target_object: 目标物体ID
             location: 放置位置
+            preposition: 放置介词 (in/on)
         """
         super().__init__(agent_id, ActionType.CORP_PLACE)
         self.agents = agents
         self.target_object = target_object
         self.location = location
+        self.preposition = preposition
     
     @classmethod
     def from_command(cls, command_str: str, agent_id: str) -> Optional['CorpPlaceAction']:
         """
         从命令字符串创建合作放置动作
-        
+
         Args:
-            command_str: 命令字符串，格式: "corp_place agent1,agent2 object_id location"
+            command_str: 命令字符串，格式: "corp_place agent1,agent2 object_id in|on location"
             agent_id: 执行命令的智能体ID
-            
+
         Returns:
             CorpPlaceAction: 合作放置动作对象，解析失败返回None
         """
         try:
             parts = command_str.strip().split()
-            if len(parts) < 4:
+            if len(parts) < 5:  # 需要至少5个部分：CORP_PLACE agents object_id in/on location
                 return None
-            
+
             # 解析智能体列表
             agents_str = parts[1]
             agents = [a.strip() for a in agents_str.split(',')]
-            
-            # 目标物体和位置
+
+            # 目标物体
             target_object = parts[2]
-            location = parts[3]
-            
-            return cls(agent_id, agents, target_object, location)
+
+            # 验证介词
+            preposition = parts[3]
+            if preposition not in ['in', 'on']:
+                return None
+
+            # 目标位置
+            location = parts[4]
+
+            return cls(agent_id, agents, target_object, location, preposition)
         except:
             return None
     
@@ -252,7 +261,7 @@ class CorpPlaceAction(BaseAction):
                 return ActionStatus.FAILURE, f"Target object does not exist: {self.target_object}", None
 
             # 使用环境管理器的move_object方法更新物体位置
-            new_location_id = f'in:{self.location}'
+            new_location_id = f'{self.preposition}:{self.location}'
             success = env_manager.move_object(self.target_object, new_location_id)
             if not success:
                 return ActionStatus.FAILURE, f"Cannot move object to specified location: {self.location}", None

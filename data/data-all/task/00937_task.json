@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the sealed_spirit_vial_1 on the spirit_energy_containment_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sealed_spirit_vial_1",
+          "location_id": "on:spirit_energy_containment_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 in the waste_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:waste_bin_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, glowing blue item and place it in the spirit_artifact_vault.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "sealed_spirit_vial_1",
           "location_id": "in:spirit_artifact_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flickering light in the main research lab and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "adjustable_lab_light_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_bending_detector_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_bending_detector_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty coffee_mug_1 using the sponge_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to mount the unstable_spirit_cannon_1 in the spirit_artifact_vault.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unstable_spirit_cannon_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, plastic-metal item with an error message and repair it using the wrench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_bending_detector_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pull the emergency_shutdown_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_lever_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the reinforced_titanium_door_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_titanium_door_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spirit_cannon_barrel_1 to the main_research_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spirit_cannon_barrel_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_analysis_table_1 to the spiritual_anomaly_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_analysis_table_1",
+          "location_id": "in:spiritual_anomaly_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the unstable_spirit_cannon_1 to the main_research_lab and repair it using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "unstable_spirit_cannon_1",
+          "location_id": "in:main_research_lab"
+        },
+        {
+          "id": "unstable_spirit_cannon_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the archives_cabinet_1 to the guard_barracks_armory and unlock it using the safe_key_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "archives_cabinet_1",
+          "location_id": "in:guard_barracks_armory"
+        },
+        {
+          "id": "archives_cabinet_1",
+          "is_locked": false
         }
       ]
     }

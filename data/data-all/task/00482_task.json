@@ -1,0 +1,169 @@
+{
+  "task_background": "Prepare the university research lab for an upcoming experiment by organizing equipment, repairing broken items, and ensuring all tools are in place.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place tube_rack_1 on industrial_shelving_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tube_rack_1",
+          "location_id": "on:industrial_shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place biohazard_bag_1 in the equipment_storage_prep_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biohazard_bag_1",
+          "location_id": "in:equipment_storage_prep_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass item in the glassware_drying_rack_1 and place it on the main_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "graduated_cylinder_1",
+          "location_id": "on:main_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the lab and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microcentrifuge_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken microscope_1 using the lens_cleaning_cloth_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Seal the styrofoam_box_1 using the sealing_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "styrofoam_box_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair_kit_1 to fix the largest, steel table that is not stable.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "main_workbench_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only cracked glass item in the glassware_drying_rack_1 and use the spray_bottle_1 to clean it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "graduated_cylinder_1",
+          "is_sprayed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryogenic_dewar_1 to the central_workbench_cluster.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_dewar_1",
+          "location_id": "in:central_workbench_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_unit_1 to the documentation_planning_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_unit_1",
+          "location_id": "in:documentation_planning_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy autoclave_1 that is broken to the repair bay and use the repair_kit_1 to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:equipment_storage_prep_bay",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy main_workbench_1 that is scratched to the documentation_planning_corner and use the label_marker_1 to label it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "main_workbench_1",
+          "location_id": "in:documentation_planning_corner"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00482"
+}

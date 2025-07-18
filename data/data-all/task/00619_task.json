@@ -1,0 +1,149 @@
+{
+  "task_background": "Prepare the museum for the high-profile retrospective exhibition of Sir Philip Burne-Jones' works by organizing, cleaning, and securing all artifacts and spaces.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the mislabeled_painting_1 in the art_storage_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mislabeled_painting_1",
+          "location_id": "in:art_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the abandoned_toolbox_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "abandoned_toolbox_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the art_storage_vault and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keycard_reader_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the conservation_duster_1 to dust the microscope_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the polishing_cloth_1 to polish the_vampire_painting_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "the_vampire_painting_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the document_verifier_1 to verify the mislocated_sketchbook_1 and then file it in the file_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mislocated_sketchbook_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the conservation_scales_1 to weigh the damaged_pigment_kit_1 and then file the report in the file_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "conservation_report_1",
+          "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial_art_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_art_rack_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the fume_extraction_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_extraction_hood_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the movable_art_panel_1 to the conservation_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "movable_art_panel_1",
+          "location_id": "in:conservation_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_restoration_table_1 to the main_exhibition_hall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_restoration_table_1",
+          "location_id": "in:main_exhibition_hall"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central_display_plinth_1 that is uniquely made of marble to the art_storage_vault and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_display_plinth_1",
+          "location_id": "in:art_storage_vault",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00619"
+}

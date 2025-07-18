@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place novaphone_x_1 on demo_kiosk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "novaphone_x_1",
+          "location_id": "on:demo_kiosk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the ar_headset_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ar_headset_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black wireless charging pad and plug it in.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wireless_charger_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dusty fake potted fern.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "potted_fern_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver_1 to assemble the disassembled_novaphone_1.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "disassembled_novaphone_1",
           "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_cloth_1 to clean the one_way_mirror_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "one_way_mirror_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white NovaPhone X demo unit with max screen brightness and turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "novaphone_x_2",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the rotating_podium_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rotating_podium_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the shipping_crate_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shipping_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the storage_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the led_wall_1 to the focus_group_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_wall_1",
+          "location_id": "in:focus_group_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the promo_materials_1 to the marketing_corner and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "promo_materials_1",
+          "location_id": "in:marketing_corner"
+        },
+        {
+          "id": "promo_materials_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rotating_podium_1 to the prototype_lab and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rotating_podium_1",
+          "location_id": "in:prototype_lab"
+        },
+        {
+          "id": "rotating_podium_1",
+          "is_on": true
         }
       ]
     }

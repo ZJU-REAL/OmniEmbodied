@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the geiger_counter_1 on the retail_counter_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "geiger_counter_1",
+          "location_id": "on:retail_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the lead_apron_1 in the backroom_storage.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lead_apron_1",
+          "location_id": "in:backroom_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest glass item in the managers_office and place it on the desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hazardous_bottle_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the 'DO NOT OPEN' label and place it in the lead_freezer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ca137_vial_1",
+          "location_id": "in:lead_freezer_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the coolant_bottle_1 to purify the hazardous_bottle_1.",
       "task_category": "tool_use",
@@ -20,6 +70,102 @@
         {
           "id": "hazardous_bottle_1",
           "is_pure": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser_1 to erase the written_chalkboard_1 and then place the eraser_1 back on the workbench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "written_chalkboard_1",
+          "is_written_on": false
+        },
+        {
+          "id": "eraser_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the key_1 to open the lead_cabinet_1 and then place the key_1 back in the desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lead_cabinet_1",
+          "is_open": true
+        },
+        {
+          "id": "key_1",
+          "location_id": "in:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the xray_emitter_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "xray_emitter_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the lead_freezer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lead_freezer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shoe_fluoroscope_1 to the backroom_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shoe_fluoroscope_1",
+          "location_id": "in:backroom_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the lead_cabinet_1 to the main_retail_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lead_cabinet_1",
+          "location_id": "in:main_retail_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the display_shelves_1 to the managers_office and use the scissors_1 to cut the unlabeled_wires_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "display_shelves_1",
+          "location_id": "in:managers_office"
+        },
+        {
+          "id": "unlabeled_wires_1",
+          "is_cut": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the workbench_1 to the main_retail_floor and use the notebook_1 to sign the typewriter_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:main_retail_floor"
+        },
+        {
+          "id": "typewriter_1",
+          "is_signed": true
         }
       ]
     }

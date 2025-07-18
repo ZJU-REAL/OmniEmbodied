@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the digital triage tablet on the reception desk.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "triage_tablet_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wheelchair to the examination and splinting room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wheelchair_1",
+          "location_id": "in:examination_splinting_room"
+        }
+      ]
+    },
     {
       "task_description": "Find the rainbow fiberglass rolls that are new and unroll them.",
       "task_category": "compound_reasoning",
@@ -20,6 +50,46 @@
         {
           "id": "fiberglass_rolls_1",
           "is_rolled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the radiation badge clipboard missing badges and staple them.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "radiation_badge_clipboard_1",
+          "is_stapled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the lead-lined door in the X-Ray suite.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lead_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the plaster bucket from the supply closet to the casting room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "plaster_bucket_1",
+          "location_id": "in:casting_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the exam table to the center of the examination and splinting room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "exam_table_1",
+          "location_id": "in:examination_splinting_room"
         }
       ]
     }

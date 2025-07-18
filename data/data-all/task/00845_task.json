@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the ledger_1 on the mixing_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ledger_1",
+          "location_id": "on:mixing_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the shipping_container_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "shipping_container_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black distortion pedal and place it on the guitar_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "distortion_pedal_5",
+          "location_id": "on:guitar_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red item in the loading_dock and place it on the broken_pallet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "distress_alarm_1",
+          "location_id": "on:broken_pallet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wire_cutters_1 to disconnect the distress_alarm_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "distress_alarm_1",
+          "is_cut": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the recovery_tools_1 to download the data from the hard_drive_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hard_drive_1",
+          "is_downloaded": true
+        }
+      ]
+    },
     {
       "task_description": "Find the only water-stained item in the shipping_container_1 and use the pencil_1 to draw a mark on it.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,74 @@
         {
           "id": "ledger_1",
           "is_drawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the steel_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to toggle the panic_button_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "panic_button_1",
+          "is_toggled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Marshall Amplifier Stack to the control_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "marshall_amp_1",
+          "location_id": "in:control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the vinyl_press_1 to the live_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vinyl_press_1",
+          "location_id": "in:live_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 to the vault and use the recovery_tools_1 to download its contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:vault"
+        },
+        {
+          "id": "hard_drive_1",
+          "is_downloaded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the minifridge_1 to the hideout and unplug it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "minifridge_1",
+          "location_id": "in:hideout"
+        },
+        {
+          "id": "minifridge_1",
+          "is_plugged_in": false
         }
       ]
     }

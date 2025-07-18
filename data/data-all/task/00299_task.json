@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Medicare Vote Folder on the Central Case Table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "medicare_vote_folder_1",
+          "location_id": "on:central_case_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Sealed Audio Tape in the Biometric Safe.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "audio_tape_1",
+          "location_id": "in:biometric_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black PATRIOT Act Amendment Ledger and place it in the Secure Document Vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "patriot_act_ledger_1",
+          "location_id": "in:secure_document_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white coffee mug with a false bottom and place it in the Verification Workstation.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:verification_workstation"
+        }
+      ]
+    },
     {
       "task_description": "Use the pressure gauge to check the pressure of the fire extinguisher.",
       "task_category": "tool_use",
@@ -20,6 +70,102 @@
         {
           "id": "fire_extinguisher_1",
           "is_pressure_checked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the UV light to photograph the Sealed Audio Tape.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "audio_tape_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black PATRIOT Act Amendment Ledger, use the red keycard to open it, and place it in the Secure Document Vault.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "patriot_act_ledger_1",
+          "is_open": true,
+          "location_id": "in:secure_document_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white coffee mug with a false bottom, open it to retrieve the blue keycard, and place the keycard in the Verification Workstation.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_open": true
+        },
+        {
+          "id": "keycard_1",
+          "location_id": "in:verification_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the Reel-to-Reel Player.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reel_to_reel_player_1",
+          "is_playing": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the Motion-Sensor Camera.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_sensor_camera_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Steel-Reinforced Filing Cabinet (108th Congress – Vote Records A-F) to the Secure Document Vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:secure_document_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Biometric Safe to the Main Evidence Chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_safe_1",
+          "location_id": "in:main_evidence_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Steel-Reinforced Filing Cabinet (GOP Leadership Comms – Sealed) to the Secure Document Vault and use the blue keycard to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_2",
+          "location_id": "in:secure_document_vault",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Central Case Table to the Break Room and use the label maker to label it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_case_table_1",
+          "location_id": "in:break_room"
         }
       ]
     }

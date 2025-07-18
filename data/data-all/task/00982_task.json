@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the triage_clipboard_1 on the reception_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "triage_clipboard_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the first_aid_kit_1 from the reception_desk_1 to the emergency_treatment_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "first_aid_kit_1",
+          "location_id": "in:emergency_treatment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the emergency_treatment_bay and place it on the operating_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "location_id": "on:operating_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, cracked stethoscope and place it in the supply_depot.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stethoscope_1",
+          "location_id": "in:supply_depot"
+        }
+      ]
+    },
     {
       "task_description": "Use the distilled_water_jug_1 to water the rusted surgical tray to clean it.",
       "task_category": "compound_reasoning",
@@ -20,6 +70,47 @@
         {
           "id": "surgical_tray_1",
           "is_watered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Scan the barcode of the defibrillator_1 to check its status and then place it on the operating_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "is_barcode_scanned": true,
+          "location_id": "on:operating_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to open the jammed_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "jammed_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stacked_crates_1 to the recovery_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stacked_crates_1",
+          "location_id": "in:recovery_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the bar_counter_1 to the triage_entrance.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bar_counter_1",
+          "location_id": "in:triage_entrance"
         }
       ]
     }

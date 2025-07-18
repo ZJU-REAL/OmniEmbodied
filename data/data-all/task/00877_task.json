@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the fire_extinguisher_1 on the technicians_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "location_id": "on:technicians_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the monitor with a static status and turn it on.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,106 @@
         {
           "id": "monitor_1",
           "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the server rack with a red status LED and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_2",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the heavy_duty_wrench_1 to disassemble server_rack_3.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the server rack with a red status LED and use the heavy_duty_wrench_1 to disassemble it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_2",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the logging terminal with a warning message and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "logging_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the steel_shelving_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the keycard_reader_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "keycard_reader_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_cooling_unit_1 to the maintenance_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_cooling_unit_1",
+          "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_shelving_unit_1 to the main_server_hall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_unit_1",
+          "location_id": "in:main_server_hall"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the water_cooler_1 that is dripping to the maintenance_closet.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_cooler_1",
+          "location_id": "in:maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 with a green status LED to the physical_archive_vault.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:physical_archive_vault"
         }
       ]
     }

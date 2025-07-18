@@ -1,656 +1,481 @@
 {
-  "description": "A mid-development aerospace engineering lab with a partially assembled spacecraft, high-tech workstations, and cluttered workbenches, embodying a mix of precision and improvisation.",
+  "description": "An advanced fuel cell research laboratory with interconnected zones for catalyst synthesis, fuel cell assembly, testing, and hydrogen storage, designed for multi-agent collaboration and complex task hierarchies.",
   "rooms": [
     {
-      "id": "main_assembly_bay",
-      "name": "Main Assembly Bay",
+      "id": "catalyst_synthesis_room",
+      "name": "Catalyst Synthesis Room",
       "properties": {
-        "type": "industrial"
+        "type": "sterile",
+        "climate_controlled": true
       },
       "connected_to_room_ids": [
-        "design_simulation_room",
-        "parts_storage_room",
-        "testing_diagnostics_zone",
-        "break_area"
+        "fuel_cell_assembly_bay"
       ]
     },
     {
-      "id": "design_simulation_room",
-      "name": "Design & Simulation Room",
+      "id": "fuel_cell_assembly_bay",
+      "name": "Fuel Cell Assembly Bay",
       "properties": {
-        "type": "office"
+        "type": "industrial",
+        "has_emergency_stop": true
       },
       "connected_to_room_ids": [
-        "main_assembly_bay"
+        "catalyst_synthesis_room",
+        "testing_chamber"
       ]
     },
     {
-      "id": "parts_storage_room",
-      "name": "Parts & Storage Room",
+      "id": "testing_chamber",
+      "name": "Testing & Data Analysis Chamber",
       "properties": {
-        "type": "storage"
+        "type": "hybrid",
+        "has_diagnostic_equipment": true
       },
       "connected_to_room_ids": [
-        "main_assembly_bay"
+        "fuel_cell_assembly_bay",
+        "hydrogen_storage"
       ]
     },
     {
-      "id": "testing_diagnostics_zone",
-      "name": "Testing & Diagnostics Zone",
+      "id": "hydrogen_storage",
+      "name": "Hydrogen Storage & Safety Airlock",
       "properties": {
-        "type": "industrial"
+        "type": "reinforced",
+        "has_fire_suppression": true
       },
       "connected_to_room_ids": [
-        "main_assembly_bay"
-      ]
-    },
-    {
-      "id": "break_area",
-      "name": "Break Area / Informal Meeting Space",
-      "properties": {
-        "type": "lounge"
-      },
-      "connected_to_room_ids": [
-        "main_assembly_bay"
+        "testing_chamber"
       ]
     }
   ],
   "objects": [
     {
-      "id": "spacecraft_frame_1",
-      "name": "Partially Assembled Spacecraft Frame",
+      "id": "fume_hood_1",
+      "name": "Stainless Steel Fume Hood",
       "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "size": [
-          6.0,
-          2.5,
+          1.8,
+          0.8,
           2.0
         ],
-        "weight": 500.0,
-        "is_container": false,
-        "material": "aluminum_alloy",
-        "model_number": "SC-001"
-      },
-      "states": {
-        "is_loaded": false
-      }
-    },
-    {
-      "id": "gantry_crane_1",
-      "name": "Motorized Gantry Crane",
-      "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "size": [
-          3.0,
-          3.0,
-          4.0
-        ],
-        "weight": 300.0,
-        "is_container": false,
-        "max_load": 500.0
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "heavy_duty_workbench_1",
-      "name": "Heavy-Duty Workbench",
-      "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "size": [
-          3.0,
-          1.5,
-          0.9
-        ],
-        "weight": 45.0,
+        "weight": 120.0,
         "is_container": true,
-        "material": "steel"
+        "material": "stainless_steel",
+        "airflow_setting": "high_extraction",
+        "uv_sterilization": true
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "warp_drive_mockup_1",
-      "name": "Warp Drive Mockup Unit",
+      "id": "fume_hood_2",
+      "name": "Stainless Steel Fume Hood",
       "type": "FURNITURE",
-      "location_id": "on:heavy_duty_workbench_1",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "size": [
-          1.2,
+          1.8,
           0.8,
-          0.5
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "titanium"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "post_it_note_1",
-      "name": "Post-it Note",
-      "type": "ITEM",
-      "location_id": "in:warp_drive_mockup_1",
-      "properties": {
-        "weight": 0.01,
-        "color": "yellow",
-        "text": "Still working on this part –J"
-      },
-      "states": {}
-    },
-    {
-      "id": "thruster_nozzle_1",
-      "name": "Unsecured Thruster Nozzle",
-      "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "size": [
-          1.0,
-          0.5,
-          0.5
-        ],
-        "weight": 80.0,
-        "is_container": false,
-        "material": "carbon_composite"
-      },
-      "states": {}
-    },
-    {
-      "id": "wheeled_cart_1",
-      "name": "Wheeled Cart",
-      "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.8
-        ],
-        "weight": 15.0,
-        "is_container": true
-      },
-      "states": {
-        "is_loaded": false
-      }
-    },
-    {
-      "id": "blueprints_1",
-      "name": "Blueprints",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_workbench_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "blue",
-        "condition": "stained",
-        "text": "Propulsion System TBD"
-      },
-      "states": {}
-    },
-    {
-      "id": "calibration_laser_1",
-      "name": "Calibration Laser",
-      "type": "ITEM",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "weight": 3.0,
-        "color": "black",
-        "battery_level": 0.0
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "portable_diagnostic_tablet_1",
-      "name": "Portable Diagnostic Tablet",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_workbench_1",
-      "properties": {
-        "weight": 0.7,
-        "color": "silver",
-        "brand": "TechPro",
-        "screen_message": "Thruster alignment deviation detected."
-      },
-      "states": {
-        "is_plugged_in": true
-      }
-    },
-    {
-      "id": "hydraulic_lift_platform_1",
-      "name": "Hydraulic Lift Platform",
-      "type": "FURNITURE",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "size": [
-          1.5,
-          1.5,
-          0.5
+          2.0
         ],
         "weight": 120.0,
-        "max_load": 300.0
+        "is_container": true,
+        "material": "stainless_steel",
+        "airflow_setting": "high_extraction",
+        "uv_sterilization": true
       },
       "states": {
-        "is_running": false
+        "is_open": false
       }
     },
     {
-      "id": "nasa_poster_1",
-      "name": "Faded NASA Poster",
-      "type": "ITEM",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "weight": 0.2,
-        "color": "multicolor",
-        "text": "The Future is Built Here!",
-        "condition": "peeling"
-      },
-      "states": {}
-    },
-    {
-      "id": "engineering_workstation_1",
-      "name": "High-End Engineering Workstation",
+      "id": "ald_machine_1",
+      "name": "Atomic Layer Deposition Machine",
       "type": "FURNITURE",
-      "location_id": "in:design_simulation_room",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          0.7
-        ],
-        "weight": 30.0,
-        "is_container": true
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "interactive_display_1",
-      "name": "Large Interactive Display",
-      "type": "FURNITURE",
-      "location_id": "in:design_simulation_room",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "size": [
           2.0,
-          1.2,
-          0.1
+          1.5,
+          1.8
         ],
-        "weight": 25.0,
-        "screen_message": "Pressure instability detected in aft section."
-      },
-      "states": {
-        "is_on": true
-      }
-    },
-    {
-      "id": "digital_draft_warp_drive_1",
-      "name": "Digital Draft of the Warp Drive",
-      "type": "ITEM",
-      "location_id": "on:engineering_workstation_1",
-      "properties": {
-        "weight": 0.1,
-        "format": "digital",
-        "text": "Energy Core – Pending Supplier Data"
-      },
-      "states": {
-        "is_formatted": false
-      }
-    },
-    {
-      "id": "printed_emails_1",
-      "name": "Printed Emails",
-      "type": "ITEM",
-      "location_id": "on:engineering_workstation_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "white",
-        "text": "Re: Feasibility of Proposed Alcubierre Metric Adjustments – Still Theoretical"
-      },
-      "states": {
-        "is_stapled": true
-      }
-    },
-    {
-      "id": "label_printer_1",
-      "name": "Label Printer",
-      "type": "ITEM",
-      "location_id": "in:design_simulation_room",
-      "properties": {
-        "weight": 2.0,
-        "color": "gray",
-        "tape_status": "out"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "whiteboard_marker_1",
-      "name": "Whiteboard Marker",
-      "type": "ITEM",
-      "location_id": "in:design_simulation_room",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "ink_level": 0.0
-      },
-      "states": {}
-    },
-    {
-      "id": "model_rocket_1",
-      "name": "Dusty Model Rocket",
-      "type": "ITEM",
-      "location_id": "in:design_simulation_room",
-      "properties": {
-        "weight": 0.3,
-        "color": "white",
-        "condition": "dusty",
-        "award": "1st Place – Regional Science Fair 2007"
-      },
-      "states": {}
-    },
-    {
-      "id": "pretzel_bag_1",
-      "name": "Half-Empty Bag of Pretzels",
-      "type": "ITEM",
-      "location_id": "in:design_simulation_room",
-      "properties": {
-        "weight": 0.1,
-        "color": "brown",
-        "contents": "half-empty"
-      },
-      "states": {}
-    },
-    {
-      "id": "prototype_energy_cell_1",
-      "name": "Prototype Energy Cell (High Voltage)",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
-      "properties": {
-        "weight": 1.5,
-        "color": "blue",
-        "warning": "HIGH VOLTAGE",
-        "temperature": "warm"
-      },
-      "states": {
-        "is_hot": false
-      }
-    },
-    {
-      "id": "prototype_energy_cell_2",
-      "name": "Prototype Energy Cell (Inert)",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
-      "properties": {
-        "weight": 1.5,
-        "color": "gray",
-        "temperature": "room"
-      },
-      "states": {
-        "is_verified": false
-      }
-    },
-    {
-      "id": "blue_glass_paperweight_1",
-      "name": "Decorative Blue Glass Paperweight",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
-      "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "material": "glass"
-      },
-      "states": {}
-    },
-    {
-      "id": "locked_toolbox_1",
-      "name": "Locked Toolbox",
-      "type": "FURNITURE",
-      "location_id": "in:parts_storage_room",
-      "properties": {
-        "size": [
-          0.5,
-          0.3,
-          0.2
-        ],
-        "weight": 5.0,
-        "is_container": true
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "display_status": "CATALYST DEPOSITION: 78% COMPLETE"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "spare_laser_battery_1",
-      "name": "Spare Laser Battery",
+      "id": "particle_sorter_1",
+      "name": "Particle Sorter",
+      "type": "FURNITURE",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "conveyor_status": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "nanomaterial_canister_1",
+      "name": "Sealed Nanomaterial Canister",
       "type": "ITEM",
-      "location_id": "in:locked_toolbox_1",
+      "location_id": "in:fume_hood_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "titanium",
+        "hazard_symbol": "CORROSIVE",
+        "pressure_gauge": "20%_above_safe",
+        "led_status": "flashing_amber"
+      },
+      "states": {}
+    },
+    {
+      "id": "nanomaterial_canister_2",
+      "name": "Sealed Nanomaterial Canister",
+      "type": "ITEM",
+      "location_id": "in:fume_hood_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "titanium",
+        "hazard_symbol": "CORROSIVE",
+        "pressure_gauge": "normal",
+        "led_status": "green"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weights Set",
+      "type": "ITEM",
+      "location_id": "on:particle_sorter_1",
       "properties": {
         "weight": 0.5,
-        "color": "black",
-        "battery_level": 100.0,
-        "provides_abilities": [
-          "verify"
-        ]
+        "material": "precision_milled_steel",
+        "missing_weight": "10g",
+        "case_material": "foam_lined"
       },
       "states": {}
     },
     {
-      "id": "toolbox_key_1",
-      "name": "Toolbox Key",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.01,
-        "color": "silver",
-        "shape": "small"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_machine_1",
-      "name": "Coffee Machine",
+      "id": "microscope_1",
+      "name": "Microscope with Broken Stage Clip",
       "type": "FURNITURE",
-      "location_id": "in:break_area",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "size": [
           0.4,
           0.3,
           0.5
         ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal_plastic_composite",
+        "clip_status": "left_snapped"
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
         "weight": 8.0,
-        "water_level": 50.0
+        "is_container": true,
+        "material": "plastic",
+        "glove_types": [
+          "nitrile_blue",
+          "chemical_resistant_purple"
+        ]
       },
       "states": {
-        "is_on": false
+        "is_open": false
       }
     },
     {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
+      "id": "digital_balance_1",
+      "name": "Digital Balance",
       "type": "FURNITURE",
-      "location_id": "in:break_area",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "readout_error": "TARE ERROR",
+        "contamination": "platinum_nanopowder"
+      },
+      "states": {}
+    },
+    {
+      "id": "eyewash_station_1",
+      "name": "Emergency Eyewash Station",
+      "type": "FURNITURE",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "last_inspection": "6_months_expired",
+        "handle_condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "patent_certificate_1",
+      "name": "Framed Patent Certificate",
+      "type": "ITEM",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "weight": 2.0,
+        "material": "glass_wood",
+        "patent_number": "USPTO #11,223,445",
+        "title": "METHOD FOR STABILIZING Pt NANOPARTICLES"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Half-Erased Equations",
+      "type": "FURNITURE",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "size": [
           1.5,
           1.0,
-          0.05
+          0.1
         ],
-        "weight": 10.0,
-        "surface": "white",
-        "is_clean": false
+        "weight": 20.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "Gibbs_free_energy_calculations",
+        "doodle": "rocket"
       },
       "states": {}
     },
     {
-      "id": "couch_1",
-      "name": "Couch",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          2.0,
-          0.8,
-          0.7
-        ],
-        "weight": 40.0,
-        "material": "fabric",
-        "is_clean": false,
-        "is_container": true
-      },
-      "states": {}
-    },
-    {
-      "id": "aerospace_journals_1",
-      "name": "Stack of Outdated Aerospace Journals",
+      "id": "pothos_plant_1",
+      "name": "Dead Pothos Plant",
       "type": "ITEM",
-      "location_id": "on:couch_1",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
-        "weight": 2.0,
-        "color": "multicolor",
-        "title": "Aerospace Engineering Monthly, Vol. 42"
+        "weight": 1.5,
+        "material": "glass",
+        "condition": "dead",
+        "container_status": "cracked",
+        "label": "H₂O ONLY"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:fuel_cell_assembly_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "steel",
+        "emergency_stop_color": "red",
+        "piston_status": "misaligned"
       },
       "states": {
-        "is_flat": false
+        "is_open": true
       }
     },
     {
-      "id": "diagnostic_rig_1",
-      "name": "Diagnostic Rig",
+      "id": "fuel_cell_jig_1",
+      "name": "Prototype Fuel Cell Jig",
       "type": "FURNITURE",
-      "location_id": "in:testing_diagnostics_zone",
+      "location_id": "in:fuel_cell_assembly_bay",
       "properties": {
         "size": [
-          1.0,
           0.8,
-          1.2
+          0.6,
+          0.5
         ],
-        "weight": 35.0,
-        "is_container": true
+        "weight": 30.0,
+        "is_container": true,
+        "material": "aluminum",
+        "coolant_leak": "blue_dyed_fluid"
       },
-      "states": {
-        "is_on": true,
-        "is_running": true
-      }
+      "states": {}
+    },
+    {
+      "id": "golden_sample_1",
+      "name": "Golden Sample Fuel Cell",
+      "type": "ITEM",
+      "location_id": "in:fuel_cell_assembly_bay",
+      "properties": {
+        "weight": 5.0,
+        "material": "composite",
+        "status": "reference_only",
+        "label": "DO NOT TOUCH",
+        "enclosure": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Misplaced Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:fuel_cell_assembly_bay",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "proper_location": "wall_hook",
+        "current_location": "stool"
+      },
+      "states": {}
+    },
+    {
+      "id": "bipolar_plates_1",
+      "name": "Stack of Bipolar Plates",
+      "type": "ITEM",
+      "location_id": "in:fuel_cell_assembly_bay",
+      "properties": {
+        "weight": 8.0,
+        "material": "graphite",
+        "condition": "scratched",
+        "status": "reject_pile"
+      },
+      "states": {}
     },
     {
       "id": "oscilloscope_1",
       "name": "Oscilloscope",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_rig_1",
-      "properties": {
-        "weight": 4.0,
-        "color": "gray"
-      },
-      "states": {
-        "is_on": true,
-        "is_synced": false
-      }
-    },
-    {
-      "id": "jury_rigged_power_supply_1",
-      "name": "Jury-Rigged Power Supply",
-      "type": "ITEM",
-      "location_id": "in:testing_diagnostics_zone",
-      "properties": {
-        "weight": 5.0,
-        "color": "black",
-        "voltage": "variable"
-      },
-      "states": {
-        "is_plugged_in": true
-      }
-    },
-    {
-      "id": "prototype_thruster_1",
-      "name": "Prototype Thruster",
       "type": "FURNITURE",
-      "location_id": "in:testing_diagnostics_zone",
+      "location_id": "in:fuel_cell_assembly_bay",
       "properties": {
         "size": [
-          0.8,
-          0.5,
-          0.5
+          0.4,
+          0.3,
+          0.3
         ],
-        "weight": 60.0
-      },
-      "states": {
-        "is_on": false,
-        "is_loose": false
-      }
-    },
-    {
-      "id": "torque_wrench_1",
-      "name": "Precision Torque Wrench",
-      "type": "ITEM",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "weight": 1.5,
-        "color": "yellow",
-        "provides_abilities": [
-          "loosen"
-        ]
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "display_status": "frozen",
+        "voltage_curve": "decay"
       },
       "states": {}
     },
     {
-      "id": "pneumatic_driver_1",
-      "name": "Pneumatic Driver",
+      "id": "wiring_diagram_1",
+      "name": "Coffee-Stained Wiring Diagram",
       "type": "ITEM",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "weight": 2.0,
-        "color": "red"
-      },
-      "states": {
-        "is_plugged_in": true
-      }
-    },
-    {
-      "id": "laser_alignment_rig_1",
-      "name": "Laser Alignment Rig",
-      "type": "ITEM",
-      "location_id": "in:main_assembly_bay",
-      "properties": {
-        "weight": 3.0,
-        "color": "blue"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "broom_1",
-      "name": "Broom",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
-      "properties": {
-        "weight": 1.0,
-        "color": "brown",
-        "provides_abilities": [
-          "sweep"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "knife_1",
-      "name": "Utility Knife",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
+      "location_id": "in:fuel_cell_assembly_bay",
       "properties": {
         "weight": 0.2,
-        "color": "silver",
-        "provides_abilities": [
-          "slice"
-        ]
+        "material": "paper",
+        "content": "GEN-3 STACK CONFIGURATION",
+        "stain": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_board_1",
+      "name": "Safety Board",
+      "type": "ITEM",
+      "location_id": "in:fuel_cell_assembly_bay",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "message": "DAYS SINCE LAST INCIDENT: 3",
+        "type": "erasable"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydrogen_tank_1",
+      "name": "Hydrogen Storage Tank",
+      "type": "FURNITURE",
+      "location_id": "in:hydrogen_storage",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "reinforced_steel",
+        "pressure_valve": "requires_stabilization"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethanol_bottle_1",
+      "name": "Ethanol Bottle",
+      "type": "ITEM",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass",
+        "cap_color": "blue",
+        "label": "FLAMMABLE",
+        "volume": "half_empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_vial_1",
+      "name": "Decorative Blue Glass Vial",
+      "type": "ITEM",
+      "location_id": "in:catalyst_synthesis_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "purpose": "lab_art"
+      },
+      "states": {}
+    },
+    {
+      "id": "ald_keycard_1",
+      "name": "ALD Machine Keycard",
+      "type": "ITEM",
+      "location_id": "in:testing_chamber",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "status": "buried_under_paperwork",
+        "machine": "ALD"
       },
       "states": {}
     },
@@ -658,10 +483,10 @@
       "id": "staple_remover_1",
       "name": "Staple Remover",
       "type": "ITEM",
-      "location_id": "in:design_simulation_room",
+      "location_id": "in:testing_chamber",
       "properties": {
         "weight": 0.1,
-        "color": "black",
+        "material": "metal_plastic",
         "provides_abilities": [
           "unstaple"
         ]
@@ -669,95 +494,121 @@
       "states": {}
     },
     {
-      "id": "roller_1",
-      "name": "Roller",
+      "id": "stapled_papers_1",
+      "name": "Stapled Research Papers",
       "type": "ITEM",
-      "location_id": "in:parts_storage_room",
+      "location_id": "in:testing_chamber",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "content": "fuel_cell_research"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "FURNITURE",
+      "location_id": "in:testing_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "plastic",
+        "provides_abilities": [
+          "upload",
+          "download"
+        ],
+        "connection_status": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:testing_chamber",
       "properties": {
         "weight": 2.0,
-        "color": "green",
+        "material": "plastic_metal",
         "provides_abilities": [
-          "flatten"
-        ]
+          "record_video"
+        ],
+        "battery_status": "charged"
       },
       "states": {}
     },
     {
-      "id": "pen_1",
-      "name": "Pen",
-      "type": "ITEM",
-      "location_id": "in:design_simulation_room",
+      "id": "alarm_panel_1",
+      "name": "Security Alarm Panel",
+      "type": "FURNITURE",
+      "location_id": "in:hydrogen_storage",
       "properties": {
-        "weight": 0.05,
-        "color": "blue",
-        "provides_abilities": [
-          "sign"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "heater_1",
-      "name": "Portable Heater",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
-      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.1
+        ],
         "weight": 3.0,
-        "color": "white",
+        "is_container": false,
+        "material": "plastic_metal",
         "provides_abilities": [
-          "heat_up"
-        ]
+          "arm_alarm"
+        ],
+        "code_required": true
       },
       "states": {}
     },
     {
-      "id": "shovel_1",
-      "name": "Shovel",
-      "type": "ITEM",
-      "location_id": "in:parts_storage_room",
+      "id": "scale_1",
+      "name": "Precision Scale",
+      "type": "FURNITURE",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
-        "weight": 2.5,
-        "color": "black",
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
         "provides_abilities": [
-          "dig"
-        ]
+          "weigh"
+        ],
+        "calibration_status": "needed"
       },
       "states": {}
     },
     {
-      "id": "lighter_1",
-      "name": "Lighter",
+      "id": "unweighed_sample_1",
+      "name": "Unweighed Nanoparticle Sample",
       "type": "ITEM",
-      "location_id": "in:parts_storage_room",
+      "location_id": "in:catalyst_synthesis_room",
       "properties": {
         "weight": 0.1,
-        "color": "red",
-        "provides_abilities": [
-          "ignite"
-        ]
+        "material": "platinum",
+        "container": "glass_vial"
       },
-      "states": {}
+      "states": {
+        "is_weighed": false
+      }
     }
   ],
   "abilities": [
-    "dig",
-    "flatten",
-    "heat_up",
-    "ignite",
-    "load",
-    "loosen",
+    "arm_alarm",
+    "close",
+    "download",
     "open",
-    "sign",
-    "slice",
-    "start_process",
-    "stop_process",
-    "sweep",
-    "sync",
-    "turn_off",
-    "turn_on",
-    "unplug",
+    "record_video",
     "unstaple",
-    "verify",
-    "close"
+    "upload",
+    "weigh"
   ]
 }

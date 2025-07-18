@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Turn on the digital_seismic_map_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_seismic_map_table_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the seismograph_printer_1 on the emergency_broadcast_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "seismograph_printer_1",
+          "location_id": "on:emergency_broadcast_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the field_prep_equipment_bay and place it on the heavy_duty_shelving_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hydraulic_rescue_cutter_1",
+          "location_id": "on:heavy_duty_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white item labeled 'Priority 1 – Field Medics' and place it on the mobile_triage_stretcher_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "medical_supply_crate_1",
+          "location_id": "on:mobile_triage_stretcher_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the maintenance_toolkit_1 to seal the first_aid_kit_1.",
       "task_category": "tool_use",
@@ -20,6 +70,70 @@
         {
           "id": "first_aid_kit_1",
           "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife_1 to spread the blueprint_1 on the engineering_workstation_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "blueprint_1",
+          "is_spread": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the crumpled, yellow priority_list_1, use the eraser_1 to clean it, and then place it on the dispatcher_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_list_1",
+          "is_written_on": false
+        },
+        {
+          "id": "priority_list_1",
+          "location_id": "on:dispatcher_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the emergency_broadcast_console_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_broadcast_console_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the structural_collapse_simulator_1 to the field_prep_equipment_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "structural_collapse_simulator_1",
+          "location_id": "in:field_prep_equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_shelving_1 to the structural_damage_simulation_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_shelving_1",
+          "location_id": "in:structural_damage_simulation_lab"
         }
       ]
     }

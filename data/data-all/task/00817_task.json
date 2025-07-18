@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the fingerprint_scanner_1 on the weapons_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fingerprint_scanner_1",
+          "location_id": "on:weapons_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the retinal_id_terminal_1 on the biometric_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "retinal_id_terminal_1",
+          "location_id": "on:biometric_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black fingerprint scanner and place it on the steel security desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fingerprint_scanner_1",
+          "location_id": "on:security_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red keycard and place it in the weapons locker.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "guard_keycard_2",
+          "location_id": "in:weapons_locker_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench to loosen the ventilation grate.",
       "task_category": "tool_use",
@@ -20,6 +70,112 @@
         {
           "id": "ventilation_grate_1",
           "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the needle and thread to sew the hidden shiv.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hidden_shiv_1",
+          "is_sewn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard to type the detainee manifest and then print it using the printer.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "detainee_manifest_1",
+          "is_typed": true
+        },
+        {
+          "id": "printer_1",
+          "is_printed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the metal polish and cloth to polish the observation window and then verify its condition using the retinal ID terminal.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "observation_window_1",
+          "is_polished": true
+        },
+        {
+          "id": "retinal_id_terminal_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the weapons locker.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to buckle the bench restraints.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bench_restraints_1",
+          "is_buckled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the armored transfer pod to the loading dock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transfer_pod_1",
+          "location_id": "in:loading_dock_transport_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the detainee restraint chair to the medical wing.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "restraint_chair_1",
+          "location_id": "in:processing_medical_wing"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer to the command console and then use it to print the detainee manifest.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "on:command_console_1"
+        },
+        {
+          "id": "printer_1",
+          "is_printed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the surveillance monitors to the command center and then turn them off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "surveillance_monitors_1",
+          "location_id": "in:command_monitoring_center"
+        },
+        {
+          "id": "surveillance_monitors_1",
+          "is_on": false
         }
       ]
     }

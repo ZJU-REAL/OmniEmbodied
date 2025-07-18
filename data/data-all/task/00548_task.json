@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 50.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the clipboard_1 on the steel_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "in:control_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pdvsa_cap_1 in the cargo_container_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pdvsa_cap_1",
+          "location_id": "in:cargo_loading_dock"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal object in the cargo loading dock and place it in the maintenance bay.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,66 @@
         {
           "id": "valve_assembly_1",
           "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blue stripe in the tool warehouse and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hydraulic_hose_5",
+          "location_id": "in:tool_warehouse"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked safe in the control office.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy drilling pump to the maintenance bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drilling_pump_1",
+          "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel cargo container to the tool warehouse.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cargo_container_1",
+          "location_id": "in:tool_warehouse"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mainframe_1",
+          "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy steel desk to the break room and use the torque wrench to stabilize it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_desk_1",
+          "location_id": "in:break_room"
         }
       ]
     }

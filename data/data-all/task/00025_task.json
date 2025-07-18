@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,108 @@
         {
           "id": "thruster_nozzle_1",
           "location_id": "on:wheeled_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blueprints_1 on the engineering_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blueprints_1",
+          "location_id": "on:engineering_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, blue item in the parts_storage_room and place it on the heavy_duty_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "prototype_energy_cell_1",
+          "location_id": "on:heavy_duty_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a warning label and place it in the testing_diagnostics_zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "prototype_energy_cell_1",
+          "location_id": "in:testing_diagnostics_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_key_1 to open the locked_toolbox_1 and retrieve the spare_laser_battery_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "locked_toolbox_1",
+          "is_open": true
+        },
+        {
+          "id": "spare_laser_battery_1",
+          "location_id": "in:main_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the roller_1 to flatten the stack of aerospace_journals_1 on the couch_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "aerospace_journals_1",
+          "is_flat": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the diagnostic_rig_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diagnostic_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_workbench_1 to the testing_diagnostics_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_workbench_1",
+          "location_id": "in:testing_diagnostics_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spacecraft_frame_1 to the main_assembly_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spacecraft_frame_1",
+          "location_id": "in:main_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the warp_drive_mockup_1 to the design_simulation_room and open it to retrieve the post_it_note_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "warp_drive_mockup_1",
+          "location_id": "in:design_simulation_room"
+        },
+        {
+          "id": "warp_drive_mockup_1",
+          "is_open": true
+        },
+        {
+          "id": "post_it_note_1",
+          "location_id": "in:design_simulation_room"
         }
       ]
     }

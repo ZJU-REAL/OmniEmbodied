@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the master_control_terminal_1 on the server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_control_terminal_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the sticky_notes_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sticky_notes_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the central_monitoring_console_1 and place it in the medical_prep_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "desk_lamp_1",
+          "location_id": "in:medical_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only broken audio device in the control_room and place it in the equipment_storage_maintenance.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "audio_intercom_1",
+          "location_id": "in:equipment_storage_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken manual_pressure_release_valve_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "manual_pressure_release_valve_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken subject_bio_monitor_1 using the spare_wiring_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "subject_bio_monitor_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the pruning_shears_1 to prune the dead_potted_plant_1 and then place it on the sink_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,56 @@
         {
           "id": "dead_potted_plant_1",
           "location_id": "on:sink_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the medicine_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "medicine_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the primary_hyperbaric_chamber_1 to the oxygen_tank_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "primary_hyperbaric_chamber_1",
+          "location_id": "in:oxygen_tank_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the equipment_storage_maintenance.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:equipment_storage_maintenance"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy examination_table_1 that is uniquely in the medical_prep_area to the decompression_chamber_bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "examination_table_1",
+          "location_id": "in:decompression_chamber_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy central_monitoring_console_1 that is uniquely in the control_room to the medical_prep_area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_monitoring_console_1",
+          "location_id": "in:medical_prep_area"
         }
       ]
     }

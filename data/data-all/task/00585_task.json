@@ -10,15 +10,138 @@
         50,
         50
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        50,
+        50,
+        50
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the neumann_u47_1 on the analog_mixer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "neumann_u47_1",
+          "location_id": "on:analog_mixer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the baritone_saxophone_1 in the saxophone_case_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "baritone_saxophone_1",
+          "location_id": "in:saxophone_case_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver microphone and place it in the control room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "neumann_u47_1",
+          "location_id": "in:control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only chrome, metal drum and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "snare_drum_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the soldering_iron_1 to insulate the exposed capacitors on the tube_amplifier_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "tube_amplifier_1",
+          "is_insulated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the flashlight_1 to scan the barcode on the jar_of_reeds_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "jar_of_reeds_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the ruler_1 to measure the diameter of the kick_drum_1 and then place it in the instrument_graveyard.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "kick_drum_1",
+          "is_measured": true,
+          "location_id": "in:instrument_graveyard"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to sign the notebook_1 and then place it in the equipment_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "notebook_1",
+          "is_signed": true,
+          "location_id": "in:equipment_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked equipment_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "equipment_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_synth_rack_1 to the instrument_graveyard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_synth_rack_1",
+          "location_id": "in:instrument_graveyard"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the photocopier_1 to the control room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy tube_amplifier_1 that has exposed capacitors to the workbench_1 and insulate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tube_amplifier_1",
+          "location_id": "on:workbench_1",
           "is_insulated": true
         }
       ]

@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 20.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the laser_rangefinder_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laser_rangefinder_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the emergency_siren_trigger_1 on the topographic_map_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_siren_trigger_1",
+          "location_id": "on:topographic_map_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the black hydrological_control_terminal_1 and unlock it.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "hydrological_control_terminal_1",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red chemical drum and cover it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_drum_1",
+          "is_covered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the leaking_hydraulic_jack_1 using the sealant_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leaking_hydraulic_jack_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to screw in the calibration_device_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "calibration_device_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, transparent hydraulic_model_1 and rinse it using the water_source_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hydraulic_model_1",
+          "is_rinsed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sandpaper_1 to sand the prototype_floodgate_1 and then paint it with the paint_brush_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "prototype_floodgate_1",
+          "is_painted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency_siren_trigger_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_siren_trigger_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the supply_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sandbag_pallet_1 to the central_command_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sandbag_pallet_1",
+          "location_id": "in:central_command_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the prototype_floodgate_1 to the field_equipment_depot.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "prototype_floodgate_1",
+          "location_id": "in:field_equipment_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 to the engineering_workbench and then screw it in using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:engineering_workbench"
+        },
+        {
+          "id": "server_rack_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the topographic_map_table_1 to the communications_alcove and then file the field_reports_1 in the file_cabinet_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "topographic_map_table_1",
+          "location_id": "in:communications_alcove"
+        },
+        {
+          "id": "field_reports_1",
+          "is_filed": true
         }
       ]
     }

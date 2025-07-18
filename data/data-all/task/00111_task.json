@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 on the bulletin_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the contaminated_plant_sample_1 in the industrial_centrifuge_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "contaminated_plant_sample_1",
+          "location_id": "in:industrial_centrifuge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass piece of furniture in the main_research_lab and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rotary_evaporator_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object in the main_research_lab that is both scratched and dirty, and clean it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "work_island_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the scissors_1 to unwrap the contaminated_plant_sample_1.",
       "task_category": "tool_use",
@@ -20,6 +70,78 @@
         {
           "id": "contaminated_plant_sample_1",
           "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the dust_cloth_1 to dust the microscope_1 and then place it in the ethnobotany_reference_library.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_dusted": false
+        },
+        {
+          "id": "microscope_1",
+          "location_id": "in:ethnobotany_reference_library"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the seed_bank_freezer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_bank_freezer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_centrifuge_1 to the analytical_instrumentation_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_centrifuge_1",
+          "location_id": "in:analytical_instrumentation_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the herbarium_press_1 to the main_research_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "herbarium_press_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the drying_racks_1 to the break_room and clean them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "drying_racks_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "drying_racks_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rare_orchid_specimen_1 to the botanical_specimen_archive and cover it with the lab_coat_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rare_orchid_specimen_1",
+          "location_id": "in:botanical_specimen_archive"
+        },
+        {
+          "id": "lab_coat_1",
+          "is_covered": true
         }
       ]
     }

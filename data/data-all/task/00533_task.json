@@ -10,15 +10,143 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the encrypted_manuscript_1 on the examination_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "encrypted_manuscript_1",
+          "location_id": "on:examination_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the digital_camera_1 in the secure_vault_annex.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_camera_1",
+          "location_id": "in:secure_vault_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the chemistry_lab and place it in the archival_reading_nook.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:archival_reading_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the highest hazard_level in the chemistry_lab and place it in the fume_hood_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "reagent_bottle_1",
+          "location_id": "in:fume_hood_1"
+        }
+      ]
+    },
     {
       "task_description": "Clean the solvent_spill_1 using the absorbent_pads_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "solvent_spill_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to fix the cracked glass on the fume_hood_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the artifact_crate_7.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "artifact_crate_7",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the metal_detector_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_detector_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the examination_table_1 to the secure_vault_annex.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "examination_table_1",
+          "location_id": "in:secure_vault_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked_cabinet_1 to the chemistry_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "location_id": "in:chemistry_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the fume_hood_1 to the security_checkpoint and repair its glass using the welding_torch_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:security_checkpoint"
+        },
+        {
+          "id": "fume_hood_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the artifact_crate_7 to the chemistry_lab and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "artifact_crate_7",
+          "location_id": "in:chemistry_lab"
+        },
+        {
+          "id": "artifact_crate_7",
           "is_dirty": false
         }
       ]

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the lidar_drone_1 on the industrial_shelving_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lidar_drone_1",
+          "location_id": "on:industrial_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the field_sample_cooler_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "field_sample_cooler_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black workbench and place the lidar_drone_1 on it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lidar_drone_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white field sample cooler and place it on the lab_bench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "field_sample_cooler_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken GPS tracker using the screwdriver.",
       "task_category": "tool_use",
@@ -20,6 +70,60 @@
         {
           "id": "gps_tracker_1",
           "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the drone battery using the charger.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drone_battery_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to fix the jammed slide tray on the microscope and place it on the lab bench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_screwed_in": true
+        },
+        {
+          "id": "microscope_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the damp clipboard and shred it using the shredder.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "is_shredded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy industrial shelving unit to the main research lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:main_research_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy server rack to the climate simulation chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:climate_simulation_chamber"
         }
       ]
     }

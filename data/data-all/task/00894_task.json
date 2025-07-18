@@ -6,9 +6,35 @@
       "max_grasp_limit": 2.0,
       "max_weight": 50.0,
       "max_size": 2.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 50.0,
+      "max_size": 2.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the OBD-II Scanner on the tool bench.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "obd2_scanner_1",
+          "location_id": "on:tool_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the spark plug set in the Chevrolet Silverado.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "spark_plug_set_1",
+          "location_id": "in:chevrolet_silverado_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, green O2 sensor and tighten it.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,116 @@
         {
           "id": "o2_sensor_bank1_1",
           "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flickering LED work light and toggle it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "work_light_1",
+          "is_toggled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench set to tighten the loose spark plug.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spark_plug_3_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the broom to sweep the stained garage floor.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "floor_1",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to print a label for the USB drive.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_printed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fuel pressure gauge kit to check the pressure in the Chevrolet Silverado.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fuel_pressure_kit_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the air compressor.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "air_compressor_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the parts cage.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "parts_cage_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine hoist to the diagnostic station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_hoist_1",
+          "location_id": "in:diagnostic_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the rolling toolbox to the main repair bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_toolbox_1",
+          "location_id": "in:main_repair_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy hydraulic lift to the pressure testing zone.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:pressure_testing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Chevrolet Silverado to the diagnostic station.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "chevrolet_silverado_1",
+          "location_id": "in:diagnostic_station"
         }
       ]
     }

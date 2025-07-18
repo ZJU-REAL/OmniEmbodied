@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,90 @@
         {
           "id": "monitor_1",
           "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the digital_map_1 in the command_briefing_area.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_map_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black furniture in the main_monitoring_floor and place it in the technical_maintenance_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "workstation_1",
+          "location_id": "in:technical_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the technical_maintenance_bay and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the plastic_zip_ties_1 to organize the tangled_usb_cables_1 in the technical_maintenance_bay.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tangled_usb_cables_1",
+          "is_tied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the main_monitoring_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_monitoring_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fridge_1 to the command_briefing_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": "in:command_briefing_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "alert_log_printer_1",
+          "location_id": "in:technical_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the emergency_response_kit_1 to the main_monitoring_floor and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_response_kit_1",
+          "location_id": "in:main_monitoring_floor"
+        },
+        {
+          "id": "emergency_response_kit_1",
+          "is_open": true
         }
       ]
     }

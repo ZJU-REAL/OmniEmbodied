@@ -10,9 +10,39 @@
         2.0,
         2.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the master_control_tablet_1 on the shared_drafting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_control_tablet_1",
+          "location_id": "on:shared_drafting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the LED Video Wall in the Central Monitoring Hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_video_wall_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the wireless headset with low battery and place it in the Equipment Locker for charging.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,113 @@
         {
           "id": "wireless_headset_1",
           "location_id": "in:equipment_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the document scanner that is jammed and move it to the Equipment Lockers & Storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "document_scanner_1",
+          "location_id": "in:equipment_lockers_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the solve_puzzle ability to fix the live data feed showing a JSON Decode Fail error.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "live_data_feed_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the solve_puzzle ability to descale the coffee machine that needs descaling.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the color calibration device that is misplaced, use the solve_puzzle ability to calibrate it, and place it on the standing desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "color_calibration_device_1",
+          "location_id": "on:standing_desk_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the unapproved storyboard that needs revision, use the solve_puzzle ability to approve it, and place it on the control desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unapproved_storyboard_1",
+          "location_id": "on:control_desk_1",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to open the equipment locker.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "equipment_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the LED Video Wall to the Client Lounge Area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_video_wall_1",
+          "location_id": "in:client_lounge_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Client Presentation Screen to the Central Monitoring Hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "client_presentation_screen_1",
+          "location_id": "in:central_monitoring_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the standing desk that is stuck to the Creative Pods and use the solve_puzzle ability to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "standing_desk_1",
+          "location_id": "in:creative_pods",
+          "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the control desk to the Data Analytics Corner and use the solve_puzzle ability to unlock the master control tablet.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "control_desk_1",
+          "location_id": "in:data_analytics_corner"
+        },
+        {
+          "id": "master_control_tablet_1",
+          "is_solved": true
         }
       ]
     }

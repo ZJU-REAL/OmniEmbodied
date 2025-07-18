@@ -10,9 +10,29 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place bandages_1 in medical_triage_tent.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bandages_1",
+          "location_id": "in:medical_triage_tent"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, leaking chemical drum and place it in the spill containment kit.",
       "task_category": "attribute_reasoning",
@@ -20,6 +40,74 @@
         {
           "id": "chemical_drum_1",
           "location_id": "in:spill_containment_kit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the photocopier to copy the triage notes and turn off the radio.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "triage_clipboard_1",
+          "is_copied": true
+        },
+        {
+          "id": "radio_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only submerged vehicle and use the winch system to unload it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "submerged_car_1",
+          "is_loaded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to mount the surveyor's tripod.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "surveyor_tripod_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wooden support beam to the medical triage tent.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wooden_beam_1",
+          "location_id": "in:medical_triage_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the structural shoring kit to the collapsed apartment block.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "structural_shoring_kit_1",
+          "location_id": "in:collapsed_apartment_block"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the pallet jack to the industrial warehouse and use it to unload the janitorial cart.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_jack_1",
+          "location_id": "in:industrial_warehouse"
+        },
+        {
+          "id": "janitorial_cart_1",
+          "is_loaded": true
         }
       ]
     }

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the USB-C Cable on the Anti-Static Workbench.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_c_cable_1",
+          "location_id": "on:anti_static_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the Dual-Monitor Setup.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dual_monitor_setup_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, half-finished plastic casing and place it on the soldering station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "plastic_casing_1",
+          "location_id": "on:soldering_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive labeled 'DO NOT SHOW – Win8 vs. Android Performance.pptx' and connect it to the Dual-Monitor Setup.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_connected": true
+        }
+      ]
+    },
     {
       "task_description": "Use the precision screwdriver set to disassemble the Prototype Tablet.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "prototype_tablet_1",
           "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the verification device to verify the Engineer ID Badge.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "engineer_id_badge_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the cooling pad and use it to cool the USB Oscilloscope.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_oscilloscope_1",
+          "is_hot": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the Vibration-Testing Rig.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vibration_testing_rig_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Industrial Shelving to the QA Testing Station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:qa_testing_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 85-inch 8K Display to the Executive Meeting Nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "object_8k_display_1",
+          "location_id": "in:executive_meeting_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Forklift Pallet to the Main Engineering Workbench and unload the OLED screens.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_pallet_1",
+          "location_id": "in:main_engineering_workbench"
+        },
+        {
+          "id": "forklift_pallet_1",
+          "is_loaded": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Vibration-Testing Rig to the Component Storage & Logistics Hub and unload the Tablet Battery.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vibration_testing_rig_1",
+          "location_id": "in:component_storage_logistics_hub"
+        },
+        {
+          "id": "tablet_battery_1",
+          "is_loaded": false
         }
       ]
     }

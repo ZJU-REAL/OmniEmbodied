@@ -10,9 +10,69 @@
         3.0,
         3.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        3.0,
+        3.0,
+        3.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the torque_wrench_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the safety_poster_1 in the break_area.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "safety_poster_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, defective aileron and place it in the parts_washer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "aileron_1",
+          "location_id": "in:parts_washer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only cracked spirit level and place it on the work_platform_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spirit_level_1",
+          "location_id": "on:work_platform_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the flickering work_light_1 by turning it on.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "work_light_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the only new servo module and install it in the avionics_station.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,66 @@
         {
           "id": "servo_module_4",
           "location_id": "in:avionics_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked tool_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the tv_1 in the break_area.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tv_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wing_jack_1 to the paint_repair_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wing_jack_1",
+          "location_id": "in:paint_repair_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine_hoist_1 to the tool_crib.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_hoist_1",
+          "location_id": "in:tool_crib"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy rudder_assembly_1 that is leaking to the paint_repair_corner.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rudder_assembly_1",
+          "location_id": "in:paint_repair_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy work_platform_1 with greasy steps to the tool_crib.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "work_platform_1",
+          "location_id": "in:tool_crib"
         }
       ]
     }

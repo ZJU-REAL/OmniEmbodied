@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place control_puck_1 on the sandbox_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "control_puck_1",
+          "location_id": "on:sandbox_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the projection_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "projection_table_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black voice recorder and place it on the workbench_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "voice_recorder_1",
           "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver laser pointer that requires calibration and place it on the chalkboard_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laser_pointer_1",
+          "location_id": "on:chalkboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the camera_rig_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "camera_rig_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale_1 to weigh the calibration_weights_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the x_acto_knife_1 to rip the tied_cable_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tied_cable_1",
+          "is_ripped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tableware_set_1 to set the table on the projection_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "projection_table_1",
+          "is_table_set": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pour the chemical_bottle_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the downtown_core_1 to the central_simulation_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "downtown_core_1",
+          "location_id": "in:central_simulation_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the physical_model_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:physical_model_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the projection_table_1 to the micro_movement_station and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "projection_table_1",
+          "location_id": "in:micro_movement_station"
+        },
+        {
+          "id": "projection_table_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sandbox_1 to the central_simulation_hub and clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sandbox_1",
+          "location_id": "in:central_simulation_hub"
+        },
+        {
+          "id": "sandbox_1",
+          "is_dirty": false
         }
       ]
     }

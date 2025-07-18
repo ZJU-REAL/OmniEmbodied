@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place dna_sample_1 on the centrifuge_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dna_sample_1",
+          "location_id": "on:centrifuge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the dna_sequencer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dna_sequencer_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the DNA sample with the blue cap and place it in the cryogenic_storage_vault.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,116 @@
         {
           "id": "dna_sample_1",
           "location_id": "in:cryogenic_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest furniture in the primary_sequencing_bay and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "dna_sequencer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the broken_pipette_controller_1 using the crispr_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_pipette_controller_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the coffee_stain_1 using the cleaning_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_stain_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sealing_tool_1 to seal the reagent_box_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "reagent_box_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the DNA sample with the handwritten 'PRIORITY' label and place it in the laminar_flow_hood_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dna_sample_1",
+          "location_id": "in:laminar_flow_hood_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_nitrogen_tank_1 to the decontamination_prep_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_tank_1",
+          "location_id": "in:decontamination_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the autoclave_1 to the primary_sequencing_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:primary_sequencing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the biosafety_cabinet_1 to the cryogenic_storage_vault and clean it using the cleaning_kit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:cryogenic_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the centrifuge_1 to the decontamination_prep_room and calibrate it using the crispr_kit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:decontamination_prep_room"
         }
       ]
     }

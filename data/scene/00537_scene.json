@@ -1,0 +1,934 @@
+{
+  "description": "A bustling gluten-free bakery and research test kitchen with production, testing, and packaging areas designed for multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "ingredient_storage",
+      "name": "Ingredient Storage & Prep Zone",
+      "properties": {
+        "type": "storage",
+        "is_gluten_free": true
+      },
+      "connected_to_room_ids": [
+        "test_kitchen"
+      ]
+    },
+    {
+      "id": "test_kitchen",
+      "name": "Test Kitchen & Mixing Station",
+      "properties": {
+        "type": "kitchen",
+        "is_gluten_free": true
+      },
+      "connected_to_room_ids": [
+        "ingredient_storage",
+        "baking_area"
+      ]
+    },
+    {
+      "id": "baking_area",
+      "name": "Baking & Cooling Area",
+      "properties": {
+        "type": "baking",
+        "is_gluten_free": true
+      },
+      "connected_to_room_ids": [
+        "test_kitchen",
+        "packaging_station"
+      ]
+    },
+    {
+      "id": "packaging_station",
+      "name": "Packaging & Labeling Station",
+      "properties": {
+        "type": "packaging",
+        "is_gluten_free": true
+      },
+      "connected_to_room_ids": [
+        "baking_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_scale_1",
+      "name": "Industrial Floor Scale",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_storage",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "capacity": "500kg",
+        "display_type": "digital",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "storage_rack_1",
+      "name": "Metal Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "steel",
+        "shelf_count": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "teff_flour_bin_1",
+      "name": "Teff Flour Bin",
+      "type": "ITEM",
+      "location_id": "on:storage_rack_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "blue",
+        "label": "Chocolate Notes—Lot #TFF-223",
+        "material": "plastic",
+        "is_airtight": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "buckwheat_flour_canister_1",
+      "name": "Buckwheat Flour Canister",
+      "type": "ITEM",
+      "location_id": "on:storage_rack_1",
+      "properties": {
+        "weight": 10.0,
+        "color": "brown",
+        "material": "metal",
+        "is_airtight": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pre_measured_mix_station_1",
+      "name": "Pre-Measured Mix Station",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "jar_count": 40
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mix_jar_1",
+      "name": "Mix Jar",
+      "type": "ITEM",
+      "location_id": "in:pre_measured_mix_station_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "material": "glass",
+        "label": "Almond Flour Mix"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "contaminant_cabinet_1",
+      "name": "Locked Contaminant Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dust_vacuum_1",
+      "name": "Handheld Dust Vacuum",
+      "type": "ITEM",
+      "location_id": "in:ingredient_storage",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "brand": "Dyson",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "adjustable_workbench_1",
+      "name": "Adjustable Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "adjustment_type": "hydraulic"
+      },
+      "states": {}
+    },
+    {
+      "id": "stand_mixer_1",
+      "name": "Stand Mixer",
+      "type": "FURNITURE",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "KitchenAid",
+        "color": "silver"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "psyllium_husk_jar_1",
+      "name": "Psyllium Husk Jar",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "glass",
+        "label": "Thickening Agent—Use Sparingly"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "precision_scale_1",
+      "name": "Precision Scale",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "brand": "OHAUS",
+        "accuracy": "0.1g",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "contaminated_mixing_bowl_1",
+      "name": "Contaminated Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "on:adjustable_workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "stainless steel",
+        "material": "metal",
+        "label": "WASH BEFORE REUSE"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "magnetic_tool_strip_1",
+      "name": "Magnetic Tool Strip",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "on:magnetic_tool_strip_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "stainless steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "spatula_1",
+      "name": "Spatula",
+      "type": "ITEM",
+      "location_id": "on:magnetic_tool_strip_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "silicone"
+      },
+      "states": {}
+    },
+    {
+      "id": "dough_scraper_1",
+      "name": "Dough Scraper",
+      "type": "ITEM",
+      "location_id": "on:magnetic_tool_strip_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "under_counter_fridge_1",
+      "name": "Under-Counter Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "brand": "Frigidaire"
+      },
+      "states": {
+        "is_open": false,
+        "is_on": true
+      }
+    },
+    {
+      "id": "spice_rack_1",
+      "name": "Spice Rack",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          0.5,
+          0.2,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood",
+        "jar_count": 30
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sucanat_jar_1",
+      "name": "Sucanat Jar",
+      "type": "ITEM",
+      "location_id": "in:spice_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "material": "glass",
+        "label": "Sucanat"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dual_convection_ovens_1",
+      "name": "Dual Convection Ovens",
+      "type": "FURNITURE",
+      "location_id": "in:baking_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "brand": "Wolf",
+        "oven_count": 2
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "rotating_cooling_rack_1",
+      "name": "Rotating Cooling Rack",
+      "type": "FURNITURE",
+      "location_id": "in:baking_area",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.5
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal",
+        "is_motorized": true
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "infrared_thermometer_1",
+      "name": "Infrared Thermometer",
+      "type": "ITEM",
+      "location_id": "in:baking_area",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "brand": "Etekcity",
+        "last_used_temp": "185°C"
+      },
+      "states": {}
+    },
+    {
+      "id": "burnt_cookie_tray_1",
+      "name": "Burnt Cookie Tray",
+      "type": "ITEM",
+      "location_id": "in:baking_area",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "material": "aluminum",
+        "label": "Batch #8—Overbaked"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "parchment_paper_dispenser_1",
+      "name": "Parchment Paper Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:baking_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_jammed": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:baking_area",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "inspection_status": "up-to-date"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_heat_sealer_1",
+      "name": "Industrial Heat Sealer",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "brand": "Impulse"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Brother"
+      },
+      "states": {
+        "is_on": true,
+        "has_error": true
+      }
+    },
+    {
+      "id": "misprinted_labels_1",
+      "name": "Misprinted Labels",
+      "type": "ITEM",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paper",
+        "count": 50,
+        "error": "GLUTEN-FRE"
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_sample_box_1",
+      "name": "Sealed Sample Box",
+      "type": "ITEM",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "cardboard",
+        "address": "Biolab Zeta—Allergen Testing"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "tape_remaining": "50%"
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_cardboard_boxes_1",
+      "name": "Empty Cardboard Boxes",
+      "type": "ITEM",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "cardboard",
+        "count": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "manager_keycard_1",
+      "name": "Manager's Keycard",
+      "type": "ITEM",
+      "location_id": "in:packaging_station",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "access_level": "manager"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dish_rack_1",
+      "name": "Dish Rack",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dirty_mixing_bowl_2",
+      "name": "Dirty Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "in:dish_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "stainless steel",
+        "material": "metal"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Kitchen Sink",
+      "type": "FURNITURE",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.2
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "stainless steel"
+      },
+      "states": {
+        "is_clogged": true
+      }
+    },
+    {
+      "id": "water_faucet_1",
+      "name": "Water Faucet",
+      "type": "FURNITURE",
+      "location_id": "on:sink_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.1,
+          0.3
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "material": "chrome"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "sponge_1",
+      "name": "Sponge",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "yellow",
+        "material": "foam",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dish_soap_1",
+      "name": "Dish Soap",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "material": "plastic",
+        "brand": "Dawn"
+      },
+      "states": {}
+    },
+    {
+      "id": "recipe_book_1",
+      "name": "Recipe Book",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "paper",
+        "title": "Gluten-Free Baking Mastery"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oven_mitt_1",
+      "name": "Oven Mitt",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "fabric"
+      },
+      "states": {}
+    },
+    {
+      "id": "timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Taylor"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "measuring_cups_1",
+      "name": "Measuring Cups",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic",
+        "set_size": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_spoons_1",
+      "name": "Measuring Spoons",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "stainless steel",
+        "set_size": 6
+      },
+      "states": {}
+    },
+    {
+      "id": "baking_sheets_1",
+      "name": "Baking Sheets",
+      "type": "ITEM",
+      "location_id": "in:baking_area",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "material": "aluminum",
+        "count": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "cooling_rack_1",
+      "name": "Cooling Rack",
+      "type": "ITEM",
+      "location_id": "in:baking_area",
+      "properties": {
+        "weight": 0.8,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "pastry_bags_1",
+      "name": "Pastry Bags",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "plastic",
+        "count": 3
+      },
+      "states": {}
+    },
+    {
+      "id": "piping_tips_1",
+      "name": "Piping Tips",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "stainless steel",
+        "count": 12
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_pin_1",
+      "name": "Rolling Pin",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.5,
+        "color": "wood",
+        "material": "maple"
+      },
+      "states": {}
+    },
+    {
+      "id": "cookie_cutters_1",
+      "name": "Cookie Cutters",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "stainless steel",
+        "count": 8
+      },
+      "states": {}
+    },
+    {
+      "id": "sieve_1",
+      "name": "Sieve",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.4,
+        "color": "silver",
+        "material": "stainless steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "grater_1",
+      "name": "Grater",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.6,
+        "color": "silver",
+        "material": "stainless steel",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cheese_block_1",
+      "name": "Cheese Block",
+      "type": "ITEM",
+      "location_id": "in:under_counter_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "cheese"
+      },
+      "states": {
+        "is_grated": false
+      }
+    },
+    {
+      "id": "serving_plate_1",
+      "name": "Serving Plate",
+      "type": "ITEM",
+      "location_id": "in:test_kitchen",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "material": "ceramic",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fresh_cookies_1",
+      "name": "Fresh Cookies",
+      "type": "ITEM",
+      "location_id": "on:rotating_cooling_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "golden",
+        "material": "dough"
+      },
+      "states": {
+        "is_served": false
+      }
+    }
+  ],
+  "abilities": [
+    "dust",
+    "grate",
+    "open",
+    "serve",
+    "turn_off",
+    "turn_on",
+    "weigh",
+    "close"
+  ]
+}

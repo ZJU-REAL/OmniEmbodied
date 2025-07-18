@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the damaged_canvas_1 on the restoration_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "damaged_canvas_1",
+          "location_id": "on:restoration_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_cup_1 in the ceramic_jar_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "in:ceramic_jar_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, wooden object in the main_studio and place it in the storage_archives.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,84 @@
         {
           "id": "restoration_table_1",
           "location_id": "in:storage_archives"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a cracked lid in the pigment_lab and place it in the lab_sink_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cobalt_jar_1",
+          "location_id": "in:lab_sink_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a faulty pump in the pigment_lab and use the lab_towel_1 to cover it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "oil_dispenser_1",
+          "is_covered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the window_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "window_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the marble_slab_1 to the main_studio.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "marble_slab_1",
+          "location_id": "in:main_studio"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the archive_rack_1 to the pigment_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "archive_rack_1",
+          "location_id": "in:pigment_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy marble_slab_1 to the main_studio and cover it with the dust_cover_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "marble_slab_1",
+          "location_id": "in:main_studio"
+        },
+        {
+          "id": "dust_cover_1",
+          "is_covered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy archive_rack_1 to the pigment_lab and place the canvas_roll_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "archive_rack_1",
+          "location_id": "in:pigment_lab"
+        },
+        {
+          "id": "canvas_roll_1",
+          "location_id": "on:archive_rack_1"
         }
       ]
     }

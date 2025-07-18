@@ -6,9 +6,55 @@
       "max_grasp_limit": 2,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the pneumatic_drill_1 on the tool_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pneumatic_drill_1",
+          "location_id": "on:tool_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the clipboard_1 on the cluttered_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:cluttered_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, silver item in the vehicle_intake_bay and place it in the prep_workshop.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "problem_car_1",
+          "location_id": "in:prep_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, coffee-stained clipboard and place it on the cluttered_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "work_order_clipboard_1",
+          "location_id": "on:cluttered_desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the scrub_brush_1 to clean the oil_drip_pan_1.",
       "task_category": "tool_use",
@@ -16,6 +62,60 @@
         {
           "id": "oil_drip_pan_1",
           "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_toolbox_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_toolbox_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the buffer_machine_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "buffer_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shipping_crate_1 to the parts_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shipping_crate_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the tire_stack_1 to the detail_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tire_stack_1",
+          "location_id": "in:detail_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the alloy_rims_crate_1 to the sales_office and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "alloy_rims_crate_1",
+          "location_id": "in:sales_office"
+        },
+        {
+          "id": "alloy_rims_crate_1",
+          "is_open": true
         }
       ]
     }

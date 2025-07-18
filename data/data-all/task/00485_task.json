@@ -6,9 +6,55 @@
       "max_grasp_limit": 30.0,
       "max_weight": 50.0,
       "max_size": 100.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 50.0,
+      "max_size": 100.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place culture_flask_1 in illuminated_incubator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "culture_flask_1",
+          "location_id": "in:illuminated_incubator_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place zygote_petri_dish_1 in cryogenic_storage_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "zygote_petri_dish_1",
+          "location_id": "in:cryogenic_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the glass flask with red tape and place it in the cryogenic storage vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "culture_flask_1",
+          "location_id": "in:cryogenic_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest container in the main culture lab and place it on the epoxy workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "illuminated_incubator_1",
+          "location_id": "on:epoxy_workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the fuel canister to refuel the emergency nitrogen injection port.",
       "task_category": "compound_reasoning",
@@ -16,6 +62,47 @@
         {
           "id": "emergency_nitrogen_port_1",
           "is_fueled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the biocontainment door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biocontainment_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial-grade nitrogen canister to the main culture lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "nitrogen_canister_1",
+          "location_id": "in:main_culture_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the anti-vibration table to the supply prep room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "anti_vibration_table_1",
+          "location_id": "in:supply_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked fridge to the main culture lab and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_fridge_1",
+          "location_id": "in:main_culture_lab",
+          "is_open": true
         }
       ]
     }

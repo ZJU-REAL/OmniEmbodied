@@ -1,132 +1,95 @@
 {
-  "description": "A chaotic IT maintenance room in a mid-sized tech company, featuring a server cluster, diagnostic workbench, storage area, and break area filled with hardware, tools, and documentation.",
+  "description": "A bustling academic research laboratory dedicated to formal logic and sequent calculus theorem proving, featuring interconnected workstations, proof verification terminals, archival systems, and a supply closet filled with delicate instruments and tools.",
   "rooms": [
     {
-      "id": "primary_server_cluster",
-      "name": "Primary Server Cluster",
+      "id": "main_workbench_area",
+      "name": "Main Workbench Area",
       "properties": {
-        "type": "industrial"
+        "type": "workstation"
       },
       "connected_to_room_ids": [
-        "diagnostic_workbench",
-        "storage_spare_parts",
-        "break_area"
+        "proof_verification_station",
+        "archival_print_station"
       ]
     },
     {
-      "id": "diagnostic_workbench",
-      "name": "Diagnostic Workbench",
+      "id": "proof_verification_station",
+      "name": "Proof Verification Station",
       "properties": {
-        "type": "workspace"
+        "type": "server_room"
       },
       "connected_to_room_ids": [
-        "primary_server_cluster",
-        "storage_spare_parts"
+        "main_workbench_area",
+        "equipment_supply_closet"
       ]
     },
     {
-      "id": "storage_spare_parts",
-      "name": "Storage & Spare Parts Corner",
+      "id": "archival_print_station",
+      "name": "Archival & Print Station",
+      "properties": {
+        "type": "printing_room"
+      },
+      "connected_to_room_ids": [
+        "main_workbench_area",
+        "equipment_supply_closet"
+      ]
+    },
+    {
+      "id": "equipment_supply_closet",
+      "name": "Equipment & Supply Closet",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
-        "primary_server_cluster",
-        "break_area"
-      ]
-    },
-    {
-      "id": "break_area",
-      "name": "Break Area",
-      "properties": {
-        "type": "lounge"
-      },
-      "connected_to_room_ids": [
-        "primary_server_cluster",
-        "storage_spare_parts"
+        "proof_verification_station",
+        "archival_print_station"
       ]
     }
   ],
   "objects": [
     {
-      "id": "server_rack_1",
-      "name": "Server Rack",
+      "id": "whiteboard_wall_1",
+      "name": "Whiteboard Wall",
       "type": "FURNITURE",
-      "location_id": "in:primary_server_cluster",
+      "location_id": "in:main_workbench_area",
       "properties": {
         "size": [
-          2.0,
-          0.8,
+          6.0,
+          0.1,
           2.0
         ],
-        "weight": 150.0,
-        "is_container": true,
-        "material": "steel",
-        "model_number": "RACK-12U"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "problem_server_1",
-      "name": "Problem Server",
-      "type": "FURNITURE",
-      "location_id": "in:server_rack_1",
-      "properties": {
-        "size": [
-          0.5,
-          0.6,
-          0.8
-        ],
-        "weight": 25.0,
+        "weight": 75.0,
         "is_container": false,
-        "brand": "Dell",
-        "model_number": "PowerEdge R740",
-        "led_color": "amber"
+        "material": "melamine",
+        "color": "white"
       },
       "states": {
-        "is_broken": true
+        "is_dirty": true
       }
     },
     {
-      "id": "usb_sata_adapter_1",
-      "name": "USB-to-SATA Adapter",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "black",
-        "brand": "Sabrent",
-        "provides_abilities": [
-          "connect"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "diagnostic_workbench_1",
-      "name": "L-Shaped Desk",
+      "id": "worktable_1",
+      "name": "Adjustable-height Worktable",
       "type": "FURNITURE",
-      "location_id": "in:diagnostic_workbench",
+      "location_id": "in:main_workbench_area",
       "properties": {
         "size": [
           1.8,
-          1.2,
-          0.75
+          0.9,
+          0.7
         ],
-        "weight": 35.0,
+        "weight": 45.0,
         "is_container": true,
-        "material": "wood",
-        "condition": "scratched"
+        "material": "steel",
+        "color": "black"
       },
       "states": {}
     },
     {
-      "id": "dual_monitor_1",
-      "name": "Dual Monitor Setup",
+      "id": "dual_monitor_setup_1",
+      "name": "Dual-monitor Setup",
       "type": "FURNITURE",
-      "location_id": "on:diagnostic_workbench_1",
+      "location_id": "on:worktable_1",
       "properties": {
         "size": [
           1.2,
@@ -136,939 +99,786 @@
         "weight": 12.0,
         "is_container": false,
         "brand": "Dell",
-        "model_number": "U2722D"
+        "model_number": "U2723QE"
       },
       "states": {
         "is_on": false
       }
     },
     {
-      "id": "external_hdd_1",
-      "name": "External HDD (WD 4TB)",
+      "id": "handwritten_proof_draft_1",
+      "name": "Handwritten Proof Draft",
       "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
+      "location_id": "on:worktable_1",
       "properties": {
-        "weight": 0.8,
-        "color": "black",
-        "brand": "Western Digital",
-        "label": "C: Backup – Fragile",
-        "connector_type": "SATA-III"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "locked_cabinet_1",
-      "name": "Locked Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:storage_spare_parts",
-      "properties": {
-        "size": [
-          0.8,
-          0.5,
-          1.5
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "material": "steel"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "beeping_hdd_1",
-      "name": "Beeping External HDD (Seagate 2TB)",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.6,
+        "weight": 0.2,
         "color": "white",
-        "brand": "Seagate",
-        "beep_pattern": "three short beeps"
+        "material": "paper"
+      },
+      "states": {
+        "is_stapled": true,
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "haskell_compiler_terminal_1",
+      "name": "Haskell Compiler Terminal",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "plastic"
       },
       "states": {
         "is_broken": true
       }
     },
     {
-      "id": "storage_shelf_1",
-      "name": "Storage Shelf",
+      "id": "stack_printed_latex_proofs_1",
+      "name": "Stack of Printed LaTeX Proofs",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "usb_coffee_warmer_1",
+      "name": "USB-powered Coffee Warmer",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "wireless_keyboard_1",
+      "name": "Wireless Keyboard",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "wobbly_office_chair_1",
+      "name": "Wobbly Office Chair",
       "type": "FURNITURE",
-      "location_id": "in:storage_spare_parts",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "keep_calm_poster_1",
+      "name": "Keep Calm and Prove Lemmas Poster",
+      "type": "ITEM",
+      "location_id": "in:main_workbench_area",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "paper"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "sierpinski_tetrahedron_1",
+      "name": "Sierpinski Tetrahedron Paperweight",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "clear",
+        "material": "glass"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "conference_badges_1",
+      "name": "Pile of Outdated Conference Badges",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "multicolor",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "reference_monitor_1",
+      "name": "32-inch Reference Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.5
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "brand": "LG",
+        "model_number": "32UN880"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "thermal_printer_1",
+      "name": "Thermal Printer",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "debug_terminal_1",
+      "name": "Debug Terminal",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Logbook",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "paper"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "ups_1",
+      "name": "Backup Uninterruptible Power Supply",
+      "type": "ITEM",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "optical_discs_1",
+      "name": "Stack of Blank Optical Discs",
+      "type": "ITEM",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "polycarbonate"
+      },
+      "states": {}
+    },
+    {
+      "id": "technicians_stool_1",
+      "name": "Wheeled Technician's Stool",
+      "type": "FURNITURE",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "post_it_note_1",
+      "name": "Post-It Note",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "framed_photo_1",
+      "name": "Dusty Framed Photo",
+      "type": "ITEM",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wood"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "broken_desk_fan_1",
+      "name": "Broken Desk Fan",
+      "type": "ITEM",
+      "location_id": "in:proof_verification_station",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "large_format_printer_1",
+      "name": "Large-format Proof Printer",
+      "type": "FURNITURE",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Floor-to-ceiling Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "misprinted_proof_1",
+      "name": "Misprinted Proof",
+      "type": "ITEM",
+      "location_id": "on:large_format_printer_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thesis_drafts_1",
+      "name": "Stack of Unbound Thesis Drafts",
+      "type": "ITEM",
+      "location_id": "on:filing_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "paper_cutter_1",
+      "name": "Paper Cutter",
+      "type": "ITEM",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "three_hole_punch_1",
+      "name": "Three-hole Punch",
+      "type": "ITEM",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "wood",
+        "color": "black"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "dried_marker_pens_1",
+      "name": "Box of Dried-up Marker Pens",
+      "type": "ITEM",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "motivational_poster_1",
+      "name": "Publish or Perish Motivational Poster",
+      "type": "ITEM",
+      "location_id": "in:archival_print_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "paper"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "tool_cabinet_1",
+      "name": "Floor-standing Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_supply_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Narrow Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_supply_closet",
       "properties": {
         "size": [
           1.2,
           0.4,
-          1.8
+          2.0
         ],
-        "weight": 20.0,
+        "weight": 40.0,
         "is_container": true,
-        "material": "metal"
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "anti_static_bag_1",
+      "name": "Sealed Anti-static Bag",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "logic_puzzle_pieces_1",
+      "name": "Box of Rare Logic Puzzle Pieces",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "cardboard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "missing_keycard_1",
+      "name": "Missing Keycard",
+      "type": "ITEM",
+      "location_id": "in:shelving_unit_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "haskell_manuals_1",
+      "name": "Leaning Tower of Haskell Reference Manuals",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "multicolor",
+        "material": "paper"
       },
       "states": {}
     },
     {
       "id": "mini_fridge_1",
-      "name": "Mini Fridge",
+      "name": "Mini-fridge",
       "type": "FURNITURE",
-      "location_id": "in:break_area",
+      "location_id": "in:equipment_supply_closet",
       "properties": {
         "size": [
           0.5,
-          0.6,
+          0.5,
           0.8
         ],
-        "weight": 30.0,
+        "weight": 25.0,
         "is_container": true,
-        "brand": "Danby",
-        "light_working": false
-      },
-      "states": {
-        "is_frosted": true,
-        "is_open": false
-      }
-    },
-    {
-      "id": "usb_key_1",
-      "name": "USB Key (SanDisk 32GB)",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "blue",
-        "brand": "SanDisk",
-        "storage_capacity": "32GB"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "break_table_1",
-      "name": "Break Table",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          1.0,
-          0.6,
-          0.7
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "screwdriver_set_1",
-      "name": "Screwdriver Set",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "red",
-        "brand": "Stanley",
-        "missing_pieces": [
-          "Phillips #2"
-        ],
-        "provides_abilities": [
-          "unscrew"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_machine_1",
-      "name": "Coffee Machine",
-      "type": "FURNITURE",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "size": [
-          0.3,
-          0.2,
-          0.4
-        ],
-        "weight": 5.0,
-        "is_container": false,
-        "brand": "Keurig",
-        "water_level": "empty",
-        "display_message": "DESCALE"
-      },
-      "states": {
-        "is_hot": true
-      }
-    },
-    {
-      "id": "water_bottle_1",
-      "name": "Water Bottle",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 1.0,
-        "color": "clear",
         "material": "plastic",
-        "volume": "1L",
-        "provides_abilities": [
-          "water"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "sysadmin_mug_1",
-      "name": "#1 Sysadmin Mug",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "material": "ceramic",
-        "contents": [
-          "pens",
-          "melted chocolate bar"
-        ],
-        "inscription": "#1 Sysadmin",
-        "is_container": true
+        "color": "white"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "cabinet_key_1",
-      "name": "Cabinet Key",
-      "type": "ITEM",
-      "location_id": "in:sysadmin_mug_1",
-      "properties": {
-        "weight": 0.01,
-        "color": "silver",
-        "material": "metal",
-        "fits_lock": "locked_cabinet_1"
-      },
-      "states": {}
-    },
-    {
-      "id": "toolbox_1",
-      "name": "Professional Toolbox",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 8.0,
-        "color": "red",
-        "brand": "Craftsman",
-        "provides_abilities": [
-          "repair",
-          "unscrew"
-        ],
-        "is_container": true
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "printer_1",
-      "name": "Printer",
+      "id": "step_ladder_1",
+      "name": "Step Ladder",
       "type": "FURNITURE",
-      "location_id": "on:diagnostic_workbench_1",
+      "location_id": "in:equipment_supply_closet",
       "properties": {
         "size": [
-          0.4,
           0.5,
-          0.3
+          0.5,
+          1.5
         ],
         "weight": 10.0,
         "is_container": false,
-        "brand": "HP",
-        "model_number": "LaserJet Pro",
-        "provides_abilities": [
-          "print"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          1.2,
-          0.1,
-          0.9
-        ],
-        "weight": 18.0,
-        "is_container": false,
-        "material": "melamine",
-        "content": "half-erased diagram titled 'Resize Workflow'"
-      },
-      "states": {
-        "is_written_on": true
-      }
-    },
-    {
-      "id": "eraser_1",
-      "name": "Whiteboard Eraser",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "blue",
-        "material": "felt",
-        "provides_abilities": [
-          "erase"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "microwave_1",
-      "name": "Microwave",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.3
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "brand": "Panasonic",
-        "display": "stuck on '0:01'"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "network_switch_1",
-      "name": "Network Switch",
-      "type": "FURNITURE",
-      "location_id": "in:primary_server_cluster",
-      "properties": {
-        "size": [
-          0.3,
-          0.2,
-          0.1
-        ],
-        "weight": 2.0,
-        "is_container": false,
-        "brand": "Cisco",
-        "port_status": "Port #3 labeled 'DEAD ZONE'"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "kvm_switch_1",
-      "name": "KVM Switch",
-      "type": "FURNITURE",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "size": [
-          0.2,
-          0.15,
-          0.1
-        ],
-        "weight": 1.0,
-        "is_container": false,
-        "brand": "IOGear",
-        "current_server": "Server #2",
-        "display": "GRUB boot error"
-      },
-      "states": {}
-    },
-    {
-      "id": "epo_button_1",
-      "name": "Emergency Power-Off Button",
-      "type": "FURNITURE",
-      "location_id": "in:primary_server_cluster",
-      "properties": {
-        "size": [
-          0.1,
-          0.1,
-          0.05
-        ],
-        "weight": 0.5,
-        "is_container": false,
-        "color": "red",
-        "label": "PRESS ONLY IF SMOKE"
-      },
-      "states": {}
-    },
-    {
-      "id": "label_maker_1",
-      "name": "Label Maker",
-      "type": "FURNITURE",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "size": [
-          0.15,
-          0.1,
-          0.05
-        ],
-        "weight": 0.3,
-        "is_container": false,
-        "brand": "Brother",
-        "display": "ERROR: NO CARTRIDGE"
-      },
-      "states": {}
-    },
-    {
-      "id": "multimeter_1",
-      "name": "Multimeter",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.4,
-        "color": "yellow",
-        "brand": "Fluke",
-        "setting": "DC Voltage",
-        "probe_condition": "tangled"
-      },
-      "states": {}
-    },
-    {
-      "id": "cable_bin_1",
-      "name": "Cable Bin",
-      "type": "FURNITURE",
-      "location_id": "in:storage_spare_parts",
-      "properties": {
-        "size": [
-          0.6,
-          0.4,
-          0.5
-        ],
-        "weight": 5.0,
-        "is_container": true,
-        "material": "plastic",
-        "contents": [
-          "USB",
-          "SATA",
-          "Ethernet cables"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "anti_static_bags_1",
-      "name": "Anti-Static Bags",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "silver",
-        "material": "plastic",
-        "condition": "crinkled, some empty"
-      },
-      "states": {}
-    },
-    {
-      "id": "floppy_disks_1",
-      "name": "Obsolete Floppy Disks",
-      "type": "ITEM",
-      "location_id": "in:storage_spare_parts",
-      "properties": {
-        "weight": 0.5,
-        "color": "black",
-        "material": "plastic",
-        "label": "Legacy Recovery",
-        "condition": "dusty"
-      },
-      "states": {}
-    },
-    {
-      "id": "dead_plant_1",
-      "name": "Dead Plant",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "brown",
-        "material": "plant",
-        "container": "Think Outside the Box mug",
-        "condition": "crispy leaves"
-      },
-      "states": {
-        "is_watered": false
-      }
-    },
-    {
-      "id": "pizza_box_1",
-      "name": "Pizza Box",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "cardboard",
-        "stains": "thermal paste"
-      },
-      "states": {}
-    },
-    {
-      "id": "hackathon_shirt_1",
-      "name": "Hackathon 2020 T-Shirt",
-      "type": "ITEM",
-      "location_id": "on:break_area_chair_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "material": "cotton",
-        "design": "Hackathon 2020"
-      },
-      "states": {}
-    },
-    {
-      "id": "break_area_chair_1",
-      "name": "Break Area Chair",
-      "type": "FURNITURE",
-      "location_id": "in:break_area",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.9
-        ],
-        "weight": 8.0,
-        "is_container": true,
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "ntfs_poster_1",
-      "name": "NTFS vs. EXT4 Poster",
-      "type": "ITEM",
-      "location_id": "in:primary_server_cluster",
-      "properties": {
-        "weight": 0.1,
-        "color": "faded",
-        "material": "paper",
-        "title": "NTFS vs. EXT4: A Sysadmin’s Guide"
-      },
-      "states": {}
-    },
-    {
-      "id": "trophy_1",
-      "name": "Downtime Recovery Trophy",
-      "type": "ITEM",
-      "location_id": "on:server_rack_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "gold",
-        "material": "metal",
-        "inscription": "Best Downtime Recovery 2019"
-      },
-      "states": {}
-    },
-    {
-      "id": "loose_screws_1",
-      "name": "Loose Screws",
-      "type": "ITEM",
-      "location_id": "in:primary_server_cluster",
-      "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "material": "metal",
-        "quantity": "scattered"
-      },
-      "states": {}
-    },
-    {
-      "id": "sticky_notes_1",
-      "name": "Sticky Notes",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.02,
-        "color": "yellow",
-        "material": "paper",
-        "content": "Ask Infra about comps.xml size field"
-      },
-      "states": {
-        "is_written_on": true
-      }
-    },
-    {
-      "id": "raspberry_pi_1",
-      "name": "Raspberry Pi",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "green",
-        "model": "Raspberry Pi 4",
-        "condition": "half-dismantled"
+        "material": "aluminum",
+        "color": "silver"
       },
       "states": {
         "is_broken": true
       }
     },
     {
-      "id": "laptop_1",
-      "name": "Laptop",
-      "type": "FURNITURE",
-      "location_id": "on:break_table_1",
+      "id": "spider_plant_1",
+      "name": "Spider Plant",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
       "properties": {
-        "size": [
-          0.3,
-          0.2,
-          0.05
-        ],
-        "weight": 2.0,
-        "is_container": false,
-        "brand": "Lenovo",
-        "display": "Continue previous installation?"
+        "weight": 0.8,
+        "color": "green",
+        "material": "plant"
       },
       "states": {
-        "is_charged": false
+        "is_dirty": true
       }
     },
     {
-      "id": "laptop_charger_1",
-      "name": "Laptop Charger",
+      "id": "floppy_disks_1",
+      "name": "Box of Floppy Disks",
       "type": "ITEM",
-      "location_id": "on:break_table_1",
+      "location_id": "on:shelving_unit_1",
       "properties": {
         "weight": 0.3,
         "color": "black",
-        "brand": "Lenovo",
-        "provides_abilities": [
-          "recharge"
-        ]
+        "material": "plastic"
       },
       "states": {}
     },
     {
-      "id": "coffee_mug_1",
-      "name": "Coffee Mug",
+      "id": "slide_rule_1",
+      "name": "Dusty Slide Rule",
       "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.4,
-        "color": "white",
-        "material": "ceramic",
-        "contents": "coffee",
-        "condition": "stained"
-      },
-      "states": {
-        "is_hot": true
-      }
-    },
-    {
-      "id": "paper_shredder_1",
-      "name": "Paper Shredder",
-      "type": "FURNITURE",
-      "location_id": "in:storage_spare_parts",
-      "properties": {
-        "size": [
-          0.4,
-          0.3,
-          0.6
-        ],
-        "weight": 12.0,
-        "is_container": false,
-        "brand": "Fellowes",
-        "provides_abilities": [
-          "shred"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "sensitive_documents_1",
-      "name": "Sensitive Documents",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "white",
-        "material": "paper",
-        "content": "confidential"
-      },
-      "states": {
-        "is_shredded": false
-      }
-    },
-    {
-      "id": "ice_cube_tray_1",
-      "name": "Ice Cube Tray",
-      "type": "ITEM",
-      "location_id": "in:mini_fridge_1",
+      "location_id": "on:shelving_unit_1",
       "properties": {
         "weight": 0.2,
-        "color": "clear",
-        "material": "plastic",
-        "contents": "ice cubes"
+        "color": "brown",
+        "material": "wood"
       },
       "states": {
-        "is_frosted": true
+        "is_dirty": true
       }
     },
     {
-      "id": "defroster_1",
-      "name": "Defroster Tool",
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
       "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "gray",
-        "material": "metal",
-        "provides_abilities": [
-          "defrost"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "sealant_gun_1",
-      "name": "Sealant Gun",
-      "type": "ITEM",
-      "location_id": "in:toolbox_1",
-      "properties": {
-        "weight": 0.7,
-        "color": "orange",
-        "material": "plastic",
-        "provides_abilities": [
-          "seal"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "unsealed_container_1",
-      "name": "Unsealed Container",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "white",
-        "material": "plastic",
-        "contents": "spare parts"
-      },
-      "states": {
-        "is_sealed": false
-      }
-    },
-    {
-      "id": "melting_device_1",
-      "name": "Melting Device",
-      "type": "FURNITURE",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "size": [
-          0.2,
-          0.2,
-          0.3
-        ],
-        "weight": 3.0,
-        "is_container": false,
-        "brand": "Weller",
-        "provides_abilities": [
-          "melt"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "solder_wire_1",
-      "name": "Solder Wire",
-      "type": "ITEM",
-      "location_id": "in:toolbox_1",
+      "location_id": "in:tool_cabinet_1",
       "properties": {
         "weight": 0.1,
-        "color": "silver",
+        "color": "black",
         "material": "metal",
-        "state": "solid"
+        "provides_abilities": [
+          "unstaple"
+        ]
       },
-      "states": {
-        "is_melted": false
-      }
+      "states": {}
     },
     {
-      "id": "mop_1",
-      "name": "Mop",
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
       "type": "ITEM",
-      "location_id": "in:storage_spare_parts",
+      "location_id": "in:tool_cabinet_1",
       "properties": {
         "weight": 2.0,
-        "color": "yellow",
-        "material": "cotton",
-        "provides_abilities": [
-          "mop"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "spilled_coffee_1",
-      "name": "Spilled Coffee",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.3,
-        "color": "brown",
-        "material": "liquid",
-        "area": "floor"
-      },
-      "states": {
-        "is_mopped": true
-      }
-    },
-    {
-      "id": "packing_tape_1",
-      "name": "Packing Tape",
-      "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "brown",
+        "color": "red",
         "material": "plastic",
         "provides_abilities": [
-          "pack"
+          "repair"
         ]
       },
       "states": {}
     },
     {
-      "id": "empty_box_1",
-      "name": "Empty Box",
+      "id": "scanner_1",
+      "name": "Document Scanner",
       "type": "ITEM",
-      "location_id": "on:storage_shelf_1",
+      "location_id": "in:tool_cabinet_1",
       "properties": {
-        "weight": 0.3,
-        "color": "cardboard",
-        "material": "paper",
-        "contents": "none"
+        "weight": 5.0,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "scan"
+        ]
       },
-      "states": {
-        "is_packed": false
-      }
+      "states": {}
     },
     {
-      "id": "spoon_1",
-      "name": "Spoon",
+      "id": "stapler_1",
+      "name": "Stapler",
       "type": "ITEM",
-      "location_id": "on:break_table_1",
+      "location_id": "in:tool_cabinet_1",
       "properties": {
-        "weight": 0.05,
+        "weight": 0.3,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "arm_alarm"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 4.0,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "liquid",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "disassembly_tools_1",
+      "name": "Disassembly Tools",
+      "type": "ITEM",
+      "location_id": "in:tool_cabinet_1",
+      "properties": {
+        "weight": 3.0,
         "color": "silver",
         "material": "metal",
         "provides_abilities": [
-          "stir"
+          "disassemble"
         ]
       },
       "states": {}
-    },
-    {
-      "id": "coffee_cup_1",
-      "name": "Coffee Cup",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "white",
-        "material": "ceramic",
-        "contents": "coffee and sugar"
-      },
-      "states": {
-        "is_stirred": false
-      }
-    },
-    {
-      "id": "grinder_1",
-      "name": "Coffee Grinder",
-      "type": "FURNITURE",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "size": [
-          0.15,
-          0.15,
-          0.2
-        ],
-        "weight": 1.5,
-        "is_container": false,
-        "brand": "Krups",
-        "provides_abilities": [
-          "grind"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_beans_1",
-      "name": "Coffee Beans",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.2,
-        "color": "brown",
-        "material": "beans",
-        "state": "whole"
-      },
-      "states": {
-        "is_ground": false
-      }
-    },
-    {
-      "id": "twist_cap_bottle_1",
-      "name": "Twist Cap Bottle",
-      "type": "ITEM",
-      "location_id": "on:break_table_1",
-      "properties": {
-        "weight": 0.4,
-        "color": "green",
-        "material": "glass",
-        "contents": "water"
-      },
-      "states": {
-        "is_twisted": false
-      }
-    },
-    {
-      "id": "wet_rag_1",
-      "name": "Wet Rag",
-      "type": "ITEM",
-      "location_id": "on:diagnostic_workbench_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "blue",
-        "material": "cloth",
-        "condition": "wet"
-      },
-      "states": {
-        "is_wrung": false
-      }
     }
   ],
   "abilities": [
-    "connect",
-    "defrost",
-    "erase",
-    "grind",
-    "melt",
-    "mop",
+    "arm_alarm",
+    "close",
+    "disassemble",
+    "extinguish",
     "open",
-    "pack",
-    "print",
-    "recharge",
     "repair",
-    "seal",
-    "shred",
-    "stir",
+    "scan",
+    "stain",
+    "staple",
+    "turn_off",
     "turn_on",
-    "twist",
-    "unscrew",
-    "water",
-    "wring",
-    "close"
+    "unstaple"
   ]
 }

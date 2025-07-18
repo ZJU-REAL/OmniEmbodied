@@ -10,9 +10,39 @@
         100.0,
         100.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        100.0,
+        100.0,
+        100.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_drug_tray_1 on the supply_wall_grid_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_drug_tray_1",
+          "location_id": "on:supply_wall_grid_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the feeding_tube_kit_1 on the neonatal_incubator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "feeding_tube_kit_1",
+          "location_id": "on:neonatal_incubator_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal object in primary_care_pod_1 and place it in the sanitation_prep_room.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,74 @@
         {
           "id": "ventilator_tower_1",
           "location_id": "in:sanitation_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the loose ECG lead on the infant_sensor_array_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "infant_sensor_array_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the ppe_storage_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ppe_storage_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the neonatal_incubator_1 to the sanitation_prep_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "neonatal_incubator_1",
+          "location_id": "in:sanitation_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ventilator_tower_1 to the central_nurses_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ventilator_tower_1",
+          "location_id": "in:central_nurses_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crash_cart_1 to the primary_care_pod_1 and use the spray_bottle_1 to disinfect it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crash_cart_1",
+          "location_id": "in:primary_care_pod_1"
+        },
+        {
+          "id": "crash_cart_1",
+          "is_sprayed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the formula_prep_station_1 to the central_nurses_station and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "formula_prep_station_1",
+          "location_id": "in:central_nurses_station"
+        },
+        {
+          "id": "formula_prep_station_1",
+          "is_on": true
         }
       ]
     }

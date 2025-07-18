@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the bubbling_flask_1 on the central_lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "bubbling_flask_1",
+          "location_id": "on:central_lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the world's_best_chemist_mug_1 in the cafeteria.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "worlds_best_chemist_mug_1",
+          "location_id": "in:cafeteria"
+        }
+      ]
+    },
     {
       "task_description": "Find the microscope with a cracked slide and place it on the teachers_desk_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,70 @@
         {
           "id": "microscope_1",
           "location_id": "on:teachers_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black microscope and place it in the storage_prep.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_2",
+          "location_id": "in:storage_prep"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the glassware_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "glassware_cabinet_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the chemical_shelving_unit_1 to the main_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_shelving_unit_1",
+          "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerator_1 to the teachers_desk.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": "in:teachers_desk"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the microwave_1 to the main_lab and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "microwave_1",
+          "location_id": "in:main_lab"
+        },
+        {
+          "id": "microwave_1",
+          "is_active": true
         }
       ]
     }

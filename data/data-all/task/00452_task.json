@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place script_binder_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "script_binder_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the projector_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "projector_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, wooden object in the main_animation_floor and move it to the prop_storage_workshop.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "animation_desk_1",
+          "location_id": "in:prop_storage_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with the inscription 'CONFIDENTIAL' and place it in the directors_booth.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "script_binder_1",
+          "location_id": "in:directors_booth"
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench_1 to connect the vice_grip_1.",
       "task_category": "tool_use",
@@ -20,6 +70,100 @@
         {
           "id": "vice_grip_1",
           "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pump_1 to inflate the balloon_animal_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "balloon_animal_1",
+          "is_inflated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to connect the treadmill_gag_1 and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "treadmill_gag_1",
+          "is_connected": true
+        },
+        {
+          "id": "treadmill_gag_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with the model number 'GR-X9' and use the stabilizer_rod_1 to connect it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "gravity_reverser_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pour the disappearing_ink_1 into the pigment_mixer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "disappearing_ink_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the backdrop_rigging_1 to the prop_storage_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backdrop_rigging_1",
+          "location_id": "in:prop_storage_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the paint_dispenser_1 to the ink_paint_department.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "paint_dispenser_1",
+          "location_id": "in:ink_paint_department"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the script_vault_1 to the directors_booth and use the label_maker_1 to label it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "script_vault_1",
+          "location_id": "in:directors_booth"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the drying_rack_1 to the ink_paint_department and use the spoon_1 to stir the inkwell_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "drying_rack_1",
+          "location_id": "in:ink_paint_department"
         }
       ]
     }

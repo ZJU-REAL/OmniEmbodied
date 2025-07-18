@@ -1,0 +1,180 @@
+{
+  "task_background": "Prepare the rustic field research station for an upcoming ecological study by organizing equipment, repairing items, and ensuring all specimens are properly stored.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the biouminescent_moth_specimen_1 in the specimen_display_case_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biouminescent_moth_specimen_1",
+          "location_id": "in:specimen_display_case_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the desk_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "desk_lamp_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, glass item on the heavy_oak_workbench_1 and place it in the specimen_processing_tent.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "petri_dishes_1",
+          "location_id": "in:specimen_processing_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device on the heavy_oak_workbench_1 and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the axe_1 to chop the firewood_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "firewood_1",
+          "is_chopped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the glue_dispenser_1 to fix the bug_net_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "bug_net_1",
+          "is_glued": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the dissection_tools_1 to sharpen the axe_1 and then chop the firewood_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "axe_1",
+          "is_chopped": true
+        },
+        {
+          "id": "firewood_1",
+          "is_chopped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only blue glass item on the heavy_oak_workbench_1 and place it in the specimen_processing_tent.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "blue_glass_paperweight_1",
+          "location_id": "in:specimen_processing_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the uv_light_trap_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uv_light_trap_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the specimen_display_case_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_display_case_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_oak_workbench_1 to the storage_tool_shed.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_oak_workbench_1",
+          "location_id": "in:storage_tool_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigeration_unit_1 to the main_research_cabin.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "location_id": "in:main_research_cabin"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the live_trap_1 to the specimen_processing_tent and verify its contents.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "live_trap_1",
+          "location_id": "in:specimen_processing_tent"
+        },
+        {
+          "id": "live_trap_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the bunk_bed_1 to the storage_tool_shed and sweep the area where it was located.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bunk_bed_1",
+          "location_id": "in:storage_tool_shed"
+        },
+        {
+          "id": "sleeping_quarters",
+          "is_swept": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00543"
+}

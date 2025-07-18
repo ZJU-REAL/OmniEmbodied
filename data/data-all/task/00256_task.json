@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the red ledger book on the corkboard.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "red_ledger_1",
+          "location_id": "on:corkboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the tactical display.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tactical_display_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest whiteboard and move it to the diplomats office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:diplomats_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fluorescent_light_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Use the knife to slice open the unlabeled box in the supply closet.",
       "task_category": "compound_reasoning",
@@ -20,6 +70,78 @@
         {
           "id": "unlabeled_box_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only idle coffee machine and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the encrypted radio.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "encrypted_radio_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fireproof safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel filing cabinet to the main operations room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_filing_cabinet_1",
+          "location_id": "in:main_operations_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the conference table to the diplomats office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "location_id": "in:diplomats_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the jammed printer to the supply closet and unjam it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "jammed_printer_1",
+          "location_id": "in:supply_closet",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the flickering TV to the communications hub and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "flickering_tv_1",
+          "location_id": "in:communications_hub",
+          "is_on": false
         }
       ]
     }

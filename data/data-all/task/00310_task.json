@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the teleprompter_rig_1 on the broadcast_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "teleprompter_rig_1",
+          "location_id": "on:broadcast_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_cup_1 in the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver microphone with a loose connection and place it on the soundproof_booth_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "neumann_microphone_1",
+          "location_id": "on:soundproof_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flickering LED studio light and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "led_studio_light_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty acoustic foam panel using the cleaning_rag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "acoustic_foam_panel_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Assemble the label_maker_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_assembled": true
+        }
+      ]
+    },
     {
       "task_description": "Find the dual-monitor setup with a frozen left screen and stop its playback.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,84 @@
         {
           "id": "dual_monitor_setup_1",
           "is_playing": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the sticky transcription pedal and clean it using the sponge_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "transcription_pedal_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to plug in the misplaced_hard_drive_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "misplaced_hard_drive_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial_shelving_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fireproof_safe_1 to the tech_maintenance_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_safe_1",
+          "location_id": "in:tech_maintenance_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the soundproof_booth_1 to the translation_workstations.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soundproof_booth_1",
+          "location_id": "in:translation_workstations"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy broadcast_desk_1 to the media_archive_storage and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broadcast_desk_1",
+          "location_id": "in:media_archive_storage"
+        },
+        {
+          "id": "broadcast_desk_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_shelving_1 to the central_broadcast_studio and assemble it using the wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:central_broadcast_studio"
+        },
+        {
+          "id": "industrial_shelving_1",
+          "is_assembled": true
         }
       ]
     }

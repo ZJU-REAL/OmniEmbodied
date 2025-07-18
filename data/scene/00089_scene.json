@@ -1,169 +1,566 @@
 {
-  "description": "A chaotic media production studio with multiple workstations, editing bays, and storage areas, filled with heavy equipment, misplaced assets, and rogue automation scripts.",
+  "description": "A bustling startup incubator co-working space, freshly revitalized by a high-profile competition, filled with half-unpacked equipment, prototype gadgets, and the frenetic energy of multiple teams competing for limited resources.",
   "rooms": [
     {
-      "id": "central_editing_hub",
-      "name": "Central Editing Hub",
+      "id": "main_workfloor",
+      "name": "Main Workfloor",
       "properties": {
-        "type": "editing"
+        "type": "communal"
       },
       "connected_to_room_ids": [
-        "soundproof_booth",
-        "equipment_closet",
-        "archive_room"
+        "prototyping_lab",
+        "supply_closet",
+        "breakout_lounge",
+        "founders_office"
       ]
     },
     {
-      "id": "soundproof_booth",
-      "name": "Soundproof Recording Booth",
+      "id": "prototyping_lab",
+      "name": "Prototyping Lab",
       "properties": {
-        "type": "recording"
+        "type": "industrial"
       },
       "connected_to_room_ids": [
-        "central_editing_hub"
+        "main_workfloor",
+        "supply_closet"
       ]
     },
     {
-      "id": "equipment_closet",
-      "name": "Equipment Closet",
+      "id": "supply_closet",
+      "name": "Supply Closet",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
-        "central_editing_hub"
+        "main_workfloor",
+        "prototyping_lab"
       ]
     },
     {
-      "id": "archive_room",
-      "name": "Archive Room",
+      "id": "breakout_lounge",
+      "name": "Breakout Lounge",
       "properties": {
-        "type": "storage"
+        "type": "recreational"
       },
       "connected_to_room_ids": [
-        "central_editing_hub"
+        "main_workfloor"
+      ]
+    },
+    {
+      "id": "founders_office",
+      "name": "Founder's Office",
+      "properties": {
+        "type": "private"
+      },
+      "connected_to_room_ids": [
+        "main_workfloor"
       ]
     }
   ],
   "objects": [
     {
-      "id": "editing_desk_1",
-      "name": "Curved Editing Desk",
+      "id": "worktable_1",
+      "name": "Steel-framed Worktable",
       "type": "FURNITURE",
-      "location_id": "in:central_editing_hub",
+      "location_id": "in:main_workfloor",
       "properties": {
         "size": [
-          4.0,
+          2.4,
           0.8,
           0.9
         ],
-        "weight": 60.0,
+        "weight": 45.0,
         "is_container": true,
-        "material": "metal",
-        "color": "black"
+        "material": "steel",
+        "condition": "dented"
       },
       "states": {}
     },
     {
-      "id": "server_rack_1",
-      "name": "Rolling Server Rack",
+      "id": "worktable_2",
+      "name": "Steel-framed Worktable",
       "type": "FURNITURE",
-      "location_id": "in:central_editing_hub",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "size": [
+          2.4,
+          0.8,
+          0.9
+        ],
+        "weight": 47.5,
+        "is_container": true,
+        "material": "steel",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Magnetic Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
       "properties": {
         "size": [
           2.0,
-          0.8,
-          2.0
+          1.2,
+          0.05
         ],
-        "weight": 200.0,
+        "weight": 30.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Rolling Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 25.0,
         "is_container": true,
-        "material": "steel",
-        "color": "gray"
+        "material": "metal",
+        "condition": "missing_wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "vr_headset_1",
+      "name": "Disassembled VR Headset",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "plastic",
+        "condition": "missing_lens"
       },
       "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "screws_1",
+      "name": "Scattered Screws",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal",
+        "quantity": 12
+      },
+      "states": {}
+    },
+    {
+      "id": "safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_type": "biometric"
+      },
+      "states": {
+        "is_open": false,
         "is_locked": true
       }
     },
     {
-      "id": "master_control_keyboard_1",
-      "name": "Master Control Keyboard",
+      "id": "router_1",
+      "name": "Wi-Fi Router",
       "type": "ITEM",
-      "location_id": "on:editing_desk_1",
+      "location_id": "on:worktable_2",
       "properties": {
-        "weight": 1.5,
+        "weight": 0.5,
         "color": "black",
-        "brand": "Logitech",
-        "model_number": "MK550"
+        "brand": "NetGear",
+        "model_number": "R7000"
       },
       "states": {
-        "is_running": true
+        "is_on": true
       }
     },
     {
-      "id": "usb_drive_1",
-      "name": "USB Drive labeled 'FINAL CUT - DO NOT TOUCH'",
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
       "type": "ITEM",
-      "location_id": "on:editing_desk_1",
+      "location_id": "on:worktable_2",
       "properties": {
-        "weight": 0.1,
-        "color": "red",
-        "brand": "SanDisk",
-        "capacity": "64GB"
+        "weight": 2.5,
+        "color": "stainless",
+        "brand": "Keurig",
+        "condition": "stained"
       },
       "states": {
-        "is_paired": false
+        "is_on": false
       }
     },
     {
-      "id": "media_server_1",
-      "name": "Error-prone Media Server",
-      "type": "ITEM",
-      "location_id": "on:editing_desk_1",
+      "id": "office_chair_1",
+      "name": "Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
       "properties": {
-        "weight": 5.0,
-        "color": "black",
-        "brand": "Dell",
-        "model_number": "PowerEdge R740"
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "fabric",
+        "condition": "wobbly_leg"
+      },
+      "states": {}
+    },
+    {
+      "id": "office_chair_2",
+      "name": "Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 12.5,
+        "is_container": false,
+        "material": "leather",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "office_chair_3",
+      "name": "Office Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 11.8,
+        "is_container": false,
+        "material": "mesh",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_kit_1",
+      "name": "IKEA Flat-pack Shelving",
+      "type": "ITEM",
+      "location_id": "in:main_workfloor",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "material": "particle_board",
+        "condition": "unassembled"
       },
       "states": {
-        "is_running": true
+        "is_assembled": false
       }
     },
     {
-      "id": "wireless_headset_1",
-      "name": "Wireless Headset",
+      "id": "cactus_1",
+      "name": "Potted Cactus",
       "type": "ITEM",
-      "location_id": "on:editing_desk_1",
+      "location_id": "on:worktable_2",
+      "properties": {
+        "weight": 1.2,
+        "color": "green",
+        "material": "plant",
+        "condition": "dead"
+      },
+      "states": {
+        "is_pruned": false
+      }
+    },
+    {
+      "id": "time_magazine_1",
+      "name": "TIME Magazine",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
       "properties": {
         "weight": 0.3,
-        "color": "black",
-        "brand": "Sony",
-        "battery_level": 12
+        "color": "red",
+        "material": "paper",
+        "title": "Crowdsourcing the Future!"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Startup Trophy",
+      "type": "ITEM",
+      "location_id": "on:worktable_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "gold",
+        "material": "plastic",
+        "inscription": "Best Pitch 2022"
+      },
+      "states": {}
+    },
+    {
+      "id": "cnc_machine_1",
+      "name": "CNC Machine",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_lab",
+      "properties": {
+        "size": [
+          2.2,
+          1.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "needs_calibration"
       },
       "states": {
-        "is_charged": false,
-        "is_paired": true
+        "is_running": false
       }
     },
     {
-      "id": "label_printer_1",
-      "name": "Label Printer",
-      "type": "ITEM",
-      "location_id": "on:editing_desk_1",
+      "id": "pegboard_1",
+      "name": "Wall-mounted Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_lab",
       "properties": {
-        "weight": 2.0,
-        "color": "white",
-        "brand": "Brother",
-        "model_number": "PT-E550W"
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "missing_tools"
+      },
+      "states": {}
+    },
+    {
+      "id": "circuit_board_1",
+      "name": "Half-soldered Circuit Board",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "material": "fiberglass",
+        "condition": "incomplete"
       },
       "states": {
-        "is_dirty": true
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "material": "metal",
+        "condition": "burnt_out"
+      },
+      "states": {}
+    },
+    {
+      "id": "battery_prototype_1",
+      "name": "Leaking Battery Prototype",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "lithium",
+        "hazard": "corrosive"
+      },
+      "states": {
+        "is_leaking": true
+      }
+    },
+    {
+      "id": "microcontroller_box_1",
+      "name": "Box of Microcontrollers",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "cardboard",
+        "label": "DEFECTIVE – RETURNS PENDING",
+        "marking": "red_dot"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "microcontroller_box_2",
+      "name": "Box of Microcontrollers",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "cardboard",
+        "label": "FUNCTIONAL",
+        "marking": "none"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "microcontroller_box_3",
+      "name": "Box of Microcontrollers",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "cardboard",
+        "label": "FUNCTIONAL",
+        "marking": "none"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "microcontroller_box_4",
+      "name": "Box of Microcontrollers",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "cardboard",
+        "label": "FUNCTIONAL",
+        "marking": "none"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "microcontroller_box_5",
+      "name": "Box of Microcontrollers",
+      "type": "ITEM",
+      "location_id": "on:pegboard_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "cardboard",
+        "label": "FUNCTIONAL",
+        "marking": "none"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "fume_extractor_1",
+      "name": "Fume Extractor",
+      "type": "ITEM",
+      "location_id": "in:prototyping_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "material": "plastic",
+        "condition": "ineffective"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "power_strip_1",
+      "name": "Power Strip",
+      "type": "ITEM",
+      "location_id": "in:prototyping_lab",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "material": "plastic",
+        "condition": "loose_slot"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "SAFETY FIRST! Poster",
+      "type": "ITEM",
+      "location_id": "in:prototyping_lab",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti Doodle",
+      "type": "ITEM",
+      "location_id": "in:prototyping_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "ink",
+        "text": "YOUR CODE SUCKS"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Metal Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "bent"
+      },
+      "states": {
+        "is_open": false
       }
     },
     {
       "id": "mini_fridge_1",
-      "name": "Mini Fridge",
+      "name": "Mini-fridge",
       "type": "FURNITURE",
-      "location_id": "in:central_editing_hub",
+      "location_id": "in:supply_closet",
       "properties": {
         "size": [
           0.5,
@@ -173,378 +570,306 @@
         "weight": 20.0,
         "is_container": true,
         "material": "plastic",
-        "color": "white",
-        "temperature": 14.0
+        "condition": "unplugged"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "energy_drink_1",
-      "name": "Expired Energy Drink",
+      "id": "server_parts_box_1",
+      "name": "Sealed Box of Server Parts",
       "type": "ITEM",
-      "location_id": "in:mini_fridge_1",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "CRITICAL SERVER PARTS – DO NOT OPEN WITHOUT IT TEAM"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "torque_wrench_spot_1",
+      "name": "Empty Torque Wrench Spot",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 0.0,
+        "color": "none",
+        "material": "none",
+        "label": "TORQUE WRENCH – MISSING"
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_spool_1",
+      "name": "Half-empty Filament Spool",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
       "properties": {
         "weight": 0.5,
         "color": "green",
-        "brand": "Red Bull",
-        "expiry_date": "2022-12-01"
-      },
-      "states": {
-        "is_drunk": false
-      }
-    },
-    {
-      "id": "neumann_mic_1",
-      "name": "Vintage Neumann U87 Mic",
-      "type": "ITEM",
-      "location_id": "in:soundproof_booth",
-      "properties": {
-        "weight": 0.7,
-        "color": "silver",
-        "brand": "Neumann",
-        "model_number": "U87"
-      },
-      "states": {
-        "is_dirty": true
-      }
-    },
-    {
-      "id": "foldable_stool_1",
-      "name": "Foldable Stool",
-      "type": "FURNITURE",
-      "location_id": "in:soundproof_booth",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.5
-        ],
-        "weight": 3.0,
-        "is_container": false,
-        "material": "metal",
-        "color": "black"
+        "material": "plastic",
+        "quantity": "50%"
       },
       "states": {}
     },
     {
-      "id": "session_sd_card_1",
-      "name": "Session 71 SD Card",
+      "id": "pizza_box_stack_1",
+      "name": "Stack of Pizza Boxes",
       "type": "ITEM",
-      "location_id": "in:soundproof_booth",
+      "location_id": "in:metal_shelving_1",
       "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "SanDisk",
-        "capacity": "32GB"
+        "weight": 2.0,
+        "color": "white",
+        "material": "cardboard",
+        "quantity": 8
       },
       "states": {
-        "is_copied": false
+        "is_stacked": true
       }
     },
     {
-      "id": "auto_upload_pedal_1",
-      "name": "Auto-Upload Pedal",
+      "id": "employee_plaque_1",
+      "name": "Broken Employee of the Month Plaque",
       "type": "ITEM",
-      "location_id": "in:soundproof_booth",
+      "location_id": "on:metal_shelving_1",
       "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "brand": "Boss",
-        "model_number": "FS-5U"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "headphones_1",
-      "name": "Headphones",
-      "type": "ITEM",
-      "location_id": "in:soundproof_booth",
-      "properties": {
-        "weight": 0.4,
-        "color": "black",
-        "brand": "Sennheiser",
-        "model_number": "HD 280 Pro"
-      },
-      "states": {
-        "is_dirty": true
-      }
-    },
-    {
-      "id": "camera_1",
-      "name": "Professional Camera",
-      "type": "ITEM",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "weight": 1.5,
-        "color": "black",
-        "brand": "Canon",
-        "model_number": "EOS C300"
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "mixer_1",
-      "name": "Audio Mixer",
-      "type": "ITEM",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "weight": 5.0,
-        "color": "black",
-        "brand": "Yamaha",
-        "model_number": "MG10XU"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "broken_server_rack_1",
-      "name": "Broken Server Rack",
-      "type": "FURNITURE",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "size": [
-          1.8,
-          0.8,
-          1.8
-        ],
-        "weight": 150.0,
-        "is_container": true,
-        "material": "steel",
-        "color": "gray"
-      },
-      "states": {
-        "is_locked": true
-      }
-    },
-    {
-      "id": "spray_bottle_1",
-      "name": "Cleaning Spray Bottle",
-      "type": "ITEM",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "weight": 0.5,
-        "color": "blue",
-        "brand": "Clorox",
-        "provides_abilities": [
-          "spray",
-          "clean"
-        ]
+        "weight": 1.2,
+        "color": "gold",
+        "material": "wood",
+        "condition": "broken"
       },
       "states": {}
     },
     {
-      "id": "charger_1",
-      "name": "Device Charger",
+      "id": "rubiks_cube_1",
+      "name": "Dusty Rubik's Cube",
       "type": "ITEM",
-      "location_id": "in:equipment_closet",
+      "location_id": "on:metal_shelving_1",
       "properties": {
         "weight": 0.2,
+        "color": "multicolor",
+        "material": "plastic",
+        "condition": "unsolved"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_2",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:breakout_lounge",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Nespresso"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "snack_wrappers_1",
+      "name": "Snack Wrappers",
+      "type": "ITEM",
+      "location_id": "in:breakout_lounge",
+      "properties": {
+        "weight": 0.1,
+        "color": "multicolor",
+        "material": "plastic",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "tv_1",
+      "name": "TV",
+      "type": "ITEM",
+      "location_id": "in:breakout_lounge",
+      "properties": {
+        "weight": 10.0,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "legal_documents_1",
+      "name": "Legal Documents",
+      "type": "ITEM",
+      "location_id": "in:founders_office",
+      "properties": {
+        "weight": 1.5,
         "color": "white",
-        "brand": "Anker",
-        "model_number": "A2147",
+        "material": "paper",
+        "condition": "stacked"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "investor_swag_1",
+      "name": "Investor Swag",
+      "type": "ITEM",
+      "location_id": "in:founders_office",
+      "properties": {
+        "weight": 2.0,
+        "color": "multicolor",
+        "material": "various",
+        "contents": [
+          "t-shirt",
+          "pen",
+          "notebook"
+        ]
+      },
+      "states": {
+        "is_wrapped": false
+      }
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "metal",
         "provides_abilities": [
-          "recharge"
+          "prune"
         ]
       },
       "states": {}
     },
     {
-      "id": "hard_drive_1",
-      "name": "Labeled Hard Drive",
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
       "type": "ITEM",
-      "location_id": "in:archive_room",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
       "properties": {
         "weight": 0.3,
-        "color": "black",
-        "brand": "Seagate",
-        "capacity": "4TB"
-      },
-      "states": {
-        "is_locked": true
-      }
-    },
-    {
-      "id": "locked_cabinet_1",
-      "name": "Locked Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:archive_room",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          1.8
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "material": "wood",
-        "color": "brown"
-      },
-      "states": {
-        "is_locked": true
-      }
-    },
-    {
-      "id": "led_sign_1",
-      "name": "DO NOT OVERWRITE LED Sign",
-      "type": "ITEM",
-      "location_id": "in:archive_room",
-      "properties": {
-        "weight": 1.0,
-        "color": "red",
-        "brand": "BrightSign",
-        "model_number": "BS-1000"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "key_1",
-      "name": "Server Rack Key",
-      "type": "ITEM",
-      "location_id": "in:archive_room",
-      "properties": {
-        "weight": 0.05,
-        "color": "silver",
-        "brand": "Kwikset",
+        "color": "yellow",
+        "material": "metal",
         "provides_abilities": [
-          "unlock"
+          "unscrew"
         ]
       },
       "states": {}
     },
     {
-      "id": "paperclip_1",
-      "name": "Paperclip",
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
       "type": "ITEM",
-      "location_id": "in:equipment_closet",
+      "location_id": "in:supply_closet",
       "properties": {
-        "weight": 0.01,
+        "weight": 0.4,
+        "color": "blue",
+        "material": "paper",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "in:breakout_lounge",
+      "properties": {
+        "weight": 0.6,
         "color": "silver",
         "material": "metal",
         "provides_abilities": [
-          "unpair"
+          "drain"
         ]
       },
       "states": {}
     },
     {
-      "id": "cleaning_cloth_1",
-      "name": "Cleaning Cloth",
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
       "type": "ITEM",
-      "location_id": "in:equipment_closet",
+      "location_id": "in:prototyping_lab",
       "properties": {
-        "weight": 0.1,
-        "color": "yellow",
-        "material": "microfiber",
-        "provides_abilities": [
-          "clean"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "photocopier_1",
-      "name": "Photocopier",
-      "type": "ITEM",
-      "location_id": "in:central_editing_hub",
-      "properties": {
-        "weight": 50.0,
-        "color": "white",
-        "brand": "Xerox",
-        "model_number": "WorkCentre 6515",
-        "provides_abilities": [
-          "copy"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "contaminant_1",
-      "name": "Contaminant Bottle",
-      "type": "ITEM",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "weight": 0.3,
-        "color": "brown",
-        "brand": "ChemLab",
-        "provides_abilities": [
-          "contaminate"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "press_1",
-      "name": "Hydraulic Press",
-      "type": "ITEM",
-      "location_id": "in:equipment_closet",
-      "properties": {
-        "weight": 120.0,
+        "weight": 5.0,
         "color": "red",
-        "brand": "Dake",
-        "model_number": "B-10",
+        "material": "metal",
         "provides_abilities": [
-          "crush"
+          "extinguish"
         ]
       },
       "states": {}
     },
     {
-      "id": "needle_thread_1",
-      "name": "Needle and Thread",
+      "id": "toolkit_1",
+      "name": "Toolkit",
       "type": "ITEM",
-      "location_id": "in:equipment_closet",
+      "location_id": "in:supply_closet",
       "properties": {
-        "weight": 0.05,
+        "weight": 3.0,
         "color": "black",
-        "material": "cotton",
+        "material": "plastic",
         "provides_abilities": [
-          "sew"
+          "disassemble"
         ]
       },
       "states": {}
     },
     {
-      "id": "saw_1",
-      "name": "Hand Saw",
+      "id": "scratch_tool_1",
+      "name": "Scratch Tool",
       "type": "ITEM",
-      "location_id": "in:equipment_closet",
+      "location_id": "in:supply_closet",
       "properties": {
-        "weight": 0.8,
+        "weight": 0.2,
         "color": "silver",
-        "brand": "Stanley",
-        "model_number": "20-046",
+        "material": "metal",
         "provides_abilities": [
-          "saw"
+          "scratch"
         ]
       },
       "states": {}
     }
   ],
   "abilities": [
-    "clean",
-    "contaminate",
-    "copy",
-    "copy_file",
-    "crush",
-    "drink",
+    "disassemble",
+    "drain",
+    "extinguish",
     "open",
-    "pair",
-    "recharge",
-    "saw",
-    "sew",
-    "spray",
-    "stop_process",
-    "unlock",
-    "unpair",
+    "prune",
+    "scratch",
+    "start_process",
+    "turn_off",
+    "turn_on",
+    "unscrew",
+    "unstaple",
+    "unstack",
+    "wrap",
     "close"
   ]
 }

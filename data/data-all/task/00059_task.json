@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the clipboard_1 on the weather_array_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:weather_array_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the flickering monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, metal item on the command_table_1 and place it in the equipment_storage.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,118 @@
         {
           "id": "drone_controller_1",
           "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a cracked glass condition and photograph it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "topographic_map_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken drone_controller_1 using the wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drone_controller_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Dry the leaking thermos_1 using the towel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "thermos_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the camera_1 to photograph the smudged clipboard_1 and then place it in the survey_annex.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "is_photographed": true
+        },
+        {
+          "id": "clipboard_1",
+          "location_id": "in:survey_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the flickering space_heater_1 using the screwdriver_1 and then turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "space_heater_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unfold the stretcher_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stretcher_1",
+          "is_folded": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spare rotor_blade_1 to the outdoor_landing.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rotor_blade_1",
+          "location_id": "in:outdoor_landing"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-duty workbench_1 to the main_operations_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:main_operations_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaking oxygen_tank_3 to the medical_triage and unpack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_3",
+          "location_id": "in:medical_triage"
+        },
+        {
+          "id": "oxygen_tank_3",
+          "is_packed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crate of rations_1 to the bunk_area and unpack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rations_crate_1",
+          "location_id": "in:bunk_area"
+        },
+        {
+          "id": "rations_crate_1",
+          "is_packed": false
         }
       ]
     }

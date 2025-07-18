@@ -10,15 +10,125 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_coolant_canister_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_coolant_canister_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the cryo_pod_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cryo_pod_2",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the cryogenic_chamber and place it in the archival_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "central_control_terminal_1",
+          "location_id": "in:archival_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a red stopper in the supply_closet and place it on the centrifuge_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "serum_vial_1",
+          "location_id": "on:centrifuge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open the shelving_unit_1 using the bolt_cutters_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "is_open": true
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench_24mm_1 to loosen the central_control_terminal_1 and then place it in the doctors_office.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "central_control_terminal_1",
+          "location_id": "in:doctors_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the reinforced_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the cryogenic_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:cryogenic_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryo_pod_1 to the supply_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_pod_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy central_control_terminal_1 that is displaying an error message to the repair bay in the supply_closet.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_control_terminal_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy reinforced_door_1 that is locked to the workshop in the doctors_office.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_door_1",
           "location_id": "in:doctors_office"
         }
       ]

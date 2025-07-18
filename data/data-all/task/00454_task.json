@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 in the testing_kitchen.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:testing_kitchen"
+        }
+      ]
+    },
+    {
+      "task_description": "Place digital_ph_meter_1 on the tasting_bar_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_ph_meter_1",
+          "location_id": "on:tasting_bar_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, ceramic item on the stainless_steel_worktable_1 and place it in the testing_kitchen.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:testing_kitchen"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with the inscription 'World’s Best Sauce Chemist' and place it in the documentation_compliance_office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:documentation_compliance_office"
+        }
+      ]
+    },
     {
       "task_description": "Use the backup_keycard_1 to unlock the biometric_lockbox_1.",
       "task_category": "tool_use",
@@ -16,6 +62,83 @@
         {
           "id": "biometric_lockbox_1",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sandpaper_1 to smooth the sagging ingredient_shelving_1 and then place it in the equipment_maintenance_bay.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ingredient_shelving_1",
+          "location_id": "in:equipment_maintenance_bay",
+          "is_sanded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the admin_terminal_1 to sync the digital_logs_1 and then place them in the secure_sample_vault.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_logs_1",
+          "is_synced": true,
+          "location_id": "in:secure_sample_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the refrigerated_storage_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_storage_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stainless_steel_worktable_1 to the equipment_maintenance_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stainless_steel_worktable_1",
+          "location_id": "in:equipment_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated_storage_unit_1 to the main_lab_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_storage_unit_1",
+          "location_id": "in:main_lab_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy shredder_1 to the documentation_compliance_office and use it to shred the regulatory_paperwork_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shredder_1",
+          "location_id": "in:documentation_compliance_office"
+        },
+        {
+          "id": "regulatory_paperwork_1",
+          "is_shredded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_vacuum_mixer_1 to the equipment_maintenance_bay and use the soldering_iron_1 to repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_vacuum_mixer_1",
+          "location_id": "in:equipment_maintenance_bay",
+          "is_ironed": true
         }
       ]
     }

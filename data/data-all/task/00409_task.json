@@ -1,0 +1,158 @@
+{
+  "task_background": "Prepare the Chocolate Factory Quality Control Lab for a new production batch by ensuring all equipment is functional, clean, and properly organized.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place cocoa_sack_1 on the hydraulic_press_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cocoa_sack_1",
+          "location_id": "on:hydraulic_press_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the calibration_weights_1 in the sensory_booth_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "location_id": "in:sensory_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object on the industrial_worktable_1 and place it in the packaging_prep_zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "location_id": "in:packaging_prep_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only brown, burlap object in the ingredient_inspection_station and close it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cocoa_sack_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken digital_thermometer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_thermometer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty sweetener_dispenser_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sweetener_dispenser_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair_kit_1 to fix the only broken, black microscope in the quality_testing_booth.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to cut the uncut fragile_sticker_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fragile_sticker_1",
+          "is_cut": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the broken laser_engraver_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laser_engraver_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated_vault_1 to the packaging_prep_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_vault_1",
+          "location_id": "in:packaging_prep_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_worktable_1 to the calibration_molding_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_worktable_1",
+          "location_id": "in:calibration_molding_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy pallet_jack_1 that is broken to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_jack_1",
+          "location_id": "in:calibration_molding_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy sealing_machine_1 that is broken to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sealing_machine_1",
+          "location_id": "in:calibration_molding_area"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00409"
+}

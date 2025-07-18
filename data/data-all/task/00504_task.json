@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,134 @@
         {
           "id": "incident_light_meter_1",
           "location_id": "on:prop_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the safelight_1 in the darkroom.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "safelight_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the workbench_1 and place it in the steel_parts_cabinet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spot_meter_1",
+          "location_id": "in:steel_parts_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a lipstick mark and place it in the lens_cleaning_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "espresso_cup_1",
+          "location_id": "in:lens_cleaning_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the alignment_tool_1 to calibrate the spot_meter_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spot_meter_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the heavy_wrench_1 to open the dark_slide_holders_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dark_slide_holders_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode_scanner_1 to scan the film_holder_1 and then place it in the film_loading_booth.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "film_holder_1",
+          "is_barcode_scanned": true
+        },
+        {
+          "id": "film_holder_1",
+          "location_id": "in:film_loading_booth"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and use the soldering_iron_1 to repair it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "timer_1",
+          "is_soldered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the steel_parts_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_parts_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the large_format_press_1 to the print_finishing_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "large_format_press_1",
+          "location_id": "in:print_finishing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the backdrop_system_1 to the studio_shooting_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backdrop_system_1",
+          "location_id": "in:studio_shooting_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the tripod_stack_1 to the equipment_storage and use the heavy_wrench_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tripod_stack_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the chemical_tray_table_1 to the darkroom and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_tray_table_1",
+          "location_id": "in:darkroom"
+        },
+        {
+          "id": "chemical_tray_table_1",
+          "is_open": true
         }
       ]
     }

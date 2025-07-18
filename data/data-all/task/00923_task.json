@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the satellite_phone_1 on the bulletin_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "satellite_phone_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the encrypted_radio_console_1 in the communications_hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "encrypted_radio_console_1",
+          "location_id": "in:communications_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the war_table_1 and place it in the armory_supply_depot.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_radio_console_1",
+          "location_id": "in:armory_supply_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a flickering monitor in the communications_hub and place it in the central_command_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "drone_control_station_1",
+          "location_id": "in:central_command_room"
+        }
+      ]
+    },
     {
       "task_description": "Use the fire_extinguisher_1 to extinguish the leaking fuel_canister_1.",
       "task_category": "tool_use",
@@ -16,6 +62,88 @@
         {
           "id": "fuel_canister_1",
           "is_alight": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to sign the classified_folder_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "classified_folder_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only top_secret item in the advisors_briefing_room, use the pen_1 to sign it, and place it on the war_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "classified_folder_1",
+          "is_signed": true,
+          "location_id": "on:war_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a missing antiseptic in the armory_supply_depot, use the toolbox_1 to flatten it, and place it in the advisors_briefing_room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "first_aid_kit_1",
+          "location_id": "in:advisors_briefing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the weapons_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the radio_tower_assembly_1 to the central_command_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "radio_tower_assembly_1",
+          "location_id": "in:central_command_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the war_table_1 to the advisors_briefing_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:advisors_briefing_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy AK-47 Crate labeled 'URGENT – MOSUL' to the central_command_room and use the toolbox_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ak47_crate_1",
+          "location_id": "in:central_command_room",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the weapons_locker_1 to the communications_hub and use the fire_extinguisher_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_locker_1",
+          "location_id": "in:communications_hub"
         }
       ]
     }

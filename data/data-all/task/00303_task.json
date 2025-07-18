@@ -10,6 +10,16 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,130 @@
         {
           "id": "delivery_manifest_clipboard_1",
           "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the hand_scanner_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hand_scanner_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel crate and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "steel_crate_stack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the clipboard with the today_manifest content and place it on the freight_scale_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:freight_scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the box_cutter_1 to slice open the mislabelled_pallet_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mislabelled_pallet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the broken tape dispenser and use the scissors_1 to slice open the steel_crate_stack_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "steel_crate_stack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the clipboard with the old_schedule content and use the stapler_1 to paste it to the l_shaped_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_2",
+          "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the freight_scale_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "freight_scale_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_crate_stack_1 to the main_stockroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_crate_stack_1",
+          "location_id": "in:main_stockroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_unit_1 to the back_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_unit_1",
+          "location_id": "in:back_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigerated_crate_1 to the main_stockroom and use the box_cutter_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_crate_1",
+          "location_id": "in:main_stockroom"
+        },
+        {
+          "id": "refrigerated_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the forklift_1 to the receiving_dock and use the pallet_jack_1 to pump it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "location_id": "in:receiving_dock"
         }
       ]
     }

@@ -6,15 +6,163 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place confidential_binder_1 on leather_sofa_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "confidential_binder_1",
+          "location_id": "on:leather_sofa_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off stock_ticker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "stock_ticker_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black binder and place it on the board_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ceo_contract_1",
+          "location_id": "on:board_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stock_ticker_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Use the duster to clean the whiteboard_1.",
       "task_category": "tool_use",
       "validation_checks": [
         {
           "id": "whiteboard_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale to weigh the water_pitcher_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "water_pitcher_1",
+          "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to sharpen the knife_1 and then slice the blue_binder_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "knife_1",
+          "is_sharp": true
+        },
+        {
+          "id": "blue_binder_1",
+          "is_sharp": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only device with a 4-digit PIN and turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ceo_tablet_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the grinder_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "grinder_1",
+          "is_ground": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the document_preparation_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:document_preparation_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the reception_desk_1 to the main_boardroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reception_desk_1",
+          "location_id": "in:main_boardroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy photocopier_1 to the IT/server closet and use the fuel_can_1 to refuel it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:it_server_closet"
+        },
+        {
+          "id": "photocopier_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy board_table_1 to the private_executive_lounge and dust it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "board_table_1",
+          "location_id": "in:private_executive_lounge"
+        },
+        {
+          "id": "board_table_1",
           "is_dusted": false
         }
       ]

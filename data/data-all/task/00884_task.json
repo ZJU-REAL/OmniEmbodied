@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place developer_pc_1 on table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "developer_pc_1",
+          "location_id": "on:table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on developer_pc_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "developer_pc_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black, metal_wood_composite U-shaped workstation and open it.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,100 @@
         {
           "id": "u_shaped_workstation_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the developer PC with a merge conflict and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "developer_pc_2",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to loosen the plexiglass cover on the emergency power switch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "plexiglass_cover_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to clean the dirty wireless keyboard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wireless_keyboard_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the bricked Raspberry Pi on the debugging workbench and use the multimeter to verify its status.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "raspberry_pi_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked filing cabinet using the cabinet key.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the sparking power strip on the workbench.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "power_strip_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the glass-walled meeting pod to the project management nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "glass_meeting_pod_1",
+          "location_id": "in:project_management_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the floor-to-ceiling bookshelf to the debugging corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:debugging_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the digital Kanban board to the main development bay and clean it with the sponge.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_kanban_board_1",
+          "location_id": "in:main_development_bay"
+        },
+        {
+          "id": "digital_kanban_board_1",
+          "is_dirty": false
         }
       ]
     }

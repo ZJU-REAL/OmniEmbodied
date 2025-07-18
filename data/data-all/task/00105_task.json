@@ -1,0 +1,156 @@
+{
+  "task_background": "Prepare the abandoned industrial research facility for safety inspections by repairing damaged equipment and organizing hazardous materials.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.0
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the digital_caliper_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_caliper_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wrench_1 on the industrial_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wrench_1",
+          "location_id": "on:industrial_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal item on the industrial_workbench_1 and place it in the tool_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "air_quality_monitor_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a dead battery and place it in the security_office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_caliper_1",
+          "location_id": "in:security_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the duct_tape_1 to wrap the torn backer_rod_foam_1 and place it in the hazardous_waste_bin_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "backer_rod_foam_1",
+          "is_wrapped": true
+        },
+        {
+          "id": "backer_rod_foam_1",
+          "location_id": "in:hazardous_waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cordless_drill_1 to assemble the cracked_wall_1 and then close the fume_hood_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cracked_wall_1",
+          "is_assembled": true
+        },
+        {
+          "id": "fume_hood_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the security_desk_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_desk_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the air_quality_monitor_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "air_quality_monitor_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_workbench_1 to the hvac_duct_access_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_workbench_1",
+          "location_id": "in:hvac_duct_access_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overloaded_metal_shelf_1 to the main_laboratory.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overloaded_metal_shelf_1",
+          "location_id": "in:main_laboratory"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hvac_machine_1 to the main_laboratory and use the wrench_1 to loosen its components.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hvac_machine_1",
+          "location_id": "in:main_laboratory"
+        },
+        {
+          "id": "hvac_machine_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken_wall_section_1 to the insulation_storage_closet and use the duct_tape_1 to wrap it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_wall_section_1",
+          "location_id": "in:insulation_storage_closet"
+        },
+        {
+          "id": "broken_wall_section_1",
+          "is_open": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00105"
+}

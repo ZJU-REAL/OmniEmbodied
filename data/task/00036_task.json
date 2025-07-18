@@ -1,61 +1,35 @@
 {
-  "task_background": "Prepare the Community Rehabilitation Center for daily operations and patient care.",
+  "task_background": "Prepare the high-end automotive workshop and showroom for an exclusive client event, ensuring all displays are operational, vehicles are properly positioned, and VIP areas are fully stocked.",
   "agents_config": [
     {
       "name": "robot_1",
-      "max_grasp_limit": 1.0,
-      "max_weight": 30.0,
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
       "max_size": [
-        1.0,
-        1.0,
-        1.0
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
       ]
     }
   ],
   "tasks": [
     {
-      "task_description": "Place patient_tablet_1 on the reception_desk_1.",
-      "task_category": "direct_command",
+      "task_description": "Have robot_1 and robot_2 work together to lower the hydraulic lift (hydraulic_lift_1).",
+      "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "patient_tablet_1",
-          "location_id": "on:reception_desk_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Find the black Samsung tablet and recharge it.",
-      "task_category": "attribute_reasoning",
-      "validation_checks": [
-        {
-          "id": "patient_tablet_1",
-          "states": {
-            "is_charged": true
-          }
-        }
-      ]
-    },
-    {
-      "task_description": "Use the screwdriver_1 to open the medication_cabinet_1.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "medication_cabinet_1",
-          "states": {
-            "is_open": true
-          }
-        }
-      ]
-    },
-    {
-      "task_description": "Find the red emergency Narcan kit and use the screwdriver_1 to open it.",
-      "task_category": "compound_reasoning",
-      "validation_checks": [
-        {
-          "id": "narcan_kit_1",
-          "states": {
-            "is_open": true
-          }
+          "id": "hydraulic_lift_1",
+          "is_lowered": true
         }
       ]
     }

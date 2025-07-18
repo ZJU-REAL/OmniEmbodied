@@ -10,15 +10,129 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the admin_keycard_1 on the reception_computer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "admin_keycard_1",
+          "location_id": "on:reception_computer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 in the lost_and_found_tray_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:lost_and_found_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white item with a gold stripe and place it on the reception desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "admin_keycard_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the reception desk and place it in the lost and found tray.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "reception_computer_1",
+          "location_id": "in:lost_and_found_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the bent_paperclip_1 to unseal the locked_safe_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "locked_safe_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the water_can_1 to water the dead_plant_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dead_plant_1",
+          "is_watered": true
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver_1 to fix the centrifuge_1 that is making a grinding sound.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "centrifuge_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the faded color and use the spray_bottle_1 to clean it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "safety_poster_1",
+          "is_sprayed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety_cabinet_1 to the server_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:server_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the research_lab_a.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:research_lab_a"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the press_1 to the server_room and use the screwdriver_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:server_room"
+        },
+        {
+          "id": "press_1",
           "is_screwed_in": true
         }
       ]

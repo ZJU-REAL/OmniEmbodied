@@ -10,15 +10,115 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the triage_clipboard_1 on the waste_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "triage_clipboard_1",
+          "location_id": "on:waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the emergency_lighting_rig_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_lighting_rig_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, unopened medical item and place it in the surgical_prep_area.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
         {
           "id": "blood_transfusion_kit_1",
+          "location_id": "in:surgical_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "portable_ventilator_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only device with a low gas warning and turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "anesthesia_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the supply_crate_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "supply_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the portable_x_ray_machine_1 to the emergency_treatment_bay_1.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "portable_x_ray_machine_1",
+          "location_id": "in:emergency_treatment_bay_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the narcotics_cabinet_1 to the surgical_prep_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "location_id": "in:surgical_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy anesthesia_machine_1 that has a low gas warning to the decontamination_waste_disposal.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "anesthesia_machine_1",
+          "location_id": "in:decontamination_waste_disposal"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy adjustable_gurney_1 with a wobbly wheel to the surgical_prep_area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "adjustable_gurney_1",
           "location_id": "in:surgical_prep_area"
         }
       ]

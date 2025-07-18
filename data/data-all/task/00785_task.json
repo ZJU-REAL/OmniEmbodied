@@ -10,15 +10,139 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the kessil_led_fixture_1 on the central_research_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "kessil_led_fixture_1",
+          "location_id": "on:central_research_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the kessil_led_fixture_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "kessil_led_fixture_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black microscope with smudged lens and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue glass paperweight and hide it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blue_glass_paperweight_1",
+          "is_hidden": true
+        }
+      ]
+    },
+    {
+      "task_description": "Replace the clogged inline_co2_diffuser_1 with the spare_diffuser_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "inline_co2_diffuser_1",
+          "is_replaced": true
+        }
+      ]
+    },
     {
       "task_description": "Use the water_testing_kit_1 to test the water in aquarium_1 and close the kit.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "water_testing_kit_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the digital_light_timer_1 flashing '12:00' and program it to turn on at 8:00.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_light_timer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the eheim_canister_filter_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "eheim_canister_filter_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the biohazard_cabinet_1 using the keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biohazard_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_research_table_1 to the observation_lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_research_table_1",
+          "location_id": "in:observation_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the aquarium_1 to the quarantine_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "aquarium_1",
+          "location_id": "in:quarantine_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filtration_system_1 to the equipment_closet and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filtration_system_1",
+          "location_id": "in:equipment_closet"
+        },
+        {
+          "id": "filtration_system_1",
           "is_open": false
         }
       ]

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place hard_drive_array_1 on server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hard_drive_array_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the corrupted data cartridge labeled 'SQL Error #45' in the redundant data bin.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "corrupted_cartridge_1",
+          "location_id": "on:redundant_data_bin_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the admin keycard to unlock server_rack_3.",
       "task_category": "tool_use",
@@ -20,6 +50,132 @@
         {
           "id": "server_rack_3",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the universal charger to recharge the diagnostic tablet.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "diagnostic_tablet_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the LCD dashboard in the Data Sorting Hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lcd_dashboard_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black document scanner on the verification desk and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "document_scanner_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the admin keycard to unlock the 'Do Not Delete' server stack and then turn on the climate control panel.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "do_not_delete_stack_1",
+          "is_on": true
+        },
+        {
+          "id": "climate_control_panel_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unpack the spare cooling unit and place it near server_rack_3.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "is_packed": false
+        },
+        {
+          "id": "cooling_unit_1",
+          "location_id": "in:server_maintenance_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the emergency power switch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "power_switch_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the tool cart.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-duty rolling server rack to the Server Maintenance Room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_server_rack_1",
+          "location_id": "in:server_maintenance_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 10-meter-long sorting table to the Verification Station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sorting_table_1",
+          "location_id": "in:verification_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy cooling unit to server_rack_3 and then unpack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "location_id": "in:server_maintenance_room"
+        },
+        {
+          "id": "cooling_unit_1",
+          "is_packed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the ergonomic verification desk to the Data Sorting Hub and then turn on the dual monitor setup.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "verification_desk_1",
+          "location_id": "in:data_sorting_hub"
+        },
+        {
+          "id": "dual_monitor_1",
+          "is_on": true
         }
       ]
     }

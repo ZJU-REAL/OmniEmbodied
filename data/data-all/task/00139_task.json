@@ -10,9 +10,59 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the serial_debug_cable_1 on the debug_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "serial_debug_cable_1",
+          "location_id": "on:debug_monitor_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red_flash_drive_1 on the pam_server_prototype_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "red_flash_drive_1",
+          "location_id": "on:pam_server_prototype_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item and place it in the documentation_archive.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "location_id": "in:documentation_archive"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the cracked glass and place it on the anti_static_mat_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "y2k_certificate_1",
+          "location_id": "on:anti_static_mat_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the scissors_1 to open the usb_serial_adapter_1.",
       "task_category": "tool_use",
@@ -20,6 +70,108 @@
         {
           "id": "usb_serial_adapter_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to unscrew the server_auth3_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "server_auth3_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the multimeter_1 to verify the status of the network_switch_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_switch_1",
+          "status": "verified"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sandpaper_1 to sand the anti_static_mat_1 and then place the pam_server_prototype_1 on it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "anti_static_mat_1",
+          "condition": "sanded"
+        },
+        {
+          "id": "pam_server_prototype_1",
+          "location_id": "on:anti_static_mat_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the server_auth3_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_auth3_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to verify the emergency_power_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_power_unit_1",
+          "battery_level": "verified"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mainframe_rack_1 to the debug_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mainframe_rack_1",
+          "location_id": "in:debug_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the whiteboard_1 to the pam_migration_workbench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:pam_migration_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the emergency_power_unit_1 to the debug_station and verify its battery level.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_power_unit_1",
+          "location_id": "in:debug_station"
+        },
+        {
+          "id": "emergency_power_unit_1",
+          "battery_level": "verified"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the oscilloscope_1 to the legacy_server_cluster and photograph it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oscilloscope_1",
+          "location_id": "in:legacy_server_cluster"
+        },
+        {
+          "id": "oscilloscope_1",
+          "is_photographed": true
         }
       ]
     }

@@ -1,0 +1,168 @@
+{
+  "task_background": "Prepare the autonomous vehicle testing garage for a critical inspection by ensuring all equipment is functional, organized, and compliant with safety standards.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the front_bumper_1 on the tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "front_bumper_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the diagnostic_dongle_1 in the server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diagnostic_dongle_1",
+          "location_id": "in:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the main_vehicle_bay and place it in the parts_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rolling_tool_chest_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a flashing red light in the diagnostics_station and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "thermal_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to tighten the lidar_array_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "lidar_array_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the autonomous_sedan_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "autonomous_sedan_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard_1 to type the calibration required message for the diagnostic_dongle_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_dongle_1",
+          "is_typed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a missing size in the tool_cart_1 and use the packing_tape_1 to pack it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hex_keys_1",
+          "is_packed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the hydraulic_lift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the vending_machine_1 to the break_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the impact_test_rig_1 to the safety_compliance.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "impact_test_rig_1",
+          "location_id": "in:safety_compliance"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy_duty_shelving_1 to the main_vehicle_bay and use the broom_1 to sweep under it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_shelving_1",
+          "location_id": "in:main_vehicle_bay"
+        },
+        {
+          "id": "main_vehicle_bay",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 to the diagnostics_station and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:diagnostics_station"
+        },
+        {
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00936"
+}

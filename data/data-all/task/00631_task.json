@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the debugging_laptop_1 on the prototype_testing_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "debugging_laptop_1",
+          "location_id": "on:prototype_testing_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the funko_pop_1 in the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "funko_pop_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red-labeled external hard drive and place it in the server_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "external_hard_drive_1",
+          "location_id": "in:server_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the server room and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken USB hub by unplugging the sparking port.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "usb_hub_1",
+          "is_plugged_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the phillips_screwdriver_1 to tighten the loose RAID array in the server room.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "raid_array_1",
+          "is_loose": false
+        }
+      ]
+    },
     {
       "task_description": "Use the debug USB drive to solve the puzzle on the crashed debugging laptop.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,46 @@
         {
           "id": "debugging_laptop_1",
           "is_solved": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the toolbox in the break room.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy collaboration desk to the testing lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collaboration_desk_1",
+          "location_id": "in:testing_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the prototype arcade cabinet to the main development floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "arcade_cabinet_1",
+          "location_id": "in:main_development_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_1",
+          "location_id": "in:testing_lab"
         }
       ]
     }

@@ -6,15 +6,159 @@
       "max_grasp_limit": 2,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the save_the_date_cards_1 on the table in the bridal_suite.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "save_the_date_cards_1",
+          "location_id": "in:bridal_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the trash_bin_1 in the main_ballroom.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "trash_bin_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, wooden object in the main_ballroom and place it in the gift_storage_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wedding_arch_1",
+          "location_id": "in:gift_storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black, leather item in the main_ballroom and place it in the bridal_suite.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wedding_planner_binder_1",
+          "location_id": "in:bridal_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_vase_1 in the main_ballroom using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_vase_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the abandoned_plating_1 in the kitchen using the cleaning_rag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "abandoned_plating_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Use the repair_kit_1 to fix the only broken, silver item in the bridal_suite.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "framed_photo_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only unopened, Dom Pérignon champagne bottle and place it in the bridal_suite.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "champagne_bottles_1",
+          "location_id": "in:bridal_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the sound_system_1 in the outdoor_garden.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sound_system_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the keepsake_box_1 in the bridal_suite using the key_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "keepsake_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stacked_chairs_1 from the main_ballroom to the outdoor_garden.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stacked_chairs_1",
+          "location_id": "in:outdoor_garden"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gift_crate_1 from the gift_storage_room to the main_ballroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gift_crate_1",
+          "location_id": "in:main_ballroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the stove_1 in the kitchen to the main_ballroom and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "stove_1",
+          "location_id": "in:main_ballroom"
+        },
+        {
+          "id": "stove_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the wedding_arch_1 from the main_ballroom to the outdoor_garden and repair it using the repair_kit_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "wedding_arch_1",
+          "location_id": "in:outdoor_garden"
+        },
+        {
+          "id": "wedding_arch_1",
           "is_broken": false
         }
       ]

@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the red priority document tray on the central bulletin board.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "document_tray_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue-capped USB drive in the keycard-locked drawer.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "in:keycard_drawer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the cubicle and place it in the dishwasher.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "in:dishwasher_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a red label and place it in the compliance archive room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "document_tray_1",
+          "location_id": "in:compliance_archive_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken paper shredder using the maintenance toolkit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "paper_shredder_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the server rack backup battery using the device charger.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "backup_battery_1",
+          "is_charged": true
+        }
+      ]
+    },
     {
       "task_description": "Find the only item with a flashing red light and use the maintenance toolkit to repair it.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,64 @@
         {
           "id": "printer_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the emergency backup generator.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the IT server closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:it_server_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the office freezer to the compliance archive room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "freezer_1",
+          "location_id": "in:compliance_archive_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the jammed printer to the repair bay and fix it using the maintenance toolkit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:main_trading_floor"
+        },
+        {
+          "id": "printer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked safe to the executive office and unlock it using the keycard.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "location_id": "in:executive_office"
+        },
+        {
+          "id": "safe_1",
+          "is_cut": true
         }
       ]
     }

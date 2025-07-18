@@ -6,6 +6,12 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
@@ -16,6 +22,120 @@
         {
           "id": "coffee_mug_1",
           "location_id": "on:vending_machine_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pen_1 on the troubleshooting_notes_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pen_1",
+          "location_id": "on:troubleshooting_notes_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black USB cable and place it on the engineer_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "good_usb_cable_1",
+          "location_id": "on:engineer_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white keycard labeled 'EMERGENCY OVERRIDE' and place it on the diagnostic_terminal_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "debug_keycard_1",
+          "location_id": "on:diagnostic_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Activate the diagnostic terminal using the debug keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "diagnostic_terminal_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to sign the troubleshooting notes.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "troubleshooting_notes_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the multimeter to activate the network analyzer.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_analyzer_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the emergency stop button.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_stop_button_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the safe using the combo paper.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the replacement server module to the main server room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "replacement_server_module_1",
+          "location_id": "in:main_server_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-duty shelving unit to the logistics bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_shelving_1",
+          "location_id": "in:logistics_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the diagnostic terminal to the engineer workstations and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "diagnostic_terminal_1",
+          "location_id": "in:engineer_workstations"
+        },
+        {
+          "id": "diagnostic_terminal_1",
+          "is_active": true
         }
       ]
     }

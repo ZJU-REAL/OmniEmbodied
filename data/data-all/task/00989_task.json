@@ -6,9 +6,55 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place vial_1 on workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vial_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue decorative bottle in the catalyst vial rack.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vial_4",
+          "location_id": "in:catalyst_vial_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vial with a cracked stopper and place it on the control panel.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vial_1",
+          "location_id": "on:control_panel_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest glass vial and place it in the reagent vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "vial_4",
+          "location_id": "in:reagent_vault_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the crowbar to loosen the hydraulic press.",
       "task_category": "tool_use",
@@ -16,6 +62,94 @@
         {
           "id": "hydraulic_press_1",
           "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to loosen the core shield.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "core_shield_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the blue glass vial to cool the hot core shield.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "core_shield_1",
+          "is_hot": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the vial with intact stopper and use it to cool the core shield.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "core_shield_1",
+          "is_hot": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the reagent vault.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reagent_vault_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic press to the top floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_press_1",
+          "location_id": "in:top_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the core shield to the repair cart.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "core_shield_1",
+          "location_id": "in:repair_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the centrifuge to the workshop and use the wrench to loosen it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:ground_floor"
+        },
+        {
+          "id": "centrifuge_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the egg crates to the top floor and open them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "egg_crates_1",
+          "location_id": "in:top_floor"
+        },
+        {
+          "id": "egg_crates_1",
+          "is_open": true
         }
       ]
     }

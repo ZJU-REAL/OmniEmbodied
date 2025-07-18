@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place sheet_music_1 on buffet_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sheet_music_1",
+          "location_id": "on:buffet_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place silver_platter_1 on serving_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "silver_platter_1",
+          "location_id": "on:serving_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the silver platter with the monogram 'S.K.' and place it on the grand_piano_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "silver_platter_1",
+          "location_id": "on:grand_piano_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the champagne flute with a red lipstick stain and place it in the servants_prep_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "champagne_flute_1",
+          "location_id": "in:servants_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken pocket watch using the lockpicks.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pocket_watch_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Tighten the loose brass sconce using the screwdriver.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "brass_sconce_1",
+          "is_loose": false
+        }
+      ]
+    },
     {
       "task_description": "Find the cracked champagne flute and repair it using the cleaning supplies.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,57 @@
         {
           "id": "champagne_flute_5",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the chandelier control panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chandelier_control_panel_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the false portrait in the gallery.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "false_portrait_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mahogany grand piano to the gallery.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "grand_piano_1",
+          "location_id": "in:gallery"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the marble-topped buffet table to the smoking lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "buffet_table_1",
+          "location_id": "in:smoking_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked delivery crate to the grand ballroom and unlock it using the keycard.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_delivery_crate_1",
+          "location_id": "in:grand_ballroom",
+          "is_locked": false
         }
       ]
     }

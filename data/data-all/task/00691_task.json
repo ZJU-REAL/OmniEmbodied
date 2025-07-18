@@ -10,9 +10,59 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 0.5,
+      "max_weight": 10.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place troop_figurine_1 on command_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "troop_figurine_1",
+          "location_id": "on:command_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place sandbag_barrier_1 on supply_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sandbag_barrier_1",
+          "location_id": "on:supply_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black monitor and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only yellow notepad with doodles and place it on the break room table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "notepad_1",
+          "location_id": "on:break_room_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Clean the chipped coffee mug using the cleaning rag.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "coffee_mug_1",
           "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pruning shears to prune the fake plant that is damaged.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fake_plant_1",
+          "is_pruned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the needle and thread to mend the broken headset and then place it on the supply shelf.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "headset_1",
+          "is_mended": true
+        },
+        {
+          "id": "headset_1",
+          "location_id": "on:supply_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the overhead projector rig.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "projector_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked mini-fridge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mini_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the main war table to the center of the war room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "war_table_1",
+          "location_id": "in:war_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the intel filing cabinet to the corner of the war room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "intel_cabinet_1",
+          "location_id": "in:war_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the coffee maker to the break room table and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_on": true
+        },
+        {
+          "id": "coffee_maker_1",
+          "location_id": "on:break_room_table_1"
         }
       ]
     }

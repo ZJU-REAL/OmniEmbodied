@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the admin_tablet_1 on the trophy_pedestal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "admin_tablet_1",
+          "location_id": "on:trophy_pedestal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the gaming_pod_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "gaming_pod_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black gaming pod with multicolor RGB lighting and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gaming_pod_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item in the backstage_tech_storage and move it to the broadcast_control_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_cabinet_1",
+          "location_id": "in:broadcast_control_room"
+        }
+      ]
+    },
     {
       "task_description": "Repair the malfunctioning_mouse_1 using the toolkit_1.",
       "task_category": "tool_use",
@@ -20,6 +70,108 @@
         {
           "id": "malfunctioning_mouse_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser_1 to clean the whiteboard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the broken monitor in the backstage_tech_storage and repair it using the toolkit_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_monitor_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_spray_1 to wash the energy_drink_can_1 and then place it in the hydration_station_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "energy_drink_can_1",
+          "is_washed": false
+        },
+        {
+          "id": "energy_drink_can_1",
+          "location_id": "in:hydration_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the jumbotron_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "jumbotron_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the alarm_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_cabinet_1 to the broadcast_control_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_cabinet_1",
+          "location_id": "in:broadcast_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the shelving_unit_1 to the admin_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:admin_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the streaming_rig_1 to the main_gaming_arena and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "streaming_rig_1",
+          "location_id": "in:main_gaming_arena"
+        },
+        {
+          "id": "streaming_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the trophy_pedestal_1 to the viewer_lounge and place the admin_tablet_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "trophy_pedestal_1",
+          "location_id": "in:viewer_lounge"
+        },
+        {
+          "id": "admin_tablet_1",
+          "location_id": "on:trophy_pedestal_1"
         }
       ]
     }

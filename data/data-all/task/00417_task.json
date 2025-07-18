@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the conference_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the main_stats_display_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "main_stats_display_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the black coffee mug and place it in the scouting_room.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "coffee_mug_1",
           "location_id": "in:scouting_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the workstation_cluster_1 and place it on the conference_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken_force_plate_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_force_plate_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Mount the robotic_pitching_machine_1 using the calibration_wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "robotic_pitching_machine_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_1 to repair the printer_1 with the blinking error light.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with the modified algorithm data and sync it with the AI Terminal.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ai_terminal_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to sync the EKG machine with the AI Terminal.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ekg_machine_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the robotic_pitching_machine_1 to the data_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_pitching_machine_1",
+          "location_id": "in:data_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the motion_capture_rig_1 to the scouting_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_capture_rig_1",
+          "location_id": "in:scouting_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server_rack_1 to the biomechanics_bay and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:biomechanics_bay"
+        },
+        {
+          "id": "server_rack_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the medical_station_1 to the data_hub and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_station_1",
+          "location_id": "in:data_hub"
+        },
+        {
+          "id": "medical_station_1",
+          "is_open": true
         }
       ]
     }

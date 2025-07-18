@@ -6,9 +6,55 @@
       "max_grasp_limit": 1,
       "max_weight": 50.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the faulty_raid_array_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "faulty_raid_array_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open the locked_maintenance_panel_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "locked_maintenance_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black RAID drive labeled 'Backup Array Zeta-9' and place it in server_rack_2.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "replacement_raid_drive_1",
+          "location_id": "in:server_rack_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flashing red faulty RAID array and move it to the maintenance bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "faulty_raid_array_1",
+          "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
     {
       "task_description": "Use the hex-key set to open the locked maintenance panel on server_rack_1.",
       "task_category": "tool_use",
@@ -16,6 +62,56 @@
         {
           "id": "locked_maintenance_panel_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to open the locked maintenance panel on server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_maintenance_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the climate control unit to the maintenance bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "climate_control_unit_1",
+          "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the surveillance monitor to the data archive storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "surveillance_monitor_1",
+          "location_id": "in:data_archive_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server rack to the security checkpoint for inspection.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:security_checkpoint"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy shelving unit to the maintenance bay for repairs.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "in:maintenance_bay"
         }
       ]
     }

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the override_key_1 on the holotable_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "override_key_1",
+          "location_id": "on:holotable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the logbook_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "logbook_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black headset and place it in the communications_nook.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,108 @@
         {
           "id": "headset_1",
           "location_id": "in:communications_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the coolant tank with the label 'DO NOT OPEN - BIOHAZARD' and move it to the data_analysis_corner.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_tank_1",
+          "location_id": "in:data_analysis_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the phillips_screwdriver_1 to unscrew the fuel_valve_switch_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fuel_valve_switch_1",
+          "is_screwed_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keycard_1 to lock the access_panel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "access_panel_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_wrench_1 to unscrew the thruster_nozzle_1 and then place it on the tool_chest_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "thruster_nozzle_1",
+          "location_id": "on:tool_chest_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the staple_remover_1 to unstaple the schematic_pile_1 and then place it on the whiteboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "schematic_pile_1",
+          "is_stapled": false,
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the engine using the engine_start_button_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_start_button_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_drawer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_drawer_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_lift_1 to the main_control_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:main_control_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the engineering_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:engineering_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the coolant_tank_2 to the data_analysis_corner and use the fire_extinguisher_1 to secure it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "coolant_tank_2",
+          "location_id": "in:data_analysis_corner",
+          "is_alight": false
         }
       ]
     }

@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place master_tape_reel_1 on the coffee_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_tape_reel_1",
+          "location_id": "on:coffee_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 in the headphone_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:headphone_rack_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black headphones and place them on the rca_mixing_console_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,108 @@
         {
           "id": "functional_headphones_1",
           "location_id": "on:rca_mixing_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the extremely rare acetate disc and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sun_sessions_acetate_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the faulty_channel_strip_1 using the vacuum_tube_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "faulty_channel_strip_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the record_cleaning_brush_1 to clean the dusty_turntable_1 and then place it on the coffee_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dusty_turntable_1",
+          "is_on": true
+        },
+        {
+          "id": "dusty_turntable_1",
+          "location_id": "on:coffee_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the rca_mixing_console_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rca_mixing_console_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial_shelving_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wooden_shipping_crate_1 to the listening_lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wooden_shipping_crate_1",
+          "location_id": "in:listening_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the jukebox_1 to the repair_tool_bench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "jukebox_1",
+          "location_id": "in:repair_tool_bench"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the altec_lansing_speakers_1 to the listening_lounge and use the vacuum_tube_1 to repair them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "altec_lansing_speakers_1",
+          "location_id": "in:listening_lounge"
+        },
+        {
+          "id": "altec_lansing_speakers_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked_filing_cabinet_1 to the repair_tool_bench and use the filing_cabinet_key_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_filing_cabinet_1",
+          "location_id": "in:repair_tool_bench"
+        },
+        {
+          "id": "locked_filing_cabinet_1",
+          "is_open": true
         }
       ]
     }

@@ -6,9 +6,55 @@
       "max_grasp_limit": 2.0,
       "max_weight": 30.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2.0,
+      "max_weight": 30.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the lead_weight_1 on the scales_of_justice_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "lead_weight_1",
+          "location_id": "on:scales_of_justice_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the alabaster_dish_1 on the scales_of_justice_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "alabaster_dish_1",
+          "location_id": "on:scales_of_justice_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, gray item in the hall_of_weighing and place it on the scales_of_justice_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lead_weight_1",
+          "location_id": "on:scales_of_justice_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white, alabaster item in the hall_of_weighing and place it on the scales_of_justice_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "alabaster_dish_1",
+          "location_id": "on:scales_of_justice_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the quill_1 to sign the accusation_ledger_1.",
       "task_category": "tool_use",
@@ -16,6 +62,112 @@
         {
           "id": "accusation_ledger_1",
           "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the magnifying_glass_1 to verify the case_scroll_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "case_scroll_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife_1 to chop the coffee_beans_1 and then place them in the coffee_machine_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_beans_1",
+          "is_chopped": true
+        },
+        {
+          "id": "coffee_beans_1",
+          "location_id": "in:coffee_machine_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to sign the clerks_logbook_1 and then place it in the key_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clerks_logbook_1",
+          "is_signed": true
+        },
+        {
+          "id": "clerks_logbook_1",
+          "location_id": "in:key_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the evidence_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the scales_of_justice_1 to the archive_of_oaths.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "scales_of_justice_1",
+          "location_id": "in:archive_of_oaths"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the testimony_shelf_1 to the hall_of_weighing.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "testimony_shelf_1",
+          "location_id": "in:hall_of_weighing"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server_rack_1 that is overheating to the clerks_atrium and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:clerks_atrium"
+        },
+        {
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy divine_catalog_1 that is gray to the hall_of_weighing and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "divine_catalog_1",
+          "location_id": "in:hall_of_weighing"
+        },
+        {
+          "id": "divine_catalog_1",
+          "is_open": true
         }
       ]
     }

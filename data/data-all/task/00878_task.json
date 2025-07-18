@@ -6,9 +6,35 @@
       "max_grasp_limit": 0.5,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 0.5,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place floppy_disk_a7_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "floppy_disk_a7_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue glass paperweight in the storage_junk_pile.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blue_paperweight_1",
+          "location_id": "in:storage_junk_pile"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, flickering device on the steel_workbench_1 and turn it off.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,86 @@
         {
           "id": "oscilloscope_1",
           "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red, notched floppy disk and place it in the tape_restoration_station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "floppy_disk_master_1",
+          "location_id": "in:tape_restoration_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the degausser_1 to scrub the floppy_disk_b12_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "floppy_disk_b12_1",
+          "is_scrubbed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to repair the broken_server_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_server_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the massive reel-to-reel reader to the main_workbench_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reel_to_reel_reader_1",
+          "location_id": "in:main_workbench_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked server rack to the whiteboard_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:whiteboard_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "holographic_projector_1",
+          "location_id": "in:tape_restoration_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server rack that is locked to the storage_junk_pile.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:storage_junk_pile"
         }
       ]
     }

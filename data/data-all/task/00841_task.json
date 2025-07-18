@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place core_sampler_1 on lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "core_sampler_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the contaminated sample bag labeled 'High Na – DO NOT OPEN OUTSIDE LAB' in the sample_crate_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "contaminated_sample_bag_1",
+          "location_id": "in:sample_crate_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel item in the field_sampling_zone and place it in the outdoor_processing_yard.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "core_sampler_1",
+          "location_id": "in:outdoor_processing_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass item with a blue cap and place it on the microscope_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "reagent_bottle_3",
+          "location_id": "on:microscope_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken core_sampler_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "core_sampler_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the electrolyte_meter_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "electrolyte_meter_1",
+          "is_calibrated": true
+        }
+      ]
+    },
     {
       "task_description": "Use the calibration tool to calibrate the concrete calibration block and place it in the main_lab_hut.",
       "task_category": "compound_reasoning",
@@ -21,6 +91,78 @@
           "id": "calibration_block_1",
           "is_calibrated": true,
           "location_id": "in:main_lab_hut"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge using the toolbox and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the portable_weather_station_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "portable_weather_station_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked sample_fridge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sample_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic soil press to the main_lab_hut.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_soil_press_1",
+          "location_id": "in:main_lab_hut"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the water tank drum to the outdoor_processing_yard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_tank_drum_1",
+          "location_id": "in:outdoor_processing_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy solar panel to the equipment_shed and repair it using the toolbox.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "solar_panel_1",
+          "location_id": "in:equipment_shed",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy lab bench to the staff_quarters and clean it using the vacuum cleaner.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_bench_1",
+          "location_id": "in:staff_quarters",
+          "is_vacuumed": false
         }
       ]
     }

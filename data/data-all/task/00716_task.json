@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the powdered_sugar_shaker_1 on the stainless_steel_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "powdered_sugar_shaker_1",
+          "location_id": "on:stainless_steel_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the unsigned_cds_1 on the merch_booth_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "unsigned_cds_1",
+          "location_id": "on:merch_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the dining_area and place it on the merch_booth_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "eodm_hot_sauce_1",
+          "location_id": "on:merch_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black item in the server_station that provides typing abilities and place it on the ticket_printer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "on:ticket_printer_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench_1 to grind the powdered_sugar_shaker_1.",
       "task_category": "tool_use",
@@ -20,6 +70,98 @@
         {
           "id": "powdered_sugar_shaker_1",
           "is_ground": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sharpie_1 to erase the writing on the unsigned_cds_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "unsigned_cds_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keyboard_1 to type on the ticket_printer_1 and then place it on the server_station.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ticket_printer_1",
+          "is_typed": true
+        },
+        {
+          "id": "ticket_printer_1",
+          "location_id": "in:server_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only broken item in the storage_closet, use the wrench_1 to smash it, and then place it on the stainless_steel_table_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "milkshake_machine_1",
+          "is_smashed": true
+        },
+        {
+          "id": "milkshake_machine_1",
+          "location_id": "on:stainless_steel_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the walk_in_fridge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the jukebox_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "jukebox_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hooburito_press_1 to the prep_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hooburito_press_1",
+          "location_id": "in:prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the vip_sauce_shelf_1 to the dining_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vip_sauce_shelf_1",
+          "location_id": "in:dining_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the jukebox_1 to the storage_closet and stop its playback.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "jukebox_1",
+          "location_id": "in:storage_closet"
+        },
+        {
+          "id": "jukebox_1",
+          "is_playing": false
         }
       ]
     }

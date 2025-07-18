@@ -147,12 +147,20 @@ def main():
     # 场景选择逻辑：如果命令行没有明确指定（使用默认值），则尝试使用配置文件
     if args.scenarios == '00001':  # 默认值，检查配置文件
         scenario_selection = parallel_settings.get('scenario_selection', {})
-        if scenario_selection.get('mode') == 'range':
+        selection_mode = scenario_selection.get('mode', 'range')
+
+        if selection_mode == 'all':
+            scenarios = 'all'
+        elif selection_mode == 'range':
             range_config = scenario_selection.get('range', {})
             start = range_config.get('start', '00001')
             end = range_config.get('end', '00001')
             scenarios = f"{start}-{end}" if start != end else start
+        elif selection_mode == 'list':
+            scenario_list = scenario_selection.get('list', ['00001'])
+            scenarios = ','.join(scenario_list)
         else:
+            logger.warning(f"未知的场景选择模式: {selection_mode}, 使用默认场景")
             scenarios = args.scenarios
     else:
         scenarios = args.scenarios

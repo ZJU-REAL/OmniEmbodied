@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the calibration_device_1 on the lab_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_device_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the wall_mounted_display_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wall_mounted_display_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on the incident_triage_console_1 and place it in the verification_lab.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "label_printer_1",
           "location_id": "in:verification_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only glass item with a blue cap and place it on the lab_bench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_vial_1",
+          "location_id": "on:lab_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keycard_1 to unlock the evidence_drawer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "evidence_drawer_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the radiation_detector_1 to pump the chemical_vial_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chemical_vial_1",
+          "is_pumped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the verification_lab and use the calibration_device_1 to turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "magnetic_stirrer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest, steel container in the data_archive and use the keycard_1 to unlock it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the backup_generator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_generator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sample_storage_unit_1 to the main_monitoring_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sample_storage_unit_1",
+          "location_id": "in:main_monitoring_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the interactive_map_table_1 to the verification_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "interactive_map_table_1",
+          "location_id": "in:verification_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server_rack_1 that is locked to the field_gear_storage and unlock it using the keycard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:field_gear_storage"
+        },
+        {
+          "id": "server_rack_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy fume_hood_1 that is open to the data_archive and close it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:data_archive"
+        },
+        {
+          "id": "fume_hood_1",
+          "is_open": false
         }
       ]
     }

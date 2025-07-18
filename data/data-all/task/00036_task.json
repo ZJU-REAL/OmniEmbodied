@@ -1,0 +1,198 @@
+{
+  "task_background": "Prepare the Community Rehabilitation Center for daily operations and patient care.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place patient_tablet_1 on the reception_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "patient_tablet_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the donation_box_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "donation_box_1",
+          "states": {
+            "is_open": false
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black Samsung tablet and recharge it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "patient_tablet_1",
+          "states": {
+            "is_charged": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue personal journal and hide it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "personal_journal_1",
+          "states": {
+            "is_hidden": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to open the medication_cabinet_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "medication_cabinet_1",
+          "states": {
+            "is_open": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to wipe the water_cooler_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "water_cooler_1",
+          "states": {
+            "is_loaded": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red emergency Narcan kit and use the screwdriver_1 to open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "narcan_kit_1",
+          "states": {
+            "is_open": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black blood pressure cuff and use the stethoscope_1 to calibrate it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "blood_pressure_cuff_1",
+          "states": {
+            "is_calibrated": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unstack the stacked_chairs_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stacked_chairs_1",
+          "states": {
+            "is_stacked": false
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to load the sharps_bin_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sharps_bin_1",
+          "states": {
+            "is_loaded": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy oak reception desk to the outdoor courtyard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reception_desk_1",
+          "location_id": "in:outdoor_courtyard"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the medical exam table to the group therapy room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "exam_table_1",
+          "location_id": "in:group_therapy_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crate of medical supplies to the medical exam room and use the screwdriver_1 to open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medical_supplies_crate_1",
+          "location_id": "in:medical_exam_room"
+        },
+        {
+          "id": "medical_supplies_crate_1",
+          "states": {
+            "is_open": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the water cooler to the outdoor courtyard and load it with the water_bottle_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_cooler_1",
+          "location_id": "in:outdoor_courtyard"
+        },
+        {
+          "id": "water_cooler_1",
+          "states": {
+            "is_loaded": true
+          }
+        }
+      ]
+    }
+  ],
+  "scene_id": "00036"
+}

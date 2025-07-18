@@ -1,905 +1,703 @@
 {
-  "description": "A sprawling, cluttered tech support warehouse repurposed as a temporary '64-bit Driver Migration Center' during the chaotic rollout of Windows XP 64-bit. Teams of technicians, scavengers, and logistics workers collaborate to recover data, downgrade systems, and piece together functional builds from salvaged parts.",
+  "description": "A forgotten server room from the early 2000s, buried deep within the basement of a defunct tech company. The room is a time capsule of early web infrastructure, filled with outdated servers, tangled cables, and dusty documentation.",
   "rooms": [
     {
-      "id": "main_sorting_area",
-      "name": "Main Sorting Area",
+      "id": "main_server_cluster",
+      "name": "Main Server Cluster",
       "properties": {
-        "type": "entrance"
+        "type": "server_room"
       },
       "connected_to_room_ids": [
-        "salvage_parts_depot",
-        "downgrade_workstations",
-        "microsoft_compliance_office",
-        "backroom_hacker_corner"
+        "network_operations_desk",
+        "storage_spare_parts_corner"
       ]
     },
     {
-      "id": "salvage_parts_depot",
-      "name": "Salvage & Parts Depot",
+      "id": "network_operations_desk",
+      "name": "Network Operations Desk",
+      "properties": {
+        "type": "workstation"
+      },
+      "connected_to_room_ids": [
+        "main_server_cluster",
+        "storage_spare_parts_corner"
+      ]
+    },
+    {
+      "id": "storage_spare_parts_corner",
+      "name": "Storage & Spare Parts Corner",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
-        "main_sorting_area",
-        "downgrade_workstations"
-      ]
-    },
-    {
-      "id": "downgrade_workstations",
-      "name": "Downgrade Workstations",
-      "properties": {
-        "type": "workshop"
-      },
-      "connected_to_room_ids": [
-        "main_sorting_area",
-        "salvage_parts_depot"
-      ]
-    },
-    {
-      "id": "microsoft_compliance_office",
-      "name": "Microsoft Compliance Office",
-      "properties": {
-        "type": "office"
-      },
-      "connected_to_room_ids": [
-        "main_sorting_area"
-      ]
-    },
-    {
-      "id": "backroom_hacker_corner",
-      "name": "Backroom Hacker Corner",
-      "properties": {
-        "type": "workshop"
-      },
-      "connected_to_room_ids": [
-        "main_sorting_area"
+        "main_server_cluster",
+        "network_operations_desk"
       ]
     }
   ],
   "objects": [
     {
-      "id": "weigh_in_conveyor_belt_1",
-      "name": "Weigh-in Conveyor Belt",
+      "id": "server_rack_a_1",
+      "name": "Server Rack A (Primary Storage Unit)",
       "type": "FURNITURE",
-      "location_id": "in:main_sorting_area",
+      "location_id": "in:main_server_cluster",
       "properties": {
         "size": [
-          3.0,
-          1.5,
-          0.8
-        ],
-        "weight": 75.0,
-        "is_container": true,
-        "material": "metal",
-        "condition": "rusted"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "industrial_shelving_unit_1",
-      "name": "Industrial Shelving Unit",
-      "type": "FURNITURE",
-      "location_id": "in:main_sorting_area",
-      "properties": {
-        "size": [
-          2.5,
-          0.8,
-          2.2
-        ],
-        "weight": 120.0,
-        "is_container": true,
-        "material": "metal",
-        "condition": "warped"
-      },
-      "states": {}
-    },
-    {
-      "id": "whiteboard_1",
-      "name": "Wall-mounted Whiteboard",
-      "type": "FURNITURE",
-      "location_id": "in:main_sorting_area",
-      "properties": {
-        "size": [
-          1.8,
-          1.2,
-          0.05
-        ],
-        "weight": 15.0,
-        "is_container": false,
-        "material": "plastic",
-        "inscription": "Priority Systems – ATI Cards Only"
-      },
-      "states": {
-        "is_written_on": false
-      }
-    },
-    {
-      "id": "dell_optiplex_gx260_1",
-      "name": "Dell OptiPlex GX260",
-      "type": "FURNITURE",
-      "location_id": "on:weigh_in_conveyor_belt_1",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 12.0,
-        "is_container": true,
-        "brand": "Dell",
-        "model_number": "GX260",
-        "condition": "bricked"
-      },
-      "states": {
-        "is_open": false,
-        "is_verified": false
-      }
-    },
-    {
-      "id": "custom_gaming_rig_1",
-      "name": "Custom Gaming Rig",
-      "type": "FURNITURE",
-      "location_id": "on:weigh_in_conveyor_belt_1",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.2
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "brand": "Custom",
-        "condition": "void_warranty"
-      },
-      "states": {
-        "is_open": true,
-        "is_verified": false
-      }
-    },
-    {
-      "id": "work_order_clipboard_1",
-      "name": "Work Order Clipboard",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_unit_1",
-      "properties": {
-        "weight": 0.5,
-        "material": "plastic",
-        "condition": "coffee_stained",
-        "provides_abilities": [
-          "write"
-        ]
-      },
-      "states": {
-        "is_written_on": false
-      }
-    },
-    {
-      "id": "barcode_scanner_1",
-      "name": "Barcode Scanner",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_unit_1",
-      "properties": {
-        "weight": 0.3,
-        "brand": "Zebra",
-        "condition": "frayed_cable",
-        "provides_abilities": [
-          "scan"
-        ]
-      },
-      "states": {
-        "is_charged": false,
-        "is_scanned": false
-      }
-    },
-    {
-      "id": "stapler_1",
-      "name": "Stapler",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_unit_1",
-      "properties": {
-        "weight": 0.4,
-        "brand": "Swingline",
-        "condition": "jammed"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "fluorescent_light_1",
-      "name": "Overhead Fluorescent Light",
-      "type": "FURNITURE",
-      "location_id": "in:main_sorting_area",
-      "properties": {
-        "size": [
-          1.2,
-          0.1,
-          0.1
-        ],
-        "weight": 5.0,
-        "is_container": false,
-        "condition": "flickering"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "xp_poster_1",
-      "name": "Peeling 'Upgrade to XP 64-bit!' Poster",
-      "type": "ITEM",
-      "location_id": "in:main_sorting_area",
-      "properties": {
-        "weight": 0.1,
-        "material": "paper",
-        "condition": "torn",
-        "brand": "Microsoft"
-      },
-      "states": {}
-    },
-    {
-      "id": "employee_plaque_1",
-      "name": "Dusty 'Employee of the Month' Plaque",
-      "type": "ITEM",
-      "location_id": "in:main_sorting_area",
-      "properties": {
-        "weight": 0.8,
-        "material": "wood",
-        "condition": "dusty",
-        "inscription": "March 2003"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_mug_1",
-      "name": "Coffee Mug 'World's Best Dad'",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_unit_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "ceramic",
-        "color": "white",
-        "inscription": "World's Best Dad"
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "coffee_mug_2",
-      "name": "Coffee Mug 'Property of Tech Support'",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_unit_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "ceramic",
-        "color": "black",
-        "inscription": "Property of Tech Support"
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "metal_shelves_1",
-      "name": "Floor-to-ceiling Metal Shelves",
-      "type": "FURNITURE",
-      "location_id": "in:salvage_parts_depot",
-      "properties": {
-        "size": [
-          3.0,
-          0.6,
-          2.5
+          2.0,
+          1.0,
+          2.0
         ],
         "weight": 150.0,
         "is_container": true,
         "material": "metal",
-        "condition": "rusted"
+        "color": "black",
+        "model_number": "SR-2000"
       },
-      "states": {}
+      "states": {
+        "is_open": false
+      }
     },
     {
-      "id": "rolling_cart_1",
-      "name": "Industrial Rolling Cart",
+      "id": "server_rack_b_1",
+      "name": "Server Rack B (Backup & Redundancy)",
       "type": "FURNITURE",
-      "location_id": "in:salvage_parts_depot",
+      "location_id": "in:main_server_cluster",
       "properties": {
         "size": [
-          1.2,
-          0.8,
-          0.9
+          2.0,
+          1.0,
+          2.0
         ],
-        "weight": 25.0,
+        "weight": 140.0,
         "is_container": true,
         "material": "metal",
-        "condition": "wobbly_wheel"
-      },
-      "states": {}
-    },
-    {
-      "id": "ati_driver_bin_1",
-      "name": "ATI 9800 Pro – 64-bit Beta Bin",
-      "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "blue",
-        "label": "ATI 9800 Pro – 64-bit Beta"
+        "color": "black",
+        "model_number": "SR-2000"
       },
       "states": {
-        "is_labeled": false
+        "is_open": false
       }
     },
     {
-      "id": "nvidia_driver_bin_1",
-      "name": "NVIDIA FX Series – Unofficial Mod Bin",
-      "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "color": "green",
-        "label": "NVIDIA FX Series – Unofficial Mod"
-      },
-      "states": {
-        "is_labeled": false
-      }
-    },
-    {
-      "id": "motherboard_pile_1",
-      "name": "Obsolete Motherboard Pile",
+      "id": "archive_01_server_1",
+      "name": "ARCHIVE-01 Server",
       "type": "FURNITURE",
-      "location_id": "in:salvage_parts_depot",
+      "location_id": "in:server_rack_a_1",
       "properties": {
         "size": [
-          1.0,
-          1.0,
-          0.5
+          0.5,
+          0.5,
+          0.8
         ],
-        "weight": 30.0,
-        "is_container": true,
-        "material": "fiberglass",
-        "condition": "bulging_capacitors"
+        "weight": 75.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black",
+        "label": "DO NOT POWER DOWN"
       },
-      "states": {}
+      "states": {
+        "is_running": true
+      }
     },
     {
-      "id": "magnifying_lamp_1",
-      "name": "Magnifying Lamp",
-      "type": "ITEM",
-      "location_id": "on:rolling_cart_1",
+      "id": "faulty_network_switch_1",
+      "name": "Faulty Network Switch",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
       "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "gray",
+        "label": "Port 3 = DEAD"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "emergency_shutdown_button_1",
+      "name": "Emergency Shutdown Button",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
         "weight": 2.0,
+        "is_container": false,
+        "material": "glass",
+        "color": "red",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
         "material": "metal",
-        "condition": "dim_bulb",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "multicolor",
+        "brand": "Craftsman",
+        "provides_abilities": [
+          "unscrew",
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "yellow",
+        "brand": "Fluke",
         "provides_abilities": [
           "verify"
         ]
       },
-      "states": {
-        "is_on": false
-      }
+      "states": {}
     },
     {
-      "id": "label_maker_1",
-      "name": "Label Maker",
-      "type": "ITEM",
-      "location_id": "on:rolling_cart_1",
+      "id": "cable_spool_1",
+      "name": "Cable Spool",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
       "properties": {
-        "weight": 0.7,
-        "brand": "Brother",
-        "condition": "out_of_tape",
-        "provides_abilities": [
-          "label"
-        ]
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "pc_gamer_magazines_1",
-      "name": "Stack of 1999 PC Gamer Magazines",
-      "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
-      "properties": {
-        "weight": 3.0,
-        "material": "paper",
-        "condition": "yellowed"
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "condition": "tangled"
       },
       "states": {}
     },
     {
-      "id": "windows_98_sticker_1",
-      "name": "Broken 'Windows 98 Compatible' Sticker",
-      "type": "ITEM",
-      "location_id": "in:salvage_parts_depot",
+      "id": "temperature_gauge_1",
+      "name": "Temperature Gauge",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
       "properties": {
-        "weight": 0.05,
-        "material": "vinyl",
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white",
+        "reading": "OVERHEAT"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "y2k_survival_guide_poster_1",
+      "name": "Y2K Survival Guide Poster",
+      "type": "ITEM",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "material": "paper",
         "condition": "peeling"
       },
       "states": {}
     },
     {
-      "id": "steel_workbench_1",
-      "name": "Heavy Steel Workbench",
+      "id": "dusty_coffee_mug_1",
+      "name": "Dusty Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "ceramic",
+        "inscription": "WORLD'S BEST SYSADMIN",
+        "contents": "loose screws"
+      },
+      "states": {}
+    },
+    {
+      "id": "obsolete_floppy_disks_1",
+      "name": "Obsolete Floppy Disks",
+      "type": "ITEM",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "l_shaped_workstation_1",
+      "name": "L-Shaped Workstation",
       "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
+      "location_id": "in:network_operations_desk",
       "properties": {
         "size": [
-          2.0,
-          1.0,
-          0.9
+          1.8,
+          1.2,
+          0.7
         ],
-        "weight": 80.0,
+        "weight": 40.0,
         "is_container": true,
-        "material": "steel",
+        "material": "wood",
+        "color": "brown",
         "condition": "scratched"
       },
       "states": {}
     },
     {
-      "id": "overhead_parts_bins_1",
-      "name": "Overhead Parts Bins",
+      "id": "patch_panel_1",
+      "name": "Patch Panel",
       "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
+      "location_id": "in:network_operations_desk",
       "properties": {
         "size": [
-          1.5,
           0.5,
-          0.5
+          0.3,
+          0.1
         ],
-        "weight": 20.0,
-        "is_container": true,
-        "material": "plastic",
-        "labels": [
-          "IDE Cables",
-          "PS/2 Mice",
-          "Floppy Drives"
-        ]
+        "weight": 3.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "gray",
+        "label": "unlabeled"
       },
       "states": {}
     },
     {
-      "id": "downgrade_toolkit_1",
-      "name": "Downgrade Toolkit",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "id": "misconfigured_router_1",
+      "name": "Misconfigured Router",
+      "type": "FURNITURE",
+      "location_id": "in:network_operations_desk",
       "properties": {
-        "weight": 2.5,
-        "material": "plastic",
-        "contents": [
-          "USB floppy drive",
-          "32-bit XP disc",
-          "license key notepad"
+        "size": [
+          0.3,
+          0.2,
+          0.1
         ],
-        "provides_abilities": [
-          "verify",
-          "sync"
-        ]
+        "weight": 1.5,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "label": "DNS ERROR"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "important_logbook_1",
+      "name": "Important Logbook",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "material": "paper",
+        "content": "failed redirects (www.example.com → example.com)"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "admin_keycard_1",
+      "name": "Admin Keycard",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "label": "ADMIN"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "gray",
+        "material": "plastic",
+        "condition": "out of tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "external_hdd_1",
+      "name": "External HDD",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "material": "plastic",
+        "condition": "unrecognized"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "beige",
+        "material": "plastic",
+        "condition": "off-hook"
+      },
+      "states": {}
+    },
+    {
+      "id": "stale_pizza_box_1",
+      "name": "Stale Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:network_operations_desk",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "cardboard",
+        "condition": "stale"
+      },
+      "states": {}
+    },
+    {
+      "id": "geeky_sticker_collection_1",
+      "name": "Geeky Sticker Collection",
+      "type": "ITEM",
+      "location_id": "in:network_operations_desk",
+      "properties": {
+        "weight": 0.1,
+        "color": "multicolor",
+        "material": "vinyl",
+        "content": "HTTPS > HTTP"
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_jam_notice_1",
+      "name": "Paper Jam Notice",
+      "type": "ITEM",
+      "location_id": "in:network_operations_desk",
+      "properties": {
+        "weight": 0.05,
+        "color": "yellow",
+        "material": "paper",
+        "content": "Paper Jam"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "banned_recovery_pc_1",
-      "name": "Banned Recovery PC",
+      "id": "parts_shelving_unit_1",
+      "name": "Parts Shelving Unit",
       "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
+      "location_id": "in:storage_spare_parts_corner",
       "properties": {
         "size": [
-          0.5,
-          0.5,
-          0.2
+          1.5,
+          0.6,
+          1.8
         ],
-        "weight": 10.0,
+        "weight": 50.0,
         "is_container": true,
-        "condition": "hidden",
-        "os": "pirated XP ISO"
+        "material": "metal",
+        "color": "gray"
       },
-      "states": {
-        "is_hidden": false
-      }
+      "states": {}
     },
     {
-      "id": "crt_monitor_1",
-      "name": "CRT Monitor",
+      "id": "recovery_key_1",
+      "name": "Recovery Key",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:storage_spare_parts_corner",
       "properties": {
-        "weight": 15.0,
-        "brand": "ViewSonic",
-        "condition": "worn_degauss_button",
-        "provides_abilities": [
-          "verify"
-        ],
-        "is_container": true
+        "weight": 0.05,
+        "color": "silver",
+        "material": "metal",
+        "label": "Recovery Key"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_hard_drive_1",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "metal",
+        "label": "Backup 2003 – DO NOT FORMAT"
+      },
+      "states": {}
+    },
+    {
+      "id": "zip_drive_1",
+      "name": "Zip Drive",
+      "type": "ITEM",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.6,
+        "color": "blue",
+        "material": "plastic",
+        "condition": "useless"
       },
       "states": {
-        "is_on": false
+        "is_connected": true
       }
     },
     {
-      "id": "anti_static_wrist_strap_1",
-      "name": "Anti-static Wrist Strap",
+      "id": "box_of_blank_cds_1",
+      "name": "Box of Blank CDs",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.7,
+        "color": "clear",
+        "material": "plastic",
+        "condition": "mixed"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_keyboard_1",
+      "name": "Broken Keyboard",
+      "type": "ITEM",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.9,
+        "color": "beige",
+        "material": "plastic",
+        "condition": "missing W key"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_rubiks_cube_1",
+      "name": "Dusty Rubik's Cube",
+      "type": "ITEM",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "plastic",
+        "condition": "unsolved"
+      },
+      "states": {}
+    },
+    {
+      "id": "hvac_ventilation_unit_1",
+      "name": "HVAC Ventilation Unit",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white",
+        "condition": "clogged"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:storage_spare_parts_corner",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "metal",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "writing_instrument_1",
+      "name": "Writing Instrument",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_workstation_1",
       "properties": {
         "weight": 0.1,
-        "material": "fabric",
-        "condition": "dangling"
-      },
-      "states": {
-        "is_buckled": true
-      }
-    },
-    {
-      "id": "sticky_note_1",
-      "name": "Sticky Note on Monitor",
-      "type": "ITEM",
-      "location_id": "on:crt_monitor_1",
-      "properties": {
-        "weight": 0.01,
-        "material": "paper",
-        "inscription": "DO NOT TOUCH – BIOS mod in progress",
+        "color": "blue",
+        "material": "plastic",
         "provides_abilities": [
           "write"
         ]
       },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:network_operations_desk",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "white",
+        "condition": "non-functional"
+      },
       "states": {
-        "is_written_on": false
+        "is_printed": false
       }
     },
     {
-      "id": "no_food_sign_1",
-      "name": "Dusty 'No Food or Drink' Sign",
+      "id": "syringe_1",
+      "name": "Syringe",
       "type": "ITEM",
-      "location_id": "in:downgrade_workstations",
+      "location_id": "in:tool_cart_1",
       "properties": {
         "weight": 0.2,
+        "color": "clear",
         "material": "plastic",
-        "condition": "ignored"
-      },
-      "states": {}
-    },
-    {
-      "id": "microsoft_rep_desk_1",
-      "name": "Microsoft Rep Desk",
-      "type": "FURNITURE",
-      "location_id": "in:microsoft_compliance_office",
-      "properties": {
-        "size": [
-          1.5,
-          0.8,
-          0.75
-        ],
-        "weight": 25.0,
-        "is_container": true,
-        "material": "particle_board",
-        "brand": "IKEA"
-      },
-      "states": {}
-    },
-    {
-      "id": "license_void_stamper_1",
-      "name": "License Void Stamper",
-      "type": "ITEM",
-      "location_id": "on:microsoft_rep_desk_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "metal",
-        "brand": "Microsoft",
         "provides_abilities": [
-          "verify"
+          "inject"
         ]
       },
       "states": {}
     },
     {
-      "id": "policy_binder_1",
-      "name": "Policy Binder",
+      "id": "iron_1",
+      "name": "Iron",
       "type": "ITEM",
-      "location_id": "on:microsoft_rep_desk_1",
+      "location_id": "in:storage_spare_parts_corner",
       "properties": {
         "weight": 1.2,
-        "material": "paper",
-        "condition": "thick",
+        "color": "white",
+        "material": "metal",
         "provides_abilities": [
-          "scan"
+          "iron"
         ]
       },
-      "states": {
-        "is_open": false,
-        "is_scanned": false
-      }
+      "states": {}
     },
     {
-      "id": "hacker_workbench_1",
-      "name": "Hacker Workbench",
-      "type": "FURNITURE",
-      "location_id": "in:backroom_hacker_corner",
+      "id": "brush_1",
+      "name": "Brush",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
       "properties": {
-        "size": [
-          1.8,
-          0.9,
-          0.8
-        ],
-        "weight": 30.0,
-        "is_container": true,
+        "weight": 0.3,
+        "color": "brown",
         "material": "wood",
-        "condition": "cluttered"
-      },
-      "states": {}
-    },
-    {
-      "id": "driver_mod_pc_1",
-      "name": "Driver Mod PC",
-      "type": "FURNITURE",
-      "location_id": "on:hacker_workbench_1",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.2
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "os": "custom_modded_drivers"
-      },
-      "states": {
-        "is_on": false,
-        "is_verified": false
-      }
-    },
-    {
-      "id": "key_generator_1",
-      "name": "License Key Generator",
-      "type": "ITEM",
-      "location_id": "on:hacker_workbench_1",
-      "properties": {
-        "weight": 0.5,
-        "material": "plastic",
-        "condition": "gray_market",
-        "provides_abilities": [
-          "verify"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "server_rack_of_doom_1",
-      "name": "Server Rack of Doom",
-      "type": "FURNITURE",
-      "location_id": "in:salvage_parts_depot",
-      "properties": {
-        "size": [
-          2.0,
-          1.0,
-          0.8
-        ],
-        "weight": 600.0,
-        "is_container": true,
-        "material": "metal",
-        "contents": [
-          "RAID controllers",
-          "SCSI drives"
-        ]
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "legacy_driver_archive_1",
-      "name": "Legacy Driver Archive Box",
-      "type": "ITEM",
-      "location_id": "in:server_rack_of_doom_1",
-      "properties": {
-        "weight": 5.0,
-        "material": "cardboard",
-        "condition": "buried",
-        "contents": [
-          "rare_drivers",
-          "obsolete_manuals"
-        ]
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "beige_pc_1",
-      "name": "Beige PC (Tested)",
-      "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "color": "beige",
-        "label": "TESTED",
-        "condition": "missing_side_panel",
-        "inscription": "DO NOT FLASH BIOS – CORRUPTED"
-      },
-      "states": {
-        "is_open": true,
-        "is_verified": false
-      }
-    },
-    {
-      "id": "beige_pc_2",
-      "name": "Beige PC (Untested)",
-      "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "color": "beige",
-        "condition": "missing_side_panel"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "beige_pc_3",
-      "name": "Beige PC (Untested)",
-      "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "color": "beige",
-        "condition": "missing_side_panel"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "beige_pc_4",
-      "name": "Beige PC (Untested)",
-      "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "color": "beige",
-        "condition": "missing_side_panel"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "beige_pc_5",
-      "name": "Beige PC (Untested)",
-      "type": "FURNITURE",
-      "location_id": "in:downgrade_workstations",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.15
-        ],
-        "weight": 10.0,
-        "is_container": true,
-        "color": "beige",
-        "condition": "missing_side_panel"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "master_reset_jumper_1",
-      "name": "Master Reset Jumper",
-      "type": "ITEM",
-      "location_id": "in:compaq_keyboard_1",
-      "properties": {
-        "weight": 0.05,
-        "material": "plastic",
-        "provides_abilities": [
-          "verify"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "compaq_keyboard_1",
-      "name": "Disassembled Compaq Keyboard",
-      "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
-      "properties": {
-        "weight": 1.0,
-        "brand": "Compaq",
-        "condition": "disassembled",
-        "is_container": true
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "usb_charger_1",
-      "name": "USB Charger",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.2,
-        "brand": "Belkin",
-        "provides_abilities": [
-          "recharge"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "marker_1",
-      "name": "Permanent Marker",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.1,
-        "brand": "Sharpie",
-        "color": "black",
-        "provides_abilities": [
-          "write",
-          "label"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "video_camera_1",
-      "name": "Video Camera",
-      "type": "ITEM",
-      "location_id": "on:rolling_cart_1",
-      "properties": {
-        "weight": 1.2,
-        "brand": "Sony",
-        "provides_abilities": [
-          "record_video"
-        ]
-      },
-      "states": {
-        "is_charged": false,
-        "is_recording": false
-      }
-    },
-    {
-      "id": "cleaning_brush_1",
-      "name": "Cleaning Brush",
-      "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
-      "properties": {
-        "weight": 0.3,
-        "material": "plastic",
         "provides_abilities": [
           "scrub"
         ]
@@ -910,127 +708,30 @@
       "id": "cleaning_agent_1",
       "name": "Cleaning Agent",
       "type": "ITEM",
-      "location_id": "on:metal_shelves_1",
+      "location_id": "in:tool_cart_1",
       "properties": {
         "weight": 0.5,
+        "color": "green",
         "material": "liquid",
-        "brand": "Lysol",
         "provides_abilities": [
-          "scrub",
-          "mop"
-        ]
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "mop_1",
-      "name": "Mop",
-      "type": "ITEM",
-      "location_id": "in:salvage_parts_depot",
-      "properties": {
-        "weight": 1.5,
-        "material": "wood",
-        "provides_abilities": [
-          "mop"
+          "scrub"
         ]
       },
       "states": {}
-    },
-    {
-      "id": "water_bucket_1",
-      "name": "Water Bucket",
-      "type": "ITEM",
-      "location_id": "in:salvage_parts_depot",
-      "properties": {
-        "weight": 2.0,
-        "material": "plastic",
-        "provides_abilities": [
-          "fill",
-          "pour"
-        ]
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "fuel_can_1",
-      "name": "Fuel Can",
-      "type": "ITEM",
-      "location_id": "on:rolling_cart_1",
-      "properties": {
-        "weight": 3.0,
-        "material": "metal",
-        "provides_abilities": [
-          "refuel"
-        ]
-      },
-      "states": {
-        "is_full": false
-      }
-    },
-    {
-      "id": "microwave_1",
-      "name": "Microwave",
-      "type": "FURNITURE",
-      "location_id": "in:backroom_hacker_corner",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.3
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "brand": "Panasonic",
-        "provides_abilities": [
-          "cook"
-        ]
-      },
-      "states": {
-        "is_on": false,
-        "is_open": false
-      }
-    },
-    {
-      "id": "frozen_burrito_1",
-      "name": "Frozen Burrito",
-      "type": "ITEM",
-      "location_id": "in:microwave_1",
-      "properties": {
-        "weight": 0.2,
-        "material": "food",
-        "brand": "El Monterey",
-        "provides_abilities": [
-          "cook"
-        ]
-      },
-      "states": {
-        "is_frozen": true,
-        "is_cooked": false
-      }
     }
   ],
   "abilities": [
     "close",
-    "cook",
-    "fill",
-    "hide",
-    "label",
-    "mop",
+    "disconnect",
+    "glue",
+    "inject",
+    "iron",
+    "loosen",
     "open",
-    "pour",
-    "recharge",
-    "record_video",
-    "refuel",
-    "scan",
+    "prune",
     "scrub",
-    "sync",
-    "thaw",
-    "turn_on",
-    "unbuckle",
+    "stop_process",
+    "unscrew",
     "verify",
     "write"
   ]

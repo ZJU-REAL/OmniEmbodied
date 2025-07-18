@@ -10,15 +10,163 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the diagnostic_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:diagnostic_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the laser_ignition_array_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laser_ignition_array_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the control_monitoring_station and place it on the conference_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_panel_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only dusty, glass item in the main_testing_chamber and place it on the whiteboard_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "trophy_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque_wrench_1 to mount the safety_shielding_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "safety_shielding_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pressure_gauge_1 to check the pressure of the fuel_canister_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fuel_canister_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
     {
       "task_description": "Use the torque_wrench_1 to mount the largest, titanium_alloy object in the main_testing_chamber.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "detonation_engine_prototype_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal_camera_1 to photograph the only flashing yellow object in the control_monitoring_station.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "audio_alarm_panel_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the emergency_shutdown_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_panel_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the detonation_engine_prototype_1 to the component_fabrication_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "detonation_engine_prototype_1",
+          "location_id": "in:component_fabrication_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydrogen_dewar_1 to the main_testing_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydrogen_dewar_1",
+          "location_id": "in:main_testing_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, steel CNC machine in the component_fabrication_bay to the main_testing_chamber and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cnc_machine_1",
+          "location_id": "in:main_testing_chamber"
+        },
+        {
+          "id": "cnc_machine_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy, polycarbonate safety_shielding_1 to the main_testing_chamber and mount it using the torque_wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "safety_shielding_1",
+          "location_id": "in:main_testing_chamber"
+        },
+        {
+          "id": "safety_shielding_1",
           "is_mounted": true
         }
       ]

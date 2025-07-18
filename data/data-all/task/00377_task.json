@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the urgent_patient_file_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "urgent_patient_file_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the janitors_keycard_1 on the triage_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "janitors_keycard_1",
+          "location_id": "on:triage_desk_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, red item and place it in the medical_records_wing.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,114 @@
         {
           "id": "urgent_patient_file_1",
           "location_id": "in:medical_records_wing"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the malfunctioning, beeping device and place it on the triage_desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "heart_monitor_1",
+          "location_id": "on:triage_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the fingerprint scanner on the triage_desk_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "triage_desk_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Replace the missing defibrillator pads in the crash_cart_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "crash_cart_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the empty oxygen tank and replace it with the full one.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the security_door_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_door_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the narcotics_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the ed_treatment_bay_3.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:ed_treatment_bay_3"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_medical_bed_1 to the ed_triage_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_medical_bed_1",
+          "location_id": "in:ed_triage_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the crash_cart_1 to the medical_records_wing and replace the missing defibrillator pads.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crash_cart_1",
+          "location_id": "in:medical_records_wing"
+        },
+        {
+          "id": "crash_cart_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the narcotics_cabinet_1 to the ed_triage_zone and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "location_id": "in:ed_triage_zone"
+        },
+        {
+          "id": "narcotics_cabinet_1",
+          "is_open": true
         }
       ]
     }

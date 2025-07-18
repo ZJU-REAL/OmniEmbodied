@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the overhead_component_shelves_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:overhead_component_shelves_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the trophy_1 in the secure_storage_lockers.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "trophy_1",
+          "location_id": "in:secure_storage_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, bricked IoT device and place it in the secure_storage_lockers.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "bricked_iot_device_1",
+          "location_id": "in:secure_storage_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the Keysight oscilloscope and activate it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "oscilloscope_1",
+          "is_active": true
+        }
+      ]
+    },
     {
       "task_description": "Use the sharpener_1 to sharpen the soldering_iron_1.",
       "task_category": "tool_use",
@@ -20,6 +70,104 @@
         {
           "id": "soldering_iron_1",
           "condition": "sharpened"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolkit_1 to disassemble the broken_jtag_debugger_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_jtag_debugger_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_tool_1 to activate the calibration_manual_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_manual_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the ARM dev board that is overheating and replace its battery with the replacement_battery_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "arm_dev_board_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the secure_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "secure_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_workbench_1 to the collaboration_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_workbench_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fpga_test_rig_1 to the main_workbench_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fpga_test_rig_1",
+          "location_id": "in:main_workbench_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the ARM dev board that is overheating to the secure_storage_lockers and replace its battery.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "arm_dev_board_1",
+          "location_id": "in:secure_storage_lockers"
+        },
+        {
+          "id": "arm_dev_board_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaking_bucket_1 to the collaboration_hub and use the watering_can_1 to water it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "leaking_bucket_1",
+          "location_id": "in:collaboration_hub"
+        },
+        {
+          "id": "leaking_bucket_1",
+          "condition": "watered"
         }
       ]
     }

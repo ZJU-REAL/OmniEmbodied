@@ -1,589 +1,744 @@
 {
-  "description": "A bustling community daycare center with multiple functional areas including a playroom, medical nook, parent lounge, and storage room, filled with interactive objects and furniture requiring multi-agent collaboration.",
+  "description": "A retro game preservation lab inside a converted industrial warehouse, featuring digitization, repair, and cataloging stations for rare gaming media. The space is designed for collaborative work with heavy machinery, fragile materials, and specialized tools.",
   "rooms": [
     {
-      "id": "main_playroom",
-      "name": "Main Playroom",
+      "id": "main_digitization_hub",
+      "name": "Main Digitization Hub",
       "properties": {
-        "type": "play_area"
+        "type": "industrial",
+        "smell": "ozone and old paper"
       },
       "connected_to_room_ids": [
-        "medical_nook",
-        "parent_lounge"
+        "media_storage_retrieval_zone",
+        "repair_testing_bay",
+        "digital_archive_server_room",
+        "break_area"
       ]
     },
     {
-      "id": "medical_nook",
-      "name": "Medical Nook",
+      "id": "media_storage_retrieval_zone",
+      "name": "Media Storage & Retrieval Zone",
       "properties": {
-        "type": "medical_area"
+        "type": "storage",
+        "lighting": "dim"
       },
       "connected_to_room_ids": [
-        "main_playroom",
-        "parent_lounge"
+        "main_digitization_hub"
       ]
     },
     {
-      "id": "parent_lounge",
-      "name": "Parent Lounge",
+      "id": "repair_testing_bay",
+      "name": "Repair & Testing Bay",
       "properties": {
-        "type": "social_area"
+        "type": "workshop",
+        "condition": "cluttered"
       },
       "connected_to_room_ids": [
-        "main_playroom",
-        "medical_nook",
-        "storage_room"
+        "main_digitization_hub"
       ]
     },
     {
-      "id": "storage_room",
-      "name": "Storage Room",
+      "id": "digital_archive_server_room",
+      "name": "Digital Archive Server Room",
       "properties": {
-        "type": "utility_area"
+        "type": "server_room",
+        "temperature": "cool"
       },
       "connected_to_room_ids": [
-        "parent_lounge"
+        "main_digitization_hub"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge",
+        "atmosphere": "casual"
+      },
+      "connected_to_room_ids": [
+        "main_digitization_hub"
       ]
     }
   ],
   "objects": [
     {
-      "id": "playmat_1",
-      "name": "6-foot-wide Playmat",
+      "id": "central_workbench_1",
+      "name": "Central Workbench",
       "type": "FURNITURE",
-      "location_id": "in:main_playroom",
+      "location_id": "in:main_digitization_hub",
       "properties": {
         "size": [
-          1.8,
-          0.6,
-          0.02
-        ],
-        "weight": 15.0,
-        "is_container": false,
-        "material": "foam",
-        "condition": "chewed_edges"
-      },
-      "states": {}
-    },
-    {
-      "id": "train_table_1",
-      "name": "Wooden Train Table",
-      "type": "FURNITURE",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "size": [
+          2.4,
           1.2,
-          0.8,
-          0.5
+          0.9
         ],
-        "weight": 25.0,
+        "weight": 85.0,
         "is_container": true,
-        "material": "wood",
-        "condition": "missing_wheel"
+        "material": "steel_frame_plywood_top",
+        "condition": "scuffed_and_stained"
       },
       "states": {}
     },
     {
-      "id": "shelving_unit_1",
-      "name": "Wooden Shelving Unit",
+      "id": "digitization_station_1",
+      "name": "Digitization Station",
       "type": "FURNITURE",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "size": [
-          1.8,
-          0.5,
-          1.5
-        ],
-        "weight": 150.0,
-        "is_container": true,
-        "material": "wood",
-        "is_bolted": true
-      },
-      "states": {}
-    },
-    {
-      "id": "special_boots_1",
-      "name": "Alice's Orthopedic Boots",
-      "type": "ITEM",
-      "location_id": "on:train_table_1",
-      "properties": {
-        "weight": 1.5,
-        "color": "red",
-        "label": "Alice – Pigeon-Toe Correction",
-        "condition": "scuffed_left_toe"
-      },
-      "states": {}
-    },
-    {
-      "id": "special_boots_2",
-      "name": "DS2's Orthopedic Boots",
-      "type": "ITEM",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "weight": 1.2,
-        "color": "blue",
-        "label": "DS2 – Flat Feet",
-        "condition": "new"
-      },
-      "states": {}
-    },
-    {
-      "id": "first_aid_cabinet_1",
-      "name": "Locked First-Aid Cabinet",
-      "type": "FURNITURE",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "size": [
-          0.5,
-          0.3,
-          0.6
-        ],
-        "weight": 20.0,
-        "is_container": true,
-        "material": "metal"
-      },
-      "states": {
-        "is_open": false,
-        "is_locked": true
-      }
-    },
-    {
-      "id": "iv_pole_1",
-      "name": "Tangled IV Pole",
-      "type": "FURNITURE",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "size": [
-          0.3,
-          0.3,
-          1.8
-        ],
-        "weight": 12.0,
-        "is_container": false,
-        "material": "metal",
-        "condition": "squeaky_wheel"
-      },
-      "states": {}
-    },
-    {
-      "id": "dvd_player_1",
-      "name": "DVD Player",
-      "type": "ITEM",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "weight": 2.5,
-        "color": "black",
-        "brand": "Sony"
-      },
-      "states": {
-        "is_open": false,
-        "is_on": false
-      }
-    },
-    {
-      "id": "sensory_beans_1",
-      "name": "Plastic Tub of Sensory Beans",
-      "type": "ITEM",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "weight": 3.0,
-        "color": "clear",
-        "material": "plastic",
-        "condition": "lid_half_off"
-      },
-      "states": {
-        "is_spilled": true
-      }
-    },
-    {
-      "id": "tricycle_1",
-      "name": "Broken Tricycle",
-      "type": "FURNITURE",
-      "location_id": "in:main_playroom",
+      "location_id": "on:central_workbench_1",
       "properties": {
         "size": [
           0.8,
           0.5,
-          0.6
+          0.3
         ],
-        "weight": 8.0,
+        "weight": 12.5,
         "is_container": false,
-        "material": "metal",
-        "condition": "front_wheel_bent"
+        "model": "custom_rig",
+        "power_led": "blinking_amber"
       },
       "states": {
-        "is_broken": true
+        "is_on": false
       }
     },
     {
-      "id": "exam_table_1",
-      "name": "Fold-Out Exam Table",
+      "id": "overhead_projector_1",
+      "name": "Overhead Projector",
       "type": "FURNITURE",
-      "location_id": "in:medical_nook",
+      "location_id": "on:central_workbench_1",
       "properties": {
         "size": [
-          1.8,
-          0.7,
-          0.8
-        ],
-        "weight": 100.0,
-        "is_container": false,
-        "material": "metal",
-        "condition": "squeaky_hinge"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "iv_stand_1",
-      "name": "Wheeled IV Stand",
-      "type": "FURNITURE",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "size": [
+          0.5,
           0.4,
-          0.4,
-          1.6
+          0.3
         ],
-        "weight": 18.0,
+        "weight": 8.7,
         "is_container": false,
-        "material": "metal",
-        "condition": "stuck_at_angle"
-      },
-      "states": {}
-    },
-    {
-      "id": "ent_forms_1",
-      "name": "ENT Referral Forms",
-      "type": "ITEM",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "weight": 0.2,
-        "color": "white",
-        "condition": "partially_filled",
-        "label": "Livs – 4 weeks"
-      },
-      "states": {
-        "is_signed": false
-      }
-    },
-    {
-      "id": "blood_pressure_cuff_1",
-      "name": "Blood Pressure Cuff",
-      "type": "ITEM",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "weight": 0.5,
-        "color": "black",
-        "condition": "missing_velcro"
-      },
-      "states": {
-        "is_broken": true
-      }
-    },
-    {
-      "id": "fluorescent_light_1",
-      "name": "Flickering Fluorescent Light",
-      "type": "FURNITURE",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "size": [
-          1.2,
-          0.1,
-          0.1
-        ],
-        "weight": 5.0,
-        "is_container": false,
-        "material": "metal",
-        "condition": "flickering"
+        "year": "1980s",
+        "current_display": "warped_Sega_CD"
       },
       "states": {
         "is_on": false
       }
     },
     {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
-      "type": "FURNITURE",
-      "location_id": "in:medical_nook",
-      "properties": {
-        "size": [
-          1.0,
-          0.7,
-          0.05
-        ],
-        "weight": 10.0,
-        "is_container": false,
-        "material": "plastic",
-        "condition": "scribbled_reminders"
-      },
-      "states": {}
-    },
-    {
-      "id": "floral_couch_1",
-      "name": "Sagging Floral Couch",
-      "type": "FURNITURE",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "size": [
-          2.0,
-          0.9,
-          0.8
-        ],
-        "weight": 60.0,
-        "is_container": false,
-        "material": "fabric",
-        "condition": "spring_poking"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_table_1",
-      "name": "Wobbly Coffee Table",
-      "type": "FURNITURE",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "size": [
-          1.2,
-          0.6,
-          0.5
-        ],
-        "weight": 25.0,
-        "is_container": false,
-        "material": "wood",
-        "condition": "duct_taped_leg"
-      },
-      "states": {}
-    },
-    {
-      "id": "iron_1",
-      "name": "Misplaced Iron",
+      "id": "priority_cartridge_1",
+      "name": "Priority Cartridge (N64, ClayFighter 63⅓ promo)",
       "type": "ITEM",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "weight": 1.8,
-        "color": "blue",
-        "brand": "Rowenta",
-        "condition": "still_warm"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "keyring_1",
-      "name": "Daycare Storage Room Key",
-      "type": "ITEM",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "weight": 0.1,
-        "color": "silver",
-        "label": "Mr. W",
-        "condition": "hidden"
-      },
-      "states": {}
-    },
-    {
-      "id": "keurig_1",
-      "name": "Working Keurig",
-      "type": "FURNITURE",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "size": [
-          0.3,
-          0.3,
-          0.4
-        ],
-        "weight": 5.0,
-        "is_container": false,
-        "material": "plastic",
-        "condition": "out_of_pods"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "wall_clock_1",
-      "name": "Wall Clock",
-      "type": "FURNITURE",
-      "location_id": "in:parent_lounge",
-      "properties": {
-        "size": [
-          0.3,
-          0.3,
-          0.1
-        ],
-        "weight": 2.0,
-        "is_container": false,
-        "material": "plastic",
-        "condition": "10_minutes_fast"
-      },
-      "states": {}
-    },
-    {
-      "id": "mug_1",
-      "name": "Chipped Mug",
-      "type": "ITEM",
-      "location_id": "in:parent_lounge",
+      "location_id": "on:central_workbench_1",
       "properties": {
         "weight": 0.3,
-        "color": "white",
-        "label": "Mr. W",
-        "condition": "chipped"
+        "platform": "N64",
+        "edition": "promo",
+        "urgency": "red_URGENT_post_it"
       },
       "states": {}
     },
     {
-      "id": "mug_2",
-      "name": "World's Okayest Mum Mug",
-      "type": "ITEM",
-      "location_id": "in:main_playroom",
-      "properties": {
-        "weight": 0.4,
-        "color": "blue",
-        "label": "WORLD’S OKAYEST MUM",
-        "condition": "dried_out_markers"
-      },
-      "states": {}
-    },
-    {
-      "id": "treadmill_1",
-      "name": "Dusty Treadmill",
+      "id": "broken_disc_scanner_1",
+      "name": "Broken Disc Scanner",
       "type": "FURNITURE",
-      "location_id": "in:parent_lounge",
+      "location_id": "on:central_workbench_1",
       "properties": {
         "size": [
-          1.8,
-          0.8,
-          1.5
+          0.4,
+          0.3,
+          0.2
         ],
-        "weight": 90.0,
+        "weight": 5.2,
         "is_container": false,
-        "material": "metal",
-        "condition": "used_as_coat_rack"
+        "error_code": "E-42"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "unlabeled_box_1",
+      "name": "Unlabeled Box",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 4.5,
+        "condition": "rattling",
+        "requires_collaboration": true
       },
       "states": {}
     },
     {
-      "id": "laundry_pile_1",
-      "name": "Pile of Unfolded Laundry",
-      "type": "ITEM",
-      "location_id": "in:parent_lounge",
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "on:central_workbench_1",
       "properties": {
-        "weight": 5.0,
-        "color": "mixed",
-        "condition": "warm_iron_nearby"
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 3.8,
+        "is_container": false,
+        "warning": "TAPE_EMPTY"
       },
       "states": {
-        "is_rolled": true
+        "is_on": false
       }
     },
     {
-      "id": "donation_bin_1",
-      "name": "Too Small Clothes Bin",
+      "id": "usb_hub_1",
+      "name": "USB Hub",
       "type": "FURNITURE",
-      "location_id": "in:storage_room",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.1,
+          0.05
+        ],
+        "weight": 0.3,
+        "is_container": false,
+        "ports": 7,
+        "condition": "overloaded_sparking"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_digitization_hub",
       "properties": {
         "size": [
           0.8,
-          0.6,
-          0.8
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "material": "plastic",
-        "label": "Too Small Clothes"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "donation_bin_2",
-      "name": "Donations Bin",
-      "type": "FURNITURE",
-      "location_id": "in:storage_room",
-      "properties": {
-        "size": [
-          0.8,
-          0.6,
-          0.8
-        ],
-        "weight": 20.0,
-        "is_container": true,
-        "material": "plastic",
-        "label": "Donations"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "ironing_board_1",
-      "name": "Rickety Ironing Board",
-      "type": "FURNITURE",
-      "location_id": "in:storage_room",
-      "properties": {
-        "size": [
-          1.5,
           0.5,
           0.9
         ],
-        "weight": 10.0,
-        "is_container": false,
-        "material": "metal",
-        "condition": "rickety"
-      },
-      "states": {}
-    },
-    {
-      "id": "dryer_1",
-      "name": "Temperamental Dryer",
-      "type": "FURNITURE",
-      "location_id": "in:storage_room",
-      "properties": {
-        "size": [
-          0.8,
-          0.7,
-          1.0
-        ],
-        "weight": 80.0,
+        "weight": 25.0,
         "is_container": true,
-        "material": "metal",
-        "condition": "temperamental"
+        "mobility": "on_wheels"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "pen_1",
-      "name": "Blue Pen",
+      "id": "screwdriver_phillips_1",
+      "name": "Screwdriver (Phillips #1)",
       "type": "ITEM",
-      "location_id": "in:parent_lounge",
+      "location_id": "in:tool_cart_1",
       "properties": {
-        "weight": 0.05,
-        "color": "blue",
-        "brand": "Bic",
+        "weight": 0.2,
+        "type": "Phillips",
+        "size": "#1",
         "provides_abilities": [
-          "sign"
+          "open"
         ]
       },
       "states": {}
     },
     {
-      "id": "cloth_1",
-      "name": "Cleaning Cloth",
+      "id": "screwdriver_phillips_2",
+      "name": "Screwdriver (Phillips #2)",
       "type": "ITEM",
-      "location_id": "in:storage_room",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "Phillips",
+        "size": "#2",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_torx_1",
+      "name": "Screwdriver (Torx T5)",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "Torx",
+        "size": "T5",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "jewelry_scale_1",
+      "name": "Jewelry Scale",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "max_capacity": "100g",
+        "precision": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_stain_map_1",
+      "name": "Coffee Stain Map",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
       "properties": {
         "weight": 0.1,
-        "color": "yellow",
+        "shape": "Australia",
+        "material": "paper"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_certificate_1",
+      "name": "Employee of the Month Certificate (June 1997)",
+      "type": "ITEM",
+      "location_id": "in:main_digitization_hub",
+      "properties": {
+        "weight": 0.2,
+        "condition": "sun_bleached",
+        "year": "1997"
+      },
+      "states": {}
+    },
+    {
+      "id": "tetris_cartridge_1",
+      "name": "Dusty Tetris Cartridge",
+      "type": "ITEM",
+      "location_id": "in:main_digitization_hub",
+      "properties": {
+        "weight": 0.3,
+        "platform": "NES",
+        "condition": "missing_label"
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_duty_shelving_unit_1",
+      "name": "Heavy-Duty Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "weight": 400.0,
+        "is_container": true,
+        "condition": "slight_forward_lean",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "library_ladder_1",
+      "name": "Library Ladder",
+      "type": "FURNITURE",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "size": [
+          2.5,
+          0.5,
+          0.1
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "condition": "wobbly_left_wheel",
+        "brake_condition": "stuck"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "misplaced_bin_1",
+      "name": "Misplaced Bin (PS1 Demo Discs—Uncataloged)",
+      "type": "ITEM",
+      "location_id": "in:heavy_duty_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "seal": "packing_tape",
+        "requires_tool": "box_cutter"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "nintendo_world_championships_cartridge_1",
+      "name": "Nintendo World Championships Cartridge (in acrylic case)",
+      "type": "ITEM",
+      "location_id": "in:heavy_duty_shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "security": "combination_locked",
+        "rarity": "high"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "weight": 0.4,
+        "battery": "low",
+        "condition": "beeps_weakly"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "FURNITURE",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "weight_limit": "150kg",
+        "condition": "squeaky_wheel"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "spiderweb_1",
+      "name": "Spiderweb",
+      "type": "ITEM",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "weight": 0.01,
+        "location": "top_right_corner"
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_clipboard_1",
+      "name": "Outdated Inventory Clipboard",
+      "type": "ITEM",
+      "location_id": "in:media_storage_retrieval_zone",
+      "properties": {
+        "weight": 0.3,
+        "last_updated": "2003",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "anti_static_mat_1",
+      "name": "Anti-Static Mat",
+      "type": "ITEM",
+      "location_id": "on:central_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "rubber",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_station_1",
+      "name": "Soldering Station",
+      "type": "FURNITURE",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "operational"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "crt_testing_rig_1",
+      "name": "CRT Testing Rig",
+      "type": "FURNITURE",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "components": "old_TV_multimeter"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "quarantine_shelf_1",
+      "name": "Quarantine Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "purpose": "damaged_cartridges"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 3.5,
+        "is_container": false,
+        "bulb_condition": "flickering"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "firmware_reset_cartridge_1",
+      "name": "Firmware Reset Cartridge",
+      "type": "ITEM",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "weight": 0.3,
+        "purpose": "disc_scanner_repair",
+        "provides_abilities": [
+          "format"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "sound": "humming_faintly",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_2",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "sound": "humming_faintly",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_2",
+      "name": "Label Printer",
+      "type": "FURNITURE",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 3.8,
+        "is_container": false,
+        "status": "operational"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "thermal_alarm_1",
+      "name": "Thermal Alarm",
+      "type": "ITEM",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "weight": 0.5,
+        "status": "flashing_green"
+      },
+      "states": {}
+    },
+    {
+      "id": "blank_sd_cards_1",
+      "name": "Blank SD Cards",
+      "type": "ITEM",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "weight": 0.2,
+        "packaging": "unopened_blister_packs",
+        "quantity": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_table_1",
+      "name": "Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.7
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "drip_coffee_maker_1",
+      "name": "Drip Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "weight": 2.5,
+        "is_container": false,
+        "status": "half_full_cold"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "takeout_menus_1",
+      "name": "Pile of Takeout Menus",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.5,
+        "quantity": "multiple",
+        "condition": "scattered"
+      },
+      "states": {}
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.05
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "contents": "Polaroids_of_rare_finds"
+      },
+      "states": {}
+    },
+    {
+      "id": "box_cutter_1",
+      "name": "Box Cutter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "blade": "retractable",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gloves_1",
+      "name": "Protective Gloves",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "rubber",
+        "provides_abilities": [
+          "wear"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:repair_testing_bay",
+      "properties": {
+        "weight": 3.5,
+        "fuel": "gas",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "polish_cloth_1",
+      "name": "Polish Cloth",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
         "material": "microfiber",
         "provides_abilities": [
-          "wipe"
+          "polish"
         ]
       },
       "states": {}
@@ -592,11 +747,10 @@
       "id": "spray_bottle_1",
       "name": "Spray Bottle",
       "type": "ITEM",
-      "location_id": "in:storage_room",
+      "location_id": "in:tool_cart_1",
       "properties": {
-        "weight": 0.3,
-        "color": "green",
-        "material": "plastic",
+        "weight": 0.4,
+        "contents": "cleaning_solution",
         "provides_abilities": [
           "spray"
         ]
@@ -604,68 +758,105 @@
       "states": {}
     },
     {
-      "id": "masher_1",
-      "name": "Potato Masher",
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
       "type": "ITEM",
-      "location_id": "in:storage_room",
-      "properties": {
-        "weight": 0.4,
-        "color": "silver",
-        "material": "metal",
-        "provides_abilities": [
-          "mash"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "roller_1",
-      "name": "Dough Roller",
-      "type": "ITEM",
-      "location_id": "in:storage_room",
+      "location_id": "in:media_storage_retrieval_zone",
       "properties": {
         "weight": 0.5,
-        "color": "wood",
-        "material": "wood",
+        "material": "plastic",
         "provides_abilities": [
-          "flatten"
+          "wrap"
         ]
       },
       "states": {}
     },
     {
-      "id": "freezer_1",
-      "name": "Mini Freezer",
-      "type": "FURNITURE",
-      "location_id": "in:storage_room",
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
       "properties": {
-        "size": [
-          0.6,
-          0.5,
-          0.8
-        ],
-        "weight": 30.0,
-        "is_container": true,
-        "material": "metal",
+        "weight": 1.2,
+        "power": "manual",
         "provides_abilities": [
-          "freeze"
+          "inflate"
         ]
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "saw_1",
+      "name": "Hand Saw",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "blade": "metal",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "network_cable_1",
+      "name": "Network Cable",
+      "type": "ITEM",
+      "location_id": "in:digital_archive_server_room",
+      "properties": {
+        "weight": 0.3,
+        "length": "3m",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mounting_bracket_1",
+      "name": "Mounting Bracket",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
     }
   ],
   "abilities": [
-    "flatten",
-    "freeze",
-    "mash",
+    "download",
+    "format",
+    "inflate",
+    "mount",
     "open",
-    "sign",
+    "polish",
+    "saw",
     "spray",
+    "turn_off",
     "turn_on",
-    "unroll",
+    "wear",
+    "weld",
     "wipe",
+    "wrap",
     "close"
   ]
 }

@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the field_microscope_1 on the seed_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:seed_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the chipped_teacup_1 to the sleeping_quarters.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "teacup_1",
+          "location_id": "in:sleeping_quarters"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, broken item on the workbench_1 and place it in the storage_shed.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "radio_1",
+          "location_id": "in:storage_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the most faded colors in the main_research_hut and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "prayer_flag_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Extinguish the fire_pit_1 using the fire_extinguisher_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fire_pit_1",
+          "is_alight": false
+        }
+      ]
+    },
     {
       "task_description": "Use the seed_press_1 to compress the seed_packets_1 and place them in the storage_shed.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,84 @@
         {
           "id": "seed_packets_1",
           "location_id": "in:storage_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the most smudged entries in the greenhouse and photograph it using the field_camera_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "notebook_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect the battery_array_1 to the charging_station_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_array_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to ignite the fire_pit_1 using the matches_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fire_pit_1",
+          "is_alight": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the irrigation_pump_1 to the outdoor_processing area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "irrigation_pump_1",
+          "location_id": "in:outdoor_processing"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydroponic_rack_1 to the main_research_hut.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_rack_1",
+          "location_id": "in:main_research_hut"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the seed_crate_tib09_1 to the greenhouse and plant the seeds using the seed_packets_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_crate_tib09_1",
+          "location_id": "in:greenhouse"
+        },
+        {
+          "id": "seed_packets_1",
+          "is_planted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the grain_mill_1 to the outdoor_processing area and use it to compress the seed_packets_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "grain_mill_1",
+          "location_id": "in:outdoor_processing"
+        },
+        {
+          "id": "seed_packets_1",
+          "is_compressed": true
         }
       ]
     }

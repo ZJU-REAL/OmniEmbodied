@@ -1,0 +1,120 @@
+{
+  "task_background": "Prepare the elementary school publishing workshop for the upcoming 'Young Authors Fair' by organizing, repairing, and setting up necessary equipment and materials.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the Dell PC on oak_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dell_pc_1",
+          "location_id": "on:oak_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the USB Drive Alpha on the steel shelving unit.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_alpha_1",
+          "location_id": "on:steel_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red USB drive with unique markings and place it on the round table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_alpha_1",
+          "location_id": "on:round_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest Dell PC and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "dell_pc_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy oak desk to the rehearsal nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oak_desk_1",
+          "location_id": "in:rehearsal_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the projector cart to the pitch strategy table.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "projector_cart_1",
+          "location_id": "in:pitch_strategy_table"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the library return boxes to the supply depot and unstack them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "book_box_1",
+          "location_id": "in:supply_depot"
+        },
+        {
+          "id": "book_box_2",
+          "location_id": "in:supply_depot"
+        },
+        {
+          "id": "book_box_1",
+          "is_stacked": false
+        },
+        {
+          "id": "book_box_2",
+          "is_stacked": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00301"
+}

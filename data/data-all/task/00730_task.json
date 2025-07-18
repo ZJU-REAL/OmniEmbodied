@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,142 @@
         {
           "id": "torque_wrench_1",
           "location_id": "on:pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the obd_ii_scanner_1 on the diagnostic_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "obd_ii_scanner_1",
+          "location_id": "on:diagnostic_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the parts_storage and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cvt_fluid_bottle_2",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a torn seal in the parts_storage and place it in the parts_washer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cvt_fluid_bottle_1",
+          "location_id": "in:parts_washer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defroster_1 to defrost the frosted_freezer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "frosted_freezer_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the needle_and_thread_1 to mend the torn_seat_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "torn_seat_1",
+          "is_mended": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale_1 to weigh the unweighed_part_1 and place it on the steel_shelving_unit_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unweighed_part_1",
+          "is_weighed": true
+        },
+        {
+          "id": "unweighed_part_1",
+          "location_id": "on:steel_shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label_maker_1 to disarm the alarm_panel_1 and then place the label_maker_1 on the diagnostic_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": false
+        },
+        {
+          "id": "label_maker_1",
+          "location_id": "on:diagnostic_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_glass_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_glass_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the transmission_jack_1 to the tool_wall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transmission_jack_1",
+          "location_id": "in:tool_wall"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_shelving_unit_1 to the main_service_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_unit_1",
+          "location_id": "in:main_service_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the air_compressor_1 to the parts_storage and use the sharp_knife_1 to dull its hose.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "air_compressor_1",
+          "location_id": "in:parts_storage"
+        },
+        {
+          "id": "air_compressor_1",
+          "is_sharp": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the vending_machine_1 to the customer_waiting_area and use the fire_extinguisher_1 to extinguish its alarm.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "vending_machine_1",
+          "location_id": "in:customer_waiting_area"
+        },
+        {
+          "id": "vending_machine_1",
+          "is_alight": false
         }
       ]
     }

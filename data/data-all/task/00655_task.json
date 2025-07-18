@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 30.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the ice_core_drill_1 in the storage_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ice_core_drill_1",
+          "location_id": "in:storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the data_drive_1 on the printer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "data_drive_1",
+          "location_id": "on:printer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black data drive labeled 'Core Samples 12/04' and place it in the sample_lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "data_drive_1",
+          "location_id": "in:sample_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the main_hub and place it in the storage_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "climate_console_1",
+          "location_id": "in:storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken thermocouple wire using the soldering iron.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "thermocouple_wire_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner to scan the multimeter.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "multimeter_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
     {
       "task_description": "Find the largest, wooden object in the living_quarters and use the knife to slice the bread loaf inside it.",
       "task_category": "compound_reasoning",
@@ -20,6 +86,70 @@
         {
           "id": "bread_1",
           "is_sliced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the main_hub and use the wire strippers to repair it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_panel_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the lab fridge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fuel drum to the main_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_drum_1",
+          "location_id": "in:main_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ice core drill rig to the sample_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ice_core_drill_1",
+          "location_id": "in:sample_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the lab fridge to the storage_bay and use the insulation foam to insulate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "lab_fridge_1",
+          "location_id": "in:storage_bay"
+        },
+        {
+          "id": "lab_fridge_1",
+          "is_insulated": true
         }
       ]
     }

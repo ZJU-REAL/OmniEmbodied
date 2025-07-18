@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the flight_data_recorder_1 on the flatbed_trailer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "flight_data_recorder_1",
+          "location_id": "on:flatbed_trailer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the radio_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "radio_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, orange object in the nose_cone_1 and place it in the biohazard_bin_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "bird_strike_evidence_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black object with a red LED and place it on the laptop_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "location_id": "on:laptop_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to calibrate the portable_gas_detector_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "portable_gas_detector_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the hex_key_1 to lock the avionics_compartment_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "avionics_compartment_1",
+          "is_locked": true
+        }
+      ]
+    },
     {
       "task_description": "Use the battery_charger_1 to recharge the gps_tracker_1 and then place it on the topographic_map_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,74 @@
         {
           "id": "gps_tracker_1",
           "location_id": "on:topographic_map_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the brush_1 and cleaning_agent_1 to scrub the bloodied headset_cord_1 and then place it in the biohazard_bin_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "headset_cord_1",
+          "is_scrubbed": false
+        },
+        {
+          "id": "headset_cord_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the hydraulic press.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to sync the flight_data_recorder_1 with the laptop_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "flight_data_recorder_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the detached_wing_1 to the equipment_staging_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "detached_wing_1",
+          "location_id": "in:equipment_staging_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the nose_cone_1 to the flatbed_trailer_1.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "nose_cone_1",
+          "location_id": "on:flatbed_trailer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sensor_pods_1 to the mobile_command_post and use the wrench_1 to calibrate them.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sensor_pods_1",
+          "location_id": "in:mobile_command_post"
+        },
+        {
+          "id": "sensor_pods_1",
+          "is_calibrated": true
         }
       ]
     }

@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 20.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place tip_envelope_stack_1 on the wall_of_mailboxes_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tip_envelope_stack_1",
+          "location_id": "on:wall_of_mailboxes_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the heavy_gift_basket_1 in apartment_12b.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "heavy_gift_basket_1",
+          "location_id": "in:apartment_12b"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red envelope and place it in the trash_bin_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "misplaced_envelope_1",
+          "location_id": "in:trash_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the sorting_shelves_1 and place it on the dolly_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "precariously_balanced_cookbooks_1",
+          "location_id": "on:dolly_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Sterilize the baby_bottle_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "baby_bottle_1",
+          "is_sterile": true
+        }
+      ]
+    },
     {
       "task_description": "Use the label_maker_1 to format the usb_drive_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,70 @@
         {
           "id": "usb_drive_1",
           "is_formatted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife_1 to chop the apple_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "apple_1",
+          "is_chopped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the security_turnstile_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_turnstile_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to compress the package_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "package_1",
+          "is_compressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the christmas_tree_1 to the mailroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "christmas_tree_1",
+          "location_id": "in:mailroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overflowing_package_cart_1 to the service_elevator.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overflowing_package_cart_1",
+          "location_id": "in:service_elevator"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the wall_of_mailboxes_1 to the grand_lobby and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "wall_of_mailboxes_1",
+          "location_id": "in:grand_lobby"
+        },
+        {
+          "id": "wall_of_mailboxes_1",
+          "is_open": true
         }
       ]
     }

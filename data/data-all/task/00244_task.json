@@ -1,0 +1,166 @@
+{
+  "task_background": "Organize and secure the high-security evidence storage facility by processing new evidence, repairing equipment, and ensuring all classified materials are properly stored.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place plastic_bin_1 on pending_review_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "plastic_bin_1",
+          "location_id": "on:pending_review_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the black briefcase from reinforced_locker_1 to the forensic_workstation.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "black_briefcase_1",
+          "location_id": "in:forensic_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black plastic bin labeled CLASSIFIED and place it in the high_security_lockers.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "plastic_bin_1",
+          "location_id": "in:high_security_lockers"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the encrypted laptop with the hazard property set to CORROSIVE and move it to the loading_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_laptop_1",
+          "location_id": "in:loading_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to repair the freight_elevator_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "freight_elevator_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the soldering_iron_1 to fix the microscope_1 with the stuck slide.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_soldered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the broken scanner with error code E-205, repair it using the soldering_iron_1, and place it on the l_shaped_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_scanner_1",
+          "is_soldered": true
+        },
+        {
+          "id": "broken_scanner_1",
+          "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the locked_drawer_1 with the missing key, find the coffee_stained_napkin_1 inside it, and use the combination to open the black_briefcase_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "black_briefcase_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm on reinforced_locker_1 using the control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_locker_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the unmarked_crate_1 from the loading_bay to the main_storage_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "unmarked_crate_1",
+          "location_id": "in:main_storage_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Transport the steel_shelving_unit_1 to the loading_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_shelving_unit_1",
+          "location_id": "in:loading_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy unprocessed_crate_1 that is leaking to the loading_bay using the dolly_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "unprocessed_crate_1",
+          "location_id": "in:loading_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the reinforced_locker_2 that is in RESTRICTED status to the main_storage_area and disarm its alarm using the control_panel_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_locker_2",
+          "location_id": "in:main_storage_area"
+        },
+        {
+          "id": "reinforced_locker_2",
+          "is_alarm_armed": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00244"
+}

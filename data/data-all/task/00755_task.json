@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place biosensor_1 on sample_sorting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "biosensor_1",
+          "location_id": "on:sample_sorting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place hand_scanner_1 on sample_sorting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hand_scanner_1",
+          "location_id": "on:sample_sorting_table_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, black item on ppe_station_1 and place it in the sample_intake_storage room.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,103 @@
         {
           "id": "biosensor_1",
           "location_id": "in:sample_intake_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with a frayed cable on sample_sorting_table_1 and place it in the chemical_processing_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "in:chemical_processing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Purify the contaminated petri dish using the water filter.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "petri_dish_1",
+          "is_pure": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the hand scanner to verify the pH meter with the submerged probe and place it in the sterile_research_room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ph_meter_1",
+          "is_verified": true,
+          "location_id": "in:sterile_research_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the saw to cut the shattered vial stand and place the glass shards in the biohazard waste bin.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "vial_stand_1",
+          "location_id": "in:biohazard_waste_bin_1",
+          "is_sawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the chemical cabinet using the keycard.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_cabinet_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the walk-in refrigerated vault to the emergency_control_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_vault_1",
+          "location_id": "in:emergency_control_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fume hood with shattered glass to the decontamination_airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "location_id": "in:decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy microscope with the misaligned lens to the chemical_processing_bay and use the screwdriver to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "in:chemical_processing_bay",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy monitoring console to the sterile_research_room and verify the fire extinguisher.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitoring_console_1",
+          "location_id": "in:sterile_research_room"
+        },
+        {
+          "id": "fire_extinguisher_1",
+          "is_verified": true
         }
       ]
     }

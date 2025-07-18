@@ -10,6 +10,16 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,144 @@
         {
           "id": "security_terminal_1",
           "location_id": "on:security_booth_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the microscope_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the main_entrance and place it in the central_laboratory.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blast_door_1",
+          "location_id": "in:central_laboratory"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red LED panel and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "led_panel_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken surveillance_drone_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "surveillance_drone_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the spilled chemical_drum_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chemical_drum_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to repair the only broken, black surveillance drone in the main_entrance.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "surveillance_drone_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only sealed bio-containment pod and thaw the frozen specimen vial inside it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "specimen_vial_1",
+          "is_frozen": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unbuckle the emergency_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_lever_1",
+          "is_buckled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm on the shutdown_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shutdown_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy crate stack to the server_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "crate_stack_1",
+          "location_id": "in:server_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial centrifuge to the storage_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy forklift to the central_laboratory and repair its dead battery.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "location_id": "in:central_laboratory"
+        },
+        {
+          "id": "forklift_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server rack to the storage_bay and unscrew its panels.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:storage_bay"
+        },
+        {
+          "id": "server_rack_1",
+          "is_screwed_in": false
         }
       ]
     }

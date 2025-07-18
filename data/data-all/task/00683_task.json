@@ -1,0 +1,128 @@
+{
+  "task_background": "Prepare the digital prepress studio for an urgent print job by organizing equipment, troubleshooting issues, and ensuring all materials are ready.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        100.0,
+        60.0,
+        90.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        100.0,
+        60.0,
+        90.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the Pantone Color Bridge Guide (pantone_guide_1) on the rolling cart (rolling_cart_1).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pantone_guide_1",
+          "location_id": "on:rolling_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the 30-inch 4K Monitor (monitor_1).",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black monitor and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only silver monitor and place it on the standing desk (standing_desk_1).",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "secondary_monitor_1",
+          "location_id": "on:standing_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning cloth (cleaning_cloth_1) to wipe the half-empty coffee cup (coffee_cup_1).",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_cup_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to open the jammed paper tray (paper_tray_1) of the Epson printer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "paper_tray_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the rackmount server (rackmount_server_1) to the material storage area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_1",
+          "location_id": "in:material_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the drafting table (drafting_table_1) to the design workstations area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drafting_table_1",
+          "location_id": "in:design_workstations"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer (epson_printer_1) that is flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "epson_printer_1",
+          "location_id": "in:material_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the rackmount file server (file_server_1) to the press liaison desk and connect it to the network.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "file_server_1",
+          "location_id": "in:press_liaison_desk"
+        }
+      ]
+    }
+  ],
+  "scene_id": "00683"
+}

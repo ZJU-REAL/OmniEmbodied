@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place resin_sample_1 on the stainless_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "resin_sample_1",
+          "location_id": "on:stainless_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the microscope_1 on the packaging_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:packaging_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless steel object in the quality_control_lab and place it in the packaging_prep_area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stainless_workbench_1",
+          "location_id": "in:packaging_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the blue cap and place it in the cold_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "resin_sample_1",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Unseal the beans_4pack_1 using the tape_dispenser_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "beans_4pack_1",
+          "is_sealed": false
+        }
+      ]
+    },
     {
       "task_description": "Use the eraser_1 to erase the writing on the lab_reports_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,56 @@
         {
           "id": "lab_reports_1",
           "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spray_bottle_1 to moisten the ph_meter_1's probe.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "ph_meter_1",
+          "is_moist": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the chemical_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sweet_action_keg_1 to the packaging_prep_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sweet_action_keg_1",
+          "location_id": "in:packaging_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the righteous_ale_pallet_1 to the quality_control_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "righteous_ale_pallet_1",
+          "location_id": "in:quality_control_lab"
         }
       ]
     }

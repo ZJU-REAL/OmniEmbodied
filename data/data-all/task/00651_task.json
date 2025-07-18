@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Mishnah Brurah Commentary on the study table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mishnah_brurah_1",
+          "location_id": "on:study_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Omer Calendar in the coatroom.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "omer_calendar_1",
+          "location_id": "in:coatroom"
+        }
+      ]
+    },
     {
       "task_description": "Find the brown, fragile book and place it on the Rabbi's desk.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,122 @@
         {
           "id": "mishnah_brurah_1",
           "location_id": "on:rabbi_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white, annotated folio and place it in the bookshelf.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gemara_folio_1",
+          "location_id": "in:bookshelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the askew mirror using the cleaning rag.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mirror_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the key to unlock the manuscript cabinet and place the Halachic document inside.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_locked": true
+        },
+        {
+          "id": "document_1",
+          "location_id": "in:locked_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser to clean the chalkboard and then close the Rabbi's desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chalkboard_1",
+          "is_dirty": false
+        },
+        {
+          "id": "rabbi_desk_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the Torah Ark.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "aron_kodesh_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the stereo.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stereo_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the overstuffed Genizah bin to the student lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "genizah_bin_1",
+          "location_id": "in:student_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bookshelf (Brachot) to the Rabbi's office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:rabbis_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the couch to the main study hall and clean it using the cleaning rag.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "couch_1",
+          "location_id": "in:main_study_hall"
+        },
+        {
+          "id": "couch_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the file cabinet to the student lounge and unlock it using the keycard.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "file_cabinet_1",
+          "location_id": "in:student_lounge"
+        },
+        {
+          "id": "file_cabinet_1",
+          "is_locked": true
         }
       ]
     }

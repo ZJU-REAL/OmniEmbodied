@@ -6,9 +6,35 @@
       "max_grasp_limit": 2,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the primary_dev_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "primary_dev_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest monitor on modular_desk_1 and place it in the qa_testing_corner.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,114 @@
         {
           "id": "monitor_1",
           "location_id": "in:qa_testing_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only cracked monitor on modular_desk_1 and place it in the supply_closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_6",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken build_server_dongle_1 using the isopropyl_wipes_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "build_server_dongle_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken nas_unit_1 using the screwdriver_set_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "nas_unit_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only monitor with portrait orientation and turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_4",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server_rack_c_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_c_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the led_dashboard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "led_dashboard_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the nas_unit_1 to the main_coding_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "nas_unit_1",
+          "location_id": "in:main_coding_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fridge_1 to the server_rack_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": "in:server_rack_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_a_1 to the qa_testing_corner and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_a_1",
+          "location_id": "in:qa_testing_corner"
+        },
+        {
+          "id": "server_rack_a_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the modular_desk_1 to the break_area and place the programmer_mug_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_desk_1",
+          "location_id": "in:break_area"
+        },
+        {
+          "id": "programmer_mug_1",
+          "location_id": "on:modular_desk_1"
         }
       ]
     }

@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on adjustable_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:adjustable_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off police_scanner_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "police_scanner_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the dusty, silver framed photo and place it on the filing_cabinet_1.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,132 @@
         {
           "id": "pulitzer_photo_1",
           "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black monitor and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the duster_1 to dust the pulitzer_photo_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pulitzer_photo_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to sign the intern_petition_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "intern_petition_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the keycard_1 to unlock the floor_safe_1 and then close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "floor_safe_1",
+          "is_locked": true
+        },
+        {
+          "id": "floor_safe_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the tape_1 to seal the sensitive_documents_1 and then place them in the filing_cabinet_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sensitive_documents_1",
+          "is_sealed": true
+        },
+        {
+          "id": "sensitive_documents_1",
+          "location_id": "in:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial_printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to mute the landline_phone_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "landline_phone_1",
+          "is_muted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the filing_cabinet_1 to the editorial_cubicles.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:editorial_cubicles"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bookshelf_1 to the intern_bullpen.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:intern_bullpen"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_printer_1 to the print_archives_room and use the ink_cartridge_2 to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "location_id": "in:print_archives_room"
+        },
+        {
+          "id": "industrial_printer_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broadcast_console_1 to the main_news_desk and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broadcast_console_1",
+          "location_id": "in:main_news_desk"
+        },
+        {
+          "id": "broadcast_console_1",
+          "is_on": true
         }
       ]
     }

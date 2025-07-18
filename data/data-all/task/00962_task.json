@@ -10,6 +10,16 @@
         100,
         100
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 30.0,
+      "max_weight": 30.0,
+      "max_size": [
+        100,
+        100,
+        100
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,142 @@
         {
           "id": "eeg_cap_1",
           "location_id": "on:eeg_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Cognitive Load Task Console on the EEG Monitoring Station.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cognitive_load_console_1",
+          "location_id": "on:eeg_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the EEG Monitoring Station and place it in the supply cart.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cognitive_load_console_1",
+          "location_id": "in:supply_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only white, silicone item in the neurocognitive lab and clean it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "eeg_cap_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken electrode wire using the glue dispenser.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_electrode_wire_1",
+          "is_glued": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the neurostim device using the access keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "neurostim_device_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sanitizing wipes to clean the dirty EEG Cap and then place it on the EEG Monitoring Station.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "eeg_cap_1",
+          "is_dirty": false
+        },
+        {
+          "id": "eeg_cap_1",
+          "location_id": "on:eeg_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to open the supply cart and then place the spare electrode gel tube on the EEG Monitoring Station.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "supply_cart_1",
+          "is_open": true
+        },
+        {
+          "id": "electrode_gel_1",
+          "location_id": "on:eeg_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the server rack.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the robotic arm assembly to the collaboration hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_arm_assembly_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular obstacle course to the neurocognitive lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_obstacle_course_1",
+          "location_id": "in:neurocognitive_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer that is open to the repair bay and close it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:ai_simulation_chamber"
+        },
+        {
+          "id": "printer_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central whiteboard cluster to the AI simulation chamber and write on it using the whiteboard marker.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_whiteboard_cluster_1",
+          "location_id": "in:ai_simulation_chamber"
+        },
+        {
+          "id": "central_whiteboard_cluster_1",
+          "is_written_on": true
         }
       ]
     }

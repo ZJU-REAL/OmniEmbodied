@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the anomaly_stabilization_lever_1 on the workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "anomaly_stabilization_lever_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the data_core_module_1 on the holo_display_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "data_core_module_1",
+          "location_id": "on:holo_display_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item in the workstation_1 and place it on the observation_console_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "data_core_module_1",
+          "location_id": "on:observation_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only gray item with missing buttons and place it in the tool_cart_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_keypad_1",
+          "location_id": "in:tool_cart_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken temporal_displacement_device_1 using the repair_kit_1.",
       "task_category": "tool_use",
@@ -20,6 +70,96 @@
         {
           "id": "temporal_displacement_device_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the cracked chronal_stabilizer_crystal_1 using the multimeter_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chronal_stabilizer_crystal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to repair the only flashing red warning_light_1 in the quantum_chamber.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "warning_light_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the insulated_gloves_1 to repair the largest, copper device in the quantum_chamber.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "temporal_displacement_device_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hazardous_materials_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazardous_materials_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_shelving_unit_1 to the quantum_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_shelving_unit_1",
+          "location_id": "in:quantum_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the containment_field_generator_1 to the equipment_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "containment_field_generator_1",
+          "location_id": "in:equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "warning_light_1",
+          "location_id": "in:equipment_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the overloaded_capacitor_bank_1 to the workbench_1 for repair.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "overloaded_capacitor_bank_1",
+          "location_id": "on:workbench_1"
         }
       ]
     }

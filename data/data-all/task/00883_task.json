@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the barcode_scanner_1 on the workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the uv_sanitizer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "uv_sanitizer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with the scratched label and connect it to the write_blocker_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the examination_table_1 and place it in the server_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "location_id": "in:server_rack_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the sterilizer_1 to sterilize the evidence_bag_1.",
       "task_category": "tool_use",
@@ -20,6 +70,100 @@
         {
           "id": "evidence_bag_1",
           "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the vacuum_1 to clean the microscope_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_vacuumed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_set_1 to tighten the loose connector on the usb_drive_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the document with the warning message and shred it using the shredder_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sticky_note_1",
+          "is_shredded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the disk_imager_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "disk_imager_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the freezer_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "freezer_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the whiteboard_1 to the forensic_workbench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:forensic_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the collaboration_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy workstation_1 to the server_farm and use the screwdriver_set_1 to tighten any loose components.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workstation_1",
+          "location_id": "in:server_farm"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the ups_1 to the collaboration_hub and connect it to the whiteboard_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_1",
+          "location_id": "in:collaboration_hub"
+        },
+        {
+          "id": "ups_1",
+          "is_connected": true
         }
       ]
     }

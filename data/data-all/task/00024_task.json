@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the USB debugging dongle on the test rack.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_dongle_1",
+          "location_id": "on:test_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the faded KDE 4.0 poster in the documentation zone.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "kde_poster_1",
+          "location_id": "in:documentation_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest black item on the adjustable desk and place it in the break area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only multicolor plastic item in the testing rig area and place it in the debugging station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lego_turing_1",
+          "location_id": "in:debugging_station"
+        }
+      ]
+    },
     {
       "task_description": "Use the duster to clean the coffee-stained schematics printout.",
       "task_category": "tool_use",
@@ -20,6 +70,90 @@
         {
           "id": "schematics_1",
           "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the whisk to mix the ingredients in the mixing bowl.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mixing_bowl_1",
+          "is_mixed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest wooden furniture in the central coding hub and use the rake to smooth its surface.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "adjustable_desk_1",
+          "is_raked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the testing rig area and use the USB debugging dongle to start its process.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_dongle_1",
+          "is_running": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the open document scanner.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "document_scanner_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 6-monitor workstation to the debugging station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_workstation_1",
+          "location_id": "in:debugging_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the rack of test devices to the central coding hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "test_rack_1",
+          "location_id": "in:central_coding_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "location_id": "in:debugging_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the partially disassembled laptop to the documentation zone and use the pen to sign the blue binder with API docs.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "location_id": "in:documentation_zone"
+        },
+        {
+          "id": "api_binder_1",
+          "is_signed": true
         }
       ]
     }

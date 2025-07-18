@@ -10,15 +10,153 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Turn on the UV Sterilization Array in the decontamination airlock.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "uv_sterilization_array_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the contaminated sample tube on the main lab bench into the biohazard waste bin in cold storage.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "contaminated_tube_1",
+          "location_id": "in:biohazard_waste_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the ethanol bottle that is hot and move it to cold storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ethanol_bottle_1",
+          "location_id": "in:cold_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the microscope with a broken stage clip and place it on the supply shelves in the emergency backup station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "on:supply_shelves_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the emergency decon spray to clean the main lab bench.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "main_lab_bench_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to dust the supply shelves in the emergency backup station.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "supply_shelves_1",
+          "is_dirty": false
+        }
+      ]
+    },
     {
       "task_description": "Find the cracked Tris buffer bottle and use the scrubbing brush to clean it.",
       "task_category": "compound_reasoning",
       "validation_checks": [
         {
           "id": "tris_buffer_bottle_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the fume hood in the primary workstation.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the centrifuge on the main lab bench.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biohazard waste bin from cold storage to the decontamination airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biohazard_waste_bin_1",
+          "location_id": "in:decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the reagent cabinet from cold storage to the emergency backup station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reagent_cabinet_1",
+          "location_id": "in:emergency_backup"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the glovebox with contaminated tools to the decontamination airlock and use the emergency decon spray to clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_1",
+          "location_id": "in:decontamination_airlock"
+        },
+        {
+          "id": "glovebox_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the outdated centrifuge to the primary workstation and use the scrubbing brush to clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "outdated_centrifuge_1",
+          "location_id": "in:primary_workstation"
+        },
+        {
+          "id": "outdated_centrifuge_1",
           "is_dirty": false
         }
       ]

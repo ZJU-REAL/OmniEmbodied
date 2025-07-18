@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the biosafety_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:biosafety_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the city_sample_kit_1 to the secure_sample_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "city_sample_kit_1",
+          "location_id": "in:secure_sample_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white sample kit with a red stripe and high priority label and place it in the secure_sample_vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "city_sample_kit_1",
+          "location_id": "in:secure_sample_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the ceramic coffee mug with the inscription 'WORLD’S OKAYEST SEX RESEARCHER' and place it in the data_hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:data_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spray_bottle_1 and cloth_1 to clean the central_workbench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "central_workbench_1",
+          "is_sprayed": true
+        }
+      ]
+    },
     {
       "task_description": "Locate the sample kit with a scuffed surface and move it to the secure_sample_vault after ensuring it's properly labeled.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,56 @@
         {
           "id": "city_sample_kit_1",
           "location_id": "in:secure_sample_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the autoclave_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Robot_1 and robot_2 should work together to turn on the label_printer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryogenic_freezer_1 to the main_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_freezer_1",
+          "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the server_rack_1 to the secure_sample_vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:secure_sample_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy press_1 to the data_hub and ensure it's properly positioned.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:data_hub"
         }
       ]
     }

@@ -1,0 +1,610 @@
+{
+  "description": "A highly modular, dynamic, and collaboration-dependent server farm control center designed for multi-agent collaboration with no single point of failure, featuring heavy server racks, delicate wiring, and distributed components requiring teamwork.",
+  "rooms": [
+    {
+      "id": "main_monitoring_station",
+      "name": "Main Monitoring Station",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "server_rack_alley",
+        "tool_maintenance_bay",
+        "network_switch_junction",
+        "cold_storage_archive"
+      ]
+    },
+    {
+      "id": "server_rack_alley",
+      "name": "Server Rack Alley",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_station",
+        "tool_maintenance_bay"
+      ]
+    },
+    {
+      "id": "tool_maintenance_bay",
+      "name": "Tool & Maintenance Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_station",
+        "server_rack_alley"
+      ]
+    },
+    {
+      "id": "network_switch_junction",
+      "name": "Network Switch Junction",
+      "properties": {
+        "type": "network_room"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_station"
+      ]
+    },
+    {
+      "id": "cold_storage_archive",
+      "name": "Cold Storage Archive",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "diagnostic_dashboard_1",
+      "name": "12-Screen Diagnostic Dashboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_station",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "steel",
+        "brand": "TechVision",
+        "model_number": "DV-12X"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "command_desk_1",
+      "name": "Steel Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scratched"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "overhead_projector_1",
+      "name": "Overhead Projector",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "ProjTech",
+        "model_number": "PT-450"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_shutdown_console_1",
+      "name": "Emergency Shutdown Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.4,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "diagnostic_tablet_1",
+      "name": "Diagnostic Tablet",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "TabTech",
+        "model_number": "TT-7",
+        "provides_abilities": [
+          "install",
+          "format"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Recovery v3.2)",
+      "type": "ITEM",
+      "location_id": "in:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "DataSafe",
+        "capacity": "32GB",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive (Outdated Data)",
+      "type": "ITEM",
+      "location_id": "in:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "DataSafe",
+        "capacity": "16GB"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_3",
+      "name": "USB Drive (Malware)",
+      "type": "ITEM",
+      "location_id": "in:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "brand": "DataSafe",
+        "capacity": "8GB"
+      },
+      "states": {}
+    },
+    {
+      "id": "wireless_earpiece_1",
+      "name": "Wireless Earpiece",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "brand": "SoundClear",
+        "model_number": "SC-100"
+      },
+      "states": {
+        "is_muted": false
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Logbook",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "leather",
+        "pages": 100,
+        "is_container": true
+      },
+      "states": {
+        "is_stapled": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "brand": "BrewMaster",
+        "model_number": "BM-200"
+      },
+      "states": {
+        "is_on": true,
+        "is_boiling": false
+      }
+    },
+    {
+      "id": "server_rack_7b_1",
+      "name": "Server Rack 7B",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_alley",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-700"
+      },
+      "states": {
+        "is_broken": true,
+        "is_overheating": true
+      }
+    },
+    {
+      "id": "cooling_fan_1",
+      "name": "Spare Cooling Fan",
+      "type": "ITEM",
+      "location_id": "in:tool_maintenance_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "CoolTech",
+        "model_number": "CT-120",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fiber_cable_1",
+      "name": "Loose Fiber Cable",
+      "type": "ITEM",
+      "location_id": "in:server_rack_alley",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "length": "5m",
+        "connector_type": "LC"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    },
+    {
+      "id": "maintenance_cart_1",
+      "name": "Maintenance Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_alley",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "rusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "FURNITURE",
+      "location_id": "in:server_rack_alley",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.6
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "type": "CO2",
+        "last_inspection": "6 months ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_pegboard_1",
+      "name": "Wall-Mounted Tool Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:tool_maintenance_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Heavy-Duty Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:tool_maintenance_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:tool_maintenance_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "yellow",
+        "brand": "MeasurePro",
+        "model_number": "MP-500",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "LabelIt",
+        "model_number": "LI-200"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "ethernet_cable_spool_1",
+      "name": "Spool of Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:tool_maintenance_bay",
+      "properties": {
+        "weight": 2.5,
+        "color": "blue",
+        "length": "100m"
+      },
+      "states": {
+        "is_unwound": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:logbook_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "brand": "SecureAccess",
+        "id_number": "SA-7890",
+        "provides_abilities": [
+          "lock",
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "material": "feather",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "microfiber",
+        "provides_abilities": [
+          "wipe",
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:locked_cabinet_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "brand": "FixIt",
+        "model_number": "FI-100",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "batteries_1",
+      "name": "Replacement Batteries",
+      "type": "ITEM",
+      "location_id": "in:locked_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "type": "AA",
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_generator_1",
+      "name": "Backup Generator",
+      "type": "FURNITURE",
+      "location_id": "in:network_switch_junction",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "brand": "PowerGen",
+        "model_number": "PG-5000"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "cold_storage_unit_1",
+      "name": "Cold Storage Unit",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_archive",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": "4°C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_drive_1",
+      "name": "Backup Drive",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_unit_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "DataVault",
+        "capacity": "1TB",
+        "provides_abilities": [
+          "format"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "dust",
+    "format",
+    "insert",
+    "install",
+    "lock",
+    "mute",
+    "open",
+    "repair",
+    "turn_off",
+    "turn_on",
+    "unlock",
+    "unstaple",
+    "wipe",
+    "close"
+  ]
+}

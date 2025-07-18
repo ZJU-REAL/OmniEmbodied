@@ -10,9 +10,39 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place input_terminal_1 on validation_console_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "input_terminal_1",
+          "location_id": "on:validation_console_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Place input_terminal_2 on validation_console_3.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "input_terminal_2",
+          "location_id": "on:validation_console_3"
+        }
+      ]
+    },
     {
       "task_description": "Find the black input terminal and place it on validation_console_1.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,124 @@
         {
           "id": "input_terminal_1",
           "location_id": "on:validation_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red emergency data purge button and disconnect it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_data_purge_button_1",
+          "is_connected": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to calibrate the tag validator device.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tag_validator_device_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to scrape the label printer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "is_scraped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the uncalibrated biometric scanner and use the toolbox to calibrate it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "biometric_scanner_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flashing red data flood emergency lockdown switch and disconnect it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "data_flood_emergency_lockdown_switch_1",
+          "is_connected": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the server access panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_access_panel_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disconnect the master shutdown lever.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "master_shutdown_lever_1",
+          "is_connected": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the security overwatch room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:security_overwatch"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the reinforced steel door to the processing core.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "reinforced_steel_door_1",
+          "location_id": "in:processing_core"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy toolbox to the security overwatch room and use it to calibrate the spare cooling fans.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "location_id": "in:security_overwatch"
+        },
+        {
+          "id": "spare_cooling_fans_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy coffee machine to the entry validation hub and water it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "location_id": "in:entry_validation_hub"
+        },
+        {
+          "id": "coffee_machine_1",
+          "is_watered": true
         }
       ]
     }

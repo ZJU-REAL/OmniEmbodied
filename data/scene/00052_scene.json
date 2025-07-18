@@ -1,632 +1,646 @@
 {
-  "description": "A high-tech electronics distribution warehouse with multiple zones including receiving, storage, packing, and dispatch areas, filled with electronics, tools, and equipment in various states of use and disarray.",
+  "description": "A high-security data archival facility where sensitive Perl scripts, cryptographic keys, and hash-encoded datasets are stored in a physically and digitally fortified environment.",
   "rooms": [
     {
-      "id": "receiving_bay",
-      "name": "Receiving & Inspection Bay",
+      "id": "main_access_hub",
+      "name": "Main Access Hub",
       "properties": {
-        "type": "industrial"
+        "type": "checkpoint"
       },
       "connected_to_room_ids": [
-        "main_storage",
-        "packing_station"
+        "server_crypt",
+        "key_forge",
+        "archivists_office",
+        "emergency_override_chamber"
       ]
     },
     {
-      "id": "main_storage",
-      "name": "Main Storage Racks",
+      "id": "server_crypt",
+      "name": "Server Crypt",
       "properties": {
-        "type": "warehouse"
+        "type": "data_storage"
       },
       "connected_to_room_ids": [
-        "receiving_bay",
-        "dispatch_dock"
+        "main_access_hub",
+        "key_forge"
       ]
     },
     {
-      "id": "packing_station",
-      "name": "Packing & Substitution Station",
+      "id": "key_forge",
+      "name": "Key Forge",
       "properties": {
-        "type": "workshop"
+        "type": "secure_lab"
       },
       "connected_to_room_ids": [
-        "receiving_bay",
-        "break_room"
+        "main_access_hub",
+        "server_crypt"
       ]
     },
     {
-      "id": "dispatch_dock",
-      "name": "Dispatch Loading Dock",
-      "properties": {
-        "type": "loading"
-      },
-      "connected_to_room_ids": [
-        "main_storage"
-      ]
-    },
-    {
-      "id": "managers_office",
-      "name": "Manager’s Office",
+      "id": "archivists_office",
+      "name": "Archivist’s Office",
       "properties": {
         "type": "office"
       },
       "connected_to_room_ids": [
-        "main_storage"
+        "main_access_hub",
+        "emergency_override_chamber"
       ]
     },
     {
-      "id": "break_room",
-      "name": "Break Room",
+      "id": "emergency_override_chamber",
+      "name": "Emergency Override Chamber",
       "properties": {
-        "type": "lounge"
+        "type": "fail_safe"
       },
       "connected_to_room_ids": [
-        "packing_station"
+        "main_access_hub",
+        "archivists_office"
       ]
     }
   ],
   "objects": [
     {
-      "id": "conveyor_belt_1",
-      "name": "Conveyor Belt",
+      "id": "biometric_scanner_station_1",
+      "name": "Biometric Scanner Station",
       "type": "FURNITURE",
-      "location_id": "in:receiving_bay",
-      "properties": {
-        "size": [
-          3.0,
-          1.5,
-          1.0
-        ],
-        "weight": 75.0,
-        "is_container": true,
-        "material": "steel",
-        "model_number": "CB-3000"
-      },
-      "states": {
-        "is_calibrated": false
-      }
-    },
-    {
-      "id": "scanner_gate_1",
-      "name": "Scanner Gate",
-      "type": "FURNITURE",
-      "location_id": "on:conveyor_belt_1",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          2.0
-        ],
-        "weight": 15.0,
-        "is_container": false,
-        "color": "black",
-        "status_light": "amber"
-      },
-      "states": {}
-    },
-    {
-      "id": "inspection_table_1",
-      "name": "Inspection Table",
-      "type": "FURNITURE",
-      "location_id": "in:receiving_bay",
-      "properties": {
-        "size": [
-          2.0,
-          1.0,
-          0.8
-        ],
-        "weight": 40.0,
-        "is_container": true,
-        "material": "wood",
-        "surface": "static_free_mat"
-      },
-      "states": {}
-    },
-    {
-      "id": "magnifying_lamp_1",
-      "name": "Magnifying Lamp",
-      "type": "ITEM",
-      "location_id": "on:inspection_table_1",
-      "properties": {
-        "weight": 2.5,
-        "color": "black",
-        "provides_abilities": [
-          "calibrate"
-        ]
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "sony_tv_crate_1",
-      "name": "Sony X95L TV Crate",
-      "type": "FURNITURE",
-      "location_id": "in:receiving_bay",
-      "properties": {
-        "size": [
-          2.5,
-          1.5,
-          0.2
-        ],
-        "weight": 150.0,
-        "is_container": true,
-        "material": "wood",
-        "status": "DELAYED – 3-4 WEEKS"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "samsung_tv_display_1",
-      "name": "Samsung QN90C Display Model",
-      "type": "FURNITURE",
-      "location_id": "on:inspection_table_1",
-      "properties": {
-        "size": [
-          1.9,
-          1.1,
-          0.1
-        ],
-        "weight": 45.0,
-        "is_container": false,
-        "condition": "open_box",
-        "discount": "applied"
-      },
-      "states": {}
-    },
-    {
-      "id": "defective_tablets_1",
-      "name": "Defective Samsung Galaxy Tabs",
-      "type": "ITEM",
-      "location_id": "in:sony_tv_crate_1",
-      "properties": {
-        "weight": 5.0,
-        "quantity": 10,
-        "status": "SCREEN ARTIFACTING – RMA PENDING"
-      },
-      "states": {}
-    },
-    {
-      "id": "label_printer_1",
-      "name": "Label Printer",
-      "type": "FURNITURE",
-      "location_id": "in:receiving_bay",
-      "properties": {
-        "size": [
-          0.4,
-          0.3,
-          0.2
-        ],
-        "weight": 8.0,
-        "is_container": false,
-        "brand": "Zebra",
-        "paper_status": "jammed"
-      },
-      "states": {
-        "is_calibrated": false
-      }
-    },
-    {
-      "id": "digital_scale_1",
-      "name": "Digital Scale",
-      "type": "FURNITURE",
-      "location_id": "in:receiving_bay",
-      "properties": {
-        "size": [
-          0.5,
-          0.5,
-          0.3
-        ],
-        "weight": 12.0,
-        "is_container": false,
-        "error_message": "ERR: OVERLOAD"
-      },
-      "states": {}
-    },
-    {
-      "id": "barcode_scanner_1",
-      "name": "Handheld Barcode Scanner",
-      "type": "ITEM",
-      "location_id": "on:inspection_table_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "yellow",
-        "provides_abilities": [
-          "recharge"
-        ]
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "industrial_shelving_1",
-      "name": "Industrial Shelving Unit",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
-      "properties": {
-        "size": [
-          4.0,
-          2.0,
-          0.5
-        ],
-        "weight": 200.0,
-        "is_container": true,
-        "material": "metal",
-        "condition": "partially_collapsed"
-      },
-      "states": {}
-    },
-    {
-      "id": "forklift_charging_station_1",
-      "name": "Forklift Charging Station",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
+      "location_id": "in:main_access_hub",
       "properties": {
         "size": [
           1.5,
-          1.0,
-          0.5
-        ],
-        "weight": 50.0,
-        "is_container": false,
-        "cable_condition": "frayed"
-      },
-      "states": {
-        "is_connected": true
-      }
-    },
-    {
-      "id": "priority_order_pallet_1",
-      "name": "Priority Order Pallet",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
-      "properties": {
-        "size": [
-          1.2,
-          1.2,
-          1.5
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "tag": "EXPRESS – DELIVER BY 8AM"
-      },
-      "states": {}
-    },
-    {
-      "id": "lg_tv_box_1",
-      "name": "LG OLED TV Box",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
-      "properties": {
-        "size": [
-          2.0,
-          1.2,
-          0.3
-        ],
-        "weight": 60.0,
-        "is_container": true,
-        "location_error": "soundbar_section"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "mystery_crate_1",
-      "name": "Mystery Crate",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
-      "properties": {
-        "size": [
-          1.5,
-          1.5,
-          1.5
-        ],
-        "weight": 70.0,
-        "is_container": true,
-        "label": "CUSTOMS HOLD"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "pallet_jack_1",
-      "name": "Pallet Jack",
-      "type": "FURNITURE",
-      "location_id": "in:main_storage",
-      "properties": {
-        "size": [
-          1.8,
           0.8,
-          0.5
+          1.2
         ],
-        "weight": 55.0,
+        "weight": 120.0,
         "is_container": false,
-        "status": "stuck"
-      },
-      "states": {}
-    },
-    {
-      "id": "inventory_terminal_1",
-      "name": "Wireless Inventory Terminal",
-      "type": "ITEM",
-      "location_id": "on:industrial_shelving_1",
-      "properties": {
-        "weight": 1.2,
-        "battery_level": 12,
-        "provides_abilities": [
-          "recharge"
-        ]
+        "material": "steel",
+        "model_number": "BIO-SCAN-5000"
       },
       "states": {
-        "is_charged": false
+        "is_on": true
       }
     },
     {
-      "id": "packing_table_1",
-      "name": "Packing Table",
+      "id": "security_desk_1",
+      "name": "Security Desk",
       "type": "FURNITURE",
-      "location_id": "in:packing_station",
+      "location_id": "in:main_access_hub",
       "properties": {
         "size": [
-          3.0,
+          2.0,
           1.0,
           0.9
         ],
-        "weight": 45.0,
+        "weight": 85.0,
         "is_container": true,
-        "surface": "dimension_guides"
+        "material": "steel",
+        "brand": "SecureDesk Inc."
       },
-      "states": {}
+      "states": {
+        "is_open": false
+      }
     },
     {
-      "id": "order_monitor_1",
-      "name": "Order Monitor",
+      "id": "heavy_vault_door_1",
+      "name": "Heavy Vault Door",
       "type": "FURNITURE",
-      "location_id": "in:packing_station",
+      "location_id": "in:main_access_hub",
       "properties": {
         "size": [
-          1.0,
-          0.1,
-          0.6
-        ],
-        "weight": 10.0,
-        "is_container": false,
-        "display": "real_time_order_changes"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "monica_order_box_1",
-      "name": "Monica Viggers’ Order Box",
-      "type": "FURNITURE",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "size": [
-          0.8,
-          0.6,
-          0.5
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "content": "half_packed",
-        "substitution": "Samsung QN90C"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "bubble_wrap_roll_1",
-      "name": "Bubble Wrap Roll",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "weight": 1.0,
-        "length": 50,
-        "provides_abilities": [
-          "cut"
-        ]
-      },
-      "states": {
-        "is_cut": false
-      }
-    },
-    {
-      "id": "foam_inserts_1",
-      "name": "Custom Foam Inserts",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "weight": 2.0,
-        "material": "foam",
-        "provides_abilities": [
-          "cut"
-        ]
-      },
-      "states": {
-        "is_cut": false
-      }
-    },
-    {
-      "id": "sonos_soundbar_1",
-      "name": "Sonos Arc Soundbar",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "weight": 8.0,
-        "promo": "FREE WITH UPGRADE"
-      },
-      "states": {
-        "is_plugged_in": true
-      }
-    },
-    {
-      "id": "tape_dispenser_1",
-      "name": "Tape Dispenser",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "weight": 0.8,
-        "tape_remaining": 10,
-        "provides_abilities": [
-          "clean"
-        ]
-      },
-      "states": {
-        "is_dirty": true
-      }
-    },
-    {
-      "id": "void_fill_bags_1",
-      "name": "Void Fill Bags",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
-      "properties": {
-        "weight": 3.0,
-        "quantity": 5,
-        "leak_status": "one_leaking"
-      },
-      "states": {}
-    },
-    {
-      "id": "coffee_machine_1",
-      "name": "Coffee Machine",
-      "type": "FURNITURE",
-      "location_id": "in:break_room",
-      "properties": {
-        "size": [
-          0.4,
+          2.5,
           0.3,
-          0.5
+          2.8
         ],
-        "weight": 12.0,
-        "is_container": true,
-        "water_level": 50
+        "weight": 400.0,
+        "is_container": false,
+        "material": "reinforced_steel",
+        "hinge_type": "hydraulic"
       },
       "states": {
-        "is_poured": false
+        "is_open": false
       }
     },
     {
-      "id": "coffee_cup_1",
-      "name": "Coffee Cup",
+      "id": "master_keycard_1",
+      "name": "Master Keycard",
       "type": "ITEM",
-      "location_id": "on:coffee_machine_1",
+      "location_id": "in:security_desk_1",
       "properties": {
-        "weight": 0.3,
-        "material": "ceramic",
-        "provides_abilities": [
-          "clean"
-        ]
-      },
-      "states": {
-        "is_dirty": true
-      }
-    },
-    {
-      "id": "toner_cartridge_1",
-      "name": "Unopened Toner Cartridge",
-      "type": "ITEM",
-      "location_id": "in:break_room",
-      "properties": {
-        "weight": 1.5,
+        "weight": 0.1,
         "color": "black",
+        "brand": "RFID-Tech",
         "provides_abilities": [
           "open"
         ]
       },
+      "states": {}
+    },
+    {
+      "id": "emergency_shutdown_toggle_1",
+      "name": "Emergency Shutdown Toggle",
+      "type": "ITEM",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic"
+      },
       "states": {
-        "is_open": false
+        "is_hidden": true
       }
     },
     {
-      "id": "stuck_drawer_1",
-      "name": "Stuck Drawer",
+      "id": "visitor_log_terminal_1",
+      "name": "Visitor Log Terminal",
       "type": "FURNITURE",
-      "location_id": "in:break_room",
+      "location_id": "in:main_access_hub",
       "properties": {
         "size": [
           0.5,
-          0.4,
-          0.2
+          0.3,
+          0.4
         ],
-        "weight": 5.0,
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "brand": "LogiTech"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "wall_mounted_monitor_1",
+      "name": "Wall-mounted Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.6
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "brand": "ViewSonic",
+        "model_number": "VS-2458"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "metal_detector_archway_1",
+      "name": "Metal Detector Archway",
+      "type": "FURNITURE",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "SecurScan",
+        "model_number": "MD-3000"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "overhead_pa_system_1",
+      "name": "Overhead PA System",
+      "type": "FURNITURE",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "AudioTech",
+        "model_number": "PA-100"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "server_rack_array_1",
+      "name": "Server Rack Array",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 250.0,
         "is_container": true,
-        "condition": "stuck"
+        "material": "steel",
+        "brand": "RackSolutions"
       },
       "states": {
         "is_open": false
       }
     },
     {
-      "id": "flat_tool_1",
-      "name": "Flat Tool",
-      "type": "ITEM",
-      "location_id": "on:packing_table_1",
+      "id": "tape_backup_robot_1",
+      "name": "Tape Backup Robot",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
       "properties": {
-        "weight": 0.5,
-        "material": "metal",
-        "provides_abilities": [
-          "dull",
-          "cut"
-        ]
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "brand": "DataBot",
+        "model_number": "TBR-2000"
       },
       "states": {
-        "is_sharp": true
+        "is_running": false
       }
     },
     {
-      "id": "vacuum_cleaner_1",
-      "name": "Vacuum Cleaner",
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
       "type": "ITEM",
-      "location_id": "in:break_room",
-      "properties": {
-        "weight": 6.0,
-        "provides_abilities": [
-          "vacuum",
-          "recharge"
-        ]
-      },
-      "states": {
-        "is_charged": false
-      }
-    },
-    {
-      "id": "mop_1",
-      "name": "Mop",
-      "type": "ITEM",
-      "location_id": "in:break_room",
+      "location_id": "in:server_crypt",
       "properties": {
         "weight": 2.0,
-        "provides_abilities": [
-          "mop",
-          "clean"
-        ]
+        "color": "red",
+        "material": "plastic"
       },
       "states": {
-        "is_dirty": true
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "encrypted_perl_script_module_1",
+      "name": "Encrypted Perl Script Module",
+      "type": "ITEM",
+      "location_id": "in:server_rack_array_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "damaged_tape_cartridge_1",
+      "name": "Damaged Tape Cartridge",
+      "type": "ITEM",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "hash_verification_terminal_1",
+      "name": "Hash Verification Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "brand": "CryptoCheck",
+        "model_number": "HVT-100"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "network_switch_hub_1",
+      "name": "Network Switch Hub",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "brand": "NetGear",
+        "model_number": "NS-500"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "temperature_alert_panel_1",
+      "name": "Temperature Alert Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "brand": "TempAlert",
+        "model_number": "TAP-100"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "brand": "ToolMaster"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "t10_torx_screwdriver_1",
+      "name": "T10 Torx Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "material": "steel",
+        "provides_abilities": [
+          "screw",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Thermal Paste",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "paste",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "physical_breaker_key_1",
+      "name": "Physical Breaker Key",
+      "type": "ITEM",
+      "location_id": "in:archivists_office",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "replace"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "override_chamber_panel_1",
+      "name": "Override Chamber Panel",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_override_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "FailSafe Inc.",
+        "model_number": "OCP-200"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "biometric_locked_door_1",
+      "name": "Biometric Locked Door",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_override_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "brand": "BioLock"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "perl_encoded_usb_drive_1",
+      "name": "Perl-encoded USB Drive",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "material": "plastic",
+        "label": "CRYPTO-ALPHA",
+        "condition": "dented"
+      },
+      "states": {}
+    },
+    {
+      "id": "perl_encoded_usb_drive_2",
+      "name": "Perl-encoded USB Drive",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.05,
+        "color": "red",
+        "material": "plastic",
+        "label": "CRYPTO-BETA",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "perl_encoded_usb_drive_3",
+      "name": "Perl-encoded USB Drive",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.05,
+        "color": "green",
+        "material": "plastic",
+        "label": "CRYPTO-GAMMA",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "perl_encoded_usb_drive_4",
+      "name": "Perl-encoded USB Drive",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.05,
+        "color": "yellow",
+        "material": "plastic",
+        "label": "CRYPTO-DELTA",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "perl_encoded_usb_drive_5",
+      "name": "Perl-encoded USB Drive",
+      "type": "ITEM",
+      "location_id": "in:key_forge",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "plastic",
+        "label": "CRYPTO-EPSILON",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_no_unauthorized_access_poster_1",
+      "name": "Faded NO UNAUTHORIZED ACCESS Poster",
+      "type": "ITEM",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "faded_red",
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "half_empty_coffee_cup_1",
+      "name": "Half-empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:security_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "ceramic",
+        "contents": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_fire_extinguisher_1",
+      "name": "Dusty Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_access_hub",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "last_inspection_date": "expired"
+      },
+      "states": {}
+    },
+    {
+      "id": "outdated_perl_manuals_1",
+      "name": "Outdated Perl Manuals",
+      "type": "ITEM",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "weight": 3.0,
+        "color": "various",
+        "material": "paper",
+        "condition": "dog-eared"
+      },
+      "states": {}
+    },
+    {
+      "id": "handwritten_do_not_touch_note_1",
+      "name": "Handwritten DO NOT TOUCH Note",
+      "type": "ITEM",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "weight": 0.01,
+        "color": "white",
+        "material": "paper",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_chair_1",
+      "name": "Broken Chair",
+      "type": "FURNITURE",
+      "location_id": "in:server_crypt",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "broken"
+      },
+      "states": {
+        "is_broken": true
       }
     }
   ],
   "abilities": [
-    "calibrate",
-    "clean",
-    "close",
-    "cut",
-    "disconnect",
-    "dull",
-    "mop",
     "open",
-    "recharge",
-    "turn_on",
-    "unplug",
-    "vacuum"
+    "repair",
+    "replace",
+    "screw",
+    "show",
+    "start_process",
+    "turn_off",
+    "close"
   ]
 }

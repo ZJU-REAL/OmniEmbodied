@@ -10,15 +10,135 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place blood_sample_rack_1 on specimen_shelves_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blood_sample_rack_1",
+          "location_id": "on:specimen_shelves_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the microscope_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_station_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, stainless steel object in the main_research_lab and place it in the field_gear_storage.",
       "task_category": "attribute_reasoning",
       "validation_checks": [
         {
           "id": "dissection_table_1",
+          "location_id": "in:field_gear_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the label 'URGENT – HIGH PARASITE LOAD' and place it in the specimen_fridge_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blood_sample_rack_1",
+          "location_id": "in:specimen_fridge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the broom_1 to sweep the live_otter_holding_area.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mop_bucket_1",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the rusty, steel object in the field_gear_storage and use the packing_materials_1 to pack it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "traps_1",
+          "is_packed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the condition 'lid_ajar' and use the drill_1 to secure it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_drilled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the specimen_fridge_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the specimen_fridge_1 to the administrative_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_fridge_1",
+          "location_id": "in:administrative_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pool_tank_1 to the outdoor_observation_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pool_tank_1",
+          "location_id": "in:outdoor_observation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy dissection_table_1 that is smeared_with_fish_scales to the live_otter_holding_area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "location_id": "in:live_otter_holding_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy otter_cage_1 with the bent_latch to the field_gear_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "otter_cage_1",
           "location_id": "in:field_gear_storage"
         }
       ]

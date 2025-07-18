@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place laptop_1 on server_rack_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "location_id": "on:server_rack_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off build_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "build_terminal_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the [broken] laptop with a [thermal_sensor] and place it on the workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the [red] [killswitch_box] and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "killswitch_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the [broken] usb_fan_1 using the repair_kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "usb_fan_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the [stuck] coolant_valve_control_1 using the toolbox.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coolant_valve_control_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the [repair_kit] to fix the [broken] laptop with a [thermal_sensor] and place it on the workbench.",
       "task_category": "compound_reasoning",
@@ -21,6 +91,71 @@
           "id": "laptop_1",
           "is_broken": false,
           "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the [screwdriver] to tighten the [loose] component on the server_rack_1 and close the toolbox.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": false
+        },
+        {
+          "id": "toolbox_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency_ice_bin_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_ice_bin_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the backup_battery_array_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "backup_battery_array_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the liquid_cooling_tank_1 to the primary_build_cluster.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_cooling_tank_1",
+          "location_id": "in:primary_build_cluster"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the workbench_1 to the emergency_cooling_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:emergency_cooling_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the [heavy] server_rack_1 with a [bent_frame] to the parts_diagnostics_corner and repair it using the toolbox.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:parts_diagnostics_corner",
+          "is_broken": false
         }
       ]
     }

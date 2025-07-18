@@ -33,13 +33,22 @@ worker_agents:
   # Maximum history length
   max_chat_history: -1  # -1 means no limit on history record count
 
+# 历史记录格式配置
+history:
+  max_history_length: -1  # -1 表示不限制历史长度
+  # 历史记录格式配置
+  format:
+    include_thought: false  # 是否在历史记录中包含Thought内容
+    show_execution_status: false  # 是否显示执行状态 (centralized模式默认false)
+
 # Task execution settings
 execution:
   max_total_steps: 300  # Maximum total execution steps
+  max_steps_per_task: 20  # Maximum steps per subtask (每个任务的最大步数)
 
-# Task evaluator settings
+# Task evaluator settings (保持向后兼容)
 task_evaluator:
-  max_steps_per_task: 30  # Maximum steps per subtask
+  max_steps_per_task: 30  # Maximum steps per subtask (已废弃，请使用execution.max_steps_per_task)
 
 # Evaluation mode settings
 evaluation:
@@ -69,7 +78,7 @@ evaluation:
     # Combined evaluation mode configuration
     combined:
       # Separator between task descriptions
-      task_separator: "Next task:"
+      task_separator: " "
       # Whether to add task numbers before task descriptions
       add_task_numbers: true
 
@@ -105,7 +114,7 @@ parallel_evaluation:
   # 场景级并行配置
   scenario_parallelism:
     # 最大并行场景数
-    max_parallel_scenarios: 3
+    max_parallel_scenarios: 20
 
   # 场景选择配置
   # 说明：首先根据场景选择配置确定基础场景列表，然后应用任务筛选
@@ -115,16 +124,16 @@ parallel_evaluation:
     #   - 'all': 选择所有可用场景
     #   - 'range': 选择指定范围内的场景 (如 00001-00010)
     #   - 'list': 选择指定列表中的场景
-    mode: 'range'
+    mode: 'all'
 
     # 范围模式配置 (当mode='range'时使用)
     range:
-      start: '00001'  # 起始场景ID (5位数字，如 00001)
-      end: '00005'    # 结束场景ID (5位数字，如 00005)
+      start: '00250'  # 起始场景ID (5位数字，如 00001)
+      end: '00256'    # 结束场景ID (5位数字，如 00005)
 
     # 列表模式配置 (当mode='list'时使用)
     # 用法：取消注释并指定场景ID列表
-    # list: ['00001', '00003', '00005']
+    list: ['00402']
 
     # 任务筛选配置 (与场景选择取交集)
     # 说明：任务筛选用于根据任务特征进一步筛选要评测的场景
@@ -142,7 +151,7 @@ parallel_evaluation:
       #   - 'implicit_collaboration': 隐式协作任务 (需要智能体自主协作)
       #   - 'compound_collaboration': 复合协作任务
       # 用法：取消注释并指定要筛选的类别列表
-      categories: ['explicit_collaboration']
+      # categories: ['explicit_collaboration']
 
   # 输出配置
   output:

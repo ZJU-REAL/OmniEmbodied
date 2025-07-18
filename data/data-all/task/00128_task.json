@@ -10,9 +10,29 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the mislabeled_contract_1 on the scheduling_whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mislabeled_contract_1",
+          "location_id": "on:scheduling_whiteboard_1"
+        }
+      ]
+    },
     {
       "task_description": "Place the black rolling chair with a missing wheel in the break room.",
       "task_category": "attribute_reasoning",
@@ -20,6 +40,94 @@
         {
           "id": "rolling_chair_1",
           "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilizer to sterilize the blood pressure cuff.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "blood_pressure_cuff_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel-framed cubicle and open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cubicle_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pencil to draw on the drawing pad.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "drawing_pad_1",
+          "is_drawn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the security monitor.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "security_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the metal shelving unit to the main interpretation office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_unit_1",
+          "location_id": "in:main_interpretation_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the folding stage to the main interpretation office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "folding_stage_1",
+          "location_id": "in:main_interpretation_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken fridge to the equipment storage room and use the WD-40 to loosen its door.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_fridge_1",
+          "location_id": "in:equipment_storage_room"
+        },
+        {
+          "id": "broken_fridge_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sealed crate to the security office and use the sealing kit to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sealed_crate_1",
+          "location_id": "in:security_office"
+        },
+        {
+          "id": "sealed_crate_1",
+          "is_sealed": true
         }
       ]
     }

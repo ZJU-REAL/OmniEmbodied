@@ -6,9 +6,55 @@
       "max_grasp_limit": 1,
       "max_weight": 30.0,
       "max_size": 2.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": 2.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place sample_k72_1 in the specimen_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sample_k72_1",
+          "location_id": "in:specimen_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue_paperweight_1 on the supply_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blue_paperweight_1",
+          "location_id": "on:supply_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, blue item on the lab_table_1 and place it in the specimen_rack_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_k72_1",
+          "location_id": "in:specimen_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the label 'VOLATILE' and seal it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_k72_1",
+          "is_sealed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the keycard_1 to unlock the locked_safe_1.",
       "task_category": "tool_use",
@@ -16,6 +62,94 @@
         {
           "id": "locked_safe_1",
           "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the item with the model number 'CF-2000' and use the toolkit_1 to open it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_centrifuge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the digital logbook with the last entry 'DAY 18 – OUT OF TIME' and sync it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_logbook_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the monitor_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to seal the walk_in_freezer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_freezer_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryo_tank_gamma_1 to the main_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_tank_gamma_1",
+          "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bioreactor_array_1 to the supply_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bioreactor_array_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy cryo_tank_gamma_1 to the main_lab and use the toolkit_1 to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_tank_gamma_1",
+          "location_id": "in:main_lab"
+        },
+        {
+          "id": "cryo_tank_gamma_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy walk_in_freezer_1 to the main_lab and use the spill_kit_1 to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_freezer_1",
+          "location_id": "in:main_lab"
+        },
+        {
+          "id": "walk_in_freezer_1",
+          "is_sealed": true
         }
       ]
     }

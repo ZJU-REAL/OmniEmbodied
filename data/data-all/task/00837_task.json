@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place childs_car_seat_1 on stainless_steel_countertop_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "childs_car_seat_1",
+          "location_id": "on:stainless_steel_countertop_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place fathers_phone_1 in refrigerated_evidence_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fathers_phone_1",
+          "location_id": "in:refrigerated_evidence_locker_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the black, cracked iPhone and place it in the digital forensics room.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,148 @@
         {
           "id": "fathers_phone_1",
           "location_id": "in:digital_forensics_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the server rack and place it on the detective's desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "encrypted_laptop_1",
+          "location_id": "on:detective_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the defroster to defrost the refrigerated evidence locker.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "refrigerated_evidence_locker_1",
+          "states": {
+            "is_frosted": false
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to clean the shop vac.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "shop_vac_1",
+          "states": {
+            "is_dirty": false
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to write on the chain-of-custody forms and then place them in the legal prep room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chain_of_custody_forms_1",
+          "states": {
+            "is_written_on": true
+          }
+        },
+        {
+          "id": "chain_of_custody_forms_1",
+          "location_id": "in:legal_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sharpener to sharpen the torque wrench set and then place it on the hydraulic lift.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_set_1",
+          "states": {
+            "is_sharp": true
+          }
+        },
+        {
+          "id": "torque_wrench_set_1",
+          "location_id": "on:hydraulic_lift_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the hydraulic lift.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "states": {
+            "is_active": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to calibrate the thermal camera.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "thermal_camera_1",
+          "states": {
+            "is_calibrated": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the vehicle examination hangar.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:vehicle_examination_hangar"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic lift to the evidence intake bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "location_id": "in:evidence_intake_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the SUV's black box to the digital forensics room and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "suv_black_box_1",
+          "location_id": "in:digital_forensics_room"
+        },
+        {
+          "id": "suv_black_box_1",
+          "states": {
+            "is_loaded": true
+          }
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the thermal camera to the autopsy lab and calibrate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "thermal_camera_1",
+          "location_id": "in:autopsy_toxicology_lab"
+        },
+        {
+          "id": "thermal_camera_1",
+          "states": {
+            "is_calibrated": true
+          }
         }
       ]
     }

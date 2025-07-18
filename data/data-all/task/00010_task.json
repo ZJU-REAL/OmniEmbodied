@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the diagnostic_laptop_1 on the steel_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diagnostic_laptop_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the race_map_1 in the parts_tray_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "race_map_1",
+          "location_id": "in:parts_tray_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, green coolant bottle and place it on the steel_workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_bottle_1",
+          "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only red plastic parts tray and place it on the heavy_duty_shelving_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "parts_tray_1",
+          "location_id": "on:heavy_duty_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the oxygen_sensor_tester_1 to scan the gps_tracker_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "gps_tracker_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the diagnostic_laptop_1 to type on the stapled_documents_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "stapled_documents_1",
+          "is_typed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the battery_charger_1 to disarm the alarm and then place it on the steel_workbench_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,84 @@
         {
           "id": "battery_charger_1",
           "location_id": "on:steel_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only leaking coolant bottle and use the funnel_1 to empty it into the fuel_drum_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_bottle_1",
+          "is_full": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the portable_stove_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "portable_stove_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_tool_chest_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_tool_chest_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fuel_drum_1 to the damaged_bike_graveyard.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fuel_drum_1",
+          "location_id": "in:damaged_bike_graveyard"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_motorcycle_lift_1 to the parts_tools_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_motorcycle_lift_1",
+          "location_id": "in:parts_tools_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the warped_engine_block_1 to the main_repair_tent and use the diagnostic_laptop_1 to scan it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "warped_engine_block_1",
+          "location_id": "in:main_repair_tent"
+        },
+        {
+          "id": "warped_engine_block_1",
+          "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the jerrycan_1 to the rider_recovery_area and use the fire_extinguisher_1 to spray it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "jerrycan_1",
+          "location_id": "in:rider_recovery_area"
+        },
+        {
+          "id": "jerrycan_1",
+          "is_sprayed": true
         }
       ]
     }

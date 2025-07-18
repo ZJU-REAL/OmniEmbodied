@@ -1,55 +1,35 @@
 {
-  "task_background": "Prepare the mafia-controlled recycling facility for an incoming shipment while hiding any evidence of illegal activities.",
+  "task_background": "Clean up and investigate an abandoned dump site containing hazardous waste and altered items requiring multi-agent collaboration.",
   "agents_config": [
     {
       "name": "robot_1",
-      "max_grasp_limit": 2.0,
-      "max_weight": 50.0,
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
       "max_size": [
-        1.5,
-        1.5,
-        1.5
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
       ]
     }
   ],
   "tasks": [
     {
-      "task_description": "Place clipboard_1 on conveyor_belt_1.",
-      "task_category": "direct_command",
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the flashlight_1.",
+      "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "clipboard_1",
-          "location_id": "on:conveyor_belt_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Find the heaviest, steel object in the receiving bay and place it on the steel weighing platform.",
-      "task_category": "attribute_reasoning",
-      "validation_checks": [
-        {
-          "id": "suspicious_refrigerator_1",
-          "location_id": "on:steel_weighing_platform_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Use the gloves to clean the moldy coffee cup.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "moldy_coffee_cup_1",
-          "is_dirty": false
-        }
-      ]
-    },
-    {
-      "task_description": "Use the magnesium sorting rod to separate the hollow paper bales and place them in the loading dock.",
-      "task_category": "compound_reasoning",
-      "validation_checks": [
-        {
-          "id": "paper_bales_1",
-          "location_id": "in:loading_dock"
+          "id": "flashlight_1",
+          "is_on": true
         }
       ]
     }

@@ -1,847 +1,1020 @@
 {
-  "description": "A high-tech Digital Signal Processing (DSP) Laboratory specializing in fixed-point FIR filters, featuring heavy equipment, precision tools, and collaborative workspaces.",
+  "description": "A sprawling Southern California film set backlot with multiple interconnected zones, designed for hyper-realistic multi-agent collaboration and problem-solving.",
   "rooms": [
     {
-      "id": "main_workbench_area",
-      "name": "Main Workbench Area",
+      "id": "main_street_facade",
+      "name": "Main Street Facade Set",
       "properties": {
-        "type": "workbench"
+        "type": "film_set"
       },
       "connected_to_room_ids": [
-        "filter_simulation_station",
-        "signal_generation_testing_bay",
-        "storage_component_shelves"
+        "western_town",
+        "production_alley"
       ]
     },
     {
-      "id": "filter_simulation_station",
-      "name": "Filter Simulation Station",
+      "id": "western_town",
+      "name": "Western Town Set",
       "properties": {
-        "type": "simulation"
+        "type": "film_set"
       },
       "connected_to_room_ids": [
-        "main_workbench_area",
-        "signal_generation_testing_bay"
+        "main_street_facade",
+        "storage_warehouse"
       ]
     },
     {
-      "id": "signal_generation_testing_bay",
-      "name": "Signal Generation & Testing Bay",
+      "id": "production_alley",
+      "name": "Production Alley",
       "properties": {
-        "type": "testing"
+        "type": "support_area"
       },
       "connected_to_room_ids": [
-        "main_workbench_area",
-        "filter_simulation_station",
-        "storage_component_shelves"
+        "main_street_facade",
+        "parking_overflow"
       ]
     },
     {
-      "id": "storage_component_shelves",
-      "name": "Storage & Component Shelves",
+      "id": "storage_warehouse",
+      "name": "Storage Warehouse",
       "properties": {
         "type": "storage"
       },
       "connected_to_room_ids": [
-        "main_workbench_area",
-        "signal_generation_testing_bay"
+        "western_town",
+        "parking_overflow"
+      ]
+    },
+    {
+      "id": "parking_overflow",
+      "name": "Parking & Overflow Zone",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "production_alley",
+        "storage_warehouse"
       ]
     }
   ],
   "objects": [
     {
-      "id": "steel_workbench_1",
-      "name": "6ft Steel Workbench",
+      "id": "false_front_bank_1",
+      "name": "False-front Bank",
       "type": "FURNITURE",
-      "location_id": "in:main_workbench_area",
+      "location_id": "in:main_street_facade",
       "properties": {
         "size": [
-          1.8,
-          0.9,
-          0.8
+          5.0,
+          0.5,
+          3.0
         ],
-        "weight": 95.0,
+        "weight": 85.0,
         "is_container": true,
-        "material": "steel",
-        "surface_type": "ESD-safe matting"
+        "material": "plywood",
+        "color": "beige",
+        "is_movable": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "diner_countertop_1",
+      "name": "Diner Countertop",
+      "type": "FURNITURE",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          2.5,
+          0.6,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "formica",
+        "color": "red",
+        "is_movable": true
       },
       "states": {}
     },
     {
-      "id": "overhead_power_strip_1",
-      "name": "Overhead Retractable Power Strip",
+      "id": "streetlight_rig_1",
+      "name": "Streetlight Rig",
       "type": "FURNITURE",
-      "location_id": "in:main_workbench_area",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          4.0
+        ],
+        "weight": 32.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black",
+        "is_movable": false,
+        "wiring_exposed": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "breakaway_glass_crate_1",
+      "name": "Breakaway Glass Crate",
+      "type": "FURNITURE",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown",
+        "label": "FRAGILE: STUNT GLASS - DO NOT STACK"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glass_panel_1",
+      "name": "Breakaway Glass Panel",
+      "type": "ITEM",
+      "location_id": "in:breakaway_glass_crate_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "sugar_glass",
+        "color": "transparent",
+        "thickness": "0.5cm",
+        "is_fragile": true
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "marquee_sign_1",
+      "name": "Digital Marquee Sign",
+      "type": "FURNITURE",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          2.0,
+          0.2,
+          1.5
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black",
+        "current_display": "CLOSED"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "wet_floor_sign_1",
+      "name": "Wet Floor Caution Sign",
+      "type": "ITEM",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "weight": 2.5,
+        "material": "plastic",
+        "color": "yellow",
+        "is_tipped": true
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "directors_chair_1",
+      "name": "Director's Chair",
+      "type": "FURNITURE",
+      "location_id": "in:main_street_facade",
       "properties": {
         "size": [
           0.5,
-          0.1,
-          0.1
+          0.5,
+          1.2
         ],
-        "weight": 3.2,
+        "weight": 8.0,
         "is_container": false,
-        "material": "plastic",
-        "color": "black"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "dual_arm_magnifying_lamp_1",
-      "name": "Dual-Arm Magnifying Lamp",
-      "type": "FURNITURE",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.6
-        ],
-        "weight": 4.5,
-        "is_container": false,
-        "material": "metal",
-        "led_color": "white"
-      },
-      "states": {
-        "is_on": false
-      }
-    },
-    {
-      "id": "prototype_fir_filter_board_1",
-      "name": "Prototype FIR Filter Board",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 1.2,
-        "material": "fiberglass",
-        "condition": "partially soldered",
-        "missing_component": "16-bit DAC chip"
+        "material": "wood",
+        "color": "black",
+        "nameplate": "STEVE",
+        "stability": "wobbly"
       },
       "states": {}
     },
     {
-      "id": "calibration_jig_1",
-      "name": "Calibration Jig",
+      "id": "boom_mic_stand_1",
+      "name": "Boom Mic Stand",
       "type": "FURNITURE",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          3.0
+        ],
+        "weight": 5.5,
+        "is_container": false,
+        "material": "metal",
+        "color": "silver",
+        "extended": true
+      },
+      "states": {}
+    },
+    {
+      "id": "craft_services_table_1",
+      "name": "Craft Services Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_street_facade",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "donut_box_1",
+      "name": "Half-empty Donut Box",
+      "type": "ITEM",
+      "location_id": "on:craft_services_table_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "cardboard",
+        "color": "pink",
+        "contents": "donuts",
+        "quantity": 3
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "coffee_dispenser_1",
+      "name": "Coffee Dispenser",
+      "type": "FURNITURE",
+      "location_id": "on:craft_services_table_1",
       "properties": {
         "size": [
           0.3,
           0.3,
-          0.2
+          0.4
         ],
-        "weight": 8.0,
-        "is_container": false,
-        "material": "aluminum"
+        "weight": 4.2,
+        "is_container": true,
+        "material": "stainless_steel",
+        "color": "silver",
+        "temperature": "lukewarm"
       },
       "states": {
+        "is_drained": false
+      }
+    },
+    {
+      "id": "saloon_doors_1",
+      "name": "Saloon Doors",
+      "type": "FURNITURE",
+      "location_id": "in:western_town",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          2.0
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "wood",
+        "color": "brown",
+        "hinge_condition": "squeaky"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jail_cell_1",
+      "name": "Jail Cell",
+      "type": "FURNITURE",
+      "location_id": "in:western_town",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "black",
+        "bar_condition": "one_bent"
+      },
+      "states": {
+        "is_welded": false
+      }
+    },
+    {
+      "id": "hitching_post_1",
+      "name": "Hitching Post",
+      "type": "FURNITURE",
+      "location_id": "in:western_town",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.5
+        ],
+        "weight": 28.0,
+        "is_container": false,
+        "material": "oak",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_horse_1",
+      "name": "Fake Horse",
+      "type": "FURNITURE",
+      "location_id": "in:western_town",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.5
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "fiberglass",
+        "color": "brown",
+        "saddle_attached": true
+      },
+      "states": {}
+    },
+    {
+      "id": "prop_revolver_case_1",
+      "name": "Prop Revolver Case",
+      "type": "FURNITURE",
+      "location_id": "in:western_town",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false,
         "is_locked": true
       }
     },
     {
-      "id": "oscilloscope_probe_set_1",
-      "name": "Oscilloscope Probe Set",
+      "id": "prop_revolver_1",
+      "name": "Prop Revolver (PX-409)",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:prop_revolver_case_1",
       "properties": {
-        "weight": 0.5,
-        "condition": "one probe has a frayed wire",
+        "weight": 0.9,
+        "material": "resin",
         "color": "black",
-        "brand": "Tektronix"
+        "serial_number": "PX-409",
+        "condition": "scratched"
       },
       "states": {}
     },
     {
-      "id": "soldering_iron_station_1",
-      "name": "Soldering Iron Station",
+      "id": "prop_revolver_2",
+      "name": "Prop Revolver (PX-410)",
+      "type": "ITEM",
+      "location_id": "in:prop_revolver_case_1",
+      "properties": {
+        "weight": 0.9,
+        "material": "resin",
+        "color": "black",
+        "serial_number": "PX-410",
+        "condition": "pristine"
+      },
+      "states": {}
+    },
+    {
+      "id": "breakaway_bottle_crate_1",
+      "name": "Breakaway Bottle Crate",
       "type": "FURNITURE",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:western_town",
       "properties": {
         "size": [
-          0.2,
-          0.15,
-          0.1
+          0.8,
+          0.6,
+          0.4
         ],
-        "weight": 2.0,
-        "is_container": false,
-        "material": "plastic",
-        "led_status": "blinking"
+        "weight": 12.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown",
+        "label": "STUNT BREAKAWAY - HANDLE WITH CARE"
       },
       "states": {
-        "is_on": true
+        "is_open": false
       }
     },
     {
-      "id": "anti_static_wristbands_1",
-      "name": "Anti-Static Wristbands",
+      "id": "breakaway_bottle_1",
+      "name": "Breakaway Bottle",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "material": "fabric",
-        "condition": "dangling from a hook"
-      },
-      "states": {}
-    },
-    {
-      "id": "solder_spool_holder_1",
-      "name": "Solder Spool Holder",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:breakaway_bottle_crate_1",
       "properties": {
         "weight": 0.3,
-        "material": "plastic",
-        "condition": "half-empty",
-        "residue": "present on spindle"
+        "material": "sugar_glass",
+        "color": "brown",
+        "contents": "fake_whiskey"
       },
-      "states": {}
+      "states": {
+        "is_cut": false
+      }
     },
     {
-      "id": "coffee_stained_schematic_1",
-      "name": "Coffee-Stained Schematic",
-      "type": "ITEM",
-      "location_id": "in:main_workbench_area",
-      "properties": {
-        "weight": 0.05,
-        "material": "paper",
-        "condition": "stained",
-        "content": "FIR filter design"
-      },
-      "states": {}
-    },
-    {
-      "id": "employee_plaque_1",
-      "name": "Employee of the Month Plaque",
-      "type": "ITEM",
-      "location_id": "in:main_workbench_area",
-      "properties": {
-        "weight": 0.8,
-        "material": "wood",
-        "condition": "dusty",
-        "year": "2018"
-      },
-      "states": {}
-    },
-    {
-      "id": "broken_desk_fan_1",
-      "name": "Broken Desk Fan",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 1.5,
-        "material": "plastic",
-        "condition": "broken",
-        "note": "DO NOT PLUG IN"
-      },
-      "states": {}
-    },
-    {
-      "id": "triple_monitor_setup_1",
-      "name": "Triple-Monitor Setup",
+      "id": "tumbleweed_cart_1",
+      "name": "Tumbleweed Cart",
       "type": "FURNITURE",
-      "location_id": "in:filter_simulation_station",
+      "location_id": "in:western_town",
       "properties": {
         "size": [
           1.5,
-          0.4,
-          0.8
+          1.0,
+          1.2
         ],
-        "weight": 25.0,
-        "is_container": true,
-        "brand": "Dell",
-        "condition": "one screen flickering"
+        "weight": 90.0,
+        "is_container": false,
+        "material": "wood",
+        "color": "brown",
+        "wheel_condition": "jammed"
       },
       "states": {
-        "is_on": true
+        "is_assembled": false
       }
     },
     {
-      "id": "server_rack_1",
-      "name": "Server Rack",
+      "id": "lantern_1",
+      "name": "Flickering Lantern",
       "type": "FURNITURE",
-      "location_id": "in:filter_simulation_station",
+      "location_id": "in:western_town",
       "properties": {
         "size": [
-          2.0,
-          0.8,
-          1.8
+          0.3,
+          0.3,
+          0.4
         ],
-        "weight": 200.0,
-        "is_container": true,
-        "material": "steel",
-        "status": "humming softly"
+        "weight": 2.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "brass",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "cowboy_boots_1",
+      "name": "Cowboy Boots",
+      "type": "ITEM",
+      "location_id": "in:western_town",
+      "properties": {
+        "weight": 1.2,
+        "material": "leather",
+        "color": "brown",
+        "size": 10,
+        "condition": "scuffed"
       },
       "states": {}
     },
     {
-      "id": "matlab_terminal_1",
-      "name": "MATLAB Terminal",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
+      "id": "makeup_trailer_1",
+      "name": "Makeup Trailer",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
       "properties": {
-        "weight": 0.1,
-        "content": "half-written FIR coefficient script"
+        "size": [
+          3.0,
+          2.5,
+          2.8
+        ],
+        "weight": 450.0,
+        "is_container": true,
+        "material": "aluminum",
+        "color": "white",
+        "light_condition": "flickering"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "equipment_cage_1",
+      "name": "Equipment Cage",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray",
+        "lock_code": "7421"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:equipment_cage_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "color": "red",
+        "size": "#2",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gaff_tape_1",
+      "name": "Gaff Tape",
+      "type": "ITEM",
+      "location_id": "in:equipment_cage_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "cloth",
+        "color": "black",
+        "length": "50m"
+      },
+      "states": {}
+    },
+    {
+      "id": "directors_monitor_1",
+      "name": "Director's Monitor Setup",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.0
+        ],
+        "weight": 22.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "screen_status": "frozen"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "floodlight_1",
+      "name": "Burned-Out Floodlight",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "silver",
+        "bulb_type": "Philips HPL 500W"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "release_forms_drawer_1",
+      "name": "Misfiled Release Forms Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
       },
       "states": {
         "is_open": true
       }
     },
     {
-      "id": "external_hdd_1",
-      "name": "External HDD",
+      "id": "release_form_1",
+      "name": "Release Form",
       "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 0.3,
-        "label": "BACKUP_CRITICAL"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "reference_filter_printouts_1",
-      "name": "Reference Filter Printouts",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 0.2,
-        "condition": "coffee ring stain",
-        "material": "paper"
-      },
-      "states": {}
-    },
-    {
-      "id": "mechanical_keyboard_1",
-      "name": "Mechanical Keyboard",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 1.0,
-        "condition": "missing F5 key",
-        "brand": "Corsair"
-      },
-      "states": {}
-    },
-    {
-      "id": "usb_hub_1",
-      "name": "USB Hub",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 0.2,
-        "condition": "one port loose"
-      },
-      "states": {
-        "is_connected": false
-      }
-    },
-    {
-      "id": "sticky_notes_1",
-      "name": "Sticky Notes",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 0.05,
-        "content": "bit-length calculations",
-        "color": "yellow"
-      },
-      "states": {}
-    },
-    {
-      "id": "think_poster_1",
-      "name": "Think Before You Quantize Poster",
-      "type": "ITEM",
-      "location_id": "in:filter_simulation_station",
+      "location_id": "in:release_forms_drawer_1",
       "properties": {
         "weight": 0.1,
         "material": "paper",
-        "condition": "motivational"
-      },
-      "states": {}
-    },
-    {
-      "id": "ieee_journals_1",
-      "name": "IEEE Journals",
-      "type": "ITEM",
-      "location_id": "in:filter_simulation_station",
-      "properties": {
-        "weight": 3.0,
-        "condition": "some bookmarked, others unopened",
-        "material": "paper"
-      },
-      "states": {}
-    },
-    {
-      "id": "dead_succulent_1",
-      "name": "Dead Succulent",
-      "type": "ITEM",
-      "location_id": "on:triple_monitor_setup_1",
-      "properties": {
-        "weight": 0.5,
-        "condition": "dead",
-        "pot_design": "circuit-board-patterned"
-      },
-      "states": {}
-    },
-    {
-      "id": "rf_shielding_cage_1",
-      "name": "RF Shielding Cage",
-      "type": "FURNITURE",
-      "location_id": "in:signal_generation_testing_bay",
-      "properties": {
-        "size": [
-          2.0,
-          1.0,
-          1.5
-        ],
-        "weight": 150.0,
-        "is_container": true,
-        "material": "steel"
+        "color": "white",
+        "content": "actor_release"
       },
       "states": {
-        "is_open": false
+        "is_signed": false,
+        "is_shredded": false
       }
     },
     {
-      "id": "rack_mounted_signal_analyzer_1",
-      "name": "Rack-Mounted Signal Analyzer",
-      "type": "FURNITURE",
-      "location_id": "in:signal_generation_testing_bay",
-      "properties": {
-        "size": [
-          0.6,
-          0.5,
-          0.4
-        ],
-        "weight": 30.0,
-        "is_container": true,
-        "brand": "Keysight",
-        "display": "CALIBRATION REQUIRED"
-      },
-      "states": {}
-    },
-    {
-      "id": "reference_signal_generator_1",
-      "name": "Reference Signal Generator",
+      "id": "walkie_talkie_1",
+      "name": "Lost Walkie-Talkie",
       "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
+      "location_id": "in:production_alley",
       "properties": {
-        "weight": 5.0,
-        "output": "1kHz sine wave",
-        "brand": "Rohde & Schwarz"
-      },
-      "states": {}
-    },
-    {
-      "id": "defective_fpga_dev_board_1",
-      "name": "Defective FPGA Dev Board",
-      "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
-      "properties": {
-        "weight": 0.8,
-        "condition": "one pin array bent",
-        "brand": "Xilinx"
-      },
-      "states": {}
-    },
-    {
-      "id": "bnc_cable_organizer_1",
-      "name": "BNC Cable Organizer",
-      "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
-      "properties": {
-        "weight": 1.0,
-        "condition": "one cable unlabeled",
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "bnc_terminator_box_1",
-      "name": "BNC Terminator Box",
-      "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
-      "properties": {
-        "weight": 0.5,
-        "condition": "one port loose"
+        "weight": 0.4,
+        "material": "plastic",
+        "color": "black",
+        "brand": "Motorola",
+        "channel": 3
       },
       "states": {
-        "is_connected": false
+        "is_active": true
       }
     },
     {
-      "id": "grounding_strap_clip_1",
-      "name": "Grounding Strap Clip",
-      "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
-      "properties": {
-        "weight": 0.1,
-        "condition": "attached to a dangling wire",
-        "material": "metal"
-      },
-      "states": {}
-    },
-    {
-      "id": "power_sequencer_1",
-      "name": "Power Sequencer",
-      "type": "ITEM",
-      "location_id": "on:rack_mounted_signal_analyzer_1",
-      "properties": {
-        "weight": 0.7,
-        "led_status": "STANDBY",
-        "brand": "Tripp Lite"
-      },
-      "states": {}
-    },
-    {
-      "id": "high_voltage_sticker_1",
-      "name": "High Voltage Warning Sticker",
-      "type": "ITEM",
-      "location_id": "in:signal_generation_testing_bay",
-      "properties": {
-        "weight": 0.01,
-        "condition": "faded",
-        "material": "vinyl"
-      },
-      "states": {}
-    },
-    {
-      "id": "whiteboard_1",
-      "name": "Whiteboard",
+      "id": "folding_chair_1",
+      "name": "Broken Folding Chair",
       "type": "FURNITURE",
-      "location_id": "in:signal_generation_testing_bay",
-      "properties": {
-        "size": [
-          1.2,
-          0.8,
-          0.05
-        ],
-        "weight": 10.0,
-        "is_container": false,
-        "content": "half-erased SNR calculations",
-        "material": "melamine"
-      },
-      "states": {}
-    },
-    {
-      "id": "mini_fridge_1",
-      "name": "Mini Fridge",
-      "type": "FURNITURE",
-      "location_id": "in:signal_generation_testing_bay",
+      "location_id": "in:production_alley",
       "properties": {
         "size": [
           0.5,
           0.5,
           0.8
         ],
-        "weight": 25.0,
-        "is_container": true,
-        "content": "energy drinks",
-        "status": "humming loudly"
-      },
-      "states": {}
-    },
-    {
-      "id": "heavy_duty_shelving_unit_1",
-      "name": "Heavy-Duty Shelving Unit",
-      "type": "FURNITURE",
-      "location_id": "in:storage_component_shelves",
-      "properties": {
-        "size": [
-          2.0,
-          1.0,
-          2.0
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "condition": "sagging slightly under weight",
-        "material": "steel"
-      },
-      "states": {}
-    },
-    {
-      "id": "esd_safe_storage_bins_1",
-      "name": "ESD-Safe Storage Bins",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 2.0,
-        "condition": "some labeled, others scribbled over",
-        "material": "plastic",
-        "is_container": true
+        "weight": 3.5,
+        "is_container": false,
+        "material": "metal",
+        "color": "black",
+        "leg_condition": "broken"
       },
       "states": {
-        "is_open": false
+        "is_assembled": false
       }
     },
     {
-      "id": "dac_chip_1",
-      "name": "16-bit DAC Chip",
+      "id": "call_sheet_clipboard_1",
+      "name": "Clipboard with Call Sheets",
       "type": "ITEM",
-      "location_id": "in:esd_safe_storage_bins_1",
-      "properties": {
-        "weight": 0.05,
-        "packaging": "anti-static bag",
-        "location_note": "tucked behind resistors",
-        "brand": "Analog Devices"
-      },
-      "states": {}
-    },
-    {
-      "id": "spare_oscilloscope_probe_1",
-      "name": "Spare Oscilloscope Probe",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 0.3,
-        "note": "Use for low-noise only",
-        "brand": "Tektronix"
-      },
-      "states": {}
-    },
-    {
-      "id": "sealed_backup_hdd_1",
-      "name": "Sealed Backup HDD",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 0.4,
-        "label": "DO NOT OVERWRITE"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "component_drawers_1",
-      "name": "Component Drawers",
-      "type": "FURNITURE",
-      "location_id": "in:storage_component_shelves",
-      "properties": {
-        "size": [
-          0.8,
-          0.4,
-          0.6
-        ],
-        "weight": 15.0,
-        "is_container": true,
-        "condition": "some stuck",
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "label_maker_1",
-      "name": "Label Maker",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
+      "location_id": "in:production_alley",
       "properties": {
         "weight": 0.6,
-        "condition": "out of tape",
-        "brand": "Brother"
-      },
-      "states": {}
-    },
-    {
-      "id": "digital_calipers_1",
-      "name": "Digital Calipers",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 0.2,
-        "condition": "battery low",
-        "brand": "Mitutoyo"
-      },
-      "states": {}
-    },
-    {
-      "id": "obsolete_floppy_disks_1",
-      "name": "Obsolete Floppy Disks",
-      "type": "ITEM",
-      "location_id": "in:storage_component_shelves",
-      "properties": {
-        "weight": 0.5,
-        "quantity": "stack",
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "candy_bowl_1",
-      "name": "Take One Candy Bowl",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 0.3,
-        "content": "only wrappers left",
-        "material": "glass"
-      },
-      "states": {}
-    },
-    {
-      "id": "empty_cardboard_boxes_1",
-      "name": "Empty Cardboard Boxes",
-      "type": "ITEM",
-      "location_id": "in:storage_component_shelves",
-      "properties": {
-        "weight": 2.0,
-        "condition": "leaning tower",
-        "material": "cardboard"
-      },
-      "states": {}
-    },
-    {
-      "id": "magnetic_box_1",
-      "name": "Magnetic Box",
-      "type": "ITEM",
-      "location_id": "in:main_workbench_area",
-      "properties": {
-        "weight": 0.4,
-        "content": "calibration jig key",
-        "material": "metal"
+        "material": "wood",
+        "color": "brown",
+        "content": "misprinted_schedule"
       },
       "states": {
-        "is_open": false
+        "is_signed": false
       }
     },
     {
-      "id": "replacement_cable_1",
-      "name": "Replacement Cable",
-      "type": "ITEM",
-      "location_id": "in:storage_component_shelves",
-      "properties": {
-        "weight": 0.2,
-        "location_note": "behind a stack of manuals",
-        "purpose": "for flickering monitor"
-      },
-      "states": {}
-    },
-    {
-      "id": "charger_1",
-      "name": "Battery Charger",
-      "type": "ITEM",
-      "location_id": "on:heavy_duty_shelving_unit_1",
-      "properties": {
-        "weight": 0.5,
-        "brand": "Energizer",
-        "provides_abilities": [
-          "recharge"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "portable_freezer_1",
-      "name": "Portable Freezer",
+      "id": "first_aid_kit_1",
+      "name": "First Aid Kit",
       "type": "FURNITURE",
-      "location_id": "in:signal_generation_testing_bay",
-      "properties": {
-        "size": [
-          0.4,
-          0.4,
-          0.6
-        ],
-        "weight": 12.0,
-        "is_container": true,
-        "brand": "Dometic",
-        "provides_abilities": [
-          "freeze"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "fire_extinguisher_1",
-      "name": "Fire Extinguisher",
-      "type": "ITEM",
-      "location_id": "in:main_workbench_area",
-      "properties": {
-        "weight": 5.0,
-        "type": "CO2",
-        "provides_abilities": [
-          "extinguish"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "keycard_1",
-      "name": "Keycard",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
-      "properties": {
-        "weight": 0.05,
-        "access_level": "engineer",
-        "provides_abilities": [
-          "unlock"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "toaster_1",
-      "name": "Toaster",
-      "type": "FURNITURE",
-      "location_id": "in:main_workbench_area",
+      "location_id": "in:production_alley",
       "properties": {
         "size": [
           0.3,
           0.2,
           0.2
         ],
-        "weight": 2.5,
-        "is_container": false,
-        "brand": "Breville",
-        "provides_abilities": [
-          "toast"
-        ]
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "red",
+        "missing_items": "bandages"
       },
-      "states": {}
+      "states": {
+        "is_open": true
+      }
     },
     {
-      "id": "butter_knife_1",
-      "name": "Butter Knife",
-      "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "id": "storage_shelf_1",
+      "name": "Labeled Storage Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:storage_warehouse",
       "properties": {
-        "weight": 0.1,
-        "material": "stainless steel",
+        "size": [
+          2.0,
+          0.5,
+          2.0
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "prop_crate_1",
+      "name": "Fragile Prop Crate",
+      "type": "FURNITURE",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown",
+        "label": "FRAGILE - THIS SIDE UP"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "porcelain_vase_1",
+      "name": "Antique Porcelain Vase",
+      "type": "ITEM",
+      "location_id": "in:prop_crate_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "porcelain",
+        "color": "blue",
+        "age": "antique",
+        "value": "high"
+      },
+      "states": {
+        "is_packed": false
+      }
+    },
+    {
+      "id": "smoke_machine_1",
+      "name": "Hazardous Smoke Machine",
+      "type": "FURNITURE",
+      "location_id": "in:storage_warehouse",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 18.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black",
+        "hazard_level": "flammable"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "pyrotechnics_case_1",
+      "name": "Pyrotechnics Case",
+      "type": "FURNITURE",
+      "location_id": "in:storage_warehouse",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.4
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red",
+        "warning": "EXPLOSIVE MATERIALS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "scaffolding_1",
+      "name": "Metal Scaffolding",
+      "type": "FURNITURE",
+      "location_id": "in:parking_overflow",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          3.0
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "silver",
+        "stability": "unstable"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "film_reel_1",
+      "name": "Abandoned Film Reel",
+      "type": "ITEM",
+      "location_id": "in:parking_overflow",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "color": "silver",
+        "content": "raw_footage",
+        "condition": "exposed"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "camera_1",
+      "name": "Professional Camera",
+      "type": "ITEM",
+      "location_id": "in:parking_overflow",
+      "properties": {
+        "weight": 2.5,
+        "material": "metal",
+        "color": "black",
+        "brand": "Arri",
+        "model": "Alexa",
         "provides_abilities": [
-          "spread"
+          "photograph"
         ]
       },
       "states": {}
     },
     {
-      "id": "mixing_spoon_1",
-      "name": "Mixing Spoon",
+      "id": "pen_1",
+      "name": "Ballpoint Pen",
       "type": "ITEM",
-      "location_id": "on:steel_workbench_1",
+      "location_id": "in:production_alley",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "color": "blue",
+        "ink_level": "half",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:equipment_cage_1",
+      "properties": {
+        "weight": 3.2,
+        "material": "metal",
+        "color": "silver",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:production_alley",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.6
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic",
+        "color": "black",
+        "jam_status": "clear"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "on:craft_services_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "clear",
+        "contents": "water",
+        "volume": "500ml",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Utility Knife",
+      "type": "ITEM",
+      "location_id": "in:equipment_cage_1",
       "properties": {
         "weight": 0.2,
-        "material": "wood",
+        "material": "metal",
+        "color": "silver",
+        "blade_condition": "sharp",
         "provides_abilities": [
-          "stir"
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_pin_1",
+      "name": "Rolling Pin",
+      "type": "ITEM",
+      "location_id": "in:storage_warehouse",
+      "properties": {
+        "weight": 0.8,
+        "material": "wood",
+        "color": "brown",
+        "length": "40cm",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Metal Colander",
+      "type": "ITEM",
+      "location_id": "in:storage_warehouse",
+      "properties": {
+        "weight": 0.6,
+        "material": "metal",
+        "color": "silver",
+        "hole_size": "medium",
+        "provides_abilities": [
+          "drain"
         ]
       },
       "states": {}
     }
   ],
   "abilities": [
+    "activate",
+    "assemble",
     "close",
-    "connect",
-    "extinguish",
-    "freeze",
+    "cut",
+    "deactivate",
+    "disconnect",
+    "drain",
+    "flatten",
+    "hide",
     "open",
-    "recharge",
-    "spread",
-    "stir",
-    "toast",
-    "turn_off",
-    "turn_on",
-    "unlock"
+    "photograph",
+    "sign",
+    "sync",
+    "unroll",
+    "water",
+    "weld"
   ]
 }

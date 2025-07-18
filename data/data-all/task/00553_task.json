@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the tape_backup_drive_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tape_backup_drive_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the crt_screen_1 in the storage_closet.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "crt_screen_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal hard drive and place it in the file_cabinet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hard_drive_1",
+          "location_id": "in:file_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only hard drive labeled \"CORROSIVE\" and place it in the empty_crates_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hard_drive_1",
+          "location_id": "in:empty_crates_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the degaussing_wand_1 to unseal the tape_backup_drive_1.",
       "task_category": "tool_use",
@@ -20,6 +70,102 @@
         {
           "id": "tape_backup_drive_1",
           "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label_marker_1 to label the hard_drive_2.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hard_drive_2",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to open the file_cabinet_1 and place the manual_1 inside.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "file_cabinet_1",
+          "is_open": true
+        },
+        {
+          "id": "manual_1",
+          "location_id": "in:file_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors_1 to cut the rs232_cable_tangle_1 and then place it in the empty_crates_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "rs232_cable_tangle_1",
+          "is_cut": true
+        },
+        {
+          "id": "rs232_cable_tangle_1",
+          "location_id": "in:empty_crates_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to plug in the keyboard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ups_battery_array_1 to the loading_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_battery_array_1",
+          "location_id": "in:loading_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_42 to the loading_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_42",
+          "location_id": "in:loading_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the forklift_1 to the main_server_hall and use the screwdriver_1 to open the empty_crates_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "location_id": "in:main_server_hall"
+        },
+        {
+          "id": "empty_crates_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the pallet_jack_1 to the technician_alcove and use the label_marker_1 to label the hard_drive_3.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_jack_1",
+          "location_id": "in:technician_alcove"
+        },
+        {
+          "id": "hard_drive_3",
+          "is_labeled": true
         }
       ]
     }

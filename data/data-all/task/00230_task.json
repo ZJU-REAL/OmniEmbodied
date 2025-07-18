@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place rubber_duck_1 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rubber_duck_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place coffee_mug_1 on collaboration_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:collaboration_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red USB drive labeled 'BOOTLOADER' and place it in the server closet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "in:server_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the unlabeled black cable in the server closet and label it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "unlabeled_cable_1",
+          "is_labeled": true
+        }
+      ]
+    },
     {
       "task_description": "Use the multimeter to verify the network switch in the server closet.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "network_switch_1",
           "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the marker to label the whiteboard wall.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "whiteboard_wall_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest wooden furniture in the main coding floor and varnish it using the brush.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "collaboration_table_1",
+          "is_varnished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the main coding floor and use the multimeter to verify it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked toolbox.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_toolbox_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collaboration table to the archives.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collaboration_table_1",
+          "location_id": "in:archives"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the filing cabinet to the main coding floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:main_coding_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy server rack to the main coding floor and verify it using the multimeter.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_a_1",
+          "location_id": "in:main_coding_floor"
+        },
+        {
+          "id": "server_rack_a_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the CRT monitor to the supply nook and stop its running process.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "in:supply_nook"
+        },
+        {
+          "id": "crt_monitor_1",
+          "is_running": false
         }
       ]
     }

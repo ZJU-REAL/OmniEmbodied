@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on server_status_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:server_status_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black Dell monitor on the server_status_board_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_2",
+          "location_id": "on:server_status_board_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the scanner_1 to scan the employee_photo_1.",
       "task_category": "tool_use",
@@ -20,6 +50,104 @@
         {
           "id": "employee_photo_1",
           "is_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fertilizer_1 to fertilize the dead_plant_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dead_plant_1",
+          "is_fertilized": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sealing_tape_1 to seal the fire_extinguisher_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fire_extinguisher_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to wipe the central_command_desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "central_command_desk_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the parts_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "parts_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the photocopier_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the central_command_desk_1 to the maintenance_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_command_desk_1",
+          "location_id": "in:maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ups_bank_1 to the primary_server_racks.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_bank_1",
+          "location_id": "in:primary_server_racks"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the photocopier_1 to the maintenance_bay and use the sealing_tape_1 to seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:maintenance_bay"
+        },
+        {
+          "id": "photocopier_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_a_1 to the maintenance_bay and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_a_1",
+          "location_id": "in:maintenance_bay"
+        },
+        {
+          "id": "server_rack_a_1",
+          "is_open": true
         }
       ]
     }

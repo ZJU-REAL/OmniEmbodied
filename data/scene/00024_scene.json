@@ -1,548 +1,722 @@
 {
-  "description": "A bustling, late-night hackathon space dedicated to KDE development, with multiple zones for coding, testing, and debugging, filled with technical equipment, half-finished prototypes, and abandoned snacks.",
+  "description": "A cutting-edge Microbiome Research Laboratory with interconnected zones for sample processing, microscopy, live culture incubation, and collaborative work. The lab is densely packed with specialized equipment, bacterial cultures, and clinical samples, requiring extensive collaboration for operation.",
   "rooms": [
     {
-      "id": "central_coding_hub",
-      "name": "Central Coding Hub",
+      "id": "sample_processing_storage",
+      "name": "Sample Processing & Storage Zone",
       "properties": {
-        "type": "workspace"
+        "type": "refrigerated",
+        "temperature": "4°C"
       },
       "connected_to_room_ids": [
-        "testing_rig_area",
-        "debugging_station",
-        "documentation_zone",
-        "break_area"
+        "microscopy_analysis",
+        "live_culture_incubation",
+        "collaborative_workspace"
       ]
     },
     {
-      "id": "testing_rig_area",
-      "name": "Testing Rig Area",
+      "id": "microscopy_analysis",
+      "name": "Microscopy & Analysis Station",
       "properties": {
-        "type": "testing"
+        "type": "diagnostic",
+        "lighting": "dim"
       },
       "connected_to_room_ids": [
-        "central_coding_hub",
-        "debugging_station"
+        "sample_processing_storage",
+        "live_culture_incubation",
+        "collaborative_workspace"
       ]
     },
     {
-      "id": "debugging_station",
-      "name": "Debugging Station",
+      "id": "live_culture_incubation",
+      "name": "Live Culture Incubation Bay",
       "properties": {
-        "type": "repair"
+        "type": "temperature_controlled",
+        "humidity": "high"
       },
       "connected_to_room_ids": [
-        "central_coding_hub",
-        "testing_rig_area"
+        "sample_processing_storage",
+        "microscopy_analysis",
+        "collaborative_workspace"
       ]
     },
     {
-      "id": "documentation_zone",
-      "name": "Documentation & Reference Zone",
+      "id": "collaborative_workspace",
+      "name": "Collaborative Workspace & Documentation Area",
       "properties": {
-        "type": "reference"
+        "type": "office",
+        "noise_level": "moderate"
       },
       "connected_to_room_ids": [
-        "central_coding_hub"
-      ]
-    },
-    {
-      "id": "break_area",
-      "name": "Break Area",
-      "properties": {
-        "type": "kitchenette"
-      },
-      "connected_to_room_ids": [
-        "central_coding_hub"
+        "sample_processing_storage",
+        "microscopy_analysis",
+        "live_culture_incubation"
       ]
     }
   ],
   "objects": [
     {
-      "id": "monitor_workstation_1",
-      "name": "6-Monitor Workstation",
+      "id": "biosafety_cabinet_1",
+      "name": "Industrial-grade Biosafety Cabinet",
       "type": "FURNITURE",
-      "location_id": "in:central_coding_hub",
-      "properties": {
-        "size": [
-          2.5,
-          1.2,
-          1.0
-        ],
-        "weight": 80.0,
-        "is_container": true,
-        "material": "metal",
-        "model_number": "WS-6000"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "adjustable_desk_1",
-      "name": "Adjustable-Height Desk",
-      "type": "FURNITURE",
-      "location_id": "in:central_coding_hub",
+      "location_id": "in:sample_processing_storage",
       "properties": {
         "size": [
           1.8,
-          0.9,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "filter_type": "HEPA"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ultra_low_freezer_1",
+      "name": "-80°C Ultra-Low Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "temperature": -80.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sample_rack_1",
+      "name": "Stainless Steel Sample Rack",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.3
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "probiotic_trial_kit_1",
+      "name": "Probiotic Trial Kit - E. coli Nissle",
+      "type": "ITEM",
+      "location_id": "in:ultra_low_freezer_1",
+      "properties": {
+        "size": [
+          0.25,
+          0.15,
+          0.1
+        ],
+        "weight": 3.0,
+        "color": "blue",
+        "label": "E. coli Nissle – Trial Batch #7",
+        "temperature_sensitive": true
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Broken Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.4
+        ],
+        "weight": 45.0,
+        "error_code": "E-404"
+      },
+      "states": {
+        "is_open": false,
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Precision Pipette Set",
+      "type": "ITEM",
+      "location_id": "on:sample_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "calibration_status": "overdue",
+        "missing_tip": "50µL",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 60.0,
+        "steam_valve": "hissing"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "temperature": 4.0,
+        "is_container": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "waste_bin_1",
+      "name": "Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "contents": "biohazard_bags",
+        "fill_level": "half"
+      },
+      "states": {}
+    },
+    {
+      "id": "biosafety_poster_1",
+      "name": "Biosafety Level 2 Poster",
+      "type": "ITEM",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded",
+        "peeling": "corners"
+      },
+      "states": {}
+    },
+    {
+      "id": "protocol_binder_1",
+      "name": "Coffee-Stained Protocol Binder",
+      "type": "ITEM",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "weight": 1.2,
+        "current_page": 47,
+        "page_title": "Probiotic Dosage Trials"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Lab Safety Champion Trophy",
+      "type": "ITEM",
+      "location_id": "in:sample_processing_storage",
+      "properties": {
+        "weight": 0.8,
+        "year": 2018,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "electron_microscope_1",
+      "name": "Electron Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "size": [
+          1.5,
+          1.2,
+          1.8
+        ],
+        "weight": 300.0,
+        "current_sample": "gut_bacteria"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "spectrophotometer_1",
+      "name": "Spectrophotometer",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "temperature": "warm",
+        "current_scan": "absorbance"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "misplaced_slide_1",
+      "name": "Misplaced Slide - UC Patient 12",
+      "type": "ITEM",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "weight": 0.05,
+        "label": "UC Patient 12 – Severe Inflammation",
+        "mixed_with": "control_samples"
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "Out-of-Calibration pH Meter",
+      "type": "ITEM",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "weight": 0.3,
+        "calibration_error": "+0.3",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 10.0,
+        "paper_status": "out",
+        "jam_status": "jammed",
+        "jam_content": "gel_electrophoresis_result"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_kit_1",
+      "name": "Microscope Cleaning Kit",
+      "type": "ITEM",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "weight": 0.7,
+        "ethanol_level": "low",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note - Calibration Warning",
+      "type": "ITEM",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "weight": 0.01,
+        "message": "DO NOT TOUCH – Calibration in Progress",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "photo_frame_1",
+      "name": "Research Team Photo",
+      "type": "ITEM",
+      "location_id": "in:microscopy_analysis",
+      "properties": {
+        "weight": 0.2,
+        "orientation": "crooked",
+        "event": "conference"
+      },
+      "states": {}
+    },
+    {
+      "id": "incubator_1",
+      "name": "Incubator - Lactobacillus",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 100.0,
+        "temperature": 37.0,
+        "hum": "humming",
+        "culture_type": "Lactobacillus"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "incubator_2",
+      "name": "Incubator - Bifidobacterium",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 100.0,
+        "temperature": 37.0,
+        "hum": "humming",
+        "culture_type": "Bifidobacterium",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "incubator_3",
+      "name": "Incubator - E. coli Nissle",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 100.0,
+        "temperature": 37.0,
+        "hum": "humming",
+        "culture_type": "E. coli Nissle"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "incubator_4",
+      "name": "Incubator - Control Group",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 100.0,
+        "temperature": 37.0,
+        "hum": "humming",
+        "culture_type": "Control Group"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "co2_tank_1",
+      "name": "CO₂ Tank",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 50.0,
+        "fill_level": "half",
+        "pressure_gauge": "flickering"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "petri_dish_1",
+      "name": "Contaminated Petri Dish",
+      "type": "ITEM",
+      "location_id": "in:incubator_2",
+      "properties": {
+        "weight": 0.1,
+        "culture": "Bifidobacterium",
+        "contamination": "fungal_growth"
+      },
+      "states": {}
+    },
+    {
+      "id": "liquid_nitrogen_dewar_1",
+      "name": "Liquid Nitrogen Dewar",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 40.0,
+        "fill_level": "overflowing",
+        "warning_light": "blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_rack_1",
+      "name": "Lab Coat Rack",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          0.5,
+          0.2,
+          1.5
+        ],
+        "weight": 5.0,
+        "coat_condition": "torn_sleeve"
+      },
+      "states": {}
+    },
+    {
+      "id": "timer_1",
+      "name": "Culture Cycle Timer",
+      "type": "ITEM",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "weight": 0.2,
+        "remaining_time": "12:37"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Research Notes Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 25.0,
+        "notes": "Day 14 – Nissle group shows higher remission rates?"
+      },
+      "states": {}
+    },
+    {
+      "id": "fern_1",
+      "name": "Dead Fern",
+      "type": "ITEM",
+      "location_id": "in:live_culture_incubation",
+      "properties": {
+        "weight": 0.5,
+        "condition": "dead",
+        "location": "corner"
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_1",
+      "name": "Shared Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:collaborative_workspace",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
           0.7
         ],
-        "weight": 55.0,
-        "is_container": true,
-        "material": "wood",
-        "state": "stuck_raised"
+        "weight": 50.0,
+        "monitors": 3,
+        "monitor_condition": "one_flickering",
+        "display_data": "bacterial_growth"
       },
       "states": {}
     },
     {
       "id": "whiteboard_1",
-      "name": "Wheeled Whiteboard",
+      "name": "Research Whiteboard",
       "type": "FURNITURE",
-      "location_id": "in:central_coding_hub",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "size": [
+          1.8,
           1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "content": "equations",
+        "erasure": "half"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:collaborative_workspace",
+      "properties": {
+        "size": [
           0.8,
+          0.5,
           1.5
         ],
-        "weight": 25.0,
-        "is_container": false,
-        "material": "plastic"
+        "weight": 60.0,
+        "is_container": true,
+        "contents": "patient_trial_records",
+        "key_location": "biosafety_cabinet_glove_compartment"
       },
-      "states": {}
+      "states": {
+        "is_locked": true
+      }
     },
     {
-      "id": "usb_dongle_1",
-      "name": "USB Debugging Dongle",
+      "id": "grant_proposal_1",
+      "name": "Unsent Grant Proposal Draft",
       "type": "ITEM",
-      "location_id": "on:monitor_workstation_1",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "weight": 0.1,
-        "color": "black",
-        "brand": "KDE",
-        "provides_abilities": [
-          "start_process"
-        ]
+        "storage": "USB_stick",
+        "save_status": "unsaved_changes"
       },
       "states": {
-        "is_running": false
+        "is_downloaded": false
       }
     },
     {
-      "id": "compiler_errors_1",
-      "name": "Printed Stack of Compiler Errors",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "yellow",
-        "material": "paper"
-      },
-      "states": {
-        "is_solved": false
-      }
-    },
-    {
-      "id": "keyboard_1",
-      "name": "Mechanical Keyboard",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 1.2,
-        "color": "black",
-        "brand": "Cherry",
-        "model_number": "MX-Blues"
-      },
-      "states": {
-        "is_cracked": false
-      }
-    },
-    {
-      "id": "headset_1",
-      "name": "Noise-Canceling Headset",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "black",
-        "brand": "Sony",
-        "battery_level": 10
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "label_printer_1",
-      "name": "Label Printer",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 2.5,
-        "color": "white",
-        "brand": "Brother",
-        "provides_abilities": [
-          "sign"
-        ]
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "document_scanner_1",
-      "name": "Document Scanner",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 5.0,
-        "color": "gray",
-        "brand": "Epson"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "kde_poster_1",
-      "name": "Faded KDE 4.0 Poster",
-      "type": "ITEM",
-      "location_id": "in:central_coding_hub",
-      "properties": {
-        "weight": 0.2,
-        "color": "multicolor",
-        "material": "paper"
-      },
-      "states": {}
-    },
-    {
-      "id": "conference_badges_1",
-      "name": "Stack of Old Conference Badges",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "various",
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "desk_plant_1",
-      "name": "Desk Plant",
-      "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
-      "properties": {
-        "weight": 0.8,
-        "color": "brown",
-        "material": "plant"
-      },
-      "states": {
-        "is_planted": false
-      }
-    },
-    {
-      "id": "test_rack_1",
-      "name": "Rack of Test Devices",
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
       "type": "FURNITURE",
-      "location_id": "in:testing_rig_area",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "size": [
-          1.5,
-          0.6,
-          1.8
+          0.3,
+          0.2,
+          0.4
         ],
-        "weight": 70.0,
-        "is_container": true,
-        "material": "metal"
+        "weight": 5.0,
+        "coffee_condition": "stale"
       },
-      "states": {}
+      "states": {
+        "is_on": true
+      }
     },
     {
-      "id": "kvm_switch_1",
-      "name": "KVM Switch",
+      "id": "consent_forms_1",
+      "name": "Unprocessed Consent Forms",
       "type": "ITEM",
-      "location_id": "on:test_rack_1",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "weight": 1.0,
-        "color": "black",
-        "brand": "ATEN"
+        "organization": "disorganized"
       },
-      "states": {
-        "is_running": true
-      }
+      "states": {}
     },
     {
-      "id": "sd_card_1",
-      "name": "Corrupted SD Card",
+      "id": "motivational_poster_1",
+      "name": "Science Motivational Poster",
       "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "label": "DO NOT ERASE – TEST IMAGE"
-      },
-      "states": {
-        "is_pure": true
-      }
-    },
-    {
-      "id": "thermal_camera_1",
-      "name": "Thermal Camera",
-      "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 1.5,
-        "color": "yellow",
-        "brand": "FLIR"
-      },
-      "states": {
-        "is_running": true
-      }
-    },
-    {
-      "id": "usb_hub_1",
-      "name": "USB Hub",
-      "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 0.3,
-        "color": "white",
-        "brand": "Anker"
-      },
-      "states": {
-        "is_cracked": false
-      }
-    },
-    {
-      "id": "hdmi_cable_1",
-      "name": "Spare HDMI Cable",
-      "type": "ITEM",
-      "location_id": "on:test_rack_1",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "weight": 0.2,
-        "color": "black",
-        "condition": "bent_connector"
+        "message": "Science: Because Magic Isn’t Real"
       },
       "states": {}
     },
     {
-      "id": "power_strip_1",
-      "name": "Power Strip",
+      "id": "sandwich_1",
+      "name": "Half-Eaten Sandwich",
       "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 0.8,
-        "color": "black",
-        "brand": "Belkin"
-      },
-      "states": {
-        "is_buckled": false
-      }
-    },
-    {
-      "id": "free_software_sticker_1",
-      "name": "Dusty 'I ❤️ Free Software' Sticker",
-      "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 0.01,
-        "color": "red",
-        "material": "vinyl"
-      },
-      "states": {}
-    },
-    {
-      "id": "lego_turing_1",
-      "name": "Half-Assembled LEGO Turing Machine",
-      "type": "ITEM",
-      "location_id": "on:test_rack_1",
-      "properties": {
-        "weight": 0.5,
-        "color": "multicolor",
-        "material": "plastic"
-      },
-      "states": {
-        "is_solved": false
-      }
-    },
-    {
-      "id": "oscilloscope_1",
-      "name": "Vintage Oscilloscope",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 15.0,
-        "color": "green",
-        "brand": "Tektronix"
-      },
-      "states": {
-        "is_running": false
-      }
-    },
-    {
-      "id": "soldering_station_1",
-      "name": "Soldering Station",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 3.5,
-        "color": "blue",
-        "brand": "Weller"
-      },
-      "states": {
-        "is_running": false
-      }
-    },
-    {
-      "id": "microcontroller_1",
-      "name": "Fried Microcontroller",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 0.1,
-        "color": "black",
-        "condition": "burned"
-      },
-      "states": {
-        "is_pure": false
-      }
-    },
-    {
-      "id": "laptop_1",
-      "name": "Partially Disassembled Laptop",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 2.0,
-        "color": "silver",
-        "brand": "Dell"
-      },
-      "states": {
-        "is_open": true
-      }
-    },
-    {
-      "id": "multimeter_1",
-      "name": "Multimeter",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 0.5,
-        "color": "yellow",
-        "brand": "Fluke"
-      },
-      "states": {
-        "is_running": false
-      }
-    },
-    {
-      "id": "magnifying_lamp_1",
-      "name": "Magnifying Lamp",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 2.5,
-        "color": "black",
-        "brand": "Brightech"
-      },
-      "states": {
-        "is_lowered": true
-      }
-    },
-    {
-      "id": "schematics_1",
-      "name": "Coffee-Stained Schematics Printout",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 0.1,
-        "color": "brown",
-        "material": "paper"
-      },
-      "states": {
-        "is_dusted": true
-      }
-    },
-    {
-      "id": "danger_sign_1",
-      "name": "DANGER: HIGH VOLTAGE Sign",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 0.2,
-        "color": "red",
-        "material": "plastic"
-      },
-      "states": {}
-    },
-    {
-      "id": "api_binder_1",
-      "name": "Blue Binder with API Docs",
-      "type": "ITEM",
-      "location_id": "in:documentation_zone",
-      "properties": {
-        "weight": 1.5,
-        "color": "blue",
-        "material": "paper"
-      },
-      "states": {
-        "is_solved": false
-      }
-    },
-    {
-      "id": "coffee_pot_1",
-      "name": "Half-Empty Coffee Pot",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 1.0,
-        "color": "black",
-        "material": "glass"
-      },
-      "states": {
-        "is_open": false
-      }
-    },
-    {
-      "id": "energy_drink_1",
-      "name": "Energy Drink Can",
-      "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:collaborative_workspace",
       "properties": {
         "weight": 0.3,
-        "color": "red",
-        "brand": "Red Bull"
+        "wrapping": "foil",
+        "condition": "abandoned"
       },
-      "states": {
-        "is_open": false
-      }
+      "states": {}
     },
     {
-      "id": "microwave_1",
-      "name": "Microwave with Broken Door Latch",
+      "id": "screwdriver_1",
+      "name": "Precision Screwdriver",
       "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:biosafety_cabinet_1",
       "properties": {
-        "weight": 15.0,
-        "color": "white",
-        "brand": "Panasonic"
+        "weight": 0.2,
+        "type": "phillips",
+        "provides_abilities": [
+          "unscrew"
+        ]
       },
-      "states": {
-        "is_open": true
-      }
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Sterile Syringe",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.1,
+        "volume": "10mL",
+        "sterility": "sterile",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
     },
     {
       "id": "whisk_1",
-      "name": "Whisk",
+      "name": "Laboratory Whisk",
       "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:sample_processing_storage",
       "properties": {
-        "weight": 0.2,
-        "color": "silver",
-        "material": "metal",
+        "weight": 0.3,
+        "material": "stainless_steel",
         "provides_abilities": [
           "whisk"
         ]
@@ -550,127 +724,57 @@
       "states": {}
     },
     {
-      "id": "duster_1",
-      "name": "Duster",
+      "id": "grinder_1",
+      "name": "Sample Grinder",
       "type": "ITEM",
-      "location_id": "in:break_area",
+      "location_id": "in:sample_processing_storage",
       "properties": {
-        "weight": 0.3,
-        "color": "yellow",
-        "material": "feather",
+        "weight": 2.5,
+        "power": "electric",
         "provides_abilities": [
-          "dust"
+          "grind"
         ]
       },
       "states": {}
     },
     {
-      "id": "pen_1",
-      "name": "Pen",
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
       "type": "ITEM",
-      "location_id": "on:adjustable_desk_1",
+      "location_id": "in:sample_processing_storage",
       "properties": {
-        "weight": 0.05,
-        "color": "black",
-        "brand": "Pilot",
+        "weight": 0.2,
+        "material": "microfiber",
         "provides_abilities": [
-          "sign"
+          "wash"
         ]
       },
       "states": {}
     },
     {
-      "id": "shredder_1",
-      "name": "Shredder",
+      "id": "bluetooth_adapter_1",
+      "name": "Bluetooth Adapter",
       "type": "ITEM",
-      "location_id": "in:documentation_zone",
+      "location_id": "in:collaborative_workspace",
       "properties": {
-        "weight": 5.0,
-        "color": "black",
-        "brand": "Fellowes",
-        "provides_abilities": [
-          "shred"
-        ]
+        "weight": 0.05
       },
-      "states": {}
-    },
-    {
-      "id": "filter_1",
-      "name": "Water Filter",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 1.0,
-        "color": "white",
-        "brand": "Brita",
-        "provides_abilities": [
-          "purify"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "mixing_bowl_1",
-      "name": "Mixing Bowl",
-      "type": "ITEM",
-      "location_id": "in:break_area",
-      "properties": {
-        "weight": 0.8,
-        "color": "blue",
-        "material": "ceramic",
-        "provides_abilities": [
-          "mix"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "rake_1",
-      "name": "Rake",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 1.5,
-        "color": "green",
-        "material": "plastic",
-        "provides_abilities": [
-          "rake"
-        ]
-      },
-      "states": {}
-    },
-    {
-      "id": "contaminant_1",
-      "name": "Contaminant Bottle",
-      "type": "ITEM",
-      "location_id": "in:debugging_station",
-      "properties": {
-        "weight": 0.5,
-        "color": "brown",
-        "material": "glass",
-        "provides_abilities": [
-          "contaminate"
-        ]
-      },
-      "states": {}
+      "states": {
+        "is_paired": false
+      }
     }
   ],
   "abilities": [
-    "buckle",
     "close",
-    "contaminate",
-    "crack",
-    "dust",
-    "mix",
+    "disconnect",
+    "grind",
+    "inject",
+    "measure",
     "open",
-    "purify",
-    "raise",
-    "rake",
-    "shred",
-    "sign",
-    "solve_puzzle",
-    "start_process",
-    "stop_process",
+    "pair",
+    "turn_off",
+    "unscrew",
+    "wash",
     "whisk"
   ]
 }

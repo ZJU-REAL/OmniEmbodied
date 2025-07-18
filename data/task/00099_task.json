@@ -1,55 +1,35 @@
 {
-  "task_background": "Prepare the train maintenance depot for an upcoming safety inspection by organizing tools, repairing equipment, and ensuring all safety protocols are followed.",
+  "task_background": "Prepare the Pediatric Audiology Research & Fitting Center for a day of patient appointments and device calibrations.",
   "agents_config": [
     {
       "name": "robot_1",
-      "max_grasp_limit": 1.0,
+      "max_grasp_limit": 2,
       "max_weight": 30.0,
       "max_size": [
-        1.5,
-        1.5,
-        1.5
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
       ]
     }
   ],
   "tasks": [
     {
-      "task_description": "Place the inspection_tablet_1 on the desk_1.",
-      "task_category": "direct_command",
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked keycard drawer.",
+      "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "inspection_tablet_1",
-          "location_id": "on:desk_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Find the heaviest, metal object in the tool_cart_1 and place it on the inspection_tablet_1.",
-      "task_category": "attribute_reasoning",
-      "validation_checks": [
-        {
-          "id": "pressure_gauge_1",
-          "location_id": "on:inspection_tablet_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Use the wrench_1 to disassemble the brake_assembly_1.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "brake_assembly_1",
-          "is_assembled": false
-        }
-      ]
-    },
-    {
-      "task_description": "Use the wrench_1 to disassemble the only object in the train_inspection_bay that is both metal and has a condition of 'dented'.",
-      "task_category": "compound_reasoning",
-      "validation_checks": [
-        {
-          "id": "train_car_712_1",
-          "is_assembled": false
+          "id": "keycard_drawer_1",
+          "is_open": true
         }
       ]
     }

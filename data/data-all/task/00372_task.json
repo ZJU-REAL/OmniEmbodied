@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the groundhog_prediction_console_1 on the server_rack_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "groundhog_prediction_console_1",
+          "location_id": "on:server_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the framed_newspaper_clipping_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "framed_newspaper_clipping_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black TechLogic device with sticky keys and place it in the storage_maintenance_shed.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "groundhog_prediction_console_1",
+          "location_id": "in:storage_maintenance_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only yellowed framed newspaper clipping and place it on the workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "framed_newspaper_clipping_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the portable_microclimate_regulator_1 with the sealing_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "portable_microclimate_regulator_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Defrost the portable_microclimate_regulator_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "portable_microclimate_regulator_1",
+          "is_frosted": false
+        }
+      ]
+    },
     {
       "task_description": "Use the pruning_shears_1 to prune the dead_potted_fern_1 and then place it in the storage_maintenance_shed.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,50 @@
         {
           "id": "dead_potted_fern_1",
           "location_id": "in:storage_maintenance_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the hydraulic_jack_1 to fix the stuck mechanized_burrow_1 and then close it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mechanized_burrow_1",
+          "is_open": false
+        },
+        {
+          "id": "mechanized_burrow_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unpack the feed_bags_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "feed_bags_1",
+          "is_packed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the workbench_1 to the storage_maintenance_shed.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:storage_maintenance_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the northeast_observation_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:northeast_observation_hub"
         }
       ]
     }

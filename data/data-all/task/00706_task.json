@@ -1,0 +1,174 @@
+{
+  "task_background": "Secure and restore the abandoned marine research outpost after a storm evacuation.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place pelican_specimen_jar_1 on the dissection_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pelican_specimen_jar_1",
+          "location_id": "on:dissection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the microscope_1 in the storage_supply_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "location_id": "in:storage_supply_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the main_laboratory and place it in the field_equipment_shed.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "location_id": "in:field_equipment_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with 'World's Best Ornithologist' inscription and place it in the living_quarters.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:living_quarters"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge_1 using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the bloodstained dissection_table_1 using the cleaning_rag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox_key_1 to open the locked toolbox_1 and retrieve the spark_plug_wrench_1 to repair the generator_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "toolbox_1",
+          "is_open": true
+        },
+        {
+          "id": "generator_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with 'evacuation_plans' content and place it on the whiteboard_1 after cleaning it with the sponge_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "personal_notes_1",
+          "location_id": "on:whiteboard_1"
+        },
+        {
+          "id": "whiteboard_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the open refrigeration_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dissection_table_1 to the storage_supply_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "location_id": "in:storage_supply_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the water_tank_1 to the field_equipment_shed.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_tank_1",
+          "location_id": "in:field_equipment_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy crate_1 to the living_quarters and open it to retrieve the spare_parts_box_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crate_1",
+          "location_id": "in:living_quarters"
+        },
+        {
+          "id": "crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy bunk_bed_1 to the main_laboratory and clean it with the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bunk_bed_1",
+          "location_id": "in:main_laboratory"
+        },
+        {
+          "id": "bunk_bed_1",
+          "is_dirty": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00706"
+}

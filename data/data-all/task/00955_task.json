@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place slide_box_a_1 on the chemical_shelf_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "slide_box_a_1",
+          "location_id": "on:chemical_shelf_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the autoclave_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white plastic slide box containing the special slide EH-BLOOM-47 and place it in the wet_lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "slide_box_a_1",
+          "location_id": "in:wet_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the red emergency stop button and press it to deactivate the gas control panel.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gas_control_panel_1",
+          "is_active": false
+        }
+      ]
+    },
     {
       "task_description": "Use the torque_wrench_1 to open the jammed gold_sputter_1.",
       "task_category": "tool_use",
@@ -20,6 +70,84 @@
         {
           "id": "gold_sputter_1",
           "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Spray the contaminated_sample_12_1 with the EDTA solution to disinfect it.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "contaminated_sample_12_1",
+          "is_sprayed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Locate the flickering microscope and use the barcode_scanner_1 to scan the sample barcode label on its slide box.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_barcode_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to close the frosted over cryo_prep_chamber_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_prep_chamber_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the seawater_tank_1 to the observation_deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "seawater_tank_1",
+          "location_id": "in:observation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the fume_hood_3_1 to the storage_closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_3_1",
+          "location_id": "in:storage_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy telescope that is covered to the main lab and uncover it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "telescope_1",
+          "location_id": "in:main_lab"
+        },
+        {
+          "id": "telescope_1",
+          "is_covered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Work together to move the centrifuge with the imbalance alarm to the repair bay and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": "in:storage_closet"
+        },
+        {
+          "id": "centrifuge_1",
+          "is_on": false
         }
       ]
     }

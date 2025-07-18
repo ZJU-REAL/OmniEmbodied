@@ -339,11 +339,15 @@ class TaskVerifier:
         """
         检查位置是否匹配，支持灵活的in/on判定
 
-        如果expected_location没有in:或on:前缀，则in和on都判定为完成
+        支持的格式：
+        - "in:location" - 精确匹配in前缀
+        - "on:location" - 精确匹配on前缀
+        - ":location" - 空前缀，匹配任何前缀的location
+        - "location" - 无前缀，匹配任何前缀的location
 
         Args:
-            current_location: 当前位置，如 "in:storage_component_shelves"
-            expected_location: 期望位置，如 "signal_generation_testing_bay" 或 "in:storage_component_shelves"
+            current_location: 当前位置，如 "in:restoration_lab"
+            expected_location: 期望位置，如 ":restoration_lab" 或 "in:restoration_lab"
 
         Returns:
             bool: 位置是否匹配
@@ -351,19 +355,26 @@ class TaskVerifier:
         if not current_location or not expected_location:
             return current_location == expected_location
 
-        # 如果期望位置有明确的in:或on:前缀，则进行精确匹配
+        # 解析期望位置
         if expected_location.startswith(("in:", "on:")):
+            # 有明确前缀（in: 或 on:），进行精确匹配
             return current_location == expected_location
-
-        # 如果期望位置没有前缀，则检查当前位置是否在该位置（无论in还是on）
-        if current_location.startswith("in:"):
-            # 提取in:后面的位置名称
-            current_base_location = current_location[3:]  # 去掉"in:"前缀
-            return current_base_location == expected_location
-        elif current_location.startswith("on:"):
-            # 提取on:后面的位置名称
-            current_base_location = current_location[3:]  # 去掉"on:"前缀
-            return current_base_location == expected_location
+        elif expected_location.startswith(":"):
+            # 空前缀格式 ":location"，提取基础位置名
+            expected_base = expected_location[1:]  # 去掉":"前缀
         else:
-            # 当前位置没有前缀，直接比较
-            return current_location == expected_location
+            # 没有前缀，直接使用原值作为基础位置名
+            expected_base = expected_location
+
+        # 解析当前位置，提取基础位置名
+        if current_location.startswith("in:"):
+            current_base = current_location[3:]  # 去掉"in:"前缀
+        elif current_location.startswith("on:"):
+            current_base = current_location[3:]  # 去掉"on:"前缀
+        elif current_location.startswith(":"):
+            current_base = current_location[1:]  # 去掉":"前缀
+        else:
+            current_base = current_location
+
+        # 比较基础位置名
+        return current_base == expected_base

@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place nanomaterial_canister_1 on the digital_balance_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "nanomaterial_canister_1",
+          "location_id": "on:digital_balance_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the calibration_weights_1 on the scale_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_weights_1",
+          "location_id": "on:scale_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the nanomaterial canister with a flashing amber LED and place it in the fume_hood_2.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "nanomaterial_canister_1",
+          "location_id": "in:fume_hood_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the ethanol bottle with a blue cap and place it in the hydrogen_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ethanol_bottle_1",
+          "location_id": "in:hydrogen_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the staple_remover_1 to unstaple the stapled_papers_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "stapled_papers_1",
+          "is_stapled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scale_1 to weigh the unweighed_sample_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "unweighed_sample_1",
+          "is_weighed": true
+        }
+      ]
+    },
     {
       "task_description": "Find the digital balance with a tare error and use the calibration_weights_1 to fix it.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,46 @@
         {
           "id": "digital_balance_1",
           "is_weighed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the hydraulic_press_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_press_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to arm the alarm_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_panel_1",
+          "is_alarm_armed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the particle_sorter_1 to the fuel_cell_assembly_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "particle_sorter_1",
+          "location_id": "in:fuel_cell_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydrogen_tank_1 to the testing_chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydrogen_tank_1",
+          "location_id": "in:testing_chamber"
         }
       ]
     }

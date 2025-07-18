@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the solaris_installation_cd_set_1 on the secondary_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "solaris_installation_cd_set_1",
+          "location_id": "on:secondary_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the primary_solaris_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "primary_solaris_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, beige-colored terminal and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "primary_solaris_terminal_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing amber network device and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "network_switch_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Drain the petrified_coffee_mug_1 using the colander_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "petrified_coffee_mug_1",
+          "is_drained": true
+        }
+      ]
+    },
     {
       "task_description": "Use the server_cabinet_key_1 to open the server_rack_1 and then mount the unmounted_server_1 using the mounting_bracket_1.",
       "task_category": "compound_reasoning",
@@ -24,6 +84,84 @@
         {
           "id": "unmounted_server_1",
           "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only water-damaged, yellowed book and place it in the supply_closet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "solaris_administrators_guide_1",
+          "location_id": "in:supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the power_button_1 on the primary_solaris_terminal_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "power_button_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to stop the engine_1 using the engine_stop_tool_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_1",
+          "is_engine_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the junk_pile_corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:junk_pile_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the crt_monitor_1 to the whiteboard_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "in:whiteboard_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy engine_1 to the supply_closet and then stop it using the engine_stop_tool_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_1",
+          "location_id": "in:supply_closet"
+        },
+        {
+          "id": "engine_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the metal_shelving_unit_1 to the main_workstation_cluster and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_unit_1",
+          "location_id": "in:main_workstation_cluster"
+        },
+        {
+          "id": "metal_shelving_unit_1",
+          "is_open": true
         }
       ]
     }

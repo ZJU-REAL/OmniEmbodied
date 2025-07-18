@@ -1,59 +1,27 @@
 {
-  "task_background": "Prepare the high-altitude emergency research station for search-and-rescue operations after a helicopter crash.",
+  "task_background": "Prepare the animal shelter for a busy day of surgeries and adoptions by organizing supplies, cleaning, and ensuring all equipment is functional.",
   "agents_config": [
     {
       "name": "robot_1",
-      "max_grasp_limit": 1,
-      "max_weight": 25.0,
-      "max_size": [
-        1.0,
-        1.0,
-        1.0
-      ]
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
     {
-      "task_description": "Place the clipboard_1 on the weather_array_1.",
-      "task_category": "direct_command",
+      "task_description": "Have robot_1 and robot_2 cooperate to open the autoclave_1.",
+      "task_category": "explicit_collaboration",
       "validation_checks": [
         {
-          "id": "clipboard_1",
-          "location_id": "on:weather_array_1"
-        }
-      ]
-    },
-    {
-      "task_description": "Find the heaviest, metal item on the command_table_1 and place it in the equipment_storage.",
-      "task_category": "attribute_reasoning",
-      "validation_checks": [
-        {
-          "id": "drone_controller_1",
-          "location_id": "in:equipment_storage"
-        }
-      ]
-    },
-    {
-      "task_description": "Repair the broken drone_controller_1 using the wrench_1.",
-      "task_category": "tool_use",
-      "validation_checks": [
-        {
-          "id": "drone_controller_1",
-          "is_broken": false
-        }
-      ]
-    },
-    {
-      "task_description": "Use the camera_1 to photograph the smudged clipboard_1 and then place it in the survey_annex.",
-      "task_category": "compound_reasoning",
-      "validation_checks": [
-        {
-          "id": "clipboard_1",
-          "is_photographed": true
-        },
-        {
-          "id": "clipboard_1",
-          "location_id": "in:survey_annex"
+          "id": "autoclave_1",
+          "is_open": true
         }
       ]
     }

@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the inspection_tablet_1 on the desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "inspection_tablet_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the wrench_1 on the steel_shelving_units_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wrench_1",
+          "location_id": "on:steel_shelving_units_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the tool_cart_1 and place it on the inspection_tablet_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "pressure_gauge_1",
+          "location_id": "on:inspection_tablet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object in the tool_cart_1 that provides the ability to polish and place it on the desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "polish_cloth_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench_1 to disassemble the brake_assembly_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "brake_assembly_1",
+          "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pressure_gauge_1 to check the pressure of the hydraulic_lift_platform_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_platform_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
     {
       "task_description": "Use the wrench_1 to disassemble the only object in the train_inspection_bay that is both metal and has a condition of 'dented'.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,66 @@
         {
           "id": "train_car_712_1",
           "is_assembled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object in the tool_cart_1 that provides the ability to ignite and use it to light the fuel_can_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "fuel_can_1",
+          "is_alight": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_cabinet_1 using the key_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the train_inspection_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:train_inspection_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_lift_platform_1 to the parts_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_platform_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the only object in the supervisors_office that is both a container and made of wood to the parts_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "desk_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the only object in the parts_storage that is both a container and made of wood to the train_inspection_bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "priority_shipment_crate_1",
+          "location_id": "in:train_inspection_bay"
         }
       ]
     }

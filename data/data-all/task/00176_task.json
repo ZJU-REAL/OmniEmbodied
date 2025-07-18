@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the diseased Arabidopsis sample on the growth rack.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "arabidopsis_sample_1",
+          "location_id": "on:growth_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pH meter on the growth rack.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ph_meter_1",
+          "location_id": "on:growth_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the equipment storage and place it in the microscopy lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "press_1",
+          "location_id": "in:microscopy_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blinking alarm in the microscopy lab and close it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "specimen_freezer_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Find the only object with a spilled property in the hydroponic cultivation bay, measure its contents, and clean it up.",
       "task_category": "compound_reasoning",
@@ -20,6 +70,60 @@
         {
           "id": "ph_meter_1",
           "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a stuck lid in the microscopy lab, unseal it, and pour its contents into a measuring cup.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the button on the data hub terminal.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "data_hub_terminal_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular growth rack to the outdoor sampling plot.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "growth_rack_1",
+          "location_id": "in:outdoor_sampling_plot"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the nutrient reservoir tank to the equipment storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "nutrient_tank_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy autoclave to the data hub and unseal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "autoclave_1",
+          "location_id": "in:data_hub"
+        },
+        {
+          "id": "autoclave_1",
+          "is_sealed": false
         }
       ]
     }

@@ -10,6 +10,16 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,126 @@
         {
           "id": "blood_sample_kit_1",
           "location_id": "on:operating_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red triage_clipboard_1 on the nurse_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "triage_clipboard_1",
+          "location_id": "on:nurse_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, stainless steel gurney and move it to the trauma_room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "stainless_steel_gurney_1",
+          "location_id": "in:trauma_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device on the anesthesia_machine_1 and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "anesthesia_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to tighten the wobbly base of iv_stand_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "iv_stand_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sterilizing_tool_1 to sterilize the scalpel_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "scalpel_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration_tool_1 to calibrate the flickering surgical_light_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "surgical_light_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only non-sterile, sharp scalpel and sterilize it using the sterilizing_tool_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "scalpel_1",
+          "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked narcotics_cabinet_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "narcotics_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy blood_bank_1 to the trauma_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "blood_bank_1",
+          "location_id": "in:trauma_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy operating_table_1 to the center of the trauma_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "operating_table_1",
+          "location_id": "in:trauma_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy crash_cart_1 with the jammed drawer to the supply_station for repair.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "crash_cart_1",
+          "location_id": "in:supply_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy monitored_bed_1 with the active heart_rate_display to the observation_area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitored_bed_1",
+          "location_id": "in:observation_area"
         }
       ]
     }

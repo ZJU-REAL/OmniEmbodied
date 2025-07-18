@@ -1,0 +1,184 @@
+{
+  "task_background": "Prepare the high-volume hybrid and electric vehicle dealership service center for daily operations and customer service.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.5,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.5,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the diagnostic_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:diagnostic_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the safety_gloves_1 on the insulated_workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "safety_gloves_1",
+          "location_id": "on:insulated_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the blue coolant bottle labeled 'READY-TO-USE' and place it on the tool_chest_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coolant_bottle_1",
+          "location_id": "on:tool_chest_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red tool chest and open it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal_camera_1 to measure the faulty Nissan Leaf battery module.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leaf_battery_module_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the safety_gloves_1 to extinguish the fume extraction hose.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fume_extraction_hose_1",
+          "is_alight": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the thermal imaging camera to measure the faulty hybrid inverter module and then place it on the insulated workbench.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hybrid_inverter_1",
+          "is_measured": true
+        },
+        {
+          "id": "hybrid_inverter_1",
+          "location_id": "on:insulated_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the decorative blue glass bottle containing loose bolts, shake it, and place it on the inspection table.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "decorative_bottle_1",
+          "is_shaken": true
+        },
+        {
+          "id": "decorative_bottle_1",
+          "location_id": "on:inspection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the battery test rig.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_test_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fireproof containment bin.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fireproof_bin_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the transmission assembly to the parts storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transmission_assembly_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wheel alignment machine to the inspection zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wheel_alignment_machine_1",
+          "location_id": "in:inspection_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy battery test rig to the main service bay and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_test_rig_1",
+          "location_id": "in:main_service_bay"
+        },
+        {
+          "id": "battery_test_rig_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the insulated workbench to the main service bay and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "insulated_workbench_1",
+          "location_id": "in:main_service_bay"
+        },
+        {
+          "id": "insulated_workbench_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "00456"
+}

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place clipboard_1 on reconstruction_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:reconstruction_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the handheld_metal_detector_1 on the reconstruction_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "handheld_metal_detector_1",
+          "location_id": "on:reconstruction_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object in the debris_intake_bay and place it on the reconstruction_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "pallet_7x_42_1",
+          "location_id": "on:reconstruction_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a flashing red light and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "thermal_camera_1",
+          "is_on": false
+        }
+      ]
+    },
     {
       "task_description": "Repair the thermal_camera_1 by using the toolbox_1 to loosen the misaligned lid.",
       "task_category": "tool_use",
@@ -20,6 +70,104 @@
         {
           "id": "thermal_camera_1",
           "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pruning_shears_1 to prune the potted_cactus_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "potted_cactus_1",
+          "is_pruned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the dusty microscope in the primary_examination_floor and polish it using the polish_cloth_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microscope_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a hidden keycard and open it to retrieve the spare_keycard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_stained_manual_1",
+          "is_open": true
+        },
+        {
+          "id": "spare_keycard_1",
+          "location_id": "in:coffee_stained_manual_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the chemical_cabinet_1 using the spare_keycard_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the mass_spectrometer_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mass_spectrometer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_storage_racks_1 to the primary_examination_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_storage_racks_1",
+          "location_id": "in:primary_examination_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic_loading_ramp_1 to the primary_examination_floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_loading_ramp_1",
+          "location_id": "in:primary_examination_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial_3d_scanner_1 to the digital_reconstruction_room and connect it to the monitor_bank_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_3d_scanner_1",
+          "location_id": "in:digital_reconstruction_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filing_cabinets_1 to the digital_reconstruction_room and open them to access the blueprints_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinets_1",
+          "location_id": "in:digital_reconstruction_room"
+        },
+        {
+          "id": "filing_cabinets_1",
+          "is_open": true
         }
       ]
     }

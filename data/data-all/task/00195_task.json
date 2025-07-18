@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on the multi_screen_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:multi_screen_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the holographic_projector_1 on the multi_screen_workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "holographic_projector_1",
+          "location_id": "on:multi_screen_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black mechanical keyboard and clean it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mechanical_keyboard_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red blinking hard drive and disconnect it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "hard_drive_1",
+          "is_connected": false
+        }
+      ]
+    },
+    {
+      "task_description": "Mount the faulty GPU using the soldering iron.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "faulty_gpu_1",
+          "is_ironed": true
+        }
+      ]
+    },
     {
       "task_description": "Use the debugging toolkit to sync the bug log terminal.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,80 @@
         {
           "id": "bug_log_terminal_1",
           "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sandpaper to smooth the faulty GPU and then mount it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "faulty_gpu_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the cooling unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cooling_unit_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to disarm the alarm control panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server tower to the hardware inspection bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_tower_1",
+          "location_id": "in:hardware_inspection_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the interactive whiteboard to the code repository room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "interactive_whiteboard_1",
+          "location_id": "in:code_repository_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rackmount server stack to the server farm alcove and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rackmount_server_stack_1",
+          "location_id": "in:server_farm_alcove"
+        },
+        {
+          "id": "rackmount_server_stack_1",
+          "is_mounted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the anti-static workbench to the hardware inspection bay and clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "anti_static_workbench_1",
+          "location_id": "in:hardware_inspection_bay"
         }
       ]
     }

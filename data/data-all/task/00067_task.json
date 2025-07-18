@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the rusted_key_1 on the stone_pedestal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rusted_key_1",
+          "location_id": "on:stone_pedestal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the broken_lantern_1 in the stone_sarcophagus_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "broken_lantern_1",
+          "location_id": "in:stone_sarcophagus_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, intact engraved stone tablet and place it on the obsidian_altar_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "engraved_tablet_2",
+          "location_id": "on:obsidian_altar_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only black quill and place it in the locked_drawer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "quill_1",
+          "location_id": "in:locked_drawer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the forge_gauntlet_1 to loosen the reinforced iron door.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "iron_door_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scrap_cloth_1 to wipe the wet distillation apparatus.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "distillation_apparatus_1",
+          "is_wet": false
+        }
+      ]
+    },
     {
       "task_description": "Use the straight_razor_1 to cut the scrap_cloth_1 and cover the broken_lantern_1 with it.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,88 @@
         {
           "id": "broken_lantern_1",
           "is_covered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the dwarven_monocle_1 to replace the cracked glass vial and place it on the stone_pedestal_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "glass_vial_1",
+          "is_replaced": true
+        },
+        {
+          "id": "glass_vial_1",
+          "location_id": "on:stone_pedestal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the stone_sarcophagus_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stone_sarcophagus_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to push the pressure_plate_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pressure_plate_1",
+          "is_pushed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the stone_sarcophagus_1 to the altar_of_the_old_miner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "stone_sarcophagus_1",
+          "location_id": "in:altar_of_the_old_miner"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ceremonial_anvil_1 to the barbershop_annex.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ceremonial_anvil_1",
+          "location_id": "in:barbershop_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy golden hammer to the alchemy lab and use it to smash the cracked distillation apparatus.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "golden_hammer_1",
+          "location_id": "in:alchemy_lab"
+        },
+        {
+          "id": "distillation_apparatus_1",
+          "is_smashed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy obsidian altar to the runic_scriptorium and place the engraved_tablet_1 on it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "obsidian_altar_1",
+          "location_id": "in:runic_scriptorium"
+        },
+        {
+          "id": "engraved_tablet_1",
+          "location_id": "on:obsidian_altar_1"
         }
       ]
     }

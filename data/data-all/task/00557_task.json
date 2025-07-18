@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the decontamination_logbook_1 in the decontamination_chamber_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "logbook_1",
+          "location_id": "in:decontamination_chamber_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 on the conservation_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:conservation_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, wooden object in the document_reception and place it on the intake_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "artifact_crate_1",
+          "location_id": "on:intake_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only dusty, framed object in the document_reception and place it in the main_restoration.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "madison_portrait_1",
+          "location_id": "in:main_restoration"
+        }
+      ]
+    },
     {
       "task_description": "Use the solvent_set_1 to erase the writing on the logbook_1.",
       "task_category": "tool_use",
@@ -20,6 +70,94 @@
         {
           "id": "logbook_1",
           "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the broom_1 to sweep the document_reception.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "document_reception",
+          "is_swept": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the measuring_cup_1 to measure the deionized water in the water_pitcher_1 and then use the water to water the blue_vase_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "water_pitcher_1",
+          "is_measured": true
+        },
+        {
+          "id": "blue_vase_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the trowel_1 to plaster the torn edge of the parchment_1 and then fold the folder_1 to store it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "parchment_1",
+          "is_folded": true
+        },
+        {
+          "id": "folder_1",
+          "is_folded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fume_hood_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fume_hood_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the artifact_crate_1 to the secure_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "artifact_crate_1",
+          "location_id": "in:secure_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the conservation_table_1 to the digital_archiving.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conservation_table_1",
+          "location_id": "in:digital_archiving"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the scanner_1 that is uniquely connected to the network to the main_restoration.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "scanner_1",
+          "location_id": "in:main_restoration"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server_rack_1 that is actively backing up data to the secure_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:secure_storage"
         }
       ]
     }

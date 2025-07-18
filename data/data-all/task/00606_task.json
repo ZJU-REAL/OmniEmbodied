@@ -6,9 +6,75 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the cracked_vial_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cracked_vial_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the regulation_binders_1 on the folding_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "regulation_binders_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object in the sample_processing_lab and place it in the equipment_storage_yard.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:equipment_storage_yard"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with the highest weight in the equipment_storage_yard and place it in the field_command_tent.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "press_machine_1",
+          "location_id": "in:field_command_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the cracked_wall_1 using the plaster_trowel_1 and plaster_bag_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cracked_wall_1",
+          "is_plastered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Scrape the contaminated work surface scraped_surface_1 using the scraper_tool_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "scraped_surface_1",
+          "is_scraped": true
+        }
+      ]
+    },
     {
       "task_description": "Use the spectrometer_1 to verify the water_samples_1.",
       "task_category": "compound_reasoning",
@@ -16,6 +82,84 @@
         {
           "id": "water_samples_1",
           "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fertilizer_1 to fertilize the dead_fern_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dead_fern_1",
+          "is_fertilized": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lower the elevated_platform_1 by pressing the control_button_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "elevated_platform_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the photocopier_1 to copy the uncopied_documents_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uncopied_documents_1",
+          "is_copied": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the press_machine_1 to the sample_processing_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_machine_1",
+          "location_id": "in:sample_processing_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the storage_locker_1 to the field_command_tent.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_locker_1",
+          "location_id": "in:field_command_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the leaking_drum_1 to the equipment_storage_yard and pour its contents into the empty_containers_1 using the pour_spout_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "leaking_drum_1",
+          "location_id": "in:equipment_storage_yard"
+        },
+        {
+          "id": "empty_containers_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydraulic press_machine_1 to the equipment_storage_yard and use it to compress the uncompressed_samples_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "press_machine_1",
+          "location_id": "in:equipment_storage_yard"
+        },
+        {
+          "id": "uncompressed_samples_1",
+          "is_compressed": true
         }
       ]
     }

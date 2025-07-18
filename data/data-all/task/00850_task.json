@@ -10,9 +10,69 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place monitor_1 on the main_monitoring_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:main_monitoring_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the coffee_mug_1 in the observation_control_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:observation_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object on the diagnostic_workbench_1 and place it in the calibration_storage_annex.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_workbench_1",
+          "location_id": "in:calibration_storage_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the observation_control_room and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Download the data from the usb_oscilloscope_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "usb_oscilloscope_1",
+          "is_downloaded": true
+        }
+      ]
+    },
     {
       "task_description": "Use the hex_wrench_set_1 to assemble the disassembled_smart_ball_1 on the prototype_worktable_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,84 @@
         {
           "id": "disassembled_smart_ball_1",
           "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque_screwdriver_1 to assemble the sensor_node_1 into the smart_ball_prototype_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "smart_ball_prototype_1",
+          "is_assembled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the servo_testing_rig_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "servo_testing_rig_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to sign the emergency_protocol_binder_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_protocol_binder_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the modular_shelving_1 to the main_testing_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "modular_shelving_1",
+          "location_id": "in:main_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the decommissioned_centrifuge_1 to the observation_control_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "decommissioned_centrifuge_1",
+          "location_id": "in:observation_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the servo_testing_rig_1 to the calibration_storage_annex and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "servo_testing_rig_1",
+          "location_id": "in:calibration_storage_annex"
+        },
+        {
+          "id": "servo_testing_rig_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the gantry_crane_1 to the observation_control_room and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gantry_crane_1",
+          "location_id": "in:observation_control_room"
+        },
+        {
+          "id": "gantry_crane_1",
+          "is_on": false
         }
       ]
     }

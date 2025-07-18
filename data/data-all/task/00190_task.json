@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place playbook_binder_1 on the metal_shelving_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "playbook_binder_1",
+          "location_id": "on:metal_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the rotary_phone_1 in the coffee_break_area.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "rotary_phone_1",
+          "location_id": "in:coffee_break_area"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, red item on the oak_strategy_table_1 and place it in the equipment_storage.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,118 @@
         {
           "id": "playbook_binder_1",
           "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a cracked glass and place it on the projection_screen_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "championship_photo_1",
+          "location_id": "on:projection_screen_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the fire_extinguisher_1 to extinguish the coffee_percolator_1 if it is alight.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_percolator_1",
+          "is_alight": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the polish_cloth_1 to polish the trophy_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "trophy_1",
+          "is_polished": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the film_compressor_1 to compress the film_reel_1 and then place it on the rewind_bench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "film_reel_1",
+          "is_compressed": true
+        },
+        {
+          "id": "film_reel_1",
+          "location_id": "on:rewind_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a dog-eared condition and use the scissors_1 to unwrap it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "playbook_binder_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the overhead_projector_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overhead_projector_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the oak_strategy_table_1 to the tactical_chalkboard_wall.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oak_strategy_table_1",
+          "location_id": "in:tactical_chalkboard_wall"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the tactical_chalkboard_1 to the main_strategy_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tactical_chalkboard_1",
+          "location_id": "in:main_strategy_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken tackling_dummy_1 to the equipment_storage and use the sharpening_stone_1 to dull it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tackling_dummy_1",
+          "location_id": "in:equipment_storage"
+        },
+        {
+          "id": "tackling_dummy_1",
+          "is_sharp": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the metal_shelving_1 to the film_analysis_corner and use the file_cabinet_1 to file the scouting_reports_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_1",
+          "location_id": "in:film_analysis_corner"
+        },
+        {
+          "id": "scouting_reports_1",
+          "is_filed": true
         }
       ]
     }

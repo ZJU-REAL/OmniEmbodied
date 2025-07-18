@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Turn on the control monitors in the entrance control booth.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "control_monitors_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Erase the writing on the whiteboard in the entrance control booth.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_written_on": false
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest wooden object in the pirate cove and move it to the storage workshop.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,87 @@
         {
           "id": "ss_putter_1",
           "location_id": "in:storage_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object in the jungle zone that is made of fiberglass and stop its running process.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "waterfall_hazard_1",
+          "is_running": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the unhooked rope bridge in the jungle zone using the replacement bridge hook from the storage workshop.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "rope_bridge_1",
+          "is_replaced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the windmill repair kit to fix the overheating windmill in the pirate cove and then stop its running process.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "windmill_1",
+          "is_running": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hydraulic panel on the S.S. Putter in the pirate cove.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to cover the whiteboard in the entrance control booth.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "is_covered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the leaking waterfall hazard from the jungle zone to the storage workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "waterfall_hazard_1",
+          "location_id": "in:storage_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the S.S. Putter tilting ship deck from the pirate cove to the storage workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ss_putter_1",
+          "location_id": "in:storage_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rope bridge in the jungle zone to the storage workshop and use the replacement bridge hook to fix it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rope_bridge_1",
+          "location_id": "in:storage_workshop",
+          "is_replaced": true
         }
       ]
     }

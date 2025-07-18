@@ -10,9 +10,69 @@
         0.8,
         1.2
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.8,
+        0.8,
+        1.2
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the playbook_tablet_1 on the central_whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "playbook_tablet_1",
+          "location_id": "on:central_whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the home_jersey_1 on the player_cubicle_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "home_jersey_1",
+          "location_id": "on:player_cubicle_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black keyboard on the GM desk and place it on the filing cabinet.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white jersey with size XL and place it on the jersey rack.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "home_jersey_1",
+          "location_id": "on:jersey_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Sew the torn away jersey using the sewing kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "away_jersey_1",
+          "is_sewn": true
+        }
+      ]
+    },
     {
       "task_description": "Use the whiteboard marker to write on the central whiteboard and then upload the playbook tablet to the network router.",
       "task_category": "compound_reasoning",
@@ -24,6 +84,88 @@
         {
           "id": "playbook_tablet_1",
           "is_uploaded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Measure the kinesiology tape and then seal the injection kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "kinesiology_tape_1",
+          "is_measured": true
+        },
+        {
+          "id": "injection_kit_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the cryo-tank.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_tank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to toggle the player load monitor.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "player_load_monitor_1",
+          "is_toggled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the treatment table to the main locker room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "treatment_table_1",
+          "location_id": "in:main_locker_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving to the medical rehab zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:medical_rehab_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy cryo-tank to the equipment storage and then seal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryo_tank_1",
+          "location_id": "in:equipment_storage"
+        },
+        {
+          "id": "cryo_tank_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filing cabinet to the general manager's office and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:general_manager_office"
+        },
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
         }
       ]
     }

@@ -10,9 +10,79 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the torque_wrench_1 on the tackboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_1",
+          "location_id": "on:tackboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the engineer_mug_1 in the coffee_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "engineer_mug_1",
+          "location_id": "in:coffee_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel object on the steel_workbench_1 and place it in the supply_depot.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "bearing_housing_1",
+          "location_id": "in:supply_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a grease-stained condition and close it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ferris_wheel_manual_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the control_panel_1 by connecting the wiring_harness_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wiring_harness_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the wrapped_component_1 using the scissors_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wrapped_component_1",
+          "is_wrapped": false
+        }
+      ]
+    },
     {
       "task_description": "Use the diagnostic_laptop_1 to verify the bearing_housing_1.",
       "task_category": "compound_reasoning",
@@ -20,6 +90,76 @@
         {
           "id": "bearing_housing_1",
           "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a missing calibration sticker and adjust it using the torque_wrench_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "torque_wrench_1",
+          "condition": "calibrated"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the portable_generator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "portable_generator_1",
+          "is_engine_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the shipping_container_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shipping_container_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the wheel_panels_1 to the maintenance_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "wheel_panels_1",
+          "location_id": "in:maintenance_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gantry_crane_1 to the ferris_wheel_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gantry_crane_1",
+          "location_id": "in:ferris_wheel_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the axle_joint_1 that is missing bolts to the maintenance_hub.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "axle_joint_1",
+          "location_id": "in:maintenance_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hydraulic_piston_1 that is leaking to the supply_depot.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_piston_1",
+          "location_id": "in:supply_depot"
         }
       ]
     }

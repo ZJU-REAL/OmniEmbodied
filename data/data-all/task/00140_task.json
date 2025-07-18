@@ -10,9 +10,59 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 20.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place crt_monitor_1 on the whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the USB Dongle on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_dongle_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, beige CRT monitor and place it in the server_storage_corner.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_2",
+          "location_id": "in:server_storage_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device and place it on the workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "y2k_clock_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the screwdriver to calibrate the hole punch.",
       "task_category": "tool_use",
@@ -20,6 +70,70 @@
         {
           "id": "hole_punch_1",
           "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the solder wire to weld the frayed power cable and plug it in.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "power_cable_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the server rack.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy server rack to the main coding area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": "in:main_coding_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Sun Ultra 5 Server to the reference archive zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sun_ultra_5_1",
+          "location_id": "in:reference_archive_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "inkjet_printer_1",
+          "location_id": "in:server_storage_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy bookshelf to the main coding area and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bookshelf_1",
+          "location_id": "in:main_coding_area"
+        },
+        {
+          "id": "bookshelf_1",
+          "is_open": true
         }
       ]
     }

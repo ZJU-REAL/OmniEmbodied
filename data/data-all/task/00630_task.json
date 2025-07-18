@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the coffee_stained_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:coffee_stained_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the whiteboard_1 to the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, steel workbench and place it in the equipment_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black, blinking ghost trap and place it on the metal_shelving_unit_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "active_ghost_trap_1",
+          "location_id": "on:metal_shelving_unit_1"
+        }
+      ]
+    },
     {
       "task_description": "Repair the broken_server_rack_1 using the toolbox_1.",
       "task_category": "tool_use",
@@ -20,6 +70,90 @@
         {
           "id": "broken_server_rack_1",
           "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the flickering_terminal_1 using the soldering_iron_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "flickering_terminal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scanner_1 to scan the clipboard_1 and then place it on the bulletin_board_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:bulletin_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen_1 to write on the whiteboard_1 and then place it in the secure_archives.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "whiteboard_1",
+          "location_id": "in:secure_archives"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the central_containment_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_containment_unit_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy_duty_rolling_cart_1 to the main_laboratory.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_rolling_cart_1",
+          "location_id": "in:main_laboratory"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ecto_containment_pod_1 to the equipment_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ecto_containment_pod_1",
+          "location_id": "in:equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the proton_pack_charging_station_1 to the main_laboratory and repair it using the toolbox_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "proton_pack_charging_station_1",
+          "location_id": "in:main_laboratory"
+        },
+        {
+          "id": "proton_pack_charging_station_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the metal_shelving_unit_1 to the equipment_storage and scan its contents using the scanner_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_shelving_unit_1",
+          "location_id": "in:equipment_storage"
         }
       ]
     }

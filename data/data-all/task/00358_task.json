@@ -10,9 +10,79 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 15.0,
+      "max_weight": 15.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the led_lamp_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_lamp_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the led_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_lamp_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the flashing red DroboPro unit and place it on the anti-static worksurface_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "drobo_pro_1",
+          "location_id": "on:anti_static_worksurface_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest hard drive in the DroboPro and place it in the USB 3.0 Forensic Dock.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "seagate_drive_1",
+          "location_id": "in:usb_forensic_dock_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the SAS-to-USB Adapter to calibrate the DroboPro.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drobo_pro_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label printer to label the DroboPro.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drobo_pro_1",
+          "is_labeled": true
+        }
+      ]
+    },
     {
       "task_description": "Find the DroboPro with flashing red lights, use the calibration tool to calibrate it, and place it on the anti-static worksurface.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,84 @@
         {
           "id": "drobo_pro_1",
           "location_id": "on:anti_static_worksurface_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest hard drive in the DroboPro, use the polishing cloth to clean its connectors, and place it in the USB 3.0 Forensic Dock.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "seagate_drive_1",
+          "location_id": "in:usb_forensic_dock_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the soldering station.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soldering_station_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the DroboPro.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drobo_pro_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the LTO-7 Tape Backup Drive to the forensic imaging station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "lto_tape_drive_1",
+          "location_id": "in:forensic_imaging_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Synology RS2416+ NAS to the main workbench area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "synology_nas_1",
+          "location_id": "in:main_workbench_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy LTO-7 Tape Backup Drive to the forensic imaging station and use the calibration tool to calibrate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "lto_tape_drive_1",
+          "location_id": "in:forensic_imaging_station"
+        },
+        {
+          "id": "lto_tape_drive_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the Synology RS2416+ NAS to the main workbench area and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "synology_nas_1",
+          "location_id": "in:main_workbench_area"
+        },
+        {
+          "id": "synology_nas_1",
+          "is_on": false
         }
       ]
     }

@@ -10,9 +10,59 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place pipette_set_1 on biosafety_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "pipette_set_1",
+          "location_id": "on:biosafety_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place cracked_vial_1 in biohazard_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cracked_vial_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, blue piece of equipment and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only open container with a purple stain and close it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_open": false
+        }
+      ]
+    },
     {
       "task_description": "Sterilize the cracked_vial_1 using the para_film_1.",
       "task_category": "tool_use",
@@ -20,6 +70,80 @@
         {
           "id": "cracked_vial_1",
           "is_sterile": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to loosen the loose valve on the CO₂ canister and then place it in the gas_canister_rack_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "loose_valve_canister_1",
+          "is_loose": true
+        },
+        {
+          "id": "loose_valve_canister_1",
+          "location_id": "in:gas_canister_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device (timer_1) and turn it off using the screwdriver.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "timer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the hypoxia_chamber_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hypoxia_chamber_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety_cabinet_1 to the microscopy_suite.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": "in:microscopy_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gas_canister_rack_1 to the sample_prep_station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gas_canister_rack_1",
+          "location_id": "in:sample_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy confocal_microscope_1 that is uniquely branded Zeiss to the data_hub.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "confocal_microscope_1",
+          "location_id": "in:data_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy hypoxia_chamber_1 that is uniquely made of stainless steel to the sample_prep_station.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hypoxia_chamber_1",
+          "location_id": "in:sample_prep_station"
         }
       ]
     }

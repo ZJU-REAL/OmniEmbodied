@@ -6,6 +6,12 @@
       "max_grasp_limit": 1,
       "max_weight": 40.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
@@ -16,6 +22,114 @@
         {
           "id": "digital_torque_gauge_1",
           "location_id": "on:reinforced_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the energy_drink_can_1 in the break_room.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "energy_drink_can_1",
+          "location_id": "in:break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, metal object on the reinforced_workbench_1 and place it in the materials_parts_storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "electric_motor_1",
+          "location_id": "in:materials_parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a red error light in the efficiency_testing_chamber and place it on the chassis_dynamometer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "oxygen_sensor_1",
+          "location_id": "on:chassis_dynamometer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blue valve in the materials_parts_storage and use it to start the hybrid_sedan_chassis_1's engine.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hybrid_sedan_chassis_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the prototype_battery_crate_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "prototype_battery_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the hydraulic_lift_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_lift_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the prototype_battery_crate_1 to the prototype_assembly_bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "prototype_battery_crate_1",
+          "location_id": "in:prototype_assembly_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial_shelving_1 to the engineering_workstation.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "location_id": "in:engineering_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hybrid_sedan_chassis_1 to the efficiency_testing_chamber and start its engine using the coffee_mug_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hybrid_sedan_chassis_1",
+          "location_id": "in:efficiency_testing_chamber"
+        },
+        {
+          "id": "hybrid_sedan_chassis_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rolling_tool_chest_1 to the break_room and use the fire_extinguisher_1 to ensure it is safe.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_tool_chest_1",
+          "location_id": "in:break_room"
+        },
+        {
+          "id": "fire_extinguisher_1",
+          "is_alight": false
         }
       ]
     }

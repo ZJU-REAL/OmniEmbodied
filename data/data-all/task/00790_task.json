@@ -10,6 +10,16 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
@@ -20,6 +30,120 @@
         {
           "id": "usb_drive_1",
           "location_id": "on:hydraulic_cutting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the Coffee Mug ('World's Best Puzzle Designer') in the Assembly & Testing Zone.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:assembly_testing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, wooden item on the Hydraulic Cutting Table and place it in the Shipping & Final Inspection Zone.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_puzzle_board_1",
+          "location_id": "in:shipping_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the Assembly & Testing Zone and plug it in.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mobile_lighting_rig_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken coffee machine using the welding torch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hydraulic_cutting_table_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the digital caliper with the USB charger.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_caliper_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife sharpener to sharpen the calibration ruler and then place it on the Adjustable-height Puzzle Table.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_ruler_1",
+          "is_sharp": true
+        },
+        {
+          "id": "calibration_ruler_1",
+          "location_id": "on:adjustable_puzzle_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to plug in the magnifying lamp.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "magnifying_lamp_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the large-format printer to the Shipping & Final Inspection Zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "large_format_printer_1",
+          "location_id": "in:shipping_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mobile lighting rig to the Design & Prototyping Zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mobile_lighting_rig_1",
+          "location_id": "in:design_prototyping_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer in the corner that is uniquely flashing a red light to the repair bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mobile_lighting_rig_1",
+          "location_id": "in:design_prototyping_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the problematic Falcon 1000-piece puzzle to the Shipping & Final Inspection Zone.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "problematic_falcon_puzzle_1",
+          "location_id": "in:shipping_zone"
         }
       ]
     }

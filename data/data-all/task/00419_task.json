@@ -10,9 +10,79 @@
         0.5,
         0.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the barcode_scanner_1 on inspection_table_3.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:inspection_table_3"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the clipboard_1 on inspection_table_4.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:inspection_table_4"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black barcode scanner and place it on the inspection table with the dirty hand truck.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:inspection_table_3"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the wooden clipboard with writing and place it on the inspection table with the dirty barcode scanner.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:inspection_table_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty barcode scanner using a cleaning rag.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_2",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Wrap the pallets of merchandise using plastic wrap.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pallets_1",
+          "is_wrapped": true
+        }
+      ]
+    },
     {
       "task_description": "Use the eraser to clean the dirty customs stamp and then place it on the filing cabinet.",
       "task_category": "compound_reasoning",
@@ -24,6 +94,88 @@
         {
           "id": "customs_stamp_3",
           "location_id": "on:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty coffee mug and place it in the microwave.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        },
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:microwave_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect the conveyor belt system.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the forklift engine.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "forklift_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hazardous materials cage to the quarantine storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazardous_cage_1",
+          "location_id": "in:quarantine_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sealed shipping container to the loading dock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shipping_container_1",
+          "location_id": "in:loading_dock"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy pallet rack to the loading dock and wrap it with plastic wrap.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_rack_1",
+          "location_id": "in:loading_dock"
+        },
+        {
+          "id": "pallet_rack_1",
+          "is_wrapped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the chemical drum to the hazardous materials cage and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "chemical_drum_1",
+          "location_id": "in:hazardous_cage_1"
+        },
+        {
+          "id": "chemical_drum_1",
+          "is_open": true
         }
       ]
     }

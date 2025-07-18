@@ -6,9 +6,35 @@
       "max_grasp_limit": 1.0,
       "max_weight": 25.0,
       "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 25.0,
+      "max_size": 1.0
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the coffee_mug_1 on the table_saw_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:table_saw_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the tape_measure_1 in the rolling_tool_chest_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "tape_measure_1",
+          "location_id": "in:rolling_tool_chest_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest, steel object on the workbench_1 and place it in the lumber_storage_rack.",
       "task_category": "attribute_reasoning",
@@ -16,6 +42,128 @@
         {
           "id": "bench_vise_1",
           "location_id": "in:lumber_storage_rack"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a battery_level of 0 and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cordless_drill_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the circular_saw_1 to slice the custom_jig_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "custom_jig_1",
+          "is_sliced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the allen_wrench_1 to loosen the bench_vise_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "bench_vise_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a condition of 'scratched' and use the stapler_1 to staple it to the pegboard_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "safety_goggles_1",
+          "is_stapled": true
+        },
+        {
+          "id": "safety_goggles_1",
+          "location_id": "on:pegboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the object with a brand of 'Makita' and use it to turn on the table_saw_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "table_saw_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the rolling_tool_chest_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_tool_chest_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the table_saw_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "table_saw_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the salvaged_door_1 to the main_workbench_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "salvaged_door_1",
+          "location_id": "in:main_workbench_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the drywall_compound_bucket_1 to the transition_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drywall_compound_bucket_1",
+          "location_id": "in:transition_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the lumber_rack_1 to the transition_zone and use the cordless_drill_1 to loosen it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "lumber_rack_1",
+          "location_id": "in:transition_zone"
+        },
+        {
+          "id": "lumber_rack_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the table_saw_1 to the lumber_storage_rack and use the fire_extinguisher_1 to extinguish it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "table_saw_1",
+          "location_id": "in:lumber_storage_rack"
+        },
+        {
+          "id": "table_saw_1",
+          "is_alight": false
         }
       ]
     }

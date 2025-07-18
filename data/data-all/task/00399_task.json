@@ -10,9 +10,59 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the emergency_shutdown_key_1 on the pressure_dial_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_key_1",
+          "location_id": "on:pressure_dial_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the coffee_maker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the CRT monitor that is flickering and turn it on.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "crt_monitor_3",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, rusted pipe segment and place it on the workbench_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "pipe_segment_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
     {
       "task_description": "Use the torque_wrench_1 to weld the faulty_pressure_regulator_1.",
       "task_category": "tool_use",
@@ -20,6 +70,104 @@
         {
           "id": "faulty_pressure_regulator_1",
           "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning_rag_1 to clean the dirty mug_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the broken pressure gauge and replace it with the spare pressure gauge from the archive.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "broken_pressure_gauge_1",
+          "location_id": "in:archive_union_office"
+        },
+        {
+          "id": "spare_pressure_gauge_1",
+          "location_id": "on:parts_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding_torch_1 to fix the main_valve_wheel_1 in the underground access shaft.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "main_valve_wheel_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the locked_toolbox_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_toolbox_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the radio_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "radio_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the corroded_pump_housing_1 to the hydraulic_lift_1.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "corroded_pump_housing_1",
+          "location_id": "on:hydraulic_lift_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the water_grid_map_wall_1 to the archive_union_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_grid_map_wall_1",
+          "location_id": "in:archive_union_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy central_monitoring_console_1 to the pump_valve_maintenance_bay and use the welding_torch_1 to repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_monitoring_console_1",
+          "location_id": "in:pump_valve_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filing_cabinet_1 to the main_control_room and open it to retrieve the blueprints.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": "in:main_control_room"
+        },
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
         }
       ]
     }

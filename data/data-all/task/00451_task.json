@@ -10,9 +10,39 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place clipboard_1 on examination_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:examination_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the barcode scanner on the medical cart.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:medical_cart_1"
+        }
+      ]
+    },
     {
       "task_description": "Find the heaviest metal object in the prep chamber and place it in the stylist's atelier.",
       "task_category": "attribute_reasoning",
@@ -20,6 +50,118 @@
         {
           "id": "medical_cart_1",
           "location_id": "in:stylists_atelier"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a blue cap and place it on the steamer.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_dye_bottle_3",
+          "location_id": "on:steamer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to open the vent cover.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "vent_cover_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the gold thimble to unlock the syringe case.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "syringe_case_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a grinding motor, use the label marker to label it, and then deactivate it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wig_display_1",
+          "is_active": false
+        },
+        {
+          "id": "chemical_dye_bottle_3",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only object with a frayed cord, use the pressure gauge to check its pressure, and then lower it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "iron_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unlock the weapon rack.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapon_rack_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mirror wall to the peacekeeper checkpoint.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mirror_wall_1",
+          "location_id": "in:peacekeeper_checkpoint"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked cabinet to the prep chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_cabinet_1",
+          "location_id": "in:prep_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the weapon rack to the stylist's atelier and use the keycard to unlock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapon_rack_1",
+          "location_id": "in:stylists_atelier"
+        },
+        {
+          "id": "weapon_rack_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the examination table to the peacekeeper checkpoint and lower it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "examination_table_1",
+          "location_id": "in:peacekeeper_checkpoint"
+        },
+        {
+          "id": "examination_table_1",
+          "is_lowered": true
         }
       ]
     }

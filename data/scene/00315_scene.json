@@ -1,0 +1,636 @@
+{
+  "description": "A makeshift Emergency Medical Field Station set up in a beachfront hotel lobby after a tsunami, featuring triage, treatment, supply, and recovery zones with extensive medical equipment, debris, and hazards.",
+  "rooms": [
+    {
+      "id": "triage_entrance",
+      "name": "Triage Entrance",
+      "properties": {
+        "type": "medical_triage"
+      },
+      "connected_to_room_ids": [
+        "emergency_treatment_bay"
+      ]
+    },
+    {
+      "id": "emergency_treatment_bay",
+      "name": "Emergency Treatment Bay",
+      "properties": {
+        "type": "medical_treatment"
+      },
+      "connected_to_room_ids": [
+        "triage_entrance",
+        "supply_depot",
+        "recovery_area"
+      ]
+    },
+    {
+      "id": "supply_depot",
+      "name": "Supply Depot",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "emergency_treatment_bay",
+        "flooded_corridor"
+      ]
+    },
+    {
+      "id": "recovery_area",
+      "name": "Recovery & Observation Area",
+      "properties": {
+        "type": "patient_recovery"
+      },
+      "connected_to_room_ids": [
+        "emergency_treatment_bay"
+      ]
+    },
+    {
+      "id": "flooded_corridor",
+      "name": "Flooded Back Corridor",
+      "properties": {
+        "type": "hazard_zone"
+      },
+      "connected_to_room_ids": [
+        "supply_depot"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "reception_desk_1",
+      "name": "Partially Collapsed Reception Desk",
+      "type": "FURNITURE",
+      "location_id": "in:triage_entrance",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "damaged"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "check_in_station_1",
+      "name": "Makeshift Check-In Station",
+      "type": "FURNITURE",
+      "location_id": "in:triage_entrance",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheelchair_ramp_1",
+      "name": "Blocked Wheelchair Ramp",
+      "type": "FURNITURE",
+      "location_id": "in:triage_entrance",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.3
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "concrete"
+      },
+      "states": {}
+    },
+    {
+      "id": "triage_clipboard_1",
+      "name": "Triage Clipboard",
+      "type": "ITEM",
+      "location_id": "on:check_in_station_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic",
+        "condition": "used",
+        "provides_abilities": [
+          "file"
+        ]
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "handheld_radio_1",
+      "name": "Handheld Radio",
+      "type": "ITEM",
+      "location_id": "on:check_in_station_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Motorola",
+        "condition": "low_battery"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "Partially Depleted First Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:reception_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "material": "plastic",
+        "condition": "missing_supplies"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "stretcher_1",
+      "name": "Torn Strap Stretcher",
+      "type": "FURNITURE",
+      "location_id": "in:triage_entrance",
+      "properties": {
+        "size": [
+          2.0,
+          0.7,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "damaged"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "operating_table_1",
+      "name": "Bloodstained Operating Table",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "operating_table_2",
+      "name": "Defibrillator Assembly Table",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "size": [
+          2.0,
+          0.9,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_generator_1",
+      "name": "Overheating Portable Generator",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "brand": "Honda",
+        "condition": "leaking_oil"
+      },
+      "states": {}
+    },
+    {
+      "id": "defibrillator_1",
+      "name": "Incomplete Defibrillator",
+      "type": "ITEM",
+      "location_id": "on:operating_table_2",
+      "properties": {
+        "weight": 3.5,
+        "color": "green",
+        "brand": "Philips",
+        "condition": "missing_paddle",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "oxygen_tank_1",
+      "name": "Low Pressure Oxygen Tank",
+      "type": "ITEM",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "green",
+        "material": "metal",
+        "condition": "low_pressure"
+      },
+      "states": {}
+    },
+    {
+      "id": "surgical_tray_1",
+      "name": "Rusted Surgical Tray",
+      "type": "ITEM",
+      "location_id": "on:operating_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "silver",
+        "material": "metal",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_cut": false
+      }
+    },
+    {
+      "id": "iv_stand_1",
+      "name": "Empty IV Stand",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "iv_stand_2",
+      "name": "Half-Full IV Stand",
+      "type": "FURNITURE",
+      "location_id": "in:emergency_treatment_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.5
+        ],
+        "weight": 3.5,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "stethoscope_1",
+      "name": "Cracked Stethoscope",
+      "type": "ITEM",
+      "location_id": "on:operating_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Littmann",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "blood_pressure_cuff_1",
+      "name": "Frayed Blood Pressure Cuff",
+      "type": "ITEM",
+      "location_id": "on:operating_table_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "material": "fabric",
+        "condition": "frayed"
+      },
+      "states": {
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "bar_counter_1",
+      "name": "Medical Supply Bar Counter",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Unpowered Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          1.6
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medicine_cabinet_1",
+      "name": "Locked Medicine Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "size": [
+          0.6,
+          0.2,
+          0.8
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "distilled_water_jug_1",
+      "name": "Distilled Water Jug",
+      "type": "ITEM",
+      "location_id": "on:bar_counter_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "clear",
+        "material": "plastic",
+        "capacity": "5L",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "broken_flashlight_1",
+      "name": "Broken Flashlight",
+      "type": "ITEM",
+      "location_id": "on:bar_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Maglite",
+        "condition": "needs_batteries"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "battery_pack_1",
+      "name": "Battery Pack",
+      "type": "ITEM",
+      "location_id": "in:refrigerator_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "brand": "Duracell",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "battery_powered_lantern_1",
+      "name": "Flickering Lantern",
+      "type": "ITEM",
+      "location_id": "on:bar_counter_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "yellow",
+        "material": "plastic",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rubber_gloves_box_1",
+      "name": "Partially Used Rubber Gloves Box",
+      "type": "ITEM",
+      "location_id": "on:bar_counter_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "blue",
+        "material": "latex",
+        "quantity": "12 pairs"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hand_sanitizer_dispenser_1",
+      "name": "Empty Hand Sanitizer Dispenser",
+      "type": "ITEM",
+      "location_id": "on:bar_counter_1",
+      "properties": {
+        "weight": 0.9,
+        "color": "white",
+        "material": "plastic",
+        "condition": "empty"
+      },
+      "states": {
+        "is_squeezed": false
+      }
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Crowbar",
+      "type": "ITEM",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "weight": 2.5,
+        "color": "silver",
+        "material": "steel",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "stacked_crates_1",
+      "name": "Stack of Crates",
+      "type": "FURNITURE",
+      "location_id": "in:supply_depot",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.5
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_cot_1",
+      "name": "Folding Cot",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_area",
+      "properties": {
+        "size": [
+          1.9,
+          0.8,
+          0.4
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_blanket_1",
+      "name": "Thermal Blanket",
+      "type": "ITEM",
+      "location_id": "on:folding_cot_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "mylar",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {
+        "is_insulated": false
+      }
+    },
+    {
+      "id": "battery_powered_radio_1",
+      "name": "Battery-Powered Radio",
+      "type": "ITEM",
+      "location_id": "in:recovery_area",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Sony",
+        "condition": "working"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "jammed_door_1",
+      "name": "Jammed Emergency Exit Door",
+      "type": "FURNITURE",
+      "location_id": "in:flooded_corridor",
+      "properties": {
+        "size": [
+          2.1,
+          1.0,
+          0.1
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flood_water_1",
+      "name": "Knee-Deep Flood Water",
+      "type": "FURNITURE",
+      "location_id": "in:flooded_corridor",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          0.5
+        ],
+        "weight": 1000.0,
+        "is_container": false,
+        "material": "water"
+      },
+      "states": {}
+    },
+    {
+      "id": "floating_debris_1",
+      "name": "Floating Debris",
+      "type": "ITEM",
+      "location_id": "in:flooded_corridor",
+      "properties": {
+        "weight": 8.0,
+        "material": "mixed",
+        "condition": "waterlogged"
+      },
+      "states": {
+        "is_ripped": false
+      }
+    }
+  ],
+  "abilities": [
+    "file",
+    "flatten",
+    "insulate",
+    "open",
+    "rip",
+    "scan_barcode",
+    "squeeze",
+    "tear",
+    "turn_on",
+    "water",
+    "close"
+  ]
+}

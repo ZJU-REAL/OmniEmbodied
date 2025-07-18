@@ -10,9 +10,79 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place networked_monitor_1 on l_shaped_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "networked_monitor_1",
+          "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red master keycard on the L-shaped desk.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_keycard_1",
+          "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red binder and place it on the L-shaped desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "maintenance_logs_binder_1",
+          "location_id": "on:l_shaped_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the sticky guest request terminal and unmute it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "guest_request_terminal_1",
+          "is_muted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken walkie-talkie using the vacuum repair kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_walkie_talkie_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the toolbox to repair the broken AC unit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_ac_unit_1",
+          "is_broken": false
+        }
+      ]
+    },
     {
       "task_description": "Use the cleaning spray bottle to clean the dirty towel and place it in the housekeeping cart.",
       "task_category": "compound_reasoning",
@@ -21,6 +91,69 @@
           "id": "dirty_towel_1",
           "is_dirty": false,
           "location_id": "in:housekeeping_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the vegetable peeler to peel the potato and place it on the cutting board.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "potato_1",
+          "is_peeled": true,
+          "location_id": "on:cutting_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to refuel the generator.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "generator_1",
+          "is_fueled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the main operations hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_unit_1",
+          "location_id": "in:main_operations_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the L-shaped desk to the housekeeping prep station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "l_shaped_desk_1",
+          "location_id": "in:housekeeping_prep_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer to the technical maintenance closet and repair it using the toolbox.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:technical_maintenance_closet",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sealed wine crate to the staff break nook and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "wine_crate_1",
+          "location_id": "in:staff_break_nook",
+          "is_open": true
         }
       ]
     }

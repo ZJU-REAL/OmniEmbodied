@@ -10,9 +10,49 @@
         1.5,
         1.5
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place check_in_tablet_1 on worktable_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "check_in_tablet_1",
+          "location_id": "on:worktable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black check-in tablet on the worktable in the processing hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "check_in_tablet_1",
+          "location_id": "on:worktable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the verification scanner to start the intake process.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "verification_scanner_1",
+          "is_running": true
+        }
+      ]
+    },
     {
       "task_description": "Fix the jammed stapler and staple the red loan file marked 'FRAUD RISK'.",
       "task_category": "compound_reasoning",
@@ -24,6 +64,104 @@
         {
           "id": "loan_file_1",
           "is_stapled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the urgent cases dropbox.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "urgent_cases_dropbox_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the printer paper box from the supply closet to the processing hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_paper_box_1",
+          "location_id": "in:processing_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial printer to the archive room and replace its toner cartridge.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "location_id": "in:archive_room"
+        },
+        {
+          "id": "toner_cartridge_1",
+          "location_id": "in:industrial_printer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the chipped blue mug on the reception counter.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mug_2",
+          "location_id": "on:reception_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white mug labeled 'World’s Okayest Loan Officer' and place it on the counselor’s desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mug_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to label the reference binder.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "reference_binder_1",
+          "is_labeled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the filing cabinet in the archive room.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the brochures box from the supply closet to the main reception area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "brochures_box_1",
+          "location_id": "in:main_reception"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the dented filing cart to the archive room and organize the red loan files inside it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cart_1",
+          "location_id": "in:archive_room"
+        },
+        {
+          "id": "loan_file_1",
+          "location_id": "in:filing_cart_1"
         }
       ]
     }

@@ -1,0 +1,136 @@
+{
+  "task_background": "Prepare the experimental craft brewery and microbiology lab for a new batch of tart cherry-infused beer, ensuring all equipment is functional and ingredients are ready.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place cherry_puree_can_1 on the tasting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cherry_puree_can_1",
+          "location_id": "on:tasting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the digital_thermometer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_thermometer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, red item in the brewing_station and place it in the fermentation_chamber.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cherry_puree_can_1",
+          "location_id": "in:fermentation_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flickering device in the brewing_station and turn it off.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_thermometer_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to fix the stuck_valve condition of the mash_tun_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mash_tun_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to fix the only flickering device in the brewing_station and then turn it off.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_thermometer_1",
+          "is_screwed_in": true
+        },
+        {
+          "id": "digital_thermometer_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the fermenter_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fermenter_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fermenter_lid_1 to the storage_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fermenter_lid_1",
+          "location_id": "in:storage_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cherry_drum_1 to the ingredient_prep_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cherry_drum_1",
+          "location_id": "in:ingredient_prep_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy photocopier_1 that is currently off to the storage_room and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "photocopier_1",
+          "location_id": "in:storage_room"
+        },
+        {
+          "id": "photocopier_1",
+          "is_on": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "00123"
+}

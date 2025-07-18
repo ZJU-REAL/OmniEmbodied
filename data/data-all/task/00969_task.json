@@ -10,9 +10,69 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 20.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the Project Helix Prototype on the Modular Tool Grid.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "project_helix_1",
+          "location_id": "on:modular_tool_grid_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the Overhead Magnifier Arm.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "overhead_magnifier_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black wireless debugger with a blinking red status and place it on the ESD-Safe Workstation.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "wireless_debugger_1",
+          "location_id": "on:esd_workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest item on the ESD-Safe Workstation and place it in the Component Vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "micro_welder_1",
+          "location_id": "in:component_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Label the Super Retina Display Sample X1 using the Label Marker.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "super_retina_x1_1",
+          "is_labeled": true
+        }
+      ]
+    },
     {
       "task_description": "Find the coffee-stained schematics, erase the stains using the Eraser, and staple them together using the Stapler.",
       "task_category": "compound_reasoning",
@@ -20,6 +80,68 @@
         {
           "id": "coffee_stained_schematics_1",
           "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the Biometric Glass Cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biometric_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the Gaze-Tracking Calibration Setup.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gaze_tracker_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ESD-Safe Workstation to the Collaboration Hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "esd_workstation_1",
+          "location_id": "in:collaboration_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Thermal Chamber Testing Rig to the Prototyping Bench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "thermal_chamber_1",
+          "location_id": "in:prototyping_bench"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy Gaze-Tracking Calibration Setup to the Testing Chamber and deactivate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "gaze_tracker_1",
+          "location_id": "in:testing_chamber",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy Interactive Whiteboard to the Collaboration Hub and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "interactive_whiteboard_1",
+          "location_id": "in:collaboration_hub",
+          "is_on": false
         }
       ]
     }

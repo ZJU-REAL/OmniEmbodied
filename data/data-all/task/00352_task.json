@@ -6,9 +6,55 @@
       "max_grasp_limit": 1,
       "max_weight": 25.0,
       "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 25.0,
+      "max_size": 1.5
     }
   ],
   "tasks": [
+    {
+      "task_description": "Place the wedding_magazine_1 on the reception_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "wedding_magazine_1",
+          "location_id": "on:reception_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the touchscreen_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "touchscreen_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest glass object in the front_reception and place it on the coffee_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_table_1",
+          "location_id": "on:coffee_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only white item on the workstation_1 and fold it.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_invitation_1",
+          "is_folded": true
+        }
+      ]
+    },
     {
       "task_description": "Clean the dirty printer_1 using the cleaning_rag_1.",
       "task_category": "tool_use",
@@ -16,6 +62,105 @@
         {
           "id": "printer_1",
           "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the floral_delivery_1 using the scissors_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "floral_delivery_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only flashing red device in the main_planning_hub and sync it using the barcode_scanner_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "digital_kiosk_1",
+          "is_synced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the largest wooden container in the vendor_storage and open it using the toolbox_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "china_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the server_1 and the computer_monitor_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_1",
+          "is_on": true
+        },
+        {
+          "id": "computer_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to clean the mannequin_torso_1 using the cleaning_rag_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mannequin_torso_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the china_crate_1 to the main_planning_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "china_crate_1",
+          "location_id": "in:main_planning_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the storage_rack_1 to the bridal_suite.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_rack_1",
+          "location_id": "in:bridal_suite"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy printer_1 to the it_office and clean it using the cleaning_rag_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": "in:it_office",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy workstation_1 to the bridal_suite and turn on the computer_monitor_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "workstation_1",
+          "location_id": "in:bridal_suite"
+        },
+        {
+          "id": "computer_monitor_1",
+          "is_on": true
         }
       ]
     }
