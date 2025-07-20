@@ -38,8 +38,8 @@ def parse_args():
     parser.add_argument('--mode', type=str,
                         choices=['sequential', 'combined', 'independent'],
                         help='评测模式: sequential (逐个评测), combined (混合评测), independent (独立评测)')
-    parser.add_argument('--scenarios', type=str, default='00001',
-                        help='场景选择: all, 00001-00010, 00001,00003,00005')
+    parser.add_argument('--scenarios', type=str, default=None,
+                        help='场景选择: all, 00001-00010, 00001,00003,00005 (如果未指定，将使用配置文件设置)')
     parser.add_argument('--suffix', type=str, default='demo',
                         help='运行后缀')
     parser.add_argument('--config', type=str, default='single_agent_config',
@@ -69,6 +69,19 @@ def run_single_evaluation(config_file: str, mode: str, scenarios: str, suffix: s
     logger = logging.getLogger(__name__)
 
     try:
+        # 加载配置
+        config_manager = ConfigManager()
+        config = config_manager.get_config(config_file)
+
+        # 严格验证数据目录配置 - 直接抛出异常
+        data_dir = config_manager.get_data_dir(config_file)
+        scene_dir = config_manager.get_scene_dir(config_file)
+        task_dir = config_manager.get_task_dir(config_file)
+
+        logger.info(f"📁 数据目录: {data_dir}")
+        logger.info(f"📁 场景目录: {scene_dir}")
+        logger.info(f"📁 任务目录: {task_dir}")
+
         # 解析场景选择
         scenario_selection = EvaluationInterface.parse_scenario_string(scenarios)
 
@@ -78,6 +91,7 @@ def run_single_evaluation(config_file: str, mode: str, scenarios: str, suffix: s
         logger.info(f"🏠 场景选择: {scenarios}")
         logger.info(f"🏷️ 运行后缀: {suffix}")
         logger.info(f"⚙️ 配置文件: {config_file}")
+        logger.info(f"🤖 智能体类型: 单智能体")
 
         results = EvaluationInterface.run_evaluation(
             config_file=config_file,
@@ -142,18 +156,27 @@ def main():
     # 确定最终参数（命令行参数优先，然后是配置文件，最后是默认值）
     mode = args.mode or eval_config.get('task_type', 'sequential')
 
-    # 场景选择逻辑：如果命令行没有明确指定（使用默认值），则尝试使用配置文件
-    if args.scenarios == '00001':  # 默认值，检查配置文件
+    # 场景选择逻辑：优先使用命令行参数，否则使用配置文件设置
+    if args.scenarios is None:  # 命令行未指定，使用配置文件
         scenario_selection = parallel_settings.get('scenario_selection', {})
-        if scenario_selection.get('mode') == 'range':
+        scenario_mode = scenario_selection.get('mode', 'list')
+
+        if scenario_mode == 'all':
+            scenarios = 'all'  # 使用'all'执行所有场景
+        elif scenario_mode == 'range':
             range_config = scenario_selection.get('range', {})
             start = range_config.get('start', '00001')
             end = range_config.get('end', '00001')
             scenarios = f"{start}-{end}" if start != end else start
+        elif scenario_mode == 'list':
+            scenario_list = scenario_selection.get('list', ['00001'])
+            scenarios = ','.join(scenario_list)
         else:
-            scenarios = args.scenarios
+            # 如果配置文件也没有有效设置，使用单个场景作为最后的回退
+            scenarios = '00001'
+            logger.warning("配置文件中没有有效的场景选择设置，使用默认场景 00001")
     else:
-        scenarios = args.scenarios
+        scenarios = args.scenarios  # 使用命令行指定的场景
 
     suffix = args.suffix or run_settings.get('default_suffix', 'demo')
 

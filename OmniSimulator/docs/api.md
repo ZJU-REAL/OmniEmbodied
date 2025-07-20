@@ -101,12 +101,11 @@ description = engine.get_agent_supported_actions_description(["agent_id"])  # �
 from embodied_simulator.utils.data_loader import default_data_loader
 
 # 加载完整场景（推荐）
-scene_data, task_data, verify_data = default_data_loader.load_complete_scenario("00001")
+scene_data, task_data = default_data_loader.load_complete_scenario("00001")
 
 # 单独加载各类数据
 scene_data = default_data_loader.load_scene("00001")
 task_data = default_data_loader.load_task("00001")
-verify_data = default_data_loader.load_verify("00001")
 
 # 获取任务能力
 abilities = default_data_loader.get_task_abilities("00001")
@@ -470,7 +469,7 @@ CORP_GRAB <agent1,agent2> <object_id>
 from embodied_simulator.utils.task_verifier import TaskVerifier
 
 # 创建任务验证器
-verifier = TaskVerifier(verify_data, world_state)
+verifier = TaskVerifier(task_data, env_manager)
 
 # 验证所有任务
 results = verifier.verify_all_tasks()

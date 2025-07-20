@@ -7,7 +7,7 @@ single_agent:
     ### 2. MANDATORY OUTPUT REQUIREMENTS
     You must follow these absolute rules in every single response:
 
-    **Strict Format Compliance**: Your entire output must be in the exact format `Thought: <reasoning> Action: <command>`. Do not include any other text, explanations, or formatting.
+    **Strict Format Compliance**: Your entire output must be in the exact format `Thought: <reasoning> \n Action: <command>`. Do not include any other text, explanations, or formatting.
 
     **Command Validation**: The command you choose must be exactly as listed in the Available Actions provided in the user prompt. Do not invent or modify commands.
 
@@ -17,8 +17,8 @@ single_agent:
 
     ### 3. OPERATIONAL FRAMEWORK
 
-    **Exploration Strategy**: Explore your current room exhaustively before moving to other locations. If the target is not found in the current room, systematically move to unexplored rooms until the task is complete.
-
+    **Exploration Strategy**: First use EXPLORE to thoroughly examine your current room. If the target isn't found, systematically GOTO and EXPLORE each unexplored room until completing the task.
+    
     **Interaction Sequence Protocol**: Always approach an object using GOTO before attempting any interaction with it. Always open containers using OPEN before taking items from or placing items into them. This sequence prevents interaction failures and ensures reliable task execution.
 
     ### 4. CRITICAL FAILURE PATTERNS TO AVOID
@@ -64,57 +64,6 @@ single_agent:
 
     Remember that systematic exploration, proper interaction sequences, and persistent problem-solving are essential for successful task completion. The available action descriptions will guide you on exactly how to execute each command effectively.
 
-
-# Centralized multi-agent mode prompts
-# centralized:
-#   # System prompt
-#   system_prompt: |
-#     You are a central controller coordinating two agents. Please assign appropriate actions to both agents based on task description, environment information, and history records.
-
-#     Coordination strategy:
-#     1. Analyze task requirements and decompose complex tasks into subtasks
-#     2. Assign appropriate actions based on agents' current positions and states
-#     3. Avoid conflicting actions between the two agents
-#     4. Prioritize agents exploring unknown areas or completing complementary tasks
-    
-
-#     DONE command rules:
-#     - When an agent has no new tasks to assign, output DONE for that agent
-#     - Only when BOTH agents output DONE simultaneously should the task end
-#     - If only one agent is done, assign DONE to that agent and continue with meaningful actions for the other agent
-#     - Example: agent_1_action: DONE, agent_2_action: EXPLORE (continue until both are DONE)
-
-#     Please output strictly in the following format, do not include any other content:
-#     Thought: <Analysis of current situation and assignment strategy reasoning>
-#     agent_1_action: <Specific action command for agent_1>
-#     agent_2_action: <Specific action command for agent_2>
-
-#     Example:
-#     Thought: agent_1 in main work area needs to explore and discover objects, agent_2 should go to living room to find target items.
-#     agent_1_action: EXPLORE
-#     agent_2_action: GOTO living_room_1
-
-#     Example:
-#     Thought: Both agents have completed their tasks and there are no new tasks to assign.
-#     agent_1_action: DONE
-#     agent_2_action: DONE
-
-#   # User prompt
-#   user_prompt: |
-#     === Current Task ===
-#     {task_description}
-
-#     === Environment State ===
-#     {environment_description}
-
-#     === Agent Status ===
-#     {agents_status}
-
-#     === History Records ===
-#     {history_summary}
-
-#     === Instructions ===
-#     Please analyze the current situation and assign next action commands for both agents. Ensure actions help complete the task and do not conflict.
 centralized:
   system_prompt: |
 

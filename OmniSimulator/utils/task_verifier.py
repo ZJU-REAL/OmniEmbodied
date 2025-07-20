@@ -1,7 +1,7 @@
 """
 任务验证器 - 负责验证子任务的完成情况
 
-该模块提供了TaskVerifier类，用于根据verify.json文件中的验证条件
+该模块提供了TaskVerifier类，用于根据task.json文件中的validation_checks字段
 检查子任务是否已完成，并返回详细的验证结果。
 """
 

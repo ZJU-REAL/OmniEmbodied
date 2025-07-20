@@ -40,8 +40,6 @@ class TrajectoryRecorder:
         # 文件路径
         self.trajectory_file = os.path.join(output_dir, f"trajectories/{scenario_id}_trajectory.json")
         self.qa_file = os.path.join(output_dir, f"llm_qa/{scenario_id}_llm_qa.json")
-        # 按场景组织执行日志：logs/scenario_id/scenario_execution.json
-        self.execution_log_file = os.path.join(output_dir, f"logs/{scenario_id}/scenario_execution.json")
 
         # 确保目录存在
         self._create_directories()
@@ -52,8 +50,7 @@ class TrajectoryRecorder:
         """创建必要的子目录"""
         directories = [
             os.path.dirname(self.trajectory_file),
-            os.path.dirname(self.qa_file),
-            os.path.dirname(self.execution_log_file)
+            os.path.dirname(self.qa_file)
         ]
         for directory in directories:
             os.makedirs(directory, exist_ok=True)
@@ -297,24 +294,7 @@ class TrajectoryRecorder:
             # 立即更新轨迹文件
             self._update_task_completion(task_index, completion_data)
     
-    def save_execution_log(self, execution_data: Dict[str, Any]) -> None:
-        """保存场景执行日志JSON文件"""
-        with self.lock:
-            temp_file = self.execution_log_file + '.tmp'
-            try:
-                with open(temp_file, 'w', encoding='utf-8') as f:
-                    json.dump(execution_data, f, ensure_ascii=False, indent=2)
-                    f.flush()
-                    os.fsync(f.fileno())
-                
-                os.rename(temp_file, self.execution_log_file)
-                logger.debug(f"💾 执行日志已保存: {self.execution_log_file}")
-                
-            except Exception as e:
-                if os.path.exists(temp_file):
-                    os.remove(temp_file)
-                logger.error(f"保存执行日志失败: {e}")
-                raise
+
 
     def close(self):
         """关闭记录器：强制保存数据并清理内存"""

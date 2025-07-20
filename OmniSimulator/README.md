@@ -47,7 +47,7 @@ from embodied_simulator.core import SimulationEngine
 from embodied_simulator.utils.data_loader import default_data_loader
 
 # 加载场景数据
-scene_data, task_data, verify_data = default_data_loader.load_complete_scenario("00001")
+scene_data, task_data = default_data_loader.load_complete_scenario("00001")
 
 # 创建引擎并启用可视化
 config = {'visualization': {'enabled': True}}
@@ -56,8 +56,7 @@ engine = SimulationEngine(config=config, task_abilities=task_data.get("abilities
 # 初始化模拟器
 success = engine.initialize_with_data({
     'scene': scene_data,
-    'task': task_data,
-    'verify': verify_data
+    'task': task_data
 })
 
 # 执行动作

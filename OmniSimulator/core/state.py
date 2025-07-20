@@ -496,7 +496,7 @@ class EnvironmentGraph:
             desc_lines.append("  • Objects:")
             desc_lines.extend(["    " + line for line in obj_lines])
         else:
-            desc_lines.append("  • Objects: No objects or not yet discovered")
+            desc_lines.append("  • Objects: Not yet discovered")
         
         # 被合作持有的物体
         cooperative_objs = []

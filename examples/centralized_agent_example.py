@@ -70,6 +70,19 @@ def run_centralized_evaluation(config_file: str, mode: str, scenarios: str, suff
     logger = logging.getLogger(__name__)
 
     try:
+        # 加载配置
+        config_manager = ConfigManager()
+        config = config_manager.get_config(config_file)
+
+        # 严格验证数据目录配置 - 直接抛出异常
+        data_dir = config_manager.get_data_dir(config_file)
+        scene_dir = config_manager.get_scene_dir(config_file)
+        task_dir = config_manager.get_task_dir(config_file)
+
+        logger.info(f"📁 数据目录: {data_dir}")
+        logger.info(f"📁 场景目录: {scene_dir}")
+        logger.info(f"📁 任务目录: {task_dir}")
+
         # 解析场景选择
         scenario_selection = EvaluationInterface.parse_scenario_string(scenarios)
 

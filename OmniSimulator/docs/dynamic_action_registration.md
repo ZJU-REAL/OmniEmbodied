@@ -18,7 +18,7 @@
 
 ### 3. 基于数据驱动
 - 测试场景和任务从`data`文件夹读取，作为标准样本使用
-- 支持场景数据、任务数据和验证数据的完整加载
+- 支持场景数据和任务数据的完整加载
 - 动作描述从CSV文件中读取，支持英文描述
 
 ## 主要组件
@@ -28,7 +28,7 @@
 
 ```python
 # 加载完整场景
-scene_data, task_data, verify_data = data_loader.load_complete_scenario("00001")
+scene_data, task_data = data_loader.load_complete_scenario("00001")
 
 # 获取任务能力
 abilities = data_loader.get_task_abilities("00001")

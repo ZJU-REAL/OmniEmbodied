@@ -42,13 +42,13 @@ class ScenarioSelector:
 
         # 获取基础场景列表
         if mode == 'all':
-            base_scenarios = ScenarioSelector._get_all_scenarios()
+            base_scenarios = ScenarioSelector._get_all_scenarios(config)
         elif mode == 'range':
             range_config = scenario_selection.get('range', {})
             base_scenarios = ScenarioSelector._get_range_scenarios(range_config)
         elif mode == 'list':
             scenario_list = scenario_selection.get('list', ['00001'])
-            base_scenarios = ScenarioSelector._validate_scenarios(scenario_list)
+            base_scenarios = ScenarioSelector._validate_scenarios(scenario_list, config)
         else:
             logger.warning(f"未知的场景选择模式: {mode}, 使用默认场景")
             base_scenarios = ['00001']
@@ -56,7 +56,7 @@ class ScenarioSelector:
         # 应用任务筛选
         task_filter = scenario_selection.get('task_filter')
         if task_filter:
-            filter_result = ScenarioSelector._filter_scenarios_by_tasks(base_scenarios, task_filter)
+            filter_result = ScenarioSelector._filter_scenarios_by_tasks(base_scenarios, task_filter, config)
             return filter_result
 
         return {
@@ -65,13 +65,33 @@ class ScenarioSelector:
         }
     
     @staticmethod
-    def _get_all_scenarios() -> List[str]:
-        """获取所有可用场景"""
-        # 从data/scene目录获取所有场景
-        scene_dir = 'data/scene'
+    def _get_all_scenarios(config: Dict[str, Any]) -> List[str]:
+        """
+        获取所有可用场景
+
+        Args:
+            config: 配置字典，必须包含data_dir
+
+        Raises:
+            KeyError: 配置中缺少data_dir
+            FileNotFoundError: 场景目录不存在
+        """
+        # 必须有data_dir配置
+        if 'data_dir' not in config:
+            raise KeyError("配置中缺少必需的 'data_dir' 设置")
+
+        data_dir = config['data_dir']
+
+        # 转换为绝对路径
+        if not os.path.isabs(data_dir):
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)  # evaluation -> OmniEmbodied
+            data_dir = os.path.join(project_root, data_dir)
+
+        scene_dir = os.path.join(data_dir, 'scene')
+        # 严格验证场景目录存在
         if not os.path.exists(scene_dir):
-            logger.warning(f"场景目录不存在: {scene_dir}")
-            return ['00001']  # 返回默认场景
+            raise FileNotFoundError(f"场景目录不存在: {scene_dir}")
         
         # 查找所有场景文件
         scene_files = glob.glob(os.path.join(scene_dir, '*.json'))
@@ -85,8 +105,7 @@ class ScenarioSelector:
                 scenario_ids.append(scenario_id)
         
         if not scenario_ids:
-            logger.warning("未找到任何场景文件")
-            return ['00001']
+            raise RuntimeError(f"场景目录中没有找到任何场景文件: {scene_dir}")
         
         # 排序并返回
         scenario_ids.sort()
@@ -114,7 +133,10 @@ class ScenarioSelector:
                 scenario_ids.append(scenario_id)
             
             # 验证场景是否存在
-            validated_scenarios = ScenarioSelector._validate_scenarios(scenario_ids)
+            # 注意：这里需要传入config，但_get_range_scenarios是静态方法，没有config访问权限
+            # 暂时使用默认的data目录，这个方法需要重构
+            default_config = {'data_dir': 'data'}
+            validated_scenarios = ScenarioSelector._validate_scenarios(scenario_ids, default_config)
             
             logger.info(f"范围场景 {start}-{end}: 找到 {len(validated_scenarios)} 个有效场景")
             return validated_scenarios
@@ -124,26 +146,34 @@ class ScenarioSelector:
             return ['00001']
     
     @staticmethod
-    def _validate_scenarios(scenario_list: List[str]) -> List[str]:
+    def _validate_scenarios(scenario_list: List[str], config: Dict[str, Any]) -> List[str]:
         """验证场景ID的有效性"""
         validated_scenarios = []
-        scene_dir = 'data/scene'
-        
+
+        # 从配置获取数据目录
+        data_dir = config.get('data_dir', 'data')
+        if not os.path.isabs(data_dir):
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)
+            data_dir = os.path.join(project_root, data_dir)
+
+        scene_dir = os.path.join(data_dir, 'scene')
+
         for scenario_id in scenario_list:
             scene_file = os.path.join(scene_dir, f'{scenario_id}_scene.json')
             if os.path.exists(scene_file):
                 validated_scenarios.append(scenario_id)
             else:
                 logger.warning(f"场景文件不存在: {scene_file}")
-        
+
         if not validated_scenarios:
             logger.warning("没有找到有效的场景，使用默认场景")
             return ['00001']
-        
+
         return validated_scenarios
 
     @staticmethod
-    def _filter_scenarios_by_tasks(scenarios: List[str], task_filter: Dict[str, Any]) -> Dict[str, Any]:
+    def _filter_scenarios_by_tasks(scenarios: List[str], task_filter: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
         """
         根据任务特征筛选场景和任务
 
@@ -174,10 +204,19 @@ class ScenarioSelector:
         total_tasks_before = 0
         total_tasks_after = 0
 
+        # 从配置获取数据目录
+        data_dir = config.get('data_dir', 'data')
+        if not os.path.isabs(data_dir):
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)
+            data_dir = os.path.join(project_root, data_dir)
+
+        task_dir = os.path.join(data_dir, 'task')
+
         for scenario_id in scenarios:
             try:
                 # 加载任务文件
-                task_file = f'data/task/{scenario_id}_task.json'
+                task_file = os.path.join(task_dir, f'{scenario_id}_task.json')
                 if not os.path.exists(task_file):
                     logger.warning(f"任务文件不存在: {task_file}")
                     continue

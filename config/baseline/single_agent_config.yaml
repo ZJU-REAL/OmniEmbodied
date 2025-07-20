@@ -1,5 +1,8 @@
 # 单智能体配置文件
 
+# 数据目录配置（必需）
+data_dir: "data/eval/single-independent"  # 必须明确指定，支持相对路径和绝对路径
+
 # 智能体配置
 agent_config:
   agent_class: "modes.single_agent.llm_agent.LLMAgent"
@@ -21,7 +24,7 @@ agent_config:
 
 # 历史记录格式配置
 history:
-  max_history_length: 10  # -1 表示不限制历史长度
+  max_history_length: -1  # -1 表示不限制历史长度
   # 历史记录格式配置
   format:
     include_thought: true   # 是否在历史记录中包含Thought内容
@@ -30,7 +33,7 @@ history:
 # 任务执行设置
 execution:
   max_total_steps: 400  # 最大总执行步数
-  max_steps_per_task: 20  # 每个任务的最大步数
+  max_steps_per_task: 35  # 每个任务的最大步数
 
 # 评测模式设置
 evaluation:
@@ -73,7 +76,7 @@ parallel_evaluation:
   # 场景级并行配置
   scenario_parallelism:
     # 最大并行场景数
-    max_parallel_scenarios: 10
+    max_parallel_scenarios: 5
 
   # 场景选择配置
   # 说明：首先根据场景选择配置确定基础场景列表，然后应用任务筛选
@@ -83,7 +86,7 @@ parallel_evaluation:
     #   - 'all': 选择所有可用场景
     #   - 'range': 选择指定范围内的场景 (如 00001-00010)
     #   - 'list': 选择指定列表中的场景
-    mode: 'list'
+    mode: 'all'
 
     # 范围模式配置 (当mode='range'时使用)
     range:

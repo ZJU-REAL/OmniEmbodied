@@ -195,7 +195,7 @@ class VisualizationDataProvider:
 
 
     def _get_detailed_tasks(self) -> List[Dict[str, Any]]:
-        """获取所有任务的详细列表，按照verify.json的结构"""
+        """获取所有任务的详细列表，基于task.json中的validation_checks"""
         import logging
         logger = logging.getLogger(__name__)
         logger.info("开始获取详细任务信息")

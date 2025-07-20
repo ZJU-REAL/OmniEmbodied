@@ -23,7 +23,7 @@ sys.path.append(str(Path(__file__).parent))
 
 from utils.task_validator import TaskValidator
 from utils.json_utils import load_json, save_json
-from utils.logger import get_logger
+from utils.logger import get_logger, setup_logging
 
 
 class TaskCleaner:
@@ -41,8 +41,8 @@ class TaskCleaner:
         self.task_dir = self.data_dir / "task"
         self.scene_dir = self.data_dir / "scene"
         
-        # Initialize validator
-        self.validator = TaskValidator()
+        # Initialize validator with scene directory for persistent modifications
+        self.validator = TaskValidator(scene_dir=self.scene_dir)
         
         # Statistics
         self.stats = {
@@ -100,10 +100,26 @@ class TaskCleaner:
             if not scene_data:
                 return False, [f"Failed to load scene data for scene_id: {scene_id}"], {}, []
                 
+            # Log task processing start
+            self.logger.info(f"🔍 Processing task file: {task_file.name}")
+
             # Validate with auto-fix enabled
             is_valid, errors, fixed_data, fixes_applied = self.validator.validate_and_fix_task_data(
                 task_data, scene_data, auto_fix=True
             )
+
+            # # Log detailed results
+            # if errors:
+            #     self.logger.warning(f"❌ Found {len(errors)} validation issues in {task_file.name}:")
+            #     for i, error in enumerate(errors, 1):
+            #         self.logger.warning(f"   {i}. {error}")
+
+            # if fixes_applied:
+            #     self.logger.info(f"🔧 Applied {len(fixes_applied)} fixes to {task_file.name}:")
+            #     for i, fix in enumerate(fixes_applied, 1):
+            #         self.logger.info(f"   {i}. {fix}")
+            # else:
+            #     self.logger.debug(f"✅ No fixes needed for {task_file.name}")
             
             return is_valid, errors, fixed_data, fixes_applied
             
@@ -304,19 +320,24 @@ class TaskCleaner:
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description='Clean and validate tasks in data-all directory')
-    parser.add_argument('--data-dir', default='data/data-all', 
+    parser.add_argument('--data-dir', default='data/data-all',
                        help='Path to data-all directory (default: data/data-all)')
     parser.add_argument('--dry-run', action='store_true',
                        help='Only report what would be done without making changes')
-    parser.add_argument('--log-level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'], 
+    parser.add_argument('--log-level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
                        default='INFO', help='Logging level')
-    
+
     args = parser.parse_args()
-    
-    # Set up logging level
-    import logging
-    logging.getLogger().setLevel(getattr(logging, args.log_level))
-    
+
+    # Set up logging with colored console output and file logging
+    setup_logging(
+        console_level=args.log_level,
+        file_level='DEBUG',
+        log_dir='./logs',
+        use_color=True,
+        use_progress_symbols=True
+    )
+
     # Create cleaner and run
     cleaner = TaskCleaner(args.data_dir)
     

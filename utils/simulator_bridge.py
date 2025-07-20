@@ -41,11 +41,10 @@ class SimulatorBridge:
         使用数据字典初始化模拟器（新API）
 
         Args:
-            data: 包含场景、任务和验证数据的字典
+            data: 包含场景和任务数据的字典
                   格式: {
                       'scene': scene_data,
-                      'task': task_data,
-                      'verify': verify_data (可选)
+                      'task': task_data
                   }
 
         Returns:
@@ -70,12 +69,8 @@ class SimulatorBridge:
                 logger.error(f"无法加载场景数据: {scenario_id}")
                 return False
 
-            # 解包结果（可能是2元组或3元组）
-            if len(result) == 2:
-                scene_data, task_data = result
-                verify_data = None
-            else:
-                scene_data, task_data, verify_data = result
+            # 解包结果（2元组：场景数据和任务数据）
+            scene_data, task_data = result
 
             # 从场景数据中提取abilities（新的数据结构）
             scene_abilities = scene_data.get('abilities', [])
@@ -88,8 +83,6 @@ class SimulatorBridge:
                 'scene': scene_data,
                 'task': task_data
             }
-            if verify_data:
-                data['verify'] = verify_data
 
             # 使用新的initialize_with_data方法
             success = self.initialize_with_data(data)

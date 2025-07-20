@@ -120,4 +120,68 @@ class ConfigManager:
             
         except Exception as e:
             logger.exception(f"保存配置文件时出错: {e}")
-            return False 
+            return False
+
+    def get_data_dir(self, config_name: str) -> str:
+        """
+        获取数据目录路径
+
+        Args:
+            config_name: 配置名称
+
+        Returns:
+            str: 数据目录的绝对路径
+
+        Raises:
+            KeyError: 配置文件中没有data_dir配置
+            FileNotFoundError: 数据目录不存在
+        """
+        config = self.get_config(config_name)
+
+        # 必须有data_dir配置
+        if 'data_dir' not in config:
+            raise KeyError(f"配置文件 {config_name} 中缺少必需的 'data_dir' 配置")
+
+        data_dir = config['data_dir']
+
+        # 转换为绝对路径
+        if not os.path.isabs(data_dir):
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)
+            data_dir = os.path.join(project_root, data_dir)
+
+        # 严格验证路径存在
+        if not os.path.exists(data_dir):
+            raise FileNotFoundError(f"数据目录不存在: {data_dir}")
+
+        return data_dir
+
+    def get_scene_dir(self, config_name: str) -> str:
+        """
+        获取场景目录路径
+
+        Raises:
+            FileNotFoundError: 场景目录不存在
+        """
+        data_dir = self.get_data_dir(config_name)
+        scene_dir = os.path.join(data_dir, 'scene')
+
+        if not os.path.exists(scene_dir):
+            raise FileNotFoundError(f"场景目录不存在: {scene_dir}")
+
+        return scene_dir
+
+    def get_task_dir(self, config_name: str) -> str:
+        """
+        获取任务目录路径
+
+        Raises:
+            FileNotFoundError: 任务目录不存在
+        """
+        data_dir = self.get_data_dir(config_name)
+        task_dir = os.path.join(data_dir, 'task')
+
+        if not os.path.exists(task_dir):
+            raise FileNotFoundError(f"任务目录不存在: {task_dir}")
+
+        return task_dir

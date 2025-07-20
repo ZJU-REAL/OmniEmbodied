@@ -1,0 +1,54 @@
+# 测试数据集生成配置文件
+
+# 数据源配置
+source:
+  # 源数据目录（相对于项目根目录）
+  data_dir: "data/data-all"
+  # 任务文件子目录
+  task_subdir: "task"
+  # 场景文件子目录  
+  scene_subdir: "scene"
+
+# 输出配置
+output:
+  # 输出根目录（相对于项目根目录）
+  output_dir: "data/eval/single-independent"
+  # 任务输出子目录
+  task_subdir: "task"
+  # 场景软链接子目录
+  scene_subdir: "scene"
+
+# 任务筛选配置
+task_filter:
+  # 智能体筛选模式
+  # - "single": 只生成单智能体任务
+  # - "multi": 只生成多智能体任务  
+  # - "all": 生成所有任务
+  agent_mode: "single"
+  
+  # 要生成的任务类型列表
+  # 单智能体任务类型: direct_command, attribute_reasoning, tool_use, compound_reasoning
+  # 多智能体任务类型: explicit_collaboration, implicit_collaboration, compound_collaboration
+  task_categories:
+    - "direct_command"
+    - "attribute_reasoning" 
+    - "tool_use"
+    - "compound_reasoning"
+  
+  # 每种任务类型的目标数量
+  count_per_category: 200
+
+# 智能体选择配置
+agent_selection:
+  # 智能体选择策略
+  # - "max_weight": 选择max_weight最大的智能体
+  # - "first": 选择第一个智能体
+  # - "random": 随机选择一个智能体
+  strategy: "max_weight"
+
+# 场景文件处理配置
+scene_processing:
+  # 是否创建场景文件的软链接
+  # true: 创建软链接（Linux/macOS）或符号链接（Windows）
+  # false: 复制场景文件并重命名
+  create_scene_links: true

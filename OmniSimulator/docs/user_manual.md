@@ -219,7 +219,7 @@ engine.action_handler.register_action_class("custom", CustomAction)
 ```python
 from embodied_simulator.utils.task_verifier import TaskVerifier
 
-verifier = TaskVerifier(verify_data, engine.world_state)
+verifier = TaskVerifier(task_data, engine.env_manager)
 results = verifier.verify_all_tasks()
 ```
 

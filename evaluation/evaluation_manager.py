@@ -5,6 +5,7 @@
 import os
 import json
 import yaml
+import csv
 import logging
 import signal
 import sys
@@ -59,18 +60,21 @@ class EvaluationManager:
         parallel_config = self.config.get('parallel_evaluation', {})
         max_parallel = parallel_config.get('scenario_parallelism', {}).get('max_parallel_scenarios', 2)
         self.parallel_count = min(len(self.scenario_list), max_parallel)
-        
-        # 任务统计
-        self.task_stats = {}
-
-        # 场景结果存储（用于紧急保存）
-        self._scenario_results = []
 
         # 运行开始时间
         self.start_time = datetime.now().isoformat()
 
         # 运行ID
         self.run_id = self.run_name
+
+        # 提取并保存模型名称
+        agent_config = self.config.get('agent_config', {})
+        model_info = self._extract_model_info(agent_config)
+
+        # 保存模型名称为实例变量
+        provider = model_info.get('provider', 'unknown')
+        model_name = model_info.get('model_name', 'unknown')
+        self.model_name = f"{provider}:{model_name}" if provider != 'unknown' and model_name != 'unknown' else 'unknown'
 
         # 注册信号处理器
         self._register_signal_handlers()
@@ -128,7 +132,7 @@ class EvaluationManager:
         output_dir = os.path.join(base_output_dir, self.run_name)
         
         # 创建必要的子目录
-        subdirs = ['trajectories', 'llm_qa', 'logs']
+        subdirs = ['trajectories', 'llm_qa']
         for subdir in subdirs:
             os.makedirs(os.path.join(output_dir, subdir), exist_ok=True)
         
@@ -217,62 +221,44 @@ class EvaluationManager:
     def run_evaluation(self) -> Dict[str, Any]:
         """运行评测"""
         logger.info(f"🎯 开始评测: {self.run_name}")
-        
+
         start_time = datetime.now()
-        
+
         try:
-            if len(self.scenario_list) == 1:
-                # 单场景直接执行
-                scenario_results = self._execute_single_scenario()
-            else:
-                # 多场景并行执行
-                scenario_results = self._execute_parallel_scenarios()
-            
+            # 执行场景
+            self._execute_scenarios()
+
             # 计算总执行时间
             end_time = datetime.now()
             total_duration = (end_time - start_time).total_seconds()
-            
-            # 生成运行摘要
+
+            # 【修改】使用混合数据源生成摘要
             run_summary = self._generate_run_summary(
-                scenario_results, start_time, end_time, total_duration
+                start_time, end_time, total_duration,
+                status="completed"
             )
-            
+
             # 保存运行摘要
             self._save_run_summary(run_summary)
-            
+
             logger.info(f"✅ 评测完成: {self.run_name}")
             return run_summary
-            
+
         except Exception as e:
             logger.error(f"❌ 评测失败: {e}")
             raise
     
-    def _execute_single_scenario(self) -> Dict[str, Any]:
-        """执行单个场景"""
-        scenario_id = self.scenario_list[0]
-        logger.info(f"🔄 执行场景: {scenario_id}")
-        
-        try:
-            # 获取该场景的任务筛选信息
-            task_indices = self.task_indices.get(scenario_id, [])
-            scenario_executor = ScenarioExecutor(scenario_id, self.config, self.output_dir, task_indices)
-            result = scenario_executor.execute_scenario(self.actual_agent_type, self.task_type)
-            
-            # 更新任务统计
-            self._update_task_statistics(result)
-            
-            return {scenario_id: result}
-            
-        except Exception as e:
-            logger.error(f"❌ 场景 {scenario_id} 执行失败: {e}")
-            return {scenario_id: {'status': 'failed', 'error': str(e)}}
+
     
-    def _execute_parallel_scenarios(self) -> Dict[str, Any]:
-        """并行执行多个场景"""
-        logger.info(f"🔄 并行执行 {len(self.scenario_list)} 个场景")
-        
-        scenario_results = {}
-        
+    def _execute_scenarios(self):
+        """执行场景（简化版，不返回结果）"""
+        scenario_count = len(self.scenario_list)
+
+        if scenario_count == 1:
+            logger.info(f"🔄 执行场景: {self.scenario_list[0]}")
+        else:
+            logger.info(f"🔄 执行 {scenario_count} 个场景")
+
         self._executor = ProcessPoolExecutor(max_workers=self.parallel_count)
         try:
             # 提交所有场景任务
@@ -285,131 +271,180 @@ class EvaluationManager:
                 ): scenario_id
                 for scenario_id in self.scenario_list
             }
-            
-            # 收集结果
+
+            # 等待所有任务完成（不收集结果）
             for future in as_completed(future_to_scenario):
                 scenario_id = future_to_scenario[future]
                 try:
-                    result = future.result()
-                    scenario_results[scenario_id] = result
-
-                    # 更新场景结果存储（用于紧急保存）
-                    self._scenario_results.append({
-                        'scenario_id': scenario_id,
-                        'result': result,
-                        'completed_at': datetime.now().isoformat()
-                    })
-
-                    # 更新任务统计
-                    self._update_task_statistics(result)
-
+                    future.result()  # 只是等待完成，不保存结果
                     logger.info(f"✅ 场景 {scenario_id} 执行完成")
-
                 except Exception as e:
                     logger.error(f"❌ 场景 {scenario_id} 执行失败: {e}")
-                    error_result = {'status': 'failed', 'error': str(e)}
-                    scenario_results[scenario_id] = error_result
-
-                    # 也要记录失败的场景
-                    self._scenario_results.append({
-                        'scenario_id': scenario_id,
-                        'result': error_result,
-                        'completed_at': datetime.now().isoformat()
-                    })
 
         finally:
-            # 确保executor被正确关闭
             if hasattr(self, '_executor') and self._executor:
                 self._executor.shutdown(wait=True)
                 self._executor = None
+    
+    def _calculate_overall_summary_from_csv(self) -> Dict[str, Any]:
+        """
+        从CSV文件计算overall_summary
 
-        return scenario_results
+        Returns:
+            Dict: overall_summary数据
+        """
+        csv_file = os.path.join(self.output_dir, "subtask_execution_log.csv")
+
+        # 默认值
+        summary = {
+            "total_tasks": 0,
+            "actually_completed": 0,
+            "model_claimed_completed": 0,
+            "total_llm_interactions": 0,
+            "completion_rate": 0.0,
+            "avg_llm_interactions": 0.0
+        }
+
+        if not os.path.exists(csv_file):
+            logger.warning(f"CSV文件不存在: {csv_file}")
+            return summary
+
+        try:
+            with open(csv_file, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+
+                total_tasks = 0
+                actually_completed = 0
+                model_claimed_completed = 0
+                total_llm_interactions = 0
+
+                for row in reader:
+                    total_tasks += 1
+
+                    # 统计实际完成
+                    if row.get('subtask_completed', '').lower() == 'true':
+                        actually_completed += 1
+
+                    # 统计模型声称完成
+                    if row.get('model_claimed_done', '').lower() == 'true':
+                        model_claimed_completed += 1
+
+                    # 累计LLM交互次数
+                    try:
+                        llm_interactions = int(row.get('llm_interactions', 0) or 0)
+                        total_llm_interactions += llm_interactions
+                    except (ValueError, TypeError):
+                        pass
+
+                # 计算比率
+                completion_rate = actually_completed / total_tasks if total_tasks > 0 else 0.0
+                avg_llm_interactions = total_llm_interactions / total_tasks if total_tasks > 0 else 0.0
+
+                summary.update({
+                    "total_tasks": total_tasks,
+                    "actually_completed": actually_completed,
+                    "model_claimed_completed": model_claimed_completed,
+                    "total_llm_interactions": total_llm_interactions,
+                    "completion_rate": round(completion_rate, 4),
+                    "avg_llm_interactions": round(avg_llm_interactions, 2)
+                })
+
+                logger.info(f"📊 从CSV计算统计: {total_tasks}个任务, {actually_completed}个完成")
+
+        except Exception as e:
+            logger.error(f"解析CSV文件失败: {e}")
+
+        return summary
+
+    def _calculate_task_category_statistics_from_csv(self) -> Dict[str, Any]:
+        """
+        从CSV文件计算任务分类统计
+
+        Returns:
+            Dict: 按任务类别分组的统计数据
+        """
+        csv_file = os.path.join(self.output_dir, "subtask_execution_log.csv")
+
+        if not os.path.exists(csv_file):
+            return {}
+
+        category_stats = {}
+
+        try:
+            with open(csv_file, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+
+                for row in reader:
+                    category = row.get('task_category', 'unknown')
+
+                    if category not in category_stats:
+                        category_stats[category] = {
+                            "total": 0,
+                            "completed": 0,
+                            "model_claimed": 0,
+                            "completion_rate": 0.0
+                        }
+
+                    category_stats[category]["total"] += 1
+
+                    if row.get('subtask_completed', '').lower() == 'true':
+                        category_stats[category]["completed"] += 1
+
+                    if row.get('model_claimed_done', '').lower() == 'true':
+                        category_stats[category]["model_claimed"] += 1
+
+                # 计算完成率
+                for category, stats in category_stats.items():
+                    if stats["total"] > 0:
+                        stats["completion_rate"] = round(stats["completed"] / stats["total"], 4)
+
+        except Exception as e:
+            logger.error(f"计算任务分类统计失败: {e}")
+
+        return category_stats
     
-    def _update_task_statistics(self, scenario_result: Dict[str, Any]):
-        """更新任务统计信息"""
-        task_results = scenario_result.get('task_results', [])
-        
-        for task_result in task_results:
-            category = task_result.get('task_category', 'unknown')
-            
-            if category not in self.task_stats:
-                self.task_stats[category] = {
-                    'total_tasks': 0,
-                    'completed_tasks': 0,
-                    'model_claimed_tasks': 0
-                }
-            
-            self.task_stats[category]['total_tasks'] += 1
-            
-            if task_result.get('subtask_completed', False):
-                self.task_stats[category]['completed_tasks'] += 1
-            
-            if task_result.get('model_claimed_done', False):
-                self.task_stats[category]['model_claimed_tasks'] += 1
-    
-    def _generate_run_summary(self, scenario_results: Dict[str, Any],
-                             start_time: datetime, end_time: datetime,
-                             total_duration: float) -> Dict[str, Any]:
-        """生成运行摘要"""
-        # 计算总体统计
-        total_scenarios = len(scenario_results)
-        successful_scenarios = sum(1 for result in scenario_results.values() 
-                                 if result.get('status') != 'failed')
-        
-        total_tasks = sum(result.get('total_tasks', 0) for result in scenario_results.values())
-        total_completed_tasks = sum(result.get('completed_tasks', 0) for result in scenario_results.values())
-        total_model_claimed_tasks = sum(
-            len([task for task in result.get('task_results', []) 
-                if task.get('model_claimed_done', False)])
-            for result in scenario_results.values()
-        )
-        
-        # 计算完成率和准确率
-        overall_completion_rate = total_completed_tasks / total_tasks if total_tasks > 0 else 0.0
-        overall_completion_accuracy = (
-            total_completed_tasks / total_model_claimed_tasks 
-            if total_model_claimed_tasks > 0 else 0.0
-        )
-        
-        # 计算任务类型统计
-        task_category_statistics = {}
-        for category, stats in self.task_stats.items():
-            completion_rate = stats['completed_tasks'] / stats['total_tasks'] if stats['total_tasks'] > 0 else 0.0
-            task_category_statistics[category] = {
-                'total_tasks': stats['total_tasks'],
-                'completed_tasks': stats['completed_tasks'],
-                'model_claimed_tasks': stats['model_claimed_tasks'],
-                'completion_rate': completion_rate
-            }
-        
-        # 计算并行效率
-        parallel_efficiency = self.parallel_count if total_scenarios > 1 else 1.0
-        
+    def _generate_run_summary(self, start_time: datetime, end_time: datetime,
+                             total_duration: float, status: str = "completed",
+                             note: str = None) -> Dict[str, Any]:
+        """
+        生成运行摘要（混合数据源版本）
+
+        Args:
+            start_time: 开始时间
+            end_time: 结束时间
+            total_duration: 总持续时间
+            status: 运行状态
+            note: 备注信息
+
+        Returns:
+            Dict: 运行摘要
+        """
+
+        # 1. 运行时信息（不依赖CSV）
+        runinfo = {
+            "run_id": self.run_id,
+            "model_name": self.model_name,
+            "agent_type": self.agent_type,
+            "task_mode": self.task_type,
+            "start_time": start_time.isoformat(),
+            "end_time": end_time.isoformat(),
+            "total_scenarios": len(self.scenario_list),
+            "config_file": self.config_file,
+            "status": status,
+            "duration_seconds": round(total_duration, 2)
+        }
+
+        if note:
+            runinfo["note"] = note
+
+        # 2. 从CSV计算统计数据
+        overall_summary = self._calculate_overall_summary_from_csv()
+        task_category_statistics = self._calculate_task_category_statistics_from_csv()
+
         return {
-            'run_info': {
-                'run_name': self.run_name,
-                'start_time': start_time.isoformat(),
-                'end_time': end_time.isoformat(),
-                'total_duration': total_duration,
-                'evaluation_mode': self.task_type,
-                'agent_type': self.agent_type,
-                'parallel_count': self.parallel_count,
-                'total_scenarios': total_scenarios,
-                'scenario_range': self._format_scenario_range()
-            },
-            'task_category_statistics': task_category_statistics,
-            'overall_summary': {
-                'total_scenarios': total_scenarios,
-                'successful_scenarios': successful_scenarios,
-                'total_tasks': total_tasks,
-                'total_completed_tasks': total_completed_tasks,
-                'overall_completion_rate': overall_completion_rate,
-                'total_model_claimed_tasks': total_model_claimed_tasks,
-                'overall_completion_accuracy': overall_completion_accuracy,
-                'average_duration_per_scenario': total_duration / total_scenarios if total_scenarios > 0 else 0.0,
-                'parallel_efficiency': parallel_efficiency
-            },
-            'scenario_results': scenario_results
+            "runinfo": runinfo,
+            "overall_summary": overall_summary,
+            "task_category_statistics": task_category_statistics
         }
     
     def _save_run_summary(self, run_summary: Dict[str, Any]):
@@ -430,45 +465,58 @@ class EvaluationManager:
         def signal_handler(signum, frame):
             logger.info("🛑 接收到中断信号，正在保存数据...")
 
-            # 如果有正在运行的进程池，尝试关闭
+            # 关闭进程池
             if hasattr(self, '_executor') and self._executor:
                 logger.info("🔄 正在关闭进程池...")
-                try:
-                    self._executor.shutdown(wait=False)
-                    logger.info("✅ 进程池已关闭")
-                except Exception as e:
-                    logger.warning(f"关闭进程池时出错: {e}")
+                self._executor.shutdown(wait=False)
+                self._executor = None
+                logger.info("✅ 进程池已关闭")
 
             # 保存当前数据
-            try:
-                # 生成紧急运行摘要
-                emergency_summary = {
-                    'run_info': {
-                        'run_id': getattr(self, 'run_id', 'unknown'),
-                        'start_time': getattr(self, 'start_time', datetime.now().isoformat()),
-                        'end_time': datetime.now().isoformat(),
-                        'status': 'interrupted',
-                        'agent_type': getattr(self, 'agent_type', 'unknown'),
-                        'task_type': getattr(self, 'task_type', 'unknown'),
-                        'total_scenarios': len(getattr(self, 'scenario_list', [])),
-                        'parallel_count': getattr(self, 'parallel_count', 1)
-                    },
-                    'scenario_results': getattr(self, '_scenario_results', []),
-                    'interruption_info': {
-                        'signal': signum,
-                        'message': 'Evaluation interrupted by user'
-                    }
-                }
-                self._save_run_summary(emergency_summary)
-                logger.info("✅ 紧急数据保存完成")
-            except Exception as e:
-                logger.warning(f"保存数据时出错: {e}")
+            self._save_emergency_summary()
+            logger.info("✅ 紧急数据保存完成")
 
             logger.info("🚪 程序退出")
             sys.exit(0)
 
         signal.signal(signal.SIGINT, signal_handler)
         signal.signal(signal.SIGTERM, signal_handler)
+
+    def _save_emergency_summary(self):
+        """异常情况下的紧急摘要保存"""
+        try:
+            end_time = datetime.now()
+            start_time_dt = datetime.fromisoformat(self.start_time)
+            total_duration = (end_time - start_time_dt).total_seconds()
+
+            # 检查是否有CSV数据
+            csv_file = os.path.join(self.output_dir, "subtask_execution_log.csv")
+            has_csv_data = os.path.exists(csv_file) and os.path.getsize(csv_file) > 100  # 大于头部
+
+            if has_csv_data:
+                # 有CSV数据，生成完整摘要
+                emergency_summary = self._generate_run_summary(
+                    start_time_dt, end_time, total_duration,
+                    status="emergency_exit",
+                    note="Program terminated unexpectedly"
+                )
+            else:
+                # 没有CSV数据，生成基本摘要
+                emergency_summary = self._generate_run_summary(
+                    start_time_dt, end_time, total_duration,
+                    status="emergency_exit_no_data",
+                    note="Program terminated before any task completion"
+                )
+
+            # 保存摘要
+            summary_path = os.path.join(self.output_dir, 'run_summary.json')
+            with open(summary_path, 'w', encoding='utf-8') as f:
+                json.dump(emergency_summary, f, indent=2, ensure_ascii=False)
+
+            logger.info(f"📊 紧急运行摘要已保存: {summary_path}")
+
+        except Exception as e:
+            logger.error(f"保存紧急摘要失败: {e}")
 
 
 def execute_scenario_standalone(scenario_id: str, config: Dict[str, Any],

@@ -14,20 +14,21 @@ from typing import Dict, List, Any, Optional, Tuple, Set
 
 import pandas as pd
 
-from utils.logger import get_logger
+import logging
 
 
 class TaskValidator:
     """Validator for task JSON data with automatic fixing capabilities."""
 
-    def __init__(self, attribute_actions_csv_path: str = None):
+    def __init__(self, attribute_actions_csv_path: str = None, scene_dir: Optional[Path] = None):
         """
         Initialize the task validator.
 
         Args:
             attribute_actions_csv_path: Path to the attribute actions CSV file
+            scene_dir: Directory containing scene files for persistent modifications
         """
-        self.logger = get_logger(__name__)
+        self.logger = logging.getLogger(__name__)
 
         # 设置默认CSV路径
         if attribute_actions_csv_path is None:
@@ -42,8 +43,158 @@ class TaskValidator:
             'explicit_collaboration', 'implicit_collaboration', 'compound_collaboration'
         }
 
+        # Scene directory for saving modified scene files
+        self.scene_dir = Path(scene_dir) if scene_dir else None
+
+        # Track modified scenes to avoid duplicate saves
+        self._modified_scenes = set()
+
+        # Scene data management for intelligent caching and saving
+        self._scene_data_cache = {}  # Cache loaded scene data
+        self._scene_modifications = {}  # Track scene modification status
+        self._pending_saves = set()  # Track scenes that need to be saved
+        self._scene_task_counts = {}  # Track how many tasks per scene are being processed
+
+        # Task data management for intelligent caching
+        self._task_data_cache = {}  # Cache task data by task file ID
+
         # Load attribute actions CSV
         self._load_attribute_actions()
+
+    def _get_cached_scene_data(self, scene_data: Dict[str, Any], scene_id: str) -> Dict[str, Any]:
+        """
+        Get scene data from cache or add to cache if not present.
+        Always returns the most up-to-date version of scene data.
+
+        Args:
+            scene_data: Scene data passed from external caller
+            scene_id: Scene ID
+
+        Returns:
+            The cached (and potentially modified) scene data
+        """
+        if scene_id in self._scene_data_cache:
+            # Use cached version which may have modifications
+            self.logger.debug(f"Using cached scene data for scene {scene_id}")
+            return self._scene_data_cache[scene_id]
+        else:
+            # First time processing this scene, add to cache
+            self._scene_data_cache[scene_id] = scene_data.copy()
+            self.logger.debug(f"Added scene {scene_id} to cache")
+            return self._scene_data_cache[scene_id]
+
+    def _get_cached_task_data(self, task_data: Dict[str, Any], task_file_id: str) -> Dict[str, Any]:
+        """
+        Get task data from cache or add to cache if not present.
+        Always returns the most up-to-date version of task data.
+
+        Args:
+            task_data: Task data passed from external caller
+            task_file_id: Task file identifier (e.g., "00001")
+
+        Returns:
+            The cached (and potentially modified) task data
+        """
+        if task_file_id in self._task_data_cache:
+            # Use cached version which may have modifications
+            self.logger.debug(f"Using cached task data for task file {task_file_id}")
+            return self._task_data_cache[task_file_id]
+        else:
+            # First time processing this task file, add to cache
+            self._task_data_cache[task_file_id] = task_data.copy()
+            self.logger.debug(f"Added task file {task_file_id} to cache")
+            return self._task_data_cache[task_file_id]
+
+    def _register_scene_task(self, scene_id: str):
+        """Register that a task for this scene is being processed."""
+        if scene_id not in self._scene_task_counts:
+            self._scene_task_counts[scene_id] = 0
+        self._scene_task_counts[scene_id] += 1
+        self.logger.debug(f"Scene {scene_id} task count: {self._scene_task_counts[scene_id]}")
+
+    def _unregister_scene_task(self, scene_id: str) -> bool:
+        """
+        Unregister a task for this scene and return whether this was the last task.
+
+        Returns:
+            True if this was the last task for this scene, False otherwise
+        """
+        if scene_id in self._scene_task_counts:
+            self._scene_task_counts[scene_id] -= 1
+            is_last_task = self._scene_task_counts[scene_id] <= 0
+            if is_last_task:
+                # Clean up the counter
+                del self._scene_task_counts[scene_id]
+            self.logger.debug(f"Scene {scene_id} remaining tasks: {self._scene_task_counts.get(scene_id, 0)}")
+            return is_last_task
+        return True  # If not tracked, assume it's the last task
+
+    def _mark_scene_for_save(self, scene_id: str):
+        """Mark a scene as needing to be saved."""
+        self._pending_saves.add(scene_id)
+        self.logger.debug(f"Marked scene {scene_id} for saving")
+
+    def _update_task_data_cache(self, task_file_id: str, updated_task_data: Dict[str, Any]):
+        """Update the cached task data with modifications."""
+        if task_file_id:
+            self._task_data_cache[task_file_id] = updated_task_data.copy()
+            self.logger.debug(f"Updated cached task data for task file {task_file_id}")
+
+    def _flush_scene_modifications(self):
+        """Save all pending scene modifications to files."""
+        if not self._pending_saves:
+            return
+
+        self.logger.debug(f"Flushing {len(self._pending_saves)} pending scene saves")
+
+        for scene_id in list(self._pending_saves):
+            if scene_id in self._scene_data_cache:
+                success = self._save_scene_file(self._scene_data_cache[scene_id], scene_id)
+                if success:
+                    self._pending_saves.remove(scene_id)
+                    self.logger.debug(f"Successfully saved scene {scene_id}")
+                else:
+                    self.logger.error(f"Failed to save scene {scene_id}")
+
+    def _save_scene_file(self, scene_data: Dict[str, Any], scene_id: str) -> bool:
+        """
+        Save modified scene data to file.
+
+        Args:
+            scene_data: Modified scene data
+            scene_id: Scene ID (e.g., "00001")
+
+        Returns:
+            bool: True if saved successfully, False otherwise
+        """
+        if not self.scene_dir:
+            self.logger.warning(f"Scene directory not set, cannot save scene {scene_id}")
+            return False
+
+        # Avoid duplicate saves for the same scene
+        if scene_id in self._modified_scenes:
+            self.logger.debug(f"Scene {scene_id} already saved in this session")
+            return True
+
+        try:
+            scene_file = self.scene_dir / f"{scene_id}_scene.json"
+
+            # Ensure directory exists
+            self.scene_dir.mkdir(parents=True, exist_ok=True)
+
+            # Save scene data
+            with open(scene_file, 'w', encoding='utf-8') as f:
+                json.dump(scene_data, f, indent=2, ensure_ascii=False)
+
+            # Mark as saved
+            self._modified_scenes.add(scene_id)
+
+            self.logger.info(f"💾 Saved modified scene data to {scene_file}")
+            return True
+
+        except Exception as e:
+            self.logger.error(f"Failed to save scene {scene_id}: {e}")
+            return False
 
     def _load_attribute_actions(self):
         """Load the attribute actions CSV file."""
@@ -71,21 +222,44 @@ class TaskValidator:
         """
         self.logger.info("🔍 Starting task validation process...")
 
+        # Get scene ID and task file ID for caching
+        scene_id = task_data.get('scene_id')
+        task_file_id = str(scene_id).zfill(5) if scene_id else None
+
+        # Manage scene data caching
+        if scene_id:
+            scene_id_str = str(scene_id).zfill(5)
+            # Register this task for the scene
+            self._register_scene_task(scene_id_str)
+            # Use cached scene data if available, otherwise cache the provided data
+            actual_scene_data = self._get_cached_scene_data(scene_data, scene_id_str)
+        else:
+            actual_scene_data = scene_data
+            scene_id_str = None
+
+        # Manage task data caching
+        if task_file_id:
+            actual_task_data = self._get_cached_task_data(task_data, task_file_id)
+        else:
+            actual_task_data = task_data
+
         # Step 1: Initial validation (check only)
         self.logger.info("📋 Step 1: Performing initial validation check...")
-        initial_errors = self._validate_task_data_check_only(task_data, scene_data)
+        initial_errors, has_removable_tasks = self._validate_task_data_check_only(actual_task_data, actual_scene_data)
 
         if initial_errors:
             self.logger.warning(f"❌ Found {len(initial_errors)} validation issues:")
             for i, error in enumerate(initial_errors, 1):
                 self.logger.warning(f"   {i}. {error}")
-        else:
+        elif not has_removable_tasks:
             self.logger.info("✅ No validation issues found!")
-            return True, [], task_data, []
+            return True, [], actual_task_data, []
+        else:
+            self.logger.info("ℹ️  No errors found, but some tasks may need to be removed")
 
         # Step 2: Apply fixes if requested
         fixes_applied = []
-        fixed_data = task_data.copy() if task_data else {}
+        fixed_data = actual_task_data.copy() if actual_task_data else {}
 
         if auto_fix:
             self.logger.info("🔧 Step 2: Applying automatic fixes...")
@@ -95,27 +269,33 @@ class TaskValidator:
                 structure_fixes = self._apply_structure_fixes(fixed_data)
                 fixes_applied.extend(structure_fixes)
 
-                # Apply task-level fixes
+                # Apply task-level fixes using cached scene data
                 if 'tasks' in fixed_data:
-                    task_fixes = self._apply_task_fixes(fixed_data['tasks'], scene_data, fixed_data)
+                    task_fixes = self._apply_task_fixes(fixed_data['tasks'], actual_scene_data, fixed_data)
                     fixes_applied.extend(task_fixes)
 
                 if fixes_applied:
                     self.logger.info(f"✅ Applied {len(fixes_applied)} fixes:")
                     for i, fix in enumerate(fixes_applied, 1):
                         self.logger.info(f"   {i}. {fix}")
+                    # Update task data cache with the fixed data
+                    if task_file_id:
+                        self._update_task_data_cache(task_file_id, fixed_data)
                 else:
                     self.logger.info("ℹ️  No fixes could be applied automatically")
 
             except Exception as e:
                 self.logger.error(f"💥 Error during fix application: {e}")
-                return False, initial_errors + [f"Fix application error: {str(e)}"], task_data, []
+                # Unregister task before returning
+                if scene_id_str:
+                    self._unregister_scene_task(scene_id_str)
+                return False, initial_errors + [f"Fix application error: {str(e)}"], actual_task_data, []
         else:
             self.logger.info("⏭️  Step 2: Skipping fixes (auto_fix=False)")
 
-        # Step 3: Final validation
+        # Step 3: Final validation using cached scene data
         self.logger.info("🔍 Step 3: Performing final validation...")
-        final_errors = self._validate_task_data_check_only(fixed_data, scene_data)
+        final_errors, _ = self._validate_task_data_check_only(fixed_data, actual_scene_data)
 
         if final_errors:
             self.logger.warning(f"❌ {len(final_errors)} issues remain after fixes:")
@@ -124,10 +304,17 @@ class TaskValidator:
         else:
             self.logger.info("✅ All issues resolved!")
 
+        # Step 4: Handle scene data saving
+        if scene_id_str:
+            is_last_task = self._unregister_scene_task(scene_id_str)
+            if is_last_task and scene_id_str in self._pending_saves:
+                self.logger.info(f"🔄 Last task for scene {scene_id_str}, triggering save...")
+                self._flush_scene_modifications()
+
         is_valid = len(final_errors) == 0
         return is_valid, final_errors, fixed_data, fixes_applied
 
-    def _validate_task_data_check_only(self, task_data: Dict[str, Any], scene_data: Dict[str, Any]) -> List[str]:
+    def _validate_task_data_check_only(self, task_data: Dict[str, Any], scene_data: Dict[str, Any]) -> Tuple[List[str], bool]:
         """
         Validate task data without making any changes (check-only mode).
 
@@ -136,7 +323,7 @@ class TaskValidator:
             scene_data: Scene data for reference
 
         Returns:
-            List of error messages
+            Tuple of (error_messages, has_removable_tasks)
         """
         errors = []
 
@@ -151,16 +338,41 @@ class TaskValidator:
                 scene_rooms = self._extract_scene_rooms(scene_data)
                 scene_abilities = self._extract_scene_abilities(scene_data)
 
+                # Set current agents_config for physical constraint checking
+                self._current_agents_config = task_data.get('agents_config', [])
+
+                # Count valid tasks (not marked for removal)
+                valid_tasks_count = 0
+                removable_tasks_count = 0
+                total_tasks = len(task_data['tasks'])
+
                 for i, task in enumerate(task_data['tasks']):
-                    task_errors = self._check_single_task(
+                    task_errors, should_remove = self._check_single_task(
                         task, i, scene_objects, scene_rooms, scene_abilities
                     )
+
+                    # Add real errors (not removal flags)
                     errors.extend(task_errors)
+
+                    # Count tasks that are not marked for removal
+                    if not should_remove:
+                        valid_tasks_count += 1
+                    else:
+                        removable_tasks_count += 1
+
+                # If all tasks should be removed, add a special error to indicate file should be deleted
+                if valid_tasks_count == 0 and total_tasks > 0:
+                    errors.append("All tasks in this file should be removed - file will be deleted")
+
+                has_removable_tasks = removable_tasks_count > 0
+            else:
+                has_removable_tasks = False
 
         except Exception as e:
             errors.append(f"Validation check error: {str(e)}")
+            has_removable_tasks = False
 
-        return errors
+        return errors, has_removable_tasks
 
     def _check_structure(self, task_data: Dict[str, Any]) -> List[str]:
         """Check basic task data structure without fixing."""
@@ -194,13 +406,18 @@ class TaskValidator:
 
     def _check_single_task(self, task: Dict[str, Any], task_index: int,
                           scene_objects: Dict[str, Any], scene_rooms: Dict[str, Any],
-                          scene_abilities: List[str]) -> List[str]:
-        """Check a single task without fixing."""
+                          scene_abilities: List[str]) -> Tuple[List[str], bool]:
+        """
+        Check a single task without fixing.
+
+        Returns:
+            Tuple of (errors, should_remove)
+        """
         errors = []
 
         if not isinstance(task, dict):
             errors.append(f"Task {task_index} must be a dictionary")
-            return errors
+            return errors, False
 
         # Check if task should be removed due to unfixable issues
         should_remove, remove_reason = self._should_remove_task(
@@ -208,8 +425,8 @@ class TaskValidator:
         )
 
         if should_remove:
-            errors.append(f"Task {task_index} should be removed: {remove_reason}")
-            return errors
+            # Don't add this as an error, just return the removal flag
+            return [], True
 
         # Check required fields
         required_fields = ['task_description', 'task_category', 'validation_checks']
@@ -234,18 +451,17 @@ class TaskValidator:
                     )
                     errors.extend(check_errors)
 
-        # Check physical constraints (新增)
-        task_description = task.get('task_description', '')
-        if self._is_collaboration_move_task(task_description):
+        # Check physical constraints (新增) - 只对搬运任务进行检查
+        if self._is_move_task(task):
             task_objects = self._extract_task_objects(task, scene_objects)
             # 从task_data中获取agents_config，如果没有则使用None
             agents_config = getattr(self, '_current_agents_config', None)
-            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config)
+            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config, task)
             if constraint_violations:
                 for violation in constraint_violations:
                     errors.append(f"Task {task_index} physical constraint violation: {violation}")
 
-        return errors
+        return errors, False
 
     def _check_validation_check(self, check: Dict[str, Any], task_index: int, check_index: int,
                                task_description: str, scene_objects: Dict[str, Any],
@@ -417,6 +633,9 @@ class TaskValidator:
         # Set current agents_config for physical constraint checking
         self._current_agents_config = task_data.get('agents_config', [])
 
+        # Get scene ID for saving modified scene files
+        scene_id = task_data.get('scene_id')
+
         # Get scene data for validation
         scene_objects = self._extract_scene_objects(scene_data)
         scene_rooms = self._extract_scene_rooms(scene_data)
@@ -439,15 +658,12 @@ class TaskValidator:
                 continue
 
             task_fixes = self._apply_single_task_fixes(
-                task, i, scene_objects, scene_rooms, scene_abilities
+                task, i, scene_objects, scene_rooms, scene_abilities, scene_data, scene_id
             )
             fixes.extend(task_fixes)
 
-            # Apply physical constraint fixes by adjusting agents_config
-            physical_fixes = self._apply_agents_config_fixes_for_task(
-                task, i, scene_objects, task_data
-            )
-            fixes.extend(physical_fixes)
+            # Physical constraint fixes are now handled in _apply_task_fixes
+            # by modifying object weights instead of agent capabilities
 
         # Remove tasks in reverse order to maintain indices
         for task_index, reason in reversed(tasks_to_remove):
@@ -460,11 +676,13 @@ class TaskValidator:
                            scene_objects: Dict[str, Any], scene_rooms: Dict[str, Any],
                            scene_abilities: List[str]) -> Tuple[bool, str]:
         """
-        严格按照三步验证顺序确定任务是否应该被删除
+        严格按照五步验证顺序确定任务是否应该被删除
 
         第一步：任务类别验证
         第二步：对象ID存在性验证
         第三步：属性验证（仅针对非location_id属性）
+        第四步：物理约束验证
+        第五步：初始状态与目标状态比较验证（新增）
 
         Returns:
             Tuple of (should_remove, reason)
@@ -523,20 +741,29 @@ class TaskValidator:
                 self.logger.warning(f"Task {task_index}: Task description does not match any supported scene abilities, will be removed")
                 return True, f"Task description does not match any supported scene abilities"
 
-        # 第四步：物理约束验证（新增）
+        # 第四步：物理约束验证
         self.logger.debug(f"Task {task_index}: Step 4 - Validating physical constraints")
 
-        # 检查是否是协作搬运任务且存在物理约束违反
-        if self._is_collaboration_move_task(task_description):
+        # 检查是否是搬运任务且存在物理约束违反
+        if self._is_move_task(task):
             # 获取任务中涉及的对象
             task_objects = self._extract_task_objects(task, scene_objects)
 
             # 检查物理约束违反（但不删除任务，而是标记需要修复）
             agents_config = getattr(self, '_current_agents_config', None)
-            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config)
+            constraint_violations = self._check_physical_constraints(task_objects, scene_objects, agents_config, task)
             if constraint_violations:
                 self.logger.info(f"Task {task_index}: Found physical constraint violations that can be auto-fixed: {constraint_violations}")
                 # 不删除任务，让修复逻辑处理
+
+        # 第五步：初始状态与目标状态比较验证（新增）
+        self.logger.debug(f"Task {task_index}: Step 5 - Validating initial vs target state")
+        should_remove_redundant, redundant_reason = self._check_initial_vs_target_state(
+            task, task_index, scene_objects, scene_rooms
+        )
+        if should_remove_redundant:
+            self.logger.warning(f"Task {task_index}: {redundant_reason}, will be removed")
+            return True, redundant_reason
 
         self.logger.debug(f"Task {task_index}: All validation steps passed, task will be kept")
         return False, ""
@@ -577,57 +804,83 @@ class TaskValidator:
 
         return False  # No abilities match this task description
 
-    def _is_collaboration_move_task(self, task_description: str) -> bool:
-        """检查是否是协作搬运任务"""
-        description_lower = task_description.lower()
+    def _is_collaboration_task(self, task: Dict[str, Any]) -> bool:
+        """检查是否是合作任务 - 基于任务类型判断"""
+        task_category = task.get('task_category', '')
+        task_description = task.get('task_description', 'Unknown task')
 
-        # 协作关键词
-        collaboration_keywords = ['cooperat', 'together', 'both', 'robot_1 and robot_2']
+        # 合作任务的固定类型
+        collaboration_categories = {
+            'explicit_collaboration',
+            'implicit_collaboration',
+            'compound_collaboration'
+        }
 
-        # 搬运关键词
-        move_keywords = ['move', 'transport', 'carry', 'bring', 'take']
+        is_collaboration = task_category in collaboration_categories
 
-        has_collaboration = any(keyword in description_lower for keyword in collaboration_keywords)
-        has_movement = any(keyword in description_lower for keyword in move_keywords)
+        if is_collaboration:
+            self.logger.debug(f"🤝 Collaboration task detected: '{task_description}' (category: {task_category})")
+        else:
+            self.logger.debug(f"👤 Single-agent task: '{task_description}' (category: {task_category})")
 
-        return has_collaboration and has_movement
+        return is_collaboration
+
+    def _is_move_task(self, task: Dict[str, Any]) -> bool:
+        """检查是否是搬运任务 - 基于validation_checks中的location_id判断"""
+        validation_checks = task.get('validation_checks', [])
+
+        for check in validation_checks:
+            if isinstance(check, dict) and 'location_id' in check:
+                return True
+
+        return False
 
     def _extract_task_objects(self, task: Dict[str, Any], scene_objects: Dict[str, Any]) -> List[str]:
-        """从任务中提取涉及的对象ID"""
-        task_objects = []
+        """从任务中提取需要移动的对象ID（只包含location_id发生改变的物体）"""
+        moving_objects = []
 
-        # 从validation_checks中提取对象ID
+        # 只从validation_checks中提取需要移动的对象ID
         validation_checks = task.get('validation_checks', [])
         for check in validation_checks:
             if isinstance(check, dict) and 'id' in check:
                 obj_id = check['id']
-                if obj_id in scene_objects:
-                    task_objects.append(obj_id)
+                # 只有当检查包含location_id时，才认为该物体需要移动
+                if 'location_id' in check and obj_id in scene_objects:
+                    moving_objects.append(obj_id)
 
-        # 从任务描述中提取对象ID（简单的正则匹配）
-        import re
-        task_description = task.get('task_description', '')
-
-        # 查找形如 object_name_1 的模式
-        object_pattern = r'\b([a-zA-Z_]+_\d+)\b'
-        matches = re.findall(object_pattern, task_description)
-
-        for match in matches:
-            if match in scene_objects and match not in task_objects:
-                task_objects.append(match)
-
-        return task_objects
+        # 不再从任务描述中提取对象ID，避免包含目标位置等不相关物体
+        return moving_objects
 
     def _check_physical_constraints(self, task_objects: List[str], scene_objects: Dict[str, Any],
-                                  agents_config: List[Dict[str, Any]] = None) -> List[str]:
+                                  agents_config: List[Dict[str, Any]] = None, task: Dict[str, Any] = None) -> List[str]:
         """检查物理约束违反 - 只检查重量，忽略尺寸"""
         violations = []
 
-        # 计算当前智能体的最大承重能力
-        if agents_config:
-            max_capacity = self._calculate_max_combined_weight(agents_config)
+        # 获取智能体配置（从上下文获取或使用默认值）
+        if not agents_config:
+            agents_config = self._get_agents_config_from_context()
+
+        # 判断任务类型并计算承重能力（与修复阶段保持一致）
+        if task:
+            is_collaboration = self._is_collaboration_task(task)
+            task_desc = task.get('task_description', 'Unknown task')
         else:
-            max_capacity = 100.0  # 默认值
+            is_collaboration = False
+            task_desc = 'Unknown task'
+
+        if is_collaboration:
+            # 多智能体协作：使用最强的两个智能体承重之和
+            max_capacity = self._calculate_max_combined_weight(agents_config)
+            task_type = "collaboration"
+        else:
+            # 单智能体：使用单个智能体的承重能力
+            max_capacity = max(agent.get('max_weight', 50.0) for agent in agents_config) if agents_config else 50.0
+            task_type = "single-agent"
+
+        self.logger.debug(f"🔍 Physical constraint check for task: '{task_desc}'")
+        self.logger.debug(f"   Task type: {task_type}")
+        self.logger.debug(f"   Max capacity: {max_capacity}kg")
+        self.logger.debug(f"   Objects to check: {task_objects}")
 
         for obj_id in task_objects:
             if obj_id in scene_objects:
@@ -636,8 +889,16 @@ class TaskValidator:
 
                 # 检查重量约束 - 使用动态计算的承重能力
                 weight = properties.get('weight', 0)
+                self.logger.debug(f"   Object {obj_id}: weight={weight}kg, limit={max_capacity}kg")
+
                 if weight > max_capacity:
-                    violations.append(f"Object {obj_id} weight {weight}kg exceeds max capacity")
+                    violation_msg = f"Object {obj_id} weight {weight}kg exceeds max capacity"
+                    violations.append(violation_msg)
+                    self.logger.warning(f"   ❌ {violation_msg}")
+                else:
+                    self.logger.debug(f"   ✅ Object {obj_id} weight within limits")
+            else:
+                self.logger.warning(f"   ⚠️  Object {obj_id} not found in scene")
 
                 # 删除尺寸约束检查 - 完全忽略size相关验证
 
@@ -724,7 +985,8 @@ class TaskValidator:
 
     def _apply_single_task_fixes(self, task: Dict[str, Any], task_index: int,
                                 scene_objects: Dict[str, Any], scene_rooms: Dict[str, Any],
-                                scene_abilities: List[str]) -> List[str]:
+                                scene_abilities: List[str], scene_data: Dict[str, Any] = None,
+                                scene_id: str = None) -> List[str]:
         """Apply fixes to a single task."""
         fixes = []
 
@@ -748,11 +1010,10 @@ class TaskValidator:
                     )
                     fixes.extend(check_fixes)
 
-        # Fix physical constraints (新增) - 只记录需要修复的信息
-        task_description = task.get('task_description', '')
-        if self._is_collaboration_move_task(task_description):
+        # Fix physical constraints (新增) - 只对搬运任务进行修复
+        if self._is_move_task(task):
             physical_fixes = self._apply_physical_constraint_fixes(
-                task, task_index, scene_objects
+                task, task_index, scene_objects, scene_data, scene_id
             )
             fixes.extend(physical_fixes)
 
@@ -1058,42 +1319,84 @@ class TaskValidator:
         self.logger.info(f"Fix log saved to: {log_path}")
 
     def _apply_physical_constraint_fixes(self, task: Dict[str, Any], task_index: int,
-                                       scene_objects: Dict[str, Any]) -> List[str]:
-        """应用物理约束修复 - 只处理重量，通过调整智能体负载能力"""
+                                       scene_objects: Dict[str, Any], scene_data: Dict[str, Any] = None,
+                                       scene_id: str = None) -> List[str]:
+        """应用物理约束修复 - 修改物体重量而不是智能体能力"""
         fixes = []
+        scene_modified = False
 
         # 获取任务中涉及的对象
         task_objects = self._extract_task_objects(task, scene_objects)
+
+        # 判断任务类型并计算承重能力
+        is_collaboration = self._is_collaboration_task(task)
+        task_desc = task.get('task_description', 'Unknown task')
+
+        # 获取智能体配置（从上下文获取或使用默认值）
+        agents_config = self._get_agents_config_from_context()
+
+        if is_collaboration:
+            # 多智能体协作：使用最强的两个智能体承重之和
+            max_capacity = self._calculate_max_combined_weight(agents_config)
+            task_type = "collaboration"
+        else:
+            # 单智能体：使用单个智能体的承重能力
+            max_capacity = max(agent.get('max_weight', 50.0) for agent in agents_config) if agents_config else 50.0
+            task_type = "single-agent"
+
+        self.logger.info(f"🔧 Physical constraint fix for Task {task_index}: '{task_desc}'")
+        self.logger.info(f"   Task type: {task_type}")
+        self.logger.info(f"   Max capacity: {max_capacity}kg")
+        self.logger.info(f"   Objects to fix: {task_objects}")
 
         for obj_id in task_objects:
             if obj_id in scene_objects:
                 obj = scene_objects[obj_id]
                 properties = obj.get('properties', {})
 
-                # 处理重量约束 - 通过调整智能体负载能力而不是修改物体重量
-                weight = properties.get('weight', 0)
-                if weight > 0:
-                    # 判断是否为协作任务
-                    task_description = task.get('task_description', '')
-                    is_collaboration = self._is_collaboration_move_task(task_description)
+                # 检查并修复重量约束
+                current_weight = properties.get('weight', 0)
+                self.logger.debug(f"   Checking object {obj_id}: current_weight={current_weight}kg, limit={max_capacity}kg")
 
-                    # 这里需要从上层传递task_data来修改agents_config
-                    # 暂时记录需要修复的信息，实际修复在上层进行
-                    fixes.append(f"Task {task_index}: Object {obj_id} weight {weight}kg requires agent capacity adjustment")
-                    self.logger.info(f"Identified weight constraint fix needed for {obj_id}: {weight}kg")
+                if current_weight > max_capacity:
+                    self.logger.info(f"   ❌ Object {obj_id} exceeds weight limit: {current_weight}kg > {max_capacity}kg")
 
-                # 完全删除尺寸约束修复逻辑
+                    # 修改物体重量为智能体承重能力
+                    old_weight = current_weight
+                    properties['weight'] = max_capacity
+                    scene_modified = True
+
+                    # 同步更新 scene_objects 中的数据
+                    if obj_id in scene_objects:
+                        scene_objects[obj_id]['properties']['weight'] = max_capacity
+                        self.logger.debug(f"   🔄 Updated scene_objects for {obj_id}: {old_weight}kg -> {max_capacity}kg")
+
+                    fixes.append(f"Task {task_index}: Reduced object {obj_id} weight from {old_weight}kg to {max_capacity}kg ({task_type} task)")
+                    self.logger.info(f"   ✅ Fixed weight constraint for {obj_id}: {old_weight}kg -> {max_capacity}kg ({task_type})")
+                else:
+                    self.logger.debug(f"   ✅ Object {obj_id} weight within limits")
+            else:
+                self.logger.warning(f"   ⚠️  Object {obj_id} not found in scene_objects")
+
+        # 如果场景被修改且提供了场景数据和ID，标记为待保存
+        if scene_modified and scene_data and scene_id:
+            self.logger.info(f"💾 Scene modified, marking scene {scene_id} for saving")
+            self._mark_scene_for_save(scene_id)
+        elif scene_modified:
+            self.logger.warning(f"⚠️  Scene was modified but cannot save (scene_data={bool(scene_data)}, scene_id={scene_id})")
 
         return fixes
 
     def _get_agents_config_from_context(self) -> List[Dict[str, Any]]:
-        """获取智能体配置（从上下文或使用默认值）"""
-        # 这里可以从当前处理的任务数据中获取agents_config
-        # 为了简化，先使用默认配置，删除max_size字段
-        return [
-            {"name": "robot_1", "max_weight": 50.0},
-            {"name": "robot_2", "max_weight": 50.0}
-        ]
+        """从上下文获取智能体配置，如果没有则返回默认配置"""
+        agents_config = getattr(self, '_current_agents_config', None)
+        if not agents_config:
+            # 返回默认的双智能体配置
+            return [
+                {"name": "robot_1", "max_grasp_limit": 1, "max_weight": 50.0},
+                {"name": "robot_2", "max_grasp_limit": 1, "max_weight": 50.0}
+            ]
+        return agents_config
 
     def _calculate_max_combined_weight(self, agents_config: List[Dict[str, Any]]) -> float:
         """计算智能体组合的最大承重能力"""
@@ -1109,54 +1412,90 @@ class TaskValidator:
 
     # 删除 _calculate_max_combined_size 方法，不再需要尺寸计算
 
-    def _apply_agents_config_fixes_for_task(self, task: Dict[str, Any], task_index: int,
-                                          scene_objects: Dict[str, Any], task_data: Dict[str, Any]) -> List[str]:
-        """为特定任务调整agents_config以满足物理约束"""
-        fixes = []
+    # 删除 _apply_agents_config_fixes_for_task 方法
+    # 新的修复策略是修改物体重量而不是智能体能力
 
-        # 检查是否是协作搬运任务
-        task_description = task.get('task_description', '')
-        if not self._is_collaboration_move_task(task_description):
-            return fixes
+    def _check_initial_vs_target_state(self, task: Dict[str, Any], task_index: int,
+                                      scene_objects: Dict[str, Any], scene_rooms: Dict[str, Any]) -> Tuple[bool, str]:
+        """
+        检查任务的目标状态是否与场景的初始状态相同
 
-        # 获取任务中涉及的对象
-        task_objects = self._extract_task_objects(task, scene_objects)
+        如果目标状态与初始状态相同，说明任务已经完成或无意义，应该被删除
 
-        # 获取当前的agents_config
-        agents_config = task_data.get('agents_config', [])
-        if not agents_config or len(agents_config) == 0:
-            return fixes
+        Args:
+            task: 任务数据
+            task_index: 任务索引
+            scene_objects: 场景对象字典
+            scene_rooms: 场景房间字典
 
-        # 找到最重的物体
-        max_weight = 0
-        heaviest_obj_id = None
+        Returns:
+            Tuple of (should_remove, reason)
+        """
+        validation_checks = task.get('validation_checks', [])
 
-        for obj_id in task_objects:
-            if obj_id in scene_objects:
-                obj = scene_objects[obj_id]
-                properties = obj.get('properties', {})
-                weight = properties.get('weight', 0)
-                if weight > max_weight:
-                    max_weight = weight
-                    heaviest_obj_id = obj_id
+        for check_index, check in enumerate(validation_checks):
+            if not isinstance(check, dict):
+                continue
 
-        if max_weight > 0 and heaviest_obj_id:
-            # 判断是否为协作任务
-            is_collaboration = self._is_collaboration_move_task(task_description)
+            object_id = check.get('id')
+            if not object_id:
+                continue
 
-            if is_collaboration and len(agents_config) >= 2:
-                # 多智能体协作：增加第一个智能体的负重能力
-                current_max_weight = agents_config[0].get('max_weight', 50.0)
-                if max_weight > current_max_weight:
-                    agents_config[0]['max_weight'] = max_weight + 10.0  # 增加10kg余量
-                    fixes.append(f"Task {task_index}: Increased first agent max_weight to {max_weight + 10.0}kg for object {heaviest_obj_id} ({max_weight}kg)")
-                    self.logger.info(f"Fixed weight constraint by increasing first agent capacity: {current_max_weight} -> {max_weight + 10.0}")
+            # 获取场景中的对象或房间
+            scene_entity = None
+            if object_id in scene_objects:
+                scene_entity = scene_objects[object_id]
+            elif object_id in scene_rooms:
+                scene_entity = scene_rooms[object_id]
             else:
-                # 单智能体：修改智能体负载为物体重量
-                current_max_weight = agents_config[0].get('max_weight', 50.0)
-                if max_weight > current_max_weight:
-                    agents_config[0]['max_weight'] = max_weight
-                    fixes.append(f"Task {task_index}: Set agent max_weight to {max_weight}kg for object {heaviest_obj_id}")
-                    self.logger.info(f"Fixed weight constraint by setting agent capacity: {current_max_weight} -> {max_weight}")
+                # 对象不存在，这个问题会在第二步验证中被捕获
+                continue
 
-        return fixes
+            # 检查位置是否相同
+            if 'location_id' in check:
+                current_location = scene_entity.get('location_id', '')
+                target_location = check['location_id']
+
+                # 标准化位置ID进行比较
+                normalized_current = self._normalize_location_id(current_location)
+                normalized_target = self._normalize_location_id(target_location)
+
+                if normalized_current == normalized_target:
+                    self.logger.debug(f"Task {task_index}: Object {object_id} already at target location '{target_location}'")
+                    return True, f"Object {object_id} already at target location (current: '{current_location}', target: '{target_location}')"
+
+            # 检查状态属性是否相同
+            scene_states = scene_entity.get('states', {})
+            for attr_name, target_value in check.items():
+                if attr_name in ['id', 'location_id']:
+                    continue
+
+                if attr_name.startswith('is_'):
+                    current_value = scene_states.get(attr_name)
+                    if current_value == target_value:
+                        self.logger.debug(f"Task {task_index}: Object {object_id} already has target state {attr_name}={target_value}")
+                        return True, f"Object {object_id} already has target state {attr_name}={target_value}"
+
+        return False, ""
+
+    def _normalize_location_id(self, location_id: str) -> str:
+        """
+        标准化location_id以便比较
+
+        移除前缀并返回基础位置ID
+
+        Args:
+            location_id: 原始位置ID
+
+        Returns:
+            标准化的位置ID
+        """
+        if not location_id:
+            return ""
+
+        # 移除前缀 (in:, on:, :)
+        if location_id.startswith(('in:', 'on:', ':')):
+            if ':' in location_id:
+                return location_id.split(':', 1)[1]
+
+        return location_id

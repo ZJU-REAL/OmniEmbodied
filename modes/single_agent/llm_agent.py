@@ -80,18 +80,21 @@ class LLMAgent(BaseAgent):
         """设置任务描述"""
         self.task_description = task_description
 
-    def _get_system_prompt(self) -> str:
-        """获取包含动态动作描述的系统提示词"""
-        # 获取动态动作描述（传入单个智能体ID，bridge会自动转换为列表）
-        actions_description = ""
-        if self.bridge:
-            actions_description = self.bridge.get_agent_supported_actions_description(self.agent_id)
+    def _get_available_actions_list(self) -> str:
+        """获取可用动作列表"""
+        try:
+            if not self.bridge:
+                return "Available actions information unavailable"
 
-        # 如果获取到动作描述，则插入到系统提示词中
-        if actions_description:
-            return f"{self.base_system_prompt}\n\n{actions_description}"
-        else:
-            return self.base_system_prompt
+            # 获取单智能体的动作描述
+            actions_description = self.bridge.get_agent_supported_actions_description(self.agent_id)
+            if actions_description:
+                return actions_description
+            else:
+                return "Actions information unavailable"
+        except Exception as e:
+            logger.warning(f"获取可用动作列表时出错: {e}")
+            return "Available actions information unavailable"
     
 
     
@@ -177,13 +180,17 @@ class LLMAgent(BaseAgent):
         # 获取环境描述（根据配置）
         env_description = self._get_environment_description()
 
+        # 获取可用动作列表
+        available_actions_list = self._get_available_actions_list()
+
         # 格式化提示词
         prompt = self.prompt_manager.get_formatted_prompt(
             self.mode,
             "user_prompt",
             task_description=self.task_description,
             history_summary=history_summary,
-            environment_description=env_description
+            environment_description=env_description,
+            available_actions_list=available_actions_list
         )
 
         return prompt
@@ -200,9 +207,8 @@ class LLMAgent(BaseAgent):
         if self.max_chat_history is not None and len(self.chat_history) > self.max_chat_history:
             self.chat_history = self.chat_history[-self.max_chat_history:]
 
-        # 调用LLM生成响应，使用动态系统提示词
-        system_prompt = self._get_system_prompt()
-        response = self.llm.generate_chat(self.chat_history, system_message=system_prompt)
+        # 调用LLM生成响应，使用基础系统提示词
+        response = self.llm.generate_chat(self.chat_history, system_message=self.base_system_prompt)
 
         # 解析响应中的动作命令
         action = self._extract_action(response)

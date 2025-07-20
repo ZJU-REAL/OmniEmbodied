@@ -33,7 +33,12 @@ class ScenarioExecutor:
         self.config = config
         self.output_dir = output_dir
         self.task_indices = task_indices or []  # 空列表表示执行所有任务
-        
+
+        # 从配置中获取数据目录（严格验证）
+        self.data_dir = self._get_data_dir_from_config()
+        self.scene_dir = os.path.join(self.data_dir, 'scene')
+        self.task_dir = os.path.join(self.data_dir, 'task')
+
         # 加载场景和任务数据
         self.scene_data = self._load_scene_data()
         self.task_data = self._load_task_data()
@@ -57,31 +62,80 @@ class ScenarioExecutor:
         self.csv_recorder = CSVRecorder(csv_file)
         
         logger.info(f"🏠 场景执行器初始化完成: {scenario_id}")
-    
+
+    def _get_data_dir_from_config(self) -> str:
+        """
+        从配置中获取数据目录
+
+        Returns:
+            str: 数据目录绝对路径
+
+        Raises:
+            KeyError: 配置中缺少data_dir
+            FileNotFoundError: 数据目录不存在
+        """
+        if 'data_dir' not in self.config:
+            raise KeyError("配置中缺少必需的 'data_dir' 设置")
+
+        data_dir = self.config['data_dir']
+
+        # 转换为绝对路径
+        if not os.path.isabs(data_dir):
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.dirname(current_dir)  # evaluation -> OmniEmbodied
+            data_dir = os.path.join(project_root, data_dir)
+
+        # 严格验证
+        if not os.path.exists(data_dir):
+            raise FileNotFoundError(f"配置的数据目录不存在: {data_dir}")
+
+        return data_dir
+
     def _load_scene_data(self) -> Dict[str, Any]:
-        """加载场景数据"""
-        scene_file = f"data/scene/{self.scenario_id}_scene.json"
+        """
+        加载场景数据
+
+        Raises:
+            FileNotFoundError: 场景文件不存在
+        """
+        scene_file = os.path.join(self.scene_dir, f"{self.scenario_id}_scene.json")
+
         if not os.path.exists(scene_file):
             raise FileNotFoundError(f"场景文件不存在: {scene_file}")
-        
-        with open(scene_file, 'r', encoding='utf-8') as f:
-            scene_data = json.load(f)
-        
-        logger.debug(f"📄 场景数据已加载: {scene_file}")
-        return scene_data
+
+        try:
+            with open(scene_file, 'r', encoding='utf-8') as f:
+                scene_data = json.load(f)
+            logger.debug(f"📄 场景数据已加载: {scene_file}")
+            return scene_data
+        except json.JSONDecodeError as e:
+            raise ValueError(f"场景文件格式错误: {scene_file}, 错误: {e}")
+        except Exception as e:
+            raise RuntimeError(f"加载场景文件失败: {scene_file}, 错误: {e}")
     
     def _load_task_data(self) -> Dict[str, Any]:
-        """加载任务数据"""
-        task_file = f"data/task/{self.scenario_id}_task.json"
+        """
+        加载任务数据
+
+        Raises:
+            FileNotFoundError: 任务文件不存在
+        """
+        task_file = os.path.join(self.task_dir, f"{self.scenario_id}_task.json")
+
         if not os.path.exists(task_file):
             raise FileNotFoundError(f"任务文件不存在: {task_file}")
-        
-        with open(task_file, 'r', encoding='utf-8') as f:
-            task_data = json.load(f)
-        
-        tasks = task_data.get('tasks', [])
-        logger.info(f"📋 任务数据已加载: {len(tasks)} 个任务")
-        return task_data
+
+        try:
+            with open(task_file, 'r', encoding='utf-8') as f:
+                task_data = json.load(f)
+
+            tasks = task_data.get('tasks', [])
+            logger.info(f"📋 任务数据已加载: {len(tasks)} 个任务")
+            return task_data
+        except json.JSONDecodeError as e:
+            raise ValueError(f"任务文件格式错误: {task_file}, 错误: {e}")
+        except Exception as e:
+            raise RuntimeError(f"加载任务文件失败: {task_file}, 错误: {e}")
     
     def _initialize_simulator(self) -> SimulationEngine:
         """初始化模拟器"""
@@ -107,7 +161,7 @@ class ScenarioExecutor:
             simulator = SimulationEngine(config=simulator_config)
 
             # 使用initialize方法加载场景
-            scene_file = f"data/scene/{self.scenario_id}_scene.json"
+            scene_file = os.path.join(self.scene_dir, f"{self.scenario_id}_scene.json")
             success = simulator.initialize(scene_file)
 
             if not success:
@@ -163,8 +217,7 @@ class ScenarioExecutor:
                 result, agent_type, task_type, start_time, end_time, total_duration
             )
             
-            # 保存执行日志
-            self._save_execution_log(scenario_result)
+
             
             logger.info(f"✅ 场景 {self.scenario_id} 执行完成")
             return scenario_result
@@ -177,14 +230,9 @@ class ScenarioExecutor:
                 end_time = datetime.now()
                 total_duration = (end_time - start_time).total_seconds()
 
-                # 先保存已完成任务的单独日志
+                # 异常情况下的任务结果已通过CSV记录保存
                 partial_task_results = getattr(self, '_partial_task_results', [])
-                for i, task_result in enumerate(partial_task_results):
-                    try:
-                        self._save_single_task_execution_log(task_result, task_type)
-                        logger.debug(f"📝 异常情况下任务 {i+1} 日志已保存")
-                    except Exception as task_save_error:
-                        logger.error(f"保存任务 {i+1} 异常日志失败: {task_save_error}")
+                logger.debug(f"📝 异常情况下已完成 {len(partial_task_results)} 个任务的CSV记录")
 
                 # 生成部分结果用于保存场景级日志
                 partial_result = {
@@ -194,8 +242,7 @@ class ScenarioExecutor:
                     'summary': {'error': str(e), 'interrupted': True}
                 }
 
-                self._save_execution_log(partial_result)
-                logger.info("📝 异常情况下的执行日志已保存")
+                logger.info("📝 异常情况下的CSV记录已保存")
             except Exception as save_error:
                 logger.error(f"保存异常情况下的执行日志失败: {save_error}")
 
@@ -249,8 +296,7 @@ class ScenarioExecutor:
                 except Exception as retry_error:
                     logger.error(f"❌ CSV记录器重新初始化也失败: {retry_error}")
 
-            # 立即保存当前任务的执行日志
-            self._save_single_task_execution_log(task_result, 'sequential')
+
 
             # Sequential模式：只有模型输出DONE才继续下一个任务
             if not task_result.get('model_claimed_done', False):
@@ -287,7 +333,7 @@ class ScenarioExecutor:
             logger.info(f"📋 执行所有 {len(tasks_to_execute)} 个任务")
 
         # 将筛选后的任务描述拼接成一个长任务
-        combined_description = "请按顺序完成以下任务：\n"
+        combined_description = "Please complete the following tasks: \n"
         for i, task in enumerate(tasks_to_execute):
             combined_description += f"{i+1}. {task.get('task_description', '')}\n"
         
@@ -312,8 +358,7 @@ class ScenarioExecutor:
         except Exception as csv_error:
             logger.error(f"❌ 记录Combined任务到CSV失败: {csv_error}")
 
-        # 立即保存当前任务的执行日志
-        self._save_single_task_execution_log(combined_result, 'combined')
+
         
         return {
             'mode': 'combined',
@@ -386,8 +431,7 @@ class ScenarioExecutor:
                 except Exception as csv_error:
                     logger.error(f"❌ 记录Independent任务 {task_index} 到CSV失败: {csv_error}")
 
-                # 立即保存当前任务的执行日志
-                self._save_single_task_execution_log(task_result, 'independent')
+
 
                 # Independent模式：只有模型输出DONE才继续下一个任务
                 if not task_result.get('model_claimed_done', False):
@@ -526,82 +570,6 @@ class ScenarioExecutor:
             }
         }
     
-    def _save_execution_log(self, scenario_result: Dict[str, Any]):
-        """保存执行日志"""
-        try:
-            # 收集所有任务的执行日志
-            task_results = scenario_result.get('task_results', [])
-            execution_logs = []
 
-            logger.debug(f"🔍 检查任务结果数量: {len(task_results)}")
 
-            for i, task_result in enumerate(task_results):
-                logger.debug(f"🔍 任务 {i} 结果键: {list(task_result.keys())}")
-                if 'execution_log' in task_result:
-                    execution_logs.append(task_result['execution_log'])
-                    logger.debug(f"✅ 任务 {i} 执行日志已收集")
-                else:
-                    logger.warning(f"⚠️ 任务 {i} 缺少execution_log")
 
-            # 生成场景级执行日志
-            scenario_execution_log = {
-                'scenario_id': self.scenario_id,
-                'execution_mode': scenario_result.get('mode', 'unknown'),
-                'total_tasks': len(task_results),
-                'execution_time': scenario_result.get('execution_time', 0),
-                'task_execution_logs': execution_logs,
-                'summary': scenario_result.get('summary', {})
-            }
-
-            logger.debug(f"📝 准备保存执行日志，包含 {len(execution_logs)} 个任务日志")
-            self.trajectory_recorder.save_execution_log(scenario_execution_log)
-            logger.info(f"✅ 执行日志已保存到 logs/ 目录")
-
-            # 强制保存轨迹文件（确保轨迹数据不丢失）
-            try:
-                if hasattr(self.trajectory_recorder, '_save_trajectory_immediately'):
-                    trajectory_data = self.trajectory_recorder._load_trajectory_data()
-                    if trajectory_data:
-                        self.trajectory_recorder._save_trajectory_immediately(trajectory_data)
-                        logger.debug(f"💾 轨迹文件强制保存完成: {self.scenario_id}")
-                    else:
-                        logger.warning(f"⚠️ 场景 {self.scenario_id} 没有轨迹数据需要保存")
-            except Exception as trajectory_error:
-                logger.error(f"❌ 强制保存轨迹文件失败: {trajectory_error}")
-
-            # 强制保存QA文件
-            try:
-                if hasattr(self.trajectory_recorder, '_save_qa_immediately'):
-                    qa_data = self.trajectory_recorder._load_qa_data()
-                    if qa_data:
-                        self.trajectory_recorder._save_qa_immediately(qa_data)
-                        logger.debug(f"💾 QA文件强制保存完成: {self.scenario_id}")
-            except Exception as qa_error:
-                logger.error(f"❌ 强制保存QA文件失败: {qa_error}")
-        except Exception as e:
-            logger.error(f"保存执行日志失败: {e}")
-            import traceback
-            logger.error(f"详细错误: {traceback.format_exc()}")
-
-    def _save_single_task_execution_log(self, task_result: Dict[str, Any], mode: str):
-        """立即保存单个任务的执行日志"""
-        try:
-            # 按场景组织日志文件：logs/scenario_id/task_index_execution.json
-            scenario_log_dir = os.path.join(self.output_dir, 'logs', self.scenario_id)
-            log_file = os.path.join(scenario_log_dir, f'task_{task_result.get("task_index", "unknown")}_execution.json')
-            os.makedirs(scenario_log_dir, exist_ok=True)
-
-            # 构建单任务执行日志
-            single_task_log = {
-                'scenario_id': self.scenario_id,
-                'mode': mode,
-                'task_result': task_result,
-                'timestamp': datetime.now().isoformat()
-            }
-
-            with open(log_file, 'w', encoding='utf-8') as f:
-                json.dump(single_task_log, f, ensure_ascii=False, indent=2)
-
-            logger.debug(f"📝 任务执行日志已保存: {log_file}")
-        except Exception as e:
-            logger.error(f"保存单任务执行日志失败: {e}")

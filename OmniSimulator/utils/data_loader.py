@@ -10,12 +10,12 @@ from typing import Dict, List, Any, Optional, Tuple
 logger = logging.getLogger(__name__)
 
 class DataLoader:
-    """数据加载器 - 负责加载场景、任务和验证数据"""
-    
+    """数据加载器 - 负责加载场景和任务数据"""
+
     def __init__(self, data_dir: str = None):
         """
         初始化数据加载器
-        
+
         Args:
             data_dir: 数据目录路径，默认为项目根目录下的data文件夹
         """
@@ -25,12 +25,11 @@ class DataLoader:
             simulator_dir = os.path.dirname(current_dir)
             project_root = os.path.dirname(simulator_dir)
             data_dir = os.path.join(project_root, 'data')
-        
+
         self.data_dir = data_dir
         self.scene_dir = os.path.join(data_dir, 'scene')
         self.task_dir = os.path.join(data_dir, 'task')
-        self.verify_dir = os.path.join(data_dir, 'verify')
-        
+
         logger.info(f"数据加载器初始化，数据目录: {data_dir}")
     
     def load_scene(self, scene_id: str) -> Optional[Dict[str, Any]]:
@@ -87,32 +86,7 @@ class DataLoader:
             logger.error(f"加载任务文件失败: {task_file}, 错误: {e}")
             return None
     
-    def load_verification(self, verify_id: str) -> Optional[Dict[str, Any]]:
-        """
-        加载验证数据
-        
-        Args:
-            verify_id: 验证ID
-            
-        Returns:
-            Dict[str, Any]: 验证数据，如果加载失败返回None
-        """
-        verify_file = os.path.join(self.verify_dir, f"{verify_id}_verify.json")
-        
-        if not os.path.exists(verify_file):
-            logger.error(f"验证文件不存在: {verify_file}")
-            return None
-        
-        try:
-            with open(verify_file, 'r', encoding='utf-8') as f:
-                verify_data = json.load(f)
-            
-            logger.info(f"成功加载验证数据: {verify_id}")
-            return verify_data
-            
-        except Exception as e:
-            logger.error(f"加载验证文件失败: {verify_file}, 错误: {e}")
-            return None
+
     
     def load_complete_scenario(self, scenario_id: str) -> Optional[Tuple[Dict, Dict]]:
         """

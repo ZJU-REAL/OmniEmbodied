@@ -108,16 +108,6 @@ class SimulatorCLI(cmd.Cmd):
             print(f"Scene data loaded: {len(scene_data.get('rooms', []))} rooms, {len(scene_data.get('objects', []))} objects")
             print(f"Task data loaded: {len(task_data.get('agents_config', []))} agents")
 
-            verify_data = None  # Verify data is optional
-
-            # Try to load verify data if it exists
-            try:
-                verify_data = default_data_loader.load_verify(scene_id)
-                print("Verify data loaded")
-            except Exception as e:
-                print(f"No verify data: {e}")
-                pass  # Verify data is optional
-
             # Create engine with visualization disabled for CLI
             config = {'visualization': {'enabled': False}}
             abilities = scene_data.get('abilities', [])
@@ -126,8 +116,6 @@ class SimulatorCLI(cmd.Cmd):
 
             # Initialize simulator
             data = {'scene': scene_data, 'task': task_data}
-            if verify_data:
-                data['verify'] = verify_data
             print("Initializing engine with data...")
             success = self.engine.initialize_with_data(data)
             
