@@ -205,11 +205,11 @@ class TestDatasetGenerator:
 
     def create_single_task_json(self, original_data: Dict[str, Any],
                                task: Dict[str, Any],
-                               selected_agent: Dict[str, Any]) -> Dict[str, Any]:
+                               agents_config: List[Dict[str, Any]]) -> Dict[str, Any]:
         """创建单任务JSON数据"""
         return {
             'task_background': original_data.get('task_background', ''),
-            'agents_config': [selected_agent],
+            'agents_config': agents_config,
             'tasks': [task],
             'scene_id': original_data.get('scene_id', '')
         }
@@ -283,12 +283,10 @@ class TestDatasetGenerator:
                 if not original_data:
                     continue
 
-                # 选择智能体
+                # 获取智能体配置
                 agents_config = original_data.get('agents_config', [])
                 if not agents_config:
                     continue
-
-                selected_agent = self.select_best_agent(agents_config)
 
                 # 按类型分组任务
                 tasks_by_category = defaultdict(list)
@@ -305,9 +303,20 @@ class TestDatasetGenerator:
                     # 选择第一个任务
                     selected_task = category_tasks[0]
 
+                    # 根据任务类型决定使用的智能体配置
+                    multi_agent_categories = {'explicit_collaboration', 'implicit_collaboration', 'compound_collaboration'}
+
+                    if category in multi_agent_categories:
+                        # 多智能体任务：保留所有智能体配置
+                        task_agents_config = agents_config
+                    else:
+                        # 单智能体任务：选择最佳智能体
+                        selected_agent = self.select_best_agent(agents_config)
+                        task_agents_config = [selected_agent]
+
                     # 创建单任务JSON
                     single_task_data = self.create_single_task_json(
-                        original_data, selected_task, selected_agent
+                        original_data, selected_task, task_agents_config
                     )
 
                     # 生成文件名
