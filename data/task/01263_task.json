@@ -1,0 +1,138 @@
+{
+  "task_background": "Prepare the urban farming cooperative for the weekly community harvest day.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        2.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        2.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place seed_packet_1 on planting_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "seed_packet_1",
+          "location_id": "on:planting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Toggle weather_station_1 to on.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "weather_station_1",
+          "is_toggled": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the only gardening manual with author 'John Doe' on the planting table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gardening_manual_1",
+          "location_id": "on:planting_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Sign sign_1 using pen_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sign_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the blue pen to sign the wooden sign that says 'TAKE WHAT YOU NEED, LEAVE WHAT YOU CAN'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sign_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect hydroponic_tower_1 to the system.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_tower_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to connect fish_tank_1 to the aquaponics system.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fish_tank_1",
+          "is_connected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydroponic tower to the aquaponics room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_tower_1",
+          "location_id": ":aquaponics_fish_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the compost bin to the main greenhouse hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "compost_bin_1",
+          "location_id": ":main_greenhouse_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the glass fish tank to the tool supply shed.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fish_tank_1",
+          "location_id": ":tool_supply_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the PVC hydroponic tower to the community distribution zone.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_tower_1",
+          "location_id": ":community_distribution_zone"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01263"
+}

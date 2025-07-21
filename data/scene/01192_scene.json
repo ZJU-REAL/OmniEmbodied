@@ -1,0 +1,635 @@
+{
+  "description": "A high-performance sports rehabilitation center with hydrotherapy pools, biomechanics labs, strength training zones, and medical offices, designed for elite athlete recovery and performance optimization.",
+  "rooms": [
+    {
+      "id": "hydrotherapy_suite",
+      "name": "Hydrotherapy & Recovery Suite",
+      "properties": {
+        "type": "recovery",
+        "humidity": "high",
+        "temperature": 25.0
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab"
+      ]
+    },
+    {
+      "id": "biomechanics_lab",
+      "name": "Biomechanics & Motion Capture Lab",
+      "properties": {
+        "type": "lab",
+        "lighting": "dim",
+        "temperature": 22.0
+      },
+      "connected_to_room_ids": [
+        "hydrotherapy_suite",
+        "strength_zone",
+        "medical_office"
+      ]
+    },
+    {
+      "id": "strength_zone",
+      "name": "Strength & Conditioning Zone",
+      "properties": {
+        "type": "training",
+        "flooring": "rubber",
+        "temperature": 20.0
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab"
+      ]
+    },
+    {
+      "id": "medical_office",
+      "name": "Medical & Strategy Office",
+      "properties": {
+        "type": "office",
+        "lighting": "soft",
+        "temperature": 21.0
+      },
+      "connected_to_room_ids": [
+        "biomechanics_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydrotherapy_pool_1",
+      "name": "Hydrotherapy Pool",
+      "type": "FURNITURE",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "size": [
+          3.0,
+          5.0,
+          1.2
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": 37.0,
+        "depth_adjustable": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cold_plunge_tub_1",
+      "name": "Cold Plunge Tub",
+      "type": "FURNITURE",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "reinforced_acrylic",
+        "temperature": 10.0,
+        "non_slip_steps": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_screen_1",
+      "name": "Biometric Screen",
+      "type": "FURNITURE",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "BioTrack",
+        "model": "BT-2000",
+        "display_type": "touchscreen"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "towel_warmer_1",
+      "name": "Towel Warmer",
+      "type": "FURNITURE",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": 40.0,
+        "capacity": 10
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microfiber_towel_1",
+      "name": "Microfiber Towel",
+      "type": "ITEM",
+      "location_id": "in:towel_warmer_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "microfiber",
+        "size": "large"
+      },
+      "states": {
+        "is_washed": true
+      }
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "label": "POOL DRAIN"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "motion_capture_rig_1",
+      "name": "Motion Capture Rig",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "brand": "Vicon",
+        "model": "V16",
+        "camera_count": 12
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "force_plate_treadmill_1",
+      "name": "Force Plate Treadmill",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "max_load": 200.0,
+        "brand": "Bertec",
+        "has_pressure_sensors": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "calibration_wand_1",
+      "name": "Calibration Wand",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "material": "plastic",
+        "marker_count": 11
+      },
+      "states": {
+        "is_carved": false
+      }
+    },
+    {
+      "id": "spare_marker_adhesive_1",
+      "name": "Spare Marker Adhesive",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "adhesive",
+        "quantity": "half_empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hydraulic_resistance_trainer_1",
+      "name": "Hydraulic Resistance Trainer",
+      "type": "FURNITURE",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          1.8
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "max_force": 500.0,
+        "brand": "Keiser",
+        "has_grease_stains": true
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "olympic_lifting_platform_1",
+      "name": "Olympic Lifting Platform",
+      "type": "FURNITURE",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "size": [
+          2.4,
+          2.4,
+          0.1
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "wood",
+        "has_chalk_dust": true,
+        "has_strain_gauges": true
+      },
+      "states": {}
+    },
+    {
+      "id": "weighted_vest_1",
+      "name": "Weighted Vest",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 25.0,
+        "color": "black",
+        "material": "nylon",
+        "straps_condition": "frayed"
+      },
+      "states": {
+        "is_compressed": false
+      }
+    },
+    {
+      "id": "broken_resistance_band_1",
+      "name": "Broken Resistance Band",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "latex",
+        "condition": "snapped"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "locked_filing_cabinet_1",
+      "name": "Locked Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_office",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "biometric",
+        "brand": "HON",
+        "has_buzz": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:medical_office",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "melamine",
+        "has_marker_stains": true,
+        "eraser_missing": true
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_laptop_1",
+      "name": "Encrypted Laptop",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "Dell",
+        "model": "Latitude 7420",
+        "screen_message": "SECURITY LOCKED"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:medical_office",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "water_tank_status": "empty",
+        "descale_light_on": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pool_cover_1",
+      "name": "Hydrotherapy Pool Cover",
+      "type": "FURNITURE",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "size": [
+          3.2,
+          5.2,
+          0.05
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "vinyl",
+        "color": "blue",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "wood",
+        "bristle_type": "stiff",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_lab",
+      "properties": {
+        "weight": 3.0,
+        "color": "silver",
+        "brand": "Lincoln Electric",
+        "fuel_type": "acetylene",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "drill_1",
+      "name": "Drill",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 2.5,
+        "color": "red",
+        "brand": "DeWalt",
+        "battery_status": "charged",
+        "provides_abilities": [
+          "drill"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "grit": "medium",
+        "material": "aluminum_oxide",
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "plastic",
+        "capacity": "1L",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "carving_knife_1",
+      "name": "Carving Knife",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "stainless_steel",
+        "sharpness": "high",
+        "provides_abilities": [
+          "carve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Bontrager",
+        "pressure_gauge": true,
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defrosting_pad_1",
+      "name": "Defrosting Pad",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "rubber",
+        "temperature_range": "20-50C",
+        "provides_abilities": [
+          "defrost"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_jar_1",
+      "name": "Seasoning Jar",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "content": "salt",
+        "quantity": "half_full",
+        "provides_abilities": [
+          "season"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "replacement_band_1",
+      "name": "Replacement Resistance Band",
+      "type": "ITEM",
+      "location_id": "in:strength_zone",
+      "properties": {
+        "weight": 0.6,
+        "color": "red",
+        "material": "latex",
+        "resistance_level": "heavy"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "biometric_wristband_1",
+      "name": "Biometric Wristband",
+      "type": "ITEM",
+      "location_id": "in:hydrotherapy_suite",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "Fitbit",
+        "model": "Charge 5",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "electrolyte_iv_bag_1",
+      "name": "Electrolyte IV Bag",
+      "type": "ITEM",
+      "location_id": "in:medical_office",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "content": "electrolyte_solution",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_eaten": false
+      }
+    }
+  ],
+  "abilities": [
+    "carve",
+    "defrost",
+    "drill",
+    "eat",
+    "inflate",
+    "open",
+    "pair",
+    "press",
+    "sand",
+    "season",
+    "sweep",
+    "turn_on",
+    "water",
+    "weld",
+    "wipe",
+    "close"
+  ]
+}

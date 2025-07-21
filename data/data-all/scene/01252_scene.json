@@ -1,0 +1,684 @@
+{
+  "description": "A Union Army field hospital in June 1861, following a skirmish near a rural Virginia town. The scene is chaotic—overcrowded with wounded soldiers, understaffed medical personnel, and civilian volunteers.",
+  "rooms": [
+    {
+      "id": "front_triage_tent",
+      "name": "Front Triage Tent",
+      "properties": {
+        "type": "tent"
+      },
+      "connected_to_room_ids": [
+        "operating_theater"
+      ]
+    },
+    {
+      "id": "operating_theater",
+      "name": "Operating Theater",
+      "properties": {
+        "type": "barn"
+      },
+      "connected_to_room_ids": [
+        "front_triage_tent",
+        "recovery_ward"
+      ]
+    },
+    {
+      "id": "recovery_ward",
+      "name": "Recovery Ward",
+      "properties": {
+        "type": "farmhouse"
+      },
+      "connected_to_room_ids": [
+        "operating_theater",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet",
+      "properties": {
+        "type": "pantry"
+      },
+      "connected_to_room_ids": [
+        "recovery_ward",
+        "kitchen"
+      ]
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "properties": {
+        "type": "annex"
+      },
+      "connected_to_room_ids": [
+        "supply_closet"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "stretcher_rack_1",
+      "name": "Collapsible Wooden Stretcher Rack",
+      "type": "FURNITURE",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          1.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "wood",
+        "max_load": 250.0
+      },
+      "states": {}
+    },
+    {
+      "id": "field_desk_1",
+      "name": "Field Desk",
+      "type": "FURNITURE",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "uneven_legs"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "triage_tag_1",
+      "name": "Triage Tag (Urgent)",
+      "type": "ITEM",
+      "location_id": "on:field_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "label": "Urgent",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "triage_tag_2",
+      "name": "Triage Tag (Delayed)",
+      "type": "ITEM",
+      "location_id": "on:field_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "label": "Delayed",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "bloodied_tourniquet_1",
+      "name": "Bloodied Leather Tourniquet",
+      "type": "ITEM",
+      "location_id": "on:field_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "leather",
+        "condition": "stiff",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "wounded_soldier_1",
+      "name": "Wounded Soldier (Private Callahan)",
+      "type": "ITEM",
+      "location_id": "on:stretcher_rack_1",
+      "properties": {
+        "weight": 70.0,
+        "condition": "unconscious",
+        "injury": "shattered_leg",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "minie_ball_1",
+      "name": "Minié Ball",
+      "type": "ITEM",
+      "location_id": "in:wounded_soldier_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "lead",
+        "caliber": ".58"
+      },
+      "states": {}
+    },
+    {
+      "id": "lantern_1",
+      "name": "Lantern with Cracked Glass Pane",
+      "type": "ITEM",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "water_bucket_1",
+      "name": "Water Bucket with Ladle",
+      "type": "ITEM",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "weight": 3.0,
+        "material": "wood",
+        "contents": "half_full",
+        "condition": "dirty"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "company_flag_1",
+      "name": "Trampled Company Flag (3rd Minnesota)",
+      "type": "ITEM",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "weight": 0.8,
+        "material": "cloth",
+        "condition": "mud_crusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "playing_card_1",
+      "name": "Discarded Playing Card (Ace of Spades)",
+      "type": "ITEM",
+      "location_id": "in:front_triage_tent",
+      "properties": {
+        "weight": 0.05,
+        "material": "cardboard",
+        "condition": "pinned"
+      },
+      "states": {}
+    },
+    {
+      "id": "surgical_table_1",
+      "name": "Oak Surgical Table",
+      "type": "FURNITURE",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.0
+        ],
+        "weight": 75.0,
+        "material": "oak",
+        "condition": "stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "amputation_saw_stand_1",
+      "name": "Amputation Saw Stand",
+      "type": "FURNITURE",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 15.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "amputation_saw_1",
+      "name": "Amputation Saw (Sharpened)",
+      "type": "ITEM",
+      "location_id": "on:amputation_saw_stand_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "steel",
+        "condition": "sharpened",
+        "marking": "blue_cloth_wrap",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "amputation_saw_2",
+      "name": "Amputation Saw (Rusted)",
+      "type": "ITEM",
+      "location_id": "on:amputation_saw_stand_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "steel",
+        "condition": "rusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "amputation_saw_3",
+      "name": "Amputation Saw (Missing Teeth)",
+      "type": "ITEM",
+      "location_id": "on:amputation_saw_stand_1",
+      "properties": {
+        "weight": 1.1,
+        "material": "steel",
+        "condition": "missing_teeth"
+      },
+      "states": {}
+    },
+    {
+      "id": "ether_bottle_1",
+      "name": "Ether Bottle (1/4 Full)",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 0.7,
+        "material": "glass",
+        "contents": "1/4_full",
+        "label": "Caution: 3 drops max—Dr. Whitmore’s orders."
+      },
+      "states": {}
+    },
+    {
+      "id": "instrument_cabinet_1",
+      "name": "Locked Instrument Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          2.0
+        ],
+        "weight": 60.0,
+        "material": "wood",
+        "is_container": true,
+        "lock_type": "brass_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blood_runoff_gutter_1",
+      "name": "Blood-Runoff Gutter",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 5.0,
+        "material": "tin",
+        "condition": "clogged"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "wheeled_stool_1",
+      "name": "Wheeled Stool",
+      "type": "FURNITURE",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 10.0,
+        "material": "wood",
+        "condition": "wobbly_leg",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tin_basin_1",
+      "name": "Tin Basin",
+      "type": "ITEM",
+      "location_id": "on:wheeled_stool_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "tin",
+        "contents": "pink_water",
+        "condition": "recently_used"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "daguerreotype_1",
+      "name": "Faded Daguerreotype of a Woman",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "pocket_watch_1",
+      "name": "Broken Pocket Watch",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 0.3,
+        "material": "gold",
+        "condition": "broken",
+        "time_stopped": "3:15"
+      },
+      "states": {}
+    },
+    {
+      "id": "cot_1",
+      "name": "Cot with Straw Mattress",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.5
+        ],
+        "weight": 20.0,
+        "material": "wood",
+        "condition": "moldy"
+      },
+      "states": {}
+    },
+    {
+      "id": "fireplace_mantle_1",
+      "name": "Fireplace Mantle",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "size": [
+          1.5,
+          0.3,
+          0.5
+        ],
+        "weight": 30.0,
+        "material": "wood",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pewter_cup_1",
+      "name": "Dented Pewter Cup",
+      "type": "ITEM",
+      "location_id": "on:fireplace_mantle_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "pewter",
+        "condition": "dented",
+        "use": "measuring_laudanum"
+      },
+      "states": {}
+    },
+    {
+      "id": "private_hawkins_boot_1",
+      "name": "Private Hawkins’ Boot",
+      "type": "ITEM",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "weight": 1.0,
+        "material": "leather",
+        "condition": "worn",
+        "concealed_item": "confederate_map",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "confederate_map_1",
+      "name": "Folded Confederate Map",
+      "type": "ITEM",
+      "location_id": "in:private_hawkins_boot_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "folded"
+      },
+      "states": {}
+    },
+    {
+      "id": "laudanum_bottle_1",
+      "name": "Empty Laudanum Bottle",
+      "type": "ITEM",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "contents": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "rocking_chair_1",
+      "name": "Wooden Rocking Chair",
+      "type": "FURNITURE",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.2
+        ],
+        "weight": 15.0,
+        "material": "wood",
+        "condition": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "cracked_mirror_1",
+      "name": "Cracked Mirror",
+      "type": "ITEM",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "weight": 2.0,
+        "material": "glass",
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "childs_drawing_1",
+      "name": "Child’s Drawing (To Papa)",
+      "type": "ITEM",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "inscription": "To Papa"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_houseplant_1",
+      "name": "Dead Houseplant",
+      "type": "ITEM",
+      "location_id": "in:recovery_ward",
+      "properties": {
+        "weight": 1.5,
+        "material": "ceramic",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "carbolic_acid_barrel_1",
+      "name": "Barrel of Carbolic Acid",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 80.0,
+        "material": "wood",
+        "contents": "sealed",
+        "hazard": "fumes_if_tipped"
+      },
+      "states": {}
+    },
+    {
+      "id": "medicine_chest_1",
+      "name": "Locked Medicine Chest",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 40.0,
+        "material": "wood",
+        "is_container": true,
+        "lock_type": "brass_key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "surgeons_coat_1",
+      "name": "Surgeon’s Bloodstained Coat",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 2.0,
+        "material": "wool",
+        "condition": "bloodstained",
+        "pocket_condition": "sewn_shut",
+        "concealed_item": "brass_key",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "brass_key_1",
+      "name": "Brass Key",
+      "type": "ITEM",
+      "location_id": "in:surgeons_coat_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "brass",
+        "use": "unlock_instrument_cabinet"
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:kitchen",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cast_iron_stove_1",
+      "name": "Cast-Iron Stove",
+      "type": "FURNITURE",
+      "location_id": "in:kitchen",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 90.0,
+        "material": "cast_iron",
+        "condition": "overworked",
+        "is_container": true
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "boiling_water_pot_1",
+      "name": "Boiling Water Pot",
+      "type": "ITEM",
+      "location_id": "on:cast_iron_stove_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "copper",
+        "contents": "boiling_water"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "rag_1",
+      "name": "Dwindling Stock of Rags",
+      "type": "ITEM",
+      "location_id": "in:kitchen",
+      "properties": {
+        "weight": 0.5,
+        "material": "cloth",
+        "condition": "dwindling",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cavalry_saber_1",
+      "name": "Decorative Cavalry Saber",
+      "type": "ITEM",
+      "location_id": "in:operating_theater",
+      "properties": {
+        "weight": 2.0,
+        "material": "steel",
+        "condition": "decorative"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "clean",
+    "open",
+    "saw",
+    "close"
+  ]
+}

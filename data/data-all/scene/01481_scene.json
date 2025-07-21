@@ -1,0 +1,727 @@
+{
+  "description": "A chaotic e-commerce fulfillment warehouse undergoing systemic overhaul, with cluttered workspaces, malfunctioning equipment, and mismanaged inventory requiring multi-agent coordination.",
+  "rooms": [
+    {
+      "id": "receiving_dock",
+      "name": "Receiving Dock",
+      "properties": {
+        "type": "loading_area"
+      },
+      "connected_to_room_ids": [
+        "sorting_qc_zone"
+      ]
+    },
+    {
+      "id": "sorting_qc_zone",
+      "name": "Sorting & QC Zone",
+      "properties": {
+        "type": "processing_area"
+      },
+      "connected_to_room_ids": [
+        "receiving_dock",
+        "packing_stations",
+        "storage_shelves"
+      ]
+    },
+    {
+      "id": "packing_stations",
+      "name": "Packing Stations",
+      "properties": {
+        "type": "workbench_area"
+      },
+      "connected_to_room_ids": [
+        "sorting_qc_zone",
+        "shipping_dispatch"
+      ]
+    },
+    {
+      "id": "storage_shelves",
+      "name": "Storage Shelves",
+      "properties": {
+        "type": "high_density_storage"
+      },
+      "connected_to_room_ids": [
+        "sorting_qc_zone"
+      ]
+    },
+    {
+      "id": "shipping_dispatch",
+      "name": "Shipping & Dispatch",
+      "properties": {
+        "type": "exit_point"
+      },
+      "connected_to_room_ids": [
+        "packing_stations"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "loading_dock_plate_1",
+      "name": "Hydraulic Loading Dock Plate",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.1
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Rusted Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.2
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "condition": "sticky_handle",
+        "wheel_condition": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          2.4,
+          1.2,
+          2.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "leaning",
+        "support": "cinder_block"
+      },
+      "states": {}
+    },
+    {
+      "id": "wooden_crate_1",
+      "name": "Sealed Wooden Crate",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "label": "FRAGILE",
+        "label_condition": "smudged"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Mismatched Invoices Clipboard",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "conflicting_quantities",
+        "color": "blue"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Jammed Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Zebra",
+        "model": "DS2208",
+        "error_light": "blinking"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Slow Label Printer",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 3.2,
+        "ink_status": "no_red",
+        "speed": "slow"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "rolling_cart_1",
+      "name": "Wobbly Rolling Cart",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "wheel_condition": "wobbly",
+        "contents": "packing_peanuts"
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerator_1",
+      "name": "Buzzing Refrigerator",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.7
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "door_status": "ajar",
+        "sound": "buzzing"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Main Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "size": [
+          5.0,
+          1.0,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "direction": "backward",
+        "status": "jammed"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "sorting_table_1",
+      "name": "Scratched Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "surface": "sticky_residue",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_monitor_1",
+      "name": "Flickering Wall Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.8
+        ],
+        "weight": 25.0,
+        "display": "garbled_codes",
+        "status": "flickering"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "priority_bin_1",
+      "name": "Priority Packages Bin",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "contents": "mixed_priority"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_weight_set_1",
+      "name": "Scattered Calibration Weight Set",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 2.5,
+        "missing_weight": "1kg",
+        "condition": "scattered"
+      },
+      "states": {}
+    },
+    {
+      "id": "override_lever_1",
+      "name": "Manual Override Lever",
+      "type": "ITEM",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "weight": 5.0,
+        "condition": "stiff",
+        "required_operators": 2
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_gun_1",
+      "name": "Outdated Barcode Gun",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.7,
+        "response_time": "slow",
+        "model": "old"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_dispenser_1",
+      "name": "Tangle-Prone Label Dispenser",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 1.2,
+        "tape_condition": "frequently_tangles"
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_chair_1",
+      "name": "Leaning Rolling Chair",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_qc_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 12.0,
+        "wheel_condition": "missing_one",
+        "lean_direction": "left"
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_table_1",
+      "name": "Workbench Packing Table",
+      "type": "FURNITURE",
+      "location_id": "in:packing_stations",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "surface": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_gun_1",
+      "name": "Empty Tape Gun",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "empty",
+        "brand": "3M"
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_gun_2",
+      "name": "Jammed Tape Gun",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "jammed",
+        "brand": "Scotch"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_scale_1",
+      "name": "Broken Scale",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 1.8,
+        "error_message": "ERR 404",
+        "condition": "broken"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "storage_rack_1",
+      "name": "Overstuffed Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_shelves",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "status": "overstuffed",
+        "note": "DO NOT USE – INVENTORY AUDIT PENDING"
+      },
+      "states": {}
+    },
+    {
+      "id": "shipping_conveyor_1",
+      "name": "Slow-Moving Shipping Conveyor",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_dispatch",
+      "properties": {
+        "size": [
+          4.0,
+          1.0,
+          0.8
+        ],
+        "weight": 120.0,
+        "speed": "slow",
+        "backlog": "high"
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "label_printer_2",
+      "name": "Misaligned Label Printer",
+      "type": "ITEM",
+      "location_id": "in:shipping_dispatch",
+      "properties": {
+        "weight": 3.0,
+        "alignment": "misaligned",
+        "output": "spooling"
+      },
+      "states": {}
+    },
+    {
+      "id": "led_sign_1",
+      "name": "Overdue LED Sign",
+      "type": "ITEM",
+      "location_id": "in:shipping_dispatch",
+      "properties": {
+        "weight": 2.0,
+        "message": "OVERDUE",
+        "status": "blinking",
+        "color": "red"
+      },
+      "states": {
+        "is_alight": true
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Weller",
+        "temperature": "adjustable",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "verification_device_1",
+      "name": "Verification Device",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.9,
+        "function": "accuracy_check",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 5.0,
+        "type": "ABC",
+        "pressure": "good",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.3,
+        "bristles": "synthetic",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Metal Colander",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 0.7,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "drain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "handsaw_1",
+      "name": "Hand Saw",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 1.2,
+        "teeth": "sharp",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_1",
+      "name": "Contaminant Bottle",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.5,
+        "content": "unknown_substance",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Portable Stove",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 8.0,
+        "fuel": "propane",
+        "provides_abilities": [
+          "boil"
+        ],
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "pot_1",
+      "name": "Cooking Pot",
+      "type": "ITEM",
+      "location_id": "on:stove_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "aluminum",
+        "capacity": "5L"
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.4,
+        "blade": "sharp",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bluetooth_device_1",
+      "name": "Bluetooth Speaker",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 1.0,
+        "status": "unpaired",
+        "brand": "JBL"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "hanging_sign_1",
+      "name": "Hanging OSHA Poster",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 0.3,
+        "message": "LIFT WITH YOUR LEGS!",
+        "condition": "faded"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "roll_of_tape_1",
+      "name": "Roll of Packing Tape",
+      "type": "ITEM",
+      "location_id": "on:packing_table_1",
+      "properties": {
+        "weight": 0.2,
+        "length": "50m",
+        "width": "48mm"
+      },
+      "states": {
+        "is_rolled": false
+      }
+    },
+    {
+      "id": "cheese_grater_1",
+      "name": "Cheese Grater",
+      "type": "ITEM",
+      "location_id": "in:receiving_dock",
+      "properties": {
+        "weight": 0.3,
+        "holes": "medium",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "software_installer_1",
+      "name": "Software Installer USB",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 0.05,
+        "content": "warehouse_management_system",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "boil",
+    "close",
+    "contaminate",
+    "drain",
+    "extinguish",
+    "grate",
+    "install",
+    "open",
+    "pair",
+    "prune",
+    "roll",
+    "saw",
+    "show",
+    "solder",
+    "start_process",
+    "take_down",
+    "unstaple",
+    "varnish",
+    "verify"
+  ]
+}

@@ -1,0 +1,964 @@
+{
+  "description": "A bustling pit garage for a Fun Cup endurance racing team, featuring a race car service area, parts storage, strategy station, and crew lounge, filled with tools, spare parts, and equipment for high-energy race prep and repairs.",
+  "rooms": [
+    {
+      "id": "race_car_service_area",
+      "name": "Race Car Service Area",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "parts_storage",
+        "strategy_station",
+        "crew_lounge"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts & Supply Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "race_car_service_area",
+        "crew_lounge"
+      ]
+    },
+    {
+      "id": "strategy_station",
+      "name": "Strategy & Telemetry Station",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "race_car_service_area",
+        "crew_lounge"
+      ]
+    },
+    {
+      "id": "crew_lounge",
+      "name": "Driver & Crew Lounge",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "race_car_service_area",
+        "parts_storage",
+        "strategy_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "2-Post Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          4.0
+        ],
+        "weight": 3000.0,
+        "is_container": true,
+        "material": "steel",
+        "capacity": "3000 lbs"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fun_cup_car_1",
+      "name": "Fun Cup Race Car",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          4.2,
+          1.8,
+          1.2
+        ],
+        "weight": 950.0,
+        "is_container": true,
+        "chassis": "tube-frame",
+        "engine": "2.0L VW Golf"
+      },
+      "states": {
+        "is_fueled": false,
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "right_front_tire_1",
+      "name": "Right-Front Tire (195/50R15)",
+      "type": "ITEM",
+      "location_id": "on:fun_cup_car_1",
+      "properties": {
+        "weight": 12.5,
+        "brand": "BFGoodrich",
+        "model": "g-Force Sport",
+        "tread_depth": "3mm",
+        "condition": "scuffed"
+      },
+      "states": {
+        "is_inflated": false
+      }
+    },
+    {
+      "id": "spare_tire_1",
+      "name": "Spare Tire (205/50R15)",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 13.0,
+        "brand": "BFGoodrich",
+        "model": "g-Force Sport",
+        "condition": "new",
+        "has_leak": true
+      },
+      "states": {
+        "is_inflated": false
+      }
+    },
+    {
+      "id": "tool_chest_1",
+      "name": "Rolling Steel Tool Chest",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "drawers": 6
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "metric_wrench_set_1",
+      "name": "Metric Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 3.5,
+        "material": "chrome-vanadium",
+        "pieces": 12,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 2.8,
+        "brand": "Snap-on",
+        "range": "10-150 Nm",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "impact_socket_set_1",
+      "name": "Impact Socket Set",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 4.2,
+        "material": "hardened steel",
+        "pieces": 24,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pneumatic_hose_reel_1",
+      "name": "Wall-Mounted Pneumatic Hose Reel",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "reach": "15m",
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "tank_size": "30L",
+        "pressure": "150 PSI",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_laptop_1",
+      "name": "Diagnostic Laptop",
+      "type": "ITEM",
+      "location_id": "on:fun_cup_car_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Latitude",
+        "connection": "OBD-II",
+        "error_code": "P0115"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "creeper_stool_1",
+      "name": "Creeper Stool",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "adjustable": true,
+        "wheels": true
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_tray_1",
+      "name": "Magnetic Parts Tray",
+      "type": "ITEM",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "weight": 1.2,
+        "diameter": "30cm",
+        "color": "black",
+        "contents": [
+          "M8 bolts",
+          "throttle cable"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "weight": 5.0,
+        "type": "ABC",
+        "last_inspection": "3 months ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_shelving_1",
+      "name": "Heavy-Duty Steel Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "shelves": 4,
+        "labels": [
+          "Tires",
+          "Fluids",
+          "Fasteners",
+          "Body Panels"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Parts Bin Organizer",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "drawers": 60,
+        "missing_label": "Drawer #17"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oil_drum_1",
+      "name": "Oil Drum (20L)",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 22.0,
+        "type": "synthetic 5W-30",
+        "seal": "broken",
+        "missing_funnel": true,
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coolant_jug_1",
+      "name": "Coolant Jug (G12)",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "type": "VW-approved G12",
+        "expiry_date": "next month",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "led_work_light_1",
+      "name": "Battery-Powered LED Work Light",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.8,
+        "battery_level": "50%",
+        "condition": "flickering"
+      },
+      "states": {}
+    },
+    {
+      "id": "tire_pressure_gauge_1",
+      "name": "Digital Tire Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.3,
+        "last_calibration": "2 weeks ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiber_rags_1",
+      "name": "Grease-Stained Microfiber Rags",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.5,
+        "condition": "stained",
+        "damage": "one with hole"
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_block_1",
+      "name": "Spare Engine Block",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.7
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "type": "2.0L VW Golf",
+        "frame": "tubular"
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_drum_1",
+      "name": "Fuel Drum (60L)",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          0.9,
+          0.9,
+          1.2
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "contents": "fuel",
+        "capacity": "60L"
+      },
+      "states": {}
+    },
+    {
+      "id": "dolly_1",
+      "name": "Dolly",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 8.0,
+        "type": "hand truck",
+        "current_location": "under stack of tires"
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_1",
+      "name": "Strategy Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:strategy_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.75
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "laptops",
+          "monitors"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:strategy_station",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "surface": "writable"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "marker_1",
+      "name": "Whiteboard Marker",
+      "type": "ITEM",
+      "location_id": "in:strategy_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "ink_level": "50%",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Team Manager's Clipboard",
+      "type": "ITEM",
+      "location_id": "in:strategy_station",
+      "properties": {
+        "weight": 0.5,
+        "contents": [
+          "pit strategy",
+          "parts cabinet key"
+        ],
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_cabinet_1",
+      "name": "Locked Parts Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:strategy_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "lock_type": "key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coolant_sensor_1",
+      "name": "Spare Coolant Sensor",
+      "type": "ITEM",
+      "location_id": "in:parts_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "OEM",
+        "compatibility": "VW Golf"
+      },
+      "states": {}
+    },
+    {
+      "id": "crew_bench_1",
+      "name": "Crew Bench",
+      "type": "FURNITURE",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          0.45
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "material": "wood",
+        "cushion_color": "blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydration_station_1",
+      "name": "Hydration Station",
+      "type": "FURNITURE",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "contents": [
+          "water bottles",
+          "energy drinks"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:hydration_station_1",
+      "properties": {
+        "weight": 0.5,
+        "capacity": "500ml",
+        "material": "plastic",
+        "provides_abilities": [
+          "water",
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "snack_box_1",
+      "name": "Snack Box",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 2.0,
+        "contents": [
+          "energy bars",
+          "fruit"
+        ],
+        "material": "cardboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_bench_1",
+      "name": "Repair Bench",
+      "type": "FURNITURE",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "scratched"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vise_1",
+      "name": "Bench Vise",
+      "type": "ITEM",
+      "location_id": "on:repair_bench_1",
+      "properties": {
+        "weight": 5.0,
+        "jaw_width": "100mm",
+        "material": "cast iron"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:repair_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "pieces": 6,
+        "types": [
+          "Phillips",
+          "flathead"
+        ],
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "electrical_tape_1",
+      "name": "Electrical Tape",
+      "type": "ITEM",
+      "location_id": "in:repair_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "length": "10m",
+        "provides_abilities": [
+          "insulate",
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "toaster_1",
+      "name": "Toaster",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 1.5,
+        "slots": 2,
+        "brand": "Black & Decker",
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bread_1",
+      "name": "Bread Loaf",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.5,
+        "type": "whole wheat",
+        "slices_remaining": 10
+      },
+      "states": {
+        "is_toasted": false
+      }
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Team #44 Coffee Mug",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "logo": "Team #44",
+        "condition": "dirty"
+      },
+      "states": {
+        "is_rinsed": false
+      }
+    },
+    {
+      "id": "tire_pressure_logs_1",
+      "name": "Tire Pressure Logs",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.8,
+        "pages": 50,
+        "condition": "old",
+        "content": "historical tire data"
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "size": [
+          0.5,
+          0.6,
+          1.2
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "drawers": 2,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety First Poster",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.3,
+        "size": "A2",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_cans_1",
+      "name": "Empty Energy Drink Cans",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.2,
+        "count": 5,
+        "brand": "Red Bull",
+        "condition": "crushed"
+      },
+      "states": {}
+    },
+    {
+      "id": "race_photo_1",
+      "name": "Framed Spa Race Photo",
+      "type": "ITEM",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "weight": 1.0,
+        "frame": "wood",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "sponsor_decals_1",
+      "name": "Peeling Sponsor Decals",
+      "type": "ITEM",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "weight": 0.1,
+        "condition": "peeling",
+        "location": "garage door"
+      },
+      "states": {}
+    },
+    {
+      "id": "rulebook_1",
+      "name": "2007 Fun Cup Rulebook",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.7,
+        "pages": 120,
+        "condition": "torn and stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "tire_patch_kit_1",
+      "name": "Tire Patch Kit",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.5,
+        "contents": [
+          "patches",
+          "cement",
+          "tools"
+        ],
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_funnel_1",
+      "name": "Oil Funnel",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "size": "medium",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grease_gun_1",
+      "name": "Grease Gun",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 1.8,
+        "capacity": "400g",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stirring_spoon_1",
+      "name": "Stirring Spoon",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "length": "30cm",
+        "provides_abilities": [
+          "stir"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mop_1",
+      "name": "Mop",
+      "type": "ITEM",
+      "location_id": "in:crew_lounge",
+      "properties": {
+        "weight": 2.0,
+        "head_type": "string",
+        "handle_material": "aluminum",
+        "provides_abilities": [
+          "mop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_1",
+      "name": "Garage Floor",
+      "type": "FURNITURE",
+      "location_id": "in:race_car_service_area",
+      "properties": {
+        "size": [
+          10.0,
+          10.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "material": "concrete",
+        "condition": "oily"
+      },
+      "states": {
+        "is_mopped": true
+      }
+    },
+    {
+      "id": "tire_iron_1",
+      "name": "Tire Iron",
+      "type": "ITEM",
+      "location_id": "in:tool_chest_1",
+      "properties": {
+        "weight": 1.5,
+        "length": "50cm",
+        "material": "steel",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "damage",
+    "inflate",
+    "inject",
+    "insulate",
+    "mop",
+    "mount",
+    "open",
+    "refuel",
+    "rinse",
+    "screw",
+    "stir",
+    "stop_playback",
+    "toast",
+    "water",
+    "wrap",
+    "write",
+    "close"
+  ]
+}

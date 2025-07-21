@@ -1,0 +1,986 @@
+{
+  "description": "A bustling, partially reconstructed boardwalk along the Jersey Shore, still bearing scars from Hurricane Sandy’s devastation. Construction crews, local vendors, and volunteers work in tandem to restore the iconic structure while seasonal businesses scramble to reopen before the summer rush.",
+  "rooms": [
+    {
+      "id": "debris_sorting_yard",
+      "name": "Debris Sorting & Storage Yard",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "active_construction_zone"
+      ]
+    },
+    {
+      "id": "active_construction_zone",
+      "name": "Active Construction Zone",
+      "properties": {
+        "type": "construction"
+      },
+      "connected_to_room_ids": [
+        "debris_sorting_yard",
+        "vendor_row"
+      ]
+    },
+    {
+      "id": "vendor_row",
+      "name": "Vendor Row (Partially Restored)",
+      "properties": {
+        "type": "commercial"
+      },
+      "connected_to_room_ids": [
+        "active_construction_zone",
+        "volunteer_station"
+      ]
+    },
+    {
+      "id": "volunteer_station",
+      "name": "Volunteer & Donation Station",
+      "properties": {
+        "type": "community"
+      },
+      "connected_to_room_ids": [
+        "vendor_row"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "shipping_container_1",
+      "name": "20ft Shipping Container",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          6.1,
+          2.4,
+          2.6
+        ],
+        "weight": 2500.0,
+        "is_container": true,
+        "material": "rusted_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dumpster_1",
+      "name": "Industrial Dumpster (Overflowing)",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          2.4,
+          1.8,
+          1.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "SPLINTERED_WOOD"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "dumpster_2",
+      "name": "Industrial Dumpster (Metal Only)",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          2.4,
+          1.8,
+          1.5
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "METAL_ONLY"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.2
+        ],
+        "weight": 4500.0,
+        "is_container": false,
+        "engine_status": "off",
+        "hydraulic_leak": true
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "belmar_sign_1",
+      "name": "Salvageable Vintage 'Belmar Beach' Sign",
+      "type": "ITEM",
+      "location_id": "on:dumpster_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "wood",
+        "condition": "partly_broken",
+        "requires_restoration": true
+      },
+      "states": {
+        "is_shattered": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Locked Toolbox",
+      "type": "ITEM",
+      "location_id": "in:shipping_container_1",
+      "properties": {
+        "weight": 8.5,
+        "material": "metal",
+        "combination_location": "volunteer_clipboard"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "decking_planks_1",
+      "name": "Pallet of Synthetic Decking Planks",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.8
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "label_status": "mislabeled",
+        "correct_shipment_due": "2_hours"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheelbarrow_1",
+      "name": "Wheelbarrow",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "tire_condition": "flat",
+        "contents": "sand_crusted_nails"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Inspection Sheets",
+      "type": "ITEM",
+      "location_id": "on:wheelbarrow_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "last_updated": "3_days_ago",
+        "contains_combination": true
+      },
+      "states": {}
+    },
+    {
+      "id": "generator_1",
+      "name": "Power Generator",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "fuel_level": 20,
+        "extension_cord_destination": "construction_zone"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "volunteer_shirt_1",
+      "name": "Faded 'Keep Jersey Strong' Volunteer T-shirt",
+      "type": "ITEM",
+      "location_id": "on:folding_chair_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "condition": "faded",
+        "size": "XL"
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_chair_1",
+      "name": "Folding Chair",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 4.5,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "paperback_novel_1",
+      "name": "Waterlogged Paperback Novel",
+      "type": "ITEM",
+      "location_id": "on:cinderblock_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "waterlogged",
+        "title": "illegible"
+      },
+      "states": {
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "cinderblock_1",
+      "name": "Cinderblock",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          0.4,
+          0.2,
+          0.2
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "material": "concrete"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermos_1",
+      "name": "Cracked Coffee Thermos",
+      "type": "ITEM",
+      "location_id": "on:newspaper_stack_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "stainless_steel",
+        "condition": "cracked",
+        "contents": "coffee"
+      },
+      "states": {
+        "is_sealed": false,
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "newspaper_stack_1",
+      "name": "Stack of Soggy Newspapers",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "condition": "soggy"
+      },
+      "states": {}
+    },
+    {
+      "id": "crane_1",
+      "name": "Crane",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          10.0
+        ],
+        "weight": 8000.0,
+        "is_container": true,
+        "current_load": "steel_piling",
+        "operator_status": "arguing"
+      },
+      "states": {
+        "is_active": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "steel_piling_1",
+      "name": "Steel Piling",
+      "type": "FURNITURE",
+      "location_id": "in:crane_1",
+      "properties": {
+        "size": [
+          4.0,
+          0.3,
+          0.3
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "scaffolding_1",
+      "name": "Scaffolding Tower",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          5.0
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "stability": "wobbly",
+        "missing_part": "crossbar"
+      },
+      "states": {}
+    },
+    {
+      "id": "nail_gun_station_1",
+      "name": "Pneumatic Nail Gun Station",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.5
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "hose_condition": "tangled",
+        "compressor_status": "humming"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "blueprint_table_1",
+      "name": "Blueprint Table",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "wind_risk": "high",
+        "weighted_by": "coffee_cup"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-Full Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:blueprint_table_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "contents": "coffee",
+        "fill_level": "half"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "supply_cabinet_1",
+      "name": "Locked Supply Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": "spare_drill_batteries",
+        "key_holder": "site_supervisor"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "misaligned_section_1",
+      "name": "Misaligned Boardwalk Section",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.1
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "alignment_status": "misaligned",
+        "required_tools": [
+          "laser_level",
+          "pry_bar"
+        ]
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "hard_hat_1",
+      "name": "Hard Hat (Marked 'Joe')",
+      "type": "ITEM",
+      "location_id": "on:bench_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "owner": "Joe",
+        "color": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "bench_1",
+      "name": "Bench",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          1.8,
+          0.4,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First-Aid Kit",
+      "type": "ITEM",
+      "location_id": "on:post_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "condition": "partially_open",
+        "contents": "basic_supplies"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "post_1",
+      "name": "Post",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          2.0
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "on:bench_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "station": "classic_rock",
+        "sound_quality": "staticky",
+        "volume": "loud"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "plywood_barrier_1",
+      "name": "Plywood Barrier",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          2.4,
+          0.1,
+          1.2
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "graffiti": "Rebuild Faster! - Local 124",
+        "material": "plywood"
+      },
+      "states": {}
+    },
+    {
+      "id": "stuffed_dolphin_1",
+      "name": "Sun-Bleached Stuffed Dolphin Toy",
+      "type": "ITEM",
+      "location_id": "on:planks_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "fabric",
+        "condition": "sun_bleached",
+        "origin": "pre_storm"
+      },
+      "states": {}
+    },
+    {
+      "id": "planks_1",
+      "name": "Stack of Planks",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.3
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "fast_food_bag_1",
+      "name": "Crumpled Fast-Food Bag",
+      "type": "ITEM",
+      "location_id": "on:nail_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "crumpled",
+        "brand": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "nail_1",
+      "name": "Protruding Nail",
+      "type": "FURNITURE",
+      "location_id": "in:active_construction_zone",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "weight": 0.01,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "beach_gear_kiosk_1",
+      "name": "Beach Gear Kiosk",
+      "type": "FURNITURE",
+      "location_id": "in:vendor_row",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "status": "open",
+        "inventory": "beach_toys"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "fudge_stand_1",
+      "name": "Fudge Stand",
+      "type": "FURNITURE",
+      "location_id": "in:vendor_row",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "status": "open",
+        "specialty": "chocolate_fudge"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "bike_rental_hut_1",
+      "name": "Bike Rental Hut",
+      "type": "FURNITURE",
+      "location_id": "in:vendor_row",
+      "properties": {
+        "size": [
+          2.5,
+          2.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "status": "closed",
+        "inventory": "bicycles"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "donation_tent_1",
+      "name": "Pop-Up Donation Tent",
+      "type": "FURNITURE",
+      "location_id": "in:volunteer_station",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          2.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "purpose": "supply_dropoff"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "water_bottles_1",
+      "name": "Pile of Bottled Water",
+      "type": "ITEM",
+      "location_id": "in:donation_tent_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "plastic",
+        "quantity": 24,
+        "brand": "generic"
+      },
+      "states": {
+        "is_pure": false,
+        "is_packed": false
+      }
+    },
+    {
+      "id": "toolkit_1",
+      "name": "Volunteer Toolkit",
+      "type": "ITEM",
+      "location_id": "in:donation_tent_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "contents": "basic_tools",
+        "donor": "local_hardware_store",
+        "is_container": true
+      },
+      "states": {
+        "is_packed": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "donor_plaque_1",
+      "name": "'Adopt-a-Board' Donor Plaque",
+      "type": "ITEM",
+      "location_id": "on:table_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "wood",
+        "inscription": "Donated by Smith Family",
+        "status": "uninstalled"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "table_1",
+      "name": "Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:volunteer_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_purifier_1",
+      "name": "Portable Water Purifier",
+      "type": "ITEM",
+      "location_id": "in:donation_tent_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "plastic",
+        "filter_status": "new",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Box of Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:donation_tent_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "mixed",
+        "contents": "bubble_wrap, tape",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Tire Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:toolkit_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "range": "0-100_psi",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_hose_1",
+      "name": "Garden Hose",
+      "type": "ITEM",
+      "location_id": "in:donation_tent_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "rubber",
+        "length": "50_ft",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:toolkit_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "steel",
+        "size": "10_in",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_grill_1",
+      "name": "Portable Charcoal Grill",
+      "type": "FURNITURE",
+      "location_id": "in:volunteer_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "fuel_type": "charcoal",
+        "provides_abilities": [
+          "roast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scrub_brush_1",
+      "name": "Stiff-Bristled Scrub Brush",
+      "type": "ITEM",
+      "location_id": "in:toolkit_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "bristle_type": "stiff",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealant_gun_1",
+      "name": "Caulking Gun",
+      "type": "ITEM",
+      "location_id": "in:toolkit_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "contents": "silicone_sealant",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "carving_knife_1",
+      "name": "Wood Carving Knife",
+      "type": "ITEM",
+      "location_id": "in:toolkit_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "steel",
+        "blade_length": "4_in",
+        "provides_abilities": [
+          "carve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spatula_1",
+      "name": "Metal Spatula",
+      "type": "ITEM",
+      "location_id": "in:beach_gear_kiosk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless_steel",
+        "edge_type": "flat",
+        "provides_abilities": [
+          "spread"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Small Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:debris_sorting_yard",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "pressure_capacity": "5_ton",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "software_installer_1",
+      "name": "USB Drive with Software Installer",
+      "type": "ITEM",
+      "location_id": "in:supply_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "contents": "construction_software",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "carve",
+    "check_pressure",
+    "close",
+    "crack",
+    "crush",
+    "deactivate",
+    "drink",
+    "install",
+    "loosen",
+    "open",
+    "pack",
+    "purify",
+    "rinse",
+    "roast",
+    "scrub",
+    "seal",
+    "shatter",
+    "spread"
+  ]
+}

@@ -29,7 +29,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 # 导入新的评测器
 from evaluation.evaluation_interface import EvaluationInterface
-from config.config_manager import ConfigManager
+from config.config_manager import get_config_manager
+from config.config_override import ConfigOverrideParser
 
 
 def parse_args():
@@ -50,6 +51,20 @@ def parse_args():
                         help='日志级别')
     parser.add_argument('--parallel', action='store_true',
                         help='启用并行评测模式')
+
+    # 便捷的模型选择参数
+    model_group = parser.add_argument_group('便捷模型选择')
+    model_group.add_argument('--model', type=str,
+                           choices=['deepseek', 'qwen3b', 'qwen7b', 'openai', 'volcengine', 'bailian'],
+                           help='快速选择模型: deepseek, qwen3b, qwen7b, openai, volcengine, bailian')
+    model_group.add_argument('--observation-mode', type=str,
+                           choices=['explore', 'global'],
+                           help='观察模式: explore (探索模式，只显示已发现物体), global (全局模式，显示所有物体)')
+
+    # 添加配置覆盖支持（使用全局单例）
+    config_manager = get_config_manager()
+    ConfigOverrideParser.add_config_override_args(parser, config_manager)
+
     return parser.parse_args()
 
 
@@ -69,15 +84,19 @@ def run_single_evaluation(config_file: str, mode: str, scenarios: str, suffix: s
     logger = logging.getLogger(__name__)
 
     try:
-        # 加载配置
-        config_manager = ConfigManager()
+        # 加载配置（使用全局单例）
+        config_manager = get_config_manager()
         config = config_manager.get_config(config_file)
 
-        # 严格验证数据目录配置 - 直接抛出异常
-        data_dir = config_manager.get_data_dir(config_file)
-        scene_dir = config_manager.get_scene_dir(config_file)
-        task_dir = config_manager.get_task_dir(config_file)
+        # 获取数据集配置
+        dataset_name = config.get('dataset', {}).get('default', 'eval_single')
 
+        # 严格验证数据目录配置 - 直接抛出异常
+        data_dir = config_manager.get_data_dir(config_file, dataset_name)
+        scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
+        task_dir = config_manager.get_task_dir(config_file, dataset_name)
+
+        logger.info(f"📁 使用数据集: {dataset_name}")
         logger.info(f"📁 数据目录: {data_dir}")
         logger.info(f"📁 场景目录: {scene_dir}")
         logger.info(f"📁 任务目录: {task_dir}")
@@ -101,23 +120,23 @@ def run_single_evaluation(config_file: str, mode: str, scenarios: str, suffix: s
             custom_suffix=suffix
         )
 
-        # 显示结果
-        run_info = results.get('run_info', {})
+        # 显示结果 - 使用正确的字段名
+        run_info = results.get('runinfo', {})
         overall_summary = results.get('overall_summary', {})
 
         logger.info("\n🎉 评测完成！")
         logger.info("📊 评测结果:")
-        logger.info(f"  - 运行名称: {run_info.get('run_name', 'Unknown')}")
-        logger.info(f"  - 总耗时: {run_info.get('total_duration', 0):.2f} 秒")
-        logger.info(f"  - 场景数量: {overall_summary.get('total_scenarios', 0)}")
+        logger.info(f"  - 运行名称: {run_info.get('run_id', 'Unknown')}")
+        logger.info(f"  - 总耗时: {run_info.get('duration_seconds', 0):.2f} 秒")
+        logger.info(f"  - 场景数量: {run_info.get('total_scenarios', 0)}")
         logger.info(f"  - 任务总数: {overall_summary.get('total_tasks', 0)}")
-        logger.info(f"  - 完成任务: {overall_summary.get('total_completed_tasks', 0)}")
-        logger.info(f"  - 总体完成率: {overall_summary.get('overall_completion_rate', 0):.2%}")
-        logger.info(f"  - 模型准确率: {overall_summary.get('overall_completion_accuracy', 0):.2%}")
-        logger.info(f"📁 结果保存在: output/{run_info.get('run_name', 'unknown')}/")
+        logger.info(f"  - 完成任务: {overall_summary.get('actually_completed', 0)}")
+        logger.info(f"  - 总体完成率: {overall_summary.get('completion_rate', 0):.2%}")
+        logger.info(f"  - 模型声称完成: {overall_summary.get('model_claimed_completed', 0)}")
+        logger.info(f"📁 结果保存在: output/{run_info.get('run_id', 'unknown')}/")
 
         # 显示性能评价
-        completion_rate = overall_summary.get('overall_completion_rate', 0)
+        completion_rate = overall_summary.get('completion_rate', 0)
         if completion_rate >= 0.8:
             logger.info("🎊 评测结果优秀！")
         elif completion_rate >= 0.6:
@@ -139,15 +158,46 @@ def main():
     # 解析命令行参数
     args = parse_args()
 
+    # 从配置文件获取日志设置（使用全局单例）
+    config_manager = get_config_manager()
+    config = config_manager.get_config(args.config)
+    logging_config = config.get('logging', {})
+
+    # 确定日志级别（命令行参数优先，然后是配置文件，最后是默认值）
+    log_level = args.log_level or logging_config.get('level', 'INFO')
+
     # 设置日志
     logging.basicConfig(
-        level=getattr(logging, args.log_level),
+        level=getattr(logging, log_level),
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     logger = logging.getLogger(__name__)
 
-    # 从配置文件获取默认值
-    config_manager = ConfigManager()
+    if logging_config.get('show_llm_details', False):
+        logger.info("🔍 LLM详细日志已启用")
+
+    # 处理便捷参数，转换为配置覆盖
+    if hasattr(args, 'model') and args.model:
+        # 将便捷模型参数转换为配置覆盖
+        if not hasattr(args, 'config_override') or args.config_override is None:
+            args.config_override = []
+        args.config_override.append(f'llm_config.api.provider={args.model}')
+        logger.info(f"🎯 便捷模型选择: {args.model}")
+
+    if hasattr(args, 'observation_mode') and args.observation_mode:
+        # 将观察模式参数转换为配置覆盖
+        if not hasattr(args, 'config_override') or args.config_override is None:
+            args.config_override = []
+
+        only_show_discovered = 'true' if args.observation_mode == 'explore' else 'false'
+        args.config_override.append(f'{args.config}.agent_config.environment_description.only_show_discovered={only_show_discovered}')
+        logger.info(f"👁️ 观察模式: {args.observation_mode} ({'探索模式' if args.observation_mode == 'explore' else '全局模式'})")
+
+    # 应用配置覆盖
+    ConfigOverrideParser.apply_config_overrides(args, args.config)
+    logger.info("配置覆盖已应用到: %s", args.config)
+
+    # 重新获取配置（包含覆盖后的值）
     config = config_manager.get_config(args.config)
     eval_config = config.get('evaluation', {})
     run_settings = eval_config.get('run_settings', {})

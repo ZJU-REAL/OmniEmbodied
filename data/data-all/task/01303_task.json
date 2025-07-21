@@ -1,0 +1,166 @@
+{
+  "task_background": "Prepare the Memory River Clinic for daily operations by organizing equipment, cleaning, and setting up therapy environments.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 on monitoring_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:monitoring_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move patient_journal_1 to family_notes_board_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "patient_journal_1",
+          "location_id": ":family_notes_board_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue patient journal in the therapy lounge.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "patient_journal_1",
+          "location_id": "in:therapy_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Put the half-full corrosive medicine vial in the medicine refrigerator.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "medicine_vial_1",
+          "location_id": "in:medicine_refrigerator_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Seal the unsealed medicine vial with the blue cap.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "medicine_vial_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Wipe the wet coffee mug.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the sealing tape to seal the unsealed medicine vial that has a blue cap.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "medicine_vial_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the soundproof therapy pod.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soundproof_pod_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the Memory River water feature.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "memory_river_feature_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the neural mapping chair to the therapy lounge.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "neural_mapping_chair_1",
+          "location_id": ":therapy_lounge"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Memory River water feature to the staff monitoring station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "memory_river_feature_1",
+          "location_id": ":staff_monitoring_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the inactive Memory River water feature to the staff monitoring station and activate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "memory_river_feature_1",
+          "location_id": ":staff_monitoring_station"
+        },
+        {
+          "id": "memory_river_feature_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the closed soundproof therapy pod to the diagnostic imaging suite and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "soundproof_pod_1",
+          "location_id": ":diagnostic_imaging_suite"
+        },
+        {
+          "id": "soundproof_pod_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01303"
+}

@@ -1,0 +1,802 @@
+{
+  "description": "A bustling independent auto repair shop specializing in performance tuning and fuel system diagnostics, featuring a main garage bay, parts storage room, client lounge, diagnostic office, and outdoor junkyard storage.",
+  "rooms": [
+    {
+      "id": "main_garage_bay",
+      "name": "Main Garage Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "parts_storage_room",
+        "client_lounge",
+        "diagnostic_office",
+        "outdoor_junkyard"
+      ]
+    },
+    {
+      "id": "parts_storage_room",
+      "name": "Parts Storage Room",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "client_lounge",
+      "name": "Client Lounge",
+      "properties": {
+        "type": "waiting_area"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "diagnostic_office",
+      "name": "Diagnostic Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "outdoor_junkyard",
+      "name": "Outdoor Junkyard Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift #1",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          3.5
+        ],
+        "weight": 3500.0,
+        "is_container": true,
+        "max_capacity": "3.5 tons",
+        "current_height": 1.8,
+        "condition": "sticky from grease"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "honda_pilot_1",
+      "name": "2008 Honda Pilot (AWD EX-L)",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_lift_1",
+      "properties": {
+        "size": [
+          4.8,
+          1.9,
+          1.8
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "color": "silver",
+        "model": "AWD EX-L",
+        "year": 2008
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "engine_hoist_1",
+      "name": "Engine Hoist",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          3.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "max_reach": "2.4m",
+        "condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "v6_engine_block_1",
+      "name": "Detached V6 Engine Block",
+      "type": "FURNITURE",
+      "location_id": "on:engine_hoist_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "condition": "used",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "obd_ii_scanner_1",
+      "name": "OBD-II Scanner (AutoPro X9)",
+      "type": "ITEM",
+      "location_id": "in:honda_pilot_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "AutoPro",
+        "model": "X9",
+        "display": "P0172 – System Too Rich (Bank 1)"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "fuel_pressure_tester_1",
+      "name": "Fuel Pressure Tester Kit",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.2,
+        "color": "red",
+        "missing_part": "12mm adapter",
+        "last_seen": "Parts Room, Bin #7",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "leaking_coolant_reservoir_1",
+      "name": "Leaking Coolant Reservoir",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "green",
+        "condition": "cracked along seam",
+        "fluid_type": "coolant",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor (80-gallon)",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "tank_size": "80-gallon",
+        "pressure": "90 PSI",
+        "condition": "hose tangled"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench (Digital)",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "setting": "89 ft-lbs",
+        "calibrated": true,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_2",
+      "name": "Torque Wrench (Analog)",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.3,
+        "color": "red",
+        "setting": "unknown",
+        "calibrated": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_3",
+      "name": "Torque Wrench (Digital)",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.4,
+        "color": "blue",
+        "setting": "75 ft-lbs",
+        "calibrated": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "solvent_level": "30%",
+        "contents": "grimy throttle body"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "\"Safety First!\" Poster",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "faded",
+        "condition": "peeling at corners",
+        "stain": "coffee-cup stain"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "dented_toolbox_1",
+      "name": "Dented Toolbox",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "stickers": [
+          "Honda Master Tech 2005"
+        ],
+        "drawer_condition": "slightly ajar",
+        "contents": "loose spark plugs"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "improvised_ashtray_1",
+      "name": "Improvised Ashtray (Old Brake Rotor)",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "contents": "cigarette butts",
+        "hazard": "near flammable solvent cans"
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_shelving_unit_1",
+      "name": "Steel Shelving Unit (3m tall)",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_room",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          3.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "accessibility": "top shelf requires ladder"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_coolant_jug_1",
+      "name": "Sealed Coolant Jug (Type 2 HOAT)",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "label": "Type 2 HOAT – Do Not Mix with Standard Green",
+        "expiration": "rubbed off",
+        "tested": false
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_coolant_jug_2",
+      "name": "Sealed Coolant Jug (Type 2 HOAT)",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "label": "Type 2 HOAT – Do Not Mix with Standard Green",
+        "expiration": "rubbed off",
+        "tested": false
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_coolant_jug_3",
+      "name": "Sealed Coolant Jug (Type 2 HOAT)",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "label": "Type 2 HOAT – Do Not Mix with Standard Green",
+        "expiration": "rubbed off",
+        "tested": false
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_coolant_jug_4",
+      "name": "Sealed Coolant Jug (Type 2 HOAT)",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "label": "Type 2 HOAT – Do Not Mix with Standard Green",
+        "expiration": "rubbed off",
+        "tested": false
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_coolant_jug_5",
+      "name": "Sealed Coolant Jug (Type 2 HOAT)",
+      "type": "ITEM",
+      "location_id": "on:steel_shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "green",
+        "label": "Type 2 HOAT – Do Not Mix with Standard Green",
+        "expiration": "rubbed off",
+        "tested": true,
+        "ph_level": "8.2"
+      },
+      "states": {}
+    },
+    {
+      "id": "misfiled_oxygen_sensor_1",
+      "name": "Misfiled Oxygen Sensor",
+      "type": "ITEM",
+      "location_id": "in:steel_shelving_unit_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "serial": "OX-2297H",
+        "correct_location": "Oxygen Sensors bin"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_room",
+      "properties": {
+        "weight": 0.8,
+        "color": "gray",
+        "condition": "out of tape",
+        "location": "next to unmarked fuses"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "battery_charger_1",
+      "name": "Battery Charger",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "status": "flickering between 'charging' and 'error'"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "outdated_calendar_1",
+      "name": "Outdated Calendar (2018 Bosch Tools)",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "year": 2018,
+        "brand": "Bosch Tools"
+      },
+      "states": {}
+    },
+    {
+      "id": "mouse_nest_1",
+      "name": "Mouse Nest",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "shredded shop towels",
+        "contents": "half-eaten granola bar"
+      },
+      "states": {}
+    },
+    {
+      "id": "transmission_crate_1",
+      "name": "Transmission Crate",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          1.5
+        ],
+        "weight": 180.0,
+        "is_container": true,
+        "blocking": "garage doorway",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "obd_ii_cheat_sheet_1",
+      "name": "OBD-II Code Cheat Sheet Poster",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "laminated",
+        "condition": "outdated",
+        "hazard": "misleading error definitions"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "repair_manual_1",
+      "name": "Repair Manual",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_office",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "relevant_page": "43 (Rich Condition Diagnostics)",
+        "provides_abilities": [
+          "show"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "dual_monitor_pc_1",
+      "name": "Dual-Monitor PC",
+      "type": "FURNITURE",
+      "location_id": "in:diagnostic_office",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "software": "scan software",
+        "condition": "cluttered desk"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rusty_fuel_tank_1",
+      "name": "Rusted Fuel Tank",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_junkyard",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "label": "LEAK TEST PENDING",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "broken_pickup_truck_1",
+      "name": "Broken-Down Pickup Truck",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_junkyard",
+      "properties": {
+        "size": [
+          5.0,
+          2.0,
+          1.8
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "missing_part": "front axle",
+        "condition": "broken"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "salvaged_engine_1",
+      "name": "Salvaged Engine on Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:outdoor_junkyard",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "condition": "salvaged",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "wrench_set_1",
+      "name": "Wrench Set",
+      "type": "ITEM",
+      "location_id": "in:dented_toolbox_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "chrome",
+        "pieces": 12,
+        "provides_abilities": [
+          "loosen",
+          "adjust",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:dented_toolbox_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "multicolor",
+        "pieces": 6,
+        "provides_abilities": [
+          "loosen",
+          "adjust",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Professional Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:dented_toolbox_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "contents": "various tools and parts",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_tape_1",
+      "name": "Measuring Tape",
+      "type": "ITEM",
+      "location_id": "in:dented_toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "length": "25 feet",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Shop Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 8.0,
+        "color": "orange",
+        "capacity": "10 gallons",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:diagnostic_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "condition": "good",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:client_lounge",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "sign": "OUT OF ORDER",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "faded_chair_1",
+      "name": "Faded Chair",
+      "type": "FURNITURE",
+      "location_id": "in:client_lounge",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "faded blue",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_chair_2",
+      "name": "Faded Chair",
+      "type": "FURNITURE",
+      "location_id": "in:client_lounge",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "faded blue",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_mounted_tv_1",
+      "name": "Wall-Mounted TV",
+      "type": "FURNITURE",
+      "location_id": "in:client_lounge",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "channel": "stuck on news channel",
+        "condition": "working"
+      },
+      "states": {
+        "is_on": true
+      }
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "hide",
+    "loosen",
+    "lower",
+    "measure",
+    "open",
+    "repair",
+    "show",
+    "sync",
+    "turn_off",
+    "turn_on",
+    "unstaple",
+    "vacuum",
+    "close"
+  ]
+}

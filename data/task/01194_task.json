@@ -1,0 +1,174 @@
+{
+  "task_background": "Prepare the Network Operations Center for a critical system upgrade by organizing equipment, performing maintenance, and ensuring safety protocols.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 150.0,
+      "max_size": [
+        3.0,
+        3.0,
+        3.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 150.0,
+      "max_size": [
+        3.0,
+        3.0,
+        3.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place empty_coffee_cup_1 in the mini_fridge_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "empty_coffee_cup_1",
+          "location_id": "in:mini_fridge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place employee_of_the_month_photo_1 on network_traffic_whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "employee_of_the_month_photo_1",
+          "location_id": "on:network_traffic_whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off the Dell brand terminal on the command console desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "primary_admin_terminal_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the white microwave in the break room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "microwave_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the faulty hard drive.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "faulty_hard_drive_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the spare SSD on the workbench.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spare_ssd_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to unwrap the spare SSD and place it in the tool chest.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "spare_ssd_1",
+          "is_wrapped": false
+        },
+        {
+          "id": "spare_ssd_1",
+          "location_id": "in:tool_chest_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the torque screwdriver set to repair the faulty hard drive and move it to the tool chest.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "faulty_hard_drive_1",
+          "is_broken": false
+        },
+        {
+          "id": "faulty_hard_drive_1",
+          "location_id": ":tool_chest_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the primary admin terminal and deactivate the KVM switch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "primary_admin_terminal_1",
+          "is_active": false
+        },
+        {
+          "id": "kvm_switch_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the emergency battery backup to the maintenance tool bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_battery_backup_1",
+          "location_id": ":maintenance_tool_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move server rack 3 to the main monitoring hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "location_id": ":main_monitoring_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server rack containing the faulty hard drive to the maintenance tool bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_3",
+          "location_id": ":maintenance_tool_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the emergency battery backup to the break room and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_battery_backup_1",
+          "location_id": ":break_storage_nook"
+        },
+        {
+          "id": "emergency_battery_backup_1",
+          "is_on": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01194"
+}

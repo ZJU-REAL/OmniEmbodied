@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the university budget office for the Board of Regents vote on the tuition hike proposal.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place red_folder_1 on water_cooler_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "red_folder_1",
+          "location_id": "on:water_cooler_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place presentation_clicker_1 in metal_inbox_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "presentation_clicker_1",
+          "location_id": "in:metal_inbox_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the USB drive with red color and 'Final Proposal Backup' label, then place it on conference_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the unopened mail and place it on conference_table_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "unopened_mail_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the industrial printer by removing the jammed paper.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "jammed_paper_1",
+          "location_id": ":rolling_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the fireproof safe.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "fireproof_safe_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the key ring to unlock the red-stamped folder containing confidential budget documents.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "red_folder_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the correct sticky note with combination 34-56-78 and unlock the filing cabinet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to activate the industrial printer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the jammed industrial printer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial printer to the main conference room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "location_id": ":main_conference_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the filing cabinet to the secure records annex.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": ":secure_records_annex"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial printer to the conference room and activate it for the presentation.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_printer_1",
+          "location_id": ":main_conference_room"
+        },
+        {
+          "id": "industrial_printer_1",
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked filing cabinet to the annex and unlock it using the key ring.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": ":secure_records_annex"
+        },
+        {
+          "id": "filing_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01291"
+}

@@ -1,0 +1,862 @@
+{
+  "description": "A long-abandoned corporate IT security bunker with server racks, outdated terminals, and scattered sensitive documents, requiring multi-agent collaboration for heavy object movement, distributed knowledge sharing, and security puzzle solving.",
+  "rooms": [
+    {
+      "id": "main_server_hall",
+      "name": "Main Server Hall",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "security_hub",
+        "developer_lab",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "security_hub",
+      "name": "Security Hub",
+      "properties": {
+        "type": "security"
+      },
+      "connected_to_room_ids": [
+        "main_server_hall"
+      ]
+    },
+    {
+      "id": "developer_lab",
+      "name": "Decommissioned Developer Lab",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_server_hall"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet & Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_server_hall"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "server_rack_a7_1",
+      "name": "Server Rack A-7",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-A7",
+        "is_bolted": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "monitoring_station_1",
+      "name": "Central Monitoring Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal",
+        "shape": "L-shaped"
+      },
+      "states": {}
+    },
+    {
+      "id": "authentication_terminal_1",
+      "name": "Authentication Terminal",
+      "type": "FURNITURE",
+      "location_id": "on:monitoring_station_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.1
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "SecureTech",
+        "model": "AT-2000",
+        "missing_key": "F5"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "ups_battery_1",
+      "name": "UPS Battery Backup",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "PowerSafe",
+        "charge_level": 10,
+        "wires_frayed": true
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "server_blade_3_1",
+      "name": "Server Blade (Slot 3)",
+      "type": "ITEM",
+      "location_id": "in:server_rack_a7_1",
+      "properties": {
+        "weight": 3.5,
+        "label": "AUTH-SECURE-V2",
+        "condition": "dusty",
+        "status": "intact"
+      },
+      "states": {}
+    },
+    {
+      "id": "flashlight_1",
+      "name": "Emergency Flashlight",
+      "type": "ITEM",
+      "location_id": "on:server_rack_a7_1",
+      "properties": {
+        "weight": 0.5,
+        "battery_level": "low",
+        "condition": "flickering",
+        "brand": "ToughLight"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "weight": 5.0,
+        "is_container": true,
+        "condition": "partially_open",
+        "color": "red",
+        "brand": "ProTool"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "Phillips",
+        "size": "medium",
+        "condition": "good",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_cable_1",
+      "name": "Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "length": "3m",
+        "condition": "loose",
+        "color": "blue"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.05,
+        "capacity": "16GB",
+        "condition": "cracked",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_safe_1",
+      "name": "Wall-Mounted Safe",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "lock_type": "biometric",
+        "power_status": "dim"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cctv_monitor_1",
+      "name": "CCTV Monitor Bank",
+      "type": "FURNITURE",
+      "location_id": "in:security_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.3,
+          1.2
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "screens_working": 1,
+        "screens_total": 6
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "master_keycard_1",
+      "name": "Master Keycard",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.02,
+        "label": "ADMIN OVERRIDE",
+        "color": "gold",
+        "status": "valid"
+      },
+      "states": {}
+    },
+    {
+      "id": "router_reboot_switch_1",
+      "name": "Router Reboot Switch",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.5,
+        "access_required": "screwdriver",
+        "hold_time": "10s"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "cluttered"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "status": "cold",
+        "brand": "IronMaster",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "debug_terminal_1",
+      "name": "Debug Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.1
+        ],
+        "weight": 7.0,
+        "is_container": false,
+        "status": "Connection Timeout",
+        "brand": "TechDebug"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "server_crate_1",
+      "name": "Heavy Server Crate",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "label": "DO NOT OPEN – CORP AUTH KEYS",
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Crowbar",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 3.0,
+        "condition": "rusted",
+        "material": "steel",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_tape_1",
+      "name": "Backup Tape",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.3,
+        "label": "FINAL CONFIG BACKUP",
+        "condition": "good",
+        "requires": "tape_drive"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_keycard_1",
+      "name": "Spare Keycard",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.02,
+        "status": "blank",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_laptop_1",
+      "name": "Dusty Laptop",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 2.5,
+        "missing_parts": [
+          "battery",
+          "HDD"
+        ],
+        "brand": "OldTech"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_manual_1",
+      "name": "Security Manual",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 1.2,
+        "title": "Outdated Security Manuals (2008)",
+        "condition": "dusty",
+        "pages": 300
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "brand": "OfficePro",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:monitoring_station_1",
+      "properties": {
+        "weight": 0.6,
+        "condition": "stained",
+        "content": "petrified_liquid",
+        "color": "white"
+      },
+      "states": {
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "maintenance_logs_1",
+      "name": "Server Maintenance Logs",
+      "type": "ITEM",
+      "location_id": "on:monitoring_station_1",
+      "properties": {
+        "weight": 1.8,
+        "year": 2010,
+        "condition": "dusty",
+        "pages": 150
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Dusty Keyboard",
+      "type": "ITEM",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "weight": 1.2,
+        "missing_keys": [
+          "F5",
+          "J",
+          "Space"
+        ],
+        "condition": "broken",
+        "brand": "KeyMaster"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "desk_phone_1",
+      "name": "Desk Phone",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.8,
+        "status": "off-hook",
+        "brand": "BellTech",
+        "condition": "fingerprinted"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Security Logbook",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.7,
+        "last_entry": "LOCKDOWN INITIATED",
+        "condition": "used",
+        "pages": 200
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Broken Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 5.5,
+        "condition": "leaking",
+        "smell": "burnt_plastic",
+        "brand": "BrewMaster"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "motherboard_1",
+      "name": "Dismantled Motherboard",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "dismantled",
+        "brand": "CircuitTech",
+        "model": "MB-2000"
+      },
+      "states": {
+        "is_soldered": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "AUTH BYPASS PATH?",
+        "condition": "half-erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "envelope_1",
+      "name": "Sealed Envelope",
+      "type": "ITEM",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "weight": 0.1,
+        "label": "LAST CONFIG",
+        "contents": "USB_dongle",
+        "condition": "sealed",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_dongle_1",
+      "name": "USB Dongle",
+      "type": "ITEM",
+      "location_id": "in:envelope_1",
+      "properties": {
+        "weight": 0.03,
+        "contents": "admin_credentials",
+        "color": "black",
+        "brand": "SecureTech"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_1",
+      "name": "Stack of Disassembled Servers",
+      "type": "ITEM",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "weight": 25.0,
+        "condition": "disassembled",
+        "led_status": "blinking",
+        "brand": "ServerPro"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "wireless_keyboard_1",
+      "name": "Wireless Keyboard",
+      "type": "ITEM",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "weight": 0.9,
+        "battery_condition": "corroded",
+        "brand": "WirelessPro",
+        "model": "WK-100"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "sandwich_1",
+      "name": "Half-Eaten Sandwich",
+      "type": "ITEM",
+      "location_id": "in:developer_lab",
+      "properties": {
+        "weight": 0.2,
+        "condition": "petrified",
+        "wrapper": "foil",
+        "content": "unknown"
+      },
+      "states": {
+        "is_chopped": false
+      }
+    },
+    {
+      "id": "hard_drive_1",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.7,
+        "capacity": "1TB",
+        "condition": "unlabeled",
+        "brand": "DataSafe"
+      },
+      "states": {}
+    },
+    {
+      "id": "hard_drive_2",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.7,
+        "capacity": "1TB",
+        "label": "Backup_001",
+        "condition": "good",
+        "brand": "DataSafe"
+      },
+      "states": {}
+    },
+    {
+      "id": "hard_drive_3",
+      "name": "Spare Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.7,
+        "capacity": "2TB",
+        "label": "Backup_002",
+        "condition": "scratched",
+        "brand": "DataSafe"
+      },
+      "states": {}
+    },
+    {
+      "id": "poster_1",
+      "name": "Security Protocol #7 Poster",
+      "type": "ITEM",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "weight": 0.3,
+        "content": "outdated_password_policies",
+        "condition": "peeling",
+        "size": "A2"
+      },
+      "states": {
+        "is_torn": false
+      }
+    },
+    {
+      "id": "intercom_1",
+      "name": "Overhead Intercom",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_hall",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "sound": "static_buzzing",
+        "message": "…systems compromised…",
+        "brand": "CommTech"
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 1.5,
+        "year": 2011,
+        "condition": "dusty",
+        "name_status": "scratched_off",
+        "material": "wood"
+      },
+      "states": {
+        "is_varnished": false
+      }
+    },
+    {
+      "id": "varnish_1",
+      "name": "Varnish Can",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 1.0,
+        "color": "clear",
+        "brand": "WoodFinish",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "bristle_type": "synthetic",
+        "size": "medium",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Utility Knife",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.3,
+        "blade_type": "retractable",
+        "condition": "sharp",
+        "provides_abilities": [
+          "chop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:security_hub",
+      "properties": {
+        "weight": 0.4,
+        "brand": "PhotoPro",
+        "megapixels": 12,
+        "battery_status": "low",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 2.0,
+        "type": "manual",
+        "condition": "functional",
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_1",
+      "name": "Sewing Needle",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.02,
+        "size": "medium",
+        "condition": "sharp",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "thread_1",
+      "name": "Thread Spool",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "polyester",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "chop",
+    "close",
+    "connect",
+    "disconnect",
+    "inflate",
+    "mend",
+    "open",
+    "photograph",
+    "scrape",
+    "solder",
+    "stack",
+    "staple",
+    "tear",
+    "tighten",
+    "turn_on",
+    "varnish"
+  ]
+}

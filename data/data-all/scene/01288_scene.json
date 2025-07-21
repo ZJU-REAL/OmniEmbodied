@@ -1,0 +1,875 @@
+{
+  "description": "A high-security aquatic toxicity research lab studying mercury contamination in marine life, featuring interconnected zones with heavy equipment, time-sensitive tasks, and safety protocols requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_testing_chamber",
+      "name": "Main Testing Chamber",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "microscopy_analysis_bay",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "microscopy_analysis_bay",
+      "name": "Microscopy & Analysis Bay",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "main_testing_chamber",
+        "cold_storage_vault"
+      ]
+    },
+    {
+      "id": "cold_storage_vault",
+      "name": "Cold Storage & Sample Vault",
+      "properties": {
+        "type": "refrigerated"
+      },
+      "connected_to_room_ids": [
+        "microscopy_analysis_bay",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination & Safety Airlock",
+      "properties": {
+        "type": "transition"
+      },
+      "connected_to_room_ids": [
+        "main_testing_chamber",
+        "cold_storage_vault",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck & Control Room",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "decontamination_airlock"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "fish_tank_fw_1",
+      "name": "Freshwater Fish Tank FW-1",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "acrylic",
+        "frame_material": "steel",
+        "water_type": "freshwater"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fish_tank_fw_2",
+      "name": "Freshwater Fish Tank FW-2",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "acrylic",
+        "frame_material": "steel",
+        "water_type": "freshwater"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fish_tank_sw_1",
+      "name": "Saltwater Fish Tank SW-1",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "acrylic",
+        "frame_material": "steel",
+        "water_type": "saltwater"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fish_tank_sw_2",
+      "name": "Saltwater Fish Tank SW-2",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "acrylic",
+        "frame_material": "steel",
+        "water_type": "saltwater"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dissection_table_1",
+      "name": "Stainless Steel Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "integrated_drainage": true
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Motorized Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.3
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "rubber_metal"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "mercury_analyzer_1",
+      "name": "Mercury Vapor Analyzer",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 3.5,
+        "battery_level": 18,
+        "color": "black",
+        "brand": "LabTech",
+        "model": "MVA-3000"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "fish_crate_k9_1",
+      "name": "High-Risk Swordfish Crate Batch #K9",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 15.0,
+        "material": "plastic",
+        "risk_level": "high",
+        "fish_type": "swordfish"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fish_crate_l4_1",
+      "name": "Low-Risk Salmon Crate Batch #L4",
+      "type": "ITEM",
+      "location_id": "on:conveyor_belt_1",
+      "properties": {
+        "weight": 12.0,
+        "material": "plastic",
+        "risk_level": "low",
+        "fish_type": "salmon"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "water_pump_1",
+      "name": "Broken Water Pump",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal_plastic",
+        "brand": "AquaFlow",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 1.5,
+        "max_capacity": 30,
+        "color": "white",
+        "brand": "PrecisionWeigh",
+        "is_container": true
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "petri_dish_1",
+      "name": "Empty Petri Dish",
+      "type": "ITEM",
+      "location_id": "on:digital_scale_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "glass",
+        "is_empty": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_tray_cart_1",
+      "name": "Sample Tray Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "wheels": true
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_tray_1",
+      "name": "Dissected Fish Tissue Tray",
+      "type": "ITEM",
+      "location_id": "on:sample_tray_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "content": "fish_tissue",
+        "stain": "iodine"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_tray_2",
+      "name": "Empty Stained Tray",
+      "type": "ITEM",
+      "location_id": "on:sample_tray_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "is_empty": true,
+        "stain": "iodine"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_lamp_1",
+      "name": "Wall-Mounted UV Sterilization Lamp",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 4.0,
+        "mount_type": "wall",
+        "brand": "PureBeam",
+        "filter_status": "needs_replacement"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "mercury_poster_1",
+      "name": "Mercury Exposure Limits Poster",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "condition": "faded",
+        "content": "safety_guidelines"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_manual_1",
+      "name": "Aquatic Toxicology Protocols, 3rd Ed.",
+      "type": "ITEM",
+      "location_id": "on:dissection_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "paper",
+        "stain": "coffee",
+        "edition": "3rd"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_fern_1",
+      "name": "Potted Fern",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 3.0,
+        "plant_type": "fern",
+        "health": "poor",
+        "soil_moisture": "dry"
+      },
+      "states": {}
+    },
+    {
+      "id": "sem_microscope_1",
+      "name": "Scanning Electron Microscope (SEM)",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.2,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "brand": "NanoView",
+        "model": "SEM-5000"
+      },
+      "states": {}
+    },
+    {
+      "id": "aas_spectrometer_1",
+      "name": "Atomic Absorption Spectrometer (AAS)",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "brand": "ChemAnalyze",
+        "calibration_progress": 72
+      },
+      "states": {}
+    },
+    {
+      "id": "mercury_slide_1",
+      "name": "Mercury-Contaminated Slide Patient #442",
+      "type": "ITEM",
+      "location_id": "on:sem_microscope_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "contamination_level": "high",
+        "label": "Patient #442 – High Hg"
+      },
+      "states": {}
+    },
+    {
+      "id": "mercury_slide_2",
+      "name": "Control Slide #119",
+      "type": "ITEM",
+      "location_id": "on:sem_microscope_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "glass",
+        "contamination_level": "low",
+        "label": "Control #119 – Low Hg"
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_cabinet_1",
+      "name": "Locked Reagent Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "last_use": "blood_samples"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "pcr_machine_1",
+      "name": "Thermal Cycler (PCR Machine)",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "last_use": "DNA_extraction",
+        "temperature": "warm"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Lab Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_analysis_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "content": "equations",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "toxicologist_mug_1",
+      "name": "World's Best Toxicologist Mug",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "ceramic",
+        "content": [
+          "pens",
+          "usb_drive"
+        ],
+        "novelty": true
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigeration_unit_1",
+      "name": "Walk-in Refrigeration Unit",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          2.5,
+          2.5,
+          2.2
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "temperature": 4,
+        "door_seal_condition": "damaged"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "certification_status": "expired"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "frozen_samples_pallet_1",
+      "name": "Pallet of Frozen Fish Samples",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "cooling_status": "faulty",
+        "thawing": true
+      },
+      "states": {}
+    },
+    {
+      "id": "mercury_tracer_vial_1",
+      "name": "Radioactive Mercury Tracer Vial",
+      "type": "ITEM",
+      "location_id": "in:biosafety_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "container": "lead_box",
+        "hazard_level": "high",
+        "lock_status": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_generator_1",
+      "name": "Backup Generator",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 70.0,
+        "is_container": false,
+        "status": "offline",
+        "fuel_needed": true
+      },
+      "states": {}
+    },
+    {
+      "id": "shipping_crate_1",
+      "name": "Insulated Shipping Crate (URGENT)",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 15.0,
+        "material": "insulated",
+        "label": "URGENT: Return to EPA Field Office",
+        "priority": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "safety_note_1",
+      "name": "DO NOT EAT Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:refrigeration_unit_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "message": "DO NOT EAT – Research Samples Only!",
+        "adhesive": true
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_manual_1",
+      "name": "Dusty Safety Manual",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 1.0,
+        "material": "paper",
+        "year": 2018,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_sterilization_1",
+      "name": "UV Sterilization Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 110.0,
+        "is_container": true,
+        "sterilization_type": "UV"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "protective_gear_rack_1",
+      "name": "Protective Gear Storage Rack",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.2,
+          0.4,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "content": "safety_gear"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "on:protective_gear_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "cotton",
+        "size": "large",
+        "color": "white"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Safety Goggles",
+      "type": "ITEM",
+      "location_id": "on:protective_gear_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "lens_color": "clear"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "emergency_shower_1",
+      "name": "Emergency Shower",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          2.2
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "activation_type": "pull_handle"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Lab Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          1.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "interface_type": "touchscreen"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_computer_1",
+      "name": "Lab Computer",
+      "type": "ITEM",
+      "location_id": "on:control_panel_1",
+      "properties": {
+        "weight": 5.0,
+        "brand": "TechLab",
+        "model": "Workstation-500",
+        "status": "idle"
+      },
+      "states": {
+        "is_plugged_in": true,
+        "is_on": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Misplaced Keycard",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "access_level": "high",
+        "location_status": "misplaced"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Flathead Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal_plastic",
+        "type": "flathead",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "corrosive_reagent_1",
+      "name": "Corrosive Reagent (Blue Cap)",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.5,
+        "cap_color": "blue",
+        "label": "CORROSIVE",
+        "fill_level": "half"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glassware_1",
+      "name": "Decorative Blue Glassware",
+      "type": "ITEM",
+      "location_id": "in:main_testing_chamber",
+      "properties": {
+        "weight": 0.7,
+        "material": "glass",
+        "color": "blue",
+        "purpose": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "cooling_coil_1",
+      "name": "Faulty Cooling Coil",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "status": "faulty",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Repair Toolbox",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "contents": [
+          "wrench",
+          "pliers",
+          "screwdriver"
+        ],
+        "provides_abilities": [
+          "repair",
+          "unscrew"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "open",
+    "raise",
+    "repair",
+    "show",
+    "turn_on",
+    "unplug",
+    "unscrew",
+    "wear"
+  ]
+}

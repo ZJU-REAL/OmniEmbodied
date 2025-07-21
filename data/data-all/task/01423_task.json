@@ -1,0 +1,168 @@
+{
+  "task_background": "Prepare the hospital trauma bay and prosthetic workshop for emergency cases and ongoing prosthetic repairs.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 5.0,
+      "max_weight": 80.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 5.0,
+      "max_weight": 80.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place digital_clipboard_1 on crash_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_clipboard_1",
+          "location_id": "on:crash_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open sterilization_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sterilization_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the IV bag with the red port on gurney_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "iv_bag_1",
+          "location_id": "on:gurney_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the only damaged titanium facial prosthetic in the UV sterilization chamber.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "facial_prosthetic_1",
+          "location_id": "in:uv_chamber_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Scan the barcode of the IV bag labeled 'LACTATED RINGERS—CRITICAL'.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "iv_bag_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Install the half-assembled prosthetic hand using the precision screwdriver.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "prosthetic_hand_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner to scan the IV bag with the red port.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "iv_bag_1",
+          "is_barcode_scanned": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the whiteboard marker to write on the wooden plaque for the employee of the month that is 6 months old.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "employee_plaque_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the bio-seal door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bio_seal_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the industrial 3D printer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic gurney to the decontamination airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gurney_1",
+          "location_id": ":decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial 3D printer to the trauma bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": ":trauma_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the tool cart that is blocking the passage to the supply closet.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "location_id": ":supply_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial 3D printer currently printing a titanium nasal plate to the decontamination airlock.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": ":decontamination_airlock"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01423"
+}

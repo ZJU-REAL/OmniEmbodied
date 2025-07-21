@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the Network Operations Center for an emergency network upgrade by repairing equipment, organizing tools, and moving heavy furniture.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place keyboard_1 on office_chair_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "keyboard_1",
+          "location_id": "on:office_chair_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place manual_stack_1 on workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "manual_stack_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the red binder and place it in the break area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_binder_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the black Juniper device and place it on the workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ipv6_gateway_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken coffee machine.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Tighten the loose patch panel.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "patch_panel_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the black repair kit to fix the broken KVM switch on the workstation.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "kvm_switch_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the silver wrench to tighten the loose office chair.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "office_chair_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the SixXS tunnel router.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sixxs_router_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to unseal the storage cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_cabinet_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the storage cabinet to the main NOC hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_cabinet_1",
+          "location_id": ":main_noc_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the network closet.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":network_closet"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sealed storage cabinet to the main NOC hub and unseal it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_cabinet_1",
+          "location_id": ":main_noc_hub"
+        },
+        {
+          "id": "storage_cabinet_1",
+          "is_sealed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the server rack to the network closet and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":network_closet"
+        },
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01440"
+}

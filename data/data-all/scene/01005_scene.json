@@ -1,0 +1,691 @@
+{
+  "description": "A high-security biomedical research lab specializing in cytokine synthesis and immune modulation, currently in a state of controlled chaos after an overnight equipment malfunction disrupted a critical IL-35 production batch.",
+  "rooms": [
+    {
+      "id": "main_synthesis_lab",
+      "name": "Main Synthesis Lab",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "cold_storage_sample_vault",
+        "equipment_maintenance_bay",
+        "monitoring_control_room",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "cold_storage_sample_vault",
+      "name": "Cold Storage & Sample Vault",
+      "properties": {
+        "type": "refrigerated"
+      },
+      "connected_to_room_ids": [
+        "main_synthesis_lab"
+      ]
+    },
+    {
+      "id": "equipment_maintenance_bay",
+      "name": "Equipment Maintenance Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_synthesis_lab"
+      ]
+    },
+    {
+      "id": "monitoring_control_room",
+      "name": "Monitoring & Control Room",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_synthesis_lab"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "transitional"
+      },
+      "connected_to_room_ids": [
+        "main_synthesis_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet (Class II)",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "BC-2000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge (Operational)",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "brand": "Eppendorf"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_2",
+      "name": "Centrifuge (Operational)",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "brand": "Eppendorf"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_3",
+      "name": "Centrifuge (Broken)",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "brand": "Eppendorf"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "microplate_reader_1",
+      "name": "Refrigerated Microplate Reader",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic",
+        "brand": "BioTek"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "il_35_batch_1",
+      "name": "IL-35 Synthesis Batch (Priority Sample)",
+      "type": "ITEM",
+      "location_id": "in:biosafety_cabinet_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "glass",
+        "quantity": 12,
+        "label": "STABLE/DEGRADING"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_stabilizer_kit_1",
+      "name": "Emergency Stabilizer Kit",
+      "type": "ITEM",
+      "location_id": "in:biosafety_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "master_control_terminal_1",
+      "name": "Master Control Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "brand": "LabTech"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Pipette Set",
+      "type": "ITEM",
+      "location_id": "on:centrifuge_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "range": "1-10μL",
+        "provides_abilities": [
+          "pour"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_incubator_1",
+      "name": "Portable Incubator",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "temperature_setting": "37°C"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "biometric_lock_panel_1",
+      "name": "Biometric Lock Panel",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_sample_vault",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "material": "plastic",
+        "brand": "SecurTech"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sample_racks_1",
+      "name": "Sample Racks",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_sample_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_il_12_stocks_1",
+      "name": "Backup IL-12α/EBI3 Stocks",
+      "type": "ITEM",
+      "location_id": "in:sample_racks_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass"
+      },
+      "states": {
+        "is_pure": true
+      }
+    },
+    {
+      "id": "emergency_thawing_kit_1",
+      "name": "Emergency Thawing Kit",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_sample_vault",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "spare_gloves_1",
+      "name": "Spare Gloves & Face Shields",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_sample_vault",
+      "properties": {
+        "weight": 0.5,
+        "material": "latex",
+        "quantity": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital Thermometer",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_sample_vault",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "broken_centrifuge_1",
+      "name": "Broken Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_maintenance_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "brand": "Eppendorf"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "repair_dolly_1",
+      "name": "Repair Dolly",
+      "type": "ITEM",
+      "location_id": "in:equipment_maintenance_bay",
+      "properties": {
+        "weight": 20.0,
+        "material": "steel",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "half_dismantled_spectrometer_1",
+      "name": "Half-Dismantled Spectrometer",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_maintenance_bay",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.4
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "material": "metal",
+        "brand": "Agilent"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_maintenance_bay",
+      "properties": {
+        "weight": 8.0,
+        "material": "metal",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_racks_1",
+      "name": "Server Racks",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "command_terminal_1",
+      "name": "Central Command Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic_metal",
+        "brand": "LabTech"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "on:command_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "insert"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ppe_station_1",
+      "name": "PPE Station",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_sterilizer_1",
+      "name": "UV Sterilizer",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "brand": "BioSafe"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Bin",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle (Corrosive)",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass",
+        "color": "blue",
+        "label": "CORROSIVE",
+        "fill_level": "half-full"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle (Non-Corrosive)",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 1.0,
+        "material": "glass",
+        "color": "blue",
+        "label": "NON-CORROSIVE",
+        "fill_level": "full"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "blue_glassware_1",
+      "name": "Blue Glassware (Decorative)",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 0.5,
+        "material": "glass",
+        "color": "blue"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "calibration_reports_1",
+      "name": "Stack of Outdated Calibration Reports",
+      "type": "ITEM",
+      "location_id": "in:monitoring_control_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "quantity": 20,
+        "is_container": true
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "desk_key_1",
+      "name": "Desk Key",
+      "type": "ITEM",
+      "location_id": "on:calibration_reports_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Towel",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.2,
+        "material": "cloth",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_source_1",
+      "name": "Water Source",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal",
+        "brand": "AquaPure"
+      },
+      "states": {}
+    },
+    {
+      "id": "plate_1",
+      "name": "Plate",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 0.1,
+        "material": "ceramic",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cup_1",
+      "name": "Cup",
+      "type": "ITEM",
+      "location_id": "in:main_synthesis_lab",
+      "properties": {
+        "weight": 0.1,
+        "material": "ceramic",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hanger_1",
+      "name": "Hanger",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "weight": 0.3,
+        "material": "cloth"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "cover",
+    "dry",
+    "hang_up",
+    "insert",
+    "open",
+    "pour",
+    "repair",
+    "serve",
+    "uncover",
+    "unlock",
+    "close"
+  ]
+}

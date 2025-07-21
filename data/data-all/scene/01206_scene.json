@@ -1,0 +1,681 @@
+{
+  "description": "A Digital Forensics & Privacy Investigation Lab with forensic workstations, server racks, and evidence storage areas, designed for collaborative multi-agent investigations.",
+  "rooms": [
+    {
+      "id": "forensic_workstation_bay",
+      "name": "Forensic Workstation Bay",
+      "properties": {
+        "type": "forensic_analysis"
+      },
+      "connected_to_room_ids": [
+        "server_data_recovery_room",
+        "legal_documentation_office",
+        "evidence_intake_storage"
+      ]
+    },
+    {
+      "id": "server_data_recovery_room",
+      "name": "Server & Data Recovery Room",
+      "properties": {
+        "type": "data_processing"
+      },
+      "connected_to_room_ids": [
+        "forensic_workstation_bay",
+        "legal_documentation_office"
+      ]
+    },
+    {
+      "id": "legal_documentation_office",
+      "name": "Legal & Documentation Office",
+      "properties": {
+        "type": "administrative"
+      },
+      "connected_to_room_ids": [
+        "forensic_workstation_bay",
+        "server_data_recovery_room"
+      ]
+    },
+    {
+      "id": "evidence_intake_storage",
+      "name": "Evidence Intake & Storage",
+      "properties": {
+        "type": "secure_storage"
+      },
+      "connected_to_room_ids": [
+        "forensic_workstation_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "forensic_workbench_1",
+      "name": "Forensic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workstation_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_type": "ESD-safe"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "multi_monitor_station_1",
+      "name": "Multi-Monitor Analysis Station",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workstation_bay",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "display_count": 3,
+        "display_size": 27,
+        "display_type": "IPS"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "anti_static_cabinet_1",
+      "name": "Anti-Static Storage Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workstation_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "security_type": "RFID",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "seized_laptop_1",
+      "name": "Seized Laptop",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Latitude",
+        "serial_number": "DL-7742X",
+        "condition": "hinge_broken",
+        "sticker": "Clark County Schools"
+      },
+      "states": {
+        "is_assembled": false,
+        "is_bios_locked": true
+      }
+    },
+    {
+      "id": "usb_write_blocker_1",
+      "name": "USB Write-Blocker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Tableau",
+        "model": "T8",
+        "led_color": "blue",
+        "calibration_sticker": "CALIBRATED 06/2024"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "usb_write_blocker_2",
+      "name": "USB Write-Blocker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Tableau",
+        "model": "T8",
+        "led_color": "green",
+        "calibration_sticker": "CALIBRATED 05/2024"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_write_blocker_3",
+      "name": "USB Write-Blocker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Tableau",
+        "model": "T8",
+        "led_color": "blue",
+        "calibration_sticker": "CALIBRATED 04/2024"
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_hdd_1",
+      "name": "Encrypted External HDD",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "WD",
+        "model": "MyPassport",
+        "capacity": "4TB",
+        "label": "Clement-Jeffrey Case Images",
+        "metadata_status": "partially_corrupted"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keystroke_log_file_1",
+      "name": "Keystroke Log File",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "content": "unauthorized_access_timestamps",
+        "highlight_color": "yellow"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Brother",
+        "model": "PT-D210",
+        "tape_level": "low",
+        "color": "black",
+        "is_container": true
+      },
+      "states": {
+        "is_labeled": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Digital Microscope",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 3.0,
+        "zoom": "1000x",
+        "temperature": "warm",
+        "brand": "Unknown"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 4.5,
+        "pot_status": "half_full",
+        "warning_sign": "Caution: Hot",
+        "brand": "Generic",
+        "is_container": true
+      },
+      "states": {
+        "is_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "chain_of_custody_poster_1",
+      "name": "Chain of Custody Poster",
+      "type": "ITEM",
+      "location_id": "in:forensic_workstation_bay",
+      "properties": {
+        "weight": 0.2,
+        "condition": "faded",
+        "content": "legal_protocols",
+        "material": "paper"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "sticky_notes_1",
+      "name": "Sticky Notes",
+      "type": "ITEM",
+      "location_id": "on:multi_monitor_station_1",
+      "properties": {
+        "weight": 0.05,
+        "content": "Check IP logs 06/08/2008!",
+        "color": "yellow",
+        "quantity": "multiple"
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:forensic_workstation_bay",
+      "properties": {
+        "weight": 1.0,
+        "inscription": "Best Digital Sleuth 2015",
+        "material": "metal",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_data_recovery_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal",
+        "sound_level": "humming_loudly"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "raid_array_1",
+      "name": "RAID Array",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 25.0,
+        "brand": "Dell",
+        "model": "PowerVault",
+        "capacity": "48TB",
+        "led_status": "blinking_REBUILDING"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_duplicator_1",
+      "name": "Forensic Duplicator",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "brand": "WiebeTech",
+        "model": "CRU",
+        "missing_parts": "one_screw"
+      },
+      "states": {
+        "is_assembled": false
+      }
+    },
+    {
+      "id": "ip_log_printout_1",
+      "name": "IP Log Printout",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "Absolute Software unauthorized access",
+        "highlight_color": "yellow",
+        "material": "paper"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "signal_analyzer_1",
+      "name": "Signal Analyzer",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 12.0,
+        "brand": "Tektronix",
+        "display": "packet_capture_anomalies",
+        "color": "black"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "ITEM",
+      "location_id": "in:server_data_recovery_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "warning_sign": "DO NOT PRESS",
+        "material": "plastic"
+      },
+      "states": {
+        "is_pressed": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_data_recovery_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "wheel_condition": "squeaky",
+        "contents": "Torx_screwdrivers, spudgers, thermal_paste"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "old_hard_drives_1",
+      "name": "Old Hard Drives",
+      "type": "ITEM",
+      "location_id": "in:server_data_recovery_room",
+      "properties": {
+        "weight": 5.0,
+        "quantity": "multiple",
+        "condition": "failed",
+        "bin_label": "Do Not Reuse"
+      },
+      "states": {}
+    },
+    {
+      "id": "hack_the_planet_poster_1",
+      "name": "Retro Hack the Planet Poster",
+      "type": "ITEM",
+      "location_id": "in:server_data_recovery_room",
+      "properties": {
+        "weight": 0.2,
+        "condition": "torn_edges",
+        "material": "paper",
+        "content": "retro_hacking"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "legal_desk_1",
+      "name": "Legal Documentation Desk",
+      "type": "FURNITURE",
+      "location_id": "in:legal_documentation_office",
+      "properties": {
+        "size": [
+          1.6,
+          0.8,
+          0.75
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "surface_type": "smooth"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_locker_1",
+      "name": "Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "security_type": "tamper_proof_seals",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:evidence_locker_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Unknown",
+        "model": "Generic",
+        "color": "black",
+        "battery_status": "low"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "security_logbook_1",
+      "name": "Security Logbook",
+      "type": "ITEM",
+      "location_id": "on:evidence_locker_1",
+      "properties": {
+        "weight": 0.8,
+        "material": "paper",
+        "content": "evidence_logs",
+        "condition": "well_used"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "password_bypass_cables_1",
+      "name": "Password Bypass Jumper Cables",
+      "type": "ITEM",
+      "location_id": "in:anti_static_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "purpose": "bios_password_bypass",
+        "color": "red_black",
+        "length": "30cm"
+      },
+      "states": {
+        "is_tied": true
+      }
+    },
+    {
+      "id": "rfid_badge_1",
+      "name": "RFID Badge",
+      "type": "ITEM",
+      "location_id": "in:legal_documentation_office",
+      "properties": {
+        "weight": 0.05,
+        "owner": "lead_analyst",
+        "access_level": "high",
+        "color": "blue"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "led_strip_1",
+      "name": "Decorative LED Strip",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "length": "2m",
+        "brightness": "high"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "evidence_bags_1",
+      "name": "Tamper-Proof Evidence Bags",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "weight": 0.5,
+        "quantity": "multiple",
+        "size": "large",
+        "seal_type": "tamper_evident"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "laptop_charger_1",
+      "name": "Laptop Charger",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Dell",
+        "model": "PA-12",
+        "compatibility": "Latitude_series"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "roller_1",
+      "name": "Document Roller",
+      "type": "ITEM",
+      "location_id": "on:legal_desk_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic",
+        "color": "black",
+        "purpose": "flatten_papers"
+      },
+      "states": {
+        "provides_abilities": [
+          "flatten"
+        ]
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Torx Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "pieces": 6,
+        "sizes": "T5-T20",
+        "handle_material": "rubber"
+      },
+      "states": {
+        "provides_abilities": [
+          "assemble",
+          "replace"
+        ]
+      }
+    },
+    {
+      "id": "label_tape_1",
+      "name": "Label Tape",
+      "type": "ITEM",
+      "location_id": "in:label_maker_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "width": "12mm",
+        "remaining_length": "short"
+      },
+      "states": {
+        "provides_abilities": [
+          "label"
+        ]
+      }
+    },
+    {
+      "id": "defrost_spray_1",
+      "name": "Defrost Spray",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "FrostAway",
+        "volume": "250ml",
+        "chemical_type": "non_toxic"
+      },
+      "states": {
+        "provides_abilities": [
+          "defrost"
+        ]
+      }
+    },
+    {
+      "id": "coffee_beans_1",
+      "name": "Coffee Beans",
+      "type": "ITEM",
+      "location_id": "in:coffee_machine_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "arabica",
+        "roast": "dark",
+        "grind": "medium"
+      },
+      "states": {
+        "provides_abilities": [
+          "pulverize"
+        ]
+      }
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "open",
+    "press",
+    "turn_on",
+    "untie",
+    "wear",
+    "close"
+  ]
+}

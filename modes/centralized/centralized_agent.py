@@ -24,22 +24,38 @@ class CentralizedAgent(BaseAgent):
         """初始化中心化多智能体控制器"""
         super().__init__(simulator, agent_id, config)
 
-        # 加载LLM配置
-        config_manager = ConfigManager()
-        self.llm_config = config_manager.get_config('llm_config')
+        # 优先使用传递的配置，避免子进程中重新加载配置文件
+        if config and '_llm_config' in config:
+            # 使用传递的完整LLM配置（包含运行时覆盖）
+            self.llm_config = config['_llm_config']
+            logger.debug("使用传递的LLM配置（包含运行时覆盖）")
+        else:
+            # 回退到重新加载配置（主要用于单独测试）- 使用全局单例
+            from config.config_manager import get_config_manager
+            config_manager = get_config_manager()
+            self.llm_config = config_manager.get_config('llm_config')
+            logger.debug("从配置文件重新加载LLM配置（使用全局单例）")
 
         # 创建LLM实例
         self.llm = create_llm_from_config(self.llm_config)
 
-        # 创建提示词管理器
-        self.prompt_manager = PromptManager("prompts_config")
+        # 自动选择提示词模板
+        self.prompt_template = self._select_prompt_template()
+
+        # 创建提示词管理器，优先使用传递的配置
+        if config and '_prompts_config' in config:
+            self.prompt_manager = PromptManager(config_dict=config['_prompts_config'])
+            logger.debug("使用传递的提示词配置（包含运行时覆盖）")
+        else:
+            self.prompt_manager = PromptManager("prompts_config")
+            logger.debug("从配置文件重新加载提示词配置（使用全局单例）")
 
         # 模式名称
         self.mode = "centralized"
 
         # 基础系统提示词模板
         self.base_system_prompt = self.prompt_manager.get_prompt_template(
-            self.mode,
+            self.prompt_template,
             "system_prompt",
             "你是一个协调两个智能体完成任务的中央控制系统。"
         )
@@ -51,16 +67,21 @@ class CentralizedAgent(BaseAgent):
         self.chat_history = []
 
         # 获取历史长度配置
-        history_config = self.config.get('history', {})
-        max_history_length = history_config.get('max_history_length', 10)
-        # -1 表示不限制历史长度
-        self.max_chat_history = None if max_history_length == -1 else max_history_length
+        agent_config = self.config.get('agent_config', {})
+        max_history_length = agent_config.get('max_history', 10)
 
-        # 同时更新动作历史的长度限制
+        # 处理 max_history = -1 的特殊情况
         if max_history_length == -1:
-            self.max_history = float('inf')  # 不限制动作历史长度
+            # 当 max_history = -1 时，使用 max_steps_per_task 的值
+            execution_config = self.config.get('execution', {})
+            max_steps_per_task = execution_config.get('max_steps_per_task', 50)
+            self.max_history = max_steps_per_task
+            self.max_chat_history = max_steps_per_task
+            logger.info(f"max_history设置为-1，使用max_steps_per_task值: {max_steps_per_task}")
         else:
+            # 使用指定的历史长度
             self.max_history = max_history_length
+            self.max_chat_history = max_history_length
 
         # 任务描述
         self.task_description = ""
@@ -215,9 +236,9 @@ class CentralizedAgent(BaseAgent):
         # 获取可用动作列表
         available_actions_list = self._get_available_actions_list()
 
-        # 格式化提示词
+        # 格式化提示词，使用选择的模板
         prompt = self.prompt_manager.get_formatted_prompt(
-            self.mode,
+            self.prompt_template,
             "user_prompt",
             task_description=self.task_description,
             history_summary=history_summary,
@@ -293,10 +314,12 @@ class CentralizedAgent(BaseAgent):
             if not line:
                 continue
 
-            # 格式1: agent_1_action: EXPLORE
-            if line.startswith('agent_1_action:') or line.startswith('agent_1_动作：') or line.startswith('agent_1_动作:'):
-                if line.startswith('agent_1_action:'):
-                    action = line[15:].strip()  # 去掉"agent_1_action:"前缀
+            # 格式1: Agent_1_Action: EXPLORE (新格式)
+            if line.startswith('Agent_1_Action:') or line.startswith('agent_1_action:') or line.startswith('agent_1_动作：') or line.startswith('agent_1_动作:'):
+                if line.startswith('Agent_1_Action:'):
+                    action = line[15:].strip()  # 去掉"Agent_1_Action:"前缀
+                elif line.startswith('agent_1_action:'):
+                    action = line[15:].strip()  # 去掉"agent_1_action:"前缀（向后兼容）
                 elif line.startswith('agent_1_动作：'):
                     action = line[8:].strip()   # 去掉"agent_1_动作："前缀
                 else:
@@ -307,10 +330,12 @@ class CentralizedAgent(BaseAgent):
                     actions['agent_1'] = action
                     logger.debug(f"解析到agent_1动作: {action}")
 
-            # 格式2: agent_2_action: GOTO kitchen_1
-            elif line.startswith('agent_2_action:') or line.startswith('agent_2_动作：') or line.startswith('agent_2_动作:'):
-                if line.startswith('agent_2_action:'):
-                    action = line[15:].strip()  # 去掉"agent_2_action:"前缀
+            # 格式2: Agent_2_Action: GOTO kitchen_1 (新格式)
+            elif line.startswith('Agent_2_Action:') or line.startswith('agent_2_action:') or line.startswith('agent_2_动作：') or line.startswith('agent_2_动作:'):
+                if line.startswith('Agent_2_Action:'):
+                    action = line[15:].strip()  # 去掉"Agent_2_Action:"前缀
+                elif line.startswith('agent_2_action:'):
+                    action = line[15:].strip()  # 去掉"agent_2_action:"前缀（向后兼容）
                 elif line.startswith('agent_2_动作：'):
                     action = line[8:].strip()   # 去掉"agent_2_动作："前缀
                 else:
@@ -611,3 +636,36 @@ class CentralizedAgent(BaseAgent):
         else:
             # 全部是INVALID
             return ActionStatus.INVALID, "; ".join(invalid_messages)
+
+    def _select_prompt_template(self) -> str:
+        """
+        根据配置自动选择合适的提示词模板
+
+        Returns:
+            str: 提示词模板名称
+        """
+        # 获取环境描述配置
+        agent_config = self.config.get('agent_config', {})
+        env_config = agent_config.get('environment_description', {})
+
+        # 检查是否启用全局观察模式
+        only_show_discovered = env_config.get('only_show_discovered', True)
+        detail_level = env_config.get('detail_level', 'full')  # 中心化默认就是full
+
+        # 全局观察模式判断
+        is_global_mode = not only_show_discovered
+
+        if is_global_mode:
+            template_name = 'centralized_global'
+            logger.info(f"🌍 检测到中心化全局观察模式，使用模板: {template_name}")
+        else:
+            template_name = 'centralized'
+            logger.info(f"🔍 使用中心化探索模式，使用模板: {template_name}")
+
+        logger.info("🤖 中心化智能体配置分析:")
+        logger.info(f"  - detail_level: {detail_level}")
+        logger.info(f"  - only_show_discovered: {only_show_discovered}")
+        logger.info(f"  - 选择的模板: {template_name}")
+        logger.info(f"  - 模式: {'🌍 全局观察' if is_global_mode else '🔍 探索模式'}")
+
+        return template_name

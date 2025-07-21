@@ -1,0 +1,160 @@
+{
+  "task_background": "Prepare the high-security data validation lab for a critical audit by organizing equipment, validating samples, and ensuring all security protocols are active.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 15.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 15.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Open the incoming_sample_tray_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "incoming_sample_tray_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the validation_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "validation_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the USB drive with barcode ID-8Y3C: PRIORITY 1 into the emergency_shredder_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_2",
+          "location_id": ":emergency_shredder_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red USB drive into the decontamination_pod_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": ":decontamination_pod_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the emergency_shredder_1 using the shredder maintenance kit.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "emergency_shredder_1",
+          "is_shredded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the welding torch to fix the exposed panel on the mainframe cluster and then turn it on.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mainframe_cluster_1",
+          "is_on": true
+        },
+        {
+          "id": "mainframe_cluster_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the decontamination_pod_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "decontamination_pod_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the specimen_shelving_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_shelving_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the collaborative workbench to the data intake airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "collaborative_workbench_1",
+          "location_id": ":data_intake_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the specimen shelving to the central validation floor.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_shelving_1",
+          "location_id": ":central_validation_floor"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the tool cart to the secure sample vault and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tool_cart_1",
+          "location_id": ":secure_sample_vault"
+        },
+        {
+          "id": "tool_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the emergency shredder to the central validation floor and then unjam it using the shredder maintenance kit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shredder_1",
+          "location_id": ":central_validation_floor"
+        },
+        {
+          "id": "emergency_shredder_1",
+          "is_shredded": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01347"
+}

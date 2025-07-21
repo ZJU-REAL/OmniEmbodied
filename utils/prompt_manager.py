@@ -1,6 +1,6 @@
 import logging
 from typing import Dict, List, Any, Optional, Union
-from config.config_manager import ConfigManager
+from config.config_manager import get_config_manager
 
 logger = logging.getLogger(__name__)
 
@@ -9,17 +9,24 @@ class PromptManager:
     提示词管理器，负责加载和格式化提示词模板
     """
     
-    def __init__(self, config_name: str = "prompts_config"):
+    def __init__(self, config_name: str = "prompts_config", config_dict: Dict[str, Any] = None):
         """
         初始化提示词管理器
-        
+
         Args:
             config_name: 提示词配置名称
+            config_dict: 直接传递的配置字典，优先于config_name
         """
-        # 加载提示词配置
-        config_manager = ConfigManager()
-        self.prompts_config = config_manager.get_config(config_name)
-        
+        if config_dict is not None:
+            # 使用直接传递的配置字典（避免重新加载文件）
+            self.prompts_config = config_dict
+            logger.debug("使用传递的提示词配置字典")
+        else:
+            # 从配置文件加载（使用全局单例）
+            config_manager = get_config_manager()
+            self.prompts_config = config_manager.get_config(config_name)
+            logger.debug(f"从配置文件加载提示词配置: {config_name}")
+
         # 确保配置加载成功
         if not self.prompts_config:
             logger.warning(f"Unable to load prompt config: {config_name}, using default prompts")
@@ -63,13 +70,13 @@ class PromptManager:
     def get_formatted_prompt(self, mode: str, template_key: str, default_value: str = "", **kwargs) -> str:
         """
         获取并格式化提示词模板
-        
+
         Args:
-            mode: 模式名称
+            mode: 模式名称或模板名称（如 'single_agent' 或 'single_agent_global'）
             template_key: 模板键名
             default_value: 默认值
             **kwargs: 格式化参数
-            
+
         Returns:
             str: 格式化后的提示词
         """

@@ -1,0 +1,824 @@
+{
+  "description": "A bustling electronics repair and customization workshop specializing in retrofitting legacy netbooks like the ASUS EeePC 1215N with modern components. The environment is inherently collaborative, featuring heavy objects, precision assembly tasks, and inventory management.",
+  "rooms": [
+    {
+      "id": "disassembly_bay",
+      "name": "Disassembly Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "testing_station",
+        "parts_storage",
+        "finishing_area"
+      ]
+    },
+    {
+      "id": "testing_station",
+      "name": "Testing & Calibration Station",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "disassembly_bay",
+        "parts_storage"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts Storage & Inventory",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "disassembly_bay",
+        "testing_station",
+        "finishing_area"
+      ]
+    },
+    {
+      "id": "finishing_area",
+      "name": "Finishing & Packaging Area",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "disassembly_bay",
+        "parts_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "Heavy-duty Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "bolted to the floor"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Overhead Articulated Magnifying Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 12.5,
+        "is_container": false,
+        "magnification": "5x",
+        "led_condition": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "static_mat_1",
+      "name": "Static-Safe Mat",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.3,
+        "condition": "slightly frayed",
+        "is_grounded": true
+      },
+      "states": {}
+    },
+    {
+      "id": "eeepc_1215n_1",
+      "name": "ASUS EeePC 1215N (Partially Disassembled)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.8,
+        "condition": "missing keyboard",
+        "motherboard_exposed": true,
+        "gpu_label": "NVIDIA Next-Gen ION"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "bits_included": 9,
+        "bits_missing": 1,
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lcd_panel_1",
+      "name": "Cracked 12.1\" LCD Panel",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "condition": "leaking liquid crystal",
+        "residue": "sticky edges"
+      },
+      "states": {
+        "is_smashed": false
+      }
+    },
+    {
+      "id": "donor_laptop_1",
+      "name": "Dell Inspiron Mini 10 (Donor)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "salvageable_parts": [
+          "RAM",
+          "Wi-Fi card"
+        ],
+        "condition": "functional"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "USB-Powered Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "oxidized tip",
+        "provides_abilities": [
+          "melt"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "tweezers_1",
+      "name": "ESD-Safe Tweezers",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "slightly bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_paste_1",
+      "name": "Half-Empty Tube of Arctic MX-4 Thermal Paste",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "condition": "lid loose",
+        "residue": "dried around nozzle"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "test_rig_1",
+      "name": "Custom-Built Test Rig",
+      "type": "FURNITURE",
+      "location_id": "in:testing_station",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "aluminum",
+        "voltage_supply": "adjustable",
+        "knob_condition": "misaligned"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Imaging Camera",
+      "type": "ITEM",
+      "location_id": "on:test_rig_1",
+      "properties": {
+        "weight": 3.2,
+        "mount": "tripod",
+        "display": "heatmap"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "gpu_enclosure_1",
+      "name": "External GPU Enclosure (RTX 3060)",
+      "type": "ITEM",
+      "location_id": "on:test_rig_1",
+      "properties": {
+        "weight": 5.7,
+        "connection": "Thunderbolt",
+        "error_indicator": "blinking LED"
+      },
+      "states": {}
+    },
+    {
+      "id": "benchmark_laptop_1",
+      "name": "ASUS ROG Zephyrus (Benchmarking)",
+      "type": "ITEM",
+      "location_id": "on:test_rig_1",
+      "properties": {
+        "weight": 2.1,
+        "software": "HWMonitor",
+        "status": "thermal throttling warnings"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "mini_hdmi_cables_1",
+      "name": "Pile of Mini HDMI Cables",
+      "type": "ITEM",
+      "location_id": "in:testing_station",
+      "properties": {
+        "weight": 0.9,
+        "quantity": 5,
+        "condition": "some frayed"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "usb_c_dock_1",
+      "name": "USB-C Dock",
+      "type": "ITEM",
+      "location_id": "in:testing_station",
+      "properties": {
+        "weight": 0.4,
+        "missing_parts": "one port cover"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:test_rig_1",
+      "properties": {
+        "weight": 0.01,
+        "message": "DO NOT USE - unstable BIOS"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "storage_shelf_1",
+      "name": "Parts Storage Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hdd_1",
+      "name": "Seagate HDD (Failed)",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.6,
+        "sticker": "red FAILED TEST",
+        "connector_condition": "scratches",
+        "temperature": "warm"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "hdd_2",
+      "name": "Seagate HDD",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.6,
+        "sticker": "green PASSED TEST",
+        "connector_condition": "clean",
+        "temperature": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "hdd_3",
+      "name": "Seagate HDD",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.6,
+        "sticker": "green PASSED TEST",
+        "connector_condition": "clean",
+        "temperature": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "hdd_4",
+      "name": "Seagate HDD",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.6,
+        "sticker": "yellow INSPECT",
+        "connector_condition": "slightly worn",
+        "temperature": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "hdd_5",
+      "name": "Seagate HDD",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.6,
+        "sticker": "green PASSED TEST",
+        "connector_condition": "clean",
+        "temperature": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "bios_flasher_1",
+      "name": "CH341A BIOS Flasher",
+      "type": "ITEM",
+      "location_id": "in:storage_shelf_1",
+      "properties": {
+        "weight": 0.2,
+        "location": "hidden in drawer",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "flathead_screwdriver_1",
+      "name": "Flathead Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.3,
+        "provides_abilities": [
+          "screw",
+          "show"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packaging_table_1",
+      "name": "Packaging Table",
+      "type": "FURNITURE",
+      "location_id": "in:finishing_area",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "box_1",
+      "name": "Shipping Box",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 0.5,
+        "size": "medium",
+        "contents": "empty"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "bubble_wrap_1",
+      "name": "Bubble Wrap Roll",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 1.2,
+        "length": "5m",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_dispenser_1",
+      "name": "Tape Dispenser",
+      "type": "ITEM",
+      "location_id": "on:packaging_table_1",
+      "properties": {
+        "weight": 0.4,
+        "tape_remaining": "half",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack of Spare Displays",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "stability": "top-heavy"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "display_1",
+      "name": "Spare LCD Display",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "size": "15.6\"",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "display_2",
+      "name": "Spare LCD Display",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "size": "15.6\"",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "display_3",
+      "name": "Spare LCD Display",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "size": "15.6\"",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "display_4",
+      "name": "Spare LCD Display",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "size": "15.6\"",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "display_5",
+      "name": "Spare LCD Display",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "size": "15.6\"",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.7,
+        "brand": "Zebra",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bin_1",
+      "name": "Labeled Bin (RAM Modules)",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 2.0,
+        "contents": "DDR3 SODIMMs",
+        "barcode": "RAM-001"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "labeled_bin_2",
+      "name": "Labeled Bin (SSDs)",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 2.5,
+        "contents": "SATA SSDs",
+        "barcode": "SSD-002"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "dusty_monitor_1",
+      "name": "Dusty Monitor",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 4.2,
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": false
+      }
+    },
+    {
+      "id": "microfiber_cloth_1",
+      "name": "Microfiber Cloth",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "clean",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Novelty \"I ♥ Silicon\" Mug",
+      "type": "ITEM",
+      "location_id": "in:testing_station",
+      "properties": {
+        "weight": 0.3,
+        "contents": "loose resistors",
+        "condition": "stained"
+      },
+      "states": {
+        "is_washed": false
+      }
+    },
+    {
+      "id": "sponge_1",
+      "name": "Kitchen Sponge",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 0.05,
+        "condition": "damp",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:testing_station",
+      "properties": {
+        "weight": 1.2,
+        "year": "2018",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_dusted": false
+      }
+    },
+    {
+      "id": "no_food_sign_1",
+      "name": "Yellowed \"No Food or Drink\" Sign",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 0.2,
+        "condition": "yellowed",
+        "stains": "coffee rings"
+      },
+      "states": {}
+    },
+    {
+      "id": "pc_world_magazines_1",
+      "name": "Stack of Outdated PC World Magazines",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 2.5,
+        "top_issue": "Sept. 2010",
+        "quantity": 12
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "dead_succulent_1",
+      "name": "Dead Potted Succulent",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 0.8,
+        "condition": "dead",
+        "soil": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 0.5,
+        "contents": "water",
+        "state": "liquid"
+      },
+      "states": {
+        "is_boiling": false
+      }
+    },
+    {
+      "id": "electric_kettle_1",
+      "name": "Electric Kettle",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 1.2,
+        "capacity": "1.7L",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Safety Goggles",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "clean"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "apron_1",
+      "name": "Work Apron",
+      "type": "ITEM",
+      "location_id": "in:disassembly_bay",
+      "properties": {
+        "weight": 0.4,
+        "pockets": 3,
+        "condition": "slightly stained"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Flash Drive",
+      "type": "ITEM",
+      "location_id": "in:testing_station",
+      "properties": {
+        "weight": 0.05,
+        "capacity": "32GB",
+        "contents": "BIOS files"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hammer_1",
+      "name": "Hammer",
+      "type": "ITEM",
+      "location_id": "on:storage_shelf_1",
+      "properties": {
+        "weight": 0.9,
+        "head_material": "steel",
+        "handle_material": "wood"
+      },
+      "states": {
+        "is_smashed": false
+      }
+    },
+    {
+      "id": "ice_pack_1",
+      "name": "Ice Pack",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.3,
+        "state": "frozen",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "boil",
+    "close",
+    "cool",
+    "copy_file",
+    "dust",
+    "hide",
+    "melt",
+    "open",
+    "scan_barcode",
+    "screw",
+    "seal",
+    "show",
+    "smash",
+    "turn_off",
+    "turn_on",
+    "unstack",
+    "verify",
+    "wash",
+    "wear"
+  ]
+}

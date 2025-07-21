@@ -1,0 +1,497 @@
+{
+  "description": "A high-security Quantum Communications Lab with interconnected zones for quantum encryption, network monitoring, secure storage, and maintenance, designed for collaborative multi-agent tasks.",
+  "rooms": [
+    {
+      "id": "quantum_encryption_chamber",
+      "name": "Quantum Encryption Chamber",
+      "properties": {
+        "type": "lab",
+        "security_level": "high"
+      },
+      "connected_to_room_ids": [
+        "network_monitoring_hub",
+        "secure_storage_vault",
+        "maintenance_tool_bay"
+      ]
+    },
+    {
+      "id": "network_monitoring_hub",
+      "name": "Network Monitoring Hub",
+      "properties": {
+        "type": "monitoring",
+        "security_level": "high"
+      },
+      "connected_to_room_ids": [
+        "quantum_encryption_chamber",
+        "secure_storage_vault"
+      ]
+    },
+    {
+      "id": "secure_storage_vault",
+      "name": "Secure Storage & Key Vault",
+      "properties": {
+        "type": "storage",
+        "security_level": "maximum"
+      },
+      "connected_to_room_ids": [
+        "quantum_encryption_chamber",
+        "network_monitoring_hub"
+      ]
+    },
+    {
+      "id": "maintenance_tool_bay",
+      "name": "Maintenance & Tool Bay",
+      "properties": {
+        "type": "workshop",
+        "security_level": "medium"
+      },
+      "connected_to_room_ids": [
+        "quantum_encryption_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "optics_bench_1",
+      "name": "Optics Bench",
+      "type": "FURNITURE",
+      "location_id": "in:quantum_encryption_chamber",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "bolted_to_floor": true
+      },
+      "states": {}
+    },
+    {
+      "id": "vibration_isolation_table_1",
+      "name": "Vibration Isolation Table",
+      "type": "FURNITURE",
+      "location_id": "in:quantum_encryption_chamber",
+      "properties": {
+        "size": [
+          1.8,
+          1.8,
+          0.8
+        ],
+        "weight": 300.0,
+        "is_container": false,
+        "material": "composite",
+        "vibration_damping": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "qkd_transmitter_unit_1",
+      "name": "QKD Transmitter Unit",
+      "type": "ITEM",
+      "location_id": "on:optics_bench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "color": "black",
+        "status_led": "POLARIZATION CALIBRATION REQUIRED",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "photon_detector_array_1",
+      "name": "Photon Detector Array",
+      "type": "FURNITURE",
+      "location_id": "in:quantum_encryption_chamber",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "status": "NOISE ANOMALY: POSSIBLE EAVESDROPPING"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shutter_1",
+      "name": "Emergency Shutter",
+      "type": "FURNITURE",
+      "location_id": "in:quantum_encryption_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "laser_cooling_unit_1",
+      "name": "Laser Cooling Unit",
+      "type": "ITEM",
+      "location_id": "on:optics_bench_1",
+      "properties": {
+        "weight": 12.0,
+        "efficiency": 75,
+        "sound_level": "humming softly",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "calibration_toolkit_1",
+      "name": "Calibration Toolkit",
+      "type": "ITEM",
+      "location_id": "on:optics_bench_1",
+      "properties": {
+        "weight": 3.0,
+        "is_container": true,
+        "missing_tool": "0.5mm hex wrench",
+        "provides_abilities": [
+          "open",
+          "close"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "terminal_screen_1",
+      "name": "Terminal Screen",
+      "type": "ITEM",
+      "location_id": "on:optics_bench_1",
+      "properties": {
+        "weight": 4.5,
+        "display": "live photon polarization graphs",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:network_monitoring_hub",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "label": "MAIN ROUTER – QUANTUM BACKBONE",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_display_wall_1",
+      "name": "Overhead Display Wall",
+      "type": "FURNITURE",
+      "location_id": "in:network_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "status": "one panel flickering",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "traffic_analysis_terminal_1",
+      "name": "Traffic Analysis Terminal",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 8.0,
+        "alert": "UNENCRYPTED PACKETS DETECTED IN SECTOR 4",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "fiber_optic_patch_panel_1",
+      "name": "Fiber Optic Patch Panel",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 6.0,
+        "mislabeled_port": "NSA_TAP?",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "biometric_scanner_1",
+      "name": "Biometric Scanner",
+      "type": "ITEM",
+      "location_id": "in:network_monitoring_hub",
+      "properties": {
+        "weight": 3.5,
+        "note": "USE GLOVES – STATIC ISSUES",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "heavy_steel_door_1",
+      "name": "Heavy Steel Door",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.2
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "security_feature": "dual-key override",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_activated_safe_1",
+      "name": "Keycard-Activated Safe",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "scratch_marks": "near lock",
+        "provides_abilities": [
+          "open",
+          "close"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "quantum_key_backup_drives_1",
+      "name": "Quantum Key Backup Drives",
+      "type": "ITEM",
+      "location_id": "in:keycard_activated_safe_1",
+      "properties": {
+        "weight": 0.5,
+        "label": "CORRUPTED – DO NOT USE",
+        "serial_number": "QKD-8891",
+        "color": "green",
+        "battery": 98,
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "emergency_faraday_cage_1",
+      "name": "Emergency Faraday Cage",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_vault",
+      "properties": {
+        "weight": 2.0,
+        "size": "small",
+        "purpose": "block signals",
+        "provides_abilities": [
+          "hide"
+        ]
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_tool_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "wobbly leg"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_cabinet_1",
+      "name": "Parts Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_tool_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "stuck_drawer": "FIBER OPTICS",
+        "provides_abilities": [
+          "open",
+          "close"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "oscilloscope_1",
+      "name": "Oscilloscope",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 7.0,
+        "display": "erratic noise patterns",
+        "provides_abilities": [
+          "disconnect"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "spare_photon_detector_1",
+      "name": "Spare Photon Detector",
+      "type": "ITEM",
+      "location_id": "in:parts_cabinet_1",
+      "properties": {
+        "weight": 3.0,
+        "condition": "box dented",
+        "warning": "FRAGILE: HANDLE WITH CARE",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {
+        "is_mounted": false
+      }
+    },
+    {
+      "id": "hex_wrench_1",
+      "name": "0.5mm Hex Wrench",
+      "type": "ITEM",
+      "location_id": "in:parts_cabinet_1",
+      "properties": {
+        "weight": 0.1,
+        "size": "0.5mm",
+        "material": "steel",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "cold, tip oxidized",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "battery": "low",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_weighed": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "copy",
+    "copy_file",
+    "damage",
+    "disassemble",
+    "disconnect",
+    "hide",
+    "mount",
+    "open",
+    "scan_barcode",
+    "weigh"
+  ]
+}

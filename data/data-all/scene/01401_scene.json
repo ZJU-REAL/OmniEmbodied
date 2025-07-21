@@ -1,0 +1,815 @@
+{
+  "description": "A gritty, bustling starship maintenance bay where derelict spacecraft are repaired, stripped for parts, or retrofitted. The environment thrives on chaotic collaboration with mechanics, droids, and smugglers working in tandem or competing to meet deadlines.",
+  "rooms": [
+    {
+      "id": "main_hangar_bay",
+      "name": "Main Hangar Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "parts_storage_scrap_yard",
+        "droid_maintenance_alcove",
+        "smugglers_office"
+      ]
+    },
+    {
+      "id": "parts_storage_scrap_yard",
+      "name": "Parts Storage & Scrap Yard",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_hangar_bay"
+      ]
+    },
+    {
+      "id": "droid_maintenance_alcove",
+      "name": "Droid Maintenance Alcove",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_hangar_bay"
+      ]
+    },
+    {
+      "id": "smugglers_office",
+      "name": "Smuggler's Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_hangar_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "gantry_crane_1",
+      "name": "Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          4.0
+        ],
+        "weight": 3500.0,
+        "is_container": false,
+        "material": "rusted_metal",
+        "capacity": "3-ton",
+        "status": "Low Battery"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          4.0,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "stains": "coolant_spills"
+      },
+      "states": {}
+    },
+    {
+      "id": "tie_fighter_1",
+      "name": "Disabled TIE Fighter",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          6.0,
+          6.0,
+          2.5
+        ],
+        "weight": 1200.0,
+        "is_container": true,
+        "condition": "damaged",
+        "wing_status": "detached",
+        "canopy_status": "cracked_open"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "navigation_module_1",
+      "name": "Fried Navigation Module",
+      "type": "ITEM",
+      "location_id": "in:tie_fighter_1",
+      "properties": {
+        "weight": 3.5,
+        "serial_number": "TX-45L",
+        "condition": "scorched",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "hyperdrive_unit_1",
+      "name": "Junk Hyperdrive Unit",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "label": "FAULTY — RADIATION LEAK",
+        "requires_collaboration": true
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.3,
+        "fuel_gauge": 30,
+        "condition": "kinked_hose",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Parts Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "contents": "mismatched_bolts_washers"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tieftr_bolt_1",
+      "name": "TIE Fighter-Compatible Bolt",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "TIEFTR-COMPATIBLE",
+        "material": "durasteel"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_1",
+      "name": "Industrial Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "labels": [
+          "DURASTEEL PLATING",
+          "REPULSORLIFT COILS"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "label": "HYPERDRIVE COMPONENTS — AUTHORIZED PERSONNEL ONLY",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "droid_power_core_1",
+      "name": "Droid Power Core",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 4.2,
+        "glow": "faint_blue",
+        "label": "PROPERTY OF BOUNTY HUNTER GUILD",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 1500.0,
+        "fuel_status": "empty",
+        "keys_status": "dangling_from_ignition"
+      },
+      "states": {}
+    },
+    {
+      "id": "tibanna_gas_crate_1",
+      "name": "Crate of Tibanna Gas Canisters",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "warning": "EXPLOSIVE IF DROPPED"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "droid_repair_bench_1",
+      "name": "Droid Repair Bench",
+      "type": "FURNITURE",
+      "location_id": "in:droid_maintenance_alcove",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "contents": "scattered_tools"
+      },
+      "states": {}
+    },
+    {
+      "id": "protocol_droid_1",
+      "name": "Protocol Droid",
+      "type": "FURNITURE",
+      "location_id": "on:droid_repair_bench_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          1.8
+        ],
+        "weight": 65.0,
+        "access_panel": "red",
+        "sticker": "PRIORITY REPAIR",
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {
+        "is_solved": false
+      }
+    },
+    {
+      "id": "terminal_1",
+      "name": "Flickering Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:droid_maintenance_alcove",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "display": "partial_schematic",
+        "schematic_type": "TIE fighter’s stabilizer array"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:droid_repair_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "condition": "functional",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "reinforced_door_1",
+      "name": "Reinforced Door",
+      "type": "FURNITURE",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          2.0
+        ],
+        "weight": 80.0,
+        "material": "reinforced_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "weapons_rack_1",
+      "name": "Weapons Rack",
+      "type": "FURNITURE",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "size": [
+          1.5,
+          0.3,
+          1.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "assorted_weapons"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "floor_safe_1",
+      "name": "Floor Safe",
+      "type": "FURNITURE",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "lock_type": "digital_keypad",
+        "status": "locked"
+      },
+      "states": {
+        "is_open": false,
+        "is_solved": false
+      }
+    },
+    {
+      "id": "ledger_1",
+      "name": "Pending Deliveries Ledger",
+      "type": "ITEM",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "weight": 0.5,
+        "content": "pending_deliveries",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "water_canister_1",
+      "name": "Water Canister",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "weight": 5.0,
+        "capacity": "10_liters",
+        "current_volume": 8.0,
+        "provides_abilities": [
+          "water",
+          "fill"
+        ]
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sensitive_document_1",
+      "name": "Sensitive Document",
+      "type": "ITEM",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "weight": 0.1,
+        "content": "classified",
+        "condition": "pristine"
+      },
+      "states": {
+        "is_shredded": false,
+        "is_ripped": false
+      }
+    },
+    {
+      "id": "sewing_kit_1",
+      "name": "Sewing Kit",
+      "type": "ITEM",
+      "location_id": "on:droid_repair_bench_1",
+      "properties": {
+        "weight": 0.8,
+        "contents": [
+          "needle",
+          "thread",
+          "thimble"
+        ],
+        "provides_abilities": [
+          "sew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torn_fabric_1",
+      "name": "Torn Fabric",
+      "type": "ITEM",
+      "location_id": "in:droid_maintenance_alcove",
+      "properties": {
+        "weight": 0.3,
+        "material": "synthetic",
+        "tear_size": "large"
+      },
+      "states": {
+        "is_sewn": false
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "weight": 7.5,
+        "power_status": "charged",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_panel_1",
+      "name": "Dusty Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "dust_level": "heavy"
+      },
+      "states": {
+        "is_vacuumed": true
+      }
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 100.0,
+        "pressure_capacity": "10_tons",
+        "provides_abilities": [
+          "crush"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_canister_1",
+      "name": "Empty Canister",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "capacity": "5_liters"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "data_drive_1",
+      "name": "Corrupted Data Drive",
+      "type": "ITEM",
+      "location_id": "in:droid_maintenance_alcove",
+      "properties": {
+        "weight": 0.2,
+        "capacity": "1TB",
+        "status": "corrupted",
+        "provides_abilities": [
+          "format"
+        ]
+      },
+      "states": {
+        "is_formatted": false
+      }
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "weight": 3.5,
+        "power_source": "electric",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "deflated_tire_1",
+      "name": "Deflated Tire",
+      "type": "ITEM",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "weight": 8.0,
+        "size": "large",
+        "condition": "punctured"
+      },
+      "states": {
+        "is_pumped": false
+      }
+    },
+    {
+      "id": "sharp_knife_1",
+      "name": "Sharp Knife",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "blade_material": "durasteel",
+        "edge_condition": "sharp"
+      },
+      "states": {
+        "is_sharp": true
+      }
+    },
+    {
+      "id": "grinding_stone_1",
+      "name": "Grinding Stone",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "grit": "coarse",
+        "provides_abilities": [
+          "dull"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:droid_repair_bench_1",
+      "properties": {
+        "weight": 0.7,
+        "contents": "cleaning_solution",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dirty_window_1",
+      "name": "Dirty Window",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 10.0,
+        "dirt_level": "heavy"
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "table_set_1",
+      "name": "Mess Hall Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_hangar_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "place_settings": "none"
+      },
+      "states": {
+        "is_table_set": false
+      }
+    },
+    {
+      "id": "dishes_set_1",
+      "name": "Dishes Set",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "weight": 5.0,
+        "contents": [
+          "plates",
+          "bowls",
+          "cups"
+        ],
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cutlery_set_1",
+      "name": "Cutlery Set",
+      "type": "ITEM",
+      "location_id": "in:parts_storage_scrap_yard",
+      "properties": {
+        "weight": 2.0,
+        "contents": [
+          "forks",
+          "knives",
+          "spoons"
+        ],
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "writing_pad_1",
+      "name": "Writing Pad",
+      "type": "ITEM",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "weight": 0.3,
+        "pages": "blank",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "in:smugglers_office",
+      "properties": {
+        "weight": 0.1,
+        "ink_color": "black",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "blaster_1",
+      "name": "Blaster",
+      "type": "ITEM",
+      "location_id": "in:weapons_rack_1",
+      "properties": {
+        "weight": 1.5,
+        "ammo_type": "power_cell",
+        "ammo_count": 0
+      },
+      "states": {
+        "is_reloaded": false
+      }
+    },
+    {
+      "id": "power_cell_1",
+      "name": "Power Cell",
+      "type": "ITEM",
+      "location_id": "in:weapons_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "charge_level": "full"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "crush",
+    "download",
+    "dull",
+    "fill",
+    "format",
+    "open",
+    "pair",
+    "pump",
+    "reload",
+    "rip",
+    "set_table",
+    "sew",
+    "shred",
+    "solder",
+    "solve_puzzle",
+    "spray",
+    "vacuum",
+    "water",
+    "write",
+    "close"
+  ]
+}

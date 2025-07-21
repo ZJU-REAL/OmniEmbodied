@@ -1,0 +1,148 @@
+{
+  "task_background": "Optimize warehouse operations by preparing for the next shipment cycle and resolving critical equipment issues.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place barcode_scanner_1 on conveyor_junction_control_panel_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "on:conveyor_junction_control_panel_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Insert master_keycard_1 into warehouse_digital_twin_monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "master_keycard_1",
+          "is_inserted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the parcel labeled 'BioSample Z-42 – DO NOT THAW' to cold storage vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diverted_parcel_1",
+          "location_id": ":cold_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the barcode scanner with a scratched condition in the optimization control room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_1",
+          "location_id": "in:optimization_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Verify the misplaced vaccine tray using the handheld thermometer.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "misplaced_vaccine_tray_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the barcode scanner with battery level 23 to verify the diverted parcel labeled 'BioSample Z-42 – DO NOT THAW'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diverted_parcel_1",
+          "is_verified": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the heavy airlock door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_airlock_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to pull the pallet jack.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pallet_jack_1",
+          "is_pushed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial freezer rack to the main sorting hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_freezer_rack_1",
+          "location_id": ":main_sorting_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the tool maintenance bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":tool_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the robotic packing arm with a blinking red status light to the tool maintenance bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_packing_arm_1",
+          "location_id": ":tool_maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the priority shipment crate labeled 'URGENT: VACCINES – KEEP UPRIGHT' to the loading dock.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "priority_shipment_crate_1",
+          "location_id": ":loading_dock"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01221"
+}

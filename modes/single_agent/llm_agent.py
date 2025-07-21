@@ -23,22 +23,38 @@ class LLMAgent(BaseAgent):
         """初始化LLM智能体"""
         super().__init__(simulator, agent_id, config)
 
-        # 加载LLM配置
-        config_manager = ConfigManager()
-        self.llm_config = config_manager.get_config('llm_config')
+        # 优先使用传递的配置，避免子进程中重新加载配置文件
+        if config and '_llm_config' in config:
+            # 使用传递的完整LLM配置（包含运行时覆盖）
+            self.llm_config = config['_llm_config']
+            logger.debug("使用传递的LLM配置（包含运行时覆盖）")
+        else:
+            # 回退到重新加载配置（主要用于单独测试）- 使用全局单例
+            from config.config_manager import get_config_manager
+            config_manager = get_config_manager()
+            self.llm_config = config_manager.get_config('llm_config')
+            logger.debug("从配置文件重新加载LLM配置（使用全局单例）")
 
         # 创建LLM实例
         self.llm = create_llm_from_config(self.llm_config)
 
-        # 创建提示词管理器
-        self.prompt_manager = PromptManager("prompts_config")
+        # 自动选择提示词模板
+        self.prompt_template = self._select_prompt_template()
+
+        # 创建提示词管理器，优先使用传递的配置
+        if config and '_prompts_config' in config:
+            self.prompt_manager = PromptManager(config_dict=config['_prompts_config'])
+            logger.debug("使用传递的提示词配置（包含运行时覆盖）")
+        else:
+            self.prompt_manager = PromptManager("prompts_config")
+            logger.debug("从配置文件重新加载提示词配置（使用全局单例）")
 
         # 模式名称
         self.mode = "single_agent"
 
         # 基础系统提示词模板
         self.base_system_prompt = self.prompt_manager.get_prompt_template(
-            self.mode,
+            self.prompt_template,
             "system_prompt",
             "你是一个在虚拟环境中执行任务的智能体。"
         )
@@ -50,16 +66,21 @@ class LLMAgent(BaseAgent):
         self.chat_history = []
 
         # 获取历史长度配置
-        history_config = self.config.get('history', {})
-        max_history_length = history_config.get('max_history_length', 10)
-        # -1 表示不限制历史长度
-        self.max_chat_history = None if max_history_length == -1 else max_history_length
+        agent_config = self.config.get('agent_config', {})
+        max_history_length = agent_config.get('max_history', 10)
 
-        # 同时更新动作历史的长度限制
+        # 处理 max_history = -1 的特殊情况
         if max_history_length == -1:
-            self.max_history = float('inf')  # 不限制动作历史长度
+            # 当 max_history = -1 时，使用 max_steps_per_task 的值
+            execution_config = self.config.get('execution', {})
+            max_steps_per_task = execution_config.get('max_steps_per_task', 50)
+            self.max_history = max_steps_per_task
+            self.max_chat_history = max_steps_per_task
+            logger.info(f"max_history设置为-1，使用max_steps_per_task值: {max_steps_per_task}")
         else:
+            # 使用指定的历史长度
             self.max_history = max_history_length
+            self.max_chat_history = max_history_length
 
         # 任务描述
         self.task_description = ""
@@ -183,9 +204,9 @@ class LLMAgent(BaseAgent):
         # 获取可用动作列表
         available_actions_list = self._get_available_actions_list()
 
-        # 格式化提示词
+        # 格式化提示词，使用选择的模板
         prompt = self.prompt_manager.get_formatted_prompt(
-            self.mode,
+            self.prompt_template,
             "user_prompt",
             task_description=self.task_description,
             history_summary=history_summary,
@@ -258,17 +279,21 @@ class LLMAgent(BaseAgent):
         """从LLM响应中提取动作命令"""
         lines = response.split('\n')
 
-        # 直接匹配"Action:"格式，提取后面的命令
+        # 直接匹配"Agnet_1_Action:"格式，提取后面的命令
         for line in lines:
             line = line.strip()
             if not line:
                 continue
 
-            # 匹配"Action:"格式（支持中英文）
-            if line.startswith('Action:') or line.startswith('动作：') or line.startswith('动作:'):
+            # 匹配"Agnet_1_Action:"格式（支持中英文）
+            if line.startswith('Agnet_1_Action:') or line.startswith('Agent_1_Action:') or line.startswith('Action:') or line.startswith('动作：') or line.startswith('动作:'):
                 # 提取冒号后的内容作为动作命令
-                if line.startswith('Action:'):
-                    action = line[7:].strip()  # 去掉"Action:"前缀
+                if line.startswith('Agnet_1_Action:'):
+                    action = line[15:].strip()  # 去掉"Agnet_1_Action:"前缀
+                elif line.startswith('Agent_1_Action:'):
+                    action = line[15:].strip()  # 去掉"Agent_1_Action:"前缀
+                elif line.startswith('Action:'):
+                    action = line[7:].strip()  # 去掉"Action:"前缀（向后兼容）
                 elif line.startswith('动作：'):
                     action = line[3:].strip()  # 去掉"动作："前缀
                 else:
@@ -280,7 +305,7 @@ class LLMAgent(BaseAgent):
                 if action:
                     return action
 
-        # 如果没找到"Action:"或"动作："格式，返回最后一行非空文本作为回退
+        # 如果没找到格式，返回最后一行非空文本作为回退
         for line in reversed(lines):
             if line.strip():
                 return line.strip()
@@ -333,3 +358,38 @@ class LLMAgent(BaseAgent):
             self.consecutive_failures = 0
 
         return status, message, result
+
+    def _select_prompt_template(self) -> str:
+        """
+        根据配置自动选择合适的提示词模板
+
+        Returns:
+            str: 提示词模板名称
+        """
+        # 获取环境描述配置
+        agent_config = self.config.get('agent_config', {})
+        env_config = agent_config.get('environment_description', {})
+
+        # 检查是否启用全局观察模式
+        only_show_discovered = env_config.get('only_show_discovered', True)
+        detail_level = env_config.get('detail_level', 'room')
+
+        # 全局观察模式的判断条件：
+        # 1. only_show_discovered = False (显示所有物体)
+        # 2. detail_level = 'full' (显示所有房间)
+        is_global_mode = (not only_show_discovered) and (detail_level == 'full')
+
+        if is_global_mode:
+            template_name = 'single_agent_global'
+            logger.info(f"🌍 检测到全局观察模式，使用模板: {template_name}")
+        else:
+            template_name = 'single_agent'
+            logger.info(f"🔍 使用探索模式，使用模板: {template_name}")
+
+        logger.info("🤖 智能体配置分析:")
+        logger.info(f"  - detail_level: {detail_level}")
+        logger.info(f"  - only_show_discovered: {only_show_discovered}")
+        logger.info(f"  - 选择的模板: {template_name}")
+        logger.info(f"  - 模式: {'🌍 全局观察' if is_global_mode else '🔍 探索模式'}")
+
+        return template_name

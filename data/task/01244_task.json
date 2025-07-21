@@ -1,0 +1,148 @@
+{
+  "task_background": "Prepare the warehouse for daily operations including receiving, sorting, and dispatching goods.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place insurance_tote_1 in filing_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "insurance_tote_1",
+          "location_id": "in:filing_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place fragile_box_1 on packing_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fragile_box_1",
+          "location_id": "on:packing_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the barcode scanner with the alert 'low battery' to the dispatch_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_3",
+          "location_id": ":dispatch_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the only confidential red insurance document to the insurance_desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "insurance_packet_1",
+          "location_id": ":insurance_desk"
+        }
+      ]
+    },
+    {
+      "task_description": "Use charger_1 to recharge delivery_drone_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "delivery_drone_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use keycard_1 to lock tool_chest_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tool_chest_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the low-battery barcode scanner using the charger in dispatch_bay.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "barcode_scanner_3",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open delivery_truck_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "delivery_truck_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open overflow_shelf_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "overflow_shelf_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the engine block to the packing_zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "engine_block_1",
+          "location_id": ":packing_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sealed car battery crate to the automotive_section.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "car_battery_crate_1",
+          "location_id": ":automotive_section"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy car battery crate to the automotive_section and store it in tool_chest_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "car_battery_crate_1",
+          "location_id": "in:tool_chest_1"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01244"
+}

@@ -1,0 +1,176 @@
+{
+  "task_background": "Stabilize the urban sinkhole emergency site by repairing infrastructure, clearing debris, and securing the area.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 200.0,
+      "max_size": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 200.0,
+      "max_size": [
+        0.6,
+        0.6,
+        0.6
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place walkie_talkie_1 on folding_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "walkie_talkie_1",
+          "location_id": "on:folding_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move traffic_cone_1 to sinkhole_zone.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "traffic_cone_1",
+          "location_id": ":sinkhole_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the yellow floodlight powered by generator.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "portable_floodlight_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Close the open first-aid kit with partial contents.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "first_aid_kit_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Seal exposed_water_pipe_1 using pipe_wrench_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "exposed_water_pipe_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Start disabled_backhoe_1's engine using ignition_key_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "disabled_backhoe_1",
+          "is_engine_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Record sinkhole footage with the black Sony video camera.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "video_camera_1",
+          "is_recording": true
+        }
+      ]
+    },
+    {
+      "task_description": "Defrost microwave_1 with stuck display using deicing_spray_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microwave_1",
+          "is_frosted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open water_main_control_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_main_control_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open jammed toolbox_2.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "toolbox_2",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move steel_i_beam_1 to utility_workstation.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_i_beam_1",
+          "location_id": ":utility_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Move broken_asphalt_slab_1 to debris_staging_area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_asphalt_slab_1",
+          "location_id": ":debris_staging_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move broken_asphalt_slab_1 to debris_staging_area and crack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_asphalt_slab_1",
+          "location_id": ":debris_staging_area"
+        },
+        {
+          "id": "broken_asphalt_slab_1",
+          "is_cracked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move exposed_water_pipe_1 to utility_workstation and seal it with pipe_wrench_1.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "exposed_water_pipe_1",
+          "location_id": ":utility_workstation"
+        },
+        {
+          "id": "exposed_water_pipe_1",
+          "is_sealed": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01358"
+}

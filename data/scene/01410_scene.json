@@ -1,0 +1,711 @@
+{
+  "description": "An emergency relief kitchen in a disaster zone, repurposed from a community center, filled with donated supplies, improvised cooking stations, and logistical challenges requiring multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_cooking_area",
+      "name": "Main Cooking Area",
+      "properties": {
+        "type": "cooking"
+      },
+      "connected_to_room_ids": [
+        "supply_storage_corner",
+        "rehydration_station",
+        "distribution_counter",
+        "improvised_repair_zone"
+      ]
+    },
+    {
+      "id": "supply_storage_corner",
+      "name": "Supply Storage Corner",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_cooking_area"
+      ]
+    },
+    {
+      "id": "rehydration_station",
+      "name": "Rehydration Station",
+      "properties": {
+        "type": "preparation"
+      },
+      "connected_to_room_ids": [
+        "main_cooking_area"
+      ]
+    },
+    {
+      "id": "distribution_counter",
+      "name": "Distribution Counter",
+      "properties": {
+        "type": "serving"
+      },
+      "connected_to_room_ids": [
+        "main_cooking_area"
+      ]
+    },
+    {
+      "id": "improvised_repair_zone",
+      "name": "Improvised Repair Zone",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "main_cooking_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "folding_table_1",
+      "name": "Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_cooking_area",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "portable_burner_1",
+      "name": "Portable Butane Burner",
+      "type": "FURNITURE",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "fuel_type": "butane",
+        "condition": "functional"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "portable_burner_2",
+      "name": "Portable Butane Burner",
+      "type": "FURNITURE",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "fuel_type": "butane",
+        "condition": "functional"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "portable_burner_3",
+      "name": "Portable Butane Burner",
+      "type": "FURNITURE",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "fuel_type": "butane",
+        "condition": "malfunctioning"
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "stockpot_1",
+      "name": "Aluminum Stockpot",
+      "type": "ITEM",
+      "location_id": "on:portable_burner_2",
+      "properties": {
+        "weight": 3.5,
+        "capacity": 12.0,
+        "material": "aluminum",
+        "condition": "dented",
+        "provides_abilities": [
+          "boil"
+        ]
+      },
+      "states": {
+        "is_boiling": true
+      }
+    },
+    {
+      "id": "ingredient_tray_1",
+      "name": "Ingredient Tray",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "contents": "freeze-dried potatoes",
+        "label": "smudged Sharpie"
+      },
+      "states": {}
+    },
+    {
+      "id": "ingredient_tray_2",
+      "name": "Ingredient Tray",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "contents": "freeze-dried carrots",
+        "label": "smudged Sharpie"
+      },
+      "states": {}
+    },
+    {
+      "id": "ingredient_tray_3",
+      "name": "Ingredient Tray",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "contents": "freeze-dried celery",
+        "label": "smudged Sharpie",
+        "sticker": "URGENT",
+        "condition": "torn corner"
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_1",
+      "name": "Flour Sack",
+      "type": "ITEM",
+      "location_id": "in:main_cooking_area",
+      "properties": {
+        "weight": 5.0,
+        "material": "burlap",
+        "condition": "spilled"
+      },
+      "states": {}
+    },
+    {
+      "id": "rusty_scoop_1",
+      "name": "Rusted Scoop",
+      "type": "ITEM",
+      "location_id": "in:main_cooking_area",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "condition": "rusted",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cheese_container_1",
+      "name": "Vacuum-Sealed Cheese Bag",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "contents": "freeze-dried cheddar",
+        "condition": "sealed"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "plastic_pitcher_1",
+      "name": "Plastic Pitcher",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.3,
+        "capacity": 1.0,
+        "material": "plastic",
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "recipe_cards_1",
+      "name": "Laminated Recipe Cards",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "condition": "grease-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "kitchen_timer_1",
+      "name": "Digital Kitchen Timer",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "low battery"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          0.5
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "condition": "sagging"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheeled_dolly_1",
+      "name": "Wheeled Dolly",
+      "type": "FURNITURE",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.2
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "condition": "sticky wheel"
+      },
+      "states": {}
+    },
+    {
+      "id": "powdered_milk_sack_1",
+      "name": "Powdered Milk Sack",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "weight": 20.0,
+        "material": "plastic",
+        "condition": "straining seams"
+      },
+      "states": {}
+    },
+    {
+      "id": "broth_can_1",
+      "name": "Dehydrated Chicken Broth Can",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "condition": "label peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "broth_can_2",
+      "name": "Dehydrated Chicken Broth Can",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "condition": "dented lid"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "butter_jar_1",
+      "name": "Clarified Butter Jar",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "seal": "wax",
+        "condition": "sealed"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "safety_gloves_1",
+      "name": "Safety Gloves",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "weight": 0.1,
+        "material": "fabric",
+        "condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_sheet_1",
+      "name": "Handwritten Inventory Sheet",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "content": "CARROTS – BACK ROW"
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_camp_table_1",
+      "name": "Folding Camp Table",
+      "type": "FURNITURE",
+      "location_id": "in:rehydration_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_basin_1",
+      "name": "Plastic Basin",
+      "type": "ITEM",
+      "location_id": "on:folding_camp_table_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "capacity": 5.0
+      },
+      "states": {}
+    },
+    {
+      "id": "pitcher_2",
+      "name": "Pitcher of Warm Water",
+      "type": "ITEM",
+      "location_id": "on:folding_camp_table_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "contents": "water",
+        "temperature": "warm"
+      },
+      "states": {}
+    },
+    {
+      "id": "colander_1",
+      "name": "Colander",
+      "type": "ITEM",
+      "location_id": "on:folding_camp_table_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soak_sign_1",
+      "name": "Handwritten Soak Sign",
+      "type": "ITEM",
+      "location_id": "in:rehydration_station",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "content": "SOAK BEFORE COOKING"
+      },
+      "states": {}
+    },
+    {
+      "id": "distribution_counter_1",
+      "name": "Distribution Counter",
+      "type": "FURNITURE",
+      "location_id": "in:distribution_counter",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "dietary_clipboard_1",
+      "name": "Dietary Restriction Clipboard",
+      "type": "ITEM",
+      "location_id": "on:distribution_counter_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "content": "NO DAIRY – GREEN TAPE"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheeled_cart_1",
+      "name": "Wobbly Wheeled Cart",
+      "type": "FURNITURE",
+      "location_id": "in:distribution_counter",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "condition": "wobbly"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrapped_utensils_1",
+      "name": "Wrapped Utensils",
+      "type": "ITEM",
+      "location_id": "in:wheeled_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "wrapped"
+      },
+      "states": {
+        "is_wrapped": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:improvised_repair_zone",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "contents": "spare parts",
+        "provides_abilities": [
+          "repair"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "duct_tape_1",
+      "name": "Duct Tape",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "adhesive",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multi_tool_1",
+      "name": "Multi-Tool",
+      "type": "ITEM",
+      "location_id": "in:improvised_repair_zone",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal",
+        "provides_abilities": [
+          "cut",
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "volunteer_backpack_1",
+      "name": "Volunteer's Backpack",
+      "type": "ITEM",
+      "location_id": "in:improvised_repair_zone",
+      "properties": {
+        "weight": 2.0,
+        "material": "nylon",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rain_jacket_1",
+      "name": "Rain Jacket",
+      "type": "ITEM",
+      "location_id": "in:volunteer_backpack_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "waterproof"
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:volunteer_backpack_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "provides_abilities": [
+          "cut",
+          "unseal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gas_valve_1",
+      "name": "Gas Valve",
+      "type": "ITEM",
+      "location_id": "in:improvised_repair_zone",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "condition": "hidden"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "thank_you_poster_1",
+      "name": "Thank You Volunteers Poster",
+      "type": "ITEM",
+      "location_id": "in:main_cooking_area",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "water-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_herb_plant_1",
+      "name": "Dead Herb Plant",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "organic",
+        "type": "parsley",
+        "condition": "brittle"
+      },
+      "states": {}
+    },
+    {
+      "id": "childs_drawing_1",
+      "name": "Child's Drawing",
+      "type": "ITEM",
+      "location_id": "on:supply_crate_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "content": "For the nice soup people!"
+      },
+      "states": {}
+    },
+    {
+      "id": "supply_crate_1",
+      "name": "Supply Crate",
+      "type": "FURNITURE",
+      "location_id": "in:main_cooking_area",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "paper_coffee_cup_1",
+      "name": "Crushed Paper Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "condition": "crushed"
+      },
+      "states": {}
+    },
+    {
+      "id": "salt_box_1",
+      "name": "Salt Box",
+      "type": "ITEM",
+      "location_id": "in:supply_storage_corner",
+      "properties": {
+        "weight": 2.0,
+        "material": "cardboard",
+        "label": "SALT",
+        "condition": "mud-caked"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "boil",
+    "close",
+    "cut",
+    "open",
+    "repair",
+    "rinse",
+    "scoop",
+    "turn_off",
+    "turn_on",
+    "unseal"
+  ]
+}

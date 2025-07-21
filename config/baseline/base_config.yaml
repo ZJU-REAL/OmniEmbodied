@@ -1,0 +1,88 @@
+# 基础配置文件 - 所有其他配置的基础
+# 系统信息
+system:
+  name: "OmniEmbodied"
+  version: "1.0.0"
+
+# 数据目录配置
+data:
+  # 子目录结构
+  subdirs:
+    scene: "scene"
+    task: "task"
+
+  # 数据集配置（相对于项目根目录）
+  datasets:
+    # 原始数据集
+    source: "data/data-all"
+
+    # 评测数据集
+    eval_single: "data/eval/single-independent"
+    eval_multi: "data/eval/multi-independent"
+
+    # SFT训练数据集
+    sft_single: "data/sft/single-independent"
+    sft_multi: "data/sft/multi-independent"
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# 执行配置
+execution:
+  max_total_steps: 300
+  max_steps_per_task: 35
+  timeout_seconds: 900
+
+# 历史记录配置
+history:
+  max_history_length: -1
+  format:
+    include_thought: true
+    show_execution_status: true
+
+# 评测配置
+evaluation:
+  task_type: 'independent'
+  default_scenario: '00001'
+  run_settings:
+    default_suffix: 'demo'
+    log_level: 'INFO'
+  output:
+    base_dir: 'output'
+    save_trajectory: true
+    save_compact_trajectory: true
+    generate_report: true
+  execution:
+    timeout_seconds: 900
+    sequential:
+      continue_on_failure: true
+    combined:
+      task_separator: " "
+      add_task_numbers: true
+    independent:
+      continue_on_failure: true
+      delay_between_subtasks: 1.0
+      show_subtask_progress: true
+      output_management:
+        subtask_dir_pattern: 'subtask_{index:03d}_{hash}'
+        save_individual_logs: true
+        generate_subtask_trajectories: true
+
+# 并行评测配置
+parallel_evaluation:
+  enabled: true
+  scenario_parallelism:
+    max_parallel_scenarios: 2
+  scenario_selection:
+    mode: 'all'
+    range:
+      start: '00001'
+      end: '00010'
+    list: []
+    task_filter: {}
+  output:
+    save_individual_trajectories: true
+    generate_summary_report: true
+    pause_duration: 1.0

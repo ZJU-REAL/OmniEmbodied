@@ -1,166 +1,42 @@
 # 中心化多智能体配置文件
+extends: "base_config"
 
-# 数据目录配置（必需）
-data_dir: "data"  # 必须明确指定，支持相对路径和绝对路径
+# 数据集选择配置
+dataset:
+  # 默认使用的数据集 (eval_single, eval_multi, sft_single, sft_multi, source)
+  default: "eval_multi"
+
+# 日志配置
+logging:
+  level: "DEBUG"
+  show_llm_details: true
 
 # 智能体配置
 agent_config:
   agent_class: "modes.centralized.centralized_agent.CentralizedAgent"
-  max_failures: 3
-  max_history: 20
+  max_history: 35
 
-  # 环境描述配置
   environment_description:
-    # 详细程度: 'full' (完整环境) / 'room' (当前房间) / 'brief' (仅智能体状态)
     detail_level: 'full'
-    # 是否显示物体属性
     show_object_properties: true
-    # 是否只显示已发现的内容 全局观察 or 部分观察
     only_show_discovered: true
-    # 是否包含其他智能体信息 (重要：确保包含两个智能体)
     include_other_agents: true
-    # 更新频率 (0=每步更新, >0=按频率更新)
     update_frequency: 0
-
-# 协调器设置 (保持向后兼容)
-coordinator:
-  # LLM configuration to use
-  llm_config: llm_config
-  # Maximum history length
-  max_chat_history: -1  # -1 means no limit on history record count
-
-# Worker agent settings (保持向后兼容)
-worker_agents:
-  # LLM configuration to use
-  llm_config: llm_config
-  # Maximum history length
-  max_chat_history: -1  # -1 means no limit on history record count
 
 # 历史记录格式配置
 history:
-  max_history_length: -1  # -1 表示不限制历史长度
-  # 历史记录格式配置
   format:
-    include_thought: false  # 是否在历史记录中包含Thought内容
-    show_execution_status: false  # 是否显示执行状态 (centralized模式默认false)
-
-# Task execution settings
-execution:
-  max_total_steps: 300  # Maximum total execution steps
-  max_steps_per_task: 20  # Maximum steps per subtask (每个任务的最大步数)
-
-# Task evaluator settings (保持向后兼容)
-task_evaluator:
-  max_steps_per_task: 30  # Maximum steps per subtask (已废弃，请使用execution.max_steps_per_task)
-
-# Evaluation mode settings
-evaluation:
-  # Evaluation type: 'sequential' (sequential evaluation) or 'combined' (combined evaluation) or 'independent' (independent evaluation)
-  task_type: 'independent'
-
-  # Default scenario settings
-  default_scenario: '00001'
-
-  # Run settings
-  run_settings:
-    # Default run suffix
-    default_suffix: 'demo'
-    # Log level: 'DEBUG', 'INFO', 'WARNING', 'ERROR'
-    log_level: 'INFO'
-
-  # Task execution configuration
-  execution:
-    # Task timeout (seconds)
-    timeout_seconds: 900
-
-    # Sequential evaluation mode configuration
-    sequential:
-      # Whether to continue executing next task when subtask fails
-      continue_on_failure: true
-
-    # Combined evaluation mode configuration
-    combined:
-      # Separator between task descriptions
-      task_separator: " "
-      # Whether to add task numbers before task descriptions
-      add_task_numbers: true
-
-    # Independent evaluation mode configuration
-    independent:
-      # Whether to continue executing next task when subtask fails
-      continue_on_failure: true
-
-      # Delay time between subtasks (seconds) - for resource cleanup
-      delay_between_subtasks: 1.0
-
-      # Whether to show subtask execution progress
-      show_subtask_progress: true
-
-      # Output management configuration
-      output_management:
-        # Subtask output directory naming pattern
-        subtask_dir_pattern: 'subtask_{index:03d}_{hash}'
-
-        # Whether to save detailed logs for each subtask
-        save_individual_logs: true
-
-        # Whether to generate subtask-level trajectory files
-        generate_subtask_trajectories: true
+    include_thought: false
+    show_execution_status: false
 
 
 
-# 并行评测配置
 parallel_evaluation:
-  # 是否启用并行评测
-  enabled: true
-
-  # 场景级并行配置
   scenario_parallelism:
-    # 最大并行场景数
     max_parallel_scenarios: 1
-
-  # 场景选择配置
-  # 说明：首先根据场景选择配置确定基础场景列表，然后应用任务筛选
   scenario_selection:
-    # 场景选择模式
-    # 选项:
-    #   - 'all': 选择所有可用场景
-    #   - 'range': 选择指定范围内的场景 (如 00001-00010)
-    #   - 'list': 选择指定列表中的场景
     mode: 'all'
-
-    # 范围模式配置 (当mode='range'时使用)
     range:
-      start: '00250'  # 起始场景ID (5位数字，如 00001)
-      end: '00256'    # 结束场景ID (5位数字，如 00005)
-
-    # 列表模式配置 (当mode='list'时使用)
-    # 用法：取消注释并指定场景ID列表
+      start: '00250'
+      end: '00256'
     list: ['00402']
-
-    # 任务筛选配置 (与场景选择取交集)
-    # 说明：任务筛选用于根据任务特征进一步筛选要评测的场景
-    # 只有包含符合筛选条件任务的场景才会被评测
-    task_filter:
-      # 任务类别筛选 (可选)
-      # 说明：根据任务的task_category字段筛选任务
-      # 支持的类别:
-      #   - 'direct_command': 直接命令任务 (如"将苹果放到桌子上")
-      #   - 'attribute_reasoning': 属性推理任务 (如"找到最重的物体")
-      #   - 'tool_use': 工具使用任务 (如"用锤子修理设备")
-      #   - 'spatial_reasoning': 空间推理任务 (如"将物体放到最近的容器中")
-      #   - 'compound_reasoning': 复合推理任务
-      #   - 'explicit_collaboration': 显式协作任务 (明确指定多智能体协作)
-      #   - 'implicit_collaboration': 隐式协作任务 (需要智能体自主协作)
-      #   - 'compound_collaboration': 复合协作任务
-      # 用法：取消注释并指定要筛选的类别列表
-      # categories: ['explicit_collaboration']
-
-  # 输出配置
-  output:
-    # 是否保存各场景的详细轨迹
-    save_individual_trajectories: true
-    # 是否生成汇总报告
-    generate_summary_report: true
-    # 暂停时间（秒）
-    pause_duration: 1.0

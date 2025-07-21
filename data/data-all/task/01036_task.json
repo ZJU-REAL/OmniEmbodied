@@ -1,0 +1,138 @@
+{
+  "task_background": "Prepare the emergency field hospital for patient treatment by setting up equipment and supplies.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 35.0,
+      "max_size": [
+        2.0,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 35.0,
+      "max_size": [
+        2.0,
+        1.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Open defibrillator_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "defibrillator_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the white ventilator in the acute trauma bays.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ventilator_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unpair the black blood pressure cuff in the acute trauma bays.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blood_pressure_cuff_1",
+          "is_paired": false
+        }
+      ]
+    },
+    {
+      "task_description": "Write on clipboard_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Write on the brown clipboard in the acute trauma bays.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open oxygen_tank_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open refrigeration_unit_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the medication cabinet to the supply depot.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "medication_cabinet_1",
+          "location_id": ":supply_depot"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the oxygen tank to the pediatric recovery zone.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "location_id": ":pediatric_recovery_zone"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the green oxygen tank in the acute trauma bays to the morgue tent.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "oxygen_tank_1",
+          "location_id": "in:morgue_tent"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the brown medication cabinet in the pediatric recovery zone to the communications hub.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "medication_cabinet_1",
+          "location_id": "in:communications_hub"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01036"
+}

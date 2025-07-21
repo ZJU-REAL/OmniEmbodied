@@ -1,0 +1,180 @@
+{
+  "task_background": "Prepare the forensic ballistics laboratory for an urgent homicide case evidence processing cycle.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Open heavy_duty_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on ibis_terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ibis_terminal_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red evidence bin labeled 'URGENT – HOMICIDE CASES' in the case coordination office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_evidence_bin_1",
+          "location_id": "in:case_coordination_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Glock with the scratched-off serial number to the forensic workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "unlogged_glock_1",
+          "location_id": ":forensic_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to unscrew the jammed revolver.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "jammed_revolver_1",
+          "is_screwed_in": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pump to pump the bullet recovery water tank.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "water_tank_1",
+          "is_pumped": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the brass punch tool to loosen the revolver with the stuck cylinder in the firing booth.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "jammed_revolver_1",
+          "is_loose": true
+        }
+      ]
+    },
+    {
+      "task_description": "Dry the cleaning kit with the oily rag using the towel.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "cleaning_kit_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open heavy_duty_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_locker_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on both the IBIS terminal and its high-resolution scanner.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ibis_terminal_1",
+          "is_on": true
+        },
+        {
+          "id": "high_res_scanner_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bullet recovery water tank to the forensic workbench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_tank_1",
+          "location_id": ":forensic_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy-duty steel evidence locker to the ballistics testing range.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_locker_1",
+          "location_id": ":ballistics_testing_range"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the firing booth that is currently closed to the evidence intake storage and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "firing_booth_1",
+          "location_id": ":evidence_intake_storage"
+        },
+        {
+          "id": "firing_booth_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the water tank with discolored water to the forensic workbench and pump it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "water_tank_1",
+          "location_id": ":forensic_workbench"
+        },
+        {
+          "id": "water_tank_1",
+          "is_pumped": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01156"
+}

@@ -1,0 +1,781 @@
+{
+  "description": "A high-tech Forensic Ballistics Laboratory serving as a central hub for processing firearms evidence, featuring interconnected zones for evidence intake, ballistic testing, IBIS analysis, forensic work, and case coordination.",
+  "rooms": [
+    {
+      "id": "evidence_intake_storage",
+      "name": "Evidence Intake & Storage",
+      "properties": {
+        "type": "secured_storage"
+      },
+      "connected_to_room_ids": [
+        "ballistics_testing_range",
+        "ibis_analysis_station"
+      ]
+    },
+    {
+      "id": "ballistics_testing_range",
+      "name": "Ballistics Testing Range",
+      "properties": {
+        "type": "firing_range"
+      },
+      "connected_to_room_ids": [
+        "evidence_intake_storage",
+        "forensic_workbench"
+      ]
+    },
+    {
+      "id": "ibis_analysis_station",
+      "name": "IBIS Analysis Station",
+      "properties": {
+        "type": "high_tech_workstation"
+      },
+      "connected_to_room_ids": [
+        "evidence_intake_storage",
+        "case_coordination_office"
+      ]
+    },
+    {
+      "id": "forensic_workbench",
+      "name": "Forensic Workbench",
+      "properties": {
+        "type": "cluttered_workspace"
+      },
+      "connected_to_room_ids": [
+        "ballistics_testing_range",
+        "case_coordination_office"
+      ]
+    },
+    {
+      "id": "case_coordination_office",
+      "name": "Case Coordination Office",
+      "properties": {
+        "type": "administrative"
+      },
+      "connected_to_room_ids": [
+        "ibis_analysis_station",
+        "forensic_workbench"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "heavy_duty_locker_1",
+      "name": "Heavy-duty Steel Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "high",
+        "rfid_tag": "LOCKER001"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "heavy_duty_locker_2",
+      "name": "Heavy-duty Steel Evidence Locker",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "high",
+        "rfid_tag": "LOCKER002"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "overflow_rack_1",
+      "name": "Overflow Rack",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "rusted_metal",
+        "condition": "sagging"
+      },
+      "states": {}
+    },
+    {
+      "id": "weigh_station_1",
+      "name": "Weigh Station with Digital Scale",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "max_capacity": 50.0,
+        "brand": "PrecisionWeigh"
+      },
+      "states": {}
+    },
+    {
+      "id": "priority_evidence_bin_1",
+      "name": "Priority Evidence Bin",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "label": "URGENT – HOMICIDE CASES",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "unlogged_glock_1",
+      "name": "Unlogged Glock 17",
+      "type": "ITEM",
+      "location_id": "in:priority_evidence_bin_1",
+      "properties": {
+        "weight": 0.8,
+        "serial_number": "scratched_off",
+        "case_tag": "Bellevue PD Case #4472",
+        "caliber": "9mm",
+        "condition": "used"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_submission_forms_1",
+      "name": "Evidence Submission Forms",
+      "type": "ITEM",
+      "location_id": "on:weigh_station_1",
+      "properties": {
+        "weight": 0.2,
+        "status": "half_filled",
+        "stains": "coffee",
+        "pages": 5
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:weigh_station_1",
+      "properties": {
+        "weight": 0.5,
+        "battery_status": "low",
+        "brand": "Zebra",
+        "model": "DS2200"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "metal_cart_1",
+      "name": "Metal Cart",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "condition": "wobbly_wheel",
+        "contents": "evidence_bags"
+      },
+      "states": {}
+    },
+    {
+      "id": "security_camera_1",
+      "name": "Security Camera",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "weight": 1.2,
+        "status": "recording",
+        "brand": "Hikvision",
+        "model": "DS-2CD2342WD-I"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "evidence_handling_poster_1",
+      "name": "Evidence Handling Protocol Poster",
+      "type": "ITEM",
+      "location_id": "in:evidence_intake_storage",
+      "properties": {
+        "weight": 0.3,
+        "condition": "peeling",
+        "year": 2015,
+        "content": "outdated"
+      },
+      "states": {}
+    },
+    {
+      "id": "latex_gloves_box_1",
+      "name": "Box of Latex Gloves",
+      "type": "ITEM",
+      "location_id": "on:overflow_rack_1",
+      "properties": {
+        "weight": 0.4,
+        "quantity": "almost_empty",
+        "size": "medium",
+        "brand": "MedPride"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Half-drunk Energy Drink",
+      "type": "ITEM",
+      "location_id": "on:weigh_station_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Monster",
+        "flavor": "Ultra",
+        "condition": "condensation_ring"
+      },
+      "states": {
+        "is_poured": false
+      }
+    },
+    {
+      "id": "water_tank_1",
+      "name": "Bullet Recovery Water Tank",
+      "type": "FURNITURE",
+      "location_id": "in:ballistics_testing_range",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "reinforced_glass",
+        "water_condition": "discolored"
+      },
+      "states": {
+        "is_pumped": false
+      }
+    },
+    {
+      "id": "firing_booth_1",
+      "name": "Firing Booth",
+      "type": "FURNITURE",
+      "location_id": "in:ballistics_testing_range",
+      "properties": {
+        "size": [
+          2.5,
+          2.0,
+          2.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "soundproofing": "high",
+        "features": "mechanical_clamps"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jammed_revolver_1",
+      "name": "Jammed Revolver",
+      "type": "ITEM",
+      "location_id": "in:firing_booth_1",
+      "properties": {
+        "weight": 1.1,
+        "caliber": ".45 ACP",
+        "condition": "cylinder_stuck",
+        "brand": "Smith & Wesson"
+      },
+      "states": {
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "ejected_casings_tray_1",
+      "name": "Ejected Casings Tray",
+      "type": "ITEM",
+      "location_id": "on:firing_booth_1",
+      "properties": {
+        "weight": 0.6,
+        "casings_count": 5,
+        "caliber": ".45 ACP",
+        "condition": "one_deformed"
+      },
+      "states": {}
+    },
+    {
+      "id": "ear_protection_1",
+      "name": "Ear Protection",
+      "type": "ITEM",
+      "location_id": "on:firing_booth_1",
+      "properties": {
+        "weight": 0.2,
+        "pair_status": "one_missing",
+        "brand": "3M",
+        "type": "over_ear"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tools_1",
+      "name": "Calibration Tools",
+      "type": "ITEM",
+      "location_id": "on:firing_booth_1",
+      "properties": {
+        "weight": 0.7,
+        "condition": "misaligned",
+        "type": "precision",
+        "brand": "Mitutoyo"
+      },
+      "states": {
+        "is_loose": false
+      }
+    },
+    {
+      "id": "cleaning_kit_1",
+      "name": "Cleaning Kit",
+      "type": "ITEM",
+      "location_id": "on:firing_booth_1",
+      "properties": {
+        "weight": 1.5,
+        "condition": "oily_rag_draped",
+        "contents": "brushes_solvents",
+        "brand": "Hoppe's"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "no_food_sign_1",
+      "name": "NO FOOD Sign",
+      "type": "ITEM",
+      "location_id": "in:ballistics_testing_range",
+      "properties": {
+        "weight": 0.1,
+        "condition": "ignored",
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "ballistics_chart_1",
+      "name": "Faded Ballistics Chart",
+      "type": "ITEM",
+      "location_id": "in:ballistics_testing_range",
+      "properties": {
+        "weight": 0.2,
+        "condition": "annotated",
+        "annotations": "Sharpie",
+        "year": 2010
+      },
+      "states": {}
+    },
+    {
+      "id": "ibis_terminal_1",
+      "name": "IBIS Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:ibis_analysis_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "features": "dual_monitors",
+        "security": "fingerprint_locked"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "high_res_scanner_1",
+      "name": "High-resolution Scanner",
+      "type": "ITEM",
+      "location_id": "on:ibis_terminal_1",
+      "properties": {
+        "weight": 3.5,
+        "condition": "dust_on_lens",
+        "resolution": "4800dpi",
+        "brand": "Epson"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "pending_casings_tray_1",
+      "name": "Pending Casings Tray",
+      "type": "ITEM",
+      "location_id": "on:ibis_terminal_1",
+      "properties": {
+        "weight": 0.5,
+        "samples_count": 12,
+        "status": "awaiting_upload",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "match_found_alert_1",
+      "name": "MATCH FOUND Alert",
+      "type": "ITEM",
+      "location_id": "on:ibis_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "status": "blinking",
+        "acknowledged": false,
+        "urgency": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:ibis_terminal_1",
+      "properties": {
+        "weight": 2.0,
+        "status": "out_of_tape",
+        "brand": "Brother",
+        "model": "PT-E550W"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "reference_manuals_1",
+      "name": "Reference Manuals",
+      "type": "ITEM",
+      "location_id": "on:ibis_terminal_1",
+      "properties": {
+        "weight": 3.0,
+        "bookmarks": "sticky_notes",
+        "topics": "ballistics_analysis",
+        "condition": "well_used"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:ibis_analysis_station",
+      "properties": {
+        "weight": 0.3,
+        "year": 2018,
+        "frame": "wooden",
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_cactus_1",
+      "name": "Dead Potted Cactus",
+      "type": "ITEM",
+      "location_id": "in:ibis_analysis_station",
+      "properties": {
+        "weight": 0.8,
+        "status": "dead",
+        "pot_material": "clay",
+        "size": "small"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_workbench_1",
+      "name": "Forensic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "cluttered"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "brass_punch_tool_1",
+      "name": "Brass Punch Tool",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "brass",
+        "use": "firearm_repair",
+        "provides_abilities": [
+          "unscrew",
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "magnification": "1000x",
+        "brand": "Leica",
+        "condition": "clean"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "chemical_processing_kit_1",
+      "name": "Chemical Processing Kit",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "contents": "reagents_brushes",
+        "brand": "ForensicSource",
+        "condition": "partially_used"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "case_coordination_desk_1",
+      "name": "Case Coordination Desk",
+      "type": "FURNITURE",
+      "location_id": "in:case_coordination_office",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "organized"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:case_coordination_office",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "crime_links",
+        "condition": "marked_up"
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_map_1",
+      "name": "Wall Map",
+      "type": "ITEM",
+      "location_id": "in:case_coordination_office",
+      "properties": {
+        "weight": 1.5,
+        "content": "jurisdictional_overlaps",
+        "condition": "pinned",
+        "size": "large"
+      },
+      "states": {}
+    },
+    {
+      "id": "case_files_1",
+      "name": "Case Files",
+      "type": "ITEM",
+      "location_id": "on:case_coordination_desk_1",
+      "properties": {
+        "weight": 3.0,
+        "status": "outdated",
+        "quantity": "many",
+        "organization": "unsorted"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:case_coordination_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "resemblance": "casing",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Towel",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "condition": "clean",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "phillips",
+        "size": "medium",
+        "provides_abilities": [
+          "unscrew",
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "ITEM",
+      "location_id": "in:case_coordination_office",
+      "properties": {
+        "weight": 25.0,
+        "brand": "Xerox",
+        "model": "WorkCentre 6515",
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "capacity": "10ml",
+        "condition": "sterile",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "carving_knife_1",
+      "name": "Carving Knife",
+      "type": "ITEM",
+      "location_id": "in:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "blade_material": "stainless_steel",
+        "handle_material": "wood",
+        "provides_abilities": [
+          "carve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pump_1",
+      "name": "Pump",
+      "type": "ITEM",
+      "location_id": "in:ballistics_testing_range",
+      "properties": {
+        "weight": 5.0,
+        "type": "water",
+        "power_source": "electric",
+        "provides_abilities": [
+          "pump"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "carve",
+    "copy",
+    "dry",
+    "inject",
+    "loosen",
+    "open",
+    "pump",
+    "turn_off",
+    "turn_on",
+    "unpack",
+    "unscrew",
+    "unstack",
+    "close"
+  ]
+}

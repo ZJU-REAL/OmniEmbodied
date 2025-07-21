@@ -1,0 +1,60 @@
+# SFT数据集生成配置文件
+
+# 数据源配置
+source:
+  # 源数据目录（相对于项目根目录）
+  data_dir: "data/data-all"
+  # 任务文件子目录
+  task_subdir: "task"
+  # 场景文件子目录  
+  scene_subdir: "scene"
+
+# 输出配置
+output:
+  # 输出根目录（相对于项目根目录）
+  output_dir: "data/sft"
+  # 任务输出子目录
+  task_subdir: "task"
+  # 场景软链接子目录
+  scene_subdir: "scene"
+
+# 场景范围配置
+scene_filter:
+  # 场景编号范围（包含起始和结束）
+  min_scene_id: 301
+  max_scene_id: 1300
+
+# 任务筛选配置
+task_filter:
+  # 要生成的任务类型及其目标数量
+  single_agent_tasks:
+    "direct_command": 400
+    "attribute_reasoning": 900
+    "tool_use": 700
+    "compound_reasoning": 700
+
+  multi_agent_tasks:
+    "explicit_collaboration": 400
+    "implicit_collaboration": 400
+    "compound_collaboration": 900
+
+# 智能体选择配置
+agent_selection:
+  # 单智能体任务的智能体选择策略：max_weight（选择负重最大的智能体）
+  single_agent_strategy: "max_weight"
+  # 多智能体任务保留所有智能体
+  multi_agent_strategy: "all"
+
+# 场景文件处理配置
+scene_processing:
+  # 是否创建场景文件的软链接
+  create_scene_links: true
+
+# 采样策略配置
+sampling:
+  # 是否确保同一类别任务来自不同场景
+  ensure_scene_diversity: true
+  # 当场景资源不足时的处理策略
+  # - "skip": 跳过该场景
+  # - "reuse": 允许重复使用场景
+  insufficient_scenes_strategy: "reuse"

@@ -38,7 +38,6 @@ class BaseAgent(ABC):
         self.config = config or {}
         
         # 默认配置
-        self.max_failures = self.config.get('max_failures', 3)
         self.max_history = self.config.get('max_history', 50)
         
         # 执行历史记录

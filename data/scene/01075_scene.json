@@ -1,0 +1,787 @@
+{
+  "description": "A covert cybercrime investigation hub hidden within a nondescript urban office building, featuring a forensic workroom, evidence lockup, and breakroom/intel meeting area. The scene is dense with technology, evidence, and operational clutter, requiring multi-agent collaboration for handling bulky equipment, decrypting data, and managing secure workflows.",
+  "rooms": [
+    {
+      "id": "forensic_workroom",
+      "name": "Forensic Workroom",
+      "properties": {
+        "type": "lab",
+        "lighting": "UV-filtered",
+        "flooring": "anti-static",
+        "soundproofing": true
+      },
+      "connected_to_room_ids": [
+        "evidence_lockup",
+        "breakroom"
+      ]
+    },
+    {
+      "id": "evidence_lockup",
+      "name": "Evidence Lockup",
+      "properties": {
+        "type": "secure_room",
+        "door_material": "reinforced_steel",
+        "access_control": "biometric",
+        "surveillance": "motion-triggered_cameras"
+      },
+      "connected_to_room_ids": [
+        "forensic_workroom"
+      ]
+    },
+    {
+      "id": "breakroom",
+      "name": "Breakroom/Intel Meeting Area",
+      "properties": {
+        "type": "lounge",
+        "furniture_condition": "worn",
+        "decor": "case_files"
+      },
+      "connected_to_room_ids": [
+        "forensic_workroom"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "forensic_workbench_1",
+      "name": "Forensic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "size": [
+          2.4,
+          0.8,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "embedded_features": [
+          "write-blockers"
+        ],
+        "anchored": true
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": "locked",
+        "label": "EVIDENCE #3829"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_laptop_1",
+      "name": "Encrypted Laptop",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "Dell",
+        "model": "Latitude",
+        "condition": "scratched",
+        "warning_sticker": "CONFISCATED - DO NOT POWER ON"
+      },
+      "states": {
+        "is_on": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "usb_dongle_1",
+      "name": "USB Dongle",
+      "type": "ITEM",
+      "location_id": "in:faraday_pouch_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "TK-78 KEY",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "faraday_pouch_1",
+      "name": "Faraday Pouch",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metallic_fabric",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_slides_1",
+      "name": "Microscope Slides",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "content": "PCB fragments",
+        "quantity": 5
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.6
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "access_method": "thumbprint",
+        "response_delay": "slight_beep"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_locker_5",
+      "name": "Evidence Locker #5",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.6
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "hinge_condition": "squeaky"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tk78_manual_1",
+      "name": "TK-78 Manual",
+      "type": "ITEM",
+      "location_id": "in:evidence_locker_5",
+      "properties": {
+        "weight": 0.5,
+        "condition": "page_12_torn_out",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerated_drawer_1",
+      "name": "Refrigerated Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.3
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "temperature": 4.0,
+        "warning": "TERMINATE IF >10°C"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "samsung_phone_1",
+      "name": "Samsung Phone",
+      "type": "ITEM",
+      "location_id": "in:refrigerated_drawer_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "bagged",
+        "warning": "TERMINATE IF >10°C"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "digital_logbook_1",
+      "name": "Digital Logbook",
+      "type": "ITEM",
+      "location_id": "on:evidence_locker_5",
+      "properties": {
+        "weight": 0.7,
+        "battery_level": 12,
+        "last_entry": "Chain of custody broken for Item #209"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "conference_table_1",
+      "name": "Conference Table",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.7
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "condition": "scratched",
+        "leg_stability": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "receiver_off-hook",
+        "note": "CALL BACK FIELD 7"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "case_file_1",
+      "name": "Case File 'Operation Blindspot'",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 0.4,
+        "content": "redacted_address",
+        "condition": "smudged_fingerprint"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.02
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "content": "FIND THE RAT circled aggressively",
+        "condition": "half-erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Flickering Monitor",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "condition": "flickering",
+        "brand": "Dell"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Brother",
+        "model": "PT-90",
+        "condition": "out_of_tape"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "evidence_box_1",
+      "name": "Half-Labeled Evidence Box",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "condition": "half-labeled",
+        "contents": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drives_1",
+      "name": "USB Drive Tray",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "quantity": 5,
+        "contents": [
+          {
+            "id": "usb_drive_1",
+            "brand": "Sandisk",
+            "model": "Cruzer",
+            "color": "blue",
+            "label": "BACKUP_4/12",
+            "condition": "scratched"
+          },
+          {
+            "id": "usb_drive_2",
+            "brand": "Sandisk",
+            "model": "Cruzer",
+            "color": "blue",
+            "label": "",
+            "condition": "new"
+          },
+          {
+            "id": "usb_drive_3",
+            "brand": "Sandisk",
+            "model": "Cruzer",
+            "color": "red",
+            "label": "",
+            "condition": "new"
+          },
+          {
+            "id": "usb_drive_4",
+            "brand": "Sandisk",
+            "model": "Cruzer",
+            "color": "blue",
+            "label": "",
+            "condition": "new"
+          },
+          {
+            "id": "usb_drive_5",
+            "brand": "Sandisk",
+            "model": "Cruzer",
+            "color": "red",
+            "label": "",
+            "condition": "new"
+          }
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_lipstick_1",
+      "name": "Blue-Capped Lipstick",
+      "type": "ITEM",
+      "location_id": "in:breakroom_trash_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "brand": "unknown"
+      },
+      "states": {}
+    },
+    {
+      "id": "breakroom_trash_1",
+      "name": "Breakroom Trash Bin",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torn_page_1",
+      "name": "Torn Page from Manual",
+      "type": "ITEM",
+      "location_id": "on:conference_table_1",
+      "properties": {
+        "weight": 0.05,
+        "content": "TK-78 decryption instructions",
+        "condition": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Access Keycard",
+      "type": "ITEM",
+      "location_id": "in:biometric_safe_1",
+      "properties": {
+        "weight": 0.05,
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 3.5,
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_server_1",
+      "name": "Broken Server Component",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 12.0,
+        "condition": "damaged"
+      },
+      "states": {
+        "is_welded": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 4.0,
+        "condition": "out_of_beans"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 15.0,
+        "model": "1990s",
+        "condition": "door_jammed"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 1.5,
+        "condition": "empty",
+        "remaining_gloves": 1,
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "latex_glove_1",
+      "name": "Latex Glove",
+      "type": "ITEM",
+      "location_id": "on:glove_dispenser_1",
+      "properties": {
+        "weight": 0.05,
+        "condition": "dangling"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_trophy_1",
+      "name": "Best Forensic Team 2018 Trophy",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dusty",
+        "obstruction": "motion_sensor_view"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_cactus_1",
+      "name": "Dead Potted Cactus",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 0.8,
+        "label": "WATER ME :(",
+        "condition": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "motivational_poster_1",
+      "name": "DATA LOSS = JAIL TIME Poster",
+      "type": "ITEM",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "weight": 0.3,
+        "condition": "faded",
+        "stains": "coffee"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_journals_1",
+      "name": "Stack of Outdated Forensic Journals",
+      "type": "ITEM",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "weight": 3.0,
+        "quantity": 12,
+        "covering": "Wi-Fi router"
+      },
+      "states": {}
+    },
+    {
+      "id": "wifi_router_1",
+      "name": "Wi-Fi Router",
+      "type": "ITEM",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "weight": 0.4,
+        "status": "blinking_lights"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope with Digital Camera",
+      "type": "ITEM",
+      "location_id": "on:forensic_workbench_1",
+      "properties": {
+        "weight": 5.5,
+        "condition": "stiff_focus_knob",
+        "accessories": "PCB_slides"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "red_string_board_1",
+      "name": "Corkboard with Red-Stringed Photos",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.05
+        ],
+        "weight": 4.0,
+        "content": "suspect_photos",
+        "connectors": "red_string"
+      },
+      "states": {}
+    },
+    {
+      "id": "tv_1",
+      "name": "Wall-Mounted TV",
+      "type": "ITEM",
+      "location_id": "in:breakroom",
+      "properties": {
+        "weight": 8.0,
+        "status": "muted_news_loop"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "photocopier_1",
+      "name": "Photocopier",
+      "type": "ITEM",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "weight": 45.0,
+        "provides_abilities": [
+          "copy"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "document_1",
+      "name": "Uncopied Document",
+      "type": "ITEM",
+      "location_id": "on:photocopier_1",
+      "properties": {
+        "weight": 0.2,
+        "content": "classified"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "alarm_panel_1",
+      "name": "Security Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 3.0,
+        "provides_abilities": [
+          "arm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": false
+      }
+    },
+    {
+      "id": "scrub_brush_1",
+      "name": "Scrub Brush",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.4,
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dirty_floor_1",
+      "name": "Dirty Floor Section",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.01
+        ],
+        "weight": 0.0,
+        "condition": "dirty"
+      },
+      "states": {
+        "is_scrubbed": true
+      }
+    },
+    {
+      "id": "air_pump_1",
+      "name": "Air Pump",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 2.0,
+        "provides_abilities": [
+          "inflate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "deflated_equipment_1",
+      "name": "Deflated Equipment Bag",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 1.5,
+        "condition": "deflated"
+      },
+      "states": {
+        "is_inflated": false
+      }
+    },
+    {
+      "id": "cracked_monitor_1",
+      "name": "Cracked Monitor",
+      "type": "ITEM",
+      "location_id": "in:forensic_workroom",
+      "properties": {
+        "weight": 6.0,
+        "condition": "cracked_screen"
+      },
+      "states": {
+        "is_cracked": false
+      }
+    },
+    {
+      "id": "table_set_1",
+      "name": "Set Table",
+      "type": "FURNITURE",
+      "location_id": "in:breakroom",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.01
+        ],
+        "weight": 0.0,
+        "condition": "set_with_tableware"
+      },
+      "states": {
+        "is_table_set": true
+      }
+    }
+  ],
+  "abilities": [
+    "arm_alarm",
+    "clear_table",
+    "copy",
+    "copy_file",
+    "crack",
+    "inflate",
+    "open",
+    "scrub",
+    "turn_on",
+    "unlock",
+    "weld",
+    "close"
+  ]
+}

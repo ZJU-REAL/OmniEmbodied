@@ -1,0 +1,541 @@
+{
+  "description": "A high-security Financial Forensic Lab where teams of investigators collaborate to uncover evidence of insider trading and financial fraud. The lab is divided into specialized zones including a Digital Forensics Hub, Document Analysis Zone, Secure Evidence Vault, Collaboration War Room, and Break Room.",
+  "rooms": [
+    {
+      "id": "digital_forensics_hub",
+      "name": "Digital Forensics Hub",
+      "properties": {
+        "type": "forensic",
+        "security_level": "high"
+      },
+      "connected_to_room_ids": [
+        "document_analysis_zone",
+        "collaboration_war_room"
+      ]
+    },
+    {
+      "id": "document_analysis_zone",
+      "name": "Document Analysis Zone",
+      "properties": {
+        "type": "analysis",
+        "security_level": "medium"
+      },
+      "connected_to_room_ids": [
+        "digital_forensics_hub",
+        "secure_evidence_vault"
+      ]
+    },
+    {
+      "id": "secure_evidence_vault",
+      "name": "Secure Evidence Vault",
+      "properties": {
+        "type": "storage",
+        "security_level": "maximum"
+      },
+      "connected_to_room_ids": [
+        "document_analysis_zone"
+      ]
+    },
+    {
+      "id": "collaboration_war_room",
+      "name": "Collaboration War Room",
+      "properties": {
+        "type": "meeting",
+        "security_level": "medium"
+      },
+      "connected_to_room_ids": [
+        "digital_forensics_hub",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "utility",
+        "security_level": "low"
+      },
+      "connected_to_room_ids": [
+        "collaboration_war_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "forensic_server_rack_1",
+      "name": "Forensic Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics_hub",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "FR-3000",
+        "security_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "triple_monitor_workstation_1",
+      "name": "Triple Monitor Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:digital_forensics_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.7,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "Dell",
+        "model_number": "TMW-450"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "goldman_leaks_hdd_1",
+      "name": "Goldman Leaks External HDD",
+      "type": "ITEM",
+      "location_id": "in:forensic_server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "brand": "Seagate",
+        "model_number": "STHD-500",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {
+        "is_connected": true
+      }
+    },
+    {
+      "id": "decryption_keycard_1",
+      "name": "Decryption Keycard",
+      "type": "ITEM",
+      "location_id": "in:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "brand": "SecureTech",
+        "model_number": "DK-200",
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "noise_canceling_headset_1",
+      "name": "Noise Canceling Headset",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "Bose",
+        "model_number": "NC-700",
+        "condition": "frayed_cables"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:triple_monitor_workstation_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "brand": "Brother",
+        "model_number": "PT-100",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "light_table_1",
+      "name": "Light Table",
+      "type": "FURNITURE",
+      "location_id": "in:document_analysis_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "glass",
+        "brand": "Lumino"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "overhead_document_scanner_1",
+      "name": "Overhead Document Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:document_analysis_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Epson",
+        "model_number": "DS-500"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "spreadsheet_binder_1",
+      "name": "Spreadsheet Binder",
+      "type": "ITEM",
+      "location_id": "on:light_table_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "black",
+        "material": "leather",
+        "label": "GS-Q4 Trades – EYES ONLY"
+      },
+      "states": {}
+    },
+    {
+      "id": "handwritten_notes_1",
+      "name": "Handwritten Notes",
+      "type": "ITEM",
+      "location_id": "on:light_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "paper",
+        "content": "Call from SAC Capital?"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:light_table_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "brand": "BrightView",
+        "model_number": "ML-200"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "hole_punch_1",
+      "name": "Hole Punch",
+      "type": "ITEM",
+      "location_id": "on:light_table_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "silver",
+        "brand": "Swingline",
+        "condition": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "heavy_steel_shelving_1",
+      "name": "Heavy Steel Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:secure_evidence_vault",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "security_level": "maximum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:secure_evidence_vault",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "brand": "Safeguard",
+        "model_number": "BS-1000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealed_goldman_sachs_box_1",
+      "name": "Sealed Goldman Sachs Box",
+      "type": "ITEM",
+      "location_id": "in:heavy_steel_shelving_1",
+      "properties": {
+        "weight": 18.0,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "FRAGILE – DO NOT OPEN"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "voice_recorder_1",
+      "name": "Voice Recorder",
+      "type": "ITEM",
+      "location_id": "in:heavy_steel_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "brand": "Sony",
+        "model_number": "VR-200"
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "evidence_logbook_1",
+      "name": "Evidence Logbook",
+      "type": "ITEM",
+      "location_id": "on:heavy_steel_shelving_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "leather",
+        "condition": "missing_pen"
+      },
+      "states": {}
+    },
+    {
+      "id": "gloves_evidence_bags_1",
+      "name": "Gloves & Evidence Bags",
+      "type": "ITEM",
+      "location_id": "on:heavy_steel_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "plastic",
+        "condition": "partially_used"
+      },
+      "states": {}
+    },
+    {
+      "id": "interactive_screen_1",
+      "name": "Interactive Screen",
+      "type": "FURNITURE",
+      "location_id": "in:collaboration_war_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.1
+        ],
+        "weight": 30.0,
+        "is_container": false,
+        "brand": "Samsung",
+        "model_number": "IS-850"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "brand": "Keurig",
+        "model_number": "K-Elite"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "Panasonic",
+        "model_number": "NN-SN686S"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_key_1",
+      "name": "Spare Key",
+      "type": "ITEM",
+      "location_id": "in:microwave_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "open"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_plant_mug_1",
+      "name": "Dead Plant in Trophy Mug",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "brown",
+        "material": "ceramic",
+        "inscription": "World’s Best Analyst"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_charger_1",
+      "name": "USB Charger",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "brand": "Anker",
+        "model_number": "A2143",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:microwave_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "brand": "HydroFlask",
+        "model_number": "HF-32",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "brand": "Pilot",
+        "model_number": "G2",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_tape_1",
+      "name": "Measuring Tape",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "brand": "Stanley",
+        "model_number": "FMHT33806",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "disconnect",
+    "install",
+    "measure",
+    "mend",
+    "open",
+    "recharge",
+    "rinse",
+    "sign",
+    "solve_puzzle",
+    "turn_on",
+    "close"
+  ]
+}

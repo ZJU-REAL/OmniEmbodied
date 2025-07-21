@@ -1,0 +1,911 @@
+{
+  "description": "An industrial factory undergoing retrofit with a mix of outdated and cutting-edge automation equipment, featuring collaborative workstations, heavy machinery, and diagnostic tools.",
+  "rooms": [
+    {
+      "id": "assembly_line_floor",
+      "name": "Assembly Line Floor",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay",
+        "control_room",
+        "storage_logistics",
+        "worker_break_area"
+      ]
+    },
+    {
+      "id": "maintenance_bay",
+      "name": "Maintenance Bay",
+      "properties": {
+        "type": "repair"
+      },
+      "connected_to_room_ids": [
+        "assembly_line_floor",
+        "storage_logistics"
+      ]
+    },
+    {
+      "id": "control_room",
+      "name": "Control Room",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "assembly_line_floor"
+      ]
+    },
+    {
+      "id": "storage_logistics",
+      "name": "Storage & Logistics",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "assembly_line_floor",
+        "maintenance_bay",
+        "worker_break_area"
+      ]
+    },
+    {
+      "id": "worker_break_area",
+      "name": "Worker Break Area",
+      "properties": {
+        "type": "rest"
+      },
+      "connected_to_room_ids": [
+        "assembly_line_floor",
+        "storage_logistics"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "legacy_conveyor_belt_1",
+      "name": "Legacy Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          8.0,
+          1.5,
+          1.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "partially disassembled"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_arm_1",
+      "name": "Robotic Arm (Kuka KR 1000)",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.5
+        ],
+        "weight": 1200.0,
+        "is_container": false,
+        "model": "Kuka KR 1000",
+        "firmware": "v2.4.7",
+        "status": "Calibration Required"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 800.0,
+        "is_container": false,
+        "capacity": "500-ton",
+        "condition": "manual override lever stuck"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "faulty_sensor_array_1",
+      "name": "Faulty Sensor Array",
+      "type": "ITEM",
+      "location_id": "on:legacy_conveyor_belt_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "gray",
+        "condition": "misreading alignment data"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "emergency_stop_panel_1",
+      "name": "Emergency Stop Panel",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "condition": "one button missing"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "blocking emergency exit"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "parts_bin_1",
+      "name": "Parts Bin (Actuators - DO NOT USE)",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "label": "Actuators - DO NOT USE",
+        "contents": "mismatched servos"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead Crane",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          4.0
+        ],
+        "weight": 600.0,
+        "is_container": false,
+        "limit": "2-ton",
+        "condition": "remote control missing battery"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "stained with coolant"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "condition": "touchscreen, cracked corner",
+        "status": "ENGINEER ACCESS REQUIRED"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "disassembled_servo_motor_1",
+      "name": "Disassembled Servo Motor",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.0,
+        "serial": "SERV-8821",
+        "condition": "missing rotor",
+        "color": "blue",
+        "sticker": "WARNING: HIGH TORQUE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "circuit_tester_1",
+      "name": "Circuit Tester (LeakSeeker Pro)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "model": "LeakSeeker Pro",
+        "condition": "battery dead",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "locked_tool_cabinet_1",
+      "name": "Locked Tool Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "lock": "digital keypad",
+        "code": "0000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolling_chair_1",
+      "name": "Rolling Chair",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "one wheel wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": "murky solvent",
+        "condition": "lid slightly ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.05
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "notes": "Check bearing alignment on Arm #3",
+        "condition": "half-erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          1.8
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "lock": "keycard slot",
+        "label": "MAINTENANCE ONLY"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "alarm_panel_1",
+      "name": "Alarm Panel",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "status": "three blinking red lights: OVERLOAD – LINE 2"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "security_monitor_1",
+      "name": "Security Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "one camera displays static"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:worker_break_area",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "condition": "needs cleaning"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "locker_1",
+      "name": "Locker",
+      "type": "FURNITURE",
+      "location_id": "in:worker_break_area",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          1.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "lock": "combination",
+        "condition": "abandoned lunchbox inside"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "protest_flyers_1",
+      "name": "Protest Flyers",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "MACHINES WON’T PAY YOUR RENT",
+        "condition": "faded"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "steel",
+        "size": "medium",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Fluke",
+        "condition": "functional",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "grease_gun_1",
+      "name": "Grease Gun",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "contents": "lubricant",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:locked_tool_cabinet_1",
+      "properties": {
+        "weight": 1.5,
+        "brand": "Snap-on",
+        "condition": "new",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "object_9v_battery_1",
+      "name": "9V Battery",
+      "type": "ITEM",
+      "location_id": "in:locker_1",
+      "properties": {
+        "weight": 0.1,
+        "brand": "Duracell",
+        "condition": "fresh",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:locker_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "ENGINEER ACCESS",
+        "condition": "valid"
+      },
+      "states": {}
+    },
+    {
+      "id": "absorbent_pads_1",
+      "name": "Absorbent Pads",
+      "type": "ITEM",
+      "location_id": "in:storage_logistics",
+      "properties": {
+        "weight": 2.0,
+        "quantity": 10,
+        "condition": "unused",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coolant_leak_1",
+      "name": "Coolant Leak",
+      "type": "ITEM",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "weight": 0.0,
+        "state": "spreading",
+        "hazard": "slippery floor"
+      },
+      "states": {
+        "is_scooped": false
+      }
+    },
+    {
+      "id": "scoop_1",
+      "name": "Scoop",
+      "type": "ITEM",
+      "location_id": "in:storage_logistics",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_servo_motor_1",
+      "name": "Spare Servo Motor",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "SERV-8821",
+        "color": "blue",
+        "sticker": "WARNING: HIGH TORQUE"
+      },
+      "states": {}
+    },
+    {
+      "id": "decoy_servo_motor_1",
+      "name": "Decoy Servo Motor",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "SERV-8822",
+        "color": "red",
+        "voltage": "24V"
+      },
+      "states": {}
+    },
+    {
+      "id": "decoy_servo_motor_2",
+      "name": "Decoy Servo Motor",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "SERV-8823",
+        "color": "green",
+        "voltage": "12V"
+      },
+      "states": {}
+    },
+    {
+      "id": "decoy_servo_motor_3",
+      "name": "Decoy Servo Motor",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "SERV-8824",
+        "color": "yellow",
+        "voltage": "48V"
+      },
+      "states": {}
+    },
+    {
+      "id": "decoy_servo_motor_4",
+      "name": "Decoy Servo Motor",
+      "type": "ITEM",
+      "location_id": "in:parts_bin_1",
+      "properties": {
+        "weight": 2.5,
+        "serial": "SERV-8825",
+        "color": "black",
+        "voltage": "36V"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_fragile_components_1",
+      "name": "Pallet of Fragile Components",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "contents": "fragile electronics",
+        "condition": "requires careful handling"
+      },
+      "states": {}
+    },
+    {
+      "id": "remote_control_1",
+      "name": "Remote Control",
+      "type": "ITEM",
+      "location_id": "in:locked_tool_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "missing battery",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "Phillips",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "loose_screw_1",
+      "name": "Loose Screw",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.01,
+        "size": "M4",
+        "condition": "needs tightening"
+      },
+      "states": {
+        "is_screwed_in": false
+      }
+    },
+    {
+      "id": "screwdriver_2",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:locked_tool_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "type": "Flathead",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_neon_sign_1",
+      "name": "Broken Neon EXIT Sign",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.1,
+          0.1
+        ],
+        "weight": 3.0,
+        "condition": "flickers intermittently"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo (2015)",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "torn at the corner",
+        "content": "worker beside an old press"
+      },
+      "states": {
+        "is_pasted": false
+      }
+    },
+    {
+      "id": "coffee_stained_blueprint_1",
+      "name": "Coffee Stained Blueprint",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "condition": "obscures critical wiring diagram"
+      },
+      "states": {
+        "is_folded": true
+      }
+    },
+    {
+      "id": "dented_hard_hat_1",
+      "name": "Dented Hard Hat",
+      "type": "ITEM",
+      "location_id": "on:railing_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "OSHA sticker peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "railing_1",
+      "name": "Railing",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          1.0
+        ],
+        "weight": 20.0,
+        "material": "steel",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "yellowed_manuals_1",
+      "name": "Stack of Yellowed Manuals (1987 Hydraulic Systems Guide)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "condition": "dusty, pages stuck together"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "graffiti_support_beam_1",
+      "name": "Graffiti on Support Beam",
+      "type": "ITEM",
+      "location_id": "on:support_beam_1",
+      "properties": {
+        "weight": 0.0,
+        "content": "MACHINES WON’T PAY YOUR RENT",
+        "condition": "faded but legible"
+      },
+      "states": {}
+    },
+    {
+      "id": "support_beam_1",
+      "name": "Support Beam",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line_floor",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          4.0
+        ],
+        "weight": 200.0,
+        "material": "steel",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "smoke_detector_1",
+      "name": "Smoke Detector",
+      "type": "FURNITURE",
+      "location_id": "in:worker_break_area",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "weight": 0.2,
+        "battery": "9V",
+        "condition": "functional"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "lunchbox_1",
+      "name": "Abandoned Lunchbox",
+      "type": "ITEM",
+      "location_id": "in:locker_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "employee ID",
+        "condition": "abandoned",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "employee_id_1",
+      "name": "Employee ID",
+      "type": "ITEM",
+      "location_id": "in:lunchbox_1",
+      "properties": {
+        "weight": 0.05,
+        "name": "John Doe",
+        "access_level": "engineer"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "fold",
+    "open",
+    "paste",
+    "scoop",
+    "screw",
+    "toggle",
+    "unfold"
+  ]
+}

@@ -1,0 +1,704 @@
+{
+  "description": "A remote marine weather research station with an observation deck, main lab, equipment storage, dockside workshop, and living quarters, designed for multi-agent collaboration in harsh coastal conditions.",
+  "rooms": [
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "outdoor",
+        "exposure": "high",
+        "weather_conditions": "windy"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "main_lab",
+      "name": "Main Lab",
+      "properties": {
+        "type": "indoor",
+        "humidity": "controlled",
+        "lighting": "fluorescent"
+      },
+      "connected_to_room_ids": [
+        "observation_deck",
+        "equipment_storage",
+        "living_quarters"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage",
+      "properties": {
+        "type": "indoor",
+        "organization": "cluttered",
+        "access": "restricted"
+      },
+      "connected_to_room_ids": [
+        "main_lab",
+        "dockside_workshop"
+      ]
+    },
+    {
+      "id": "dockside_workshop",
+      "name": "Dockside Workshop",
+      "properties": {
+        "type": "semi_outdoor",
+        "corrosion_level": "high",
+        "floor_material": "concrete"
+      },
+      "connected_to_room_ids": [
+        "equipment_storage"
+      ]
+    },
+    {
+      "id": "living_quarters",
+      "name": "Living Quarters",
+      "properties": {
+        "type": "indoor",
+        "comfort_level": "basic",
+        "noise_level": "moderate"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "steel_instrument_array_1",
+      "name": "Steel Instrument Array",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "corrosion_resistance": "high"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "primary_anemometer_1",
+      "name": "Primary Anemometer",
+      "type": "ITEM",
+      "location_id": "on:steel_instrument_array_1",
+      "properties": {
+        "weight": 3.2,
+        "color": "white",
+        "model": "Windspeed-X200",
+        "accuracy": "high",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "backup_anemometer_1",
+      "name": "Backup Anemometer",
+      "type": "ITEM",
+      "location_id": "on:steel_instrument_array_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "yellow",
+        "model": "Windspeed-X150",
+        "accuracy": "medium",
+        "mounting_status": "loose"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "satellite_dish_1",
+      "name": "Satellite Dish",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.3
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "aluminum",
+        "label": "MARINE LINK DELTA"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "calibration_toolkit_1",
+      "name": "Calibration Toolkit",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 8.7,
+        "color": "red",
+        "contents": [
+          "torque_wrench",
+          "silica_gel",
+          "conversion_chart"
+        ],
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_lever_1",
+      "name": "Emergency Lever",
+      "type": "FURNITURE",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          1.2,
+          0.2,
+          0.1
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "weatherproof_laptop_1",
+      "name": "Weatherproof Laptop",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "brand": "RuggedTech",
+        "screen_status": "error_displayed",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false,
+        "is_charged": false
+      }
+    },
+    {
+      "id": "bucket_of_grease_1",
+      "name": "Bucket of Grease",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 4.8,
+        "color": "gray",
+        "contents": "waterproofing_grease",
+        "fill_level": "half"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "central_data_console_1",
+      "name": "Central Data Console",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          0.9
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "material": "metal_wood_composite"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "master_terminal_1",
+      "name": "Master Terminal",
+      "type": "ITEM",
+      "location_id": "on:central_data_console_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "keyboard_condition": "missing_enter_key",
+        "provides_abilities": [
+          "pair"
+        ]
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "sample_tray_1",
+      "name": "Sample Tray",
+      "type": "ITEM",
+      "location_id": "on:central_data_console_1",
+      "properties": {
+        "weight": 2.3,
+        "color": "clear",
+        "material": "plastic",
+        "vial_count": 5,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "high_salinity_vial_1",
+      "name": "High Salinity Vial",
+      "type": "ITEM",
+      "location_id": "in:sample_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "label": "HIGH SALINITY – VERIFY",
+        "lid_condition": "cracked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "PrintMaster"
+      },
+      "states": {
+        "is_jammed": true
+      }
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "noise_level": "loud"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_buoy_1",
+      "name": "Spare Buoy",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "sensor_status": "detached"
+      },
+      "states": {}
+    },
+    {
+      "id": "drone_parts_1",
+      "name": "Drone Parts",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 7.5,
+        "color": "gray",
+        "propeller_labels": [
+          "A3",
+          "B2"
+        ],
+        "requires_assembly": true
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "marine_float_1",
+      "name": "Marine Float",
+      "type": "FURNITURE",
+      "location_id": "in:dockside_workshop",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "surface_texture": "smooth_metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:dockside_workshop",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_pot_1",
+      "name": "Coffee Pot",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 1.8,
+        "color": "black",
+        "temperature": "cold",
+        "fill_level": "half"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "camping_lantern_1",
+      "name": "Camping Lantern",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.9,
+        "color": "yellow",
+        "light_condition": "flickering",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {
+        "is_charged": false
+      }
+    },
+    {
+      "id": "towel_1",
+      "name": "Towel",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrapping_paper_1",
+      "name": "Wrapping Paper",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.3,
+        "color": "multicolor",
+        "material": "paper",
+        "provides_abilities": [
+          "wrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mixing_bowl_1",
+      "name": "Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 1.2,
+        "color": "white",
+        "material": "ceramic",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "potato_masher_1",
+      "name": "Potato Masher",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.7,
+        "color": "silver",
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "mash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 2.0,
+        "color": "gray",
+        "brand": "SecureTech",
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "charger_1",
+      "name": "Charger",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "connector_type": "USB-C",
+        "provides_abilities": [
+          "recharge"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_and_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.1,
+        "color": "assorted",
+        "material": "metal_cotton",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torn_lab_coat_1",
+      "name": "Torn Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "material": "cotton",
+        "tear_location": "right_sleeve"
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "wet_floor_sign_1",
+      "name": "Wet Floor Sign",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 1.5,
+        "color": "yellow",
+        "material": "plastic",
+        "message": "CAUTION: WET FLOOR"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "folded_map_1",
+      "name": "Folded Map",
+      "type": "ITEM",
+      "location_id": "on:central_data_console_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "paper",
+        "content": "marine_atlas"
+      },
+      "states": {
+        "is_folded": true
+      }
+    },
+    {
+      "id": "hung_poster_1",
+      "name": "Hung Poster",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.3,
+        "color": "faded",
+        "material": "paper",
+        "subject": "storm_safety_procedures"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "empty_sample_jar_1",
+      "name": "Empty Sample Jar",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.4,
+        "color": "clear",
+        "material": "glass",
+        "lid_type": "screw_top"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "water_dispenser_1",
+      "name": "Water Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "water_type": "filtered"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "leashed_dog_1",
+      "name": "Leashed Dog",
+      "type": "ITEM",
+      "location_id": "in:living_quarters",
+      "properties": {
+        "weight": 12.0,
+        "color": "brown",
+        "breed": "labrador",
+        "collar_color": "red"
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "thrown_anchor_1",
+      "name": "Thrown Anchor",
+      "type": "ITEM",
+      "location_id": "in:dockside_workshop",
+      "properties": {
+        "weight": 45.0,
+        "color": "rusty",
+        "material": "iron",
+        "condition": "weathered"
+      },
+      "states": {
+        "is_thrown": false
+      }
+    },
+    {
+      "id": "lowered_flag_1",
+      "name": "Lowered Flag",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 1.2,
+        "color": "faded_red",
+        "material": "nylon",
+        "symbol": "research_logo"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "knocked_over_toolbox_1",
+      "name": "Knocked Over Toolbox",
+      "type": "ITEM",
+      "location_id": "in:dockside_workshop",
+      "properties": {
+        "weight": 10.5,
+        "color": "blue",
+        "material": "metal",
+        "contents_spilled": true
+      },
+      "states": {
+        "is_knocked": false
+      }
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "disarm_alarm",
+    "dry",
+    "knock",
+    "mash",
+    "mend",
+    "mix",
+    "open",
+    "pair",
+    "raise",
+    "recharge",
+    "take_down",
+    "throw",
+    "unfold",
+    "unleash",
+    "weld",
+    "wrap",
+    "close"
+  ]
+}

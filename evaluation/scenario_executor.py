@@ -34,10 +34,8 @@ class ScenarioExecutor:
         self.output_dir = output_dir
         self.task_indices = task_indices or []  # 空列表表示执行所有任务
 
-        # 从配置中获取数据目录（严格验证）
-        self.data_dir = self._get_data_dir_from_config()
-        self.scene_dir = os.path.join(self.data_dir, 'scene')
-        self.task_dir = os.path.join(self.data_dir, 'task')
+        # 使用新的数据集配置系统获取目录
+        self._setup_data_directories()
 
         # 加载场景和任务数据
         self.scene_data = self._load_scene_data()
@@ -62,6 +60,38 @@ class ScenarioExecutor:
         self.csv_recorder = CSVRecorder(csv_file)
         
         logger.info(f"🏠 场景执行器初始化完成: {scenario_id}")
+
+    def _setup_data_directories(self):
+        """设置数据目录"""
+        try:
+            # 使用新的数据集配置系统
+            from config.config_manager import get_config_manager
+
+            config_manager = get_config_manager()
+            dataset_name = self.config.get('dataset', {}).get('default', 'eval_multi')
+
+            # 获取配置文件名
+            config_file = getattr(self.config, 'config_file', 'centralized_config')
+            if isinstance(self.config, dict) and 'config_file' in self.config:
+                config_file = self.config['config_file']
+            else:
+                config_file = 'centralized_config'
+
+            self.data_dir = config_manager.get_data_dir(config_file, dataset_name)
+            self.scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
+            self.task_dir = config_manager.get_task_dir(config_file, dataset_name)
+
+            logger.info(f"使用数据集 '{dataset_name}' 的目录:")
+            logger.info(f"  数据目录: {self.data_dir}")
+            logger.info(f"  场景目录: {self.scene_dir}")
+            logger.info(f"  任务目录: {self.task_dir}")
+
+        except Exception as e:
+            logger.warning(f"无法使用新配置系统获取数据目录: {e}")
+            # 回退到旧方式
+            self.data_dir = self._get_data_dir_from_config()
+            self.scene_dir = os.path.join(self.data_dir, 'scene')
+            self.task_dir = os.path.join(self.data_dir, 'task')
 
     def _get_data_dir_from_config(self) -> str:
         """

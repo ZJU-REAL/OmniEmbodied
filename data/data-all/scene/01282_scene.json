@@ -1,0 +1,765 @@
+{
+  "description": "A high-tech Verizon 4G Network Expansion Command Center with multiple functional zones for network monitoring, hardware deployment, and server management.",
+  "rooms": [
+    {
+      "id": "main_monitoring_hub",
+      "name": "Main Monitoring Hub",
+      "properties": {
+        "type": "command_center"
+      },
+      "connected_to_room_ids": [
+        "hardware_deployment_station",
+        "server_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "hardware_deployment_station",
+      "name": "Hardware Deployment Station",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "field_technician_prep_zone"
+      ]
+    },
+    {
+      "id": "field_technician_prep_zone",
+      "name": "Field Technician Prep Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "hardware_deployment_station",
+        "break_room"
+      ]
+    },
+    {
+      "id": "server_room",
+      "name": "Server & Network Core Room",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room & Informal Meeting Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_monitoring_hub",
+        "field_technician_prep_zone"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "led_wall_1",
+      "name": "12-screen LED Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          5.0,
+          0.2,
+          3.0
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "brand": "Samsung",
+        "model_number": "QLED-12X",
+        "status": "active"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "command_desk_1",
+      "name": "Circular Command Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          0.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "ergonomic_chair_1",
+      "name": "Ergonomic Chair",
+      "type": "FURNITURE",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Herman Miller",
+        "color": "gray"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "27-inch Monitor",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.1,
+          0.4
+        ],
+        "weight": 5.0,
+        "brand": "Dell",
+        "model_number": "U2719D",
+        "resolution": "2560x1440"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Master Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "brand": "Siemens",
+        "model_number": "CP-4000"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "kill_switch_1",
+      "name": "Emergency Kill Switch",
+      "type": "ITEM",
+      "location_id": "on:control_panel_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic",
+        "label": "NETWORK RESET – AUTHORIZED PERSONNEL ONLY"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive - Market 47",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "label": "Market 47 – Final Config",
+        "encrypted": false
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive - Market 48",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "label": "Market 48 – Encrypted Backup",
+        "encrypted": true,
+        "initials": "TK"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_3",
+      "name": "USB Drive - Corrupted",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "label": "Corrupted – Do Not Use",
+        "corrupted": true
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Network Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "brand": "HP",
+        "model_number": "LaserJet Pro",
+        "jam_status": "jammed"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:command_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Cisco",
+        "note": "If Downtime >5min, CALL KAPLAN."
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Rolling Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_monitoring_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.5
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "color": "white",
+        "content": "signal strength calculations"
+      },
+      "states": {}
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Heavy-duty Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:hardware_deployment_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "capacity": "high"
+      },
+      "states": {}
+    },
+    {
+      "id": "microcell_tower_1",
+      "name": "4G LTE Microcell Tower",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.2
+        ],
+        "weight": 30.0,
+        "brand": "Ericsson",
+        "model_number": "AIR 32",
+        "status": "active"
+      },
+      "states": {}
+    },
+    {
+      "id": "microcell_tower_2",
+      "name": "Faulty 4G LTE Microcell Tower",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.2
+        ],
+        "weight": 30.0,
+        "brand": "Ericsson",
+        "model_number": "AIR 32",
+        "status": "faulty",
+        "serial_label": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:hardware_deployment_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "brand": "Toyota",
+        "fuel_type": "electric"
+      },
+      "states": {
+        "is_fueled": false
+      }
+    },
+    {
+      "id": "calibration_toolkit_1",
+      "name": "Calibration Toolkit",
+      "type": "ITEM",
+      "location_id": "in:hardware_deployment_station",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "Fluke",
+        "locked": true,
+        "code": "written on a post-it in the break room",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "signal_amplifier_1",
+      "name": "Disassembled Signal Amplifier",
+      "type": "ITEM",
+      "location_id": "on:shelving_unit_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "brand": "Huawei",
+        "missing_part": "capacitor",
+        "location_of_part": "break room junk drawer"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_cables_1",
+      "name": "Stack of Ethernet Cables",
+      "type": "ITEM",
+      "location_id": "in:hardware_deployment_station",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "length": "3m",
+        "tangled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:hardware_deployment_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Weller",
+        "temperature": "high",
+        "provides_abilities": [
+          "melt"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "brand": "Ohaus",
+        "max_capacity": "10kg",
+        "precision": "0.1g"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Rack-mounted Server Stack",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "brand": "Dell",
+        "model_number": "PowerEdge R740"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_cabinet_1",
+      "name": "Locked Server Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          2.0
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "locked": true,
+        "keycard_location": "field prep zone"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ups_battery_1",
+      "name": "UPS Battery Backup",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "brand": "APC",
+        "model_number": "BR1500MS",
+        "status": "flickering",
+        "requires_replacement": true
+      },
+      "states": {}
+    },
+    {
+      "id": "router_1",
+      "name": "Misconfigured Router",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "Cisco",
+        "model_number": "ISR 4331",
+        "issue": "intermittent packet loss"
+      },
+      "states": {}
+    },
+    {
+      "id": "rack_screws_1",
+      "name": "Spare Rack Screws",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "quantity": 20,
+        "size": "M6"
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "in:server_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "Tripp Lite",
+        "ports": 4
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "equipment_locker_1",
+      "name": "Equipment Locker",
+      "type": "FURNITURE",
+      "location_id": "in:field_technician_prep_zone",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "locked": false
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolkit_1",
+      "name": "Field Technician Toolkit",
+      "type": "ITEM",
+      "location_id": "in:equipment_locker_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "brand": "Klein Tools",
+        "contents": [
+          "screwdrivers",
+          "pliers",
+          "multimeter"
+        ],
+        "provides_abilities": [
+          "scrub",
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "battery_1",
+      "name": "Replacement Battery",
+      "type": "ITEM",
+      "location_id": "in:field_technician_prep_zone",
+      "properties": {
+        "weight": 8.0,
+        "color": "black",
+        "brand": "APC",
+        "model_number": "RBC55",
+        "location": "behind a stack of manuals"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "brand": "Keurig",
+        "model_number": "K-Elite",
+        "water_level": "low"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "whiteboard_2",
+      "name": "Break Room Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "color": "white",
+        "content": "deployment notes"
+      },
+      "states": {}
+    },
+    {
+      "id": "junk_drawer_1",
+      "name": "Junk Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": [
+          "capacitor",
+          "paper clips",
+          "pens"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "capacitor_1",
+      "name": "Missing Capacitor",
+      "type": "ITEM",
+      "location_id": "in:junk_drawer_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "brown",
+        "specs": "100uF 25V",
+        "for_device": "signal amplifier"
+      },
+      "states": {}
+    },
+    {
+      "id": "post_it_1",
+      "name": "Post-it Note",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_2",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "content": "Toolkit code: 7392"
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Can",
+      "type": "ITEM",
+      "location_id": "in:field_technician_prep_zone",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "fuel_type": "diesel",
+        "capacity": "5 liters",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "syringe_1",
+      "name": "Syringe",
+      "type": "ITEM",
+      "location_id": "in:field_technician_prep_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "volume": "10ml",
+        "provides_abilities": [
+          "inject"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "brush_1",
+      "name": "Cleaning Brush",
+      "type": "ITEM",
+      "location_id": "in:field_technician_prep_zone",
+      "properties": {
+        "weight": 0.3,
+        "color": "green",
+        "bristle_type": "stiff",
+        "provides_abilities": [
+          "scrub"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bowl_1",
+      "name": "Mixing Bowl",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "ceramic",
+        "provides_abilities": [
+          "mix"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spoon_1",
+      "name": "Mixing Spoon",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "stainless steel",
+        "provides_abilities": [
+          "mix",
+          "scoop"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "inject",
+    "melt",
+    "mix",
+    "open",
+    "refuel",
+    "scoop",
+    "scrub",
+    "wash",
+    "close"
+  ]
+}

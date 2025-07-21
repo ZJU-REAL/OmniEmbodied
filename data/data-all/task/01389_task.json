@@ -1,0 +1,134 @@
+{
+  "task_background": "Prepare the National Cybersecurity Emergency Response Center for an imminent cyber threat.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.5
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": 1.5
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place secure_briefcase_1 on workstation_2.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "secure_briefcase_1",
+          "location_id": "on:workstation_2"
+        }
+      ]
+    },
+    {
+      "task_description": "Move emergency_flashlight_1 to the forensic_lab.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "emergency_flashlight_1",
+          "location_id": ":forensic_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the SafeLight brand emergency flashlight.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_flashlight_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Open the aluminum secure briefcase.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "secure_briefcase_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Sign the chain-of-custody logbook.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chain_of_custody_logbook_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to tighten the only black magnetic screw tray that is loose.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "magnetic_screw_tray_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to sign the blue chain-of-custody logbook.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "chain_of_custody_logbook_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the weapons cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weapons_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the HVAC cooling unit to the main operations hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hvac_cooling_unit_1",
+          "location_id": ":main_operations_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence locker to the server vault.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_1",
+          "location_id": ":server_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "After turning on the network diagnostic tool, cooperatively move the HVAC cooling unit to the forensic lab.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "network_diagnostic_tool_1",
+          "is_on": true
+        },
+        {
+          "id": "hvac_cooling_unit_1",
+          "location_id": "on:forensic_lab"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01389"
+}

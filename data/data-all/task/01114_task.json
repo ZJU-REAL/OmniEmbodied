@@ -1,0 +1,136 @@
+{
+  "task_background": "Prepare the microbiology brewing laboratory for an upcoming fermentation experiment and address maintenance issues.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place digital_clipboard_1 on workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_clipboard_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place slide_7b_1 in uv_cabinet_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "slide_7b_1",
+          "location_id": "in:uv_cabinet_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Plug in the black laptop on the stainless steel workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "laptop_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the yeast master cultures fridge.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "yeast_fridge_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open fermentation tank A.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fermentation_tank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the centrifuge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the crate of malt to the sanitation station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "malt_crate_1",
+          "location_id": ":sanitation_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the yeast master cultures fridge to the microscopy corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "yeast_fridge_1",
+          "location_id": ":microscopy_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked yeast master cultures fridge to the sample prep zone and unlock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "yeast_fridge_1",
+          "location_id": ":sample_prep_zone"
+        },
+        {
+          "id": "yeast_fridge_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the packed crate of bottles to the fermentation bay and unpack it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "bottle_crate_1",
+          "location_id": ":fermentation_bay"
+        },
+        {
+          "id": "bottle_crate_1",
+          "is_packed": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01114"
+}

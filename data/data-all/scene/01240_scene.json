@@ -1,0 +1,566 @@
+{
+  "description": "A high-tech modular robotics assembly line with specialized workstations for assembling, inspecting, and debugging custom-built computing machines.",
+  "rooms": [
+    {
+      "id": "material_intake_bay",
+      "name": "Material Intake Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "circuit_assembly_station"
+      ]
+    },
+    {
+      "id": "circuit_assembly_station",
+      "name": "Circuit Assembly Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "material_intake_bay",
+        "mechanical_assembly_station"
+      ]
+    },
+    {
+      "id": "mechanical_assembly_station",
+      "name": "Mechanical Assembly Station",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "circuit_assembly_station",
+        "testing_debugging_bay"
+      ]
+    },
+    {
+      "id": "testing_debugging_bay",
+      "name": "Testing & Debugging Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "mechanical_assembly_station",
+        "packaging_shipping"
+      ]
+    },
+    {
+      "id": "packaging_shipping",
+      "name": "Packaging & Shipping",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "testing_debugging_bay",
+        "control_hub"
+      ]
+    },
+    {
+      "id": "control_hub",
+      "name": "Control Hub",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "packaging_shipping"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "heavy_duty_conveyor_belt_1",
+      "name": "Heavy-duty Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:material_intake_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          0.5
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "load_capacity": 300.0
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "steel_sorting_racks_1",
+      "name": "Steel Sorting Racks",
+      "type": "FURNITURE",
+      "location_id": "in:material_intake_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "compartments": 10
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_shipping_crate_1",
+      "name": "Sealed Shipping Crate",
+      "type": "ITEM",
+      "location_id": "on:heavy_duty_conveyor_belt_1",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "material": "wood",
+        "label": "IC Chips – FRAGILE",
+        "is_container": true
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "component_scanner_1",
+      "name": "Component Scanner",
+      "type": "ITEM",
+      "location_id": "on:steel_sorting_racks_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "color": "black",
+        "brand": "TechScan",
+        "led_color": "red"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "hydraulic_pallet_jack_1",
+      "name": "Hydraulic Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:material_intake_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.5
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "capacity": 500.0,
+        "condition": "sticky_controls"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:steel_sorting_racks_1",
+      "properties": {
+        "weight": 3.0,
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "brand": "PrintMaster",
+        "error_message": "REPLACE CARTRIDGE"
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:circuit_assembly_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "copper",
+        "surface": "grounded"
+      },
+      "states": {}
+    },
+    {
+      "id": "precision_robotic_arm_1",
+      "name": "Precision Robotic Arm",
+      "type": "FURNITURE",
+      "location_id": "in:circuit_assembly_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.0
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "mode": "standby"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "defective_circuit_board_1",
+      "name": "Defective Circuit Board",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.2,
+          0.15,
+          0.02
+        ],
+        "condition": "charred_resistor",
+        "position": "B7"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "tub_of_conductive_adhesive_1",
+      "name": "Tub of Conductive Adhesive",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "viscosity": "thickening",
+        "fill_level": "half-empty"
+      },
+      "states": {
+        "is_mixed": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "zoom": "10x-40x",
+        "condition": "misaligned_eyepiece"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "component_tray_1",
+      "name": "Component Tray",
+      "type": "ITEM",
+      "location_id": "on:anti_static_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "label": "RESISTORS – 10Ω ±5%",
+        "condition": "disorganized"
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_press_1",
+      "name": "Hydraulic Press",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_assembly_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "force": 500.0,
+        "safety_interlock": "engaged"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_wall_1",
+      "name": "Tool Wall",
+      "type": "FURNITURE",
+      "location_id": "in:mechanical_assembly_station",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "condition": "partially_disorganized"
+      },
+      "states": {}
+    },
+    {
+      "id": "misaligned_actuator_arm_1",
+      "name": "Misaligned Actuator Arm",
+      "type": "ITEM",
+      "location_id": "in:mechanical_assembly_station",
+      "properties": {
+        "weight": 60.0,
+        "size": [
+          1.0,
+          0.2,
+          0.1
+        ],
+        "angle": "45_degrees",
+        "condition": "stuck"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.5,
+        "size": [
+          0.4,
+          0.1,
+          0.1
+        ],
+        "calibration": "expired",
+        "drift": "slight"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "pneumatic_screwdriver_1",
+      "name": "Pneumatic Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.3,
+          0.1,
+          0.1
+        ],
+        "condition": "air_leak",
+        "operational": true
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "lubricant_dispenser_1",
+      "name": "Lubricant Dispenser",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "condition": "clogged_nozzle"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:testing_debugging_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "monitors": 3,
+        "condition": "flickering"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "vibration_test_chamber_1",
+      "name": "Vibration Test Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:testing_debugging_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "door_condition": "misaligned"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "failing_unit_1",
+      "name": "Failing Unit",
+      "type": "ITEM",
+      "location_id": "in:vibration_test_chamber_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "error_code": "E1024",
+        "error_message": "Memory Leak Detected"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "logic_analyzer_1",
+      "name": "Logic Analyzer",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 1.5,
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "condition": "tangled_probes",
+        "missing_probe": "Probe #3"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "battery_status": "low",
+        "auto_shutdown": "10_min"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "qa_checklist_1",
+      "name": "QA Checklist",
+      "type": "ITEM",
+      "location_id": "on:diagnostic_terminal_1",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.2,
+          0.15,
+          0.01
+        ],
+        "condition": "incomplete",
+        "missing_pen": true
+      },
+      "states": {}
+    },
+    {
+      "id": "control_hub_terminal_1",
+      "name": "Control Hub Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:control_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "monitors": 2,
+        "condition": "operational"
+      },
+      "states": {
+        "is_active": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "engineers_keycard_1",
+      "name": "Engineer's Keycard",
+      "type": "ITEM",
+      "location_id": "in:control_hub_terminal_1",
+      "properties": {
+        "weight": 0.05,
+        "size": [
+          0.1,
+          0.06,
+          0.01
+        ],
+        "owner": "Lead Engineer",
+        "access_level": "admin"
+      },
+      "states": {
+        "is_inserted": false
+      }
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "insert",
+    "open",
+    "turn_on",
+    "unpack",
+    "close"
+  ]
+}

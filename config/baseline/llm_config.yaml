@@ -1,68 +1,69 @@
-# LLM Configuration
+# LLM配置文件
+extends: "base_config"
 
-# LLM inference mode settings
+# LLM推理模式设置
 mode: "api"
 
-# API call configuration
+# API调用配置
 api:
-  provider: "custom"  # Options: "openai", "volcengine", "bailian" or "custom"
+  # 当前使用的提供商
+  provider: "qwen7b"
 
-  # OpenAI API configuration
-  openai:
-    model: "gpt-3.5-turbo"
-    temperature: 0.7
-    max_tokens: 1024
-    api_key: ""  # Use environment variable OPENAI_API_KEY
+  # 供应商配置（统一结构）
+  providers:
+    volcengine:
+      model: "deepseek-r1-250528"
+      temperature: 0.1
+      max_tokens: 512
+      api_key: "${VOLCENGINE_API_KEY}"
+      endpoint: "https://ark.cn-beijing.volces.com/api/v3"
 
-  # Custom endpoint API configuration
-  volcengine:
-    # model: "deepseek-v3-250324"
-    model: "deepseek-r1-250528"
-    temperature: 0.1
-    max_tokens: 4096
-    api_key: "f4de2c06-0a2b-4482-ac71-24a8f65517a5"  # Or use environment variable CUSTOM_LLM_API_KEY
-    endpoint: "https://ark.cn-beijing.volces.com/api/v3"
+    bailian:
+      model: "qwen2.5-72b-instruct"
+      temperature: 0.1
+      max_tokens: 512
+      api_key: "${BAILIAN_API_KEY}"
+      endpoint: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      enable_thinking: false
 
-  bailian:
-    model: "qwen2.5-72b-instruct"
-    # model: "deepseek-v3"
-    temperature: 0.1
-    max_tokens: 4096
-    api_key: "sk-b944f82f7c4a489da4eed4a58578721f"
-    # api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"
-    endpoint: "https://dashscope.aliyuncs.com/compatible-mode/v1"
-    enable_thinking: false
+    deepseek:
+      model: "deepseek-chat"
+      temperature: 0.1
+      max_tokens: 512
+      api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"
+      endpoint: "https://api.deepseek.com"
 
-  # custom:
-  #   model: "deepseek-chat"
-  #   temperature: 0.1
-  #   max_tokens: 256
-  #   api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 或使用环境变量CUSTOM_LLM_API_KEY
-  #   endpoint: "https://api.deepseek.com"
-  custom:
-    model: "Qwen2.5-7B-Instruct"
-    temperature: 0.3
-    max_tokens: 1024  # 降低到合理值，为输入预留足够空间
-    api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"  # 或使用环境变量CUSTOM_LLM_API_KEY
-    endpoint: "http://10.130.129.18:8007/v1"
+    qwen3b:
+      model: "Qwen2.5-3B-Instruct"
+      temperature: 0.3
+      max_tokens: 512
+      api_key: "dummy_key"
+      endpoint: "http://10.130.129.18:8003/v1"
+      extends:
+        # 支持单智能体和多智能体格式的通用正则表达式
+        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
+        stop_tokens: ["\n\n","Execution Result"]
+
+    qwen7b:
+      model: "Qwen2.5-7B-Instruct"
+      temperature: 0.3
+      max_tokens: 512
+      api_key: "dummy_key"
+      endpoint: "http://10.130.129.18:8007/v1"
+      extends:
+        # 支持单智能体和多智能体格式的通用正则表达式
+        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
+        stop_tokens: ["\n\n","Execution Result"]
 
 
-# VLLM本地推理配置（当mode为"vllm"时使用）
+# VLLM本地推理配置
 vllm:
-  model_path: ""  # VLLM模型路径，例如: "/path/to/model" 或 "meta-llama/Llama-2-13b-chat"
+  model_path: "/path/to/model"
   temperature: 0.1
   max_tokens: 4096
-  tensor_parallel_size: 1  # 张量并行大小
-  gpu_memory_utilization: 0.9  # GPU内存利用率
+  tensor_parallel_size: 1
+  gpu_memory_utilization: 0.9
 
 # LLM参数配置
 parameters:
-  # 是否发送完整的对话历史给LLM
-  # true: 发送完整的chat_history（包含所有历史对话）
-  #       - 优点：LLM能看到完整的对话上下文，理解更准确
-  #       - 缺点：消耗更多token，可能超出上下文长度限制
-  # false: 只发送system消息和最新的用户消息，历史信息通过history_summary在提示词中传递
-  #        - 优点：节省token，避免上下文长度问题
-  #        - 缺点：LLM只能看到历史摘要，可能丢失细节信息
-  # 默认值：false（推荐设置，平衡性能和效果）
   send_history: false

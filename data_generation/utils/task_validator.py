@@ -32,7 +32,6 @@ class TaskValidator:
 
         # 设置默认CSV路径
         if attribute_actions_csv_path is None:
-            from pathlib import Path
             project_root = Path(__file__).parent.parent.parent  # 项目根目录
             attribute_actions_csv_path = str(project_root / 'data' / 'attribute_actions.csv')
 
@@ -1281,7 +1280,6 @@ class TaskValidator:
     def _save_fix_log(self, task_file_path: str, fixes_applied: List[str], remaining_errors: List[str]):
         """Save fix log to a log file."""
         import datetime
-        from pathlib import Path
 
         # Create logs directory if it doesn't exist
         log_dir = Path("logs")

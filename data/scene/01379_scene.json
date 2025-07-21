@@ -1,0 +1,617 @@
+{
+  "description": "A Wildlife Rehabilitation Center with an attached Field Research Station, bustling with activity to treat injured animals and manage invasive species.",
+  "rooms": [
+    {
+      "id": "main_treatment_ward",
+      "name": "Main Treatment Ward",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "quarantine_room",
+        "supply_closet",
+        "research_office"
+      ]
+    },
+    {
+      "id": "quarantine_room",
+      "name": "Quarantine & Isolation Room",
+      "properties": {
+        "type": "containment"
+      },
+      "connected_to_room_ids": [
+        "main_treatment_ward"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply & Storage Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_treatment_ward",
+        "vehicle_bay"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Outdoor Observation Deck",
+      "properties": {
+        "type": "monitoring"
+      },
+      "connected_to_room_ids": [
+        "research_office"
+      ]
+    },
+    {
+      "id": "research_office",
+      "name": "Research Office",
+      "properties": {
+        "type": "administrative"
+      },
+      "connected_to_room_ids": [
+        "main_treatment_ward",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "vehicle_bay",
+      "name": "Vehicle Bay",
+      "properties": {
+        "type": "transport"
+      },
+      "connected_to_room_ids": [
+        "supply_closet"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "surgical_table_1",
+      "name": "Stainless Steel Surgical Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "adjustable_height": true
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "medical_cabinet_1",
+      "name": "Wall-mounted Medical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          0.5
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "recovery_cage_1",
+      "name": "Recovery Cage",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "steel_mesh",
+        "heat_lamp": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "barn_owl_1",
+      "name": "Wounded Barn Owl",
+      "type": "ITEM",
+      "location_id": "in:recovery_cage_1",
+      "properties": {
+        "weight": 1.5,
+        "species": "Tyto alba",
+        "tag_number": "A7",
+        "condition": "bandaged_right_wing",
+        "iv_drip": true
+      },
+      "states": {}
+    },
+    {
+      "id": "triage_clipboard_1",
+      "name": "Emergency Triage Clipboard",
+      "type": "ITEM",
+      "location_id": "on:surgical_table_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "content": "Python bite—gray fox, critical"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "x_ray_machine_1",
+      "name": "Portable X-ray Machine",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "brand": "MediRay",
+        "wheels_locked": true
+      },
+      "states": {
+        "is_running": false
+      }
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:surgical_table_1",
+      "properties": {
+        "weight": 2.0,
+        "brand": "PrecisionWeigh",
+        "current_reading": "0.00"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "time_remaining": "15min"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Sink with Scrub Brush",
+      "type": "FURNITURE",
+      "location_id": "in:main_treatment_ward",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "condition": "dried_blood_flecks"
+      },
+      "states": {}
+    },
+    {
+      "id": "feral_cat_carrier_1",
+      "name": "Reinforced Steel Cat Carrier",
+      "type": "FURNITURE",
+      "location_id": "in:quarantine_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 18.0,
+        "is_container": true,
+        "material": "steel",
+        "interior_condition": "scratched",
+        "lock_type": "padlock"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "feral_cat_1",
+      "name": "Sedated Feral Cat",
+      "type": "ITEM",
+      "location_id": "in:feral_cat_carrier_1",
+      "properties": {
+        "weight": 5.0,
+        "tag_number": "F3",
+        "condition": "sedated",
+        "microchip_scanner_nearby": true
+      },
+      "states": {
+        "is_leashed": true
+      }
+    },
+    {
+      "id": "python_sign_1",
+      "name": "CAUTION: PYTHON Sign",
+      "type": "ITEM",
+      "location_id": "in:quarantine_room",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "condition": "leaning_against_wall"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:quarantine_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "glove_type": "nitrile",
+        "status": "out_of_latex"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_button_1",
+      "name": "Red Emergency Button",
+      "type": "ITEM",
+      "location_id": "in:quarantine_room",
+      "properties": {
+        "weight": 0.3,
+        "label": "Wildlife Escape Protocol",
+        "color": "red"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Floor-to-ceiling Metal Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "overloaded"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_fridge_1",
+      "name": "Industrial Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "temperature_gauge": "flickering"
+      },
+      "states": {
+        "is_open": false,
+        "is_running": true
+      }
+    },
+    {
+      "id": "live_trap_1",
+      "name": "Live Trap for Cats",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "wire_mesh",
+        "status": "requires_assembly"
+      },
+      "states": {
+        "is_folded": false
+      }
+    },
+    {
+      "id": "tranquilizer_darts_1",
+      "name": "Sealed Tranquilizer Darts Case",
+      "type": "ITEM",
+      "location_id": "in:industrial_fridge_1",
+      "properties": {
+        "weight": 2.0,
+        "lock_type": "biometric",
+        "content": "tranquilizer_darts"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mop_bucket_1",
+      "name": "Broken Mop Bucket",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 4.0,
+        "material": "plastic",
+        "condition": "leaking"
+      },
+      "states": {
+        "is_dirty": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:metal_shelving_1",
+      "properties": {
+        "weight": 0.8,
+        "brand": "Brother",
+        "status": "out_of_tape"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "binoculars_1",
+      "name": "Binoculars",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.7,
+        "brand": "Nikon",
+        "magnification": "10x"
+      },
+      "states": {
+        "is_photographed": false
+      }
+    },
+    {
+      "id": "motion_camera_1",
+      "name": "Motion-activated Camera",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 1.2,
+        "brand": "Bushnell",
+        "battery_level": "85%"
+      },
+      "states": {
+        "is_running": true
+      }
+    },
+    {
+      "id": "radio_transmitter_1",
+      "name": "Radio Transmitter",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 2.5,
+        "frequency": "145.825 MHz",
+        "range": "5km"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "in:research_office",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Olympus",
+        "magnification": "1000x"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-drunk Coffee",
+      "type": "ITEM",
+      "location_id": "in:research_office",
+      "properties": {
+        "weight": 0.3,
+        "content": "coffee",
+        "temperature": "lukewarm"
+      },
+      "states": {
+        "is_eaten": false
+      }
+    },
+    {
+      "id": "rescue_van_1",
+      "name": "Wildlife Rescue Van",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_bay",
+      "properties": {
+        "size": [
+          5.0,
+          2.0,
+          2.5
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "doors_open": true,
+        "contains_stretcher": true
+      },
+      "states": {}
+    },
+    {
+      "id": "trapping_atv_1",
+      "name": "Trapping ATV",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.5,
+          1.8
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "cage_attachment": "locked"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "scissors_1",
+      "name": "Surgical Scissors",
+      "type": "ITEM",
+      "location_id": "in:medical_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless_steel",
+        "sterilized": true,
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "brand": "TechCal",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "varnish_brush_1",
+      "name": "Varnish Brush",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.3,
+        "bristle_type": "synthetic",
+        "provides_abilities": [
+          "varnish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staining_agent_1",
+      "name": "Staining Agent",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "provides_abilities": [
+          "stain"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:research_office",
+      "properties": {
+        "weight": 0.6,
+        "brand": "Canon",
+        "megapixels": "24.1",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "calibrate",
+    "cut",
+    "eat",
+    "fold",
+    "lower",
+    "open",
+    "photograph",
+    "stain",
+    "start_process",
+    "stop_process",
+    "unleash",
+    "unplug",
+    "varnish",
+    "whisk",
+    "close"
+  ]
+}

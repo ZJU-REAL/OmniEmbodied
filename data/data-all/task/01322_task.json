@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the law office for a critical court hearing by organizing documents, repairing equipment, and securing evidence.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 3,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 3,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place sealed_envelope_1 on mahogany_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sealed_envelope_1",
+          "location_id": "on:mahogany_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place visitor_logbook_1 in document_processing.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "visitor_logbook_1",
+          "location_id": "in:document_processing"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the CONFIDENTIAL – EYES ONLY envelope to the lead attorney's office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sealed_envelope_1",
+          "location_id": ":lead_attorney_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Take the dusty trophy from the main reception to the break room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "trophy_1",
+          "location_id": ":break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken coffee machine in the main reception.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_coffee_machine_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the document scanner with the blinking error light.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "document_scanner_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the wall-mounted LCD screen showing ALIMONY PROJECTIONS.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "lcd_screen_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the leather chair with worn armrests using the repair kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "leather_chair_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the evidence safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_safe_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the safe under the desk.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_safe_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the break room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": ":break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence safe to the main reception area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_safe_1",
+          "location_id": ":main_reception"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the broken refrigerator to the document processing room and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": ":document_processing"
+        },
+        {
+          "id": "fridge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the evidence safe to the lead attorney office and lock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_safe_1",
+          "location_id": ":lead_attorney_office"
+        },
+        {
+          "id": "evidence_safe_1",
+          "is_locked": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01322"
+}

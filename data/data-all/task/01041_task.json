@@ -1,0 +1,152 @@
+{
+  "task_background": "Prepare the high-tech Bioanalytics Research Hub for an important research session.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place keycard_1 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "keycard_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Plug in microarray_scanner_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "microarray_scanner_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue reagent bottle labeled 'CORROSIVE' in the autoclave bin.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "reagent_bottle_1",
+          "location_id": "in:autoclave_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Take down the heavier multicolor paper item that is hung up.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "bmc_genomics_cover_1",
+          "is_hung_up": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the robotic dissection table using the screwdriver.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "robotic_dissection_table_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the calibration kit to measure the microarray scanner that is unplugged.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "microarray_scanner_1",
+          "is_measured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the gold alignment rod to fix the only dissection table in the tissue bay that is unscrewed.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "robotic_dissection_table_1",
+          "is_screwed_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the cryogenic storage unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_storage_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryogenic storage unit to the main analysis chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_storage_unit_1",
+          "location_id": ":main_analysis_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the equipment storage area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy dissection table that is unscrewed to the workshop.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "robotic_dissection_table_1",
+          "location_id": ":equipment_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the open centrifuge to storage and close it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "location_id": ":equipment_storage"
+        },
+        {
+          "id": "centrifuge_1",
+          "is_open": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01041"
+}

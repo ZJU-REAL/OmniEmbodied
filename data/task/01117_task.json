@@ -1,0 +1,108 @@
+{
+  "task_background": "Prepare the campaign office for a critical strategy meeting by organizing documents, cleaning, and setting up equipment.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place usb_drive_2 on the executive_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_2",
+          "location_id": "on:executive_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on monitor_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Insert the red USB drive into the encrypted laptop.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_2",
+          "location_id": ":encrypted_laptop_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the coffee-stained coffee table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_table_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the conference table.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to clean the oak conference table with coffee rings.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "conference_table_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to tighten the loose screw on the executive desk.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "loose_screw_1",
+          "is_loose": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the floor safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "floor_safe_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01117"
+}

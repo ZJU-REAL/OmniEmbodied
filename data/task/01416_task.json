@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the Emergency Winter Crisis Response Center for operation during the polar vortex event.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place region_map_1 on hexagonal_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "region_map_1",
+          "location_id": "on:hexagonal_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Plug in terminal_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "terminal_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Plug in the only red emergency broadcast console.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "broadcast_console_1",
+          "is_plugged_in": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the only brass barometer to the main command hub.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "barometer_1",
+          "location_id": ":main_command_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken safety sign.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "safety_sign_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the transformer prototype.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "transformer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver to repair the only red broken safety sign.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "safety_sign_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the wrench to repair the steel broken transformer prototype.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "transformer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the breaker box.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "breaker_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the refrigerated unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the 150kg transformer prototype to the storage bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "transformer_1",
+          "location_id": ":storage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated unit to the utility repair area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_unit_1",
+          "location_id": ":utility_repair"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the broken transformer prototype to the storage bay and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "transformer_1",
+          "location_id": ":storage_bay"
+        },
+        {
+          "id": "transformer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated unit to the storage bay and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_unit_1",
+          "location_id": ":storage_bay"
+        },
+        {
+          "id": "refrigerated_unit_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01416"
+}

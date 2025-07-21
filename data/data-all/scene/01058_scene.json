@@ -1,0 +1,705 @@
+{
+  "description": "A cutting-edge Wellness Hub combining a nutrition research lab, fitness testing facility, and health coaching center, designed for multi-agent collaboration and holistic health research.",
+  "rooms": [
+    {
+      "id": "nutrition_lab",
+      "name": "Nutrition & Biomarker Lab",
+      "properties": {
+        "type": "laboratory",
+        "temperature": 20.0,
+        "humidity": 45.0
+      },
+      "connected_to_room_ids": [
+        "fitness_bay",
+        "meal_prep_station"
+      ]
+    },
+    {
+      "id": "fitness_bay",
+      "name": "Fitness Assessment Bay",
+      "properties": {
+        "type": "gym",
+        "temperature": 22.0,
+        "humidity": 50.0
+      },
+      "connected_to_room_ids": [
+        "nutrition_lab",
+        "health_coaching_office"
+      ]
+    },
+    {
+      "id": "meal_prep_station",
+      "name": "Meal Prep & Supplement Station",
+      "properties": {
+        "type": "kitchen",
+        "temperature": 18.0,
+        "humidity": 40.0
+      },
+      "connected_to_room_ids": [
+        "nutrition_lab",
+        "health_coaching_office"
+      ]
+    },
+    {
+      "id": "health_coaching_office",
+      "name": "Health Coaching Office",
+      "properties": {
+        "type": "office",
+        "temperature": 21.0,
+        "humidity": 55.0
+      },
+      "connected_to_room_ids": [
+        "fitness_bay",
+        "meal_prep_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "lab_bench_1",
+      "name": "Stainless-steel lab bench",
+      "type": "FURNITURE",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": 4.0
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Industrial-grade centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "steel",
+        "rpm": 3200,
+        "max_rpm": 5000
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "specimen_fridge_1",
+      "name": "Walk-in specimen fridge",
+      "type": "FURNITURE",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "blood_sample_rack_1",
+      "name": "Vacuum-sealed blood sample rack",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "plastic",
+        "label": "Participant 47 - Fasting Glucose - 06:30 AM"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "spectrophotometer_1",
+      "name": "Handheld spectrophotometer",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic_metal",
+        "last_use": "omega-3 fatty acid analysis",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "enzyme_vial_1",
+      "name": "Glass vial of synthetic digestive enzymes",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "ph_meter_1",
+      "name": "Digital pH meter",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "ph_value": 6.8
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "lab_stool_1",
+      "name": "Ergonomic lab stool",
+      "type": "FURNITURE",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.8
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "wheels_locked": true
+      },
+      "states": {}
+    },
+    {
+      "id": "treadmill_1",
+      "name": "Dual-belt treadmill",
+      "type": "FURNITURE",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "metal",
+        "force_sensors_calibrated": false
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "motion_capture_rig_1",
+      "name": "3D motion-capture rig",
+      "type": "FURNITURE",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "metal_plastic",
+        "cameras": 8,
+        "misaligned_camera": 1
+      },
+      "states": {}
+    },
+    {
+      "id": "weighing_tank_1",
+      "name": "Hydrostatic weighing tank",
+      "type": "FURNITURE",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.8,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "fiberglass",
+        "capacity": 1500,
+        "water_level": 750
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "ecg_chest_strap_1",
+      "name": "Wireless ECG chest strap",
+      "type": "ITEM",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic_fabric",
+        "battery_level": 12,
+        "last_used_by": "Participant 22"
+      },
+      "states": {}
+    },
+    {
+      "id": "dumbbell_rack_1",
+      "name": "Adjustable dumbbell rack",
+      "type": "FURNITURE",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal",
+        "missing_dumbbell": "20kg"
+      },
+      "states": {}
+    },
+    {
+      "id": "vo2_analyzer_1",
+      "name": "VO₂ max analyzer",
+      "type": "ITEM",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic_metal",
+        "display_message": "CALIBRATION REQUIRED",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "blender_1",
+      "name": "Commercial-grade blender",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 15.0,
+        "material": "metal_plastic",
+        "power": 1200,
+        "provides_abilities": [
+          "pulverize",
+          "chop"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "smart_fridge_1",
+      "name": "Smart fridge",
+      "type": "FURNITURE",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "metal_plastic",
+        "biometric_access": true
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "nutrient_dispenser_1",
+      "name": "Precision nutrient dispenser",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 10.0,
+        "material": "plastic",
+        "slots": 50,
+        "jammed_slot": 1,
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "kale_1",
+      "name": "Vacuum-sealed organic kale",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "expiry_days": 2
+      },
+      "states": {
+        "is_sealed": false,
+        "is_harvested": false
+      }
+    },
+    {
+      "id": "protein_powder_1",
+      "name": "Mislabeled protein powder jar",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 1.2,
+        "material": "glass",
+        "label": "Vanilla",
+        "smell": "chocolate",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "capsule_machine_1",
+      "name": "Broken capsule-filling machine",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "missing_part": "spring",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Interactive whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.1
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal_glass",
+        "last_session": "Client 89 - Plateaus & Setbacks"
+      },
+      "states": {}
+    },
+    {
+      "id": "vr_pod_1",
+      "name": "VR meditation pod",
+      "type": "FURNITURE",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "plastic",
+        "needs_sanitizing": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Filing cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "stuck_drawer": "bottom"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biometric_tablet_1",
+      "name": "Client biometric tablet",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "plastic_glass",
+        "display_message": "Loading...",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "stress_balls_1",
+      "name": "Unopened stress-ball shipment",
+      "type": "ITEM",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "weight": 2.0,
+        "material": "cardboard",
+        "label": "Squeeze Away Anxiety!"
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "standing_desk_1",
+      "name": "Broken standing desk",
+      "type": "FURNITURE",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "metal_wood",
+        "height": "sitting"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "backup_keycard_1",
+      "name": "Backup keycard",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab coat",
+      "type": "ITEM",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "weight": 0.8,
+        "material": "cotton",
+        "pockets": 2,
+        "is_container": true
+      },
+      "states": {
+        "is_zipped": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding torch",
+      "type": "ITEM",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "weight": 3.5,
+        "material": "metal",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shredder_1",
+      "name": "Document shredder",
+      "type": "ITEM",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "weight": 8.0,
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum cleaner",
+      "type": "ITEM",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "weight": 6.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "in:health_coaching_office",
+      "properties": {
+        "weight": 12.0,
+        "material": "plastic",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "knife_1",
+      "name": "Chef's knife",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 0.4,
+        "material": "metal_wood",
+        "provides_abilities": [
+          "chop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel can",
+      "type": "ITEM",
+      "location_id": "in:fitness_bay",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealing_tool_1",
+      "name": "Sealing tool",
+      "type": "ITEM",
+      "location_id": "in:nutrition_lab",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic_metal",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "harvesting_tool_1",
+      "name": "Harvesting tool",
+      "type": "ITEM",
+      "location_id": "in:meal_prep_station",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "provides_abilities": [
+          "harvest"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "chop",
+    "deactivate",
+    "empty",
+    "harvest",
+    "open",
+    "print",
+    "pulverize",
+    "refuel",
+    "scoop",
+    "seal",
+    "shred",
+    "sterilize",
+    "unlock",
+    "unscrew",
+    "vacuum",
+    "weld",
+    "zip",
+    "close"
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "task_background": "Prepare the Ultrafast Optics Laboratory for a critical high-harmonic generation experiment by organizing equipment, repairing components, and ensuring operational readiness.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 3,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 3,
+      "max_weight": 25.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the oscilloscope_1 on the workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "oscilloscope_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close the xenon_gas_cylinder_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "xenon_gas_cylinder_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the mirror with dielectric coating and place it on the gas_target_chamber_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mirror_3",
+          "location_id": "on:gas_target_chamber_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the diffraction grating that is misaligned and place it in the sample_drawer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diffraction_grating_1",
+          "location_id": "in:sample_drawer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken mirror_2 using the repair_kit_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "mirror_2",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Inflate the deflated_ball_1 using the air_pump_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "deflated_ball_1",
+          "is_inflated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the camera to photograph the optical puzzle on the workbench and solve it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "optical_puzzle_1",
+          "is_photographed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to restart the vacuum pump in the harmonic chamber.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "vacuum_pump_1",
+          "is_vacuumed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the control console to the prep area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "control_console_1",
+          "location_id": ":prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gas target chamber to the laser control room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gas_target_chamber_1",
+          "location_id": ":laser_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the monochromator with the misaligned grating to the prep area for repair.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "monochromator_1",
+          "location_id": ":prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the beam dump that absorbs 99.9% of light to the harmonic chamber exit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "beam_dump_1",
+          "location_id": ":harmonic_beam_exit_1"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01007"
+}

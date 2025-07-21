@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the coastal marine research station for the annual inspection by organizing equipment, repairing broken devices, and securing samples.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 60.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 60.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place clipboard_1 on dissection_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "clipboard_1",
+          "location_id": "on:dissection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Put diver_beacon_1 in first_aid_kit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "diver_beacon_1",
+          "location_id": "in:first_aid_kit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the only flashing plastic beacon to the outlook deck.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diver_beacon_1",
+          "location_id": ":outlook_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue capped glass bottle on the microscope station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blue_cap_bottle_1",
+          "location_id": "on:microscope_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the conveyor belt system using the toolbox.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "conveyor_belt_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the hydraulic crane arm using the toolbox.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "hydraulic_crane_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the unbalanced metal centrifuge using the toolbox.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the only broken printer with low toner using the toolbox.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to repair the steel weigh station.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_weigh_station_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to play the diver distress beacon.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "diver_beacon_1",
+          "is_playing": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the crate of squid samples to the main laboratory.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "squid_crate_1",
+          "location_id": ":main_laboratory"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydraulic crane arm to the storage shed.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_crane_1",
+          "location_id": ":storage_equipment_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair and move the rusted steel weigh station to the storage shed.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_weigh_station_1",
+          "is_broken": false
+        },
+        {
+          "id": "steel_weigh_station_1",
+          "location_id": ":storage_equipment_shed"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the humming refrigerator to the dockside and cool it down.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerator_1",
+          "location_id": ":dockside_processing_zone"
+        },
+        {
+          "id": "refrigerator_1",
+          "is_hot": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01342"
+}

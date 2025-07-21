@@ -1,0 +1,930 @@
+{
+  "description": "A high-stakes emergency hospital trauma bay and prosthetics workshop, combining medical urgency with precision engineering under chaotic conditions.",
+  "rooms": [
+    {
+      "id": "trauma_bay",
+      "name": "Trauma Bay",
+      "properties": {
+        "type": "medical_emergency"
+      },
+      "connected_to_room_ids": [
+        "prosthetic_workshop",
+        "decontamination_airlock"
+      ]
+    },
+    {
+      "id": "prosthetic_workshop",
+      "name": "Prosthetic Workshop",
+      "properties": {
+        "type": "engineering"
+      },
+      "connected_to_room_ids": [
+        "trauma_bay",
+        "supply_closet"
+      ]
+    },
+    {
+      "id": "supply_closet",
+      "name": "Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "prosthetic_workshop"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "transition"
+      },
+      "connected_to_room_ids": [
+        "trauma_bay",
+        "staff_break_area"
+      ]
+    },
+    {
+      "id": "staff_break_area",
+      "name": "Staff Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "decontamination_airlock"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "gurney_1",
+      "name": "Hydraulic Gurney",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          2.1,
+          0.9,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "GH-5000",
+        "backrest_position": "raised"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "gurney_2",
+      "name": "Hydraulic Gurney",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          2.1,
+          0.9,
+          1.0
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "GH-5000",
+        "backrest_position": "locked"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "surgical_light_1",
+      "name": "Ceiling-mounted Surgical Light",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.3
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "aluminum",
+        "led_color": "white",
+        "brightness": 10000
+      },
+      "states": {
+        "is_on": false,
+        "is_flickering": true
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Emergency Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "plastic",
+        "wheels_locked": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iv_stand_1",
+      "name": "IV Drip Stand",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          1.5
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "height": 150
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "fill_level": 75,
+        "lid_sensor": "beeping"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal",
+        "wheels_locked": true
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_clipboard_1",
+      "name": "Digital Clipboard",
+      "type": "ITEM",
+      "location_id": "on:gurney_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "brand": "MediTech",
+        "logged_in_user": "NURSE_JWILLS",
+        "timeout_minutes": 2
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "facial_prosthetic_1",
+      "name": "Damaged Titanium Facial Prosthetic",
+      "type": "ITEM",
+      "location_id": "on:gurney_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "titanium",
+        "damage": "bullet_impact",
+        "attachment_status": "partially_detached",
+        "patient_id": "PT_0042"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "iv_bag_1",
+      "name": "IV Bag (Lactated Ringers)",
+      "type": "ITEM",
+      "location_id": "on:iv_stand_1",
+      "properties": {
+        "weight": 0.6,
+        "volume_ml": 500,
+        "liquid": "clear",
+        "label": "LACTATED RINGERS—CRITICAL",
+        "port_color": "red"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "iv_bag_2",
+      "name": "IV Bag (Saline)",
+      "type": "ITEM",
+      "location_id": "on:iv_stand_1",
+      "properties": {
+        "weight": 0.6,
+        "volume_ml": 500,
+        "liquid": "clear",
+        "label": "SALINE",
+        "port_color": "blue"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "iv_bag_3",
+      "name": "IV Bag (Saline)",
+      "type": "ITEM",
+      "location_id": "on:iv_stand_1",
+      "properties": {
+        "weight": 0.6,
+        "volume_ml": 500,
+        "liquid": "clear",
+        "label": "SALINE",
+        "port_color": "blue"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "discarded_saline_bag_1",
+      "name": "Discarded Saline Bag",
+      "type": "ITEM",
+      "location_id": "in:biohazard_bin_1",
+      "properties": {
+        "weight": 0.3,
+        "volume_ml": 500,
+        "liquid": "clear",
+        "condition": "crumpled",
+        "label": "SALINE"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Anti-static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "composite",
+        "surface_type": "anti-static"
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Industrial 3D Printer",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "steel",
+        "print_status": "54% complete",
+        "current_job": "titanium_nasal_plate"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "sterilization_cabinet_1",
+      "name": "Wall-mounted Sterilization Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          1.0,
+          0.4,
+          0.6
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "sterilization_cycle": "complete"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "prosthetic_hand_1",
+      "name": "Half-assembled Prosthetic Hand",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "titanium_polymer",
+        "assembly_status": "50%",
+        "patient_id": "PT_0038"
+      },
+      "states": {
+        "is_installed": false
+      }
+    },
+    {
+      "id": "calibration_device_1",
+      "name": "Calibration Device",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "brand": "PrecisionTools",
+        "display_message": "ERROR: OUT OF TOLERANCE"
+      },
+      "states": {
+        "is_muted": true
+      }
+    },
+    {
+      "id": "sterile_kit_1",
+      "name": "Sealed Sterile Kit (Facial Prosthetic Adhesive)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "contents": "facial_prosthetic_adhesive",
+        "expiration_date": "today"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "parts_drawer_1",
+      "name": "Locked Parts Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keycard",
+        "contents": "backup_titanium_plates"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 3.2,
+        "brand": "OptiView",
+        "eyepiece_condition": "dusty",
+        "magnification": "400x"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "task_lamp_1",
+      "name": "Adjustable Task Lamp",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.8,
+        "brand": "LumaBright",
+        "arm_position": "stuck_low",
+        "bulb_type": "LED"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "ultrasonic_cleaner_1",
+      "name": "Ultrasonic Cleaner",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 5.0,
+        "liquid": "ethanol",
+        "lid_status": "ajar",
+        "capacity_ml": 2000
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "tool_pegboard_1",
+      "name": "Wall-mounted Tool Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "pegboard",
+        "missing_tool": "torque_wrench"
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Precision Screwdriver",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "type": "phillips",
+        "size": "#00",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calipers_1",
+      "name": "Digital Calipers",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "brand": "Mitutoyo",
+        "precision": "0.01mm",
+        "battery_status": "low"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Medical Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:sterilization_cabinet_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "ScanTech",
+        "model": "MediScan Pro",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "weight": 3.5,
+        "brand": "BrewMaster",
+        "pot_status": "half_full",
+        "coffee_freshness": "stale"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Medication Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.4
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": [
+          "medication",
+          "lunchboxes"
+        ],
+        "temperature_c": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jacket_1",
+      "name": "Staff Jacket",
+      "type": "ITEM",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "weight": 0.9,
+        "color": "blue",
+        "pockets": [
+          "keycard",
+          "stress_ball"
+        ],
+        "owner": "DR_SMITH",
+        "is_container": true
+      },
+      "states": {
+        "is_wet": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:jacket_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "white",
+        "access_level": "engineering",
+        "assigned_to": "DR_SMITH"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "cleanliness": "clean",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sponge_1",
+      "name": "Sponge",
+      "type": "ITEM",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "material": "cellulose",
+        "cleanliness": "new",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "step_stool_1",
+      "name": "Step Stool",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "material": "plastic",
+        "max_weight_kg": 100
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked High-value Prosthetics Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:supply_closet",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.8
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "lock_type": "keycard",
+        "contents": "high_value_prosthetics"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "uv_chamber_1",
+      "name": "UV Sterilization Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 110.0,
+        "is_container": true,
+        "sterilization_cycle_time": "5_minutes"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bio_seal_door_1",
+      "name": "Bio-seal Door",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          2.1
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "opening_mechanism": "dual_control",
+        "safety_protocol": "requires_two_people"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Sterilized Tools Cart",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.9
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "contents": "sterilized_surgical_tools",
+        "blocking_passage": true
+      },
+      "states": {}
+    },
+    {
+      "id": "defibrillator_1",
+      "name": "Defibrillator",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 4.0,
+        "brand": "LifeSave",
+        "model": "XT-2000",
+        "battery_status": "full",
+        "provides_abilities": [
+          "turn_on"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "epinephrine_1",
+      "name": "Epinephrine Vial",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "concentration": "1:1000",
+        "volume_ml": 1,
+        "expiration_date": "2024-06-15"
+      },
+      "states": {}
+    },
+    {
+      "id": "scalpel_1",
+      "name": "Scalpel",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.05,
+        "blade_size": "#10",
+        "sterility": "sterile",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Patient Priority Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.9
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "content": "patient_IDs_and_repair_priorities"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "whiteboard_marker_1",
+      "name": "Whiteboard Marker",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.02,
+        "color": "black",
+        "ink_level": "50%",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bulletin_board_1",
+      "name": "Staff Bulletin Board",
+      "type": "FURNITURE",
+      "location_id": "in:staff_break_area",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.8
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "content": "shift_schedules"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Stress Ball",
+      "type": "ITEM",
+      "location_id": "in:jacket_1",
+      "properties": {
+        "weight": 0.15,
+        "color": "blue",
+        "material": "foam",
+        "firmness": "medium"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_stain_1",
+      "name": "Coffee Stain",
+      "type": "ITEM",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "weight": 0.01,
+        "size_cm": 15,
+        "age": "fresh"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "latex_glove_1",
+      "name": "Abandoned Latex Glove",
+      "type": "ITEM",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "weight": 0.02,
+        "condition": "inside_out",
+        "size": "medium",
+        "sterility": "compromised"
+      },
+      "states": {}
+    },
+    {
+      "id": "procedural_poster_1",
+      "name": "Prosthetic Removal Procedure Poster",
+      "type": "ITEM",
+      "location_id": "in:trauma_bay",
+      "properties": {
+        "weight": 0.3,
+        "condition": "peeling",
+        "content": "STEPS FOR PROSTHETIC REMOVAL IN TRAUMA"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "Employee of the Month Plaque",
+      "type": "ITEM",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "weight": 1.2,
+        "material": "wood",
+        "date": "6_months_ago",
+        "recipient": "ENG_DAVIS"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "prosthetics_catalog_1",
+      "name": "Prosthetics Catalog Stack",
+      "type": "ITEM",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "weight": 2.0,
+        "top_issue": "Q3 2023 Innovations",
+        "quantity": 5
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "succulent_1",
+      "name": "Dried-out Potted Succulent",
+      "type": "ITEM",
+      "location_id": "in:prosthetic_workshop",
+      "properties": {
+        "weight": 0.8,
+        "pot_material": "ceramic",
+        "plant_health": "dried_out",
+        "last_watered": "3_weeks_ago"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "dust",
+    "install",
+    "lower",
+    "open",
+    "raise",
+    "scan_barcode",
+    "turn_on",
+    "unmute",
+    "write"
+  ]
+}

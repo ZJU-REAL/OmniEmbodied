@@ -1,0 +1,572 @@
+{
+  "description": "A medical device usability testing laboratory with four interconnected zones: Control Room, Simulated Hospital Ward, Home Care Simulation Area, and Prototyping & Storage Bay.",
+  "rooms": [
+    {
+      "id": "control_room",
+      "name": "Control Room",
+      "properties": {
+        "type": "observation"
+      },
+      "connected_to_room_ids": [
+        "hospital_ward",
+        "home_care_area",
+        "prototyping_bay"
+      ]
+    },
+    {
+      "id": "hospital_ward",
+      "name": "Simulated Hospital Ward",
+      "properties": {
+        "type": "clinical"
+      },
+      "connected_to_room_ids": [
+        "control_room",
+        "home_care_area"
+      ]
+    },
+    {
+      "id": "home_care_area",
+      "name": "Home Care Simulation Area",
+      "properties": {
+        "type": "residential"
+      },
+      "connected_to_room_ids": [
+        "control_room",
+        "hospital_ward"
+      ]
+    },
+    {
+      "id": "prototyping_bay",
+      "name": "Prototyping & Storage Bay",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "control_room"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "observation_console_1",
+      "name": "Observation Console",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal",
+        "model_number": "OC-3000"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "audio_mixer_1",
+      "name": "Audio Mixer Panel",
+      "type": "ITEM",
+      "location_id": "on:observation_console_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "SoundTech",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "on:observation_console_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "silver",
+        "brand": "BrewMaster",
+        "provides_abilities": [
+          "rinse"
+        ]
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.02
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "color": "white",
+        "material": "melamine"
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "hospital_bed_1",
+      "name": "Hydraulic Hospital Bed",
+      "type": "FURNITURE",
+      "location_id": "in:hospital_ward",
+      "properties": {
+        "size": [
+          2.1,
+          1.0,
+          0.6
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "material": "metal",
+        "model_number": "HB-450"
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "vital_signs_monitor_1",
+      "name": "Vital Signs Monitor",
+      "type": "ITEM",
+      "location_id": "on:hospital_bed_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "brand": "MediTech",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "infusion_pump_1",
+      "name": "Prototype Infusion Pump",
+      "type": "ITEM",
+      "location_id": "on:hospital_bed_1",
+      "properties": {
+        "weight": 4.5,
+        "color": "orange",
+        "brand": "MediFlow",
+        "serial_number": "L-47"
+      },
+      "states": {
+        "is_open": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:hospital_ward",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "wheeled_stool_1",
+      "name": "Wheeled Stool",
+      "type": "FURNITURE",
+      "location_id": "in:hospital_ward",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard",
+      "type": "ITEM",
+      "location_id": "on:hospital_bed_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "wood",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "recliner_chair_1",
+      "name": "Recliner Chair",
+      "type": "FURNITURE",
+      "location_id": "in:home_care_area",
+      "properties": {
+        "size": [
+          0.9,
+          0.9,
+          1.1
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "material": "fabric",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "overbed_table_1",
+      "name": "Overbed Table",
+      "type": "FURNITURE",
+      "location_id": "in:home_care_area",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "scratched"
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "glucose_monitor_1",
+      "name": "Glucose Monitor Prototype",
+      "type": "ITEM",
+      "location_id": "on:overbed_table_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "brand": "GlucoCheck",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "pill_dispenser_1",
+      "name": "Pill Dispenser",
+      "type": "ITEM",
+      "location_id": "on:overbed_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "blue",
+        "brand": "MediSafe"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "tv_1",
+      "name": "TV",
+      "type": "ITEM",
+      "location_id": "in:home_care_area",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "brand": "ViewMax",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:home_care_area",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic",
+        "brand": "CoolMini"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_pegboard_1",
+      "name": "Tool Pegboard",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.1,
+          0.9
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "3D Printer",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "brand": "PrintMaster",
+        "model_number": "3D-200"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_kit_1",
+      "name": "Calibration Kit",
+      "type": "ITEM",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "adjust"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_adjusted": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "device_crate_1",
+      "name": "Device Prototype Crate",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.6
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "V4.2 – DO NOT TOUCH"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:tool_pegboard_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "brand": "SolderPro",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {
+        "is_glued": false
+      }
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "LuxVision",
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_adjusted": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:observation_console_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "label": "Access Card #42"
+      },
+      "states": {}
+    },
+    {
+      "id": "manual_1",
+      "name": "Infusion Pump Manual",
+      "type": "ITEM",
+      "location_id": "in:device_crate_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "paper",
+        "provides_abilities": [
+          "write"
+        ]
+      },
+      "states": {
+        "is_written_on": false
+      }
+    },
+    {
+      "id": "weight_100g_1",
+      "name": "100g Calibration Weight",
+      "type": "ITEM",
+      "location_id": "in:calibration_kit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_cloth_1",
+      "name": "Cleaning Cloth",
+      "type": "ITEM",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellow",
+        "material": "microfiber",
+        "provides_abilities": [
+          "polish"
+        ]
+      },
+      "states": {
+        "is_polished": false
+      }
+    },
+    {
+      "id": "water_source_1",
+      "name": "Water Source",
+      "type": "ITEM",
+      "location_id": "in:prototyping_bay",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "rinse",
+          "moisten"
+        ]
+      },
+      "states": {
+        "is_rinsed": false,
+        "is_moist": false
+      }
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "glue",
+    "moisten",
+    "open",
+    "polish",
+    "rinse",
+    "write",
+    "close"
+  ]
+}

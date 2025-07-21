@@ -1,0 +1,669 @@
+{
+  "description": "A contaminated industrial waterway cleanup site with multiple zones for hazardous material handling, equipment coordination, and safety protocol enforcement.",
+  "rooms": [
+    {
+      "id": "contaminated_creek_zone",
+      "name": "Main Contaminated Creek Zone",
+      "properties": {
+        "type": "industrial_waterway"
+      },
+      "connected_to_room_ids": [
+        "pump_filtration_station",
+        "hazardous_material_storage"
+      ]
+    },
+    {
+      "id": "pump_filtration_station",
+      "name": "Pump & Filtration Station",
+      "properties": {
+        "type": "industrial_equipment"
+      },
+      "connected_to_room_ids": [
+        "contaminated_creek_zone",
+        "equipment_supply_yard"
+      ]
+    },
+    {
+      "id": "hazardous_material_storage",
+      "name": "Hazardous Material Storage & Lab Tent",
+      "properties": {
+        "type": "chemical_lab"
+      },
+      "connected_to_room_ids": [
+        "contaminated_creek_zone",
+        "worker_check_in"
+      ]
+    },
+    {
+      "id": "worker_check_in",
+      "name": "Worker Check-In & Decontamination Zone",
+      "properties": {
+        "type": "safety_station"
+      },
+      "connected_to_room_ids": [
+        "hazardous_material_storage",
+        "monitoring_outpost"
+      ]
+    },
+    {
+      "id": "equipment_supply_yard",
+      "name": "Equipment & Supply Yard",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "pump_filtration_station",
+        "monitoring_outpost"
+      ]
+    },
+    {
+      "id": "monitoring_outpost",
+      "name": "Monitoring Outpost",
+      "properties": {
+        "type": "observation"
+      },
+      "connected_to_room_ids": [
+        "worker_check_in",
+        "equipment_supply_yard"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "containment_boom_1",
+      "name": "Steel Containment Boom",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "size": [
+          10.0,
+          1.0,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "color": "black",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "oil_skimmer_pump_1",
+      "name": "Oil Skimmer Pump",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "SK-2000"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "hazardous_waste_drum_1",
+      "name": "Hazardous Waste Drum",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "plastic",
+        "label": "Benzene-contaminated"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "methane_detector_1",
+      "name": "Methane Detector",
+      "type": "ITEM",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "weight": 2.5,
+        "color": "yellow",
+        "brand": "GasAlert",
+        "model_number": "XTD"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "oil_water_separator_1",
+      "name": "Industrial Oil-Water Separator",
+      "type": "FURNITURE",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          2.2
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel",
+        "status": "flickering"
+      },
+      "states": {}
+    },
+    {
+      "id": "diesel_generator_1",
+      "name": "Diesel-Powered Generator",
+      "type": "FURNITURE",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "intake_filter_1",
+      "name": "Clogged Intake Filter",
+      "type": "ITEM",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "weight": 3.5,
+        "color": "brown",
+        "material": "fiber",
+        "condition": "clogged"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "emergency_shutoff_valve_1",
+      "name": "Emergency Shutoff Valve",
+      "type": "ITEM",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_drum_rack_1",
+      "name": "Sealed Chemical Drum Rack",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          1.8
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "ARSENIC WASTE – DO NOT OPEN"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Portable Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "improperly_sealed"
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminated_soil_sample_1",
+      "name": "Contaminated Soil Sample",
+      "type": "ITEM",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "glass",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "chemical_cabinet_1",
+      "name": "Locked Chemical Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "key"
+      },
+      "states": {
+        "is_open": false,
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "air_purifier_1",
+      "name": "Broken Air Purifier",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "plastic",
+        "status": "error"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "safety_gear_rack_1",
+      "name": "Safety Gear Rack",
+      "type": "FURNITURE",
+      "location_id": "in:worker_check_in",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazmat_suit_1",
+      "name": "Hazmat Suit",
+      "type": "ITEM",
+      "location_id": "in:safety_gear_rack_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "decon_shower_1",
+      "name": "Emergency Decontamination Shower",
+      "type": "FURNITURE",
+      "location_id": "in:worker_check_in",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          2.5
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Rusted Toolbox",
+      "type": "ITEM",
+      "location_id": "in:equipment_supply_yard",
+      "properties": {
+        "weight": 8.0,
+        "color": "red",
+        "material": "steel",
+        "condition": "rusted",
+        "provides_abilities": [
+          "replace",
+          "weld"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_key_1",
+      "name": "Chemical Cabinet Key",
+      "type": "ITEM",
+      "location_id": "in:toolbox_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {
+        "is_hidden": true
+      }
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:equipment_supply_yard",
+      "properties": {
+        "weight": 4.5,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "replacement_filter_1",
+      "name": "Replacement Intake Filter",
+      "type": "ITEM",
+      "location_id": "in:equipment_supply_yard",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "material": "fiber"
+      },
+      "states": {
+        "is_replaced": false
+      }
+    },
+    {
+      "id": "radio_handset_1",
+      "name": "Radio Handset",
+      "type": "ITEM",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Motorola"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "environmental_sensor_1",
+      "name": "Environmental Sensor",
+      "type": "ITEM",
+      "location_id": "in:monitoring_outpost",
+      "properties": {
+        "weight": 2.0,
+        "color": "gray",
+        "material": "plastic",
+        "model_number": "ENV-1000"
+      },
+      "states": {
+        "is_synced": false
+      }
+    },
+    {
+      "id": "data_tablet_1",
+      "name": "Data Tablet",
+      "type": "ITEM",
+      "location_id": "in:monitoring_outpost",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "plastic",
+        "brand": "Samsung"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "ITEM",
+      "location_id": "in:monitoring_outpost",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "absorbent_barrier_1",
+      "name": "Absorbent Barrier Mat",
+      "type": "ITEM",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "material": "fabric",
+        "condition": "saturated"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:worker_check_in",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "oil_absorbent_pad_1",
+      "name": "Oil Absorbent Pad",
+      "type": "ITEM",
+      "location_id": "in:equipment_supply_yard",
+      "properties": {
+        "weight": 0.5,
+        "color": "gray",
+        "material": "polypropylene",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "work_gloves_1",
+      "name": "Grease-Stained Work Gloves",
+      "type": "ITEM",
+      "location_id": "in:pump_filtration_station",
+      "properties": {
+        "weight": 0.4,
+        "color": "brown",
+        "material": "leather",
+        "condition": "stained"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Safety Goggles",
+      "type": "ITEM",
+      "location_id": "in:safety_gear_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "hard_hat_1",
+      "name": "Hard Hat",
+      "type": "ITEM",
+      "location_id": "in:safety_gear_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {
+        "is_worn": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Water Sample Logs",
+      "type": "ITEM",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "weight": 0.6,
+        "color": "brown",
+        "material": "wood",
+        "condition": "smudged"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard with Chemical Formulas",
+      "type": "FURNITURE",
+      "location_id": "in:hazardous_material_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "plastic"
+      },
+      "states": {
+        "is_hidden": false
+      }
+    },
+    {
+      "id": "rusty_pipe_1",
+      "name": "Rusted Industrial Pipe",
+      "type": "FURNITURE",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "size": [
+          3.0,
+          0.3,
+          0.3
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "rusted"
+      },
+      "states": {
+        "is_welded": false
+      }
+    },
+    {
+      "id": "broken_walkway_plank_1",
+      "name": "Broken Walkway Plank",
+      "type": "ITEM",
+      "location_id": "in:contaminated_creek_zone",
+      "properties": {
+        "weight": 12.0,
+        "color": "brown",
+        "material": "wood",
+        "condition": "broken"
+      },
+      "states": {
+        "is_flat": false
+      }
+    },
+    {
+      "id": "wooden_roller_1",
+      "name": "Wooden Roller",
+      "type": "ITEM",
+      "location_id": "in:equipment_supply_yard",
+      "properties": {
+        "weight": 3.0,
+        "color": "brown",
+        "material": "wood",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "download",
+    "flatten",
+    "hide",
+    "open",
+    "replace",
+    "show",
+    "stop_playback",
+    "sync",
+    "wear",
+    "weld",
+    "wipe"
+  ]
+}

@@ -27,11 +27,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 
 from utils.logger import setup_logging, get_logger, log_success, log_processing, log_completed
-from .utils.json_utils import load_json, save_json
-from .generators.clue_generator import ClueGenerator
-from .generators.scene_generator import SceneGenerator
-from .generators.task_generator import TaskGenerator
-from .utils.task_validator import TaskValidator
+from utils.json_utils import load_json, save_json
+from generators.clue_generator import ClueGenerator
+from generators.scene_generator import SceneGenerator
+from generators.task_generator import TaskGenerator
+from utils.task_validator import TaskValidator
 
 
 class Pipeline:

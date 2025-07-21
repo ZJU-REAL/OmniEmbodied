@@ -1,0 +1,983 @@
+{
+  "description": "A high-stakes Cybersecurity Forensics Lab where a team of analysts must collaboratively investigate a data breach. The lab is a mix of digital and physical forensic workstations, server racks, and evidence storage zones, designed for multi-agent collaboration.",
+  "rooms": [
+    {
+      "id": "main_forensic_area",
+      "name": "Main Forensic Workstation Area",
+      "properties": {
+        "type": "workstation"
+      },
+      "connected_to_room_ids": [
+        "server_storage_zone",
+        "whiteboard_corner",
+        "tool_closet",
+        "break_area"
+      ]
+    },
+    {
+      "id": "server_storage_zone",
+      "name": "Server & Evidence Storage Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_area",
+        "whiteboard_corner"
+      ]
+    },
+    {
+      "id": "whiteboard_corner",
+      "name": "Whiteboard & Case Coordination Corner",
+      "properties": {
+        "type": "coordination"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_area",
+        "server_storage_zone"
+      ]
+    },
+    {
+      "id": "tool_closet",
+      "name": "Tool & Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_area"
+      ]
+    },
+    {
+      "id": "break_area",
+      "name": "Break Area",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "main_forensic_area"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "l_shaped_desk_1",
+      "name": "L-shaped Desk",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_area",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          0.7
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_monitor_1",
+      "name": "Forensic Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.7,
+          0.4,
+          0.1
+        ],
+        "brand": "Dell",
+        "model_number": "P3222QE",
+        "is_container": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "forensic_monitor_2",
+      "name": "Forensic Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.7,
+          0.4,
+          0.1
+        ],
+        "brand": "Dell",
+        "model_number": "P3222QE",
+        "is_container": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "forensic_monitor_3",
+      "name": "Forensic Monitor",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.7,
+          0.4,
+          0.1
+        ],
+        "brand": "Dell",
+        "model_number": "P3222QE",
+        "is_container": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "forensic_laptop_1",
+      "name": "Forensic Laptop",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 1.5,
+        "size": [
+          0.3,
+          0.2,
+          0.02
+        ],
+        "brand": "Dell",
+        "model_number": "Latitude 7420",
+        "is_container": true,
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "decryption_rig_1",
+      "name": "Hardware Decryption Rig",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 20.0,
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "brand": "Paladin",
+        "model_number": "Knight",
+        "is_container": false,
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "server_workstation_1",
+      "name": "Server Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_forensic_area",
+      "properties": {
+        "size": [
+          3.0,
+          0.8,
+          1.5
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_hdd_1",
+      "name": "Encrypted External HDD",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "brand": "Seagate",
+        "model_number": "4TB",
+        "is_container": false
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "password_binder_1",
+      "name": "Password Dictionary Binder",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "title": "RockYou.txt excerpts",
+        "is_container": false
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "password_binder_2",
+      "name": "Password Dictionary Binder",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "title": "Corporate Leaks 2023",
+        "is_container": false
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "password_binder_3",
+      "name": "Password Dictionary Binder",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 1.2,
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "title": "Custom Mangling Rules",
+        "is_container": false
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.01,
+        "size": [
+          0.1,
+          0.1,
+          0.001
+        ],
+        "text": "Try hashcat mode 22000 first",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_write_blocker_1",
+      "name": "USB Forensic Write-Blocker",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "brand": "Tableau",
+        "model_number": "T8",
+        "is_container": false,
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 2.0,
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "brand": "Brother",
+        "model_number": "PT-E550W",
+        "is_container": false,
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Wired Keyboard",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.45,
+          0.15,
+          0.03
+        ],
+        "brand": "Logitech",
+        "model_number": "K120",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "password_poster_1",
+      "name": "Password Complexity Rules Poster",
+      "type": "ITEM",
+      "location_id": "in:main_forensic_area",
+      "properties": {
+        "weight": 0.2,
+        "size": [
+          0.6,
+          0.4,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "text": "World's Best Hacker",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "cactus_1",
+      "name": "Potted Cactus",
+      "type": "ITEM",
+      "location_id": "in:main_forensic_area",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.15,
+          0.15,
+          0.2
+        ],
+        "is_container": false,
+        "state": "dead"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Locked Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_storage_zone",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "black"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "hard_drive_1",
+      "name": "Seized Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "is_container": false,
+        "barcode": "HDD001"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hard_drive_2",
+      "name": "Seized Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "is_container": false,
+        "barcode": "HDD002"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hard_drive_3",
+      "name": "Seized Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "is_container": false,
+        "barcode": "HDD003"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "hard_drive_4",
+      "name": "Seized Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.07,
+          0.02
+        ],
+        "is_container": false,
+        "barcode": "HDD004"
+      },
+      "states": {
+        "is_copied": false
+      }
+    },
+    {
+      "id": "forensic_duplicator_1",
+      "name": "Forensic Duplicator",
+      "type": "ITEM",
+      "location_id": "in:server_storage_zone",
+      "properties": {
+        "weight": 25.0,
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "brand": "Wiebetech",
+        "model_number": "CRU ToughTech",
+        "is_container": false,
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:server_storage_zone",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "steel",
+        "color": "silver"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "master_keycard_1",
+      "name": "Master Keycard",
+      "type": "ITEM",
+      "location_id": "in:forensic_laptop_1",
+      "properties": {
+        "weight": 0.01,
+        "size": [
+          0.05,
+          0.03,
+          0.001
+        ],
+        "text": "Admin Override",
+        "is_container": false,
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_2",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.01,
+        "size": [
+          0.1,
+          0.1,
+          0.001
+        ],
+        "text": "Check drive #3 - partial match on hashes?",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_tags_1",
+      "name": "Blank Evidence Tags",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.1,
+          0.1,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "label_gun_1",
+      "name": "Label Gun",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.15,
+          0.1,
+          0.05
+        ],
+        "brand": "Dymo",
+        "model_number": "450",
+        "is_container": false,
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "protocol_binder_1",
+      "name": "Evidence Handling Protocol Binder",
+      "type": "ITEM",
+      "location_id": "in:server_storage_zone",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.3,
+          0.2,
+          0.05
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_clock_1",
+      "name": "Digital Clock",
+      "type": "ITEM",
+      "location_id": "in:server_storage_zone",
+      "properties": {
+        "weight": 0.2,
+        "size": [
+          0.1,
+          0.05,
+          0.05
+        ],
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:whiteboard_corner",
+      "properties": {
+        "size": [
+          2.0,
+          1.2,
+          0.02
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "melamine"
+      },
+      "states": {}
+    },
+    {
+      "id": "case_notes_1",
+      "name": "Case Notes",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.2,
+          0.15,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "suspect_timeline_1",
+      "name": "Suspect Timeline",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.3,
+          0.2,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "hash_list_1",
+      "name": "Printed Hash List",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.1,
+        "size": [
+          0.2,
+          0.15,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_closet_1",
+      "name": "Tool Closet",
+      "type": "FURNITURE",
+      "location_id": "in:tool_closet",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          2.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "white"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "forensic_kit_1",
+      "name": "Forensic Kit",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 5.0,
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "is_container": false,
+        "provides_abilities": [
+          "copy"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_cables_1",
+      "name": "Spare Cables",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "specialized_hardware_1",
+      "name": "Specialized Hardware",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 3.0,
+        "size": [
+          0.25,
+          0.2,
+          0.1
+        ],
+        "is_container": false,
+        "provides_abilities": [
+          "solve_puzzle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.1,
+          0.2
+        ],
+        "cap_color": "blue",
+        "label": "CORROSIVE",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.1,
+          0.2
+        ],
+        "cap_color": "red",
+        "label": "FLAMMABLE",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_3",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.1,
+          0.2
+        ],
+        "cap_color": "red",
+        "label": "TOXIC",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_4",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.5,
+        "size": [
+          0.1,
+          0.1,
+          0.2
+        ],
+        "cap_color": "blue",
+        "label": "EMPTY",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:tool_closet_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.08,
+          0.08,
+          0.05
+        ],
+        "color": "blue",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "break_table_1",
+      "name": "Break Table",
+      "type": "FURNITURE",
+      "location_id": "in:break_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_2",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:break_table_1",
+      "properties": {
+        "weight": 0.3,
+        "size": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "snack_wrapper_1",
+      "name": "Discarded Snack Wrapper",
+      "type": "ITEM",
+      "location_id": "on:break_table_1",
+      "properties": {
+        "weight": 0.05,
+        "size": [
+          0.15,
+          0.1,
+          0.01
+        ],
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "on:break_table_1",
+      "properties": {
+        "weight": 1.0,
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "is_container": false,
+        "provides_abilities": [
+          "adjust"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    }
+  ],
+  "abilities": [
+    "adjust",
+    "copy",
+    "copy_file",
+    "download",
+    "open",
+    "print",
+    "solve_puzzle",
+    "turn_off",
+    "turn_on",
+    "unlock",
+    "close"
+  ]
+}

@@ -44,8 +44,19 @@ class EvaluationManager:
         self.actual_agent_type = self._map_agent_type(agent_type, config_file)
         
         # 加载配置
-        self.config_manager = ConfigManager()
+        from config.config_manager import get_config_manager
+        self.config_manager = get_config_manager()
         self.config = self.config_manager.get_config(config_file)
+
+        # 获取完整的LLM配置（包含运行时覆盖）- 强制重新加载以确保覆盖生效
+        self.llm_config = self.config_manager.get_config('llm_config', reload=True)
+        logger.debug(f"EvaluationManager获取LLM配置: provider={self.llm_config.get('api', {}).get('provider', 'unknown')}")
+
+        # 获取完整的提示词配置（包含运行时覆盖）- 强制重新加载以确保覆盖生效
+        self.prompts_config = self.config_manager.get_config('prompts_config', reload=True)
+
+        # 在配置中保存配置文件名，供其他组件使用
+        self.config['config_file'] = config_file
         
         # 选择场景和任务
         scenario_result = ScenarioSelector.get_scenario_list(self.config, scenario_selection)
@@ -146,6 +157,9 @@ class EvaluationManager:
             agent_config = self.config.get('agent_config', {})
             model_info = self._extract_model_info(agent_config)
 
+            # 获取数据集信息
+            dataset_info = self._extract_dataset_info()
+
             # 构建实验配置
             experiment_config = {
                 'experiment_info': {
@@ -156,6 +170,7 @@ class EvaluationManager:
                     'task_type': self.task_type,
                     'custom_suffix': self.custom_suffix
                 },
+                'dataset_config': dataset_info,
                 'model_config': model_info,
                 'scenarios': {
                     'scenario_list': self.scenario_list,
@@ -180,6 +195,52 @@ class EvaluationManager:
 
         except Exception as e:
             logger.error(f"保存实验配置失败: {e}")
+
+    def _extract_dataset_info(self) -> Dict[str, Any]:
+        """提取数据集配置信息"""
+        dataset_info = {}
+
+        try:
+            # 获取默认数据集
+            default_dataset = self.config.get('dataset', {}).get('default', 'unknown')
+            dataset_info['default_dataset'] = default_dataset
+
+            # 获取可用数据集列表
+            available_datasets = self.config_manager.list_datasets(self.config_file)
+            dataset_info['available_datasets'] = available_datasets
+
+            # 获取当前使用的数据集路径
+            if default_dataset != 'unknown' and default_dataset in available_datasets:
+                try:
+                    dataset_path = self.config_manager.get_data_dir(self.config_file, default_dataset)
+                    scene_path = self.config_manager.get_scene_dir(self.config_file, default_dataset)
+                    task_path = self.config_manager.get_task_dir(self.config_file, default_dataset)
+
+                    dataset_info['dataset_paths'] = {
+                        'data_dir': dataset_path,
+                        'scene_dir': scene_path,
+                        'task_dir': task_path
+                    }
+                except Exception as e:
+                    logger.warning(f"无法获取数据集路径信息: {e}")
+
+            # 获取运行时覆盖的数据集配置
+            if hasattr(self.config_manager, 'runtime_overrides') and self.config_manager.runtime_overrides:
+                dataset_overrides = {}
+                for config_name, overrides in self.config_manager.runtime_overrides.items():
+                    if 'dataset' in overrides or 'data' in overrides:
+                        dataset_overrides[config_name] = {
+                            k: v for k, v in overrides.items()
+                            if k in ['dataset', 'data']
+                        }
+                if dataset_overrides:
+                    dataset_info['runtime_overrides'] = dataset_overrides
+
+        except Exception as e:
+            logger.warning(f"提取数据集信息失败: {e}")
+            dataset_info['error'] = str(e)
+
+        return dataset_info
 
     def _extract_model_info(self, agent_config: Dict[str, Any]) -> Dict[str, Any]:
         """从智能体配置中提取模型信息"""
@@ -267,7 +328,8 @@ class EvaluationManager:
                     execute_scenario_standalone,
                     scenario_id, self.config, self.output_dir,
                     self.actual_agent_type, self.task_type,
-                    self.task_indices.get(scenario_id, [])
+                    self.task_indices.get(scenario_id, []),
+                    self.llm_config, self.prompts_config
                 ): scenario_id
                 for scenario_id in self.scenario_list
             }
@@ -521,7 +583,9 @@ class EvaluationManager:
 
 def execute_scenario_standalone(scenario_id: str, config: Dict[str, Any],
                                output_dir: str, agent_type: str, task_type: str,
-                               task_indices: List[int] = None) -> Dict[str, Any]:
+                               task_indices: List[int] = None,
+                               llm_config: Dict[str, Any] = None,
+                               prompts_config: Dict[str, Any] = None) -> Dict[str, Any]:
     """
     独立的场景执行函数，用于并行处理
     避免pickle序列化问题
@@ -535,7 +599,30 @@ def execute_scenario_standalone(scenario_id: str, config: Dict[str, Any],
         task_indices: 要执行的任务索引列表，None表示执行所有任务
     """
     try:
-        scenario_executor = ScenarioExecutor(scenario_id, config, output_dir, task_indices)
+        # 在子进程中重新设置日志配置
+        import logging
+        logging_config = config.get('logging', {})
+        log_level = logging_config.get('level', 'INFO')
+
+        # 配置子进程的日志
+        logging.basicConfig(
+            level=getattr(logging, log_level),
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            force=True  # 强制重新配置日志
+        )
+
+        # 确保配置中包含配置文件名信息和完整配置
+        config_with_file = config.copy()
+        if 'config_file' not in config_with_file:
+            config_with_file['config_file'] = getattr(config, 'config_file', 'centralized_config')
+
+        # 添加完整的LLM和提示词配置到主配置中，避免子进程重新加载
+        if llm_config:
+            config_with_file['_llm_config'] = llm_config
+        if prompts_config:
+            config_with_file['_prompts_config'] = prompts_config
+
+        scenario_executor = ScenarioExecutor(scenario_id, config_with_file, output_dir, task_indices)
         return scenario_executor.execute_scenario(agent_type, task_type)
     except Exception as e:
         return {

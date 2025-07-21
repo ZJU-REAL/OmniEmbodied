@@ -62,7 +62,13 @@ class EvaluationInterface:
             logger.info(f"🚀 开始评测: {config_file} - {agent_type} - {task_type}")
             result = manager.run_evaluation()
             
-            logger.info(f"✅ 评测完成: {result['run_info']['run_name']}")
+            # 检查返回结果的结构
+            if 'runinfo' in result:
+                run_name = result['runinfo'].get('run_id', 'unknown')
+                logger.info(f"✅ 评测完成: {run_name}")
+            else:
+                logger.info("✅ 评测完成")
+
             return result
             
         except Exception as e:

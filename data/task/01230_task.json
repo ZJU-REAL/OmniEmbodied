@@ -1,0 +1,142 @@
+{
+  "task_background": "Prepare the dermatopathology research laboratory for an urgent diagnostic review by organizing equipment, securing samples, and ensuring all systems are operational.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        1.5,
+        1.5,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        1.5,
+        1.5,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 in biohazard_bin_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "in:biohazard_bin_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open priority_biopsy_tray_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "priority_biopsy_tray_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the red biopsy tray labeled 'URGENT – MELANOMA SUSPECT' to the refrigerated sample rack.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "priority_biopsy_tray_1",
+          "location_id": ":refrigerated_sample_rack_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the multihead digital microscope in the microscopy bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "multihead_microscope_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Lock the biosafety cabinet using the keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white calibration kit missing the 10µL pipette and lock it with the keycard.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "calibration_kit_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the ultracentrifuge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ultracentrifuge_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the cryogenic storage tank.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_storage_tank_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the ultracentrifuge to the collaborative workspace.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ultracentrifuge_1",
+          "location_id": ":collaborative_workspace"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the biosafety cabinet to the equipment hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": ":equipment_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the LN2 dewar to the specimen intake area and lock it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ln2_dewar_1",
+          "location_id": ":specimen_intake"
+        },
+        {
+          "id": "ln2_dewar_1",
+          "is_locked": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01230"
+}

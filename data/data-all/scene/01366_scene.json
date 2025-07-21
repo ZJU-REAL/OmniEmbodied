@@ -1,0 +1,702 @@
+{
+  "description": "A high-security Biosafety Level 3 (BSL-3) research laboratory with genomic sequencing equipment, bioweapon defense studies, and strict biosecurity protocols.",
+  "rooms": [
+    {
+      "id": "main_lab",
+      "name": "Main Lab",
+      "properties": {
+        "type": "laboratory",
+        "atmosphere": "sterile but cluttered; humming servers, UV decon lights, and the faint ozone tang of active electronics"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_room",
+        "data_server_closet",
+        "decontamination_airlock",
+        "break_room"
+      ]
+    },
+    {
+      "id": "sample_prep_room",
+      "name": "Sample Preparation Room",
+      "properties": {
+        "type": "laboratory",
+        "atmosphere": "negative-pressure ventilation hisses faintly; walls lined with biohazard symbol decals"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "data_server_closet",
+      "name": "Data Server Closet",
+      "properties": {
+        "type": "server_room",
+        "atmosphere": "cold from AC units; flickering drive arrays"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "decontamination_airlock",
+      "name": "Decontamination Airlock",
+      "properties": {
+        "type": "airlock",
+        "atmosphere": "chemical-smelling; UV-lit with floor drains"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "break_room",
+        "atmosphere": "stale coffee, pinned-up memos about lab safety quizzes"
+      },
+      "connected_to_room_ids": [
+        "main_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "sequencer_x9000_1",
+      "name": "Next-Gen Sequencer (Model X-9000)",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          2.0,
+          1.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "X-9000",
+        "brand": "Genomics Inc."
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet (Class II)",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "glass_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "legionella_sample_tray_1",
+      "name": "Legionella Sample Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 2.5,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vial_b7_1",
+      "name": "Legionella Vial B7",
+      "type": "ITEM",
+      "location_id": "in:legionella_sample_tray_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "pink",
+        "material": "glass",
+        "label": "Lp02"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "electron_microscope_1",
+      "name": "Electron Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          1.5
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "model_number": "EM-4000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "biometric_terminal_1",
+      "name": "Biometric Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "error_message": "ERROR: COOLANT LOW"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "rpm": 10000
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "autoclave_1",
+      "name": "Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "temperature": 121.0,
+        "time_remaining": 15
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hazardous_waste_bin_1",
+      "name": "Hazardous Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "fill_level": 0.75
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.02
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "content": "half-erased DNA sequences and a doodle of a frowning bacterium"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "days_since_incident_counter_1",
+      "name": "DAYS SINCE INCIDENT Counter",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "display": "0"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Framed Safety Poster",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.02
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "message": "REPORT UNSECURED SAMPLES",
+        "condition": "peeling at corners"
+      },
+      "states": {}
+    },
+    {
+      "id": "glovebox_workstation_1",
+      "name": "Glovebox Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "left_glove_condition": "2cm tear",
+        "right_glove_condition": "pristine"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "minus_80c_freezer_1",
+      "name": "-80°C Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "status": "DEFROST CYCLE ACTIVE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coxiella_canister_1",
+      "name": "Coxiella burnetii Isolate",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "weight": 50.0,
+        "material": "stainless_steel",
+        "label": "Q-FEVER – DO NOT THAW"
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Pipette Set",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic_metal",
+        "misaligned_pipette": "10μL (dispensing 12μL)"
+      },
+      "states": {}
+    },
+    {
+      "id": "bunsen_burner_1",
+      "name": "Bunsen Burner",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.3
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "flame_height": "max",
+        "valve_condition": "squeaks when turned"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "lab_coat_rack_1",
+      "name": "Lab Coat Rack",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          1.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "contaminated_sleeve": "fluorescent dye stains"
+      },
+      "states": {}
+    },
+    {
+      "id": "notebook_1",
+      "name": "Coffee-Stained Notebook",
+      "type": "ITEM",
+      "location_id": "on:lab_coat_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "content": "Gene 447b – Immune Evasion?"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "periodic_table_1",
+      "name": "Decorative Periodic Table",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.02
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "note": "WARNING: BIOHAZARD on arsenic"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_closet",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "status": "flickering drive arrays"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "fireproof_safe_1",
+      "name": "Fireproof Safe",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_closet",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "content": "physical backup tapes"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "boot_scrubber_1",
+      "name": "Boot Scrubber",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "status": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "body_sensor_array_1",
+      "name": "Full-Body Sensor Array",
+      "type": "FURNITURE",
+      "location_id": "in:decontamination_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          2.0
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "status": "scanning"
+      },
+      "states": {}
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.5
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "content": "expired lunches"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "status": "broken, beeping intermittently"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "in:main_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "rubber",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "on:biometric_terminal_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "provides_abilities": [
+          "arm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": false
+      }
+    },
+    {
+      "id": "whisk_1",
+      "name": "Whisk",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "provides_abilities": [
+          "whisk"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "iron_1",
+      "name": "Iron",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "iron"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "weight": 3.0,
+        "material": "metal",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fertilizer_1",
+      "name": "Fertilizer",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_room",
+      "properties": {
+        "weight": 2.0,
+        "material": "granular",
+        "provides_abilities": [
+          "fertilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "ceramic",
+        "content": "stale coffee"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "on:lab_coat_rack_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "cotton",
+        "condition": "contaminated sleeve"
+      },
+      "states": {
+        "is_folded": false
+      }
+    }
+  ],
+  "abilities": [
+    "arm_alarm",
+    "close",
+    "drink",
+    "erase",
+    "fertilize",
+    "fold",
+    "iron",
+    "open",
+    "print",
+    "turn_off",
+    "turn_on",
+    "type",
+    "weld",
+    "whisk"
+  ]
+}

@@ -1,0 +1,624 @@
+{
+  "description": "A high-tech Bioanalytics Research Hub specializing in genetic and tissue sample analysis, featuring a main analysis chamber, tissue processing bay, data server room, equipment storage, and observation deck.",
+  "rooms": [
+    {
+      "id": "main_analysis_chamber",
+      "name": "Main Analysis Chamber",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "tissue_processing_bay",
+        "data_server_room",
+        "equipment_storage",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "tissue_processing_bay",
+      "name": "Tissue Processing Bay",
+      "properties": {
+        "type": "sterile_zone"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_chamber"
+      ]
+    },
+    {
+      "id": "data_server_room",
+      "name": "Data Server Room",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_chamber"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage & Prep",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_chamber"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "supervisor_area"
+      },
+      "connected_to_room_ids": [
+        "main_analysis_chamber"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "central_holographic_array_projector_1",
+      "name": "Central Holographic Array Projector",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.0
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "aluminum",
+        "model_number": "HoloGen-X2000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Radial Workstation 1",
+      "type": "FURNITURE",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "microarray_scanner_1",
+      "name": "Microarray Scanner (Illumina 6v1.1)",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 8.5,
+        "color": "white",
+        "brand": "Illumina",
+        "model_number": "6v1.1",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "priority_sample_tray_1",
+      "name": "Priority Sample Tray (STRIATUM – BATCH Z-7)",
+      "type": "ITEM",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "weight": 25.0,
+        "color": "stainless_steel",
+        "is_container": true,
+        "material": "metal",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_kit_1",
+      "name": "Calibration Kit",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 2.3,
+        "color": "black",
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "gold_plated_alignment_rod_1",
+      "name": "Gold-Plated Alignment Rod",
+      "type": "ITEM",
+      "location_id": "in:calibration_kit_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "gold",
+        "material": "metal",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "error_log_terminal_1",
+      "name": "Error Log Terminal",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "black",
+        "brand": "TechLog",
+        "model_number": "ELT-450"
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "autoclave_bin_1",
+      "name": "Autoclave Bin",
+      "type": "ITEM",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "uv_sterilizer_wand_1",
+      "name": "Portable UV Sterilizer Wand",
+      "type": "ITEM",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "weight": 1.2,
+        "color": "blue",
+        "brand": "SteriSafe",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 4.0,
+        "color": "gray",
+        "brand": "LabelMaster",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "cryogenic_storage_unit_1",
+      "name": "Cryogenic Storage Unit (–80°C)",
+      "type": "FURNITURE",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          2.0
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "material": "steel",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_dissection_table_1",
+      "name": "Robotic Dissection Table",
+      "type": "FURNITURE",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_screwed_in": false
+      }
+    },
+    {
+      "id": "contaminated_sample_jar_1",
+      "name": "Contaminated Sample Jar (HIPPOCAMPUS – DO NOT PROCESS)",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 3.0,
+        "color": "clear",
+        "is_container": true,
+        "material": "glass"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "laser_microtome_1",
+      "name": "Laser Microtome",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 15.0,
+        "color": "silver",
+        "brand": "MicroCut",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 20.0,
+        "color": "white",
+        "brand": "SpinTech",
+        "provides_abilities": [
+          "cool"
+        ]
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "pipette_rack_1",
+      "name": "Pipette Rack",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "diagnostic_terminal_1",
+      "name": "Diagnostic Terminal",
+      "type": "ITEM",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "DataSys",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_printed": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 10.0,
+        "color": "silver",
+        "brand": "BrewMaster",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "monitor_1",
+      "name": "Monitor",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 6.0,
+        "color": "black",
+        "brand": "ViewMax"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 1.5,
+        "color": "brown",
+        "material": "wood",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "metal",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "trowel_1",
+      "name": "Trowel",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.6,
+        "color": "gray",
+        "material": "metal",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "measuring_cup_1",
+      "name": "Measuring Cup",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "material": "plastic",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_bottle_1",
+      "name": "Reagent Bottle (Critical)",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "blue",
+        "material": "glass",
+        "label": "CORROSIVE",
+        "fill_level": "half-full"
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_bottle_2",
+      "name": "Reagent Bottle (Distractor)",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "red",
+        "material": "glass",
+        "label": "NON-CORROSIVE",
+        "fill_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "reagent_bottle_3",
+      "name": "Reagent Bottle (Distractor)",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "green",
+        "material": "glass",
+        "label": "NON-CORROSIVE",
+        "fill_level": "full"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_glass_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_first_poster_1",
+      "name": "Safety First! Poster",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "multicolor",
+        "material": "paper"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "lab_efficiency_award_1",
+      "name": "Lab Efficiency Award 2018",
+      "type": "ITEM",
+      "location_id": "in:tissue_processing_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "gold",
+        "material": "metal"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "gene_of_the_month_whiteboard_1",
+      "name": "Gene of the Month Whiteboard",
+      "type": "ITEM",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "weight": 5.0,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "bmc_genomics_cover_1",
+      "name": "Framed BMC Genomics Cover (2010)",
+      "type": "ITEM",
+      "location_id": "in:main_analysis_chamber",
+      "properties": {
+        "weight": 2.0,
+        "color": "multicolor",
+        "material": "paper"
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    }
+  ],
+  "abilities": [
+    "brew",
+    "check_pressure",
+    "close",
+    "cool",
+    "ignite",
+    "measure",
+    "open",
+    "plaster",
+    "plug_in",
+    "print",
+    "screw",
+    "staple",
+    "sweep",
+    "take_down",
+    "turn_on"
+  ]
+}

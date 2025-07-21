@@ -1,0 +1,1098 @@
+{
+  "description": "A bustling district-level testing coordination center during peak exam season, featuring a modular workspace with areas for receiving, secure storage, sorting, administration, IT troubleshooting, and a break room.",
+  "rooms": [
+    {
+      "id": "receiving_inventory_zone",
+      "name": "Receiving & Inventory Zone",
+      "properties": {
+        "type": "warehouse"
+      },
+      "connected_to_room_ids": [
+        "secure_storage_room",
+        "sorting_packing_station"
+      ]
+    },
+    {
+      "id": "secure_storage_room",
+      "name": "Secure Storage Room",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "receiving_inventory_zone",
+        "admin_office"
+      ]
+    },
+    {
+      "id": "sorting_packing_station",
+      "name": "Sorting & Packing Station",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "receiving_inventory_zone",
+        "it_troubleshooting_corner"
+      ]
+    },
+    {
+      "id": "admin_office",
+      "name": "Admin Office",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "secure_storage_room",
+        "break_room"
+      ]
+    },
+    {
+      "id": "it_troubleshooting_corner",
+      "name": "IT & Troubleshooting Corner",
+      "properties": {
+        "type": "technical"
+      },
+      "connected_to_room_ids": [
+        "sorting_packing_station",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "kitchen"
+      },
+      "connected_to_room_ids": [
+        "admin_office",
+        "it_troubleshooting_corner"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_shelving_1",
+      "name": "Steel Industrial Shelving Unit A",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "A"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shelving_2",
+      "name": "Steel Industrial Shelving Unit B",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "label": "B"
+      },
+      "states": {}
+    },
+    {
+      "id": "freight_scale_1",
+      "name": "Freight Scale",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "flickering_display"
+      },
+      "states": {}
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Rolling Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "bent_handle"
+      },
+      "states": {}
+    },
+    {
+      "id": "test_booklet_pallet_1",
+      "name": "Sealed Test Booklet Pallet",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.5
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "material": "wood",
+        "label": "K-PREP Gr. 3-5 – DO NOT OPEN BEFORE MAY 21"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mismatched_shipment_1",
+      "name": "Mismatched Shipment Box",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "cardboard",
+        "label": "EXPLORE Test Booklets",
+        "condition": "torn_label"
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Handheld Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_2",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "condition": "low_battery",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "empty_plastic_bins_1",
+      "name": "Empty Plastic Bin",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "label": "RETURN TO WAREHOUSE 12",
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Delivery Manifests",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_2",
+      "properties": {
+        "weight": 0.3,
+        "material": "wood",
+        "condition": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "received_stamp_1",
+      "name": "'RECEIVED' Stamp and Inkpad",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "rubber",
+        "condition": "drying_ink"
+      },
+      "states": {}
+    },
+    {
+      "id": "osha_poster_1",
+      "name": "Faded OSHA Poster",
+      "type": "ITEM",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "hard_hat_1",
+      "name": "Dusty Hard Hat",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_2",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "condition": "unused"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cooler_1",
+      "name": "Half-empty Water Cooler",
+      "type": "FURNITURE",
+      "location_id": "in:receiving_inventory_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "condition": "low_water"
+      },
+      "states": {}
+    },
+    {
+      "id": "keypad_door_1",
+      "name": "Heavy-duty Keypad-locked Door",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.2,
+          2.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel",
+        "display": "ENTER 6-DIGIT CODE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "storage_cabinet_1",
+      "name": "Climate-controlled Storage Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "glass_steel",
+        "temperature": 18.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "act_test_booklets_1",
+      "name": "ACT Test Booklets",
+      "type": "ITEM",
+      "location_id": "in:storage_cabinet_1",
+      "properties": {
+        "weight": 10.0,
+        "material": "paper",
+        "label": "SECURE",
+        "condition": "tamper_evident"
+      },
+      "states": {}
+    },
+    {
+      "id": "master_keycard_1",
+      "name": "Master Keycard",
+      "type": "ITEM",
+      "location_id": "on:storage_cabinet_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "label": "CUSTODIAN – EMERGENCY ACCESS ONLY"
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_test_batches_1",
+      "name": "Expired Test Batches",
+      "type": "ITEM",
+      "location_id": "in:storage_cabinet_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "paper",
+        "label": "VOID – SHRED AFTER 6/1"
+      },
+      "states": {
+        "is_shredded": false
+      }
+    },
+    {
+      "id": "dehumidifier_1",
+      "name": "Dehumidifier",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "grinding_noise"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_lockbox_1",
+      "name": "Spare Lockbox",
+      "type": "ITEM",
+      "location_id": "on:storage_cabinet_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "combination": "0-0-0"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard with Old Inventory Counts",
+      "type": "FURNITURE",
+      "location_id": "in:secure_storage_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "wood",
+        "condition": "partially_erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "long_table_1",
+      "name": "Long Sorting Table",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_packing_station",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bin_1",
+      "name": "Labeled Bin A",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "label": "A"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bin_2",
+      "name": "Labeled Bin B",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "label": "B"
+      },
+      "states": {}
+    },
+    {
+      "id": "shrink_wrap_machine_1",
+      "name": "Shrink-wrap Machine",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_packing_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "scale_1",
+      "name": "Scale",
+      "type": "FURNITURE",
+      "location_id": "in:sorting_packing_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "condition": "accurate"
+      },
+      "states": {}
+    },
+    {
+      "id": "algebra_ii_box_1",
+      "name": "Algebra II End-of-Course Exams Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "label": "Algebra II End-of-Course Exams",
+        "condition": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "algebra_ii_box_2",
+      "name": "Algebra II End-of-Course Exams Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "label": "Algebra II End-of-Course Exams",
+        "condition": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "algebra_ii_box_3",
+      "name": "Algebra II End-of-Course Exams Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "label": "Algebra II End-of-Course Exams",
+        "condition": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "algebra_ii_box_4",
+      "name": "Algebra II End-of-Course Exams Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "label": "Algebra II End-of-Course Exams",
+        "condition": "normal"
+      },
+      "states": {}
+    },
+    {
+      "id": "algebra_ii_box_5",
+      "name": "Algebra II End-of-Course Exams Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "cardboard",
+        "label": "Algebra II End-of-Course Exams",
+        "condition": "pilot_version",
+        "sticker": "PILOT VERSION",
+        "corner": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "office_desk_1",
+      "name": "Office Desk",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "dual_monitor_1",
+      "name": "Dual Monitor Setup",
+      "type": "FURNITURE",
+      "location_id": "on:office_desk_1",
+      "properties": {
+        "size": [
+          1.2,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic_metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "filing_cabinet_1",
+      "name": "Filing Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.5
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "master_schedule_1",
+      "name": "Wall-mounted Master Schedule",
+      "type": "FURNITURE",
+      "location_id": "in:admin_office",
+      "properties": {
+        "size": [
+          2.0,
+          0.1,
+          1.5
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_log_1",
+      "name": "Digital Log",
+      "type": "ITEM",
+      "location_id": "on:office_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "content": "shipment_records"
+      },
+      "states": {}
+    },
+    {
+      "id": "physical_manifest_1",
+      "name": "Physical Manifest",
+      "type": "ITEM",
+      "location_id": "in:filing_cabinet_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "coffee_stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "it_workstation_1",
+      "name": "IT Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:it_troubleshooting_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_tools_1",
+      "name": "Diagnostic Tools",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_parts_1",
+      "name": "Spare Printer Parts",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic_metal",
+        "condition": "spare"
+      },
+      "states": {}
+    },
+    {
+      "id": "tangled_cables_1",
+      "name": "Tangled Cables",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "plastic",
+        "condition": "tangled"
+      },
+      "states": {}
+    },
+    {
+      "id": "malfunctioning_printer_1",
+      "name": "Malfunctioning Printer",
+      "type": "FURNITURE",
+      "location_id": "in:it_troubleshooting_corner",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "plastic",
+        "condition": "needs_toner"
+      },
+      "states": {}
+    },
+    {
+      "id": "kitchenette_counter_1",
+      "name": "Kitchenette Counter",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          2.0,
+          0.6,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "toaster_1",
+      "name": "Toaster",
+      "type": "FURNITURE",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.2
+        ],
+        "weight": 2.0,
+        "is_container": false,
+        "material": "metal",
+        "provides_abilities": [
+          "toast"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bread_1",
+      "name": "Bread",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "food",
+        "condition": "fresh"
+      },
+      "states": {
+        "is_toasted": false
+      }
+    },
+    {
+      "id": "shredder_1",
+      "name": "Shredder",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "plastic",
+        "provides_abilities": [
+          "shred"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_documents_1",
+      "name": "Expired Documents",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "condition": "expired"
+      },
+      "states": {
+        "is_shredded": false
+      }
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal_fabric",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torn_fabric_1",
+      "name": "Torn Fabric",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "fabric",
+        "condition": "torn"
+      },
+      "states": {
+        "is_mended": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_circuit_1",
+      "name": "Broken Circuit Board",
+      "type": "ITEM",
+      "location_id": "on:it_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "fiberglass",
+        "condition": "broken"
+      },
+      "states": {
+        "is_soldered": false
+      }
+    },
+    {
+      "id": "compressed_box_1",
+      "name": "Compressed Box",
+      "type": "ITEM",
+      "location_id": "on:industrial_shelving_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "cardboard",
+        "condition": "compressed"
+      },
+      "states": {
+        "is_compressed": true
+      }
+    },
+    {
+      "id": "puzzle_book_1",
+      "name": "Puzzle Book",
+      "type": "ITEM",
+      "location_id": "on:office_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "condition": "unsolved"
+      },
+      "states": {
+        "is_solved": false
+      }
+    },
+    {
+      "id": "glass_bottle_1",
+      "name": "Glass Bottle",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "glass",
+        "condition": "intact"
+      },
+      "states": {
+        "is_smashed": false
+      }
+    },
+    {
+      "id": "guitar_1",
+      "name": "Guitar",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 3.0,
+        "material": "wood",
+        "condition": "tuned"
+      },
+      "states": {
+        "is_tuned": true
+      }
+    },
+    {
+      "id": "watering_can_1",
+      "name": "Watering Can",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.6,
+        "material": "metal",
+        "provides_abilities": [
+          "water"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "potted_plant_1",
+      "name": "Potted Plant",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "clay_soil",
+        "condition": "dry"
+      },
+      "states": {
+        "is_watered": false
+      }
+    },
+    {
+      "id": "label_marker_1",
+      "name": "Label Marker",
+      "type": "ITEM",
+      "location_id": "on:office_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "label"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unlabeled_box_1",
+      "name": "Unlabeled Box",
+      "type": "ITEM",
+      "location_id": "on:long_table_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "cardboard",
+        "condition": "unlabeled"
+      },
+      "states": {
+        "is_labeled": false
+      }
+    },
+    {
+      "id": "pan_1",
+      "name": "Pan",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 1.0,
+        "material": "metal",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "raw_eggs_1",
+      "name": "Raw Eggs",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "food",
+        "condition": "raw"
+      },
+      "states": {
+        "is_fried": false
+      }
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "provides_abilities": [
+          "spray"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_surface_1",
+      "name": "Dusty Surface",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "wood",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_sprayed": false
+      }
+    },
+    {
+      "id": "belt_1",
+      "name": "Belt",
+      "type": "ITEM",
+      "location_id": "on:office_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "leather",
+        "condition": "unbuckled"
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "lowered_blind_1",
+      "name": "Lowered Blind",
+      "type": "ITEM",
+      "location_id": "in:admin_office",
+      "properties": {
+        "weight": 1.5,
+        "material": "fabric_metal",
+        "condition": "lowered"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "trowel_1",
+      "name": "Trowel",
+      "type": "ITEM",
+      "location_id": "on:kitchenette_counter_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cracked_wall_1",
+      "name": "Cracked Wall",
+      "type": "ITEM",
+      "location_id": "in:secure_storage_room",
+      "properties": {
+        "weight": 0.1,
+        "material": "plaster",
+        "condition": "cracked"
+      },
+      "states": {
+        "is_plastered": false
+      }
+    }
+  ],
+  "abilities": [
+    "buckle",
+    "decompress",
+    "detune_instrument",
+    "fry",
+    "label",
+    "mend",
+    "open",
+    "plaster",
+    "raise",
+    "shred",
+    "smash",
+    "solder",
+    "solve_puzzle",
+    "spray",
+    "toast",
+    "water",
+    "close"
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "task_background": "Prepare the high-security biosafety research lab for a critical experiment by organizing equipment, securing hazardous materials, and maintaining containment protocols.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.0,
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.0,
+        1.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place sample_pod_1 on workstation_bench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sample_pod_1",
+          "location_id": "on:workstation_bench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place calibration_rig_1 in secure_storage_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "calibration_rig_1",
+          "location_id": "in:secure_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the sample pod with the red LED to decontamination_washroom.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sample_pod_2",
+          "location_id": ":decontamination_washroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the biohazard pod tagged STRAIN XF-09 in cryogenic_freezer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "biohazard_pod_4",
+          "location_id": "in:cryogenic_freezer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Unstaple the stapled documents using the staple remover.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "stapled_documents_1",
+          "is_stapled": false
+        }
+      ]
+    },
+    {
+      "task_description": "Sharpen the dull knife using the sharpener.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "dull_knife_1",
+          "is_sharp": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the spectrometer installer file to install software on the spectrometer needing calibration.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "spectrometer_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Open the manual override terminal with physical lock using janitor_keyring_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "override_terminal_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the centrifuge with stuck lid.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the UV decontamination arch.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "uv_decontamination_arch_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Level-4 Biohazard Locker to decontamination_washroom.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "level4_locker_1",
+          "location_id": ":decontamination_washroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the cryogenic freezer to monitoring_control_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "cryogenic_freezer_1",
+          "location_id": ":monitoring_control_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the glovebox station with torn glove to decontamination_washroom.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "glovebox_station_1",
+          "location_id": ":decontamination_washroom"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the high-security biohazard locker to primary_lab.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "level4_locker_1",
+          "location_id": ":primary_lab"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01195"
+}

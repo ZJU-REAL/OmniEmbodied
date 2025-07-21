@@ -1,0 +1,820 @@
+{
+  "description": "A bustling fast-food franchise training kitchen with multiple zones for food preparation, cooking, assembly, and quality control, designed for high-pressure collaborative tasks.",
+  "rooms": [
+    {
+      "id": "prep_cold_storage",
+      "name": "Prep & Cold Storage",
+      "properties": {
+        "type": "refrigerated"
+      },
+      "connected_to_room_ids": [
+        "grill_fry_station"
+      ]
+    },
+    {
+      "id": "grill_fry_station",
+      "name": "Grill & Fry Station",
+      "properties": {
+        "type": "high_heat"
+      },
+      "connected_to_room_ids": [
+        "prep_cold_storage",
+        "assembly_line"
+      ]
+    },
+    {
+      "id": "assembly_line",
+      "name": "Assembly Line",
+      "properties": {
+        "type": "assembly"
+      },
+      "connected_to_room_ids": [
+        "grill_fry_station",
+        "quality_control_packaging"
+      ]
+    },
+    {
+      "id": "quality_control_packaging",
+      "name": "Quality Control & Packaging",
+      "properties": {
+        "type": "inspection"
+      },
+      "connected_to_room_ids": [
+        "assembly_line"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "prep_table_1",
+      "name": "Stainless Steel Prep Table",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "PT-2000"
+      },
+      "states": {}
+    },
+    {
+      "id": "prep_table_2",
+      "name": "Stainless Steel Prep Table with Scale",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "PT-2000S",
+        "has_scale": true
+      },
+      "states": {}
+    },
+    {
+      "id": "walk_in_freezer_1",
+      "name": "Walk-in Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 250.0,
+        "is_container": true,
+        "material": "insulated_steel",
+        "temperature": -18.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "industrial_fridge_1",
+      "name": "Industrial Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "glass_steel",
+        "temperature": 4.0,
+        "has_lighting": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "beef_patty_crate_1",
+      "name": "Bulk Beef Patty Crate",
+      "type": "ITEM",
+      "location_id": "in:walk_in_freezer_1",
+      "properties": {
+        "weight": 20.0,
+        "material": "cardboard",
+        "state": "frozen",
+        "expiration_date": "10/24"
+      },
+      "states": {
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "lettuce_bin_1",
+      "name": "Pre-cut Lettuce Bin",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 5.0,
+        "material": "plastic",
+        "fill_level": "half",
+        "liner_condition": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_weight_set_1",
+      "name": "Calibration Weight Set",
+      "type": "ITEM",
+      "location_id": "on:prep_table_2",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "includes": [
+          "500g",
+          "1kg"
+        ],
+        "provides_abilities": [
+          "weigh",
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portioning_scoop_1",
+      "name": "Portioning Scoop (50mm)",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "stainless_steel",
+        "diameter": "50mm",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "portioning_scoop_2",
+      "name": "Portioning Scoop (75mm)",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "stainless_steel",
+        "diameter": "75mm",
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "on:prep_table_2",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "ink_level": "low",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_clipboard_1",
+      "name": "Inventory Clipboard",
+      "type": "ITEM",
+      "location_id": "on:prep_table_2",
+      "properties": {
+        "weight": 0.5,
+        "material": "wood_metal",
+        "last_updated": "3_hours_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "clean_poster_1",
+      "name": "\"CLEAN AS YOU GO!\" Poster",
+      "type": "ITEM",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_locker_1",
+      "name": "Employee Locker",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.8
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "nametag_1",
+      "name": "Faded Nametag",
+      "type": "ITEM",
+      "location_id": "in:employee_locker_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "text": "TRAINEE #12",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "trash_can_1",
+      "name": "Dented Metal Trash Can",
+      "type": "FURNITURE",
+      "location_id": "in:prep_cold_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "fill_level": "half",
+        "contents": "vegetable_trimmings"
+      },
+      "states": {}
+    },
+    {
+      "id": "flat_top_grill_1",
+      "name": "Flat-top Grill",
+      "type": "FURNITURE",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": 180.0,
+        "burner_condition": "flickering"
+      },
+      "states": {
+        "is_alight": false
+      }
+    },
+    {
+      "id": "deep_fryer_1",
+      "name": "Double-basket Deep Fryer",
+      "type": "FURNITURE",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "oil_capacity": "12L",
+        "oil_condition": "darkened"
+      },
+      "states": {
+        "is_fried": false
+      }
+    },
+    {
+      "id": "fryer_oil_drum_1",
+      "name": "Fryer Oil Drum",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 25.0,
+        "material": "metal_plastic",
+        "capacity": "30L",
+        "label": "HIGH-HEAT BLEND"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "thermocouple_gun_1",
+      "name": "Thermocouple Gun",
+      "type": "ITEM",
+      "location_id": "on:flat_top_grill_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "plastic_metal",
+        "calibration_status": "out",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "burnt_patty_scrapings_1",
+      "name": "Burnt Patty Scrapings",
+      "type": "ITEM",
+      "location_id": "on:flat_top_grill_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "carbon",
+        "state": "burnt"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:deep_fryer_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "plastic",
+        "current_time": "90s"
+      },
+      "states": {
+        "is_wound_up": false
+      }
+    },
+    {
+      "id": "grease_splatter_guard_1",
+      "name": "Grease Splatter Guard",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "metal",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher (CO2)",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 5.0,
+        "material": "metal",
+        "pin_condition": "bent",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "no_loose_clothing_sign_1",
+      "name": "\"NO LOOSE CLOTHING\" Sign",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "condition": "grease_stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "order_tickets_1",
+      "name": "Stack of Wrinkled Order Tickets",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 0.05,
+        "material": "paper",
+        "condition": "wrinkled"
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_spatula_1",
+      "name": "Dull Metal Spatula",
+      "type": "ITEM",
+      "location_id": "in:grill_fry_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal",
+        "condition": "dull",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Conveyor Belt",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "material": "rubber_metal",
+        "speed": "0.2m/s"
+      },
+      "states": {}
+    },
+    {
+      "id": "condiment_dispenser_rack_1",
+      "name": "Condiment Dispenser Rack",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "size": [
+          1.0,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "condiments": [
+          "ketchup",
+          "mustard",
+          "mayo",
+          "special_sauce"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mislabeled_sauce_bottle_1",
+      "name": "Mislabeled Sauce Bottle",
+      "type": "ITEM",
+      "location_id": "in:condiment_dispenser_rack_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "label": "KETCHUP",
+        "actual_content": "BBQ_sauce"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "toasted_bun_warmer_1",
+      "name": "Toasted Bun Warmer",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 20.0,
+        "is_container": true,
+        "material": "metal",
+        "door_condition": "stuck_open"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "defective_cheese_slicer_1",
+      "name": "Defective Cheese Slicer",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 1.2,
+        "material": "metal_plastic",
+        "issue": "uneven_portions",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "fill_level": "half"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "wrapping_paper_roll_1",
+      "name": "Wrapping Paper Roll",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 0.8,
+        "material": "paper",
+        "remaining": "low"
+      },
+      "states": {
+        "is_wrapped": true
+      }
+    },
+    {
+      "id": "order_monitor_1",
+      "name": "Order Monitor",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic_metal",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "perfect_burger_poster_1",
+      "name": "\"PERFECT BURGER DIAGRAM\" Poster",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "condition": "off_center"
+      },
+      "states": {}
+    },
+    {
+      "id": "stray_pickle_slices_1",
+      "name": "Stray Pickle Slices",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 0.05,
+        "material": "vegetable",
+        "condition": "dried"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_nametag_1",
+      "name": "Broken Plastic Nametag",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "text": "TRAINEE #47",
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "heat_sealing_machine_1",
+      "name": "Heat-sealing Machine",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "material": "metal_plastic",
+        "status": "jammed"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "order_staging_shelf_1",
+      "name": "Order Staging Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "contents": "incomplete_orders"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "rejected_sandwich_1",
+      "name": "Rejected Sandwich",
+      "type": "ITEM",
+      "location_id": "in:order_staging_shelf_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "food",
+        "issue": "missing_cheese",
+        "location": "REWORK_bin"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "hidden_calibration_weight_1",
+      "name": "Hidden Calibration Weight (100g)",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "hidden_under": "napkin",
+        "provides_abilities": [
+          "weigh",
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "defective_bagging_machine_1",
+      "name": "Defective Bagging Machine",
+      "type": "FURNITURE",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "metal_plastic",
+        "issue": "stuck_in_loop"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "handheld_scanner_1",
+      "name": "Handheld Scanner",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "battery_level": "12%",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.3,
+        "material": "metal_plastic",
+        "staple_status": "out",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "cleaning_spray_1",
+      "name": "Cleaning Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.6,
+        "material": "plastic",
+        "label": "DEGREASER",
+        "provides_abilities": [
+          "moisten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_plaque_1",
+      "name": "\"EMPLOYEE OF THE MONTH\" Plaque",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 1.0,
+        "material": "wood_metal",
+        "condition": "dust_covered"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.2,
+        "material": "ceramic",
+        "fill_level": "half",
+        "stain": "ring"
+      },
+      "states": {}
+    },
+    {
+      "id": "faded_receipt_1",
+      "name": "Faded Order Receipt",
+      "type": "ITEM",
+      "location_id": "in:quality_control_packaging",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "condition": "stuck_to_floor",
+        "adhesive": "gum"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "connect",
+    "cut",
+    "ignite",
+    "measure",
+    "moisten",
+    "open",
+    "turn_on",
+    "unstaple",
+    "verify",
+    "weigh",
+    "wind_up"
+  ]
+}

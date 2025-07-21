@@ -1,0 +1,158 @@
+{
+  "task_background": "Prepare the Wellness Hub for a new round of health assessments and research activities.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place blood_sample_rack_1 in specimen_fridge_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blood_sample_rack_1",
+          "location_id": "in:specimen_fridge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place ecg_chest_strap_1 on whiteboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ecg_chest_strap_1",
+          "location_id": "on:whiteboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the unsealed blood sample rack labeled 'Participant 47 - Fasting Glucose - 06:30 AM' to the walk-in specimen fridge.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "blood_sample_rack_1",
+          "location_id": ":specimen_fridge_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Seal the vacuum-sealed organic kale using the sealing tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "kale_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock the walk-in specimen fridge using the backup keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "specimen_fridge_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the harvesting tool to harvest the unsealed organic kale with 2 days expiry.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "kale_1",
+          "is_harvested": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the capsule-filling machine missing a spring part using the welding torch.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "capsule_machine_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to deactivate the industrial-grade centrifuge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_1",
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the biometric-access smart fridge.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "smart_fridge_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydrostatic weighing tank to the health coaching office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "weighing_tank_1",
+          "location_id": ":health_coaching_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dual-belt treadmill to the nutrition lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "treadmill_1",
+          "location_id": ":nutrition_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the locked walk-in specimen fridge to the fitness bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_fridge_1",
+          "location_id": ":fitness_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the 3D motion-capture rig with 8 cameras to the meal prep station.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "motion_capture_rig_1",
+          "location_id": ":meal_prep_station"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01058"
+}

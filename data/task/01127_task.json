@@ -1,0 +1,118 @@
+{
+  "task_background": "Prepare the Financial Compliance Laboratory for an external audit by organizing equipment, securing documents, and maintaining facilities.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 45.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 45.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the USB Drive (SEC_Risk_Assessment_2023) on the conference table.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": "on:conference_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the LED Screen in the Main Analysis Hub.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "led_screen_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the USB drive with a chipped corner to the Secure Document Vault.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_1",
+          "location_id": ":secure_document_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the white-labeled USB drive on the Forensic Accounting Station.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "usb_drive_2",
+          "location_id": "on:forensic_accounting_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the leftover lunchbox using scissors.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "leftover_lunchbox_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the accounting textbook to retrieve the key and open the locked safe.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "locked_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Drain the coffee machine using the colander to prepare for refill.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_machine_1",
+          "is_drained": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the walk-in safe door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "safe_door_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the floor-to-ceiling filing cabinet to the Main Analysis Hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "location_id": ":main_analysis_hub"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01127"
+}

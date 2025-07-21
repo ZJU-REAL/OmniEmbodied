@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the bistro for the health inspection and dinner rush by cleaning, repairing, and organizing.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place health_inspection_clipboard_1 on manager_desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "health_inspection_clipboard_1",
+          "location_id": "on:manager_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place reservation_logs_1 on hostess_stand_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "reservation_logs_1",
+          "location_id": "on:hostess_stand_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red spice jar that is half-empty on prep_table_island_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spice_jar_1",
+          "location_id": "on:prep_table_island_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black spice jar labeled CUMIN on bar_counter_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spice_jar_5",
+          "location_id": "on:bar_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Dust antique_chandelier_1 using the dusting cloth.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "antique_chandelier_1",
+          "is_dusted": false
+        }
+      ]
+    },
+    {
+      "task_description": "Vacuum walk_in_refrigerator_1 using the vacuum cleaner.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "walk_in_refrigerator_1",
+          "is_vacuumed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to write on the health inspection clipboard that is partially filled.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "health_inspection_clipboard_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the knife set to slice the red plastic meat tray in the walk-in refrigerator.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "unlabeled_meat_tray_1",
+          "is_sliced": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open walk_in_refrigerator_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_refrigerator_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open service_cart_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "service_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move industrial_gas_range_1 to storage_prep_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_gas_range_1",
+          "location_id": ":storage_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Move walk_in_refrigerator_1 to storage_prep_room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "walk_in_refrigerator_1",
+          "location_id": ":storage_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Plug in digital_scale_1 and move industrial_gas_range_1 to storage_prep_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "is_dusted": false
+        },
+        {
+          "id": "industrial_gas_range_1",
+          "location_id": "in:storage_prep_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Dust manager_desk_1 and move walk_in_refrigerator_1 to storage_prep_room.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "manager_desk_1",
+          "is_dusted": false
+        },
+        {
+          "id": "walk_in_refrigerator_1",
+          "location_id": ":storage_prep_room"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01320"
+}

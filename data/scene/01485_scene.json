@@ -1,0 +1,988 @@
+{
+  "description": "A bustling 3D printing workshop filled with industrial equipment, half-finished prototypes, and scattered tools, demanding multi-agent coordination for operation and problem-solving.",
+  "rooms": [
+    {
+      "id": "main_printing_bay",
+      "name": "Main Printing Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "assembly_station",
+        "digital_design_corner",
+        "storage_material_racks",
+        "shipping_finishing_area"
+      ]
+    },
+    {
+      "id": "assembly_station",
+      "name": "Assembly Station",
+      "properties": {
+        "type": "workbench"
+      },
+      "connected_to_room_ids": [
+        "main_printing_bay",
+        "storage_material_racks"
+      ]
+    },
+    {
+      "id": "digital_design_corner",
+      "name": "Digital Design Corner",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_printing_bay"
+      ]
+    },
+    {
+      "id": "storage_material_racks",
+      "name": "Storage & Material Racks",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_printing_bay",
+        "assembly_station",
+        "shipping_finishing_area"
+      ]
+    },
+    {
+      "id": "shipping_finishing_area",
+      "name": "Shipping & Finishing Area",
+      "properties": {
+        "type": "shipping"
+      },
+      "connected_to_room_ids": [
+        "main_printing_bay",
+        "storage_material_racks"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_3d_printer_1",
+      "name": "Industrial 3D Printer (Titan-XL)",
+      "type": "FURNITURE",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "Titan-XL",
+        "brand": "IndustrialPrint"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "robotic_assembly_arm_1",
+      "name": "Robotic Assembly Arm",
+      "type": "FURNITURE",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          2.2
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "aluminum",
+        "status": "ERROR: CALIBRATION REQUIRED"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_system_1",
+      "name": "Conveyor Belt System",
+      "type": "FURNITURE",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.8
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "rubber_steel",
+        "status": "jammed"
+      },
+      "states": {}
+    },
+    {
+      "id": "failed_print_job_1",
+      "name": "Failed Print Job",
+      "type": "ITEM",
+      "location_id": "in:industrial_3d_printer_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "PLA",
+        "color": "white",
+        "condition": "warped"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_1",
+      "name": "Calibration Tool (Correct)",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "grip_color": "blue",
+        "engraving": "CAL-HEX-5",
+        "condition": "greasy",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_tool_2",
+      "name": "Calibration Tool (Incorrect)",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "grip_color": "red",
+        "engraving": "CAL-HEX-4",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_stop_button_1",
+      "name": "Emergency Stop Button",
+      "type": "ITEM",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "material": "plastic_metal",
+        "is_accessible": false
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_spool_holder_1",
+      "name": "Filament Spool Holder",
+      "type": "FURNITURE",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_spool_black_1",
+      "name": "Black Filament Spool",
+      "type": "ITEM",
+      "location_id": "on:filament_spool_holder_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "material": "ABS",
+        "remaining_percentage": 45
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_spool_red_1",
+      "name": "Translucent Red Filament Spool",
+      "type": "ITEM",
+      "location_id": "on:filament_spool_holder_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "translucent_red",
+        "material": "PETG",
+        "remaining_percentage": 30
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_spool_green_1",
+      "name": "Glow-in-the-Dark Green Filament Spool",
+      "type": "ITEM",
+      "location_id": "on:filament_spool_holder_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "glow_green",
+        "material": "PLA",
+        "remaining_percentage": 60
+      },
+      "states": {}
+    },
+    {
+      "id": "cooling_fan_1",
+      "name": "Cooling Fan (Faulty)",
+      "type": "ITEM",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "CoolMaster",
+        "condition": "loose_screw"
+      },
+      "states": {
+        "is_playing": false
+      }
+    },
+    {
+      "id": "cooling_fan_2",
+      "name": "Cooling Fan (Working)",
+      "type": "ITEM",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "weight": 3.5,
+        "color": "black",
+        "brand": "CoolMaster",
+        "condition": "good"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.8,
+        "color": "multicolor",
+        "brand": "ToolPro",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pliers_1",
+      "name": "Pliers",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "brand": "ToolPro"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_sensor_1",
+      "name": "Thermal Sensor",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "brand": "TempTech",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:main_printing_bay",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "material": "paper",
+        "content": "High-Temperature Hazards"
+      },
+      "states": {}
+    },
+    {
+      "id": "steel_workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead Crane",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_station",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          2.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "steel",
+        "capacity_kg": 100
+      },
+      "states": {}
+    },
+    {
+      "id": "robot_prototype_1",
+      "name": "Robot Prototype (Ares-7)",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 12.0,
+        "color": "metallic",
+        "material": "aluminum_plastic",
+        "condition": "missing_gripper"
+      },
+      "states": {}
+    },
+    {
+      "id": "misplaced_gripper_1",
+      "name": "Misplaced Gripper",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "metallic",
+        "material": "aluminum",
+        "condition": "bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black_yellow",
+        "brand": "TorqueMaster",
+        "condition": "dead_battery",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "brand": "SolderPro",
+        "condition": "warm",
+        "provides_abilities": [
+          "melt"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_1",
+      "name": "Digital Inspection Microscope",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "brand": "MicroView",
+        "condition": "cracked_slide"
+      },
+      "states": {}
+    },
+    {
+      "id": "power_strip_1",
+      "name": "Power Strip",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "brand": "PowerSafe",
+        "condition": "overloaded"
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "old_pizza_box_1",
+      "name": "Old Pizza Box",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "cardboard",
+        "content": "wire_clippings"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:assembly_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "half-erased equations and doodle"
+      },
+      "states": {}
+    },
+    {
+      "id": "engineer_mug_1",
+      "name": "\"World's Best Engineer\" Mug",
+      "type": "ITEM",
+      "location_id": "on:steel_workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white_blue",
+        "material": "ceramic",
+        "content": "pens"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "cad_workstation_1",
+      "name": "CAD Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.7
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plastic_metal",
+        "brand": "CompuTech"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Dual Monitor",
+      "type": "ITEM",
+      "location_id": "on:cad_workstation_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "black",
+        "brand": "ViewMax"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Coffee-Stained Keyboard",
+      "type": "ITEM",
+      "location_id": "on:cad_workstation_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "KeyMaster",
+        "condition": "stained"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "maintenance_drawer_1",
+      "name": "Maintenance Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood_metal",
+        "label": "MAINTENANCE"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "shipping_manifest_stack_1",
+      "name": "Stack of Shipping Manifests",
+      "type": "ITEM",
+      "location_id": "on:cad_workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "white",
+        "material": "paper",
+        "is_container": true
+      },
+      "states": {
+        "is_stacked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "drawer_key_1",
+      "name": "Drawer Key",
+      "type": "ITEM",
+      "location_id": "in:shipping_manifest_stack_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "robotic_arm_keycard_1",
+      "name": "Robotic Arm Keycard",
+      "type": "ITEM",
+      "location_id": "in:maintenance_drawer_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white_blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "filament_rack_1",
+      "name": "Filament Rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_material_racks",
+      "properties": {
+        "size": [
+          1.8,
+          0.5,
+          2.0
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {}
+    },
+    {
+      "id": "plastic_bin_red_1",
+      "name": "Red Plastic Bin",
+      "type": "ITEM",
+      "location_id": "on:filament_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "red",
+        "material": "plastic",
+        "label": "SMALL GEARS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "plastic_bin_blue_1",
+      "name": "Blue Plastic Bin",
+      "type": "ITEM",
+      "location_id": "on:filament_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "material": "plastic",
+        "label": "SCREWS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "plastic_bin_green_1",
+      "name": "Green Plastic Bin",
+      "type": "ITEM",
+      "location_id": "on:filament_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "green",
+        "material": "plastic",
+        "label": "WIRES"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "prototype_parts_box_1",
+      "name": "Prototype Parts Box",
+      "type": "ITEM",
+      "location_id": "on:filament_rack_1",
+      "properties": {
+        "weight": 3.5,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "ARES-7 PROTOTYPE PARTS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sealing_station_1",
+      "name": "Sealing Station",
+      "type": "FURNITURE",
+      "location_id": "in:shipping_finishing_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "metal",
+        "brand": "SealPro"
+      },
+      "states": {}
+    },
+    {
+      "id": "bubble_wrap_roll_1",
+      "name": "Bubble Wrap Roll",
+      "type": "ITEM",
+      "location_id": "on:sealing_station_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "clear",
+        "material": "plastic"
+      },
+      "states": {
+        "is_insulated": false
+      }
+    },
+    {
+      "id": "cardboard_box_1",
+      "name": "Cardboard Box (Large)",
+      "type": "ITEM",
+      "location_id": "in:shipping_finishing_area",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "FRAGILE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cardboard_box_2",
+      "name": "Cardboard Box (Medium)",
+      "type": "ITEM",
+      "location_id": "in:shipping_finishing_area",
+      "properties": {
+        "weight": 0.7,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "ARES-7 PARTS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cardboard_box_3",
+      "name": "Cardboard Box (Small)",
+      "type": "ITEM",
+      "location_id": "in:shipping_finishing_area",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "TOOLS"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "packing_tape_1",
+      "name": "Packing Tape",
+      "type": "ITEM",
+      "location_id": "on:sealing_station_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "plastic",
+        "provides_abilities": [
+          "insulate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "on:sealing_station_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe",
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "brand": "BrewMaster"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:coffee_machine_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "white",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_drunk": false,
+        "is_wet": true
+      }
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive (Design Files)",
+      "type": "ITEM",
+      "location_id": "on:cad_workstation_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "blue",
+        "brand": "DataStor"
+      },
+      "states": {
+        "is_downloaded": false
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "ITEM",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "NetLink",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "puzzle_cube_1",
+      "name": "Puzzle Cube",
+      "type": "ITEM",
+      "location_id": "on:cad_workstation_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "multicolor",
+        "material": "plastic"
+      },
+      "states": {
+        "is_solved": true
+      }
+    },
+    {
+      "id": "toaster_1",
+      "name": "Toaster",
+      "type": "ITEM",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "weight": 1.5,
+        "color": "silver",
+        "brand": "ToastMaster",
+        "provides_abilities": [
+          "toast"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bread_slice_1",
+      "name": "Bread Slice",
+      "type": "ITEM",
+      "location_id": "in:toaster_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "material": "bread"
+      },
+      "states": {
+        "is_toasted": false
+      }
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "on:sealing_station_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "brown",
+        "material": "wood_bristle",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_can_1",
+      "name": "Paint Can (Red)",
+      "type": "ITEM",
+      "location_id": "on:sealing_station_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "material": "metal"
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "green",
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "office_plant_1",
+      "name": "Office Plant",
+      "type": "ITEM",
+      "location_id": "in:digital_design_corner",
+      "properties": {
+        "weight": 3.0,
+        "color": "green",
+        "material": "plant"
+      },
+      "states": {
+        "is_pruned": false
+      }
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "close",
+    "disarm_alarm",
+    "download",
+    "drink",
+    "dry",
+    "insulate",
+    "melt",
+    "open",
+    "paint",
+    "play",
+    "prune",
+    "reset_puzzle",
+    "toast",
+    "turn_on",
+    "unscrew",
+    "unstack",
+    "wipe"
+  ]
+}

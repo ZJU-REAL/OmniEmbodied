@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the greenhouse for a new series of plant growth experiments.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 40.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place plant_tray_1 on workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "plant_tray_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on irrigation_control_panel_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "irrigation_control_panel_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Rinse the spray bottle containing nutrient solution.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "spray_bottle_1",
+          "is_rinsed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Pour from the nutrient solution bottle with the blue cap.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "nutrient_solution_x_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the malfunctioning sensor node.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sensor_node_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Rinse the cleaning rag.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cleaning_rag_1",
+          "is_rinsed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the adjustable wrench to repair the only sensor node that is malfunctioning and has a red LED.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sensor_node_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Pour from the nutrient solution bottle that is half empty and has a blue cap.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "nutrient_solution_x_1",
+          "is_poured": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the soil mixer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soil_mixer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the refrigerated seed bank.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_bank_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydroponic tank to the outdoor prep area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_tank_1",
+          "location_id": ":outdoor_prep_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated seed bank to the observation station.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_bank_1",
+          "location_id": ":observation_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerated seed bank to the observation station and close it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "seed_bank_1",
+          "location_id": ":observation_station"
+        },
+        {
+          "id": "seed_bank_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hydroponic grow rack to the outdoor prep area and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydroponic_grow_rack_1",
+          "location_id": ":outdoor_prep_area"
+        },
+        {
+          "id": "hydroponic_grow_rack_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01260"
+}

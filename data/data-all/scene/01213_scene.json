@@ -1,0 +1,618 @@
+{
+  "description": "A meticulously organized kosher catering kitchen and dining preparation area, designed for high-stakes meal preparation under strict dietary laws. The space is divided into dairy and meat stations, with separate utensils and equipment, and features a transition airlock for food inspection before serving.",
+  "rooms": [
+    {
+      "id": "main_kitchen",
+      "name": "Main Kitchen",
+      "properties": {
+        "type": "industrial_kitchen",
+        "section": "fleishig"
+      },
+      "connected_to_room_ids": [
+        "ingredient_prep_station"
+      ]
+    },
+    {
+      "id": "ingredient_prep_station",
+      "name": "Ingredient Prep & Blessing Station",
+      "properties": {
+        "type": "prep_area",
+        "section": "pareve"
+      },
+      "connected_to_room_ids": [
+        "main_kitchen",
+        "transition_airlock"
+      ]
+    },
+    {
+      "id": "transition_airlock",
+      "name": "Transition Airlock",
+      "properties": {
+        "type": "inspection_zone",
+        "section": "pesach"
+      },
+      "connected_to_room_ids": [
+        "ingredient_prep_station",
+        "dining_hall_setup"
+      ]
+    },
+    {
+      "id": "dining_hall_setup",
+      "name": "Dining Hall Setup Area",
+      "properties": {
+        "type": "serving_area",
+        "section": "pareve"
+      },
+      "connected_to_room_ids": [
+        "transition_airlock"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "industrial_meat_grill_1",
+      "name": "Industrial Meat Grill Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "temperature": 200.0,
+        "noise_level": 60
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "dairy_prep_table_1",
+      "name": "Dairy Prep Table",
+      "type": "FURNITURE",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "marble",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "triple_sink_1",
+      "name": "Triple-Sink Kashering Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          0.5
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "labels": [
+          "Scrub",
+          "Rinse",
+          "Boil"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "meat_spice_rack_1",
+      "name": "Sealed Meat Spice Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "coriander_jar_1",
+      "name": "Coriander Jar",
+      "type": "ITEM",
+      "location_id": "in:meat_spice_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "label": "CORIANDER – CERTIFIED KOSHER 5784",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "cumin_jar_1",
+      "name": "Cumin Jar",
+      "type": "ITEM",
+      "location_id": "in:meat_spice_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "label": "CUMIN",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "paprika_jar_1",
+      "name": "Paprika Jar",
+      "type": "ITEM",
+      "location_id": "in:meat_spice_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "label": "PAPRIKA",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "dairy_blender_1",
+      "name": "Dairy Blender",
+      "type": "ITEM",
+      "location_id": "on:dairy_prep_table_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "white",
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {
+        "is_assembled": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "rubber_mallet_1",
+      "name": "Rubber Mallet",
+      "type": "ITEM",
+      "location_id": "in:dairy_prep_table_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "material": "rubber",
+        "provides_abilities": [
+          "assemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "blessing_log_clipboard_1",
+      "name": "Blessing Log Clipboard",
+      "type": "ITEM",
+      "location_id": "on:dairy_prep_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wood",
+        "last_entry": "3:14 PM – Ha’adama on carrots – Mashgiach Levi"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:dairy_prep_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "material": "plastic"
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "kosher_salt_dispenser_1",
+      "name": "Kosher Salt Dispenser",
+      "type": "ITEM",
+      "location_id": "on:dairy_prep_table_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "silver",
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "steam_table_tray_1",
+      "name": "Steam Table Tray",
+      "type": "ITEM",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.1
+        ],
+        "weight": 3.0,
+        "color": "silver",
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_hot": true
+      }
+    },
+    {
+      "id": "blessing_table_1",
+      "name": "Blessing Table",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "oak",
+        "silver_strip": "loosened"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "produce_rinse_sink_1",
+      "name": "Produce Rinsing Sink",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "faucet": "motion_activated"
+      },
+      "states": {}
+    },
+    {
+      "id": "pomegranate_crate_1",
+      "name": "Pomegranate Crate",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": "pomegranates",
+        "bruised": true
+      },
+      "states": {}
+    },
+    {
+      "id": "fig_crate_1",
+      "name": "Fig Crate",
+      "type": "FURNITURE",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "wood",
+        "contents": "figs",
+        "moldy": true
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "on:blessing_table_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "plastic",
+        "max_weight": 5.0,
+        "precision": 1.0,
+        "mode": "TARE"
+      },
+      "states": {
+        "is_calibrated": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Small Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:blessing_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "calibrate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cheesecloth_stack_1",
+      "name": "Stack of Cheesecloth Filters",
+      "type": "ITEM",
+      "location_id": "on:blessing_table_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "cotton",
+        "layers": 20
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "rabbinic_hotline_phone_1",
+      "name": "Rabbinic Hotline Phone",
+      "type": "ITEM",
+      "location_id": "on:blessing_table_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "material": "plastic",
+        "status": "off-hook"
+      },
+      "states": {}
+    },
+    {
+      "id": "chametz_cabinet_1",
+      "name": "Locked Chametz Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:transition_airlock",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "bracha_logbook_1",
+      "name": "Bracha Verification Logbook",
+      "type": "ITEM",
+      "location_id": "on:chametz_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "leather"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "led_countdown_timer_1",
+      "name": "LED Countdown Timer",
+      "type": "ITEM",
+      "location_id": "in:dining_hall_setup",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "material": "plastic",
+        "time_remaining": 1080
+      },
+      "states": {
+        "is_playing": true
+      }
+    },
+    {
+      "id": "blessing_status_whiteboard_1",
+      "name": "Blessing Status Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:dining_hall_setup",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "plastic",
+        "content": "Pending blessings: None"
+      },
+      "states": {}
+    },
+    {
+      "id": "serving_tray_1",
+      "name": "Large Serving Tray",
+      "type": "ITEM",
+      "location_id": "in:dining_hall_setup",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.05
+        ],
+        "weight": 12.0,
+        "color": "silver",
+        "material": "stainless_steel"
+      },
+      "states": {
+        "is_stacked": false
+      }
+    },
+    {
+      "id": "red_towel_1",
+      "name": "Red Towel",
+      "type": "ITEM",
+      "location_id": "on:dairy_prep_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "cotton"
+      },
+      "states": {
+        "is_tied": false
+      }
+    },
+    {
+      "id": "faded_kashrut_certificate_1",
+      "name": "Faded Kashrut Certificate",
+      "type": "ITEM",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "weight": 0.1,
+        "color": "yellowed",
+        "material": "paper",
+        "year": 2018
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "metal",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard",
+      "type": "FURNITURE",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "wood",
+        "message": "REMEMBER: NO GRAPES FROM UNCERTIFIED VINEYARDS!"
+      },
+      "states": {}
+    },
+    {
+      "id": "dented_metal_tray_1",
+      "name": "Dented Metal Tray",
+      "type": "ITEM",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "metal",
+        "condition": "dented",
+        "stain": "tomato_sauce"
+      },
+      "states": {}
+    },
+    {
+      "id": "peeling_brakha_poster_1",
+      "name": "Peeling Brakha Guide Poster",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "faded",
+        "material": "paper",
+        "language": "hebrew"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "dried_etrog_1",
+      "name": "Dried Etrog in Glass Case",
+      "type": "ITEM",
+      "location_id": "in:ingredient_prep_station",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "glass",
+        "origin": "sukkot"
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Liturgical Music Radio",
+      "type": "ITEM",
+      "location_id": "in:main_kitchen",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "wood"
+      },
+      "states": {
+        "is_playing": true,
+        "is_muted": false
+      }
+    }
+  ],
+  "abilities": [
+    "assemble",
+    "calibrate",
+    "mute",
+    "open",
+    "stack",
+    "stop_playback",
+    "tie",
+    "unstaple",
+    "unstack",
+    "close"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "task_background": "Prepare the computer repair lab for emergency data recovery and system restoration operations.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 3,
+      "max_weight": 40.0,
+      "max_size": 1.0
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 3,
+      "max_weight": 40.0,
+      "max_size": 1.0
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place samsung_ssd_1 on industrial_shelving_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "samsung_ssd_1",
+          "location_id": "on:industrial_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on magnifying_lamp_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "magnifying_lamp_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the SSD with 1TB capacity on the industrial shelving.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "samsung_ssd_1",
+          "location_id": "on:industrial_shelving_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Install sas_cable_1 into the server.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sas_cable_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Install spare_drive_caddies_1 into the server rack.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spare_drive_caddies_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the precision screwdriver set with 10 bits to install the Samsung SSD with 1TB capacity.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "samsung_ssd_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the flathead screwdriver to install the WD Blue SSD with UUID b61fcae3-... into storage.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wd_blue_ssd_1",
+          "is_installed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the Dell PowerEdge R740 server and turn on the KVM monitor simultaneously.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dell_poweredge_r740_1",
+          "is_on": true
+        },
+        {
+          "id": "kvm_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the industrial shelving and server rack at the same time.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_shelving_1",
+          "is_open": true
+        },
+        {
+          "id": "server_rack_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the Dell PowerEdge R740 server to the main workbench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dell_poweredge_r740_1",
+          "location_id": ":main_workbench"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the rolling ladder to the server cluster corner.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_ladder_1",
+          "location_id": ":server_cluster_corner"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the rolling ladder to the server cluster corner and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "rolling_ladder_1",
+          "location_id": ":server_cluster_corner"
+        },
+        {
+          "id": "rolling_ladder_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01186"
+}

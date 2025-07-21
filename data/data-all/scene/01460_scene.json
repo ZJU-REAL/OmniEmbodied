@@ -1,0 +1,612 @@
+{
+  "description": "A high-tech Golf Biomechanics Research Lab & Training Facility combining motion capture technology, mechanical prototyping tools, and athlete training equipment",
+  "rooms": [
+    {
+      "id": "motion_capture_studio",
+      "name": "Motion-Capture Studio",
+      "properties": {
+        "type": "studio"
+      },
+      "connected_to_room_ids": [
+        "biomechanics_workstation",
+        "prototyping_workshop"
+      ]
+    },
+    {
+      "id": "biomechanics_workstation",
+      "name": "Biomechanics Workstation",
+      "properties": {
+        "type": "lab"
+      },
+      "connected_to_room_ids": [
+        "motion_capture_studio",
+        "athlete_prep_zone"
+      ]
+    },
+    {
+      "id": "prototyping_workshop",
+      "name": "Prototyping Workshop",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "motion_capture_studio",
+        "data_server_room"
+      ]
+    },
+    {
+      "id": "athlete_prep_zone",
+      "name": "Athlete Prep Zone",
+      "properties": {
+        "type": "training"
+      },
+      "connected_to_room_ids": [
+        "biomechanics_workstation"
+      ]
+    },
+    {
+      "id": "data_server_room",
+      "name": "Data Server Room",
+      "properties": {
+        "type": "server"
+      },
+      "connected_to_room_ids": [
+        "prototyping_workshop"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "motion_capture_rig_1",
+      "name": "Motion-Capture Rig",
+      "type": "FURNITURE",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "size": [
+          10.0,
+          10.0,
+          3.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "model": "Vicon Vero"
+      },
+      "states": {}
+    },
+    {
+      "id": "vicon_camera_1",
+      "name": "Vicon Vero Camera",
+      "type": "ITEM",
+      "location_id": "on:motion_capture_rig_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "status": "needs_calibration",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "vicon_camera_2",
+      "name": "Vicon Vero Camera",
+      "type": "ITEM",
+      "location_id": "on:motion_capture_rig_1",
+      "properties": {
+        "weight": 15.0,
+        "color": "black",
+        "status": "needs_calibration",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "calibration_wand_1",
+      "name": "Calibration Wand",
+      "type": "ITEM",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "weight": 2.5,
+        "length": "1.5m",
+        "material": "aluminum",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "force_sensitive_mat_1",
+      "name": "Force-Sensitive Mat",
+      "type": "FURNITURE",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "size": [
+          2.0,
+          3.0,
+          0.05
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "material": "rubber",
+        "status": "rolled_up"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": 4,
+        "emergency_stop": true
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "ultrasonic_cleaner_1",
+      "name": "Ultrasonic Cleaner",
+      "type": "FURNITURE",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "liquid_color": "blue",
+        "status": "on"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "microfiber_towel_1",
+      "name": "Microfiber Towel",
+      "type": "ITEM",
+      "location_id": "on:ultrasonic_cleaner_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "stain": "grip_solvent",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "marker_tray_1",
+      "name": "Marker Tray",
+      "type": "FURNITURE",
+      "location_id": "in:motion_capture_studio",
+      "properties": {
+        "size": [
+          0.3,
+          0.4,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": true,
+        "contents": "retroreflective_spheres",
+        "spillage": true
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "swing_projector_1",
+      "name": "3D Swing Projector",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.3
+        ],
+        "weight": 25.0,
+        "alignment": "5_degrees_off",
+        "requires_calibration": true
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "lab_stool_1",
+      "name": "Hydraulic Lab Stool",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.8
+        ],
+        "weight": 15.0,
+        "leak": "hydraulic_fluid",
+        "stability": "wobbly"
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_sleeve_1",
+      "name": "TorqueSleeve Prototype",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "weight": 0.8,
+        "connection": "usb_disconnected",
+        "status": "needs_recalibration",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "cleanliness_alert": "3_days_ago",
+        "carafe_status": "half_full_cold"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "carbon_fiber_cutter_1",
+      "name": "Carbon-Fiber Cutter",
+      "type": "FURNITURE",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "size": [
+          3.0,
+          1.0,
+          1.5
+        ],
+        "weight": 80.0,
+        "alignment": "sensitive",
+        "requires_two_people": true
+      },
+      "states": {}
+    },
+    {
+      "id": "resin_clubhead_1",
+      "name": "Resin Clubhead Prototype",
+      "type": "ITEM",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "weight": 0.5,
+        "defect": "hairline_crack",
+        "requires_uv_inspection": true
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "uv_light_1",
+      "name": "UV Inspection Light",
+      "type": "ITEM",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "weight": 1.2,
+        "battery_status": "full",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "gpu_rack_1",
+      "name": "GPU Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 100.0,
+        "warning_sign": "do_not_touch",
+        "requires_power_cycle": true
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "resistance_band_1",
+      "name": "Adjustable Resistance Band",
+      "type": "ITEM",
+      "location_id": "in:athlete_prep_zone",
+      "properties": {
+        "weight": 0.7,
+        "tension": "medium",
+        "color": "green",
+        "provides_abilities": [
+          "buckle"
+        ]
+      },
+      "states": {
+        "is_buckled": false
+      }
+    },
+    {
+      "id": "calibration_remote_1",
+      "name": "Projector Calibration Remote",
+      "type": "ITEM",
+      "location_id": "in:athlete_prep_zone",
+      "properties": {
+        "weight": 0.3,
+        "battery": "low",
+        "buried_under": "workout_towels",
+        "provides_abilities": [
+          "verify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "weight": 0.6,
+        "temperature": "adjustable",
+        "status": "cool",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "circuit_board_1",
+      "name": "Prototype Circuit Board",
+      "type": "ITEM",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "weight": 0.2,
+        "connections": "incomplete",
+        "requires_soldering": true
+      },
+      "states": {
+        "is_soldered": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Precision Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "weight": 0.1,
+        "bit_type": "phillips",
+        "magnetic": true,
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_mount_1",
+      "name": "Camera Mount Bracket",
+      "type": "ITEM",
+      "location_id": "in:prototyping_workshop",
+      "properties": {
+        "weight": 1.8,
+        "screws": 4,
+        "requires_adjustment": true
+      },
+      "states": {
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "server_rack_key_1",
+      "name": "Server Rack Key",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "weight": 0.05,
+        "tag": "rack_access",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_cabinet_1",
+      "name": "Locked Equipment Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "contents": "sensitive_equipment"
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Research Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          1.8,
+          1.2,
+          0.05
+        ],
+        "weight": 30.0,
+        "content": "kinematic_equations",
+        "markers": 3
+      },
+      "states": {}
+    },
+    {
+      "id": "trophy_case_1",
+      "name": "Trophy Display Case",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          1.5,
+          0.4,
+          1.0
+        ],
+        "weight": 65.0,
+        "glass_condition": "cracked",
+        "dust_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "engineer_mug_1",
+      "name": "\"World's Okayest Engineer\" Mug",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "weight": 0.3,
+        "contents": "mold",
+        "humor_level": "self-deprecating",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {
+        "is_served": false
+      }
+    },
+    {
+      "id": "sensorized_glove_1",
+      "name": "Sensorized Golf Glove",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "weight": 0.25,
+        "size": "large",
+        "firmware": "outdated",
+        "identifier": "no_sticker"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "sensorized_glove_2",
+      "name": "Sensorized Golf Glove",
+      "type": "ITEM",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "weight": 0.25,
+        "size": "medium",
+        "firmware": "correct",
+        "identifier": "green_sticker_under_cuff"
+      },
+      "states": {
+        "is_verified": false
+      }
+    },
+    {
+      "id": "broken_clock_1",
+      "name": "Malfunctioning Wall Clock",
+      "type": "FURNITURE",
+      "location_id": "in:data_server_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 2.0,
+        "timekeeping": "random",
+        "sound": "masking_harddrive_noise"
+      },
+      "states": {}
+    },
+    {
+      "id": "fake_plant_1",
+      "name": "Motion-Sensing Fake Plant",
+      "type": "FURNITURE",
+      "location_id": "in:biomechanics_workstation",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.2
+        ],
+        "weight": 4.5,
+        "sensor": "active",
+        "beep_volume": "medium"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "buckle",
+    "close",
+    "open",
+    "serve",
+    "solder",
+    "uncover",
+    "unlock",
+    "unscrew",
+    "verify",
+    "wipe"
+  ]
+}

@@ -70,43 +70,61 @@ class ScenarioSelector:
         获取所有可用场景
 
         Args:
-            config: 配置字典，必须包含data_dir
+            config: 配置字典，使用新的数据集配置
 
         Raises:
-            KeyError: 配置中缺少data_dir
+            KeyError: 配置中缺少数据集配置
             FileNotFoundError: 场景目录不存在
         """
-        # 必须有data_dir配置
-        if 'data_dir' not in config:
-            raise KeyError("配置中缺少必需的 'data_dir' 设置")
+        # 使用新的数据集配置系统
+        from config.config_manager import get_config_manager
 
-        data_dir = config['data_dir']
+        # 获取配置管理器
+        config_manager = get_config_manager()
 
-        # 转换为绝对路径
-        if not os.path.isabs(data_dir):
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(current_dir)  # evaluation -> OmniEmbodied
-            data_dir = os.path.join(project_root, data_dir)
+        # 获取当前使用的数据集
+        dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
 
-        scene_dir = os.path.join(data_dir, 'scene')
+        # 获取场景目录
+        try:
+            # 假设config中有config_file信息，如果没有则使用默认配置
+            config_file = getattr(config, 'config_file', 'centralized_config')
+            if isinstance(config, dict) and 'config_file' in config:
+                config_file = config['config_file']
+            elif hasattr(config_manager, 'current_config_name'):
+                config_file = config_manager.current_config_name
+            else:
+                config_file = 'centralized_config'
+
+            scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
+        except Exception as e:
+            logger.warning(f"无法使用新配置系统获取场景目录: {e}")
+            # 回退到旧方式
+            data_dir = config.get('data_dir', 'data')
+            if not os.path.isabs(data_dir):
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                project_root = os.path.dirname(current_dir)
+                data_dir = os.path.join(project_root, data_dir)
+            scene_dir = os.path.join(data_dir, 'scene')
+
         # 严格验证场景目录存在
         if not os.path.exists(scene_dir):
             raise FileNotFoundError(f"场景目录不存在: {scene_dir}")
-        
+
         # 查找所有场景文件
         scene_files = glob.glob(os.path.join(scene_dir, '*.json'))
         scenario_ids = []
-        
+
         for scene_file in scene_files:
             # 从文件名提取场景ID
             filename = os.path.basename(scene_file)
             if filename.endswith('_scene.json'):
                 scenario_id = filename[:-11]  # 移除'_scene.json'后缀
                 scenario_ids.append(scenario_id)
-        
+
         if not scenario_ids:
             raise RuntimeError(f"场景目录中没有找到任何场景文件: {scene_dir}")
-        
+
         # 排序并返回
         scenario_ids.sort()
         logger.info(f"找到 {len(scenario_ids)} 个场景: {scenario_ids[:5]}{'...' if len(scenario_ids) > 5 else ''}")
@@ -150,14 +168,30 @@ class ScenarioSelector:
         """验证场景ID的有效性"""
         validated_scenarios = []
 
-        # 从配置获取数据目录
-        data_dir = config.get('data_dir', 'data')
-        if not os.path.isabs(data_dir):
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(current_dir)
-            data_dir = os.path.join(project_root, data_dir)
+        # 使用新的数据集配置系统
+        from config.config_manager import get_config_manager
 
-        scene_dir = os.path.join(data_dir, 'scene')
+        try:
+            config_manager = get_config_manager()
+            dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
+
+            # 获取配置文件名
+            config_file = getattr(config, 'config_file', 'centralized_config')
+            if isinstance(config, dict) and 'config_file' in config:
+                config_file = config['config_file']
+            else:
+                config_file = 'centralized_config'
+
+            scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
+        except Exception as e:
+            logger.warning(f"无法使用新配置系统获取场景目录: {e}")
+            # 回退到旧方式
+            data_dir = config.get('data_dir', 'data')
+            if not os.path.isabs(data_dir):
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                project_root = os.path.dirname(current_dir)
+                data_dir = os.path.join(project_root, data_dir)
+            scene_dir = os.path.join(data_dir, 'scene')
 
         for scenario_id in scenario_list:
             scene_file = os.path.join(scene_dir, f'{scenario_id}_scene.json')
@@ -204,14 +238,30 @@ class ScenarioSelector:
         total_tasks_before = 0
         total_tasks_after = 0
 
-        # 从配置获取数据目录
-        data_dir = config.get('data_dir', 'data')
-        if not os.path.isabs(data_dir):
-            current_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(current_dir)
-            data_dir = os.path.join(project_root, data_dir)
+        # 使用新的数据集配置系统获取任务目录
+        from config.config_manager import get_config_manager
 
-        task_dir = os.path.join(data_dir, 'task')
+        try:
+            config_manager = get_config_manager()
+            dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
+
+            # 获取配置文件名
+            config_file = getattr(config, 'config_file', 'centralized_config')
+            if isinstance(config, dict) and 'config_file' in config:
+                config_file = config['config_file']
+            else:
+                config_file = 'centralized_config'
+
+            task_dir = config_manager.get_task_dir(config_file, dataset_name)
+        except Exception as e:
+            logger.warning(f"无法使用新配置系统获取任务目录: {e}")
+            # 回退到旧方式
+            data_dir = config.get('data_dir', 'data')
+            if not os.path.isabs(data_dir):
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                project_root = os.path.dirname(current_dir)
+                data_dir = os.path.join(project_root, data_dir)
+            task_dir = os.path.join(data_dir, 'task')
 
         for scenario_id in scenarios:
             try:

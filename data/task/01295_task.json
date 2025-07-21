@@ -1,0 +1,184 @@
+{
+  "task_background": "Prepare the tech support workshop for daily operations by organizing tools, repairing devices, and setting up workstations.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place sticky_note_1 on workbench_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "sticky_note_1",
+          "location_id": "on:workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on soldering_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "soldering_station_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the disassembled Logitech mouse in the parts storage room.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "mx700_mouse_1",
+          "location_id": "in:parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the employee of the month plaque from 2018 on the customer counter.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "employee_plaque_1",
+          "location_id": "on:customer_counter_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken USB hub test rig.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "usb_hub_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the oscilloscope using the replacement probe.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "oscilloscope_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the partially dismantled Logitech keyboard.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "g915_keyboard_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the external hard drive that is making a clicking noise using the repair kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "external_hdd_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the soldering station and the magnifying lamp simultaneously.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "soldering_station_1",
+          "is_on": true
+        },
+        {
+          "id": "magnifying_lamp_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to open the bin of mouse wheels and the bin of microswitches at the same time.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bin_mouse_wheels_1",
+          "is_open": true
+        },
+        {
+          "id": "bin_microswitches_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel workbench to the customer drop-off area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "workbench_1",
+          "location_id": ":customer_dropoff"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the industrial shelving unit to the main diagnostic bench.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": ":main_diagnostic_bench"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the heavy mobile cart that has functional wheels to the firmware station and open it to access the tools.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mobile_cart_1",
+          "location_id": ":firmware_station"
+        },
+        {
+          "id": "mobile_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial shelving unit that has a warped middle shelf to the customer drop-off area and place the employee plaque on top of it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "shelving_unit_1",
+          "location_id": "on:customer_dropoff"
+        },
+        {
+          "id": "employee_plaque_1",
+          "location_id": "on:shelving_unit_1"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01295"
+}

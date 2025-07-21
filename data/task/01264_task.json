@@ -1,0 +1,176 @@
+{
+  "task_background": "Extract and secure all whistleblower evidence from the clandestine corporate lab before the authorities arrive.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 15.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 15.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the black_box_1 on the desk_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "black_box_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the security_keycard_1 in the decryption_workstation.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "security_keycard_1",
+          "location_id": "in:decryption_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the heaviest, black item on the server_rack_1 and place it in the decryption_workstation.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "black_box_1",
+          "location_id": ":decryption_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a green LED and place it on the desk_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "black_box_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the screwdriver_1 to open the tampered_server_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tampered_server_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the security_keycard_1 to lock the keycard_reader_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "keycard_reader_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a loose panel, use the screwdriver_1 to open it, and retrieve the hidden_usb_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "tampered_server_1",
+          "is_open": true
+        },
+        {
+          "id": "hidden_usb_1",
+          "location_id": ":decryption_workstation"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the only item with a scratched label, use the screwdriver_1 to scratch it, and place it on the desk_1.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "hidden_usb_1",
+          "location_id": "on:desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn off the fire_suppression_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fire_suppression_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lock the storage_locker_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "storage_locker_1",
+          "is_locked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server_rack_1 to the evidence_storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":evidence_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the desk_1 to the front_office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "desk_1",
+          "location_id": ":front_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the monitor_setup_1 that is currently off to the evidence_storage.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_setup_1",
+          "location_id": ":evidence_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the printer_1 that is recording to the shredder_1 and turn it off.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "printer_1",
+          "location_id": ":shredder_1"
+        },
+        {
+          "id": "printer_1",
+          "is_on": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01264"
+}

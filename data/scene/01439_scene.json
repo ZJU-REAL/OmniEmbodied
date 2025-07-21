@@ -1,0 +1,862 @@
+{
+  "description": "A high-tech data recovery lab where teams of technicians work to extract and reconstruct fragmented digital information from corrupted storage devices. The lab is divided into four interconnected zones: Main Recovery Floor, Cold Storage Vault, Tool & Supply Closet, and Monitoring Station.",
+  "rooms": [
+    {
+      "id": "main_recovery_floor",
+      "name": "Main Recovery Floor",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "cold_storage_vault",
+        "tool_supply_closet",
+        "monitoring_station"
+      ]
+    },
+    {
+      "id": "cold_storage_vault",
+      "name": "Cold Storage Vault",
+      "properties": {
+        "type": "storage",
+        "temperature": -10.0
+      },
+      "connected_to_room_ids": [
+        "main_recovery_floor"
+      ]
+    },
+    {
+      "id": "tool_supply_closet",
+      "name": "Tool & Supply Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_recovery_floor"
+      ]
+    },
+    {
+      "id": "monitoring_station",
+      "name": "Monitoring Station",
+      "properties": {
+        "type": "control"
+      },
+      "connected_to_room_ids": [
+        "main_recovery_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "forensic_server_rack_1",
+      "name": "Forensic Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.5,
+          2.0
+        ],
+        "weight": 500.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "SR-5000",
+        "status_led": "red"
+      },
+      "states": {
+        "is_loaded": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "adjustable_height": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "workstation_2",
+      "name": "Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "adjustable_height": true
+      },
+      "states": {}
+    },
+    {
+      "id": "workstation_3",
+      "name": "Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "adjustable_height": true
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead Crane System",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          0.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel",
+        "max_load": 1000.0
+      },
+      "states": {}
+    },
+    {
+      "id": "corrupted_hard_drive_1",
+      "name": "Corrupted Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:forensic_server_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "size": "2.5\" SSD",
+        "label": "X1892A-ERR",
+        "status": "corrupted"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "decryption_keycard_1",
+      "name": "Decryption Keycard",
+      "type": "ITEM",
+      "location_id": "in:workstation_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "rfid_enabled": true,
+        "condition": "slightly bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "fragmented_data_logbook_1",
+      "name": "Fragmented Data Logbook",
+      "type": "ITEM",
+      "location_id": "on:workstation_2",
+      "properties": {
+        "weight": 0.4,
+        "binding": "spiral-bound",
+        "missing_pages": "30-43",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "magnetic_screwdriver_set_1",
+      "name": "Magnetic Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.8,
+        "material": "neodymium-tipped",
+        "sizes": 6,
+        "case_type": "foam-lined",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_hub_1",
+      "name": "USB Hub",
+      "type": "ITEM",
+      "location_id": "on:workstation_3",
+      "properties": {
+        "weight": 0.2,
+        "ports": 4,
+        "connection_status": "loose",
+        "led_status": "flashing erratically"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_fan_1",
+      "name": "Industrial Fan",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "oscillating": true,
+        "hinge_condition": "squeaky left hinge"
+      },
+      "states": {}
+    },
+    {
+      "id": "data_loss_poster_1",
+      "name": "\"DATA LOSS = JOB LOSS\" Motivational Poster",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded, slightly peeling at the corners"
+      },
+      "states": {}
+    },
+    {
+      "id": "old_hard_drives_1",
+      "name": "Stack of Old Hard Drives",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 2.0,
+        "labels": "ARCHIVE 2015-2018",
+        "condition": "covered in dust"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Half-empty Coffee Cup",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "print": "\"WORLD'S BEST TECH\"",
+        "condition": "chipped, stained rings"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_freezer_1",
+      "name": "Industrial Freezer Unit",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "temperature": -10.0,
+        "door_condition": "glass door fogged"
+      },
+      "states": {
+        "is_open": false,
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "anti_static_workbench_1",
+      "name": "Anti-Static Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "rubber",
+        "grounded": true
+      },
+      "states": {}
+    },
+    {
+      "id": "damaged_tape_cartridge_1",
+      "name": "Damaged Tape Cartridge",
+      "type": "ITEM",
+      "location_id": "in:industrial_freezer_1",
+      "properties": {
+        "weight": 0.5,
+        "type": "LTO-6",
+        "label": "X4590_BACKUP",
+        "temperature": -10.0
+      },
+      "states": {
+        "is_frosted": true
+      }
+    },
+    {
+      "id": "thermal_gloves_1",
+      "name": "Thermal Gloves",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.3,
+        "thickness": "thick",
+        "pair_status": "one missing",
+        "provides_abilities": [
+          "defrost"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "temperature_gauge_1",
+      "name": "Temperature Gauge",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.2,
+        "type": "analog",
+        "condition": "needle slightly sticky"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_defrost_button_1",
+      "name": "Emergency Defrost Button",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "safety_flap": true
+      },
+      "states": {}
+    },
+    {
+      "id": "warning_sign_1",
+      "name": "Yellowed Warning Sign",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.1,
+        "text": "\"EXTREME COLD - NO EXPOSURE >5 MIN\"",
+        "condition": "peeling at the edges"
+      },
+      "states": {}
+    },
+    {
+      "id": "cryo_tube_rack_1",
+      "name": "Empty Cryo-Tube Rack",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_vault",
+      "properties": {
+        "weight": 0.4,
+        "material": "plastic",
+        "condition": "cracked in one corner"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_1",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "label": "scratched-off",
+        "sticker": "red \"DO NOT ERASE\""
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_2",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "label": "intact",
+        "sticker": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_3",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "label": "intact",
+        "sticker": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_4",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "label": "intact",
+        "sticker": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_5",
+      "name": "USB Drive",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.05,
+        "label": "intact",
+        "sticker": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitor_1",
+      "name": "Diagnostic Screen",
+      "type": "ITEM",
+      "location_id": "in:monitoring_station",
+      "properties": {
+        "weight": 5.0,
+        "size": "24-inch",
+        "resolution": "1920x1080",
+        "status": "active",
+        "is_container": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "monitor_2",
+      "name": "Diagnostic Screen",
+      "type": "ITEM",
+      "location_id": "in:monitoring_station",
+      "properties": {
+        "weight": 5.0,
+        "size": "24-inch",
+        "resolution": "1920x1080",
+        "status": "active"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "logbook_1",
+      "name": "Recovery Logbook",
+      "type": "ITEM",
+      "location_id": "in:monitoring_station",
+      "properties": {
+        "weight": 0.5,
+        "pages": 100,
+        "condition": "well-used"
+      },
+      "states": {}
+    },
+    {
+      "id": "key_1",
+      "name": "Drawer Key",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 0.02,
+        "material": "metal",
+        "shape": "small"
+      },
+      "states": {}
+    },
+    {
+      "id": "locked_drawer_1",
+      "name": "Locked Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:workstation_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "label": "EMERGENCY KEYS"
+      },
+      "states": {
+        "is_open": false,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "vacuum_cleaner_1",
+      "name": "Vacuum Cleaner",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 8.0,
+        "power": "1500W",
+        "cord_length": "5m",
+        "provides_abilities": [
+          "vacuum"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_floor_1",
+      "name": "Dusty Floor",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          5.0,
+          5.0,
+          0.1
+        ],
+        "weight": 0.0,
+        "is_container": false,
+        "condition": "dusty"
+      },
+      "states": {
+        "is_vacuumed": false
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 5.0,
+        "type": "ABC",
+        "pressure": "full",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "small_fire_1",
+      "name": "Small Fire",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 0.0,
+        "size": "small",
+        "intensity": "moderate"
+      },
+      "states": {
+        "is_alight": true
+      }
+    },
+    {
+      "id": "water_bottle_1",
+      "name": "Water Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 1.0,
+        "capacity": "1L",
+        "material": "plastic",
+        "provides_abilities": [
+          "water",
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "on:workstation_2",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "ink_level": "full",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unsigned_document_1",
+      "name": "Unsigned Document",
+      "type": "ITEM",
+      "location_id": "on:workstation_2",
+      "properties": {
+        "weight": 0.1,
+        "pages": 3,
+        "title": "Data Recovery Report"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "bluetooth_device_1",
+      "name": "Bluetooth Device",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.2,
+        "model": "BT-2000",
+        "status": "standby"
+      },
+      "states": {
+        "is_paired": false
+      }
+    },
+    {
+      "id": "screwed_panel_1",
+      "name": "Screwed Panel",
+      "type": "ITEM",
+      "location_id": "on:forensic_server_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "screw_count": 4
+      },
+      "states": {
+        "is_screwed_in": true
+      }
+    },
+    {
+      "id": "sharp_knife_1",
+      "name": "Sharp Knife",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.3,
+        "blade_length": "15cm",
+        "material": "stainless steel"
+      },
+      "states": {
+        "is_sharp": true
+      }
+    },
+    {
+      "id": "hard_surface_1",
+      "name": "Hard Surface",
+      "type": "FURNITURE",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.1
+        ],
+        "weight": 10.0,
+        "material": "granite",
+        "provides_abilities": [
+          "dull"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plaster_trowel_1",
+      "name": "Plaster Trowel",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.7,
+        "blade_width": "10cm",
+        "material": "steel",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unplastered_wall_1",
+      "name": "Unplastered Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          2.5
+        ],
+        "weight": 0.0,
+        "material": "brick",
+        "condition": "rough"
+      },
+      "states": {
+        "is_plastered": false
+      }
+    },
+    {
+      "id": "plant_pot_1",
+      "name": "Plant Pot",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 1.0,
+        "material": "clay",
+        "soil_type": "potting mix"
+      },
+      "states": {
+        "is_planted": false
+      }
+    },
+    {
+      "id": "seed_packet_1",
+      "name": "Seed Packet",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.1,
+        "plant_type": "succulent",
+        "quantity": "20 seeds",
+        "provides_abilities": [
+          "plant"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_container_1",
+      "name": "Sealed Container",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "contents": "unknown"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:monitoring_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "drawers": 4,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "unfiled_document_1",
+      "name": "Unfiled Document",
+      "type": "ITEM",
+      "location_id": "on:monitor_1",
+      "properties": {
+        "weight": 0.1,
+        "title": "Recovery Protocol",
+        "pages": 5
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "grinder_1",
+      "name": "Grinder",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 3.0,
+        "power": "500W",
+        "blade_material": "carbide",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "unground_coffee_1",
+      "name": "Unground Coffee",
+      "type": "ITEM",
+      "location_id": "in:tool_supply_closet",
+      "properties": {
+        "weight": 0.5,
+        "type": "arabica",
+        "form": "whole bean"
+      },
+      "states": {
+        "is_ground": false
+      }
+    },
+    {
+      "id": "pushed_box_1",
+      "name": "Pushed Box",
+      "type": "ITEM",
+      "location_id": "in:main_recovery_floor",
+      "properties": {
+        "weight": 10.0,
+        "material": "cardboard",
+        "contents": "miscellaneous"
+      },
+      "states": {
+        "is_pushed": true
+      }
+    }
+  ],
+  "abilities": [
+    "defrost",
+    "dull",
+    "extinguish",
+    "grind",
+    "open",
+    "pair",
+    "plant",
+    "plaster",
+    "pull",
+    "sign",
+    "turn_on",
+    "unload",
+    "unscrew",
+    "vacuum",
+    "water",
+    "close"
+  ]
+}

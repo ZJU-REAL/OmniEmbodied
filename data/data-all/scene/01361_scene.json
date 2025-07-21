@@ -1,0 +1,779 @@
+{
+  "description": "A Dog Training & Rehabilitation Center with specialized zones for training, medical care, and kenneling, designed for multi-agent collaboration and precise tool use.",
+  "rooms": [
+    {
+      "id": "training_room",
+      "name": "Training & Observation Room",
+      "properties": {
+        "type": "training"
+      },
+      "connected_to_room_ids": [
+        "medical_station",
+        "kennel_wing"
+      ]
+    },
+    {
+      "id": "medical_station",
+      "name": "Medical & Grooming Station",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "training_room",
+        "kennel_wing"
+      ]
+    },
+    {
+      "id": "kennel_wing",
+      "name": "Kennel & Isolation Wing",
+      "properties": {
+        "type": "kennel"
+      },
+      "connected_to_room_ids": [
+        "training_room",
+        "medical_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "training_platform_1",
+      "name": "Central Training Platform",
+      "type": "FURNITURE",
+      "location_id": "in:training_room",
+      "properties": {
+        "size": [
+          1.5,
+          2.0,
+          0.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "rubber",
+        "surface": "non-slip"
+      },
+      "states": {}
+    },
+    {
+      "id": "partition_wall_1",
+      "name": "Retractable Partition Wall",
+      "type": "FURNITURE",
+      "location_id": "in:training_room",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.5
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "material": "steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dog_treadmill_1",
+      "name": "Heavy-Duty Dog Treadmill",
+      "type": "FURNITURE",
+      "location_id": "in:training_room",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          1.2
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "max_weight": 150.0
+      },
+      "states": {
+        "is_engine_on": true
+      }
+    },
+    {
+      "id": "training_sleeve_1",
+      "name": "Bite-Resistant Training Sleeve",
+      "type": "ITEM",
+      "location_id": "on:training_platform_1",
+      "properties": {
+        "weight": 2.5,
+        "material": "kevlar",
+        "condition": "indented",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "treat_dispenser_1",
+      "name": "Remote-Controlled Treat Dispenser",
+      "type": "ITEM",
+      "location_id": "on:training_platform_1",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic",
+        "color": "red",
+        "battery_compartment": "loose"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "aggression_logbook_1",
+      "name": "Aggression Logbook",
+      "type": "ITEM",
+      "location_id": "on:training_platform_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "paper",
+        "color": "white",
+        "last_entry": "Atlas biting incidents"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "chew_toy_1",
+      "name": "Durable Chew Toy (Squeaky)",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "rubber",
+        "color": "blue",
+        "type": "squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "chew_toy_2",
+      "name": "Durable Chew Toy (Rope)",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 0.4,
+        "material": "rope",
+        "color": "red",
+        "type": "rope-based"
+      },
+      "states": {}
+    },
+    {
+      "id": "water_dispenser_1",
+      "name": "Water Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:training_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "water_level": "half-full",
+        "leak": "dripping"
+      },
+      "states": {}
+    },
+    {
+      "id": "training_pole_1",
+      "name": "Adjustable-Height Training Pole",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 5.0,
+        "material": "aluminum",
+        "color": "silver",
+        "condition": "bent"
+      },
+      "states": {}
+    },
+    {
+      "id": "exam_table_1",
+      "name": "Stainless Steel Exam Table",
+      "type": "FURNITURE",
+      "location_id": "in:medical_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          0.9
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "material": "stainless_steel",
+        "height": "stuck_mid"
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_cabinet_1",
+      "name": "Medical Supply Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:medical_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.4,
+          1.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_locked": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "grooming_tub_1",
+      "name": "Industrial Grooming Tub",
+      "type": "FURNITURE",
+      "location_id": "in:medical_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "fiberglass",
+        "drain": "clogged"
+      },
+      "states": {}
+    },
+    {
+      "id": "muzzle_1",
+      "name": "Custom-Fitted Muzzle (Atlas)",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.8,
+        "material": "leather",
+        "color": "blue",
+        "straps": "frayed",
+        "size": "XL",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "antiseptic_spray_1",
+      "name": "Antiseptic Spray Bottle",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "plastic",
+        "color": "white",
+        "label": "For Open Wounds – DO NOT MIX"
+      },
+      "states": {}
+    },
+    {
+      "id": "weight_scale_1",
+      "name": "Digital Weight Scale",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 3.0,
+        "material": "plastic",
+        "color": "white",
+        "display": "flickering"
+      },
+      "states": {
+        "is_weighed": false
+      }
+    },
+    {
+      "id": "leash_rack_1",
+      "name": "Leash Rack",
+      "type": "FURNITURE",
+      "location_id": "in:medical_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.1,
+          0.4
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "wood",
+        "leash_count": 5,
+        "condition": "one_chewed"
+      },
+      "states": {}
+    },
+    {
+      "id": "first_aid_kit_1",
+      "name": "First-Aid Kit",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 2.0,
+        "material": "plastic",
+        "color": "red",
+        "is_latched": false,
+        "gauze": "unwound"
+      },
+      "states": {
+        "is_latched": false
+      }
+    },
+    {
+      "id": "medical_forms_1",
+      "name": "Clipboard with Medical Forms",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "color": "white",
+        "is_filled": "half"
+      },
+      "states": {}
+    },
+    {
+      "id": "kennel_door_1",
+      "name": "Steel-Reinforced Kennel Door",
+      "type": "FURNITURE",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          1.5
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "steel",
+        "locks": "dual_deadbolt"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "hose_system_1",
+      "name": "Overhead Hose System",
+      "type": "FURNITURE",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "size": [
+          3.0,
+          0.2,
+          0.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "material": "rubber",
+        "nozzle": "leaking"
+      },
+      "states": {}
+    },
+    {
+      "id": "warning_tag_1",
+      "name": "Aggressive Dog Warning Tag",
+      "type": "ITEM",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "color": "red",
+        "placement": "misplaced"
+      },
+      "states": {}
+    },
+    {
+      "id": "monitoring_tablet_1",
+      "name": "Behavioral Monitoring Tablet",
+      "type": "ITEM",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "weight": 0.6,
+        "material": "plastic",
+        "color": "black",
+        "battery": 12
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rubber_mat_1",
+      "name": "Rubber Floor Mat",
+      "type": "ITEM",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "weight": 3.0,
+        "material": "rubber",
+        "color": "black",
+        "condition": "bunched"
+      },
+      "states": {}
+    },
+    {
+      "id": "kennel_blanket_1",
+      "name": "Spare Kennel Blanket",
+      "type": "ITEM",
+      "location_id": "in:kennel_wing",
+      "properties": {
+        "weight": 1.5,
+        "material": "fleece",
+        "color": "blue",
+        "fold": "uneven"
+      },
+      "states": {}
+    },
+    {
+      "id": "employee_photo_1",
+      "name": "Employee of the Month Photo",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.2,
+        "material": "paper",
+        "color": "multicolor",
+        "hidden_key": true,
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cabinet_key_1",
+      "name": "Medical Cabinet Key",
+      "type": "ITEM",
+      "location_id": "in:employee_photo_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Sturdy Broom",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 1.8,
+        "material": "wood",
+        "color": "brown",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Tire Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Medical Scissors",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.1,
+        "material": "steel",
+        "color": "silver",
+        "provides_abilities": [
+          "cut"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 0.2,
+        "material": "wood",
+        "color": "brown",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_can_1",
+      "name": "Paint Can",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 2.5,
+        "material": "metal",
+        "color": "white"
+      },
+      "states": {
+        "is_painted": false
+      }
+    },
+    {
+      "id": "scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 1.5,
+        "material": "plastic",
+        "color": "white",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "engine_stop_button_1",
+      "name": "Engine Stop Button",
+      "type": "ITEM",
+      "location_id": "on:dog_treadmill_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "color": "red",
+        "provides_abilities": [
+          "stop_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "color": "black",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_tag_1",
+      "name": "Barcode Tag",
+      "type": "ITEM",
+      "location_id": "on:muzzle_1",
+      "properties": {
+        "weight": 0.01,
+        "material": "paper",
+        "color": "white"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "pressure_check_valve_1",
+      "name": "Pressure Check Valve",
+      "type": "ITEM",
+      "location_id": "on:dog_treadmill_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {
+        "is_pressure_checked": false
+      }
+    },
+    {
+      "id": "squeeze_toy_1",
+      "name": "Squeeze Toy",
+      "type": "ITEM",
+      "location_id": "in:training_room",
+      "properties": {
+        "weight": 0.3,
+        "material": "rubber",
+        "color": "yellow"
+      },
+      "states": {
+        "is_squeezed": false
+      }
+    },
+    {
+      "id": "process_stop_button_1",
+      "name": "Process Stop Button",
+      "type": "ITEM",
+      "location_id": "on:dog_treadmill_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "color": "red",
+        "provides_abilities": [
+          "stop_process"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lock_key_1",
+      "name": "Lock Key",
+      "type": "ITEM",
+      "location_id": "in:employee_photo_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "lock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "power_cord_1",
+      "name": "Power Cord",
+      "type": "ITEM",
+      "location_id": "on:dog_treadmill_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "rubber",
+        "color": "black"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "grinder_1",
+      "name": "Coffee Grinder",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 1.2,
+        "material": "plastic",
+        "color": "black",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_beans_1",
+      "name": "Coffee Beans",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.5,
+        "material": "organic",
+        "color": "brown"
+      },
+      "states": {
+        "is_ground": false
+      }
+    },
+    {
+      "id": "serving_tray_1",
+      "name": "Serving Tray",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.8,
+        "material": "plastic",
+        "color": "white",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "frying_pan_1",
+      "name": "Frying Pan",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 1.5,
+        "material": "metal",
+        "color": "black",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pulverizer_1",
+      "name": "Pulverizer",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "color": "silver",
+        "provides_abilities": [
+          "pulverize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "medication_1",
+      "name": "Medication",
+      "type": "ITEM",
+      "location_id": "in:medical_station",
+      "properties": {
+        "weight": 0.1,
+        "material": "powder",
+        "color": "white"
+      },
+      "states": {
+        "is_pulverized": false
+      }
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "close",
+    "cut",
+    "fry",
+    "grind",
+    "lock",
+    "open",
+    "paint",
+    "pulverize",
+    "scan_barcode",
+    "serve",
+    "squeeze",
+    "stop_engine",
+    "stop_process",
+    "sweep",
+    "turn_on",
+    "unplug",
+    "weigh"
+  ]
+}

@@ -1,0 +1,699 @@
+{
+  "description": "An offshore oil rig inspection and maintenance platform with heavy machinery, collaborative workspaces, and high-risk industrial equipment.",
+  "rooms": [
+    {
+      "id": "maintenance_bay",
+      "name": "Maintenance Bay",
+      "properties": {
+        "type": "industrial_workshop"
+      },
+      "connected_to_room_ids": [
+        "control_room",
+        "outer_catwalk"
+      ]
+    },
+    {
+      "id": "control_room",
+      "name": "Control & Monitoring Room",
+      "properties": {
+        "type": "monitoring_station"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay"
+      ]
+    },
+    {
+      "id": "outer_catwalk",
+      "name": "Outer Catwalk & Storage",
+      "properties": {
+        "type": "exterior_storage"
+      },
+      "connected_to_room_ids": [
+        "maintenance_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_workbench_1",
+      "name": "Hydraulic Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          2.5,
+          1.2,
+          0.9
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "grease-stained",
+        "adjustable_clamps": true
+      },
+      "states": {}
+    },
+    {
+      "id": "gantry_crane_1",
+      "name": "Overhead Gantry Crane",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          3.5
+        ],
+        "weight": 2000.0,
+        "is_container": false,
+        "capacity": "2 tons",
+        "condition": "rusted_chain",
+        "remote_control_missing": "battery_cover"
+      },
+      "states": {}
+    },
+    {
+      "id": "parts_shelf_1",
+      "name": "Industrial Parts Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          3.0,
+          0.5,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "bolted_to_wall": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "faulty_pump_assembly_1",
+      "name": "Faulty Pump Assembly",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.8
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "leaking_fluid": "dark",
+        "diagnostic_port": "proprietary"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "seismic_sensor_kit_1",
+      "name": "Seismic Sensor Calibration Kit",
+      "type": "ITEM",
+      "location_id": "in:parts_shelf_1",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "brand": "NOC",
+        "locked": true,
+        "key_holder": "NOC_inspector"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_test_rig_1",
+      "name": "Pressure Test Rig",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "gauge_stuck": "1200psi",
+        "hissing": true
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "portable_welder_1",
+      "name": "Portable Welder",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_workbench_1",
+      "properties": {
+        "weight": 8.5,
+        "power_light": "flickering",
+        "gas_hose": "kinked",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "wheels": "squeaky",
+        "missing_tool": "14mm_wrench"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_shower_1",
+      "name": "Emergency Shower",
+      "type": "FURNITURE",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "pull_chain": "rusted",
+        "water_valve": "half-closed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "days_since_sign_1",
+      "name": "Days Since Last Incident Sign",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.5,
+        "condition": "faded",
+        "number": "peeled_off"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "World's Best Fracker Mug",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "contents": "loose_nuts_and_bolts",
+        "inscription": "World's Best Fracker"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_manuals_1",
+      "name": "Outdated Safety Manuals",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 2.0,
+        "condition": "water-damaged",
+        "pages_stuck": true
+      },
+      "states": {}
+    },
+    {
+      "id": "monitoring_console_1",
+      "name": "Central Monitoring Console",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "screens": 8,
+        "flickering_screen": true,
+        "software": "proprietary_IOC",
+        "login_status": "expired"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "noc_whiteboard_1",
+      "name": "NOC Compliance Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "marker_smudged": "red",
+        "content": "overdue_inspections"
+      },
+      "states": {}
+    },
+    {
+      "id": "sturdy_safe_1",
+      "name": "Sturdy Safe",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.8
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "bolted_to_floor": true,
+        "scanner_type": "biometric",
+        "contents": "backup_rig_schematics"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "corrupted_drive_1",
+      "name": "Corrupted Data Drive",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.1,
+        "label": "BACKUP_CRITICAL",
+        "status": "corrupted",
+        "requires": "password_recovery"
+      },
+      "states": {}
+    },
+    {
+      "id": "override_lever_1",
+      "name": "Manual Override Lever",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 2.0,
+        "condition": "rusted",
+        "label": "EMERGENCY ONLY",
+        "state": "jammed"
+      },
+      "states": {
+        "is_stuck": true
+      }
+    },
+    {
+      "id": "radio_1",
+      "name": "Radio",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 1.5,
+        "sound": "static-filled",
+        "battery_status": "low",
+        "requires": "fresh_AA_batteries"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "paper_status": "jam",
+        "toner_status": "out"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "keurig_1",
+      "name": "Keurig",
+      "type": "FURNITURE",
+      "location_id": "in:control_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "weight": 3.0,
+        "is_container": false,
+        "water_reservoir": "empty",
+        "descaling_light": "orange"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.5,
+        "time_status": "5_minutes_slow",
+        "sound": "faint_tick"
+      },
+      "states": {}
+    },
+    {
+      "id": "family_photo_1",
+      "name": "Family Photo",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.1,
+        "condition": "sun-bleached",
+        "edges": "curling"
+      },
+      "states": {}
+    },
+    {
+      "id": "hardhat_1",
+      "name": "Hardhat",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.4,
+        "condition": "dented",
+        "inscription": "Property of Rig #7"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.01,
+        "content": "CALL SUPPLIER – VALVE DEFECT",
+        "phone_number": "smudged"
+      },
+      "states": {}
+    },
+    {
+      "id": "hazmat_locker_1",
+      "name": "Hazmat Locker",
+      "type": "FURNITURE",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "padlock_code": "last_inspection_date",
+        "contents": "neutralizing_agents"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sensor_array_1",
+      "name": "Weatherproof Sensor Array",
+      "type": "FURNITURE",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "condition": "dangling_by_wires",
+        "wind_speed_indicator": "stuck"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Spill Containment Kit",
+      "type": "ITEM",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "weight": 4.0,
+        "seal": "broken",
+        "missing": "absorbent_pads"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_1",
+      "name": "Cracked Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:sensor_array_1",
+      "properties": {
+        "weight": 0.3,
+        "serial_number": "PX-8892",
+        "accuracy": "20%_low",
+        "calibration_sticker": "blue",
+        "hand_etched": "±2% ACCURACY"
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "pressure_gauge_2",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:sensor_array_1",
+      "properties": {
+        "weight": 0.3,
+        "serial_number": "XL-1234",
+        "accuracy": "±5%",
+        "calibration_sticker": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "pressure_gauge_3",
+      "name": "Pressure Gauge",
+      "type": "ITEM",
+      "location_id": "on:sensor_array_1",
+      "properties": {
+        "weight": 0.3,
+        "serial_number": "XL-5678",
+        "accuracy": "±5%",
+        "calibration_sticker": "yellow"
+      },
+      "states": {}
+    },
+    {
+      "id": "floodlight_1",
+      "name": "Floodlight",
+      "type": "FURNITURE",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.6
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "flickers_in_high_wind"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "weight": 5.0,
+        "gauge_status": "red",
+        "last_inspection": "expired"
+      },
+      "states": {}
+    },
+    {
+      "id": "birds_nest_1",
+      "name": "Bird's Nest",
+      "type": "ITEM",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "weight": 0.2,
+        "condition": "abandoned",
+        "contents": "twigs_scattered"
+      },
+      "states": {}
+    },
+    {
+      "id": "no_smoking_sticker_1",
+      "name": "No Smoking Sticker",
+      "type": "ITEM",
+      "location_id": "in:outer_catwalk",
+      "properties": {
+        "weight": 0.01,
+        "condition": "peeling",
+        "state": "half_torn_off"
+      },
+      "states": {}
+    },
+    {
+      "id": "lubricant_spray_1",
+      "name": "Lubricant Spray",
+      "type": "ITEM",
+      "location_id": "in:hazmat_locker_1",
+      "properties": {
+        "weight": 0.5,
+        "contents": "lubricant",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_wd40_1",
+      "name": "Empty WD-40 Can",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.2,
+        "contents": "empty",
+        "condition": "rusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "blue_paperweight_1",
+      "name": "Blue Glass Paperweight",
+      "type": "ITEM",
+      "location_id": "on:monitoring_console_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "material": "glass"
+      },
+      "states": {}
+    },
+    {
+      "id": "camera_1",
+      "name": "Digital Camera",
+      "type": "ITEM",
+      "location_id": "in:control_room",
+      "properties": {
+        "weight": 0.4,
+        "battery_status": "full",
+        "provides_abilities": [
+          "photograph"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Absorbent Towel",
+      "type": "ITEM",
+      "location_id": "in:maintenance_bay",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scoop_1",
+      "name": "Metal Scoop",
+      "type": "ITEM",
+      "location_id": "on:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "steel",
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:parts_shelf_1",
+      "properties": {
+        "weight": 1.0,
+        "contents": "bubble_wrap",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "welding_torch_1",
+      "name": "Welding Torch",
+      "type": "ITEM",
+      "location_id": "on:hydraulic_workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "fuel_level": "half",
+        "provides_abilities": [
+          "weld"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "dry",
+    "glue",
+    "open",
+    "pack",
+    "photograph",
+    "scoop",
+    "turn_off",
+    "weld",
+    "close"
+  ]
+}

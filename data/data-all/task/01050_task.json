@@ -1,0 +1,138 @@
+{
+  "task_background": "Prepare the border security inspection station for a high-threat level inspection by ensuring all equipment is functional, contraband is secured, and documentation is verified.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 40.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 40.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place suspicious_backpack_1 in evidence_locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "suspicious_backpack_1",
+          "location_id": "in:evidence_locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Open shipping_crate_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "shipping_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black backpack with a bulging pocket into the contraband holding area.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "suspicious_backpack_1",
+          "location_id": ":contraband_holding_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the jammed staple gun using the sealing tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "staple_gun_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the digital scale with current reading 12.3.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "digital_scale_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Sew the brown teddy bear with reseamed stitching using the sewing kit.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "flagged_teddy_bear_1",
+          "is_sewn": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the dented evidence locker #3.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_3",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dissection table to the primary inspection lane.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "location_id": ":primary_inspection_lane"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the evidence locker #1 to the break room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "evidence_locker_1",
+          "location_id": ":break_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the uncalibrated mobile cargo scanner to secondary inspection bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "cargo_scanner_1",
+          "location_id": ":secondary_inspection_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the full-body scanner with flickering screen to the holding area.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "full_body_scanner_1",
+          "location_id": ":contraband_holding_area"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01050"
+}

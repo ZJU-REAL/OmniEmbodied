@@ -1,0 +1,176 @@
+{
+  "task_background": "Prepare the vehicle emissions testing laboratory for an important audit.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place test_tag_1 on workstation_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "test_tag_1",
+          "location_id": "on:workstation_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place hard_drive_1 in locker_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "hard_drive_1",
+          "location_id": "in:locker_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the blue glass fuel sample canister labeled 'Batch #7E—High Sulfur Content' to the certification office.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fuel_sample_1",
+          "location_id": ":certification_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the black portable diagnostic scanner with low battery in the parts storage.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_scanner_1",
+          "location_id": "in:parts_tools_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the crane remote control.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "remote_control_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Unwrap the sandwich in the refrigerator.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "wrapped_sandwich_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the charger to recharge the black portable diagnostic scanner that has low battery.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_scanner_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the scissors to unwrap the white plastic wrapped sandwich in the refrigerator.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "wrapped_sandwich_1",
+          "is_wrapped": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the label printer.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "label_printer_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to press the emergency stop button.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "button_1",
+          "is_pressed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the server rack to the certification office.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_1",
+          "location_id": ":certification_office"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the refrigerator to the vehicle testing bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "fridge_1",
+          "location_id": ":vehicle_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy refrigerator to the vehicle testing bay after unwrapping the sandwich inside it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "wrapped_sandwich_1",
+          "is_wrapped": false
+        },
+        {
+          "id": "fridge_1",
+          "location_id": ":vehicle_testing_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the filing cabinet to the break area after opening it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "filing_cabinet_1",
+          "is_open": true
+        },
+        {
+          "id": "filing_cabinet_1",
+          "location_id": ":break_area"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01406"
+}

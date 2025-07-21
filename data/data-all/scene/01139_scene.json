@@ -1,0 +1,832 @@
+{
+  "description": "A high-pressure MotoGP team garage and pit lane on race day morning, filled with tools, spare parts, and diagnostic equipment requiring precise collaboration under tight time constraints.",
+  "rooms": [
+    {
+      "id": "main_garage_bay",
+      "name": "Main Garage Bay",
+      "properties": {
+        "type": "industrial_garage"
+      },
+      "connected_to_room_ids": [
+        "parts_storage",
+        "pit_lane"
+      ]
+    },
+    {
+      "id": "parts_storage",
+      "name": "Parts & Logistics Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    },
+    {
+      "id": "pit_lane",
+      "name": "Pit Lane & Track Edge",
+      "properties": {
+        "type": "outdoor"
+      },
+      "connected_to_room_ids": [
+        "main_garage_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_bike_lift_1",
+      "name": "Hydraulic Bike Lift",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "material": "steel",
+        "capacity": "300kg",
+        "current_height": 1.0
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "tool_wall_1",
+      "name": "Tool Wall",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          4.0,
+          0.1,
+          2.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "pegboard",
+        "shadow_outlines": true
+      },
+      "states": {}
+    },
+    {
+      "id": "diagnostic_station_1",
+      "name": "Diagnostic Station",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "metal",
+        "monitors": 3,
+        "telemetry_feeds": [
+          "tire_temps",
+          "engine_vitals",
+          "fuel_flow"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "race_bike_46",
+      "name": "Race Bike #46",
+      "type": "FURNITURE",
+      "location_id": "on:hydraulic_bike_lift_1",
+      "properties": {
+        "size": [
+          2.1,
+          0.7,
+          1.1
+        ],
+        "weight": 160.0,
+        "is_container": false,
+        "brand": "Yamaha",
+        "model": "YZR-M1",
+        "fairing_status": "removed",
+        "fuel_line_status": "disconnected"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "critical_parts_tray_1",
+      "name": "Critical Parts Tray",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.2,
+          0.05
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "silicone",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "titanium_exhaust_valve_1",
+      "name": "Titanium Exhaust Valve",
+      "type": "ITEM",
+      "location_id": "in:critical_parts_tray_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "titanium",
+        "marking": "LAST ONE",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "frayed_clutch_cable_1",
+      "name": "Frayed Clutch Cable",
+      "type": "ITEM",
+      "location_id": "in:critical_parts_tray_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "steel",
+        "condition": "frayed",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ecu_calibration_envelope_1",
+      "name": "ECU Calibration Envelope",
+      "type": "ITEM",
+      "location_id": "in:critical_parts_tray_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "label": "DO NOT LOSE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_repair_kit_1",
+      "name": "Emergency Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 10.0,
+        "material": "impact_resistant_plastic",
+        "contents": [
+          "carbon_fiber_patch_glue",
+          "quick_cure_resin"
+        ],
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "air_compressor_1",
+      "name": "Air Compressor",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.7
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "noise_level": "120dB",
+        "pressure": "90 PSI"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "parts_washer_1",
+      "name": "Parts Washer",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "liquid": "degreaser",
+        "fill_level": "half"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "dirty_chain_link_1",
+      "name": "Dirty Chain Link",
+      "type": "ITEM",
+      "location_id": "in:parts_washer_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "condition": "dirty",
+        "provides_abilities": [
+          "wipe"
+        ]
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "wireless_headset_set_1",
+      "name": "Wireless Headset Set",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.2,
+        "units": 4,
+        "battery_status": "one_low",
+        "missing_units": 1,
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "rossi_poster_1",
+      "name": "Rossi Poster",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.3,
+        "material": "paper",
+        "condition": "sun_bleached",
+        "event": "2004 Africa GP victory"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "coffee_stained_work_order_1",
+      "name": "Coffee Stained Work Order",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "paper",
+        "note": "CHECK REAR DAMPENER!!"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "discarded_tire_warmers_1",
+      "name": "Discarded Tire Warmers",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 3.5,
+        "material": "fabric",
+        "stack_status": "haphazard",
+        "plugged_in": true,
+        "temperature": "orange"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "heavy_duty_shelving_1",
+      "name": "Heavy-Duty Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          2.5,
+          1.0,
+          2.5
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "labeled_bins": true
+      },
+      "states": {}
+    },
+    {
+      "id": "refrigerated_cabinet_1",
+      "name": "Refrigerated Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          1.8
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "temperature": "-4°C",
+        "lock_type": "digital",
+        "last_inspection": "07:30"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "spare_front_tire_1",
+      "name": "Spare Front Tire",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 12.0,
+        "compound": "slick",
+        "heat_cycles": 2,
+        "barcode": "XR782K"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "controlled_substance_locker_1",
+      "name": "Controlled Substance Locker",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          0.7,
+          0.5,
+          1.2
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "lock_type": "biometric",
+        "contents": "nitromethane_blend",
+        "vials_checked_out": 2
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "team_radio_1",
+      "name": "Team Radio",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.5,
+        "status": "crackling",
+        "channel": 3
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.8,
+        "status": "jammed",
+        "tape_status": "out",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hand_truck_1",
+      "name": "Hand Truck",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          1.2
+        ],
+        "weight": 25.0,
+        "capacity": "200kg",
+        "wheel_condition": "one_squeaky"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_first_sign_1",
+      "name": "Safety First Sign",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.5,
+        "condition": "faded",
+        "damage": "bullet_holes"
+      },
+      "states": {
+        "is_hung_up": false
+      }
+    },
+    {
+      "id": "fuel_rig_1",
+      "name": "Fuel Rig",
+      "type": "FURNITURE",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "size": [
+          0.9,
+          0.5,
+          1.1
+        ],
+        "weight": 15.0,
+        "nozzle_type": "quick_release",
+        "pressure": "3.2 bar",
+        "hose_status": "improperly_coiled"
+      },
+      "states": {}
+    },
+    {
+      "id": "timing_beacon_1",
+      "name": "Timing Beacon",
+      "type": "ITEM",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "weight": 2.5,
+        "type": "RFID_transmitter",
+        "status": "blinking_green"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "warm_up_stand_1",
+      "name": "Warm-Up Stand",
+      "type": "FURNITURE",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "weight": 75.0,
+        "rpm": "50%"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "rain_tarp_1",
+      "name": "Rain Tarp",
+      "type": "ITEM",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "weight": 4.0,
+        "folding_status": "improper",
+        "corner_condition": "dragging_in_oil",
+        "tag": "USE ONLY IF CODE RED"
+      },
+      "states": {
+        "is_rolled": true
+      }
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "weight": 6.5,
+        "last_inspection": "6_months_ago",
+        "blocked_by": "toolbox",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pit_board_1",
+      "name": "Pit Board",
+      "type": "ITEM",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "weight": 1.8,
+        "message": "BOX NEXT LAP",
+        "orientation": "backwards"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "spare_engine_crate_1",
+      "name": "Spare Engine Crate",
+      "type": "FURNITURE",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.2
+        ],
+        "weight": 200.0,
+        "blocking": "refrigerant_cabinet"
+      },
+      "states": {}
+    },
+    {
+      "id": "tire_cart_1",
+      "name": "Tire Cart",
+      "type": "FURNITURE",
+      "location_id": "in:pit_lane",
+      "properties": {
+        "size": [
+          1.8,
+          1.0,
+          1.0
+        ],
+        "weight": 120.0,
+        "tire_count": 4,
+        "tire_type": "wets",
+        "balance_status": "unbalanced",
+        "wheel_status": "stuck_on_cable"
+      },
+      "states": {}
+    },
+    {
+      "id": "gold_torque_wrench_1",
+      "name": "Gold-Anodized Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.2,
+        "color": "gold",
+        "condition": "good",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "silver_wrench_1",
+      "name": "Silver Wrench",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 1.1,
+        "color": "silver",
+        "condition": "stripped_threads",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "bike_setup_sheet_1",
+      "name": "Bike Setup Sheet",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.2,
+        "buried_under": "coffee_stains"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "decoy_barcode_sticker_1",
+      "name": "Decoy Barcode Sticker",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.05,
+        "origin": "coffee_cup"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "provides_abilities": [
+          "wipe",
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shop_vac_1",
+      "name": "Shop Vacuum",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "provides_abilities": [
+          "scoop"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "metal_file_1",
+      "name": "Metal File",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 0.4,
+        "material": "steel",
+        "provides_abilities": [
+          "sharpen",
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "utility_knife_1",
+      "name": "Utility Knife",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "steel",
+        "provides_abilities": [
+          "slice"
+        ]
+      },
+      "states": {
+        "is_sharp": false
+      }
+    },
+    {
+      "id": "hacksaw_1",
+      "name": "Hacksaw",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 0.7,
+        "material": "steel",
+        "provides_abilities": [
+          "saw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "picture_hook_1",
+      "name": "Picture Hook",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "hang_up"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "alarm_control_panel_1",
+      "name": "Alarm Control Panel",
+      "type": "FURNITURE",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "provides_abilities": [
+          "disarm_alarm"
+        ]
+      },
+      "states": {
+        "is_alarm_armed": true
+      }
+    },
+    {
+      "id": "cheese_grater_1",
+      "name": "Cheese Grater",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 0.5,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "grate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "angle_grinder_1",
+      "name": "Angle Grinder",
+      "type": "ITEM",
+      "location_id": "on:tool_wall_1",
+      "properties": {
+        "weight": 2.0,
+        "material": "metal",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shovel_1",
+      "name": "Shovel",
+      "type": "ITEM",
+      "location_id": "in:parts_storage",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lighter_1",
+      "name": "Lighter",
+      "type": "ITEM",
+      "location_id": "in:main_garage_bay",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "deactivate",
+    "dig",
+    "disarm_alarm",
+    "erase",
+    "grate",
+    "grind",
+    "hang_up",
+    "ignite",
+    "lower",
+    "open",
+    "saw",
+    "scoop",
+    "sharpen",
+    "slice",
+    "unroll",
+    "wipe",
+    "close"
+  ]
+}

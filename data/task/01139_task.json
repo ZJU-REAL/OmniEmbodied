@@ -1,0 +1,168 @@
+{
+  "task_background": "Prepare the MotoGP team garage and pit lane for the race day under tight time constraints.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 100.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place titanium_exhaust_valve_1 on diagnostic_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "titanium_exhaust_valve_1",
+          "location_id": "on:diagnostic_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place ecu_calibration_envelope_1 on tool_wall_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "ecu_calibration_envelope_1",
+          "location_id": "on:tool_wall_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the only red critical parts tray to the pit lane.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "critical_parts_tray_1",
+          "location_id": ":pit_lane"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the gold-anodized torque wrench to the main garage bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "gold_torque_wrench_1",
+          "location_id": ":main_garage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the utility knife with stripped threads using a grinding tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "utility_knife_1",
+          "is_ground": true
+        }
+      ]
+    },
+    {
+      "task_description": "Disarm the alarm control panel in the main garage bay.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning rag to wipe the dirty chain link that is wet and in the parts washer.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "dirty_chain_link_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the label maker to erase the decoy barcode sticker with coffee cup origin.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "decoy_barcode_sticker_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to lower the hydraulic bike lift.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_bike_lift_1",
+          "is_lowered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the refrigerated cabinet.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigerated_cabinet_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spare engine crate to the main garage bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spare_engine_crate_1",
+          "location_id": ":main_garage_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the tire cart to the parts storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "tire_cart_1",
+          "location_id": ":parts_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the spare engine crate blocking the refrigerant cabinet to the pit lane.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "spare_engine_crate_1",
+          "location_id": ":pit_lane"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the tire cart with wet tires to the main garage bay.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "tire_cart_1",
+          "location_id": ":main_garage_bay"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01139"
+}

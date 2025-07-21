@@ -1,0 +1,148 @@
+{
+  "task_background": "Secure and reset the fertility laboratory after a protest to resume critical research operations.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Close the centrifuge_station_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "centrifuge_station_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the keycard_1 on the printer_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "keycard_1",
+          "location_id": "on:printer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the blue IVF culture dish to the laminar flow hood.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "ivf_culture_dish_1",
+          "location_id": ":laminar_flow_hood_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Fold the patient consent forms that have the note 'ETHICS REVIEW??'.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "patient_consent_forms_1",
+          "is_folded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty coffee mug.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Mend the torn spare cryo gloves.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "spare_cryo_gloves_1",
+          "is_mended": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the cleaning cloth to clean the white coffee mug with the inscription 'WORLD'S BEST EMBRYOLOGIST'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Mend the blue cryo gloves in the cryo storage room.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "spare_cryo_gloves_1",
+          "is_mended": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the liquid_nitrogen_tank_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "liquid_nitrogen_tank_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the laminar flow hood to the cryo storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "laminar_flow_hood_1",
+          "location_id": ":cryo_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the locked file cabinet to the main lab area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "locked_file_cabinet_1",
+          "location_id": ":main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the centrifuge station that is open to the admin office.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "centrifuge_station_1",
+          "location_id": ":admin_office"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01468"
+}

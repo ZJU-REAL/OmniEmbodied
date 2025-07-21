@@ -1,0 +1,776 @@
+{
+  "description": "A forensic crash investigation lab and morgue where experts collaborate to analyze fatal vehicular accidents caused by distracted driving. The scene is rich with evidence, tools, and specialized equipment requiring precise handling and coordination.",
+  "rooms": [
+    {
+      "id": "vehicle_examination_bay",
+      "name": "Vehicle Examination Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "forensic_lab",
+        "morgue"
+      ]
+    },
+    {
+      "id": "forensic_lab",
+      "name": "Forensic Lab",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "vehicle_examination_bay",
+        "evidence_storage",
+        "observation_room"
+      ]
+    },
+    {
+      "id": "morgue",
+      "name": "Morgue & Autopsy Suite",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "vehicle_examination_bay",
+        "evidence_storage"
+      ]
+    },
+    {
+      "id": "evidence_storage",
+      "name": "Evidence Storage & Lockup",
+      "properties": {
+        "type": "secure"
+      },
+      "connected_to_room_ids": [
+        "forensic_lab",
+        "morgue"
+      ]
+    },
+    {
+      "id": "observation_room",
+      "name": "Observation/Meeting Room",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "forensic_lab"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hydraulic_lift_1",
+      "name": "Hydraulic Lift",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": false,
+        "capacity": "3-ton",
+        "condition": "oil leak near piston #3"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead Crane",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "size": [
+          5.0,
+          1.0,
+          0.5
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "track_length": "5m",
+        "condition": "remote control missing battery cover"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sedan_wreckage_1",
+      "name": "Sedan Wreckage",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "size": [
+          4.5,
+          1.8,
+          1.5
+        ],
+        "weight": 1200.0,
+        "is_container": true,
+        "license_plate": "XJ4-9T2",
+        "condition": "front crushed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shattered_smartphone_1",
+      "name": "Shattered Smartphone",
+      "type": "ITEM",
+      "location_id": "in:sedan_wreckage_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "screen cracked, power button stuck",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "blackbox_data_module_1",
+      "name": "Blackbox Data Module",
+      "type": "ITEM",
+      "location_id": "in:sedan_wreckage_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "orange",
+        "condition": "intact",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "seatbelt_mechanism_1",
+      "name": "Seatbelt Mechanism",
+      "type": "ITEM",
+      "location_id": "in:sedan_wreckage_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "gray",
+        "condition": "jammed, cut by first responders",
+        "provides_abilities": [
+          "unbuckle"
+        ]
+      },
+      "states": {
+        "is_buckled": true
+      }
+    },
+    {
+      "id": "evidence_tarp_1",
+      "name": "Evidence Tarp",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "weight": 2.0,
+        "color": "blue",
+        "condition": "stained with coolant",
+        "provides_abilities": [
+          "unwrap"
+        ]
+      },
+      "states": {
+        "is_wrapped": true
+      }
+    },
+    {
+      "id": "digital_calipers_1",
+      "name": "Digital Calipers",
+      "type": "ITEM",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "condition": "battery at 12%",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:vehicle_examination_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "condition": "missing 10mm socket"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "condition": "slightly rusted",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "torque_gauge_1",
+      "name": "Torque Gauge",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "condition": "good",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "microscope_station_1",
+      "name": "Microscope Station",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": false,
+        "model": "Olympus BX53",
+        "condition": "eyepiece smudged"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "reconstruction_terminal_1",
+      "name": "3D Accident Reconstruction Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.9,
+          1.5
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "condition": "rendering paused at 87%"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "evidence_drying_rack_1",
+      "name": "Evidence Drying Rack",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          1.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "capacity": "12 samples",
+        "condition": "3 slots empty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "case_file_1",
+      "name": "Distracted Driving Case File",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 0.5,
+        "color": "manila",
+        "condition": "open, highlighted witness statement",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "toxicology_sample_1",
+      "name": "Toxicology Sample Vial",
+      "type": "ITEM",
+      "location_id": "in:evidence_drying_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "label": "#1147-B, Pending GC/MS",
+        "provides_abilities": [
+          "shake"
+        ]
+      },
+      "states": {
+        "is_shaken": false
+      }
+    },
+    {
+      "id": "broken_headlight_lens_1",
+      "name": "Broken Headlight Lens",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 0.3,
+        "color": "clear",
+        "condition": "fragments in tray",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "condition": "out of tape, jammed",
+        "provides_abilities": [
+          "repair"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "condition": "idle, last used 2hrs ago"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "fridge_1",
+      "name": "Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "size": [
+          1.8,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "temperature": "4°C",
+        "condition": "door slightly ajar"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "autopsy_table_1",
+      "name": "Autopsy Table",
+      "type": "FURNITURE",
+      "location_id": "in:morgue",
+      "properties": {
+        "size": [
+          2.2,
+          1.0,
+          0.9
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "condition": "hydraulic, stuck in mid-position"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "body_drawer_1",
+      "name": "Body Drawer",
+      "type": "FURNITURE",
+      "location_id": "in:morgue",
+      "properties": {
+        "size": [
+          2.1,
+          0.8,
+          0.6
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "tag": "#1147, John Doe, M, approx. 35 y/o"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_disposal_chute_1",
+      "name": "Biohazard Disposal Chute",
+      "type": "FURNITURE",
+      "location_id": "in:morgue",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "condition": "sealed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "digital_safe_1",
+      "name": "Digital Safe",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.5
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "condition": "requires two keycards"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:observation_room",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "owner": "Lead Investigator",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "keycard_2",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:morgue",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "owner": "Morgue Desk",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "conference_table_1",
+      "name": "Conference Table",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          3.0,
+          1.2,
+          0.8
+        ],
+        "weight": 70.0,
+        "is_container": true,
+        "condition": "coffee-stained"
+      },
+      "states": {
+        "is_table_set": false
+      }
+    },
+    {
+      "id": "wall_screen_1",
+      "name": "Wall-Mounted Screen",
+      "type": "FURNITURE",
+      "location_id": "in:observation_room",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "condition": "showing traffic cam footage"
+      },
+      "states": {
+        "is_recording": true
+      }
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "condition": "fully charged",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "repair_kit_1",
+      "name": "Repair Kit",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "red",
+        "condition": "complete set",
+        "provides_abilities": [
+          "repair",
+          "mend"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "needle_and_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:repair_kit_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "condition": "new",
+        "provides_abilities": [
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "condition": "sharp",
+        "provides_abilities": [
+          "unwrap",
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "eraser_1",
+      "name": "Eraser",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "condition": "slightly worn",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dishes_1",
+      "name": "Dishes",
+      "type": "ITEM",
+      "location_id": "in:observation_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "condition": "clean",
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cutlery_1",
+      "name": "Cutlery",
+      "type": "ITEM",
+      "location_id": "in:observation_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "condition": "polished",
+        "provides_abilities": [
+          "set_table"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "packing_materials_1",
+      "name": "Packing Materials",
+      "type": "ITEM",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "condition": "new",
+        "provides_abilities": [
+          "pack"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "trowel_1",
+      "name": "Trowel",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.6,
+        "color": "steel",
+        "condition": "slightly dirty",
+        "provides_abilities": [
+          "plaster"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "green",
+        "condition": "sharp",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "masher_1",
+      "name": "Masher",
+      "type": "ITEM",
+      "location_id": "in:observation_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "condition": "clean",
+        "provides_abilities": [
+          "mash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "press_1",
+      "name": "Press",
+      "type": "ITEM",
+      "location_id": "in:forensic_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "black",
+        "condition": "functional",
+        "provides_abilities": [
+          "compress"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "compress",
+    "erase",
+    "mash",
+    "mend",
+    "open",
+    "pack",
+    "plaster",
+    "prune",
+    "repair",
+    "scan_barcode",
+    "set_table",
+    "shake",
+    "stop_recording",
+    "unbuckle",
+    "unwrap"
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "task_background": "Prepare the mercenary outpost's mech hangar and simulation lab for the next combat deployment.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_weight": 90.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max_weight": 90.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place dented_coffee_mug_1 in the break_area.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "dented_coffee_mug_1",
+          "location_id": "in:break_area"
+        }
+      ]
+    },
+    {
+      "task_description": "Open locked_ammo_crate_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "locked_ammo_crate_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Bring the heavy workbench with coolant fluid stains to the engineering pit.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "heavy_duty_workbench_1",
+          "location_id": ":engineering_pit"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the outdated technical manual in the armory.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "technical_manuals_1",
+          "location_id": "in:armory"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair diagnostic_terminal_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "diagnostic_terminal_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Check the pressure of coolant_pump_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "coolant_pump_1",
+          "is_pressure_checked": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair kit to fix the broken composite object in the simulation deck.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "holo_table_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Sign the outdated technical manual using the pen.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "technical_manuals_1",
+          "is_signed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to toggle the hydraulic repair gantry.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hydraulic_repair_gantry_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the coffee maker.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "coffee_maker_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the mech leg joint to the engineering pit.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "mech_leg_joint_1",
+          "location_id": ":engineering_pit"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the gauss rifle to the simulation deck.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "gauss_rifle_1",
+          "location_id": ":simulation_deck"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken mech leg joint to the engineering pit and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "mech_leg_joint_1",
+          "location_id": ":engineering_pit"
+        },
+        {
+          "id": "mech_leg_joint_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken detached mech arm to the engineering pit and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "detached_mech_arm_1",
+          "location_id": ":engineering_pit"
+        },
+        {
+          "id": "detached_mech_arm_1",
+          "is_broken": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01355"
+}

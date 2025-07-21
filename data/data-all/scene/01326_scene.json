@@ -1,0 +1,696 @@
+{
+  "description": "A sprawling industrial scrapyard metal processing facility with multiple functional zones for sorting, cutting, and processing metal scraps.",
+  "rooms": [
+    {
+      "id": "incoming_materials_bay",
+      "name": "Incoming Materials Bay",
+      "properties": {
+        "type": "unloading_area"
+      },
+      "connected_to_room_ids": [
+        "manual_sorting_area"
+      ]
+    },
+    {
+      "id": "manual_sorting_area",
+      "name": "Manual Sorting Area",
+      "properties": {
+        "type": "sorting_area"
+      },
+      "connected_to_room_ids": [
+        "incoming_materials_bay",
+        "hydraulic_shear_station"
+      ]
+    },
+    {
+      "id": "hydraulic_shear_station",
+      "name": "Hydraulic Alligator Shear Station",
+      "properties": {
+        "type": "cutting_area"
+      },
+      "connected_to_room_ids": [
+        "manual_sorting_area",
+        "conveyor_belt_shredder"
+      ]
+    },
+    {
+      "id": "conveyor_belt_shredder",
+      "name": "Conveyor Belt & Shredder Feed",
+      "properties": {
+        "type": "shredding_area"
+      },
+      "connected_to_room_ids": [
+        "hydraulic_shear_station",
+        "storage_dispatch"
+      ]
+    },
+    {
+      "id": "storage_dispatch",
+      "name": "Storage & Dispatch",
+      "properties": {
+        "type": "storage_area"
+      },
+      "connected_to_room_ids": [
+        "conveyor_belt_shredder"
+      ]
+    },
+    {
+      "id": "operator_control_booth",
+      "name": "Operator Control Booth",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "hydraulic_shear_station",
+        "conveyor_belt_shredder"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "unloading_ramp_1",
+      "name": "Steel-reinforced unloading ramp",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "size": [
+          10.0,
+          2.0,
+          0.5
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "rusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "weighing_scale_1",
+      "name": "Heavy-duty weighing scale",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          0.8
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "capacity": 5000.0,
+        "condition": "flickering_display"
+      },
+      "states": {}
+    },
+    {
+      "id": "mixed_scrap_pile_1",
+      "name": "Mixed scrap pile",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "size": [
+          4.0,
+          4.0,
+          2.0
+        ],
+        "weight": 800.0,
+        "is_container": true,
+        "contents": [
+          "rebar",
+          "car_frames",
+          "pipes",
+          "wire"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "hazardous_waste_drum_1",
+      "name": "Tagged hazardous waste drum",
+      "type": "ITEM",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "weight": 80.0,
+        "color": "yellow",
+        "label": "CORROSIVE",
+        "condition": "leaking",
+        "provides_abilities": [
+          "seal"
+        ]
+      },
+      "states": {
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "forklift_1",
+      "name": "Forklift",
+      "type": "FURNITURE",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "size": [
+          3.0,
+          1.5,
+          2.0
+        ],
+        "weight": 2500.0,
+        "is_container": true,
+        "power": "battery",
+        "condition": "parked"
+      },
+      "states": {
+        "is_engine_on": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "forklift_key_1",
+      "name": "Forklift key",
+      "type": "ITEM",
+      "location_id": "in:forklift_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "metal",
+        "provides_abilities": [
+          "start_engine"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with delivery manifests",
+      "type": "ITEM",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "weight": 0.5,
+        "condition": "smudged",
+        "contents": "delivery_manifests"
+      },
+      "states": {}
+    },
+    {
+      "id": "no_smoking_sign_1",
+      "name": "Old NO SMOKING sign",
+      "type": "ITEM",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "weight": 1.5,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_thermos_1",
+      "name": "Dented coffee thermos",
+      "type": "ITEM",
+      "location_id": "in:incoming_materials_bay",
+      "properties": {
+        "weight": 0.8,
+        "condition": "dented",
+        "contents": "coffee"
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "sorting_table_1",
+      "name": "Steel sorting table",
+      "type": "FURNITURE",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "size": [
+          2.0,
+          4.0,
+          0.9
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "overhead_crane_1",
+      "name": "Overhead crane",
+      "type": "FURNITURE",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "size": [
+          8.0,
+          8.0,
+          3.0
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "capacity": 3000.0
+      },
+      "states": {}
+    },
+    {
+      "id": "sorting_wand_1",
+      "name": "Magnetized sorting wand",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 1.2,
+        "function": "ferrous_metal_detection"
+      },
+      "states": {}
+    },
+    {
+      "id": "copper_wire_pile_1",
+      "name": "Pile of copper wiring",
+      "type": "ITEM",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "weight": 25.0,
+        "material": "copper",
+        "condition": "partially_stripped"
+      },
+      "states": {}
+    },
+    {
+      "id": "aluminum_bin_1",
+      "name": "Bin of aluminum scraps",
+      "type": "FURNITURE",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "size": [
+          1.2,
+          1.2,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "contents": "aluminum_scraps",
+        "condition": "paint_residue"
+      },
+      "states": {}
+    },
+    {
+      "id": "spectrometer_1",
+      "name": "Handheld spectrometer",
+      "type": "ITEM",
+      "location_id": "on:sorting_table_1",
+      "properties": {
+        "weight": 2.5,
+        "battery_level": 40,
+        "condition": "on_charging_dock"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bin_1",
+      "name": "Labeled bin - Ferrous Metals",
+      "type": "FURNITURE",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "label": "Ferrous Metals",
+        "contents": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "labeled_bin_2",
+      "name": "Labeled bin - Non-Ferrous Metals",
+      "type": "FURNITURE",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "label": "Non-Ferrous Metals",
+        "contents": "overflowing"
+      },
+      "states": {}
+    },
+    {
+      "id": "periodic_table_poster_1",
+      "name": "Faded periodic table poster",
+      "type": "ITEM",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "weight": 0.3,
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "work_gloves_1",
+      "name": "Work gloves",
+      "type": "ITEM",
+      "location_id": "in:manual_sorting_area",
+      "properties": {
+        "weight": 0.4,
+        "condition": "torn"
+      },
+      "states": {}
+    },
+    {
+      "id": "alligator_shear_1",
+      "name": "36-inch hydraulic crocodile shear",
+      "type": "FURNITURE",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "size": [
+          3.0,
+          2.5,
+          2.2
+        ],
+        "weight": 2000.0,
+        "is_container": true,
+        "material": "steel",
+        "condition": "bolted_down"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_guard_1",
+      "name": "Adjustable safety guard",
+      "type": "ITEM",
+      "location_id": "on:alligator_shear_1",
+      "properties": {
+        "weight": 25.0,
+        "condition": "scratched"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "steel_ibeam_1",
+      "name": "Steel I-beam",
+      "type": "FURNITURE",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "size": [
+          5.0,
+          0.3,
+          0.3
+        ],
+        "weight": 200.0,
+        "is_container": false,
+        "material": "steel",
+        "condition": "awaiting_cutting"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_panel_1",
+      "name": "Hydraulic control panel",
+      "type": "FURNITURE",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          0.5
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "condition": "worn_labels"
+      },
+      "states": {}
+    },
+    {
+      "id": "emergency_stop_1",
+      "name": "Emergency stop button",
+      "type": "ITEM",
+      "location_id": "on:control_panel_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "condition": "sticky"
+      },
+      "states": {}
+    },
+    {
+      "id": "floor_mat_1",
+      "name": "Oil-stained floor mat",
+      "type": "ITEM",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "weight": 3.0,
+        "condition": "stained"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "grease_gun_1",
+      "name": "Grease gun",
+      "type": "ITEM",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "weight": 2.5,
+        "condition": "half_empty"
+      },
+      "states": {
+        "is_clogged": true
+      }
+    },
+    {
+      "id": "chalkboard_1",
+      "name": "Chalkboard with cut-length notes",
+      "type": "ITEM",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "weight": 15.0,
+        "condition": "partially_erased"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_sign_1",
+      "name": "Rusted SAFETY FIRST sign",
+      "type": "ITEM",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "weight": 2.0,
+        "condition": "rusted"
+      },
+      "states": {}
+    },
+    {
+      "id": "conveyor_belt_1",
+      "name": "Steel conveyor belt",
+      "type": "FURNITURE",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "size": [
+          10.0,
+          1.5,
+          0.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "condition": "misaligned"
+      },
+      "states": {}
+    },
+    {
+      "id": "industrial_shredder_1",
+      "name": "Industrial shredder",
+      "type": "FURNITURE",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "size": [
+          3.0,
+          2.0,
+          2.5
+        ],
+        "weight": 200.0,
+        "is_container": true,
+        "warning": "NO HANDS NEAR INTAKE"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jammed_fragment_1",
+      "name": "Jammed metal fragment",
+      "type": "ITEM",
+      "location_id": "in:industrial_shredder_1",
+      "properties": {
+        "weight": 8.0,
+        "material": "steel",
+        "condition": "stuck"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "pry_bar_1",
+      "name": "Pry bar",
+      "type": "ITEM",
+      "location_id": "in:hydraulic_shear_station",
+      "properties": {
+        "weight": 3.5,
+        "material": "steel",
+        "provides_abilities": [
+          "disassemble"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "remote_emergency_stop_1",
+      "name": "Remote emergency stop",
+      "type": "ITEM",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "weight": 0.8,
+        "condition": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_blades_1",
+      "name": "Spare shredder blades",
+      "type": "ITEM",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "weight": 12.0,
+        "material": "tungsten",
+        "quantity": 4
+      },
+      "states": {}
+    },
+    {
+      "id": "lunchbox_1",
+      "name": "Old lunchbox",
+      "type": "ITEM",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "weight": 1.2,
+        "condition": "forgotten"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti (MAX LOAD 500KG)",
+      "type": "ITEM",
+      "location_id": "in:conveyor_belt_shredder",
+      "properties": {
+        "weight": 0.1,
+        "inscription": "MAX LOAD 500KG"
+      },
+      "states": {}
+    },
+    {
+      "id": "storage_rack_1",
+      "name": "Heavy-duty storage rack",
+      "type": "FURNITURE",
+      "location_id": "in:storage_dispatch",
+      "properties": {
+        "size": [
+          5.0,
+          2.0,
+          3.0
+        ],
+        "weight": 300.0,
+        "is_container": true,
+        "capacity": 2000.0
+      },
+      "states": {}
+    },
+    {
+      "id": "processed_metal_pallet_1",
+      "name": "Processed metal pallet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_dispatch",
+      "properties": {
+        "size": [
+          1.2,
+          1.0,
+          1.5
+        ],
+        "weight": 600.0,
+        "is_container": true,
+        "contents": "shredded_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "control_monitor_1",
+      "name": "Control monitor",
+      "type": "FURNITURE",
+      "location_id": "in:operator_control_booth",
+      "properties": {
+        "size": [
+          0.8,
+          0.2,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": false
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "emergency_stop_panel_1",
+      "name": "Emergency stop panel",
+      "type": "FURNITURE",
+      "location_id": "in:operator_control_booth",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.1
+        ],
+        "weight": 5.0,
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "hydraulic_controls_1",
+      "name": "Hydraulic controls",
+      "type": "FURNITURE",
+      "location_id": "in:operator_control_booth",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": false
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "cover",
+    "disassemble",
+    "drink",
+    "open",
+    "seal",
+    "start_engine",
+    "turn_on",
+    "close"
+  ]
+}

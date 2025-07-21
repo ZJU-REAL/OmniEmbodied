@@ -1,0 +1,947 @@
+{
+  "description": "An Emergency Department (ED) Expansion Zone mid-construction, blending clinical precision with construction-site chaos, requiring multi-agent coordination for heavy lifting, time-sensitive tasks, and information synthesis.",
+  "rooms": [
+    {
+      "id": "active_trauma_bay",
+      "name": "Active Trauma Bay",
+      "properties": {
+        "type": "medical"
+      },
+      "connected_to_room_ids": [
+        "nurses_station",
+        "equipment_storage"
+      ]
+    },
+    {
+      "id": "construction_zone",
+      "name": "Construction Zone",
+      "properties": {
+        "type": "construction"
+      },
+      "connected_to_room_ids": [
+        "nurses_station",
+        "break_room"
+      ]
+    },
+    {
+      "id": "nurses_station",
+      "name": "Nurses' Station",
+      "properties": {
+        "type": "administrative"
+      },
+      "connected_to_room_ids": [
+        "active_trauma_bay",
+        "construction_zone",
+        "break_room"
+      ]
+    },
+    {
+      "id": "equipment_storage",
+      "name": "Equipment Storage",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "active_trauma_bay"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "shared"
+      },
+      "connected_to_room_ids": [
+        "construction_zone",
+        "nurses_station"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "mobile_trauma_bed_1",
+      "name": "Mobile Trauma Bed",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 100.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "HydraBed-2000"
+      },
+      "states": {
+        "is_lowered": false
+      }
+    },
+    {
+      "id": "mobile_trauma_bed_2",
+      "name": "Mobile Trauma Bed",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 100.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "HydraBed-2000"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "overhead_surgical_lamp_1",
+      "name": "Overhead Surgical Lamp",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "brand": "SurgiLux"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "crash_cart_1",
+      "name": "Crash Cart",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "blue"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Bin",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "iv_pole_1",
+      "name": "IV Pole",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          1.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "silver"
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "portable_vitals_monitor_1",
+      "name": "Portable Vitals Monitor",
+      "type": "ITEM",
+      "location_id": "on:mobile_trauma_bed_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "brand": "MediTrack",
+        "model_number": "VT-1000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "rolling_stool_1",
+      "name": "Rolling Stool",
+      "type": "FURNITURE",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "black"
+      },
+      "states": {}
+    },
+    {
+      "id": "nitrile_gloves_box_1",
+      "name": "Box of Nitrile Gloves",
+      "type": "ITEM",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "material": "cardboard",
+        "quantity": 100
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Fallen Clipboard",
+      "type": "ITEM",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "wood"
+      },
+      "states": {}
+    },
+    {
+      "id": "scaffolding_tower_1",
+      "name": "Scaffolding Tower",
+      "type": "FURNITURE",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "size": [
+          2.0,
+          2.0,
+          3.0
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "yellow"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "drywall_sheets_1",
+      "name": "Pile of Drywall Sheets",
+      "type": "FURNITURE",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "size": [
+          1.2,
+          2.4,
+          0.5
+        ],
+        "weight": 75.0,
+        "is_container": false,
+        "material": "gypsum",
+        "color": "white"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "electrical_panel_1",
+      "name": "Electrical Panel",
+      "type": "FURNITURE",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.2
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "sawhorse_1",
+      "name": "Sawhorse with Circular Saw",
+      "type": "FURNITURE",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          0.9
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "hardhat_1",
+      "name": "Hardhat",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "hardhat_2",
+      "name": "Hardhat with Cracked Brim",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "plastic",
+        "condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "blueprint_1",
+      "name": "Dust-Covered Blueprint",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "white",
+        "material": "paper"
+      },
+      "states": {
+        "is_dusted": false
+      }
+    },
+    {
+      "id": "l_shaped_desk_1",
+      "name": "L-Shaped Desk",
+      "type": "FURNITURE",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "size": [
+          1.8,
+          1.8,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Wall-Mounted Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.05
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "patient_chart_1",
+      "name": "Misplaced Patient Chart",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "manila",
+        "material": "paper"
+      },
+      "states": {
+        "is_signed": false
+      }
+    },
+    {
+      "id": "medication_lockbox_1",
+      "name": "Medication Lockbox",
+      "type": "FURNITURE",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "gray"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Dymo"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "white"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "mug_1",
+      "name": "World's Best Nurse Mug",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "material": "ceramic"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "unopened_crate_1",
+      "name": "Unopened Crate",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "wood",
+        "color": "brown"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "folded_gurney_1",
+      "name": "Folded Gurney",
+      "type": "FURNITURE",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.2
+        ],
+        "weight": 50.0,
+        "is_container": false,
+        "material": "metal",
+        "color": "white"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "portable_vitals_monitor_2",
+      "name": "Portable Vitals Monitor",
+      "type": "ITEM",
+      "location_id": "in:equipment_storage",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "brand": "MediTrack",
+        "model_number": "VT-1000"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic",
+        "color": "black"
+      },
+      "states": {
+        "is_brewed": false
+      }
+    },
+    {
+      "id": "construction_helmet_1",
+      "name": "Construction Helmet",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.5,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_microwave_1",
+      "name": "Broken Microwave",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.3
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "white"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "extension_cord_1",
+      "name": "Extension Cord",
+      "type": "ITEM",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "weight": 1.0,
+        "color": "orange",
+        "material": "rubber"
+      },
+      "states": {}
+    },
+    {
+      "id": "jam_drawer_1",
+      "name": "Jam Drawer",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "plastic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "medication_vial_1",
+      "name": "Medication Vial",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "glass"
+      },
+      "states": {
+        "is_pure": true
+      }
+    },
+    {
+      "id": "medication_vial_2",
+      "name": "Medication Vial with Red Cap",
+      "type": "ITEM",
+      "location_id": "in:crash_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "glass",
+        "cap_color": "red",
+        "inscription": "DILUTE FIRST"
+      },
+      "states": {
+        "is_pure": true
+      }
+    },
+    {
+      "id": "stress_ball_1",
+      "name": "Red Stress Ball",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "foam"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_guard_1",
+      "name": "Detached Safety Guard",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellow",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "hex_key_1",
+      "name": "Hex Key",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "foreman_toolbox_1",
+      "name": "Foreman's Toolbox",
+      "type": "FURNITURE",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": true,
+        "material": "metal",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "duster_1",
+      "name": "Duster",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "feather",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pen_1",
+      "name": "Pen",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "sign"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_grounds_1",
+      "name": "Coffee Grounds",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.3,
+        "color": "brown",
+        "material": "coffee",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_pitcher_1",
+      "name": "Water Pitcher",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 1.0,
+        "color": "clear",
+        "material": "glass",
+        "provides_abilities": [
+          "fill"
+        ]
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:foreman_toolbox_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wrench_1",
+      "name": "Wrench",
+      "type": "ITEM",
+      "location_id": "in:foreman_toolbox_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "tighten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "shovel_1",
+      "name": "Shovel",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "dig"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "metal",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lighter_1",
+      "name": "Lighter",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.1,
+        "color": "red",
+        "material": "plastic",
+        "provides_abilities": [
+          "ignite"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stapler_1",
+      "name": "Stapler",
+      "type": "ITEM",
+      "location_id": "in:nurses_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "material": "plastic",
+        "provides_abilities": [
+          "staple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "contaminant_1",
+      "name": "Contaminant",
+      "type": "ITEM",
+      "location_id": "in:active_trauma_bay",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "material": "chemical",
+        "provides_abilities": [
+          "contaminate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scraper_1",
+      "name": "Scraper",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "scrape"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "mounting_bracket_1",
+      "name": "Mounting Bracket",
+      "type": "ITEM",
+      "location_id": "in:construction_zone",
+      "properties": {
+        "weight": 0.5,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "water_cup_1",
+      "name": "Water Cup",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "plastic"
+      },
+      "states": {
+        "is_full": false
+      }
+    }
+  ],
+  "abilities": [
+    "brew",
+    "contaminate",
+    "dig",
+    "dust",
+    "fill",
+    "ignite",
+    "lower",
+    "mount",
+    "open",
+    "prune",
+    "raise",
+    "scrape",
+    "sign",
+    "staple",
+    "tighten",
+    "turn_on",
+    "unstack",
+    "close"
+  ]
+}

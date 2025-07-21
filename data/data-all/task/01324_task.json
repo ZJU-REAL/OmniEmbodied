@@ -1,0 +1,146 @@
+{
+  "task_background": "Prepare the high-throughput data processing lab for a critical data processing run by ensuring all equipment is operational, clean, and properly configured.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        3.0,
+        3.0,
+        3.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 100.0,
+      "max_size": [
+        3.0,
+        3.0,
+        3.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place vacuum_cleaner_1 in ingestion_bay.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "vacuum_cleaner_1",
+          "location_id": "in:ingestion_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Open data_airlock_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "data_airlock_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Place the white ceramic mug on coffee_station_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "sigmod_mug_1",
+          "location_id": "on:coffee_station_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Clean the dirty fiber optic terminal in ingestion_bay.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fiber_optic_terminal_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Clean emergency_shredder_1 using a cleaning tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "emergency_shredder_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Unlock tool_cabinet_1 using a keycard.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "tool_cabinet_1",
+          "is_locked": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the blue keycard to unlock diagnostic_station_1 and clean it.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "diagnostic_station_1",
+          "is_dirty": false
+        },
+        {
+          "id": "diagnostic_station_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to clean buffer_server_rack_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "buffer_server_rack_1",
+          "is_dirty": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move legacy_mainframe_1 to maintenance_alley.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "legacy_mainframe_1",
+          "location_id": ":maintenance_alley"
+        }
+      ]
+    },
+    {
+      "task_description": "Move data_airlock_1 to transformation_hub.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "data_airlock_1",
+          "location_id": ":transformation_hub"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the dirty legacy mainframe to maintenance_alley and clean it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "legacy_mainframe_1",
+          "location_id": ":maintenance_alley"
+        },
+        {
+          "id": "legacy_mainframe_1",
+          "is_dirty": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01324"
+}

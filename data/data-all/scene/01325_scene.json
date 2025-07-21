@@ -1,0 +1,610 @@
+{
+  "description": "A high-density bioenergetics research laboratory focused on mitochondrial ATP synthesis through chemiosmosis, featuring advanced equipment, collaborative workstations, and scattered tools for multi-agent experimentation.",
+  "rooms": [
+    {
+      "id": "main_lab_floor",
+      "name": "Main Lab Floor",
+      "properties": {
+        "type": "wet_lab",
+        "hazard_zones": [
+          "red",
+          "yellow"
+        ],
+        "atmosphere": "humid with faint ozone smell"
+      },
+      "connected_to_room_ids": [
+        "mitochondrial_chamber",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "mitochondrial_chamber",
+      "name": "Mitochondrial Isolation Chamber",
+      "properties": {
+        "type": "cryogenic",
+        "temperature": -20,
+        "atmosphere": "frosted glass with intermittent fogging"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Hub",
+      "properties": {
+        "type": "control_room",
+        "lighting": "low_blue",
+        "atmosphere": "cooling fans whirring"
+      },
+      "connected_to_room_ids": [
+        "main_lab_floor"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "ion_gradient_simulator_1",
+      "name": "Ion Gradient Simulator",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "status": "active",
+        "output": "170mV"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Beckman X-15R Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.2
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "humming at 10,000 RPM"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Stainless Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          2.5,
+          0.8,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_kit_1",
+      "name": "ATP Synthase Calibration Kit",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "black",
+        "contents": [
+          "microtorque wrench",
+          "TMRM dye"
+        ],
+        "provides_abilities": [
+          "purify",
+          "grind"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "proton_sensor_1",
+      "name": "Proton Sensor #1",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "drift_error": "+0.1pH",
+        "calibration_sticker": "red"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "proton_sensor_2",
+      "name": "Proton Sensor #2",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "drift_error": "-0.1pH",
+        "calibration_sticker": "red"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "proton_sensor_3",
+      "name": "Proton Sensor #3",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "white",
+        "drift_error": "+0.2pH",
+        "calibration_sticker": "blue",
+        "provides_abilities": [
+          "deactivate"
+        ]
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "pipette_rack_1",
+      "name": "Pipette Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "material": "plastic",
+        "contents": "10 adjustable-volume pipettes"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "clogged_pipette_1",
+      "name": "Clogged Pipette",
+      "type": "ITEM",
+      "location_id": "in:pipette_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "volume_range": "20-200μL",
+        "provides_abilities": [
+          "damage"
+        ]
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "emergency_shower_1",
+      "name": "Emergency Shower",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          2.2
+        ],
+        "weight": 55.0,
+        "is_container": false,
+        "material": "steel",
+        "status": "pull-handle stiff"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "cryogenic_dewar_1",
+      "name": "Cryogenic Storage Dewar",
+      "type": "FURNITURE",
+      "location_id": "in:mitochondrial_chamber",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          1.0
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "capacity": "50L"
+      },
+      "states": {
+        "is_sealed": true,
+        "is_open": false
+      }
+    },
+    {
+      "id": "broken_sealer_1",
+      "name": "Broken Sealer",
+      "type": "ITEM",
+      "location_id": "in:mitochondrial_chamber",
+      "properties": {
+        "weight": 5.5,
+        "color": "silver",
+        "status": "misaligned clamp",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "mitochondrial_sample_1",
+      "name": "Mitochondrial Sample #KT-9",
+      "type": "ITEM",
+      "location_id": "in:cryogenic_dewar_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "clear",
+        "label": "High PMF – Handle with 4°C gloves",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {
+        "is_pure": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          1.8
+        ],
+        "weight": 65.0,
+        "is_container": true,
+        "material": "metal",
+        "status": "disk 4/8 amber alert"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "encrypted_thumbdrive_1",
+      "name": "Encrypted Thumbdrive",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.05,
+        "color": "black",
+        "password_hint": "Δp = -59ΔpH",
+        "provides_abilities": [
+          "delete"
+        ]
+      },
+      "states": {
+        "is_deleted": false
+      }
+    },
+    {
+      "id": "thermal_printer_1",
+      "name": "Thermal Printer",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "plastic",
+        "status": "jammed"
+      },
+      "states": {
+        "is_broken": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Ergonomic Keyboard",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.7,
+        "color": "black",
+        "layout": "QWERTY",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "document_1",
+      "name": "Digital Document",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.01,
+        "format": "digital",
+        "content": "ΔG calculation results"
+      },
+      "states": {
+        "is_typed": false
+      }
+    },
+    {
+      "id": "fume_hood_1",
+      "name": "Fume Hood",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          2.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "glass_steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "reagent_rack_1",
+      "name": "Overhead Reagent Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.4,
+          0.3
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "material": "aluminum"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tmrm_vial_1",
+      "name": "TMRM Dye Vial",
+      "type": "ITEM",
+      "location_id": "in:reagent_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "concentration": "10μM",
+        "label": "matte finish",
+        "provides_abilities": [
+          "purify"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "decorative_flask_1",
+      "name": "Decorative Erlenmeyer Flask",
+      "type": "ITEM",
+      "location_id": "in:reagent_rack_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "blue",
+        "contents": "glass beads",
+        "label": "glossy finish"
+      },
+      "states": {}
+    },
+    {
+      "id": "glovebox_controls_1",
+      "name": "Glovebox Controls",
+      "type": "FURNITURE",
+      "location_id": "in:mitochondrial_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "material": "plastic_metal",
+        "status": "fingerprint smudges"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Chemiosmosis Hazards Poster",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "weight": 0.2,
+        "color": "faded",
+        "content": "cartoon mitochondria"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "eraser_1",
+      "name": "Whiteboard Eraser",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "felt",
+        "provides_abilities": [
+          "erase"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ph_logbook_1",
+      "name": "pH Calibration Logbook",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "page": 47,
+        "status": "coffee ring stains"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "nobel_reprint_1",
+      "name": "Nobel Prize Reprint",
+      "type": "ITEM",
+      "location_id": "in:mitochondrial_chamber",
+      "properties": {
+        "weight": 0.3,
+        "color": "yellowed",
+        "content": "Mitchell's 1978 chemiosmosis paper",
+        "status": "dusty"
+      },
+      "states": {}
+    },
+    {
+      "id": "sticky_note_1",
+      "name": "Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.01,
+        "color": "yellow",
+        "message": "Call supplier re: Cl- buffers",
+        "ink": "smudged"
+      },
+      "states": {
+        "is_written_on": true
+      }
+    },
+    {
+      "id": "membrane_cartridge_1",
+      "name": "Ion Gradient Simulator Membrane Cartridge",
+      "type": "ITEM",
+      "location_id": "in:main_lab_floor",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.2
+        ],
+        "weight": 80.0,
+        "material": "polymer",
+        "status": "requires alignment"
+      },
+      "states": {}
+    },
+    {
+      "id": "electrode_bolts_1",
+      "name": "Electrode Bolts Set",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "silver",
+        "quantity": 4,
+        "provides_abilities": [
+          "twist"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_fridge_1",
+      "name": "Locked Sample Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:mitochondrial_chamber",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 90.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "keycard"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Sample Fridge Keycard",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.02,
+        "color": "white",
+        "access_level": "Level 3",
+        "provides_abilities": [
+          "unseal"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "damage",
+    "deactivate",
+    "delete",
+    "erase",
+    "grind",
+    "open",
+    "purify",
+    "toggle",
+    "twist",
+    "type",
+    "unseal"
+  ]
+}

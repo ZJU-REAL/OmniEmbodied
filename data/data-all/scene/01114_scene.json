@@ -1,0 +1,565 @@
+{
+  "description": "A microbiology brewing laboratory with fermentation tanks, sample prep zones, and microscopy workstations, designed for collaborative research and troubleshooting.",
+  "rooms": [
+    {
+      "id": "fermentation_bay",
+      "name": "Fermentation Bay",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_zone",
+        "storage_supplies"
+      ]
+    },
+    {
+      "id": "sample_prep_zone",
+      "name": "Sample Prep Zone",
+      "properties": {
+        "type": "laboratory"
+      },
+      "connected_to_room_ids": [
+        "fermentation_bay",
+        "microscopy_corner"
+      ]
+    },
+    {
+      "id": "microscopy_corner",
+      "name": "Microscopy Corner",
+      "properties": {
+        "type": "research"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_zone",
+        "sanitation_station"
+      ]
+    },
+    {
+      "id": "storage_supplies",
+      "name": "Storage & Supplies",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "fermentation_bay",
+        "sanitation_station"
+      ]
+    },
+    {
+      "id": "sanitation_station",
+      "name": "Sanitation Station",
+      "properties": {
+        "type": "cleaning"
+      },
+      "connected_to_room_ids": [
+        "microscopy_corner",
+        "storage_supplies"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "fermentation_tank_1",
+      "name": "Fermentation Tank A",
+      "type": "FURNITURE",
+      "location_id": "in:fermentation_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "FT-5000"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "fermentation_tank_2",
+      "name": "Fermentation Tank B",
+      "type": "FURNITURE",
+      "location_id": "in:fermentation_bay",
+      "properties": {
+        "size": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "weight": 97.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "model_number": "FT-5000"
+      },
+      "states": {
+        "is_open": false,
+        "is_sealed": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Wheeled Pallet Jack",
+      "type": "FURNITURE",
+      "location_id": "in:fermentation_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.5
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "material": "steel",
+        "max_load": 200.0
+      },
+      "states": {
+        "is_lowered": true
+      }
+    },
+    {
+      "id": "overflow_kit_1",
+      "name": "Emergency Overflow Kit",
+      "type": "ITEM",
+      "location_id": "in:fermentation_bay",
+      "properties": {
+        "weight": 12.0,
+        "color": "red",
+        "material": "plastic",
+        "is_container": true,
+        "provides_abilities": [
+          "insulate",
+          "seal"
+        ]
+      },
+      "states": {
+        "is_locked": true
+      }
+    },
+    {
+      "id": "digital_clipboard_1",
+      "name": "Digital Clipboard",
+      "type": "ITEM",
+      "location_id": "on:fermentation_tank_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "LabTech",
+        "battery_level": 23
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "workbench_1",
+      "name": "Stainless Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_zone",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "sample_cylinder_1",
+      "name": "Sample Cylinder (Tank B - Day 3)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "glass",
+        "label": "TANK B – DAY 3"
+      },
+      "states": {
+        "is_sealed": false,
+        "is_washed": false
+      }
+    },
+    {
+      "id": "sample_cylinder_2",
+      "name": "Sample Cylinder (Tank A - Day 3)",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "glass",
+        "label": "TANK A – DAY 3"
+      },
+      "states": {
+        "is_sealed": false,
+        "is_washed": false
+      }
+    },
+    {
+      "id": "notepad_1",
+      "name": "Oil-Stained Notepad",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "yellow",
+        "material": "paper",
+        "inscription": "TRY DISH SOAP TRICK (per StackExchange)"
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_rack_1",
+      "name": "Pipette Rack",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_zone",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.6
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_open": true,
+        "is_active": true
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_corner",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal_plastic"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "slide_7b_1",
+      "name": "Slide #7B",
+      "type": "ITEM",
+      "location_id": "on:microscope_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "material": "glass",
+        "label": "POSSIBLE WILD STRAIN"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_cabinet_1",
+      "name": "UV Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_corner",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.7
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_sealed": true,
+        "is_locked": true
+      }
+    },
+    {
+      "id": "yeast_fridge_1",
+      "name": "Master Yeast Cultures Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supplies",
+      "properties": {
+        "size": [
+          1.0,
+          0.7,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "metal"
+      },
+      "states": {
+        "is_locked": true,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "malt_crate_1",
+      "name": "Crate of Malt",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supplies",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 55.0,
+        "is_container": true,
+        "material": "wood"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "bottle_crate_1",
+      "name": "Crate of Bottles",
+      "type": "FURNITURE",
+      "location_id": "in:storage_supplies",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_packed": true
+      }
+    },
+    {
+      "id": "sink_1",
+      "name": "Sanitation Sink",
+      "type": "FURNITURE",
+      "location_id": "in:sanitation_station",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "stainless_steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "spray_bottle_1",
+      "name": "Sanitizer Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "blue",
+        "material": "plastic",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dirty_tools_bucket_1",
+      "name": "Bucket of Dirty Tools",
+      "type": "FURNITURE",
+      "location_id": "in:sanitation_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "material": "plastic"
+      },
+      "states": {
+        "is_washed": false
+      }
+    },
+    {
+      "id": "autoclave_tray_1",
+      "name": "Autoclave Tray",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:storage_supplies",
+      "properties": {
+        "weight": 0.05,
+        "color": "white",
+        "material": "plastic",
+        "provides_abilities": [
+          "unlock"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:sanitation_station",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "metal_plastic",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dish_soap_1",
+      "name": "Dish Soap",
+      "type": "ITEM",
+      "location_id": "on:sink_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "green",
+        "material": "plastic",
+        "provides_abilities": [
+          "wash"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "knife_1",
+      "name": "Knife",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "material": "metal",
+        "provides_abilities": [
+          "dull",
+          "spread"
+        ]
+      },
+      "states": {
+        "is_sharp": true
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_corner",
+      "properties": {
+        "size": [
+          0.2,
+          0.2,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "material": "plastic"
+      },
+      "states": {
+        "is_plugged_in": true,
+        "is_active": true
+      }
+    },
+    {
+      "id": "laptop_1",
+      "name": "Laptop",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "brand": "TechPro",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "rope_1",
+      "name": "Rope",
+      "type": "ITEM",
+      "location_id": "in:storage_supplies",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "material": "nylon"
+      },
+      "states": {
+        "is_tied": true
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "deactivate",
+    "download",
+    "dull",
+    "insulate",
+    "open",
+    "plug_in",
+    "raise",
+    "screw",
+    "seal",
+    "spread",
+    "unlock",
+    "unpack",
+    "unplug",
+    "untie",
+    "wash"
+  ]
+}

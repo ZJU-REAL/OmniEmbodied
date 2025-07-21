@@ -1,0 +1,158 @@
+{
+  "task_background": "Prepare the high-security aquatic toxicity research lab for an emergency EPA audit by ensuring equipment functionality, sample integrity, and safety compliance.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        1.5,
+        1.5,
+        1.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place mercury_analyzer_1 on sample_tray_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "mercury_analyzer_1",
+          "location_id": "on:sample_tray_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place fish_crate_l4_1 in cold_storage_vault.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fish_crate_l4_1",
+          "location_id": "in:cold_storage_vault"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the fish crate with low risk level to decontamination_airlock.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "fish_crate_l4_1",
+          "location_id": ":decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the empty petri dish on the dissection table.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "petri_dish_1",
+          "location_id": "on:dissection_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken water_pump_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "water_pump_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the faulty cooling_coil_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "cooling_coil_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the repair toolbox to fix the AquaFlow-branded water pump in the main testing chamber.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "water_pump_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the flathead screwdriver to open the jammed mercury tracer vial in the biosafety cabinet.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "mercury_tracer_vial_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the walk-in refrigeration unit.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the scanning electron microscope to decontamination_airlock.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "sem_microscope_1",
+          "location_id": ":decontamination_airlock"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the biosafety cabinet to the main testing chamber.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "biosafety_cabinet_1",
+          "location_id": ":main_testing_chamber"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the thawing pallet of frozen fish samples to the walk-in refrigeration unit.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "frozen_samples_pallet_1",
+          "location_id": ":refrigeration_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the NanoView-brand SEM to the observation deck.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sem_microscope_1",
+          "location_id": ":observation_deck"
+        }
+      ]
+    }
+  ],
+  "scene_id": "01288"
+}

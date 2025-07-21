@@ -17,6 +17,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from utils.logger import get_logger, log_processing, log_success, log_raw_response
 from utils.json_utils import extract_json_from_text, parse_json_safe, save_json
 from generators.base_generator import BaseGenerator
+from utils.task_validator import TaskValidator
 
 
 class TaskGenerator(BaseGenerator):
@@ -42,6 +43,12 @@ class TaskGenerator(BaseGenerator):
         # Load CSV data for action details
         self.actions_csv_path = self.data_dir / 'attribute_actions.csv'
         self.actions_data = self._load_actions_csv()
+
+        # Initialize task validator
+        self.task_validator = TaskValidator(
+            attribute_actions_csv_path=str(self.actions_csv_path),
+            scene_dir=self.scene_dir
+        )
 
         self.logger.info("TaskGenerator initialized")
 

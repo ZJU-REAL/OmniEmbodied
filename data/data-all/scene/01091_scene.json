@@ -1,0 +1,825 @@
+{
+  "description": "A hyper-detailed hospital research lab and shared residency lounge, blending high-stakes biomedical work with simmering interpersonal tensions, featuring heavy collaborative equipment and personal items embedding unresolved conflicts.",
+  "rooms": [
+    {
+      "id": "research_lab",
+      "name": "Research Lab",
+      "properties": {
+        "type": "biomedical",
+        "atmosphere": "sterile but cluttered",
+        "key_features": [
+          "PCR workstation",
+          "specimen freezer",
+          "UV decontamination lights"
+        ]
+      },
+      "connected_to_room_ids": [
+        "resident_lounge",
+        "storage_hallway"
+      ]
+    },
+    {
+      "id": "resident_lounge",
+      "name": "Resident Lounge",
+      "properties": {
+        "type": "break_room",
+        "atmosphere": "lived-in chaos",
+        "key_features": [
+          "lockers",
+          "L-shaped couch",
+          "microwave",
+          "whiteboard"
+        ]
+      },
+      "connected_to_room_ids": [
+        "research_lab",
+        "storage_hallway"
+      ]
+    },
+    {
+      "id": "storage_hallway",
+      "name": "Storage Hallway",
+      "properties": {
+        "type": "connective_space",
+        "atmosphere": "cramped and dimly lit",
+        "key_features": [
+          "overloaded shelving",
+          "broken autoclave",
+          "step stool"
+        ]
+      },
+      "connected_to_room_ids": [
+        "research_lab",
+        "resident_lounge"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "pcr_workstation_1",
+      "name": "PCR Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab",
+      "properties": {
+        "size": [
+          120.0,
+          80.0,
+          90.0
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "PCR-2023"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "thermal_cycler_1",
+      "name": "Thermal Cycler",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 12.5,
+        "color": "white",
+        "brand": "BioRad",
+        "display": "CYCLE 23/30",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "microcentrifuge_1",
+      "name": "Microcentrifuge",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 8.0,
+        "color": "gray",
+        "brand": "Eppendorf",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {
+        "is_active": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "tube_rack_1",
+      "name": "Tube Rack",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "clear",
+        "material": "plastic",
+        "label": "PATIENT 4782-BRK"
+      },
+      "states": {}
+    },
+    {
+      "id": "specimen_freezer_1",
+      "name": "Specimen Freezer",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab",
+      "properties": {
+        "size": [
+          150.0,
+          80.0,
+          200.0
+        ],
+        "weight": 95.0,
+        "is_container": true,
+        "material": "steel",
+        "temperature": -80.0,
+        "emergency_release": "red lever"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "vial_box_red_1",
+      "name": "Red Vial Box",
+      "type": "ITEM",
+      "location_id": "in:specimen_freezer_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "priority": "STAT",
+        "material": "cardboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "vial_box_yellow_1",
+      "name": "Yellow Vial Box",
+      "type": "ITEM",
+      "location_id": "in:specimen_freezer_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "yellow",
+        "priority": "routine",
+        "material": "cardboard"
+      },
+      "states": {}
+    },
+    {
+      "id": "misplaced_sample_1",
+      "name": "Misplaced Cryovial",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "clear",
+        "label": "FRIART - SMOKER STUDY",
+        "material": "plastic"
+      },
+      "states": {}
+    },
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:research_lab",
+      "properties": {
+        "size": [
+          180.0,
+          90.0,
+          150.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "stainless steel"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "glove_bin_1",
+      "name": "Contaminated Glove Bin",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "plastic",
+        "biohazard_sticker": "peeling"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "latex_glove_1",
+      "name": "Latex Glove",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "material": "latex",
+        "state": "contaminated"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_tablet_1",
+      "name": "Digital Tablet",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "iPad",
+        "sticky_note": "PASSWORD = IL0V3SURG3RY"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "broken_pipette_1",
+      "name": "Broken Pipette",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "gray",
+        "brand": "Gilson",
+        "issue": "tip ejector jammed",
+        "calibration_status": "expired"
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "ppe_poster_1",
+      "name": "Faded PPE Poster",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 0.2,
+        "color": "blue",
+        "material": "paper",
+        "hidden_poster": "HAPPY HOLIDAYS 2005!"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_trophy_1",
+      "name": "Dusty Trophy",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 1.5,
+        "color": "gold",
+        "material": "metal",
+        "inscription": "BEST LAB TEAM 2004"
+      },
+      "states": {}
+    },
+    {
+      "id": "expired_reagents_1",
+      "name": "Expired Reagents",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "material": "glass",
+        "expiration_date": "2020-05-12"
+      },
+      "states": {}
+    },
+    {
+      "id": "l_shaped_couch_1",
+      "name": "L-Shaped Couch",
+      "type": "FURNITURE",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "size": [
+          300.0,
+          200.0,
+          80.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "fabric",
+        "condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "missing_cushion_1",
+      "name": "Missing Cushion",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 1.0,
+        "color": "green",
+        "material": "fabric",
+        "condition": "chewed"
+      },
+      "states": {}
+    },
+    {
+      "id": "locker_karev_1",
+      "name": "Dented Locker",
+      "type": "FURNITURE",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "size": [
+          60.0,
+          40.0,
+          180.0
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "broken lock"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "scrubs_top_1",
+      "name": "Scrubs Top",
+      "type": "ITEM",
+      "location_id": "in:locker_karev_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "material": "cotton",
+        "label": "KAREV"
+      },
+      "states": {}
+    },
+    {
+      "id": "dog_leash_1",
+      "name": "Dog Leash",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 0.3,
+        "color": "red",
+        "material": "nylon",
+        "tag": "DOC - IF FOUND CALL MEREDITH"
+      },
+      "states": {
+        "is_sewn": false
+      }
+    },
+    {
+      "id": "apartment_keycard_1",
+      "name": "Buried Keycard",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "engraving": "YANG #447"
+      },
+      "states": {}
+    },
+    {
+      "id": "pizza_box_1",
+      "name": "Pizza Box",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_couch_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "white",
+        "material": "cardboard",
+        "brand": "Pizza Hut"
+      },
+      "states": {
+        "is_covered": false
+      }
+    },
+    {
+      "id": "microwave_1",
+      "name": "Stuck Microwave",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "brand": "Panasonic",
+        "condition": "door stuck open",
+        "is_container": true
+      },
+      "states": {
+        "is_open": true,
+        "is_active": false
+      }
+    },
+    {
+      "id": "exploded_soup_1",
+      "name": "Exploded Soup",
+      "type": "ITEM",
+      "location_id": "in:microwave_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "orange",
+        "material": "liquid",
+        "state": "dried"
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "size": [
+          120.0,
+          90.0,
+          2.0
+        ],
+        "weight": 10.0,
+        "is_container": false,
+        "material": "melamine",
+        "content": "Half-erased surgery schedule with doodle"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Chipped Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:l_shaped_couch_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "blue",
+        "material": "ceramic",
+        "inscription": "WORLD’S BEST MOM",
+        "contents": [
+          "pens",
+          "nicotine gum wrapper"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "framed_photo_1",
+      "name": "Framed Photo",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 0.8,
+        "color": "brown",
+        "material": "wood",
+        "condition": "scratched face"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_autoclave_1",
+      "name": "Broken Autoclave",
+      "type": "FURNITURE",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "size": [
+          100.0,
+          70.0,
+          150.0
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "tag": "OUT OF SERVICE"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "unprocessed_petri_dishes_1",
+      "name": "Unprocessed Petri Dishes",
+      "type": "ITEM",
+      "location_id": "in:broken_autoclave_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "clear",
+        "material": "glass",
+        "smell": "overcooked agar"
+      },
+      "states": {}
+    },
+    {
+      "id": "sealed_box_1",
+      "name": "Sealed Box",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 5.0,
+        "color": "brown",
+        "material": "cardboard",
+        "label": "BAILEY’S MATERNITY LEAVE PROJECTS",
+        "condition": "dusty, tape brittle"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "overloaded_shelf_1",
+      "name": "Overloaded Shelf",
+      "type": "FURNITURE",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "size": [
+          200.0,
+          50.0,
+          180.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "bowing"
+      },
+      "states": {}
+    },
+    {
+      "id": "old_journals_1",
+      "name": "Old Journals",
+      "type": "ITEM",
+      "location_id": "on:overloaded_shelf_1",
+      "properties": {
+        "weight": 20.0,
+        "color": "various",
+        "material": "paper",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_stacked": true
+      }
+    },
+    {
+      "id": "hidden_dog_toy_1",
+      "name": "Hidden Dog Toy",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 0.2,
+        "color": "green",
+        "material": "rubber",
+        "condition": "chewed"
+      },
+      "states": {}
+    },
+    {
+      "id": "spill_kit_1",
+      "name": "Expired Spill Kit",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 3.0,
+        "color": "red",
+        "material": "plastic",
+        "expiration_date": "6 months ago",
+        "condition": "seal broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "wobbly_step_stool_1",
+      "name": "Wobbly Step Stool",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 2.0,
+        "color": "black",
+        "material": "metal",
+        "condition": "one leg shorter"
+      },
+      "states": {}
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 0.0,
+        "color": "black",
+        "material": "wall",
+        "message": "I KNOW WHAT YOU DID"
+      },
+      "states": {}
+    },
+    {
+      "id": "dead_plant_1",
+      "name": "Dead Plant",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 0.5,
+        "color": "brown",
+        "material": "plant",
+        "condition": "brittle"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 0.7,
+        "color": "white",
+        "material": "cotton",
+        "sleeves": "rolled unevenly",
+        "pocket_contents": [
+          "crumpled note: Burke’s dinner – LIE"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "working_keycard_1",
+      "name": "Working Keycard",
+      "type": "ITEM",
+      "location_id": "in:lab_coat_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "material": "plastic",
+        "status": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "loose_ceiling_tile_1",
+      "name": "Loose Ceiling Tile",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 1.0,
+        "color": "white",
+        "material": "fiberboard",
+        "contents": [
+          "map of the building with YANG’S SECRET circled"
+        ]
+      },
+      "states": {
+        "is_hung_up": true
+      }
+    },
+    {
+      "id": "backup_battery_1",
+      "name": "Backup Battery",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 50.0,
+        "color": "black",
+        "material": "metal",
+        "purpose": "power-outage drill"
+      },
+      "states": {}
+    },
+    {
+      "id": "needle_thread_1",
+      "name": "Needle and Thread",
+      "type": "ITEM",
+      "location_id": "in:resident_lounge",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "material": "metal and cotton",
+        "provides_abilities": [
+          "sew",
+          "mend"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "dusty_cloth_1",
+      "name": "Dusty Cloth",
+      "type": "ITEM",
+      "location_id": "in:storage_hallway",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "material": "cotton",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 15.0,
+        "color": "white",
+        "brand": "HP",
+        "provides_abilities": [
+          "print"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "video_camera_1",
+      "name": "Video Camera",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "brand": "Sony",
+        "provides_abilities": [
+          "record_video"
+        ]
+      },
+      "states": {
+        "is_recording": false
+      }
+    },
+    {
+      "id": "keyboard_1",
+      "name": "Keyboard",
+      "type": "ITEM",
+      "location_id": "on:pcr_workstation_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "black",
+        "brand": "Logitech",
+        "provides_abilities": [
+          "type"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 5.0,
+        "color": "red",
+        "material": "metal",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "small_fire_1",
+      "name": "Small Fire",
+      "type": "ITEM",
+      "location_id": "in:research_lab",
+      "properties": {
+        "weight": 0.0,
+        "color": "orange",
+        "material": "flame",
+        "size": "small"
+      },
+      "states": {
+        "is_alight": true
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "close",
+    "cover",
+    "dust",
+    "extinguish",
+    "mend",
+    "open",
+    "print",
+    "record_video",
+    "sew",
+    "take_down",
+    "type",
+    "unstack"
+  ]
+}

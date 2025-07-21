@@ -1,0 +1,901 @@
+{
+  "description": "A nostalgic yet functional underground workshop doubling as a LAN party hub, where vintage game consoles, modern gaming rigs, and repair tools coexist in a chaotic yet organized sprawl.",
+  "rooms": [
+    {
+      "id": "repair_workshop",
+      "name": "Repair Workshop",
+      "properties": {
+        "type": "workshop"
+      },
+      "connected_to_room_ids": [
+        "lan_station",
+        "retro_lounge",
+        "storage_closet"
+      ]
+    },
+    {
+      "id": "lan_station",
+      "name": "LAN Station",
+      "properties": {
+        "type": "gaming"
+      },
+      "connected_to_room_ids": [
+        "repair_workshop",
+        "retro_lounge"
+      ]
+    },
+    {
+      "id": "retro_lounge",
+      "name": "Retro Lounge",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "repair_workshop",
+        "lan_station",
+        "storage_closet"
+      ]
+    },
+    {
+      "id": "storage_closet",
+      "name": "Storage Closet",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "repair_workshop",
+        "retro_lounge"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "Steel Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workshop",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "material": "steel",
+        "surface_type": "anti-static_mat"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Rolling Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workshop",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "metal",
+        "lock_status": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "brand": "Weller",
+        "provides_abilities": [
+          "heat_up",
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "super_nintendo_1",
+      "name": "Faulty Super Nintendo",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "gray",
+        "model": "SNES",
+        "condition": "faulty"
+      },
+      "states": {
+        "is_toggled": false,
+        "is_screwed_in": false
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Precision Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.8,
+        "color": "multicolor",
+        "brand": "iFixit",
+        "provides_abilities": [
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "game_cartridges_1",
+      "name": "Mismatched Game Cartridges",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "various",
+        "condition": "unlabeled",
+        "requires_sorting": true
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_hub_1",
+      "name": "Melted USB Hub",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "condition": "melted",
+        "requires_repair": true
+      },
+      "states": {
+        "is_hot": false
+      }
+    },
+    {
+      "id": "gaming_pc_1",
+      "name": "Custom Gaming PC",
+      "type": "FURNITURE",
+      "location_id": "in:lan_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Custom",
+        "rgb_lighting": true,
+        "side_panel_removed": true
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "folding_table_1",
+      "name": "Wobbly Folding Table",
+      "type": "FURNITURE",
+      "location_id": "in:lan_station",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "plastic",
+        "reinforcement": "duct_tape"
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_cable_1",
+      "name": "Disconnected Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "label": "TOURNAMENT HOST",
+        "requires_routing": true
+      },
+      "states": {}
+    },
+    {
+      "id": "crt_tv_1",
+      "name": "32\" CRT TV",
+      "type": "FURNITURE",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 90.0,
+        "is_container": false,
+        "brand": "Sony",
+        "requires_collaboration": true
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "entertainment_center_1",
+      "name": "Wooden Entertainment Center",
+      "type": "FURNITURE",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "size": [
+          1.5,
+          0.6,
+          0.7
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "wood",
+        "condition": "scratched"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "n64_cartridge_1",
+      "name": "Misplaced N64 Cartridge",
+      "type": "ITEM",
+      "location_id": "in:entertainment_center_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "game": "GoldenEye 007",
+        "missing_case": true
+      },
+      "states": {}
+    },
+    {
+      "id": "power_strip_1",
+      "name": "Loose Power Strip",
+      "type": "ITEM",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "weight": 0.5,
+        "color": "black",
+        "condition": "sparking",
+        "requires_repair": true
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Overstuffed Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "metal",
+        "condition": "bowing"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "arcade_cabinet_1",
+      "name": "Broken Arcade Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": false,
+        "condition": "broken",
+        "requires_collaboration": true,
+        "missing_joystick": true
+      },
+      "states": {}
+    },
+    {
+      "id": "oem_controllers_1",
+      "name": "Sealed Box of OEM Controllers",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "white",
+        "brand": "Nintendo",
+        "condition": "dusty"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "power_adapter_1",
+      "name": "Misplaced Power Adapter",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "black",
+        "compatibility": "Dreamcast",
+        "requires_placement": true
+      },
+      "states": {}
+    },
+    {
+      "id": "light_gun_1",
+      "name": "Busted Light Gun",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "gray",
+        "condition": "broken",
+        "requires_repair": true
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Working Label Printer",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "white",
+        "brand": "Brother",
+        "out_of_paper": true,
+        "provides_abilities": [
+          "paste"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "zip_drive_1",
+      "name": "Functional Zip Drive",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "blue",
+        "condition": "archaic",
+        "covered_in_stickers": true
+      },
+      "states": {}
+    },
+    {
+      "id": "cr2032_batteries_1",
+      "name": "Box of Spare CR2032 Batteries",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "silver",
+        "condition": "mixed",
+        "some_depleted": true
+      },
+      "states": {}
+    },
+    {
+      "id": "magnifying_lamp_1",
+      "name": "Magnifying Lamp",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "Brightech",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "mini_fridge_1",
+      "name": "Mini Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workshop",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "brand": "Igloo",
+        "contents": "energy_drinks"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "energy_drink_1",
+      "name": "Energy Drink",
+      "type": "ITEM",
+      "location_id": "in:mini_fridge_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "red",
+        "brand": "Monster",
+        "flavor": "Original"
+      },
+      "states": {}
+    },
+    {
+      "id": "network_switch_1",
+      "name": "Network Switch",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "TP-Link",
+        "condition": "overheating"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "mechanical_keyboard_1",
+      "name": "Sticky Mechanical Keyboard",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "black",
+        "brand": "Corsair",
+        "condition": "sticky",
+        "missing_keycap": true
+      },
+      "states": {}
+    },
+    {
+      "id": "tournament_bracket_1",
+      "name": "Corrupted Tournament Bracket",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "white",
+        "condition": "smudged",
+        "requires_rewriting": true
+      },
+      "states": {}
+    },
+    {
+      "id": "headset_1",
+      "name": "Working Headset",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "brand": "HyperX",
+        "condition": "uneven_audio"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_mousepad_1",
+      "name": "Spare Mousepad",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "brand": "SteelSeries",
+        "logo": "obscure_indie_game"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_extension_cable_1",
+      "name": "USB Extension Cable",
+      "type": "ITEM",
+      "location_id": "on:folding_table_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "condition": "tangled"
+      },
+      "states": {}
+    },
+    {
+      "id": "beanbag_chair_1",
+      "name": "Beanbag Chair",
+      "type": "FURNITURE",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "leaking_foam"
+      },
+      "states": {}
+    },
+    {
+      "id": "jukebox_selector_1",
+      "name": "Jukebox-Style Game Selector",
+      "type": "ITEM",
+      "location_id": "in:entertainment_center_1",
+      "properties": {
+        "weight": 2.0,
+        "color": "wooden",
+        "condition": "sticky",
+        "requires_cleaning": true
+      },
+      "states": {}
+    },
+    {
+      "id": "nes_1",
+      "name": "Functional NES",
+      "type": "ITEM",
+      "location_id": "in:entertainment_center_1",
+      "properties": {
+        "weight": 3.0,
+        "color": "gray",
+        "condition": "blinking_light"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "vhs_rewinder_1",
+      "name": "VHS Rewinder",
+      "type": "ITEM",
+      "location_id": "in:entertainment_center_1",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "condition": "plugged_in"
+      },
+      "states": {}
+    },
+    {
+      "id": "dreamcast_1",
+      "name": "Working Dreamcast",
+      "type": "ITEM",
+      "location_id": "in:entertainment_center_1",
+      "properties": {
+        "weight": 2.5,
+        "color": "white",
+        "condition": "hesitant_tray"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "player_2_sign_1",
+      "name": "\"Player 2\" Neon Sign",
+      "type": "ITEM",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "weight": 1.0,
+        "color": "pink",
+        "condition": "flickering"
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "game_informers_1",
+      "name": "Stack of Old Game Informers",
+      "type": "ITEM",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "weight": 3.0,
+        "color": "yellowed",
+        "condition": "aged"
+      },
+      "states": {}
+    },
+    {
+      "id": "high_score_plaque_1",
+      "name": "\"High Score\" Plaque",
+      "type": "ITEM",
+      "location_id": "in:retro_lounge",
+      "properties": {
+        "weight": 0.5,
+        "color": "gold",
+        "condition": "dusty",
+        "engraving": "none"
+      },
+      "states": {}
+    },
+    {
+      "id": "misc_cables_box_1",
+      "name": "Cardboard Box Labeled \"Misc Cables\"",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 2.0,
+        "color": "brown",
+        "condition": "spilling"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "moldy_pizza_box_1",
+      "name": "Moldy Pizza Box",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.5,
+        "color": "stained",
+        "origin": "2018_LAN_party"
+      },
+      "states": {}
+    },
+    {
+      "id": "employees_only_sign_1",
+      "name": "\"Employees Only\" Sign",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "red",
+        "condition": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "ddr_mat_1",
+      "name": "Dented DDR Mat",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 1.5,
+        "color": "black",
+        "condition": "folded"
+      },
+      "states": {}
+    },
+    {
+      "id": "voltage_regulator_1",
+      "name": "Voltage Regulator",
+      "type": "ITEM",
+      "location_id": "in:metal_shelving_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "compatibility": "CRT_TV",
+        "provides_abilities": [
+          "toggle"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "glue_dispenser_1",
+      "name": "Glue Dispenser",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "brand": "Elmer's",
+        "provides_abilities": [
+          "glue"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "paint_brush_1",
+      "name": "Paint Brush",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "brown",
+        "brand": "Purdy",
+        "provides_abilities": [
+          "paint"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "roller_1",
+      "name": "Roller",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "color": "blue",
+        "brand": "Wooster",
+        "provides_abilities": [
+          "flatten"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pan_1",
+      "name": "Pan",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 1.0,
+        "color": "black",
+        "brand": "T-fal",
+        "provides_abilities": [
+          "fry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "stove_1",
+      "name": "Stove",
+      "type": "FURNITURE",
+      "location_id": "in:repair_workshop",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.8
+        ],
+        "weight": 35.0,
+        "is_container": false,
+        "brand": "GE",
+        "provides_abilities": [
+          "heat_up"
+        ]
+      },
+      "states": {
+        "is_toggled": false
+      }
+    },
+    {
+      "id": "carving_knife_1",
+      "name": "Carving Knife",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "silver",
+        "brand": "Victorinox",
+        "provides_abilities": [
+          "carve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "plate_1",
+      "name": "Plate",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.4,
+        "color": "white",
+        "brand": "Corelle",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cup_1",
+      "name": "Cup",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.2,
+        "color": "clear",
+        "brand": "Libbey",
+        "provides_abilities": [
+          "serve"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Broom",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 1.0,
+        "color": "brown",
+        "brand": "O-Cedar",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "tuner_1",
+      "name": "Instrument Tuner",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "brand": "Snark",
+        "provides_abilities": [
+          "tune_instrument"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "spoon_1",
+      "name": "Spoon",
+      "type": "ITEM",
+      "location_id": "in:storage_closet",
+      "properties": {
+        "weight": 0.1,
+        "color": "silver",
+        "brand": "Oneida",
+        "provides_abilities": [
+          "stir"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "carve",
+    "close",
+    "flatten",
+    "fry",
+    "glue",
+    "heat_up",
+    "open",
+    "paint",
+    "paste",
+    "screw",
+    "serve",
+    "stir",
+    "sweep",
+    "toggle",
+    "tune_instrument"
+  ]
+}

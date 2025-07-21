@@ -1,0 +1,807 @@
+{
+  "description": "A high-energy physics research lab focused on studying high-velocity impacts and material resilience, featuring an impact testing chamber, control station, calibration bay, and materials storage area.",
+  "rooms": [
+    {
+      "id": "impact_testing_chamber",
+      "name": "Impact Testing Chamber",
+      "properties": {
+        "type": "industrial",
+        "reinforcement": "tungsten",
+        "lighting": "fluorescent"
+      },
+      "connected_to_room_ids": [
+        "control_station",
+        "calibration_bay"
+      ]
+    },
+    {
+      "id": "control_station",
+      "name": "Control & Monitoring Station",
+      "properties": {
+        "type": "office",
+        "lighting": "LED",
+        "noise_level": "moderate"
+      },
+      "connected_to_room_ids": [
+        "impact_testing_chamber",
+        "materials_storage"
+      ]
+    },
+    {
+      "id": "calibration_bay",
+      "name": "Equipment & Calibration Bay",
+      "properties": {
+        "type": "workshop",
+        "lighting": "halogen",
+        "ventilation": "high"
+      },
+      "connected_to_room_ids": [
+        "impact_testing_chamber",
+        "materials_storage"
+      ]
+    },
+    {
+      "id": "materials_storage",
+      "name": "Materials Storage & Prep Area",
+      "properties": {
+        "type": "storage",
+        "lighting": "fluorescent",
+        "security": "high"
+      },
+      "connected_to_room_ids": [
+        "control_station",
+        "calibration_bay"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "hvbl_7x_1",
+      "name": "High-Velocity Ball Launcher (HVBL-7X)",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          0.5
+        ],
+        "weight": 150.0,
+        "is_container": false,
+        "material": "steel",
+        "model_number": "HVBL-7X",
+        "power_status": "standby",
+        "max_velocity": "200 m/s"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "impact_wall_1",
+      "name": "Reinforced Tungsten Impact Wall",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          0.1,
+          2.5
+        ],
+        "weight": 500.0,
+        "is_container": false,
+        "material": "tungsten",
+        "condition": "scarred",
+        "temperature": "elevated"
+      },
+      "states": {}
+    },
+    {
+      "id": "debris_grid_1",
+      "name": "Debris Containment Grid",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          3.0,
+          3.0,
+          0.05
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "steel",
+        "mesh_size": "5mm"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "test_ball_crate_1",
+      "name": "Test Ball Crate",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 5.0,
+        "is_container": true,
+        "material": "plastic",
+        "capacity": "12 balls",
+        "current_count": 11
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "steel_ball_1",
+      "name": "Steel Test Ball (TB-114)",
+      "type": "ITEM",
+      "location_id": "in:debris_grid_1",
+      "properties": {
+        "weight": 0.35,
+        "material": "steel",
+        "serial_number": "TB-114",
+        "condition": "scratched"
+      },
+      "states": {
+        "is_crushed": false
+      }
+    },
+    {
+      "id": "steel_ball_2",
+      "name": "Steel Test Ball (TB-115)",
+      "type": "ITEM",
+      "location_id": "in:test_ball_crate_1",
+      "properties": {
+        "weight": 0.35,
+        "material": "steel",
+        "serial_number": "TB-115",
+        "condition": "new"
+      },
+      "states": {
+        "is_crushed": false
+      }
+    },
+    {
+      "id": "steel_ball_3",
+      "name": "Steel Test Ball (TB-116)",
+      "type": "ITEM",
+      "location_id": "in:test_ball_crate_1",
+      "properties": {
+        "weight": 0.35,
+        "material": "steel",
+        "serial_number": "TB-116",
+        "condition": "new"
+      },
+      "states": {
+        "is_crushed": false
+      }
+    },
+    {
+      "id": "high_speed_camera_1",
+      "name": "High-Speed Camera (Obstructed Lens)",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Phantom",
+        "model": "VEO 710",
+        "status": "error"
+      },
+      "states": {
+        "is_hidden": false,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "high_speed_camera_2",
+      "name": "High-Speed Camera",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Phantom",
+        "model": "VEO 710",
+        "status": "active"
+      },
+      "states": {
+        "is_hidden": false,
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "impact_sensor_terminal_1",
+      "name": "Impact Force Sensor Terminal",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          1.2
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "brand": "Kistler",
+        "model": "Type 9333B",
+        "status": "needs_calibration"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "emergency_stop_1",
+      "name": "Emergency Stop Button",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.15,
+          0.15,
+          0.1
+        ],
+        "weight": 1.0,
+        "is_container": false,
+        "color": "red",
+        "safety_status": "functional"
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "material": "steel",
+        "wheels": 4
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "torque_wrench_1",
+      "name": "Torque Wrench",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "material": "steel",
+        "brand": "Snap-on",
+        "torque_range": "10-150 Nm",
+        "provides_abilities": [
+          "unscrew",
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "greasy_rag_1",
+      "name": "Greasy Rag",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "condition": "dirty",
+        "color": "faded_blue"
+      },
+      "states": {}
+    },
+    {
+      "id": "lens_cleaner_1",
+      "name": "Lens Cleaner Bottle",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "brand": "Zeiss",
+        "volume_remaining": "50%"
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "calibration_weights_1",
+      "name": "Calibration Weight Set",
+      "type": "FURNITURE",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "steel",
+        "weight_range": "1-10kg"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "weight_5kg_1",
+      "name": "5kg Calibration Weight",
+      "type": "ITEM",
+      "location_id": "in:impact_testing_chamber",
+      "properties": {
+        "weight": 5.0,
+        "material": "steel",
+        "color": "silver",
+        "certification": "NIST-traceable"
+      },
+      "states": {}
+    },
+    {
+      "id": "main_control_desk_1",
+      "name": "Main Control Desk",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          2.5,
+          1.8,
+          0.75
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "laminate",
+        "shape": "U-shaped"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "server_rack_1",
+      "name": "Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          1.8
+        ],
+        "weight": 80.0,
+        "is_container": true,
+        "material": "steel",
+        "status": "active"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "primary_terminal_1",
+      "name": "Primary Terminal",
+      "type": "FURNITURE",
+      "location_id": "on:main_control_desk_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.4
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision 7820",
+        "status": "error"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "calibration_keypad_1",
+      "name": "Calibration Keypad",
+      "type": "FURNITURE",
+      "location_id": "on:main_control_desk_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 1.5,
+        "is_container": false,
+        "brand": "National Instruments",
+        "model": "NI-USB-6009",
+        "status": "stuck_slider"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "data_drive_1",
+      "name": "Secure Data Drive (EXPERIMENT 47 - CLASSIFIED)",
+      "type": "ITEM",
+      "location_id": "in:server_rack_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "color": "black",
+        "capacity": "1TB",
+        "security_level": "classified"
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "wireless_headset_1",
+      "name": "Wireless Headset",
+      "type": "ITEM",
+      "location_id": "on:main_control_desk_1",
+      "properties": {
+        "weight": 0.3,
+        "material": "plastic",
+        "brand": "Jabra",
+        "model": "Evolve 75",
+        "battery_level": "12%"
+      },
+      "states": {
+        "is_plugged_in": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Printer",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          0.4,
+          0.5,
+          0.3
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "brand": "HP",
+        "model": "LaserJet Pro",
+        "status": "out_of_paper"
+      },
+      "states": {
+        "is_open": true,
+        "is_plugged_in": true,
+        "is_printed": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:control_station",
+      "properties": {
+        "size": [
+          1.2,
+          0.9,
+          0.02
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "material": "melamine",
+        "color": "white"
+      },
+      "states": {}
+    },
+    {
+      "id": "workbench_1",
+      "name": "Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_bay",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "surface": "rubber_mat"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "calibration_rig_1",
+      "name": "Sensor Calibration Rig",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_bay",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.2
+        ],
+        "weight": 80.0,
+        "is_container": false,
+        "material": "aluminum",
+        "status": "needs_calibration"
+      },
+      "states": {
+        "is_assembled": true
+      }
+    },
+    {
+      "id": "screwdriver_set_1",
+      "name": "Screwdriver Set",
+      "type": "ITEM",
+      "location_id": "in:workbench_1",
+      "properties": {
+        "weight": 1.5,
+        "material": "steel",
+        "brand": "Wiha",
+        "pieces": 6,
+        "provides_abilities": [
+          "unscrew",
+          "screw"
+        ],
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "flathead_screwdriver_1",
+      "name": "Flathead Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:screwdriver_set_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "steel",
+        "size": "5mm",
+        "handle_color": "red",
+        "provides_abilities": [
+          "unscrew",
+          "screw"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "chemical_bottle_1",
+      "name": "Chemical Bottle (Corrosive)",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.8,
+        "material": "glass",
+        "cap_color": "blue",
+        "label": "CORROSIVE",
+        "volume_remaining": "50%",
+        "hazard_level": "high"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "chemical_bottle_2",
+      "name": "Chemical Bottle",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.8,
+        "material": "glass",
+        "cap_color": "red",
+        "label": "FLAMMABLE",
+        "volume_remaining": "75%",
+        "hazard_level": "medium"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "blue_beaker_1",
+      "name": "Blue Glass Beaker",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.3,
+        "material": "glass",
+        "color": "blue",
+        "volume": "500ml",
+        "use": "decorative"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_goggles_1",
+      "name": "Safety Goggles",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "polycarbonate",
+        "color": "clear",
+        "condition": "scratched"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_goggles_2",
+      "name": "Safety Goggles",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "polycarbonate",
+        "color": "clear",
+        "condition": "new"
+      },
+      "states": {}
+    },
+    {
+      "id": "volatile_cabinet_1",
+      "name": "Locked Cabinet (Volatile Compounds)",
+      "type": "FURNITURE",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 85.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "electronic"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Security Keycard",
+      "type": "ITEM",
+      "location_id": "in:main_control_desk_1",
+      "properties": {
+        "weight": 0.02,
+        "material": "plastic",
+        "color": "white",
+        "access_level": "high",
+        "owner": "Dr. Smith"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfiber_cloth_1",
+      "name": "Clean Microfiber Cloth",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 0.1,
+        "material": "microfiber",
+        "color": "white",
+        "condition": "clean"
+      },
+      "states": {}
+    },
+    {
+      "id": "grinder_1",
+      "name": "Industrial Grinder",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_bay",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.6
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "brand": "Makita",
+        "power": "1500W",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {
+        "is_plugged_in": true
+      }
+    },
+    {
+      "id": "sample_material_1",
+      "name": "Test Material Sample",
+      "type": "ITEM",
+      "location_id": "in:workbench_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "composite",
+        "condition": "intact"
+      },
+      "states": {
+        "is_ground": false
+      }
+    },
+    {
+      "id": "fuel_can_1",
+      "name": "Fuel Canister",
+      "type": "ITEM",
+      "location_id": "in:materials_storage",
+      "properties": {
+        "weight": 2.0,
+        "material": "steel",
+        "capacity": "5L",
+        "fuel_type": "diesel",
+        "provides_abilities": [
+          "refuel"
+        ]
+      },
+      "states": {
+        "is_full": true
+      }
+    },
+    {
+      "id": "hydraulic_pump_1",
+      "name": "Hydraulic Pump",
+      "type": "FURNITURE",
+      "location_id": "in:calibration_bay",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 45.0,
+        "is_container": false,
+        "brand": "Parker",
+        "status": "needs_refuel"
+      },
+      "states": {
+        "is_fueled": false
+      }
+    }
+  ],
+  "abilities": [
+    "close",
+    "empty",
+    "grind",
+    "hide",
+    "open",
+    "plug_in",
+    "refuel",
+    "screw",
+    "unplug",
+    "unscrew"
+  ]
+}

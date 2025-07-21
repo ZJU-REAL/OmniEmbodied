@@ -1,0 +1,156 @@
+{
+  "task_background": "Prepare the nocturnal biolab field station for a critical experiment on rare arachnids.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 45.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 45.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place live_specimen_jar_1 in specimen_storage.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "live_specimen_jar_1",
+          "location_id": "in:specimen_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off digital_microscope_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "digital_microscope_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Close the open glass container labeled 'DO NOT OPEN'.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "live_specimen_jar_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Disarm the armed alarm using the disarm tool.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Inflate the deflated red latex object.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "deflated_balloon_1",
+          "is_inflated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the red emergency kit to inject the open specimen jar containing D. cancerides.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_sedation_kit_1",
+          "is_injected": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the torn insect net using the metal tool that provides plastering ability.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "foldable_insect_net_1",
+          "is_plastered": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to start the main generator process.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "process_control_panel_1",
+          "is_running": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the dissection table to the main lab area.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "dissection_table_1",
+          "location_id": ":main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Relocate the heavy sample crate to the specimen storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_sample_crate_1",
+          "location_id": ":specimen_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the industrial freezer to the main lab and open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "industrial_freezer_1",
+          "location_id": ":main_lab"
+        },
+        {
+          "id": "industrial_freezer_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken centrifuge to the equipment locker and press its green button.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "broken_centrifuge_1",
+          "location_id": ":equipment_locker"
+        },
+        {
+          "id": "start_button_1",
+          "is_pressed": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01426"
+}

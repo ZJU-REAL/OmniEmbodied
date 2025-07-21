@@ -1,0 +1,176 @@
+{
+  "task_background": "Secure the marine research station for an approaching storm by preparing instruments and equipment.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        2.5,
+        2.5,
+        2.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 50.0,
+      "max_size": [
+        2.5,
+        2.5,
+        2.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the primary_anemometer_1 on the central_data_console_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "primary_anemometer_1",
+          "location_id": "on:central_data_console_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the folded_map_1 in the living_quarters.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "folded_map_1",
+          "location_id": "in:living_quarters"
+        }
+      ]
+    },
+    {
+      "task_description": "Find the white anemometer and place it in the main lab.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "primary_anemometer_1",
+          "location_id": "in:main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Take the blue vial labeled 'HIGH SALINITY – VERIFY' and place it on the printer_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "high_salinity_vial_1",
+          "location_id": "on:printer_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the primary_anemometer_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "primary_anemometer_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the camping_lantern_1.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "camping_lantern_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the torn lab coat.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "torn_lab_coat_1",
+          "is_paired": true
+        }
+      ]
+    },
+    {
+      "task_description": "Calibrate the satellite dish labeled 'MARINE LINK DELTA'.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "satellite_dish_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to raise the emergency_lever_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_lever_1",
+          "is_lowered": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 work together to disarm the alarm_control_panel_1.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "alarm_control_panel_1",
+          "is_alarm_armed": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the spare_buoy_1 to the dockside_workshop.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "spare_buoy_1",
+          "location_id": ":dockside_workshop"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the steel_instrument_array_1 to the main_lab.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "steel_instrument_array_1",
+          "location_id": ":main_lab"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the satellite_dish_1 to the main_lab and then calibrate it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "satellite_dish_1",
+          "location_id": ":main_lab"
+        },
+        {
+          "id": "satellite_dish_1",
+          "is_calibrated": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the central_data_console_1 to the living_quarters and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "central_data_console_1",
+          "location_id": ":living_quarters"
+        },
+        {
+          "id": "central_data_console_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01097"
+}

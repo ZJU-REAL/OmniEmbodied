@@ -1,0 +1,166 @@
+{
+  "task_background": "Perform critical maintenance and safety checks on an offshore oil rig platform.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1,
+      "max_weight": 80.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1,
+      "max_weight": 80.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 on tool_cart_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:tool_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place blue_paperweight_1 in sturdy_safe_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "blue_paperweight_1",
+          "location_id": "in:sturdy_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pump assembly leaking dark fluid to the outer catwalk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "faulty_pump_assembly_1",
+          "location_id": ":outer_catwalk"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the pressure gauge with the blue calibration sticker on the hydraulic workbench.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "pressure_gauge_1",
+          "location_id": "on:hydraulic_workbench_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the pressure test rig using the welding torch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "pressure_test_rig_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the sensor array using the welding torch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "sensor_array_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the hissing pressure test rig using the welding torch.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "pressure_test_rig_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Fix the sensor array dangling by wires using the welding torch.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "sensor_array_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the emergency shower.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "emergency_shower_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the pressure test rig to the outer catwalk.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "pressure_test_rig_1",
+          "location_id": ":outer_catwalk"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the hazmat locker to the maintenance bay.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "hazmat_locker_1",
+          "location_id": ":maintenance_bay"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the hissing pressure test rig to the outer catwalk and fix it with the welding torch.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "pressure_test_rig_1",
+          "location_id": ":outer_catwalk"
+        },
+        {
+          "id": "pressure_test_rig_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the sensor array that is dangling by wires to the maintenance bay and fix it with the welding torch.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "sensor_array_1",
+          "location_id": ":maintenance_bay"
+        },
+        {
+          "id": "sensor_array_1",
+          "is_welded": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01429"
+}

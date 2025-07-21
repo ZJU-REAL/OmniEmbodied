@@ -1,0 +1,176 @@
+{
+  "task_background": "Secure and maintain the data center during a power fluctuation event to prevent data loss.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 80.0,
+      "max_size": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place coffee_mug_1 on server_status_dashboard_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "coffee_mug_1",
+          "location_id": "on:server_status_dashboard_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place logbook_1 on metal_shelving_unit_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "logbook_1",
+          "location_id": "on:metal_shelving_unit_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the monitor that is a container on the crash cart.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "location_id": "on:crash_cart_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red emergency shutdown toggle on the keycard slot labeled PRIMARY.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "emergency_shutdown_toggle_1",
+          "location_id": "on:keycard_slot_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken drive bay in server rack 2.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "drive_bay_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken label maker in the storage room.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "label_maker_1",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the pen to write on the blue binder of schematics.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "binder_of_schematics_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Write on the leather-bound binder using the pen.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "logbook_1",
+          "is_written_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the battery replacement cart.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "battery_replacement_cart_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to turn on the monitor that is a container.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the broken server rack to the storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_2",
+          "location_id": ":storage_documentation_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the broken industrial UPS unit to the storage room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_unit_3",
+          "location_id": ":storage_documentation_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken server rack to the storage room and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "server_rack_2",
+          "location_id": ":storage_documentation_nook"
+        },
+        {
+          "id": "server_rack_2",
+          "is_broken": false
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the broken industrial UPS unit to the storage room and repair it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "ups_unit_3",
+          "location_id": ":storage_documentation_nook"
+        },
+        {
+          "id": "ups_unit_3",
+          "is_broken": false
+        }
+      ]
+    }
+  ],
+  "scene_id": "01386"
+}

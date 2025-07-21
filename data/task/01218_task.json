@@ -1,0 +1,146 @@
+{
+  "task_background": "Prepare the modular robotics assembly lab for an important demonstration by organizing tools, calibrating equipment, and ensuring safety protocols.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 1.0,
+      "max_weight": 7.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 1.0,
+      "max_weight": 7.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place the KL2541 stepper controller module on the diagnostics station.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "stepper_controller_1",
+          "location_id": "on:diagnostics_station"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the access keycard on the calibration terminal.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "keycard_1",
+          "location_id": "on:calibration_terminal_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the red-labeled coffee thermos on the worktable.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_thermos_1",
+          "location_id": "on:worktable_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Place the engineer's lab coat that is size XL in the cleanroom nook.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "lab_coat_1",
+          "location_id": "in:cleanroom_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Wipe the wet anti-static mat in the cleanroom nook.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "anti_static_mat_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Find the precision soldering iron on the worktable and use it to melt the solder wire spool.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "solder_spool_1",
+          "is_melted": true
+        }
+      ]
+    },
+    {
+      "task_description": "Use the anti-static cleaning cloth to wipe the coffee stain on the worktable.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "coffee_stain_1",
+          "is_wet": false
+        }
+      ]
+    },
+    {
+      "task_description": "Move the bench vise to the cleanroom nook.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "bench_vise_1",
+          "location_id": ":cleanroom_nook"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the torque test rig to the component storage.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "torque_test_rig_1",
+          "location_id": ":component_storage"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the digital inventory screen to the diagnostics station and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "inventory_screen_1",
+          "location_id": ":diagnostics_station"
+        },
+        {
+          "id": "inventory_screen_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the heavy power supply to the main assembly bay and then open it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "power_supply_1",
+          "location_id": ":main_assembly_bay"
+        },
+        {
+          "id": "power_supply_1",
+          "is_open": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01218"
+}

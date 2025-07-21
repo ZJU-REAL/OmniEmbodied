@@ -1,0 +1,176 @@
+{
+  "task_background": "Secure and clean the abandoned military research outpost to prevent hazardous leaks and investigate the incident.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 50.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place id_card_scanner_1 on autopsy_table_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "id_card_scanner_1",
+          "location_id": "on:autopsy_table_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Close heavy_steel_door_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "heavy_steel_door_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the blue chemical bottle labeled 'Biohazard' in specimen_tank_1.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "location_id": "in:specimen_tank_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn on the black CCTV monitor on the security desk.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "cctv_monitor_1",
+          "is_on": true
+        }
+      ]
+    },
+    {
+      "task_description": "Repair the broken centrifuge using the welding torch.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "broken_centrifuge_1",
+          "is_welded": true
+        }
+      ]
+    },
+    {
+      "task_description": "Seal the blue chemical bottle labeled 'Biohazard'.",
+      "task_category": "tool_use",
+      "validation_checks": [
+        {
+          "id": "chemical_bottle_1",
+          "is_sealed": true
+        }
+      ]
+    },
+    {
+      "task_description": "Erase the writing from the partially burned notebook using the eraser.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "partially_burned_notebook_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Recharge the electronic keypad using the spare power cell to unlock the armory door.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "electronic_keypad_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to close the jammed heavy steel door.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "heavy_steel_door_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the false wall panel.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "false_wall_panel_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the autopsy table to the barracks.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "autopsy_table_1",
+          "location_id": ":barracks"
+        }
+      ]
+    },
+    {
+      "task_description": "Move the specimen tank to the armory supply room.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "specimen_tank_1",
+          "location_id": ":armory_supply_room"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the armory door to the central laboratory and recharge its keypad.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "armory_door_1",
+          "location_id": ":central_laboratory"
+        },
+        {
+          "id": "electronic_keypad_1",
+          "is_charged": true
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move the refrigeration unit to the utility corridor and turn it on.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "refrigeration_unit_1",
+          "location_id": ":utility_corridor"
+        },
+        {
+          "id": "refrigeration_unit_1",
+          "is_on": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01008"
+}

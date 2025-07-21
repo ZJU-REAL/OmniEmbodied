@@ -1,0 +1,132 @@
+{
+  "task_background": "Prepare the high school's financial office and kitchen storage areas for the upcoming audit and lunch service.",
+  "agents_config": [
+    {
+      "name": "robot_1",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "name": "robot_2",
+      "max_grasp_limit": 2,
+      "max_weight": 30.0,
+      "max_size": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_description": "Place cash_ledger_1 in drop_safe_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "cash_ledger_1",
+          "location_id": "in:drop_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Turn off fax_machine_1.",
+      "task_category": "direct_command",
+      "validation_checks": [
+        {
+          "id": "fax_machine_1",
+          "is_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Place the silver cash box in the floor safe.",
+      "task_category": "attribute_reasoning",
+      "validation_checks": [
+        {
+          "id": "metal_cash_box_1",
+          "location_id": "in:floor_safe_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Use the eraser to erase the writing on the student meal roster.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "student_meal_roster_1",
+          "is_written_on": false
+        }
+      ]
+    },
+    {
+      "task_description": "Use the plastic wrap to wrap the flour sack closest to the inventory clipboard.",
+      "task_category": "compound_reasoning",
+      "validation_checks": [
+        {
+          "id": "flour_sack_1",
+          "is_open": false
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the drop safe.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "drop_safe_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Have robot_1 and robot_2 cooperate to open the metal cash box.",
+      "task_category": "explicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "metal_cash_box_1",
+          "is_open": true
+        }
+      ]
+    },
+    {
+      "task_description": "Move the flour sack to the security desk.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "flour_sack_2",
+          "location_id": ":security_desk_1"
+        }
+      ]
+    },
+    {
+      "task_description": "Move a flour sack to the cafeteria counter.",
+      "task_category": "implicit_collaboration",
+      "validation_checks": [
+        {
+          "id": "flour_sack_3",
+          "location_id": ":cafeteria_counter"
+        }
+      ]
+    },
+    {
+      "task_description": "Cooperatively move a flour sack to the walk-in freezer and wrap it.",
+      "task_category": "compound_collaboration",
+      "validation_checks": [
+        {
+          "id": "flour_sack_1",
+          "location_id": ":walk_in_freezer_1"
+        },
+        {
+          "id": "flour_sack_1",
+          "is_wrapped": true
+        }
+      ]
+    }
+  ],
+  "scene_id": "01365"
+}
