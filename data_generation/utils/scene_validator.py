@@ -371,7 +371,7 @@ class SceneValidator:
         return obj_id
     
     def generate_error_report(self, json_str: str, parse_error: Optional[str], validation_errors: List[str]) -> str:
-        """生成详细的错误报告"""
+        """Generate detailed error report"""
         report_lines = []
         
         report_lines.append("=== JSON Generation Error Report ===")

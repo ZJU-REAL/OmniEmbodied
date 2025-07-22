@@ -131,7 +131,7 @@ class VLLMLLM(BaseLLM):
         except Exception as e:
             logger.exception(f"VLLM推理时发生错误: {str(e)}")
             self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
-            return f"错误: {str(e)}"
+            return f"Error: {str(e)}"
     
     def generate_chat(self, 
                      messages: List[Dict[str, str]],
@@ -235,4 +235,4 @@ class VLLMLLM(BaseLLM):
         except Exception as e:
             logger.exception(f"VLLM推理时发生错误: {str(e)}")
             self.last_token_usage = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
-            return f"错误: {str(e)}"
+            return f"Error: {str(e)}"

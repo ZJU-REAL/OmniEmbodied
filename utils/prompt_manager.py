@@ -61,10 +61,10 @@ class PromptManager:
         try:
             return template.format(**kwargs)
         except KeyError as e:
-            logger.warning(f"格式化提示词模板时缺少参数: {e}")
+            logger.warning(f"Missing parameter when formatting prompt template: {e}")
             return template
         except Exception as e:
-            logger.exception(f"格式化提示词模板时出错: {e}")
+            logger.exception(f"Error formatting prompt template: {e}")
             return template
     
     def get_formatted_prompt(self, mode: str, template_key: str, default_value: str = "", **kwargs) -> str:
@@ -249,7 +249,7 @@ class PromptManager:
                     # 简要描述
                     description = bridge.describe_agent_natural_language(agent_id)
         except Exception as e:
-            logger.warning(f"获取环境描述时出错: {e}")
+            logger.warning(f"Error getting environment description: {e}")
             return prompt
         
         # 将环境描述直接作为插值参数传递，而不是尝试找插入点

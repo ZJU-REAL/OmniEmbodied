@@ -172,7 +172,7 @@ class ConfigOverrideParser:
             logger.info(f"从文件加载提示词: {prompt_file}")
             return prompts
         except Exception as e:
-            logger.error(f"加载提示词文件失败 {prompt_file}: {e}")
+            logger.error(f"Failed to load prompt file {prompt_file}: {e}")
             return {}
     
     @staticmethod

@@ -214,11 +214,11 @@ class SceneValidator:
         """
         try:
             if not os.path.exists(file_path):
-                return False, [f"文件不存在: {file_path}"]
-                
+                return False, [f"File does not exist: {file_path}"]
+
             _, ext = os.path.splitext(file_path.lower())
             if ext not in ['.json', '.yaml', '.yml']:
-                return False, [f"不支持的文件格式: {ext}"]
+                return False, [f"Unsupported file format: {ext}"]
                 
             # 解析文件
             if ext == '.json':
@@ -232,7 +232,7 @@ class SceneValidator:
             # 验证场景数据
             return SceneValidator.validate_scene(scene_data)
         except Exception as e:
-            return False, [f"验证场景文件时出错: {e}"]
+            return False, [f"Error validating scene file: {e}"]
 
     @staticmethod
     def validate_agent_config(agent_config: Dict[str, Any]) -> Tuple[bool, List[str]]:

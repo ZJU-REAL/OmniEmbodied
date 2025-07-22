@@ -114,7 +114,7 @@ class LLMAgent(BaseAgent):
             else:
                 return "Actions information unavailable"
         except Exception as e:
-            logger.warning(f"获取可用动作列表时出错: {e}")
+            logger.warning(f"Error getting available actions list: {e}")
             return "Available actions information unavailable"
     
 
@@ -168,7 +168,7 @@ class LLMAgent(BaseAgent):
                 room_id = agent_info.get('location_id')
                 env_description = self.bridge.describe_room_natural_language(room_id, agents, sim_config)
             else:
-                env_description = "无法确定当前位置"
+                env_description = "Unable to determine current location"
         elif detail_level == 'brief':
             # 只描述智能体状态
             env_description = self.bridge.describe_environment_natural_language(agents, sim_config)
@@ -285,13 +285,13 @@ class LLMAgent(BaseAgent):
             if not line:
                 continue
 
-            # 匹配"Agnet_1_Action:"格式（支持中英文）
-            if line.startswith('Agnet_1_Action:') or line.startswith('Agent_1_Action:') or line.startswith('Action:') or line.startswith('动作：') or line.startswith('动作:'):
+            # 匹配"Agent_1_Action:"格式（支持中英文）
+            if line.startswith('Agent_1_Action:') or line.startswith('Agnet_1_Action:') or line.startswith('Action:') or line.startswith('动作：') or line.startswith('动作:'):
                 # 提取冒号后的内容作为动作命令
-                if line.startswith('Agnet_1_Action:'):
-                    action = line[15:].strip()  # 去掉"Agnet_1_Action:"前缀
-                elif line.startswith('Agent_1_Action:'):
+                if line.startswith('Agent_1_Action:'):
                     action = line[15:].strip()  # 去掉"Agent_1_Action:"前缀
+                elif line.startswith('Agnet_1_Action:'):
+                    action = line[15:].strip()  # 去掉"Agnet_1_Action:"前缀（向后兼容拼写错误）
                 elif line.startswith('Action:'):
                     action = line[7:].strip()  # 去掉"Action:"前缀（向后兼容）
                 elif line.startswith('动作：'):

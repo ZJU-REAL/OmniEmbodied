@@ -95,11 +95,6 @@ class CentralizedAgent(BaseAgent):
 
         # 管理的智能体ID列表
         self.managed_agent_ids = ["agent_1", "agent_2"]
-        
-        # 循环检测
-        self.consecutive_failures = 0
-        self.max_consecutive_failures = 3
-        self.last_assignments = None
 
     def set_trajectory_recorder(self, trajectory_recorder):
         """设置轨迹记录器引用"""
@@ -315,9 +310,11 @@ class CentralizedAgent(BaseAgent):
                 continue
 
             # 格式1: Agent_1_Action: EXPLORE (新格式)
-            if line.startswith('Agent_1_Action:') or line.startswith('agent_1_action:') or line.startswith('agent_1_动作：') or line.startswith('agent_1_动作:'):
+            if line.startswith('Agent_1_Action:') or line.startswith('Agnet_1_Action:') or line.startswith('agent_1_action:') or line.startswith('agent_1_动作：') or line.startswith('agent_1_动作:'):
                 if line.startswith('Agent_1_Action:'):
                     action = line[15:].strip()  # 去掉"Agent_1_Action:"前缀
+                elif line.startswith('Agnet_1_Action:'):
+                    action = line[15:].strip()  # 去掉"Agnet_1_Action:"前缀（向后兼容拼写错误）
                 elif line.startswith('agent_1_action:'):
                     action = line[15:].strip()  # 去掉"agent_1_action:"前缀（向后兼容）
                 elif line.startswith('agent_1_动作：'):
@@ -348,40 +345,13 @@ class CentralizedAgent(BaseAgent):
 
         # 检查是否解析成功
         if not actions or len(actions) < 2:
-            self.consecutive_failures += 1
-            logger.warning(f"动作解析失败或不完整 (连续失败次数: {self.consecutive_failures})")
-            logger.warning(f"解析结果: {actions}")
+            logger.error(f"Action parsing failed or incomplete")
+            logger.error(f"Parsing result: {actions}")
+            logger.error(f"Original LLM response: {response}")
 
-            if self.consecutive_failures >= self.max_consecutive_failures:
-                logger.error("连续解析失败次数过多，使用默认策略")
-                # 使用默认策略：让两个智能体都探索
-                actions = {"agent_1": "EXPLORE", "agent_2": "EXPLORE"}
-                self.consecutive_failures = 0  # 重置计数器
-            else:
-                # 为缺失的智能体分配默认动作
-                if 'agent_1' not in actions:
-                    actions['agent_1'] = "EXPLORE"
-                if 'agent_2' not in actions:
-                    actions['agent_2'] = "EXPLORE"
-        else:
-            self.consecutive_failures = 0  # 重置失败计数器
+            # 不分配默认动作，直接返回解析失败的结果
+            return {"agent_1": "PARSE_FAILED", "agent_2": "PARSE_FAILED"}
 
-        # 检查是否与上次分配相同（避免无限循环）
-        if actions == self.last_assignments:
-            logger.warning("检测到重复的任务分配，添加随机性")
-            # 为其中一个智能体分配不同的动作
-            import random
-            agent_ids = list(actions.keys())
-            if agent_ids:
-                random_agent = random.choice(agent_ids)
-                alternative_actions = ["EXPLORE", "LOOK", "DONE"]
-                current_action = actions[random_agent]
-                alternative_actions = [a for a in alternative_actions if a != current_action]
-                if alternative_actions:
-                    actions[random_agent] = random.choice(alternative_actions)
-                    logger.debug(f"为 {random_agent} 分配替代动作: {actions[random_agent]}")
-
-        self.last_assignments = actions.copy()
         logger.debug(f"最终动作分配: {actions}")
         return actions
 
@@ -470,6 +440,26 @@ class CentralizedAgent(BaseAgent):
 
         logger.info(f"协调器分配动作: agent_1={actions.get('agent_1', 'UNKNOWN')}, agent_2={actions.get('agent_2', 'UNKNOWN')}")
 
+        # 检查是否解析失败
+        agent_1_failed = actions.get('agent_1', '').strip() == 'PARSE_FAILED'
+        agent_2_failed = actions.get('agent_2', '').strip() == 'PARSE_FAILED'
+
+        if agent_1_failed or agent_2_failed:
+            logger.error("🚫 LLM response parsing failed, unable to extract valid actions")
+            # 记录解析失败的历史
+            results = {
+                "agent_1": {"status": "FAILURE", "message": "LLM response parsing failed: Agent_1_Action not found", "result": None},
+                "agent_2": {"status": "FAILURE", "message": "LLM response parsing failed: Agent_2_Action not found", "result": None}
+            }
+            self.record_action(actions, results)
+
+            combined_message = "LLM response parsing failed: unable to extract Agent_1_Action and Agent_2_Action"
+            return ActionStatus.FAILURE, combined_message, {
+                "coordination_details": results,
+                "actions": actions,
+                "parse_failed": True
+            }
+
         # 检查是否两个智能体都输出DONE
         agent_1_done = actions.get('agent_1', '').strip().upper() == 'DONE'
         agent_2_done = actions.get('agent_2', '').strip().upper() == 'DONE'
@@ -531,13 +521,13 @@ class CentralizedAgent(BaseAgent):
                         overall_status = status  # 如果之前是成功，现在变为失败
 
             except Exception as e:
-                logger.error(f"执行 {agent_id} 动作时出错: {e}")
+                logger.error(f"Error executing {agent_id} action: {e}")
                 results[agent_id] = {
                     "status": "FAILURE",
-                    "message": f"执行出错: {str(e)}",
+                    "message": f"Execution error: {str(e)}",
                     "result": None
                 }
-                messages.append(f"{agent_id}: 执行出错")
+                messages.append(f"{agent_id}: Execution error")
                 overall_status = ActionStatus.FAILURE
 
         # 特殊处理协作动作的结果聚合
@@ -545,12 +535,6 @@ class CentralizedAgent(BaseAgent):
 
         # 记录历史
         self.record_action(actions, results)
-
-        # 更新连续失败计数
-        if overall_status == ActionStatus.FAILURE or overall_status == ActionStatus.INVALID:
-            self.consecutive_failures += 1
-        else:
-            self.consecutive_failures = 0
 
         # 返回聚合结果（保持与单智能体相同的接口）
         return overall_status, combined_message, {

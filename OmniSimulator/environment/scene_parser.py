@@ -28,10 +28,10 @@ class SceneParser:
             with open(file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
-            print(f"JSON解析错误: {e}")
+            print(f"JSON parsing error: {e}")
             return None
         except Exception as e:
-            print(f"读取文件时出错: {e}")
+            print(f"Error reading file: {e}")
             return None
     
     def _parse_yaml(self, file_path: str) -> Optional[Dict[str, Any]]:
