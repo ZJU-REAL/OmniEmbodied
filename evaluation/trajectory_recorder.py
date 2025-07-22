@@ -271,8 +271,12 @@ class TrajectoryRecorder:
     def _extract_action_from_response(self, response: str) -> str:
         """从LLM响应中提取动作命令"""
         try:
-            # 查找新格式 "Agnet_1_Action: " 后面的内容
-            if "Agnet_1_Action:" in response:
+            # 查找新格式 "Agent_1_Action: " 后面的内容
+            if "Agent_1_Action:" in response:
+                action_line = response.split("Agent_1_Action:")[1].split("\n")[0].strip()
+                return action_line
+            # 向后兼容拼写错误格式 "Agnet_1_Action: "
+            elif "Agnet_1_Action:" in response:
                 action_line = response.split("Agnet_1_Action:")[1].split("\n")[0].strip()
                 return action_line
             # 向后兼容旧格式 "Action: "
