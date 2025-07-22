@@ -192,46 +192,58 @@ def create_object_from_dict(data: Dict[str, Any]) -> BaseObject:
         raise ValueError(f"无效的物体类型: {obj_type_str}")
     
     if object_type == ObjectType.STATIC:
-        return StaticObject(
+        obj = StaticObject(
             obj_id=data["id"],
             name=data["name"],
             states=data.get("states", {}),
             properties=data.get("properties", {})
         )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj
     elif object_type == ObjectType.INTERACTABLE:
-        return InteractableObject(
+        obj = InteractableObject(
             obj_id=data["id"],
             name=data["name"],
             states=data.get("states", {}),
             properties=data.get("properties", {})
         )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj
     elif object_type == ObjectType.GRABBABLE:
-        return GrabbableObject(
+        obj = GrabbableObject(
             obj_id=data["id"],
             name=data["name"],
             states=data.get("states", {}),
             properties=data.get("properties", {})
         )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj
     elif object_type == ObjectType.FURNITURE:
-        return FurnitureObject(
+        obj = FurnitureObject(
             obj_id=data["id"],
             name=data["name"],
             states=data.get("states", {}),
             properties=data.get("properties", {})
         )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj
     elif object_type == ObjectType.ITEM:
-        return ItemObject(
+        obj = ItemObject(
             obj_id=data["id"],
             name=data["name"],
             states=data.get("states", {}),
             properties=data.get("properties", {})
         )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj
     else:
         # 默认创建基础物体
-        return BaseObject(
+        obj = BaseObject(
             obj_id=data["id"],
             name=data["name"],
             object_type=object_type,
             states=data.get("states", {}),
             properties=data.get("properties", {})
-        ) 
+        )
+        obj.is_discovered = data.get("is_discovered", False)
+        return obj

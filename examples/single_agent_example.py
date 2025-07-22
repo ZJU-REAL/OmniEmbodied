@@ -55,8 +55,8 @@ def parse_args():
     # 便捷的模型选择参数
     model_group = parser.add_argument_group('便捷模型选择')
     model_group.add_argument('--model', type=str,
-                           choices=['deepseek', 'qwen3b', 'qwen7b', 'openai', 'volcengine', 'bailian'],
-                           help='快速选择模型: deepseek, qwen3b, qwen7b, openai, volcengine, bailian')
+                           choices=['deepseek', 'qwen3b', 'qwen7b', 'qwen72b','llama8b', 'openai', 'volcengine', 'bailian'],
+                           help='快速选择模型: deepseek, qwen3b, qwen7b, qwen72b, openai, volcengine, bailian')
     model_group.add_argument('--observation-mode', type=str,
                            choices=['explore', 'global'],
                            help='观察模式: explore (探索模式，只显示已发现物体), global (全局模式，显示所有物体)')

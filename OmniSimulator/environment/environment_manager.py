@@ -93,7 +93,12 @@ class EnvironmentManager:
                 # 设置物体的发现状态
                 obj_type = obj_data.get('type', '').upper()
                 if obj_type in ['FURNITURE', 'ITEM', 'INTERACTABLE', 'GRABBABLE']:
-                    obj_data['is_discovered'] = False
+                    # 直接从模拟器配置文件读取全局观察设置
+                    from config.config_manager import ConfigManager
+                    config_manager = ConfigManager()
+                    simulator_config = config_manager.get_config('simulator_config', {})
+                    global_observation = simulator_config.get('global_observation', False)
+                    obj_data['is_discovered'] = global_observation
                 
                 location_id = obj_data.get('location_id')
                 object_id = obj_data.get('id', 'unknown')
@@ -123,7 +128,11 @@ class EnvironmentManager:
                         # 设置物体的发现状态
                         obj_type = obj_data.get('type', '').upper()
                         if obj_type in ['FURNITURE', 'ITEM', 'INTERACTABLE', 'GRABBABLE']:
-                            obj_data['is_discovered'] = False
+                            # 直接从模拟器配置文件读取全局观察设置
+                            from config.config_manager import ConfigManager
+                            config_manager = ConfigManager()
+                            global_observation = config_manager.get_config('simulator_config', {}).get('global_observation', False)
+                            obj_data['is_discovered'] = global_observation
                         
                         self.add_object(obj_data, location_id)
                     else:
@@ -144,7 +153,11 @@ class EnvironmentManager:
                     # 设置物体的发现状态
                     obj_type = obj_data.get('type', '').upper()
                     if obj_type in ['FURNITURE', 'ITEM', 'INTERACTABLE', 'GRABBABLE']:
-                        obj_data['is_discovered'] = False
+                        # 直接从模拟器配置文件读取全局观察设置
+                        from config.config_manager import ConfigManager
+                        config_manager = ConfigManager()
+                        global_observation = config_manager.get_config('simulator_config', {}).get('global_observation', False)
+                        obj_data['is_discovered'] = global_observation
                     
                     # 将物体放在第一个房间中
                     first_room_id = next(iter(self.world_state.graph.room_ids))
@@ -297,7 +310,11 @@ class EnvironmentManager:
         """设置物体的发现状态"""
         obj_type = obj_data.get('type', '').upper()
         if obj_type in ['FURNITURE', 'ITEM', 'INTERACTABLE', 'GRABBABLE']:
-            obj_data['is_discovered'] = False
+            # 直接从模拟器配置文件读取全局观察设置
+            from config.config_manager import ConfigManager
+            config_manager = ConfigManager()
+            global_observation = config_manager.get_config('simulator_config', {}).get('global_observation', False)
+            obj_data['is_discovered'] = global_observation
 
         # 清空合作标记（在场景重新加载时）
         if 'states' in obj_data and 'cooperative_modified_attributes' in obj_data['states']:
