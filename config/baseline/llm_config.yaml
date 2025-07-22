@@ -13,14 +13,14 @@ api:
   providers:
     volcengine:
       model: "deepseek-r1-250528"
-      temperature: 0.1
+      temperature: 0.3
       max_tokens: 512
       api_key: "${VOLCENGINE_API_KEY}"
       endpoint: "https://ark.cn-beijing.volces.com/api/v3"
 
     bailian:
       model: "qwen2.5-72b-instruct"
-      temperature: 0.1
+      temperature: 0.3
       max_tokens: 512
       api_key: "${BAILIAN_API_KEY}"
       endpoint: "https://dashscope.aliyuncs.com/compatible-mode/v1"
@@ -33,6 +33,20 @@ api:
       api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"
       endpoint: "https://api.deepseek.com"
 
+    deepseekv3:
+      model: "deepseek-chat"
+      temperature: 0.3
+      max_tokens: 512
+      api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"
+      endpoint: "https://api.deepseek.com"
+
+    deepseekr1:
+      model: "deepseek-reasoner"
+      temperature: 0.3
+      max_tokens: 512
+      api_key: "sk-ec0c6aa1a50a49b99ae1ba48eb46cc56"
+      endpoint: "https://api.deepseek.com"
+
     qwen3b:
       model: "Qwen2.5-3B-Instruct"
       temperature: 0.3
@@ -40,9 +54,8 @@ api:
       api_key: "dummy_key"
       endpoint: "http://10.15.82.49:8003/v1"
       extends:
-        # 支持单智能体和多智能体格式的通用正则表达式
-        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
-        stop_tokens: ["\n\n","Execution Result"]
+        guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
+        stop_tokens: []
 
     qwen7b:
       model: "Qwen2.5-7B-Instruct"
@@ -51,9 +64,8 @@ api:
       api_key: "dummy_key"
       endpoint: "http://10.130.129.18:8007/v1"
       extends:
-        # 支持单智能体和多智能体格式的通用正则表达式
-        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
-        stop_tokens: ["\n\n","Execution Result"]
+        guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
+        stop_tokens: []
 
     qwen72b:
       model: "Qwen2.5-72B-Instruct-GPTQ-Int4"
@@ -62,9 +74,8 @@ api:
       api_key: "dummy_key"
       endpoint: "http://10.130.129.18:8720/v1"
       extends:
-        # 支持单智能体和多智能体格式的通用正则表达式
-        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
-        stop_tokens: ["\n\n","Execution Result"]
+        guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
+        stop_tokens: []
 
     llama8b:
       model: "Meta-Llama-3.1-8B-Instruct"
@@ -73,9 +84,8 @@ api:
       api_key: "dummy_key"
       endpoint: "http://10.15.82.43:8018/v1"
       extends:
-        # 支持单智能体和多智能体格式的通用正则表达式
-        guided_regex: "Thought: .+\\n(?:Agnet_1_Action|Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*(?:\\n(?:Agent_1_Action|Agent_2_Action): [A-Z_]+(?:\\s+[a-zA-Z0-9_]+)*)?"
-        stop_tokens: ["\n\n","Execution Result"]
+        guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
+        stop_tokens: []
 
 # VLLM本地推理配置
 vllm:
