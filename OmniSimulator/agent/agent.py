@@ -28,13 +28,7 @@ class Agent:
         self.properties = properties or {}
         self.current_action = None  # 当前正在执行的动作（如需要多回合的动作）
         
-        # 设置智能体对物体尺寸的限制（默认值）
-        if "max_length" not in self.properties:
-            self.properties["max_length"] = 1.0  # 最大长度(米)
-        if "max_width" not in self.properties:
-            self.properties["max_width"] = 1.0   # 最大宽度(米)
-        if "max_height" not in self.properties:
-            self.properties["max_height"] = 1.0  # 最大高度(米)
+        # 设置智能体的重量限制（默认值）
         if "max_weight" not in self.properties:
             self.properties["max_weight"] = 10.0 # 最大重量(千克)
         
@@ -64,35 +58,26 @@ class Agent:
     
     def can_carry(self, object_properties: Dict[str, Any]) -> Tuple[bool, str]:
         """
-        检查智能体是否能够承载特定物体（尺寸和重量限制）
-        
+        Check if agent can carry the object (weight limit only)
+        Cooperative mode has no weight limit
+
         Args:
-            object_properties: 物体属性字典，包含size([长,宽,高])/weight等
-            
+            object_properties: 物体属性字典，包含weight等
+
         Returns:
             Tuple[bool, str]: (是否可以承载, 原因)
         """
-        # 检查重量限制
-        obj_weight = object_properties.get("weight", 0.0)
-        if self.current_weight + obj_weight > self.properties["max_weight"]:
-            return False, f"Weight limit exceeded (current:{self.current_weight}kg + object:{obj_weight}kg > max:{self.properties['max_weight']}kg)"
-        
-        # 检查尺寸限制，优先用size数组
-        size = object_properties.get("size")
-        if size is not None and isinstance(size, (list, tuple)) and len(size) == 3:
-            obj_length, obj_width, obj_height = size
-        else:
-            obj_length = object_properties.get("length", 0.0)
-            obj_width = object_properties.get("width", 0.0)
-            obj_height = object_properties.get("height", 0.0)
-        
-        if obj_length > self.properties["max_length"]:
-            return False, f"Object length {obj_length}m exceeds agent maximum limit {self.properties['max_length']}m"
-        if obj_width > self.properties["max_width"]:
-            return False, f"Object width {obj_width}m exceeds agent maximum limit {self.properties['max_width']}m"
-        if obj_height > self.properties["max_height"]:
-            return False, f"Object height {obj_height}m exceeds agent maximum limit {self.properties['max_height']}m"
+        # Check cooperative mode
+        if hasattr(self, 'corporate_mode_object_id') and self.corporate_mode_object_id is not None:
+            return True, "Cooperative mode: no weight limit"
 
+        # Single agent mode: check weight limit
+        obj_weight = object_properties.get("weight", 0.0)
+        agent_max_weight = self.properties.get("max_weight", 50.0)  # 使用get方法避免KeyError，默认50kg
+        if self.current_weight + obj_weight > agent_max_weight:
+            return False, f"Weight limit exceeded (current:{self.current_weight}kg + object:{obj_weight}kg > max:{agent_max_weight}kg)"
+
+        # 移除尺寸限制检查 - 智能体可以抓取任何尺寸的物体，只要重量允许
         return True, "Can carry"
     
     def grab_object(self, object_id: str, object_properties: Dict[str, Any]) -> Tuple[bool, str]:
@@ -392,19 +377,28 @@ class Agent:
     def from_dict(cls, data: Dict[str, Any]) -> 'Agent':
         """
         从字典创建智能体对象
-        
+
         Args:
             data: 智能体数据字典
-            
+
         Returns:
             Agent: 智能体对象
         """
+        # 处理properties，将顶层的物理属性移动到properties中
+        properties = data.get('properties', {}).copy()
+
+        # 将顶层的物理属性移动到properties中（如果properties中没有的话）
+        physical_attrs = ['max_weight', 'max_length', 'max_width', 'max_height', 'max_size']
+        for attr in physical_attrs:
+            if attr in data and attr not in properties:
+                properties[attr] = data[attr]
+
         agent = cls(
             agent_id=data.get('id', ''),
             name=data.get('name', ''),
             location_id=data.get('location_id', ''),
             max_grasp_limit=data.get('max_grasp_limit', 2),
-            properties=data.get('properties', {})
+            properties=properties
         )
         
         # 还原其他字段

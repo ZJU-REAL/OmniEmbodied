@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据集矫正工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>数据集矫正工具 - 进度: <span id="progress">0/0</span></h1>
+            <div class="task-info">
+                <p><strong>当前:</strong> <span id="current-task">-</span> (<span id="task-category">-</span>)</p>
+                <p><strong>任务描述:</strong> <span id="task-description">-</span></p>
+            </div>
+        </div>
+        
+        <div class="task-section">
+            <h3>任务定义 (Task JSON)
+                <button id="save-task" class="save-button">保存</button>
+                <button id="reset-task" class="reset-button">重置</button>
+            </h3>
+            <div id="task-editor" class="task-editor"></div>
+        </div>
+        
+        <div class="main-content">
+            <div class="scene-section">
+                <h3>场景配置 (Scene JSON)
+                    <button id="save-scene" class="save-button">保存</button>
+                    <button id="reset-scene" class="reset-button">重置</button>
+                </h3>
+                <div id="scene-editor" class="scene-editor"></div>
+            </div>
+
+            <div class="trajectory-section">
+                <h3>轨迹数据 (Trajectory JSON) - 只读</h3>
+                <div id="trajectory-editor" class="trajectory-editor"></div>
+            </div>
+            
+            <div class="evaluation-panel">
+                <h3>人工评估</h3>
+                
+                <div class="question">
+                    <p><strong>1. 任务是否可以完成？</strong></p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="completable" value="yes"> 是</label>
+                        <label><input type="radio" name="completable" value="no"> 否</label>
+                    </div>
+                </div>
+                
+                <div class="question" id="correctness-question" style="display: none;">
+                    <p><strong>2. 4o完成得对吗？</strong></p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="correctness" value="correct"> 对</label>
+                        <label><input type="radio" name="correctness" value="incorrect"> 不对</label>
+                    </div>
+                </div>
+                
+                <div class="previous-result">
+                    <p><strong>上次结果:</strong> <span id="previous-result">None</span></p>
+                </div>
+                
+                <div class="notes-section">
+                    <label for="notes"><strong>备注:</strong></label>
+                    <textarea id="notes" placeholder="可选的备注信息..."></textarea>
+                </div>
+                
+                <div class="buttons">
+                    <button id="save-evaluation" class="btn-primary">保存评估</button>
+                    <div class="nav-buttons">
+                        <button id="prev-task" class="btn-secondary">上一个</button>
+                        <button id="next-task" class="btn-secondary">下一个</button>
+                    </div>
+                    <div class="jump-section">
+                        <input type="number" id="jump-index" placeholder="跳转到..." min="1">
+                        <button id="jump-task" class="btn-secondary">跳转</button>
+                    </div>
+                </div>
+                
+                <div class="status" id="status"></div>
+
+                <div class="help-section">
+                    <details>
+                        <summary><strong>编辑帮助</strong></summary>
+                        <div class="help-content">
+                            <p><strong>代码模式编辑：</strong></p>
+                            <ul>
+                                <li>直接编辑JSON代码，语法高亮</li>
+                                <li>使用搜索框快速定位内容</li>
+                                <li>支持Ctrl+F进行查找替换</li>
+                            </ul>
+                            <p><strong>添加属性到空states：</strong></p>
+                            <ul>
+                                <li>找到 "states": {}</li>
+                                <li>在{}中添加属性，如：<br>
+                                    "is_active": false,<br>
+                                    "is_open": true</li>
+                            </ul>
+                            <p><strong>切换视图：</strong></p>
+                            <ul>
+                                <li>代码模式：直接编辑JSON文本</li>
+                                <li>树形模式：可视化编辑</li>
+                                <li>表单模式：表单式编辑</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

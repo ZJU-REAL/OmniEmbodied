@@ -190,19 +190,22 @@ class ScenarioExecutor:
 
             simulator = SimulationEngine(config=simulator_config)
 
-            # 使用initialize方法加载场景
-            scene_file = os.path.join(self.scene_dir, f"{self.scenario_id}_scene.json")
-            success = simulator.initialize(scene_file)
+            # 使用initialize_with_data方法同时加载场景和智能体配置
+            init_data = {
+                'scene': self.scene_data,
+                'task': self.task_data
+            }
+            success = simulator.initialize_with_data(init_data)
 
             if not success:
-                raise RuntimeError(f"模拟器初始化失败: {scene_file}")
+                raise RuntimeError(f"模拟器初始化失败: {self.scenario_id}")
 
             # 设置任务数据和验证器
             if hasattr(simulator, 'set_task_data') and self.task_data:
                 simulator.set_task_data(self.task_data)
                 logger.debug("✅ 已设置任务数据和验证器")
 
-            logger.info(f"🎮 模拟器初始化完成，场景已加载: {self.scenario_id}")
+            logger.info(f"🎮 模拟器初始化完成，场景和智能体配置已加载: {self.scenario_id}")
             return simulator
 
         except Exception as e:

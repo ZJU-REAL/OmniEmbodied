@@ -307,16 +307,23 @@ class ActionValidator:
         if not result:
             return result
 
-        # 4. 检查物体上是否有其他物体
-        child_ids = []
-        edges = env_manager.world_state.graph.edges.get(target_id, {})
-        for child_id, rels in edges.items():
-            for rel in rels:
-                if rel.get('type') in ('in', 'on'):
-                    child_ids.append(child_id)
+        # 4. Check if object has children - allow but verify weight
+        from .weight_calculator import calculate_container_weight, has_children
+        import logging
+        logger = logging.getLogger(__name__)
 
-        if child_ids:
-            return ValidationResult(False, f"Object has other objects on/in it {', '.join(child_ids)}, cannot grab")
+        is_cooperative = hasattr(agent, 'corporate_mode_object_id') and agent.corporate_mode_object_id is not None
+
+        if not is_cooperative and has_children(env_manager, target_id):
+            # Single mode: check total weight for containers with children
+            total_weight = calculate_container_weight(env_manager, target_id)
+            can_carry, reason = agent.can_carry({'weight': total_weight})
+            if not can_carry:
+                return ValidationResult(False, f"Cannot grab container with contents: {reason}")
+
+            logger.info(f"Allow grabbing container {target_id} with children (total weight: {total_weight}kg)")
+        elif is_cooperative:
+            logger.info(f"Cooperative mode: allow grabbing {target_id} without weight check")
 
         return ValidationResult(True, "Grab action validation passed", {"object": obj})
 

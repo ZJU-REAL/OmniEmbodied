@@ -6,6 +6,7 @@ import logging
 from ...core.enums import ActionType, ActionStatus, ObjectType
 from .base_action import BaseAction
 from ...utils.action_validators import ActionValidator
+from ...utils.weight_calculator import calculate_container_weight, has_children
 
 logger = logging.getLogger(__name__)
 
@@ -204,13 +205,32 @@ class GrabAction(BaseAction):
 
         # 检查物体是否可以被智能体承载
         properties = obj.get('properties', {})
-        can_carry, reason = agent.can_carry(properties)
+
+        # Check if cooperative mode
+        is_cooperative = hasattr(agent, 'corporate_mode_object_id') and agent.corporate_mode_object_id is not None
+
+        if is_cooperative:
+            # Cooperative mode: use original weight
+            effective_properties = properties
+            logger.info(f"Cooperative grab: {obj_name}, skip weight check")
+        else:
+            # Single mode: calculate total weight if has children
+            if has_children(env_manager, self.target_id):
+                total_weight = calculate_container_weight(env_manager, self.target_id)
+                effective_properties = properties.copy()
+                effective_properties['weight'] = total_weight
+                logger.info(f"Grab container {obj_name}: total weight {total_weight}kg (including children)")
+            else:
+                effective_properties = properties
+
+        # Check carrying capacity
+        can_carry, reason = agent.can_carry(effective_properties)
         if not can_carry:
-            logger.warning(f"Object cannot be carried: {reason}")
+            logger.warning(f"Cannot carry object: {reason}")
             return ActionStatus.FAILURE, reason, None
 
-        # 将物体添加到智能体库存
-        success, message = agent.grab_object(self.target_id, properties)
+        # Add object to agent inventory
+        success, message = agent.grab_object(self.target_id, effective_properties)
         if not success:
             logger.warning(f"Grab failed: {message}")
             return ActionStatus.FAILURE, message, None
@@ -333,8 +353,20 @@ class PlaceAction(BaseAction):
             location = env_manager.get_object_by_id(location_id.split(':', 1)[1])
             location_name = location.get('name', location_id.split(':', 1)[1]) if location else location_id.split(':', 1)[1]
         
-        # 从智能体库存移除物体
-        success, message = agent.drop_object(self.target_id, obj_properties)
+        # 从智能体库存移除物体 - 计算正确的重量
+        is_cooperative = hasattr(agent, 'corporate_mode_object_id') and agent.corporate_mode_object_id is not None
+
+        if is_cooperative:
+            effective_properties = obj_properties
+        else:
+            if has_children(env_manager, self.target_id):
+                total_weight = calculate_container_weight(env_manager, self.target_id)
+                effective_properties = obj_properties.copy()
+                effective_properties['weight'] = total_weight
+            else:
+                effective_properties = obj_properties
+
+        success, message = agent.drop_object(self.target_id, effective_properties)
         if not success:
             return ActionStatus.FAILURE, message, None
         

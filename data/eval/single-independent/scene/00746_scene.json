@@ -1,1 +1,646 @@
-../../../data-all/scene/00204_scene.json
+{
+  "description": "A high-stakes digital forensics facility where a team of analysts and engineers must collaboratively investigate a malicious website redirecting users to phishing domains.",
+  "rooms": [
+    {
+      "id": "server_cluster",
+      "name": "Server Cluster",
+      "properties": {
+        "type": "industrial"
+      },
+      "connected_to_room_ids": [
+        "forensics_workbench",
+        "collaboration_hub"
+      ]
+    },
+    {
+      "id": "forensics_workbench",
+      "name": "Forensics Workbench",
+      "properties": {
+        "type": "workspace"
+      },
+      "connected_to_room_ids": [
+        "server_cluster",
+        "evidence_lockup"
+      ]
+    },
+    {
+      "id": "evidence_lockup",
+      "name": "Evidence Lockup",
+      "properties": {
+        "type": "secure_storage"
+      },
+      "connected_to_room_ids": [
+        "forensics_workbench",
+        "archives_noise_zone"
+      ]
+    },
+    {
+      "id": "collaboration_hub",
+      "name": "Collaboration Hub",
+      "properties": {
+        "type": "meeting_space"
+      },
+      "connected_to_room_ids": [
+        "server_cluster",
+        "archives_noise_zone"
+      ]
+    },
+    {
+      "id": "archives_noise_zone",
+      "name": "Archives & Noise Zone",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "evidence_lockup",
+        "collaboration_hub"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "mainframe_rack_1",
+      "name": "Mainframe Rack",
+      "type": "FURNITURE",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "model_number": "NF-42",
+        "status_led": "flickering"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "network_switch_panel_1",
+      "name": "Network Switch Panel",
+      "type": "FURNITURE",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.1
+        ],
+        "weight": 15.0,
+        "brand": "Cisco",
+        "ports": 48,
+        "unplugged_cables": 3
+      },
+      "states": {}
+    },
+    {
+      "id": "compromised_server_1",
+      "name": "Compromised Server",
+      "type": "FURNITURE",
+      "location_id": "in:mainframe_rack_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.1
+        ],
+        "weight": 12.0,
+        "label": "PAKTUTORIAL_MIRROR",
+        "note": "Check /var/log/redirects",
+        "is_container": true
+      },
+      "states": {
+        "is_dirty": true,
+        "is_open": false,
+        "is_loose": false
+      }
+    },
+    {
+      "id": "usb_dongle_1",
+      "name": "USB Dongle",
+      "type": "ITEM",
+      "location_id": "in:compromised_server_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "length": 5,
+        "label": "FIREWALL_OVERRIDE",
+        "provides_abilities": [
+          "download"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "FURNITURE",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.1
+        ],
+        "weight": 2.0,
+        "current_monitor": 3,
+        "display": "tail -f access.log"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "tool_cart_1",
+      "name": "Tool Cart",
+      "type": "FURNITURE",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.9
+        ],
+        "weight": 25.0,
+        "is_container": true,
+        "contents": [
+          "hex_wrenches",
+          "thermal_camera",
+          "ethernet_cable"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "hex_wrenches_1",
+      "name": "Hex Wrenches",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.5,
+        "material": "steel",
+        "provides_abilities": [
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "thermal_camera_1",
+      "name": "Thermal Camera",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 1.2,
+        "brand": "FLIR",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "ethernet_cable_1",
+      "name": "Ethernet Cable",
+      "type": "ITEM",
+      "location_id": "in:tool_cart_1",
+      "properties": {
+        "weight": 0.3,
+        "length": 3,
+        "color": "blue",
+        "is_coiled": true
+      },
+      "states": {}
+    },
+    {
+      "id": "compliance_poster_1",
+      "name": "Compliance Poster",
+      "type": "ITEM",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "weight": 0.2,
+        "standard": "ISO 27001:2013",
+        "condition": "coffee-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "raspberry_pi_1",
+      "name": "Raspberry Pi",
+      "type": "ITEM",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "weight": 0.1,
+        "status": "unplugged",
+        "sd_cards": [
+          "TEST_SCRIPTS"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "triple_monitor_setup_1",
+      "name": "Triple Monitor Setup",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          0.8
+        ],
+        "weight": 20.0,
+        "left_screen": "Wireshark traffic",
+        "middle_screen": "hex editor",
+        "right_screen": "jQuery code"
+      },
+      "states": {}
+    },
+    {
+      "id": "microscope_workstation_1",
+      "name": "Microscope Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.5
+        ],
+        "weight": 15.0,
+        "lens": "adjustable",
+        "subject": "disassembled router"
+      },
+      "states": {}
+    },
+    {
+      "id": "encrypted_hard_drive_1",
+      "name": "Encrypted Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 0.3,
+        "size": "2.5”",
+        "color": "silver",
+        "container": "Faraday pouch",
+        "label": "ORIGINAL_PAKTUTORIAL_BACKUP"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "notepad_1",
+      "name": "Notepad",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 0.2,
+        "content": "void(0) exploit—check anchor tags!"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 0.4,
+        "status": "out of tape",
+        "nearby_labels": [
+          "CONFIDENTIAL"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Multimeter",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 0.5,
+        "mode": "continuity",
+        "probes": "crossed",
+        "provides_abilities": [
+          "check_pressure"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cyberzines_1",
+      "name": "Stack of 1990s Cyberzines",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 2.0,
+        "titles": [
+          "Phreaking Monthly"
+        ],
+        "condition": "aged"
+      },
+      "states": {}
+    },
+    {
+      "id": "toy_penguin_1",
+      "name": "Stuffed Toy Penguin",
+      "type": "ITEM",
+      "location_id": "in:forensics_workbench",
+      "properties": {
+        "weight": 0.3,
+        "badge": "#1 HACKER"
+      },
+      "states": {}
+    },
+    {
+      "id": "biometric_safe_1",
+      "name": "Biometric Safe",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "size": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "weight": 200.0,
+        "security": "fingerprint + keycard",
+        "display": "AWAIT SCAN"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_shelving_1",
+      "name": "Evidence Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "size": [
+          2.0,
+          0.5,
+          2.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "forms": "chain of custody"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "jiffy_bag_1",
+      "name": "Sealed Jiffy Bag",
+      "type": "ITEM",
+      "location_id": "in:evidence_shelving_1",
+      "properties": {
+        "weight": 0.4,
+        "dimensions": "30x20cm",
+        "label": "GOOGLE_REDIRECT_CASE_#4412",
+        "tamper_evidence": "intact"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "keycard_1",
+      "name": "Keycard",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.05,
+        "location": "under coffee cup",
+        "condition": "magnetic strip worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_tags_1",
+      "name": "Evidence Tags",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.1,
+        "status": "blank",
+        "nearby_printer": "thermal"
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.8,
+        "status": "one glove dangling",
+        "type": "latex"
+      },
+      "states": {}
+    },
+    {
+      "id": "outdated_calendar_1",
+      "name": "Outdated Calendar",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.3,
+        "date": "October 2012",
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "uv_light_1",
+      "name": "Broken UV Light",
+      "type": "ITEM",
+      "location_id": "in:evidence_lockup",
+      "properties": {
+        "weight": 0.5,
+        "inscription": "FOR FINGERPRINTS",
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "holographic_network_map_1",
+      "name": "Holographic Network Map",
+      "type": "FURNITURE",
+      "location_id": "in:collaboration_hub",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.5
+        ],
+        "weight": 15.0,
+        "technology": "holographic",
+        "content": "network topology"
+      },
+      "states": {}
+    },
+    {
+      "id": "rolling_chair_1",
+      "name": "Rolling Chair",
+      "type": "FURNITURE",
+      "location_id": "in:collaboration_hub",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          1.0
+        ],
+        "weight": 12.0,
+        "color": "black",
+        "condition": "coffee-stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Defunct Coffee Machine",
+      "type": "FURNITURE",
+      "location_id": "in:archives_noise_zone",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 8.0,
+        "status": "defunct",
+        "brand": "Keurig"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "broken_printer_1",
+      "name": "Broken Printer",
+      "type": "FURNITURE",
+      "location_id": "in:archives_noise_zone",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 10.0,
+        "condition": "broken",
+        "brand": "HP"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "bookshelves_1",
+      "name": "Overflowing Bookshelves",
+      "type": "FURNITURE",
+      "location_id": "in:archives_noise_zone",
+      "properties": {
+        "size": [
+          2.0,
+          0.3,
+          2.0
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "contents": [
+          "outdated_manuals"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "outdated_manuals_1",
+      "name": "Outdated Manuals",
+      "type": "ITEM",
+      "location_id": "in:bookshelves_1",
+      "properties": {
+        "weight": 5.0,
+        "condition": "aged",
+        "topics": [
+          "obsolete_technology"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:archives_noise_zone",
+      "properties": {
+        "weight": 0.2,
+        "color": "gray",
+        "condition": "used",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sponge_1",
+      "name": "Sponge",
+      "type": "ITEM",
+      "location_id": "in:archives_noise_zone",
+      "properties": {
+        "weight": 0.1,
+        "condition": "damp",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_clock_1",
+      "name": "Wall Clock",
+      "type": "ITEM",
+      "location_id": "in:collaboration_hub",
+      "properties": {
+        "weight": 1.0,
+        "feature": "ticking",
+        "purpose": "countdown"
+      },
+      "states": {}
+    },
+    {
+      "id": "router_1",
+      "name": "Router",
+      "type": "ITEM",
+      "location_id": "in:server_cluster",
+      "properties": {
+        "weight": 0.8,
+        "led": "blinking red",
+        "interval": "every 3 seconds"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "check_pressure",
+    "clean",
+    "download",
+    "loosen",
+    "open",
+    "close"
+  ]
+}

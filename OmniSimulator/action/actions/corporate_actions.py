@@ -91,12 +91,13 @@ class CorpGrabAction(BaseAction):
     def execute(self, world_state, env_manager, agent_manager) -> Tuple[ActionStatus, str, Optional[Dict[str, Any]]]:
         """执行合作抓取动作"""
         try:
-            # 简化实现：标记所有参与的智能体进入合作模式
+            # 标记所有参与的智能体进入合作模式，并通过agent_manager同步状态
             for agent_id in self.agents:
                 agent = agent_manager.get_agent(agent_id)
                 if agent:
-                    agent.corporate_mode_object_id = self.target_object
-            
+                    # 使用agent_manager.update_agent确保状态同步到world_state
+                    agent_manager.update_agent(agent_id, {'corporate_mode_object_id': self.target_object})
+
             return ActionStatus.SUCCESS, f"Agents {', '.join(self.agents)} started cooperative grab of {self.target_object}", None
         except Exception as e:
             return ActionStatus.FAILURE, f"Cooperative grab failed: {str(e)}", None
@@ -166,8 +167,9 @@ class CorpGotoAction(BaseAction):
             for agent_id in self.agents:
                 agent = agent_manager.get_agent(agent_id)
                 if agent:
-                    agent.location_id = self.target_location
-                    world_state.update_agent(agent_id, {'location_id': self.target_location})
+                    agent_manager.update_agent(agent_id, {'location_id': self.target_location})
+                    # agent.location_id = self.target_location
+                    # world_state.update_agent(agent_id, {'location_id': self.target_location})
             
             return ActionStatus.SUCCESS, f"Agents {', '.join(self.agents)} cooperatively moved to {self.target_location}", None
         except Exception as e:
@@ -266,11 +268,12 @@ class CorpPlaceAction(BaseAction):
             if not success:
                 return ActionStatus.FAILURE, f"Cannot move object to specified location: {self.location}", None
 
-            # 解除所有智能体的合作模式
+            # 解除所有智能体的合作模式，并通过agent_manager同步状态
             for agent_id in self.agents:
                 agent = agent_manager.get_agent(agent_id)
                 if agent:
-                    agent.corporate_mode_object_id = None
+                    # 使用agent_manager.update_agent确保状态同步到world_state
+                    agent_manager.update_agent(agent_id, {'corporate_mode_object_id': None})
 
             return ActionStatus.SUCCESS, f"Agents {', '.join(self.agents)} cooperatively placed {self.target_object} at {self.location}", None
         except Exception as e:

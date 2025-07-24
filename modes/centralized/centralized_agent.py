@@ -487,48 +487,151 @@ class CentralizedAgent(BaseAgent):
         overall_status = ActionStatus.SUCCESS
         messages = []
 
-        for agent_id in self.managed_agent_ids:
-            action = actions.get(agent_id, "EXPLORE")
-            action = action.strip()
+        # 检测合作命令并进行去重处理
+        agent_1_action = actions.get('agent_1', '').strip()
+        agent_2_action = actions.get('agent_2', '').strip()
 
-            # 如果是DONE命令，不需要执行，直接记录
-            if action.upper() == 'DONE':
-                results[agent_id] = {
-                    "status": "SUCCESS",
-                    "message": "DONE",
+        # 检查是否都是合作命令
+        is_agent_1_corp = agent_1_action.startswith('CORP_')
+        is_agent_2_corp = agent_2_action.startswith('CORP_')
+
+        # 如果两个智能体都发出了合作命令，需要检查一致性
+        if is_agent_1_corp and is_agent_2_corp:
+            # 提取命令的前缀部分进行比较（例如：CORP_GRAB）
+            agent_1_prefix = agent_1_action.split()[0] if agent_1_action.split() else ''
+            agent_2_prefix = agent_2_action.split()[0] if agent_2_action.split() else ''
+
+            if agent_1_prefix != agent_2_prefix:
+                # 命令不一致，返回英文错误信息
+                error_message = "Cooperation commands must be issued simultaneously and consistently"
+                logger.error(f"🚫 合作命令不一致: agent_1={agent_1_action}, agent_2={agent_2_action}")
+
+                # 为两个智能体设置相同的错误结果
+                error_result = {
+                    "status": "FAILURE",
+                    "message": error_message,
                     "result": None
                 }
-                messages.append(f"{agent_id}: DONE")
-                logger.info(f"{agent_id} 输出DONE")
-                continue
+                results['agent_1'] = error_result
+                results['agent_2'] = error_result
+                messages.append(f"agent_1: {error_message}")
+                messages.append(f"agent_2: {error_message}")
+                overall_status = ActionStatus.FAILURE
 
-            # 记录执行命令
-            logger.info(f"执行命令 {agent_id}: {action}")
+                # 记录历史并返回
+                self.record_action(actions, results)
+                return overall_status, error_message, {
+                    "coordination_details": results,
+                    "actions": actions,
+                    "cooperation_command_mismatch": True
+                }
 
-            # 执行动作
+            # 命令一致，只执行一次合作命令
+            logger.info(f"🤝 检测到一致的合作命令: {agent_1_prefix}")
+            logger.info(f"执行合作命令 (去重): {agent_1_action}")
+
             try:
-                status, message, result = self.bridge.process_command(agent_id, action)
-                results[agent_id] = {
+                # 只通过第一个智能体执行合作命令
+                command_result = self.bridge.process_command('agent_1', agent_1_action)
+
+                # 检查返回值是否有效
+                if command_result is None:
+                    raise ValueError("bridge.process_command returned None")
+
+                if not isinstance(command_result, (tuple, list)) or len(command_result) != 3:
+                    raise ValueError(f"bridge.process_command returned invalid format: {command_result}")
+
+                status, message, result = command_result
+
+                # 安全处理 message，确保不为 None
+                if message is None:
+                    message = "No message provided"
+
+                # 将执行结果复制给两个智能体
+                shared_result = {
                     "status": status.name if hasattr(status, 'name') else str(status),
                     "message": message,
                     "result": result
                 }
-                messages.append(f"{agent_id}: {message}")
+                results['agent_1'] = shared_result
+                results['agent_2'] = shared_result
+                messages.append(f"agent_1: {message}")
+                messages.append(f"agent_2: {message}")
 
                 # 更新总体状态
                 if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
-                    if overall_status == ActionStatus.SUCCESS:
-                        overall_status = status  # 如果之前是成功，现在变为失败
+                    overall_status = status
 
             except Exception as e:
-                logger.error(f"Error executing {agent_id} action: {e}")
-                results[agent_id] = {
+                logger.error(f"Error executing cooperation command: {e}")
+                error_result = {
                     "status": "FAILURE",
-                    "message": f"Execution error: {str(e)}",
+                    "message": f"Cooperation execution error: {str(e)}",
                     "result": None
                 }
-                messages.append(f"{agent_id}: Execution error")
+                results['agent_1'] = error_result
+                results['agent_2'] = error_result
+                messages.append(f"agent_1: Cooperation execution error")
+                messages.append(f"agent_2: Cooperation execution error")
                 overall_status = ActionStatus.FAILURE
+        else:
+            # 非合作命令或只有一个智能体发出合作命令，使用原有逻辑
+            for agent_id in self.managed_agent_ids:
+                action = actions.get(agent_id, "EXPLORE")
+                action = action.strip()
+
+                # 如果是DONE命令，不需要执行，直接记录
+                if action.upper() == 'DONE':
+                    results[agent_id] = {
+                        "status": "SUCCESS",
+                        "message": "DONE",
+                        "result": None
+                    }
+                    messages.append(f"{agent_id}: DONE")
+                    logger.info(f"{agent_id} 输出DONE")
+                    continue
+
+                # 记录执行命令
+                logger.info(f"执行命令 {agent_id}: {action}")
+
+                # 执行动作
+                try:
+                    command_result = self.bridge.process_command(agent_id, action)
+
+                    # 检查返回值是否有效
+                    if command_result is None:
+                        raise ValueError("bridge.process_command returned None")
+
+                    if not isinstance(command_result, (tuple, list)) or len(command_result) != 3:
+                        raise ValueError(f"bridge.process_command returned invalid format: {command_result}")
+
+                    status, message, result = command_result
+
+                    # 安全处理 message，确保不为 None
+                    if message is None:
+                        message = "No message provided"
+
+                    results[agent_id] = {
+                        "status": status.name if hasattr(status, 'name') else str(status),
+                        "message": message,
+                        "result": result
+                    }
+                    messages.append(f"{agent_id}: {message}")
+
+                    # 更新总体状态
+                    if status == ActionStatus.FAILURE or status == ActionStatus.INVALID:
+                        if overall_status == ActionStatus.SUCCESS:
+                            overall_status = status  # 如果之前是成功，现在变为失败
+
+                except Exception as e:
+                    logger.error(f"Error executing {agent_id} action: {e}")
+                    results[agent_id] = {
+                        "status": "FAILURE",
+                        "message": f"Execution error: {str(e)}",
+                        "result": None
+                    }
+                    messages.append(f"{agent_id}: Execution error")
+                    overall_status = ActionStatus.FAILURE
 
         # 特殊处理协作动作的结果聚合
         overall_status, combined_message = self._process_cooperation_results(actions, results, messages)

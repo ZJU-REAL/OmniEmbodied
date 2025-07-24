@@ -1,1 +1,669 @@
-../../../data-all/scene/00165_scene.json
+{
+  "description": "A cutting-edge Hypoxia Research Laboratory where scientists investigate the role of Hypoxia-Inducible Factor 1 (HIF-1) in immune responses related to airway allergies. The lab is densely packed with specialized tools, experimental setups, and ambient clutter, creating a realistic, dynamic workspace.",
+  "rooms": [
+    {
+      "id": "sample_prep_station",
+      "name": "Sample Preparation & Wet Lab Station",
+      "properties": {
+        "type": "wet_lab"
+      },
+      "connected_to_room_ids": [
+        "hypoxia_chamber_area",
+        "microscopy_suite",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "hypoxia_chamber_area",
+      "name": "Hypoxia & Incubation Chamber Area",
+      "properties": {
+        "type": "controlled_environment"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_station",
+        "microscopy_suite"
+      ]
+    },
+    {
+      "id": "microscopy_suite",
+      "name": "Microscopy & Imaging Suite",
+      "properties": {
+        "type": "imaging"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_station",
+        "hypoxia_chamber_area",
+        "data_hub"
+      ]
+    },
+    {
+      "id": "data_hub",
+      "name": "Data Analysis & Collaboration Hub",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "sample_prep_station",
+        "microscopy_suite"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "biosafety_cabinet_1",
+      "name": "Biosafety Cabinet (Class II)",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "size": [
+          1.5,
+          0.8,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "uv_light": "off",
+        "airflow": "safe"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "centrifuge_1",
+      "name": "Refrigerated Centrifuge",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "size": [
+          0.6,
+          0.6,
+          0.8
+        ],
+        "weight": 65.0,
+        "is_container": false,
+        "color": "blue",
+        "temperature": 4.0
+      },
+      "states": {
+        "is_on": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "lab_bench_1",
+      "name": "Lab Bench",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.9
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "material": "epoxy_resin",
+        "stains": "purple_dye"
+      },
+      "states": {}
+    },
+    {
+      "id": "pipette_set_1",
+      "name": "Pipette Set (5-1000μL)",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 1.2,
+        "color": "gray",
+        "missing_part": "tip_ejector",
+        "volume_range": "5-1000μL"
+      },
+      "states": {}
+    },
+    {
+      "id": "cryotube_rack_1",
+      "name": "Sealed Cryotube Rack",
+      "type": "FURNITURE",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "weight": 0.8,
+        "is_container": true,
+        "contents": "12_labeled_vials"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cracked_vial_1",
+      "name": "Cracked Cryotube",
+      "type": "ITEM",
+      "location_id": "in:cryotube_rack_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "HIF1α KO – Day 3",
+        "risk": "contamination"
+      },
+      "states": {
+        "is_broken": true,
+        "is_sterile": false
+      }
+    },
+    {
+      "id": "biohazard_bin_1",
+      "name": "Biohazard Waste Bin",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.7
+        ],
+        "weight": 12.0,
+        "is_container": true,
+        "fill_level": "3/4",
+        "liner_color": "red"
+      },
+      "states": {}
+    },
+    {
+      "id": "microfuge_tubes_1",
+      "name": "Microfuge Tubes (1.5mL)",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "rainbow",
+        "labels": "smudged_sharpie"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_notebook_1",
+      "name": "Lab Notebook",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "open",
+        "content": "half_finished_protocol"
+      },
+      "states": {}
+    },
+    {
+      "id": "timer_1",
+      "name": "Digital Timer",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.3,
+        "display": "00:00",
+        "sound": "beeping"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "safety_poster_1",
+      "name": "Safety Poster",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "weight": 0.2,
+        "condition": "faded",
+        "message": "Proper PPE Required"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_mug_1",
+      "name": "Coffee Mug",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.4,
+        "text": "World’s Best Immunologist",
+        "contents": "pens"
+      },
+      "states": {}
+    },
+    {
+      "id": "graduation_photo_1",
+      "name": "Graduation Photo",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "weight": 0.3,
+        "condition": "dusty",
+        "subject": "young_researcher"
+      },
+      "states": {}
+    },
+    {
+      "id": "hypoxia_chamber_1",
+      "name": "Hypoxia Chamber",
+      "type": "FURNITURE",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless_steel",
+        "oxygen_level": "0.5%"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "co2_incubator_1",
+      "name": "CO₂ Incubator",
+      "type": "FURNITURE",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.2
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "temperature": 37.0,
+        "co2_level": "5%"
+      },
+      "states": {
+        "is_on": true
+      }
+    },
+    {
+      "id": "gas_canister_rack_1",
+      "name": "Gas Canister Rack",
+      "type": "FURNITURE",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "size": [
+          1.2,
+          0.5,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "contents": [
+          "N₂",
+          "O₂",
+          "CO₂"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "loose_valve_canister_1",
+      "name": "Gas Canister (CO₂)",
+      "type": "ITEM",
+      "location_id": "in:gas_canister_rack_1",
+      "properties": {
+        "weight": 25.0,
+        "gas_type": "CO₂",
+        "issue": "loose_regulator_valve"
+      },
+      "states": {
+        "is_loose": true
+      }
+    },
+    {
+      "id": "cell_culture_plates_1",
+      "name": "Cell Culture Plates (6-well)",
+      "type": "ITEM",
+      "location_id": "on:co2_incubator_1",
+      "properties": {
+        "weight": 0.6,
+        "label": "URGENT – DO NOT MOVE",
+        "contents": "live_cells"
+      },
+      "states": {}
+    },
+    {
+      "id": "oxygen_mask_1",
+      "name": "Emergency Oxygen Mask",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 0.5,
+        "seal": "intact",
+        "strap_condition": "frayed"
+      },
+      "states": {}
+    },
+    {
+      "id": "calibration_kit_1",
+      "name": "Calibration Kit",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 1.0,
+        "status": "opened",
+        "missing_part": "O₂_sensor_probe"
+      },
+      "states": {}
+    },
+    {
+      "id": "glove_dispenser_1",
+      "name": "Glove Dispenser",
+      "type": "FURNITURE",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 2.0,
+        "is_container": true,
+        "status": "empty"
+      },
+      "states": {}
+    },
+    {
+      "id": "decontamination_spray_1",
+      "name": "Decontamination Spray Bottle",
+      "type": "ITEM",
+      "location_id": "on:glove_dispenser_1",
+      "properties": {
+        "weight": 0.7,
+        "fill_level": "half",
+        "label_condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "clipboard_1",
+      "name": "Clipboard with Log Sheet",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 0.4,
+        "last_entry": "Chamber 1 – O₂ levels unstable?"
+      },
+      "states": {}
+    },
+    {
+      "id": "safety_sign_1",
+      "name": "Safety First Sign",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 0.3,
+        "condition": "dusty",
+        "placement": "crooked"
+      },
+      "states": {}
+    },
+    {
+      "id": "lab_coat_1",
+      "name": "Old Lab Coat",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 0.6,
+        "stains": "unidentifiable",
+        "location": "draped_over_chair"
+      },
+      "states": {}
+    },
+    {
+      "id": "calendar_1",
+      "name": "Outdated Calendar",
+      "type": "ITEM",
+      "location_id": "in:hypoxia_chamber_area",
+      "properties": {
+        "weight": 0.2,
+        "month": "March 2022",
+        "condition": "dog-eared"
+      },
+      "states": {}
+    },
+    {
+      "id": "confocal_microscope_1",
+      "name": "Confocal Microscope",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          1.5
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "brand": "Zeiss",
+        "model": "LSM 900"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "slide_scanner_1",
+      "name": "Slide Scanner",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          0.7
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "status": "idle"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "workstation_1",
+      "name": "Microscopy Workstation",
+      "type": "FURNITURE",
+      "location_id": "in:microscopy_suite",
+      "properties": {
+        "size": [
+          1.2,
+          0.6,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "monitors": "dual",
+        "keyboard_condition": "coffee_stained"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "touchscreen_display_1",
+      "name": "Large Touchscreen Display",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          1.8,
+          0.1,
+          1.2
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "resolution": "4K"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "research_papers_1",
+      "name": "Scattered Research Papers",
+      "type": "ITEM",
+      "location_id": "on:workstation_1",
+      "properties": {
+        "weight": 1.5,
+        "quantity": "dozens",
+        "organization": "disorganized"
+      },
+      "states": {}
+    },
+    {
+      "id": "espresso_machine_1",
+      "name": "Espresso Machine",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.5
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "brand": "DeLonghi",
+        "water_level": "half"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:data_hub",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          1.0
+        ],
+        "weight": 20.0,
+        "is_container": false,
+        "content": "diagrams_and_notes",
+        "marker_condition": "drying_out"
+      },
+      "states": {}
+    },
+    {
+      "id": "sterilizer_1",
+      "name": "Autoclave Sterilizer",
+      "type": "FURNITURE",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.0
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "brand": "Tuttnauer",
+        "cycle_time": "30_min"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "wrench_1",
+      "name": "Adjustable Wrench",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "weight": 0.8,
+        "material": "steel",
+        "provides_abilities": [
+          "loosen",
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "screwdriver_1",
+      "name": "Phillips Screwdriver",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "weight": 0.3,
+        "size": "medium",
+        "provides_abilities": [
+          "unscrew",
+          "loosen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "towel_1",
+      "name": "Lab Towel",
+      "type": "ITEM",
+      "location_id": "on:lab_bench_1",
+      "properties": {
+        "weight": 0.2,
+        "material": "cotton",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "para_film_1",
+      "name": "Sterile Paraffin Film",
+      "type": "ITEM",
+      "location_id": "in:sample_prep_station",
+      "properties": {
+        "weight": 0.1,
+        "status": "unopened",
+        "provides_abilities": [
+          "sterilize"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "o2_sensor_probe_1",
+      "name": "O₂ Sensor Probe",
+      "type": "ITEM",
+      "location_id": "in:data_hub",
+      "properties": {
+        "weight": 0.4,
+        "condition": "functional",
+        "hidden_under": "stack_of_papers"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "close",
+    "dry",
+    "loosen",
+    "open",
+    "sterilize",
+    "turn_off",
+    "turn_on",
+    "unscrew"
+  ]
+}

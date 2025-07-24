@@ -1,1 +1,655 @@
-../../../data-all/scene/00225_scene.json
+{
+  "description": "A high-stakes IT operations center where multiple database administrators must collaborate to debug, repair, and update critical web application databases before a looming deadline. The environment is a hybrid between a server room and an IT support office, with a mix of high-tech equipment and the cluttered remnants of past emergencies.",
+  "rooms": [
+    {
+      "id": "main_server_cluster",
+      "name": "Main Server Cluster",
+      "properties": {
+        "type": "server_room"
+      },
+      "connected_to_room_ids": [
+        "debugging_workstation_bay",
+        "storage_backup_vault",
+        "network_operations_hub"
+      ]
+    },
+    {
+      "id": "debugging_workstation_bay",
+      "name": "Debugging Workstation Bay",
+      "properties": {
+        "type": "office"
+      },
+      "connected_to_room_ids": [
+        "main_server_cluster",
+        "storage_backup_vault"
+      ]
+    },
+    {
+      "id": "storage_backup_vault",
+      "name": "Storage & Backup Vault",
+      "properties": {
+        "type": "secure_storage"
+      },
+      "connected_to_room_ids": [
+        "main_server_cluster",
+        "debugging_workstation_bay"
+      ]
+    },
+    {
+      "id": "network_operations_hub",
+      "name": "Network Operations Hub",
+      "properties": {
+        "type": "control_room"
+      },
+      "connected_to_room_ids": [
+        "main_server_cluster"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "primary_database_rack_1",
+      "name": "Primary Database Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          2.2
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "42U-3000",
+        "heat_distortion": "visible_near_top"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "emergency_power_switch_1",
+      "name": "Emergency Power Switch",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.5
+        ],
+        "weight": 5.0,
+        "is_container": false,
+        "material": "plexiglass",
+        "color": "red"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "failed_hard_drive_1",
+      "name": "Failed Hard Drive",
+      "type": "ITEM",
+      "location_id": "in:primary_database_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "serial_number": "HGST-7842",
+        "led_color": "amber",
+        "status": "blinking"
+      },
+      "states": {
+        "is_barcode_scanned": false
+      }
+    },
+    {
+      "id": "database_log_terminal_1",
+      "name": "Database Log Terminal",
+      "type": "ITEM",
+      "location_id": "on:primary_database_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "screen_type": "LCD",
+        "display_status": "frozen",
+        "error_message": "UPDATE query failure"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_drive_cart_1",
+      "name": "Spare Drive Cart",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          0.9
+        ],
+        "weight": 15.0,
+        "is_container": true,
+        "material": "metal",
+        "wheels": true,
+        "slots_available": 11,
+        "slots_total": 12
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:primary_database_rack_1",
+      "properties": {
+        "weight": 1.2,
+        "button_condition": "sticky",
+        "servers_connected": 4
+      },
+      "states": {
+        "is_sanded": false
+      }
+    },
+    {
+      "id": "daily_backup_poster_1",
+      "name": "DAILY BACKUP REQUIRED Poster",
+      "type": "ITEM",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded",
+        "date": "three_years_ago"
+      },
+      "states": {}
+    },
+    {
+      "id": "scsi_cables_rack_1",
+      "name": "Old SCSI Cables Rack",
+      "type": "FURNITURE",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          1.0
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "material": "metal",
+        "cable_condition": "tangled",
+        "status": "obsolete"
+      },
+      "states": {}
+    },
+    {
+      "id": "primary_debugging_desk_1",
+      "name": "Primary Debugging Desk",
+      "type": "FURNITURE",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "size": [
+          1.8,
+          0.8,
+          0.7
+        ],
+        "weight": 35.0,
+        "is_container": true,
+        "shape": "L-shaped",
+        "surface_condition": "scratched",
+        "monitors_attached": 3
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "size": [
+          1.2,
+          0.05,
+          0.9
+        ],
+        "weight": 12.0,
+        "is_container": false,
+        "content": "erased_SQL_snippets",
+        "note": "NEVER use WHERE without PK"
+      },
+      "states": {}
+    },
+    {
+      "id": "admin_laptop_1",
+      "name": "Admin Laptop",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 2.5,
+        "sticker": "PROD ACCESS - DO NOT TOUCH",
+        "application_open": "MySQL client",
+        "query_status": "failed_UPDATE"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_security_dongle_1",
+      "name": "USB Security Dongle",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "color": "blue",
+        "label": "BIOS Auth Key",
+        "required_for": "log_archives"
+      },
+      "states": {}
+    },
+    {
+      "id": "label_maker_1",
+      "name": "Label Maker",
+      "type": "ITEM",
+      "location_id": "in:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.8,
+        "tape_status": "out",
+        "last_label": "CRITICAL - DO NOT POWER OFF"
+      },
+      "states": {}
+    },
+    {
+      "id": "reference_manuals_1",
+      "name": "Reference Manuals Stack",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 3.5,
+        "stack_condition": "uneven",
+        "top_book": "SQL Antipatterns Vol. 2"
+      },
+      "states": {}
+    },
+    {
+      "id": "energy_drink_cans_1",
+      "name": "Half-empty Energy Drink Cans",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.5,
+        "brand": "Debugger's Rush",
+        "condition": "stale",
+        "sticky_rings": true
+      },
+      "states": {
+        "is_drunk": false
+      }
+    },
+    {
+      "id": "employee_certificate_1",
+      "name": "Employee of the Month Certificate",
+      "type": "ITEM",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "weight": 0.7,
+        "date": "Feb 2018",
+        "glass_condition": "cracked"
+      },
+      "states": {}
+    },
+    {
+      "id": "fireproof_cabinet_1",
+      "name": "Fireproof Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "size": [
+          0.8,
+          0.6,
+          1.8
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "material": "steel",
+        "lock_type": "dual-key",
+        "biometric_scanner": "offline"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_tape_cartridge_1",
+      "name": "Backup Tape Cartridge",
+      "type": "ITEM",
+      "location_id": "in:fireproof_cabinet_1",
+      "properties": {
+        "weight": 0.3,
+        "label": "LAST GOOD DB - 03/14",
+        "alignment": "misaligned"
+      },
+      "states": {
+        "is_wound_up": false
+      }
+    },
+    {
+      "id": "keycard_reader_1",
+      "name": "Keycard Reader",
+      "type": "ITEM",
+      "location_id": "on:fireproof_cabinet_1",
+      "properties": {
+        "weight": 0.5,
+        "light_status": "flashing_red",
+        "sound": "beeping_intermittently",
+        "log_message": "Auth Attempt Failed - Retry in 30s"
+      },
+      "states": {}
+    },
+    {
+      "id": "tape_rewinder_1",
+      "name": "Tape Rewinder",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 2.0,
+        "condition": "dusty",
+        "cord_condition": "frayed",
+        "status": "out_of_service"
+      },
+      "states": {}
+    },
+    {
+      "id": "spare_keycard_1",
+      "name": "Spare Keycard",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 0.1,
+        "location": "under_invoices",
+        "activation_requirement": "PIN"
+      },
+      "states": {}
+    },
+    {
+      "id": "compliance_posters_1",
+      "name": "HIPAA Data Laws Posters",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 0.2,
+        "date": "2015",
+        "condition": "sun-bleached"
+      },
+      "states": {}
+    },
+    {
+      "id": "empty_tape_reel_1",
+      "name": "Empty Tape Reel",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 0.3,
+        "current_use": "cup_holder",
+        "stains": "coffee_rings"
+      },
+      "states": {}
+    },
+    {
+      "id": "network_status_display_1",
+      "name": "Network Status Display",
+      "type": "ITEM",
+      "location_id": "in:network_operations_hub",
+      "properties": {
+        "weight": 15.0,
+        "display_type": "large",
+        "content": "real-time_database_errors"
+      },
+      "states": {}
+    },
+    {
+      "id": "crowbar_1",
+      "name": "Crowbar",
+      "type": "ITEM",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "weight": 3.0,
+        "material": "steel",
+        "length": "60cm",
+        "provides_abilities": [
+          "mount"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.4,
+        "brand": "Zebra",
+        "model": "DS2208",
+        "provides_abilities": [
+          "scan_barcode"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "soldering_iron_1",
+      "name": "Soldering Iron",
+      "type": "ITEM",
+      "location_id": "in:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.7,
+        "wattage": "60W",
+        "tip_type": "fine",
+        "provides_abilities": [
+          "solder"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "scissors_1",
+      "name": "Scissors",
+      "type": "ITEM",
+      "location_id": "in:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.2,
+        "blade_type": "straight",
+        "handle_material": "plastic",
+        "provides_abilities": [
+          "unwrap"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_machine_1",
+      "name": "Coffee Machine",
+      "type": "ITEM",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "weight": 5.0,
+        "brand": "Keurig",
+        "model": "K-Elite",
+        "provides_abilities": [
+          "brew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sandpaper_1",
+      "name": "Sandpaper",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 0.1,
+        "grit": "120",
+        "size": "9x11",
+        "provides_abilities": [
+          "sand"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:main_server_cluster",
+      "properties": {
+        "weight": 6.0,
+        "type": "ABC",
+        "pressure": "good",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_door_1",
+      "name": "Server Rack Door",
+      "type": "FURNITURE",
+      "location_id": "on:primary_database_rack_1",
+      "properties": {
+        "size": [
+          2.0,
+          0.05,
+          2.2
+        ],
+        "weight": 60.0,
+        "is_container": false,
+        "track_condition": "jammed"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "backup_tape_cabinet_1",
+      "name": "Backup Tape Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          1.8
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "lock_mechanism": "dual-key"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "usb_drive_admin_1",
+      "name": "USB Drive (Admin)",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "scratched_ADMIN",
+        "cap_color": "red",
+        "temperature": "warm"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_blank_1",
+      "name": "USB Drive (Blank)",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "none",
+        "cap_color": "black",
+        "temperature": "room"
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_drive_blank_2",
+      "name": "USB Drive (Blank)",
+      "type": "ITEM",
+      "location_id": "on:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.05,
+        "label": "none",
+        "cap_color": "none",
+        "temperature": "room"
+      },
+      "states": {}
+    },
+    {
+      "id": "id_badge_1",
+      "name": "ID Badge (Agent 1)",
+      "type": "ITEM",
+      "location_id": "in:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "name": "John Doe",
+        "title": "Database Admin",
+        "access_level": "2"
+      },
+      "states": {}
+    },
+    {
+      "id": "id_badge_2",
+      "name": "ID Badge (Agent 2)",
+      "type": "ITEM",
+      "location_id": "in:primary_debugging_desk_1",
+      "properties": {
+        "weight": 0.1,
+        "name": "Jane Smith",
+        "title": "Systems Engineer",
+        "access_level": "3"
+      },
+      "states": {}
+    },
+    {
+      "id": "intercom_1",
+      "name": "Intercom",
+      "type": "ITEM",
+      "location_id": "in:debugging_workstation_bay",
+      "properties": {
+        "weight": 1.5,
+        "location": "under_manuals",
+        "status": "operational"
+      },
+      "states": {}
+    },
+    {
+      "id": "backup_key_1",
+      "name": "Backup Key",
+      "type": "ITEM",
+      "location_id": "in:storage_backup_vault",
+      "properties": {
+        "weight": 0.05,
+        "key_type": "backup",
+        "lock_compatibility": "fireproof_cabinet"
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "brew",
+    "drink",
+    "extinguish",
+    "mount",
+    "open",
+    "sand",
+    "scan_barcode",
+    "solder",
+    "unwrap",
+    "wind_up",
+    "close"
+  ]
+}

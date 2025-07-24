@@ -1,1 +1,658 @@
-../../../data-all/scene/00181_scene.json
+{
+  "description": "A high-security Cyber Forensics Lab in emergency response mode, analyzing a rogue Blackberry 10 device and securing exposed email accounts.",
+  "rooms": [
+    {
+      "id": "forensic_workbench",
+      "name": "Forensic Workbench",
+      "properties": {
+        "type": "forensic"
+      },
+      "connected_to_room_ids": [
+        "network_security_hub",
+        "evidence_storage",
+        "break_room"
+      ]
+    },
+    {
+      "id": "network_security_hub",
+      "name": "Network Security Hub",
+      "properties": {
+        "type": "network"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench",
+        "evidence_storage",
+        "break_room"
+      ]
+    },
+    {
+      "id": "evidence_storage",
+      "name": "Evidence Storage & Logistics",
+      "properties": {
+        "type": "storage"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench",
+        "network_security_hub",
+        "break_room"
+      ]
+    },
+    {
+      "id": "break_room",
+      "name": "Break Room",
+      "properties": {
+        "type": "lounge"
+      },
+      "connected_to_room_ids": [
+        "forensic_workbench",
+        "network_security_hub",
+        "evidence_storage"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "workbench_1",
+      "name": "Reinforced Static-Dissipative Workbench",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 75.0,
+        "is_container": true,
+        "material": "metal",
+        "surface": "grounded"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_workstation_1",
+      "name": "Forensic Workstation",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.6,
+          0.5,
+          0.4
+        ],
+        "weight": 25.0,
+        "is_container": false,
+        "brand": "Dell",
+        "model": "Precision 7865",
+        "write_blocker": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "blackberry_10_1",
+      "name": "Blackberry 10 Device",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.2,
+        "color": "black",
+        "state": "disassembled",
+        "battery_removed": true,
+        "sim_removed": true
+      },
+      "states": {}
+    },
+    {
+      "id": "usb_sniffer_1",
+      "name": "USB Traffic Sniffer",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.3,
+        "color": "black",
+        "led_color": "amber",
+        "status": "capturing"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "evidence_bag_1",
+      "name": "Evidence Bag BB10 - Case #4821",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic",
+        "is_container": true
+      },
+      "states": {
+        "is_zipped": false
+      }
+    },
+    {
+      "id": "multimeter_1",
+      "name": "Digital Multimeter",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.4,
+        "mode": "continuity",
+        "leads_tangled": true,
+        "provides_abilities": [
+          "measure"
+        ]
+      },
+      "states": {
+        "is_measured": false
+      }
+    },
+    {
+      "id": "microscope_1",
+      "name": "40x Zoom Microscope",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "focus": "motherboard",
+        "is_container": false
+      },
+      "states": {}
+    },
+    {
+      "id": "tool_caddy_1",
+      "name": "ESD-Safe Tool Caddy",
+      "type": "FURNITURE",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 3.0,
+        "is_container": true,
+        "contents": [
+          "tweezers",
+          "prying_picks",
+          "torx_screwdrivers"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "no_food_sign_1",
+      "name": "NO FOOD OR DRINK Sign",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "plastic",
+        "condition": "coffee_stained"
+      },
+      "states": {}
+    },
+    {
+      "id": "forensic_manuals_1",
+      "name": "Outdated Forensic Manuals",
+      "type": "ITEM",
+      "location_id": "on:workbench_1",
+      "properties": {
+        "weight": 2.5,
+        "condition": "dusty",
+        "bookmarked": true
+      },
+      "states": {
+        "is_filed": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Forensic Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:forensic_workbench",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.02
+        ],
+        "weight": 15.0,
+        "content": "RIM IP: 192.168.4.22 → US/UK hops?"
+      },
+      "states": {}
+    },
+    {
+      "id": "server_rack_1",
+      "name": "19\" Server Rack",
+      "type": "FURNITURE",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "size": [
+          0.6,
+          0.8,
+          2.0
+        ],
+        "weight": 150.0,
+        "is_container": true,
+        "bolted": true
+      },
+      "states": {}
+    },
+    {
+      "id": "wall_monitor_1",
+      "name": "Wall-Mounted Monitor",
+      "type": "FURNITURE",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.1
+        ],
+        "weight": 20.0,
+        "display": "Wireshark traffic logs"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "network_tap_1",
+      "name": "Network Tap Device",
+      "type": "ITEM",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "weight": 1.2,
+        "led_status": "solid_green",
+        "position": "inline"
+      },
+      "states": {
+        "is_connected": false
+      }
+    },
+    {
+      "id": "keypad_lock_1",
+      "name": "Physical Keypad Lock",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.5,
+        "status": "locked"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "log_sheet_1",
+      "name": "Printed Log Sheet",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "IMAP creds sent to RIM IP 74.125.230.94",
+        "highlighted": true
+      },
+      "states": {}
+    },
+    {
+      "id": "kvm_switch_1",
+      "name": "KVM Switch",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 0.8,
+        "status": "cycling",
+        "provides_abilities": [
+          "connect"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "label_printer_1",
+      "name": "Label Printer",
+      "type": "ITEM",
+      "location_id": "on:server_rack_1",
+      "properties": {
+        "weight": 2.0,
+        "error": "out_of_tape",
+        "led_status": "blinking"
+      },
+      "states": {}
+    },
+    {
+      "id": "ups_1",
+      "name": "UPS Battery Backup",
+      "type": "FURNITURE",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 15.0,
+        "charge": 87,
+        "sound": "audible_hum"
+      },
+      "states": {}
+    },
+    {
+      "id": "hygiene_poster_1",
+      "name": "Cyber Hygiene Checklist Poster",
+      "type": "ITEM",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "weight": 0.2,
+        "condition": "peeling"
+      },
+      "states": {}
+    },
+    {
+      "id": "desk_fan_1",
+      "name": "Desk Fan",
+      "type": "ITEM",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "weight": 1.5,
+        "status": "oscillating",
+        "balance": "off"
+      },
+      "states": {}
+    },
+    {
+      "id": "defcon_coaster_1",
+      "name": "DEFCON Logo Coaster",
+      "type": "ITEM",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "weight": 0.1,
+        "condition": "faded"
+      },
+      "states": {}
+    },
+    {
+      "id": "evidence_safe_1",
+      "name": "Heavy-Duty Safe",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.8,
+          1.5
+        ],
+        "weight": 500.0,
+        "lock_type": "biometric_keycard",
+        "status": "ajar"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "shelving_unit_1",
+      "name": "Metal Shelving Unit",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 80.0,
+        "contents": "Pelican_cases",
+        "is_container": true
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "evidence_box_1",
+      "name": "Sealed Evidence Box BB10 - Network Logs",
+      "type": "ITEM",
+      "location_id": "in:shelving_unit_1",
+      "properties": {
+        "weight": 5.0,
+        "rfid_tagged": true,
+        "approval_required": "two_person"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "custody_clipboard_1",
+      "name": "Chain of Custody Clipboard",
+      "type": "ITEM",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "weight": 0.5,
+        "missing_pen": true
+      },
+      "states": {}
+    },
+    {
+      "id": "barcode_scanner_1",
+      "name": "Barcode Scanner",
+      "type": "ITEM",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "weight": 0.3,
+        "status": "charging"
+      },
+      "states": {}
+    },
+    {
+      "id": "wheeled_cart_1",
+      "name": "Wheeled Cart",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "weight": 20.0,
+        "wheel_condition": "sticky"
+      },
+      "states": {}
+    },
+    {
+      "id": "inventory_note_1",
+      "name": "LAST INVENTORY: 04/12 Sticky Note",
+      "type": "ITEM",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "weight": 0.01,
+        "condition": "yellowed"
+      },
+      "states": {}
+    },
+    {
+      "id": "broken_chair_1",
+      "name": "Broken Chair",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 10.0,
+        "condition": "broken"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "FURNITURE",
+      "location_id": "in:break_room",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.4
+        ],
+        "weight": 5.0,
+        "status": "off",
+        "is_container": true
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "keypad_code_note_1",
+      "name": "Keypad Code Sticky Note",
+      "type": "ITEM",
+      "location_id": "on:coffee_maker_1",
+      "properties": {
+        "weight": 0.01,
+        "content": "192168"
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_cup_1",
+      "name": "Forgotten Coffee Cup",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.2,
+        "content": "coffee"
+      },
+      "states": {
+        "is_full": false
+      }
+    },
+    {
+      "id": "energy_bar_1",
+      "name": "Half-Eaten Energy Bar",
+      "type": "ITEM",
+      "location_id": "in:break_room",
+      "properties": {
+        "weight": 0.1,
+        "condition": "half_eaten"
+      },
+      "states": {}
+    },
+    {
+      "id": "esd_tweezers_1",
+      "name": "ESD-Safe Tweezers",
+      "type": "ITEM",
+      "location_id": "in:tool_caddy_1",
+      "properties": {
+        "weight": 0.05,
+        "material": "stainless_steel",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "prying_picks_1",
+      "name": "Prying Picks",
+      "type": "ITEM",
+      "location_id": "in:tool_caddy_1",
+      "properties": {
+        "weight": 0.1,
+        "material": "plastic"
+      },
+      "states": {
+        "is_sharp": false,
+        "is_open": true
+      }
+    },
+    {
+      "id": "torx_screwdrivers_1",
+      "name": "Torx Screwdrivers Set",
+      "type": "ITEM",
+      "location_id": "in:tool_caddy_1",
+      "properties": {
+        "weight": 0.3,
+        "sizes": "T3-T10",
+        "provides_abilities": [
+          "unscrew"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sharpener_1",
+      "name": "Tool Sharpener",
+      "type": "ITEM",
+      "location_id": "in:tool_caddy_1",
+      "properties": {
+        "weight": 0.4,
+        "provides_abilities": [
+          "sharpen"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "fire_extinguisher_1",
+      "name": "Fire Extinguisher",
+      "type": "ITEM",
+      "location_id": "in:network_security_hub",
+      "properties": {
+        "weight": 5.0,
+        "type": "CO2",
+        "provides_abilities": [
+          "extinguish"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "file_cabinet_1",
+      "name": "File Cabinet",
+      "type": "FURNITURE",
+      "location_id": "in:evidence_storage",
+      "properties": {
+        "size": [
+          0.8,
+          0.5,
+          1.2
+        ],
+        "weight": 40.0,
+        "is_container": true,
+        "provides_abilities": [
+          "file"
+        ]
+      },
+      "states": {}
+    }
+  ],
+  "abilities": [
+    "connect",
+    "extinguish",
+    "file",
+    "measure",
+    "open",
+    "sharpen",
+    "turn_on",
+    "unscrew",
+    "zip",
+    "close"
+  ]
+}

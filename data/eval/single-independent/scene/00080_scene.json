@@ -1,1 +1,909 @@
-../../../data-all/scene/00021_scene.json
+{
+  "description": "A covert border surveillance outpost hidden in the rugged borderlands between Pakistan and Afghanistan, jointly operated by U.S. special forces, Pakistani military liaisons, and local tribal scouts. The outpost features a command bunker, armory, observation deck, makeshift barracks, and external border trail, filled with military equipment, supplies, and personal items that require collaboration and specialized skills to operate.",
+  "rooms": [
+    {
+      "id": "command_bunker",
+      "name": "Command & Comms Bunker",
+      "properties": {
+        "type": "military",
+        "lighting": "flickering",
+        "hum": "diesel_generator"
+      },
+      "connected_to_room_ids": [
+        "armory",
+        "barracks"
+      ]
+    },
+    {
+      "id": "armory",
+      "name": "Armory & Supply Cache",
+      "properties": {
+        "type": "storage",
+        "security": "padlocked",
+        "moisture": "stained"
+      },
+      "connected_to_room_ids": [
+        "command_bunker",
+        "observation_deck"
+      ]
+    },
+    {
+      "id": "observation_deck",
+      "name": "Observation Deck",
+      "properties": {
+        "type": "outdoor",
+        "shielding": "camo_netting",
+        "wind": "strong"
+      },
+      "connected_to_room_ids": [
+        "armory",
+        "border_trail"
+      ]
+    },
+    {
+      "id": "barracks",
+      "name": "Makeshift Barracks",
+      "properties": {
+        "type": "living",
+        "heating": "kerosene",
+        "leak": "faint_fuel"
+      },
+      "connected_to_room_ids": [
+        "command_bunker"
+      ]
+    },
+    {
+      "id": "border_trail",
+      "name": "Border Trail",
+      "properties": {
+        "type": "external",
+        "terrain": "rocky",
+        "visibility": "partially_obscured"
+      },
+      "connected_to_room_ids": [
+        "observation_deck"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "comms_array_1",
+      "name": "Military-Grade Comms Array",
+      "type": "FURNITURE",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          1.8,
+          0.6,
+          1.2
+        ],
+        "weight": 85.0,
+        "is_container": false,
+        "material": "steel",
+        "model": "X7-TacLink",
+        "status": "intermittent_static"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "map_table_1",
+      "name": "Intel Map Table",
+      "type": "FURNITURE",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.8
+        ],
+        "weight": 30.0,
+        "is_container": true,
+        "material": "plywood",
+        "map_type": "topographic"
+      },
+      "states": {}
+    },
+    {
+      "id": "document_case_1",
+      "name": "Locked Document Case",
+      "type": "ITEM",
+      "location_id": "on:map_table_1",
+      "properties": {
+        "size": [
+          0.45,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "security": "biometric",
+        "registered_to": "Lt. Harris"
+      },
+      "states": {
+        "is_locked": false,
+        "is_open": false
+      }
+    },
+    {
+      "id": "printer_1",
+      "name": "Jammed Printer",
+      "type": "ITEM",
+      "location_id": "on:map_table_1",
+      "properties": {
+        "size": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "weight": 12.0,
+        "error": "Paper Feed Malfunction",
+        "contains": "classified_patrol_roster"
+      },
+      "states": {
+        "is_open": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "battery_bank_1",
+      "name": "Battery Bank",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.6,
+          0.4,
+          0.3
+        ],
+        "weight": 15.0,
+        "cells": 6,
+        "status": [
+          "depleted",
+          "depleted",
+          "depleted",
+          "50%",
+          "50%",
+          "fully_charged"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "multi_tool_1",
+      "name": "Leatherman Multi-Tool",
+      "type": "ITEM",
+      "location_id": "on:map_table_1",
+      "properties": {
+        "size": [
+          0.1,
+          0.05,
+          0.02
+        ],
+        "weight": 0.2,
+        "condition": "dulled_blade",
+        "provides_abilities": [
+          "clean",
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "coffee_maker_1",
+      "name": "Coffee Maker",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.3
+        ],
+        "weight": 2.5,
+        "status": "stained_carafe",
+        "last_brew": "4_hours_ago"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "weapons_rack_1",
+      "name": "Weapons Rack",
+      "type": "FURNITURE",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          1.5,
+          0.5,
+          1.8
+        ],
+        "weight": 50.0,
+        "is_container": true,
+        "contains": [
+          "M4_carbines",
+          "AK-47s",
+          "broken_RPG"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "medical_locker_1",
+      "name": "Medical Locker",
+      "type": "FURNITURE",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          1.0,
+          0.5,
+          1.5
+        ],
+        "weight": 45.0,
+        "is_container": true,
+        "glass_front": true,
+        "contains": [
+          "expired_morphine",
+          "suture_kit"
+        ]
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ammo_crate_1",
+      "name": "Ammo Crate (7.62mm – PKM)",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.3
+        ],
+        "weight": 20.0,
+        "caliber": "7.62mm",
+        "seal": "intact"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "ammo_crate_2",
+      "name": "Ammo Crate (5.56mm – NATO)",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.3
+        ],
+        "weight": 20.0,
+        "caliber": "5.56mm",
+        "seal": "partially_open",
+        "missing": "3_mags"
+      },
+      "states": {
+        "is_open": true
+      }
+    },
+    {
+      "id": "drone_1",
+      "name": "SkyEye-3 Reconnaissance Drone",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          0.3
+        ],
+        "weight": 8.0,
+        "condition": "dented_wing",
+        "battery": "corroded",
+        "provides_abilities": [
+          "install"
+        ]
+      },
+      "states": {
+        "is_broken": true
+      }
+    },
+    {
+      "id": "toolbox_1",
+      "name": "Toolbox",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 5.0,
+        "contains": [
+          "adjustable_wrench",
+          "duct_tape",
+          "multimeter"
+        ],
+        "provides_abilities": [
+          "repair",
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "folding_chair_1",
+      "name": "Folding Chair",
+      "type": "FURNITURE",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.5,
+          0.5,
+          0.8
+        ],
+        "weight": 3.0,
+        "condition": "wobbly",
+        "legs": "uneven"
+      },
+      "states": {}
+    },
+    {
+      "id": "binoculars_1",
+      "name": "Tripod-Mounted Binoculars",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.4,
+          0.3,
+          0.2
+        ],
+        "weight": 2.5,
+        "magnification": "10x",
+        "condition": "wind_battered"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "thermal_scope_1",
+      "name": "Thermal Scope",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 1.5,
+        "resolution": "320x240",
+        "battery": "low"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "notebook_1",
+      "name": "Wind-Battered Notebook",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.3,
+        "entries": "smudged_pencil",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "thermos_1",
+      "name": "Dented Thermos of Cold Chai",
+      "type": "ITEM",
+      "location_id": "in:observation_deck",
+      "properties": {
+        "size": [
+          0.25,
+          0.1,
+          0.1
+        ],
+        "weight": 0.8,
+        "contents": "cold_chai",
+        "condition": "dented"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "cot_1",
+      "name": "Folding Cot",
+      "type": "FURNITURE",
+      "location_id": "in:barracks",
+      "properties": {
+        "size": [
+          2.0,
+          0.8,
+          0.4
+        ],
+        "weight": 12.0,
+        "legs": "uneven",
+        "condition": "worn",
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "heater_1",
+      "name": "Kerosene Heater",
+      "type": "ITEM",
+      "location_id": "in:barracks",
+      "properties": {
+        "size": [
+          0.4,
+          0.4,
+          0.5
+        ],
+        "weight": 8.0,
+        "fuel": "leaking",
+        "condition": "faint_leak"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "phrasebook_1",
+      "name": "Pashto Phrasebook",
+      "type": "ITEM",
+      "location_id": "on:cot_1",
+      "properties": {
+        "size": [
+          0.15,
+          0.1,
+          0.02
+        ],
+        "weight": 0.2,
+        "condition": "dog-eared",
+        "language": "Pashto"
+      },
+      "states": {}
+    },
+    {
+      "id": "mre_wrappers_1",
+      "name": "Pile of Discarded MRE Wrappers",
+      "type": "ITEM",
+      "location_id": "in:barracks",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.1
+        ],
+        "weight": 0.5,
+        "quantity": "numerous",
+        "condition": "discarded"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "cigarette_pack_1",
+      "name": "Discarded Cigarette Pack",
+      "type": "ITEM",
+      "location_id": "in:border_trail",
+      "properties": {
+        "size": [
+          0.1,
+          0.06,
+          0.02
+        ],
+        "weight": 0.05,
+        "brand": "local",
+        "condition": "discarded"
+      },
+      "states": {}
+    },
+    {
+      "id": "rope_1",
+      "name": "Frayed Rope",
+      "type": "ITEM",
+      "location_id": "in:border_trail",
+      "properties": {
+        "size": [
+          2.0,
+          0.02,
+          0.02
+        ],
+        "weight": 0.3,
+        "condition": "frayed",
+        "attachment": "scrub_bush"
+      },
+      "states": {}
+    },
+    {
+      "id": "fuel_drum_1",
+      "name": "Generator Fuel Drum",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.8,
+          0.8,
+          1.2
+        ],
+        "weight": 50.0,
+        "contents": "diesel",
+        "capacity": "200L"
+      },
+      "states": {}
+    },
+    {
+      "id": "sandbag_1",
+      "name": "Sandbag",
+      "type": "ITEM",
+      "location_id": "in:border_trail",
+      "properties": {
+        "size": [
+          0.6,
+          0.3,
+          0.3
+        ],
+        "weight": 40.0,
+        "material": "canvas",
+        "condition": "worn"
+      },
+      "states": {}
+    },
+    {
+      "id": "radio_1",
+      "name": "Encrypted Radio (Zulu-9)",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "encryption": "green_paint_chip",
+        "marking": "Zulu-9"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "radio_2",
+      "name": "Standard Radio",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "encryption": "none",
+        "marking": "none"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "radio_3",
+      "name": "Backup Radio",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "encryption": "none",
+        "marking": "none"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "radio_4",
+      "name": "Damaged Radio",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "encryption": "none",
+        "marking": "none",
+        "condition": "damaged"
+      },
+      "states": {
+        "is_on": false,
+        "is_broken": true
+      }
+    },
+    {
+      "id": "radio_5",
+      "name": "Spare Radio",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "weight": 2.0,
+        "encryption": "none",
+        "marking": "none"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Cracked Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          1.2,
+          0.8,
+          0.02
+        ],
+        "weight": 15.0,
+        "is_container": false,
+        "condition": "cracked",
+        "content": "patrol_schedules"
+      },
+      "states": {
+        "is_dirty": true
+      }
+    },
+    {
+      "id": "fluorescent_light_1",
+      "name": "Ceiling-Mounted Fluorescent Light",
+      "type": "FURNITURE",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          1.0,
+          0.1,
+          0.1
+        ],
+        "weight": 8.0,
+        "is_container": false,
+        "condition": "dying_flicker"
+      },
+      "states": {
+        "is_on": false
+      }
+    },
+    {
+      "id": "graffiti_1",
+      "name": "Graffiti on Wall",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.5,
+          0.3,
+          0.01
+        ],
+        "weight": 0.1,
+        "text": "فقط 3 روز باقی مانده",
+        "medium": "charcoal"
+      },
+      "states": {}
+    },
+    {
+      "id": "houseplant_1",
+      "name": "Dead Houseplant",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.4
+        ],
+        "weight": 1.5,
+        "condition": "brittle_stems",
+        "pot": "artillery_shell_casing"
+      },
+      "states": {}
+    },
+    {
+      "id": "quran_1",
+      "name": "Dusty Quran",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.2,
+          0.15,
+          0.05
+        ],
+        "weight": 0.5,
+        "condition": "dusty",
+        "location": "shelf"
+      },
+      "states": {
+        "is_dusted": true
+      }
+    },
+    {
+      "id": "magazine_1",
+      "name": "Faded Playboy Magazine",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.25,
+          0.2,
+          0.02
+        ],
+        "weight": 0.3,
+        "issue": "1998",
+        "condition": "faded",
+        "location": "under_floorboard"
+      },
+      "states": {
+        "is_covered": true
+      }
+    },
+    {
+      "id": "duster_1",
+      "name": "Feather Duster",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.4,
+          0.1,
+          0.1
+        ],
+        "weight": 0.2,
+        "material": "feathers",
+        "provides_abilities": [
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "broom_1",
+      "name": "Sturdy Broom",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          1.5,
+          0.1,
+          0.1
+        ],
+        "weight": 1.5,
+        "material": "wood",
+        "provides_abilities": [
+          "sweep"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_rag_1",
+      "name": "Cleaning Rag",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.3,
+          0.3,
+          0.01
+        ],
+        "weight": 0.1,
+        "material": "cotton",
+        "provides_abilities": [
+          "clean",
+          "dust"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "sponge_1",
+      "name": "Kitchen Sponge",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "weight": 0.05,
+        "material": "synthetic",
+        "provides_abilities": [
+          "clean"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "pruning_shears_1",
+      "name": "Pruning Shears",
+      "type": "ITEM",
+      "location_id": "in:armory",
+      "properties": {
+        "size": [
+          0.3,
+          0.1,
+          0.05
+        ],
+        "weight": 0.5,
+        "material": "steel",
+        "provides_abilities": [
+          "prune"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "key_1",
+      "name": "Armory Key",
+      "type": "ITEM",
+      "location_id": "in:command_bunker",
+      "properties": {
+        "size": [
+          0.05,
+          0.02,
+          0.01
+        ],
+        "weight": 0.01,
+        "owner": "CO",
+        "purpose": "armory_access"
+      },
+      "states": {
+        "is_locked": false
+      }
+    }
+  ],
+  "abilities": [
+    "clean",
+    "close",
+    "dust",
+    "install",
+    "open",
+    "prune",
+    "repair",
+    "sweep",
+    "turn_on",
+    "uncover"
+  ]
+}

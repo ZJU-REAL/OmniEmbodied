@@ -1,1 +1,596 @@
-../../../data-all/scene/00035_scene.json
+{
+  "description": "A bustling fast-casual restaurant kitchen and attached supply hub, featuring a cold storage & delivery bay, dry goods & bulk storage, prep station, assembly line, and back office. The scene embodies the tension between local sustainability and industrial efficiency, with heavy ingredient transport, precision timing, and problem-solving under constraints.",
+  "rooms": [
+    {
+      "id": "cold_storage_delivery_bay",
+      "name": "Cold Storage & Delivery Bay",
+      "properties": {
+        "type": "storage",
+        "temperature": 38.0,
+        "humidity": 85.0
+      },
+      "connected_to_room_ids": [
+        "dry_goods_bulk_storage"
+      ]
+    },
+    {
+      "id": "dry_goods_bulk_storage",
+      "name": "Dry Goods & Bulk Storage",
+      "properties": {
+        "type": "storage",
+        "temperature": 72.0,
+        "humidity": 40.0
+      },
+      "connected_to_room_ids": [
+        "cold_storage_delivery_bay",
+        "prep_station"
+      ]
+    },
+    {
+      "id": "prep_station",
+      "name": "Prep Station (Vegetables & Meats)",
+      "properties": {
+        "type": "kitchen",
+        "temperature": 68.0,
+        "humidity": 60.0
+      },
+      "connected_to_room_ids": [
+        "dry_goods_bulk_storage",
+        "assembly_line"
+      ]
+    },
+    {
+      "id": "assembly_line",
+      "name": "Assembly Line (Burrito Station)",
+      "properties": {
+        "type": "kitchen",
+        "temperature": 75.0,
+        "humidity": 70.0
+      },
+      "connected_to_room_ids": [
+        "prep_station",
+        "back_office"
+      ]
+    },
+    {
+      "id": "back_office",
+      "name": "Back Office & Supplier Communications",
+      "properties": {
+        "type": "office",
+        "temperature": 70.0,
+        "humidity": 50.0
+      },
+      "connected_to_room_ids": [
+        "assembly_line"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "walk_in_fridge_1",
+      "name": "Industrial Walk-In Fridge",
+      "type": "FURNITURE",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "size": [
+          5.0,
+          3.0,
+          2.5
+        ],
+        "weight": 350.0,
+        "is_container": true,
+        "material": "steel",
+        "model_number": "FR-5000",
+        "door_hinge_condition": "sticking"
+      },
+      "states": {
+        "is_open": false
+      }
+    },
+    {
+      "id": "pallet_jack_1",
+      "name": "Pallet Jack",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 45.0,
+        "battery_level": 30,
+        "wheel_condition": "squeaking",
+        "provides_abilities": [
+          "unload"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "lettuce_crate_1",
+      "name": "Crate of Local Romaine Lettuce",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 25.0,
+        "source": "Sunrise Farms",
+        "condition": "half-wilted",
+        "label": "USE FIRST"
+      },
+      "states": {}
+    },
+    {
+      "id": "lettuce_crate_2",
+      "name": "Crate of Local Romaine Lettuce",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 25.0,
+        "source": "Sunrise Farms",
+        "condition": "fresh",
+        "label": "USE FIRST"
+      },
+      "states": {}
+    },
+    {
+      "id": "beef_box_1",
+      "name": "Niman Ranch Beef Delivery Box",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 30.0,
+        "source": "Niman Ranch",
+        "condition": "leaking",
+        "label": "PRIORITY - REFRIGERATE IMMEDIATELY"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "beef_box_2",
+      "name": "Niman Ranch Beef Delivery Box",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 60.0,
+        "source": "Niman Ranch",
+        "condition": "intact",
+        "label": "PRIORITY - REFRIGERATE IMMEDIATELY"
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_thermometer_1",
+      "name": "Digital Thermometer",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 0.5,
+        "display_condition": "flickering",
+        "current_temperature": 38.0
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "delivery_clipboard_1",
+      "name": "Delivery Checklist Clipboard",
+      "type": "ITEM",
+      "location_id": "in:cold_storage_delivery_bay",
+      "properties": {
+        "weight": 0.3,
+        "last_entry": "Bell peppers – 3 crates short"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "metal_shelving_1",
+      "name": "Heavy-Duty Metal Shelving",
+      "type": "FURNITURE",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          2.0
+        ],
+        "weight": 120.0,
+        "is_container": true,
+        "max_weight": 500.0,
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_1",
+      "name": "50lb Bag of Black Beans",
+      "type": "ITEM",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "weight": 50.0,
+        "condition": "torn",
+        "contents": "black beans",
+        "spillage": "slight"
+      },
+      "states": {}
+    },
+    {
+      "id": "flour_sack_2",
+      "name": "50lb Bag of Flour",
+      "type": "ITEM",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "weight": 50.0,
+        "condition": "intact",
+        "contents": "flour",
+        "source": "Monsanto-treated"
+      },
+      "states": {
+        "is_weighed": true
+      }
+    },
+    {
+      "id": "oil_barrel_1",
+      "name": "Barrel of Cooking Oil",
+      "type": "ITEM",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "weight": 20.0,
+        "contents": "Canola",
+        "volume": "20L",
+        "tap_condition": "sticky residue"
+      },
+      "states": {
+        "is_sealed": true
+      }
+    },
+    {
+      "id": "hand_truck_1",
+      "name": "Hand Truck",
+      "type": "ITEM",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "weight": 15.0,
+        "wheel_condition": "wobbly",
+        "provides_abilities": [
+          "unload"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "digital_scale_1",
+      "name": "Digital Scale",
+      "type": "ITEM",
+      "location_id": "in:dry_goods_bulk_storage",
+      "properties": {
+        "weight": 2.0,
+        "battery_level": "low",
+        "display_condition": "dim",
+        "provides_abilities": [
+          "weigh"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "prep_table_1",
+      "name": "Stainless Steel Prep Table",
+      "type": "FURNITURE",
+      "location_id": "in:prep_station",
+      "properties": {
+        "size": [
+          2.0,
+          1.0,
+          0.9
+        ],
+        "weight": 60.0,
+        "is_container": true,
+        "material": "stainless steel",
+        "surface_condition": "knife nicks"
+      },
+      "states": {}
+    },
+    {
+      "id": "meat_slicer_1",
+      "name": "Industrial Meat Slicer",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 25.0,
+        "safety_guard": "missing",
+        "caution_sign": "taped on",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "jalapeno_note_1",
+      "name": "Jalapeño Substitute Note",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 0.1,
+        "content": "Jalapeños delayed—use Serranos today"
+      },
+      "states": {
+        "is_stapled": false
+      }
+    },
+    {
+      "id": "serrano_peppers_1",
+      "name": "Bowl of Serrano Peppers",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 2.0,
+        "quantity": "medium",
+        "spiciness": "hot"
+      },
+      "states": {
+        "is_seasoned": false
+      }
+    },
+    {
+      "id": "commercial_blender_1",
+      "name": "Commercial Blender",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 8.0,
+        "lid_condition": "cracked",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "sharpening_steel_1",
+      "name": "Sharpening Steel",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 0.5,
+        "condition": "left in water",
+        "material": "steel"
+      },
+      "states": {}
+    },
+    {
+      "id": "tortilla_press_1",
+      "name": "Tortilla Press",
+      "type": "ITEM",
+      "location_id": "in:assembly_line",
+      "properties": {
+        "weight": 15.0,
+        "alignment": "misaligned",
+        "edge_condition": "uneven",
+        "provides_abilities": [
+          "grind"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    },
+    {
+      "id": "adjustment_wrench_1",
+      "name": "Adjustment Wrench",
+      "type": "ITEM",
+      "location_id": "in:back_office",
+      "properties": {
+        "weight": 1.0,
+        "size": "medium",
+        "material": "steel",
+        "provides_abilities": [
+          "activate"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "whiteboard_1",
+      "name": "Delivery Schedule Whiteboard",
+      "type": "FURNITURE",
+      "location_id": "in:back_office",
+      "properties": {
+        "size": [
+          1.5,
+          1.0,
+          0.1
+        ],
+        "weight": 10.0,
+        "is_container": true,
+        "content": "half-erased delivery schedule"
+      },
+      "states": {}
+    },
+    {
+      "id": "landline_phone_1",
+      "name": "Landline Phone",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.8,
+        "condition": "off-hook",
+        "sound": "faint dial tone"
+      },
+      "states": {
+        "is_active": true
+      }
+    },
+    {
+      "id": "urgent_invoices_1",
+      "name": "Stack of Urgent Invoices",
+      "type": "ITEM",
+      "location_id": "on:whiteboard_1",
+      "properties": {
+        "weight": 0.5,
+        "content": "URGENT: Niman Ranch beef delayed"
+      },
+      "states": {
+        "is_stapled": true
+      }
+    },
+    {
+      "id": "staple_remover_1",
+      "name": "Staple Remover",
+      "type": "ITEM",
+      "location_id": "in:back_office",
+      "properties": {
+        "weight": 0.1,
+        "color": "black",
+        "provides_abilities": [
+          "unstaple"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "cleaning_towel_1",
+      "name": "Cleaning Towel",
+      "type": "ITEM",
+      "location_id": "in:prep_station",
+      "properties": {
+        "weight": 0.3,
+        "material": "cotton",
+        "condition": "clean",
+        "provides_abilities": [
+          "dry"
+        ]
+      },
+      "states": {}
+    },
+    {
+      "id": "seasoning_rack_1",
+      "name": "Seasoning Rack",
+      "type": "ITEM",
+      "location_id": "on:prep_table_1",
+      "properties": {
+        "weight": 2.0,
+        "contents": "assorted spices",
+        "provides_abilities": [
+          "season"
+        ],
+        "is_container": true
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_jar_1",
+      "name": "Spice Jar with Red Cap",
+      "type": "ITEM",
+      "location_id": "on:seasoning_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "HOT - USE SPARINGLY",
+        "cap_color": "red",
+        "contents": "cayenne pepper"
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_jar_2",
+      "name": "Spice Jar with Black Cap",
+      "type": "ITEM",
+      "location_id": "on:seasoning_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Mild",
+        "cap_color": "black",
+        "contents": "paprika"
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_jar_3",
+      "name": "Spice Jar with Black Cap",
+      "type": "ITEM",
+      "location_id": "on:seasoning_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Aromatic",
+        "cap_color": "black",
+        "contents": "cumin"
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_jar_4",
+      "name": "Spice Jar with Black Cap",
+      "type": "ITEM",
+      "location_id": "on:seasoning_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Sweet",
+        "cap_color": "black",
+        "contents": "cinnamon"
+      },
+      "states": {}
+    },
+    {
+      "id": "spice_jar_5",
+      "name": "Spice Jar with Black Cap",
+      "type": "ITEM",
+      "location_id": "on:seasoning_rack_1",
+      "properties": {
+        "weight": 0.2,
+        "label": "Savory",
+        "cap_color": "black",
+        "contents": "oregano"
+      },
+      "states": {}
+    },
+    {
+      "id": "apron_1",
+      "name": "Dirty Apron",
+      "type": "ITEM",
+      "location_id": "in:prep_station",
+      "properties": {
+        "weight": 0.4,
+        "condition": "stained with marinade"
+      },
+      "states": {
+        "is_wet": true
+      }
+    },
+    {
+      "id": "network_router_1",
+      "name": "Network Router",
+      "type": "ITEM",
+      "location_id": "in:back_office",
+      "properties": {
+        "weight": 1.5,
+        "status": "operational",
+        "provides_abilities": [
+          "upload"
+        ]
+      },
+      "states": {
+        "is_active": false
+      }
+    }
+  ],
+  "abilities": [
+    "activate",
+    "deactivate",
+    "dry",
+    "grind",
+    "open",
+    "season",
+    "unload",
+    "unstaple",
+    "upload",
+    "weigh",
+    "close"
+  ]
+}

@@ -1,0 +1,507 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+}
+
+.header {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.task-info p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.task-info strong {
+    color: #34495e;
+}
+
+.task-section {
+    height: 300px; /* 增加高度以便查看task_description和validation_checks */
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-section h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.save-button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+.save-button:hover {
+    background: #229954;
+}
+
+.reset-button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background: #c0392b;
+}
+
+.task-editor {
+    height: calc(100% - 30px);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    min-height: 0;
+}
+
+.scene-section, .trajectory-section {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.scene-section h3, .trajectory-section h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scene-editor, .trajectory-editor {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 400px;
+}
+
+.evaluation-panel {
+    width: 280px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.evaluation-panel h3 {
+    color: #2c3e50;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.question {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #3498db;
+}
+
+.question p {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+}
+
+.previous-result {
+    background: #e8f4f8;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.previous-result span {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.notes-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.notes-section textarea {
+    width: 100%;
+    height: 60px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-primary:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-secondary {
+    flex: 1;
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+.btn-secondary:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.jump-section {
+    display: flex;
+    gap: 5px;
+}
+
+.jump-section input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.jump-section button {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.status {
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    min-height: 20px;
+}
+
+.status.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.status.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.help-section {
+    margin-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+}
+
+.help-section details {
+    cursor: pointer;
+}
+
+.help-section summary {
+    color: #2c3e50;
+    font-size: 14px;
+    margin-bottom: 8px;
+    outline: none;
+}
+
+.help-section summary:hover {
+    color: #3498db;
+}
+
+.help-content {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 4px;
+    border-left: 3px solid #3498db;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.help-content p {
+    margin: 0 0 8px 0;
+    font-weight: 500;
+}
+
+.help-content ul {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+}
+
+.help-content li {
+    margin-bottom: 4px;
+    color: #555;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .evaluation-panel {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 5px;
+    }
+    
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .evaluation-panel {
+        width: 100%;
+        order: -1;
+    }
+    
+    .task-section {
+        height: 200px;
+    }
+}
+
+/* JSON编辑器样式调整 */
+.jsoneditor {
+    border: 1px solid #ddd !important;
+}
+
+.jsoneditor-menu {
+    background-color: #34495e !important;
+    border-bottom: 1px solid #2c3e50 !important;
+}
+
+.jsoneditor-tree {
+    background-color: #fff !important;
+}
+
+/* 编辑器菜单栏样式 */
+.jsoneditor-menu > button {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    margin: 2px !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+}
+
+.jsoneditor-menu > button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 右键菜单样式 */
+.jsoneditor-contextmenu {
+    background-color: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+.jsoneditor-contextmenu .jsoneditor-menu {
+    background-color: white !important;
+    border: none !important;
+}
+
+.jsoneditor-contextmenu button {
+    color: #333 !important;
+    padding: 8px 12px !important;
+    text-align: left !important;
+    width: 100% !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.jsoneditor-contextmenu button:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* 树形节点样式 */
+.jsoneditor-tree .jsoneditor-button {
+    background-color: #3498db !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 2px !important;
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+    margin: 1px !important;
+}
+
+.jsoneditor-tree .jsoneditor-button:hover {
+    background-color: #2980b9 !important;
+}
+
+/* 代码模式样式优化 */
+.jsoneditor-code {
+    background-color: #fff !important;
+}
+
+.jsoneditor-code .ace_editor {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+}
+
+/* 搜索框样式 */
+.jsoneditor-search {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+    padding: 8px !important;
+}
+
+.jsoneditor-search input {
+    border: 1px solid #ced4da !important;
+    border-radius: 4px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+    width: 200px !important;
+}
+
+.jsoneditor-search input:focus {
+    border-color: #3498db !important;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2) !important;
+    outline: none !important;
+}
+
+.jsoneditor-search button {
+    background-color: #3498db !important;
+    border: none !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 4px !important;
+    margin-left: 5px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+}
+
+.jsoneditor-search button:hover {
+    background-color: #2980b9 !important;
+}
+
+/* 只读模式样式 */
+.jsoneditor[readonly] .ace_editor {
+    background-color: #f8f9fa !important;
+}
+
+.jsoneditor[readonly] .jsoneditor-menu {
+    background-color: #6c757d !important;
+}
+
+/* 加载状态 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #7f8c8d;
+    font-style: italic;
+}
