@@ -165,12 +165,10 @@ class CorpGotoAction(BaseAction):
         try:
             # 移动所有参与的智能体到目标位置
             for agent_id in self.agents:
-                agent = agent_manager.get_agent(agent_id)
-                if agent:
-                    agent_manager.update_agent(agent_id, {'location_id': self.target_location})
-                    # agent.location_id = self.target_location
-                    # world_state.update_agent(agent_id, {'location_id': self.target_location})
-            
+                success = agent_manager.move_agent(agent_id, self.target_location)
+                if not success:
+                    return ActionStatus.FAILURE, f"Failed to move agent {agent_id} to {self.target_location}", None
+
             return ActionStatus.SUCCESS, f"Agents {', '.join(self.agents)} cooperatively moved to {self.target_location}", None
         except Exception as e:
             return ActionStatus.FAILURE, f"Cooperative move failed: {str(e)}", None
