@@ -86,6 +86,11 @@ class ApiLLM(BaseLLM):
         if 'organization' in self.extra_params:
             client_kwargs['organization'] = self.extra_params['organization']
 
+        # 设置timeout（如果有）
+        if 'timeout' in self.extra_params:
+            client_kwargs['timeout'] = self.extra_params['timeout']
+            logger.debug(f"设置API超时时间: {self.extra_params['timeout']}秒")
+
         # 创建OpenAI客户端实例
         self.client = openai.OpenAI(**client_kwargs)
 
