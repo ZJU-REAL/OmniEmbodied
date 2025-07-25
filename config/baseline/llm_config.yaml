@@ -15,17 +15,19 @@ api:
     volcengine:
       model: "gemini-2.5-flash"
       temperature: 0.3
-      max_tokens: 2048
+      max_tokens: 4096
       api_key: "sk-D8vrKhWyUqLl0VAkKSfJ90GRz6jC83j7Xwnr2j6XFPnPnSf0"
       endpoint: "https://api2.aigcbest.top/v1"
-    
+
     bailian:
-      model: "qwen2.5-72b-instruct"
+      model: "Qwen2.5-72B-Instruct-GPTQ-Int4"
       temperature: 0.3
       max_tokens: 512
-      api_key: "${BAILIAN_API_KEY}"
-      endpoint: "https://dashscope.aliyuncs.com/compatible-mode/v1"
-      enable_thinking: false
+      api_key: "dummy_key"
+      endpoint: "http://10.130.129.18:8721/v1"
+      extends:
+        guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
+        stop_tokens: []
 
     deepseek:
       model: "deepseek-chat"
@@ -37,17 +39,16 @@ api:
     deepseekv3:
       model: "deepseek-chat"
       temperature: 0.3
-      max_tokens: 512
-      api_key: "sk-2e631889bce64f4ab28b5b573a3aaf54"
+      max_tokens: 2048
+      api_key: "sk-234769c45cab419a95fcf6c1b8e7663b"
       endpoint: "https://api.deepseek.com"
 
     deepseekr1:
       model: "deepseek-reasoner"
       temperature: 0.3
-      max_tokens: 512
       max_tokens: 65536
       timeout: 3600
-      api_key: "sk-2e631889bce64f4ab28b5b573a3aaf54"
+      api_key: "sk-234769c45cab419a95fcf6c1b8e7663b"
       endpoint: "https://api.deepseek.com"
 
     qwen3b:
@@ -55,7 +56,7 @@ api:
       temperature: 0.3
       max_tokens: 512
       api_key: "dummy_key"
-      endpoint: "http://10.15.82.43:8033/v1"
+      endpoint: "http://10.15.82.49:8003/v1"
       extends:
         guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
         stop_tokens: []
@@ -65,7 +66,7 @@ api:
       temperature: 0.3
       max_tokens: 512
       api_key: "dummy_key"
-      endpoint: "http://10.130.129.18:8007/v1"
+      endpoint: "http://10.15.82.46:8007/v1"
       extends:
         guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
         stop_tokens: []
@@ -85,7 +86,7 @@ api:
       temperature: 0.3
       max_tokens: 512
       api_key: "dummy_key"
-      endpoint: "http://10.130.129.18:8721/v1"
+      endpoint: "http://10.15.82.43:8033/v1"
       extends:
         guided_regex: "Thought: .+\\n+\\s*Agent_1_Action: .+(?:\\n+\\s*Agent_2_Action: .+)?"
         stop_tokens: []
