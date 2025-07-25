@@ -24,6 +24,8 @@ import os
 import logging
 import argparse
 
+logger = logging.getLogger(__name__)
+
 # 添加项目根目录到Python路径
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -31,6 +33,25 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from evaluation.evaluation_interface import EvaluationInterface
 from config.config_manager import get_config_manager
 from config.config_override import ConfigOverrideParser
+
+def get_available_models():
+    """动态获取可用的模型列表"""
+    try:
+        config_manager = get_config_manager()
+        llm_config = config_manager.get_config('llm_config')
+        api_config = llm_config.get('api', {})
+
+        # 从 providers 结构中获取模型列表
+        if 'providers' in api_config:
+            models = list(api_config['providers'].keys())
+            logger.debug(f"从配置文件获取模型列表: {models}")
+            return models
+        else:
+            logger.warning("配置文件中未找到 providers 结构")
+            return ['openai', 'volcengine', 'bailian']  # 默认模型
+    except Exception as e:
+        logger.warning(f"获取模型列表失败: {e}")
+        return ['openai', 'volcengine', 'bailian']  # 默认模型
 
 
 def parse_args():
@@ -54,9 +75,10 @@ def parse_args():
 
     # 便捷的模型选择参数
     model_group = parser.add_argument_group('便捷模型选择')
+    available_models = get_available_models()
     model_group.add_argument('--model', type=str,
-                           choices=['deepseek', 'deepseekv3', 'deepseekr1', 'qwen06b', 'qwen3b', 'qwen7b', 'qwen72b','llama8b', 'openai', 'volcengine', 'bailian'],
-                           help='快速选择模型: deepseek, deepseekv3, deepseekr1, qwen06b, qwen3b, qwen7b, qwen72b, llama8b, openai, volcengine, bailian')
+                           choices=available_models,
+                           help=f'快速选择模型: {", ".join(available_models)}')
     model_group.add_argument('--observation-mode', type=str,
                            choices=['explore', 'global'],
                            help='观察模式: explore (探索模式，只显示已发现物体), global (全局模式，显示所有物体)')
