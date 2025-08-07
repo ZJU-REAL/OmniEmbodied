@@ -1,7 +1,6 @@
 # OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
 [![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://github.com/ZJU-REAL/OmniEmbodied)
-[![Documentation](https://img.shields.io/badge/Documentation-Latest-blue.svg)](https://omniembodied.readthedocs.io/en/latest/)
 [![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -19,7 +18,9 @@ Large language models excel at abstract reasoning but their capacity for embodie
 
 Our systematic evaluation reveals severe performance degradation when models must reason from constraints: while achieving **85-96% success** with explicit instructions, performance drops to **56-85%** for tool reasoning and **63-85%** for implicit collaboration, with compound tasks showing **over 50% failure rates**. Surprisingly, complete environmental information degrades coordination performance, indicating models cannot filter task-relevant constraints. Fine-tuning improves single-agent tasks dramatically (0.6% to 76.3%) but yields minimal multi-agent gains (1.5% to 5.5%), exposing fundamental architectural limitations.
 
-![Framework Overview](pages/static/images/main.png)
+<p align="center">
+  <img src="pages/static/images/main.png" alt="Framework Overview" width="700"/>
+</p>
 
 *Figure 1: Overview of the OmniEAR framework comprising three integrated components: **OmniSimulator** (left) uses structured text representation to model environments with objects, agents, and spatial relationships; **EAR-Bench** (right) presents our comprehensive evaluation matrix spanning single-agent and multi-agent tasks.*
 
@@ -37,7 +38,9 @@ Our systematic evaluation reveals severe performance degradation when models mus
 
 ## 📊 Benchmark Statistics
 
-![Data Generation Pipeline](pages/static/images/data_generation.png)
+<p align="center">
+  <img src="pages/static/images/data_generation.png" alt="Data Generation Pipeline" width="700"/>
+</p>
 
 *Figure 2: OmniEAR automated benchmark generation and evaluation framework showing the four-stage pipeline and comprehensive statistics.*
 
@@ -101,7 +104,9 @@ bash scripts/deepseekv3-wo.sh
 
 ## 📈 Main Results
 
-![Main Results Table](pages/static/images/main_table.png)
+<p align="center">
+  <img src="pages/static/images/main_table.png" alt="Main Results Table" width="700"/>
+</p>
 
 *Figure 3: Performance comparison across all evaluated models showing systematic degradation from explicit instructions to constraint-based reasoning.*
 
@@ -115,7 +120,9 @@ bash scripts/deepseekv3-wo.sh
 
 4. **Fine-tuning Limitations**: Supervised fine-tuning dramatically improves single-agent performance (0.6% → 76.3%) but shows minimal multi-agent gains (1.5% → 5.5%).
 
-![Performance Analysis](pages/static/images/exp_1.png)
+<p align="center">
+  <img src="pages/static/images/exp_1.png" alt="Performance Analysis" width="600"/>
+</p>
 
 *Figure 4: Detailed performance analysis across task categories and model architectures.*
 
@@ -140,70 +147,31 @@ bash scripts/deepseekv3-wo.sh
 
 ---
 
-## 📚 Documentation & Resources
 
-**📖 Complete Documentation**: [https://omniembodied.readthedocs.io/](https://omniembodied.readthedocs.io/en/latest/)
-
-Our comprehensive documentation includes:
-- 🚀 **[Quick Start Guide](https://omniembodied.readthedocs.io/en/latest/quickstart.html)** - Get running in minutes
-- 🏗️ **[Installation Guide](https://omniembodied.readthedocs.io/en/latest/installation.html)** - Detailed setup instructions  
-- 🔧 **[Configuration Guide](https://omniembodied.readthedocs.io/en/latest/configuration.html)** - Comprehensive configuration reference
-- 📋 **[API Reference](https://omniembodied.readthedocs.io/en/latest/api/index.html)** - Complete API documentation
-- 🎓 **[User Guide](https://omniembodied.readthedocs.io/en/latest/user_guide/index.html)** - Detailed usage tutorials
-
-### Core Components
-```
-OmniEmbodied/
-├── OmniSimulator/          # Environment simulation engine
-├── evaluation/             # Benchmark evaluation framework
-├── data_generation/        # Automated scenario generation
-├── modes/                  # Agent implementations
-├── llm/                    # LLM integrations
-├── config/                 # Configuration management
-└── examples/               # Usage examples and tutorials
-```
-
-### Configuration Example
-```yaml
-# Evaluation configuration
-evaluation:
-  model_name: "gpt-4o"
-  task_categories: ["tool_use", "implicit_collaboration"]
-  num_scenarios: 100
-  max_steps: 50
-
-# Agent configuration  
-agent_config:
-  agent_class: "modes.single_agent.llm_agent.LLMAgent"
-  max_history: 20
-  temperature: 0.1
-
-# Environment configuration
-simulator_config:
-  partial_observability: true
-  dynamic_capabilities: true
-  physics_constraints: true
-```
-
----
 
 ## 🔬 Experimental Analysis
 
 ### Ablation Studies
 
-![Ablation Results](pages/static/images/ae_1.png)
+<p align="center">
+  <img src="pages/static/images/ae_1.png" alt="Ablation Results" width="600"/>
+</p>
 
 *Figure 5: Ablation study results showing the impact of different framework components.*
 
 ### Efficiency Analysis
 
-![Efficiency Analysis](pages/static/images/exp_2_step_efficiency.png)
+<p align="center">
+  <img src="pages/static/images/exp_2_step_efficiency.png" alt="Efficiency Analysis" width="600"/>
+</p>
 
 *Figure 6: Step efficiency analysis across different model scales and task complexities.*
 
 ### Parameter Scaling Effects
 
-![Parameter Scaling](pages/static/images/exp_2_parameter_scaling.png)
+<p align="center">
+  <img src="pages/static/images/exp_2_parameter_scaling.png" alt="Parameter Scaling" width="600"/>
+</p>
 
 *Figure 7: Performance scaling with model parameter count across different task categories.*
 
@@ -211,41 +179,11 @@ simulator_config:
 
 ## 📖 Citation
 
-If you use OmniEAR in your research, please cite our paper:
-
-```bibtex
-@article{wang2025omniear,
-  title={OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks},
-  author={Wang, Zixuan and Li, Dingming and Li, Hongxing and Chen, Shuo and Yan, Yuchen and Zhang, Wenqi and Shen, Yongliang and Lu, Weiming and Xiao, Jun and Zhuang, Yueting},
-  journal={Preprint. Under review.},
-  year={2025},
-  note={Citation will be updated upon publication}
-}
-```
-
-*Note: This work is currently under review. The final citation format will be updated once the paper is published.*
+Citation information will be available upon publication.
 
 ---
 
-## 🤝 Contributing
 
-We welcome contributions to improve OmniEAR! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
-
-- Adding new task categories
-- Extending OmniSimulator capabilities  
-- Implementing new evaluation metrics
-- Contributing new scenarios to EAR-Bench
-
-### Development Setup
-```bash
-git clone https://github.com/ZJU-REAL/OmniEmbodied.git
-cd OmniEmbodied
-pip install -e .
-pip install -r requirements-dev.txt
-pytest tests/
-```
-
----
 
 ## 📄 License
 
@@ -253,7 +191,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **📖 Documentation**: [Complete documentation and guides](https://omniembodied.readthedocs.io/en/latest/)
 - **🐛 GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
 - **💬 Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
 - **📧 Email**: wang.zixuan@zju.edu.cn, syl@zju.edu.cn

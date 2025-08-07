@@ -14,7 +14,7 @@ from pathlib import Path
 
 def main():
     # Default port
-    PORT = 8000
+    PORT = 8005
     
     # Check if port is provided as argument
     if len(sys.argv) > 1:

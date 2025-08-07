@@ -113,7 +113,7 @@ Running Your First Evaluation
 
 Run a basic evaluation with:
 
-.. code-block:: bash
+   .. code-block:: bash
 
    bash scripts/deepseekv3-wo.sh
 
