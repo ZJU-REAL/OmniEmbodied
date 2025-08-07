@@ -1,6 +1,7 @@
 # OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
 [![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://github.com/ZJU-REAL/OmniEmbodied)
+[![Documentation](https://img.shields.io/badge/Documentation-Latest-blue.svg)](https://omniembodied.readthedocs.io/en/latest/)
 [![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -141,6 +142,15 @@ bash scripts/deepseekv3-wo.sh
 
 ## 📚 Documentation & Resources
 
+**📖 Complete Documentation**: [https://omniembodied.readthedocs.io/](https://omniembodied.readthedocs.io/en/latest/)
+
+Our comprehensive documentation includes:
+- 🚀 **[Quick Start Guide](https://omniembodied.readthedocs.io/en/latest/quickstart.html)** - Get running in minutes
+- 🏗️ **[Installation Guide](https://omniembodied.readthedocs.io/en/latest/installation.html)** - Detailed setup instructions  
+- 🔧 **[Configuration Guide](https://omniembodied.readthedocs.io/en/latest/configuration.html)** - Comprehensive configuration reference
+- 📋 **[API Reference](https://omniembodied.readthedocs.io/en/latest/api/index.html)** - Complete API documentation
+- 🎓 **[User Guide](https://omniembodied.readthedocs.io/en/latest/user_guide/index.html)** - Detailed usage tutorials
+
 ### Core Components
 ```
 OmniEmbodied/
@@ -240,10 +250,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
-- **Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
-- **Documentation**: [Complete API documentation](docs/)
-- **Email**: wang.zixuan@zju.edu.cn
+- **📖 Documentation**: [Complete documentation and guides](https://omniembodied.readthedocs.io/en/latest/)
+- **🐛 GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
+- **💬 Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
+- **📧 Email**: wang.zixuan@zju.edu.cn, syl@zju.edu.cn
 
 ---
 
