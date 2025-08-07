@@ -214,13 +214,16 @@ simulator_config:
 If you use OmniEAR in your research, please cite our paper:
 
 ```bibtex
-@inproceedings{wang2024omniear,
+@article{wang2025omniear,
   title={OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks},
   author={Wang, Zixuan and Li, Dingming and Li, Hongxing and Chen, Shuo and Yan, Yuchen and Zhang, Wenqi and Shen, Yongliang and Lu, Weiming and Xiao, Jun and Zhuang, Yueting},
-  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-  year={2026}
+  journal={Preprint. Under review.},
+  year={2025},
+  note={Citation will be updated upon publication}
 }
 ```
+
+*Note: This work is currently under review. The final citation format will be updated once the paper is published.*
 
 ---
 
