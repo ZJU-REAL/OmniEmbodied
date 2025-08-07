@@ -10,6 +10,10 @@
 ¹Zhejiang University  
 *Equal contribution, †Corresponding author
 
+**🔗 Quick Links:**
+- **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
+- **[📖 Documentation](https://omniembodied.readthedocs.io/en/latest/)** - Installation guides, API reference, and tutorials
+
 ---
 
 ## Abstract
@@ -99,6 +103,27 @@ bash scripts/deepseekv3-wo.sh
 **Note**: For scripts ending with `-wg.sh` (with global observation), you need to:
 1. Set the runtime parameter `--global` when running
 2. Configure `global_observation: true` in `config/simulator/simulator_config.yaml`
+
+---
+
+## 📚 Documentation & Resources
+
+### Complete Documentation
+
+**[📖 OmniEmbodied Documentation](https://omniembodied.readthedocs.io/en/latest/)**
+
+The documentation includes:
+- **Installation & Quick Start**: Setup guides and first steps
+- **OmniSimulator Guide**: Core simulation engine and environment system
+- **Framework Usage**: Evaluation system, agent modes, and data generation
+- **API Reference**: Complete class and function documentation
+- **Developer Guide**: Contributing, examples, and advanced integration
+
+### Additional Resources
+
+- **📋 Examples**: Practical code samples in the `examples/` directory
+- **⚙️ Configuration**: Template files in `config/` for different setups
+- **📊 Analysis**: Results visualization with `examples/results_analysis.ipynb`
 
 ---
 
@@ -193,7 +218,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **🐛 GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
 - **💬 Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
-- **📧 Email**: wang.zixuan@zju.edu.cn, syl@zju.edu.cn
+- **📧 Email**: wang.zixuan@zju.edu.cn
 
 ---
 
