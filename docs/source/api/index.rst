@@ -73,7 +73,7 @@ Quick API Overview
 .. autosummary::
    :toctree: _autosummary
 
-   llm.llm_factory.create_llm_from_config
+
 
 Usage Examples
 --------------

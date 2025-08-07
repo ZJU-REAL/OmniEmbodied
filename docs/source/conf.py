@@ -82,7 +82,7 @@ html_theme_options = {
 
 html_context = {
     "display_github": True,
-    "github_user": "omniembodied",
+    "github_user": "ZJU-REAL",
     "github_repo": "OmniEmbodied",
     "github_version": "main",
     "conf_py_path": "/docs/source/",
@@ -123,4 +123,26 @@ intersphinx_mapping = {
 }
 
 # -- Todo extension ----------------------------------------------------------
-todo_include_todos = True 
+todo_include_todos = True
+
+# -- Mock imports for documentation build ------------------------------------
+# Mock imports for modules that cannot be imported during docs build
+autodoc_mock_imports = [
+    'llm',
+    'llm.llm_factory',
+    'llm.api_llm',
+    'llm.base_llm',
+    'llm.vllm_llm',
+    'core',
+    'modes',
+    'modes.single_agent',
+    'modes.centralized', 
+    'modes.decentralized',
+    'config',
+    'evaluation',
+    'data_generation',
+    'utils',
+]
+
+# Autosummary configuration
+autosummary_generate = False  # Disable automatic generation to avoid import errors 

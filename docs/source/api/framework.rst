@@ -151,7 +151,7 @@ LLM Factory
 
 Factory function for creating LLM instances.
 
-.. autofunction:: llm.llm_factory.create_llm_from_config
+.. Note: LLM factory function documentation temporarily disabled due to import issues.
    :no-index:
 
    Create LLM client from configuration.
