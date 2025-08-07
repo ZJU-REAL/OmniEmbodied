@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks - A comprehensive framework for evaluating how language models reason about physical interactions, tool usage, and multi-agent coordination">
+  <meta property="og:title" content="OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks"/>
+  <meta property="og:description" content="A comprehensive framework for evaluating how language models reason about physical interactions, tool usage, and multi-agent coordination in embodied tasks"/>
+  <meta property="og:url" content="https://zju-real.github.io/OmniEmbodied/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/images/main.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks">
+  <meta name="twitter:description" content="A comprehensive framework for evaluating how language models reason about physical interactions, tool usage, and multi-agent coordination">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/main.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="embodied AI, multi-agent systems, language models, tool reasoning, collaboration, benchmark, physical reasoning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks</title>
+  <link rel="icon" type="image/x-icon" href="static/images/avatar.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<!-- HTML Structure -->
+<style>
+        .spatial-carousel {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0 auto;
+            color: #333;
+            background-color: white;
+            max-width: 1000px; /* Ensure the entire carousel doesn't exceed max content width */
+        }
+
+        .spatial-carousel .main-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            gap: 20px;
+            align-items: stretch; /* Make containers stretch to fill height */
+            min-height: 400px; /* Minimum height to ensure proper centering */
+        }
+
+        .spatial-carousel .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 200px; /* Increased width for longer button names */
+            flex-shrink: 0;
+            justify-content: center; /* Center buttons vertically */
+            align-self: center; /* Center the entire button container */
+        }
+
+        .spatial-carousel .content-area {
+            flex-grow: 1;
+            max-width: calc(100% - 240px); /* Accommodate button width + gap */
+        }
+
+        /* Single-agent task buttons (green) */
+        .spatial-carousel .category-button.single-agent {
+            background-color: #d8f7f0; /* 浅绿色 */
+            border: 2px solid #4caf50; /* 绿色边框 */
+            border-radius: 25px;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spatial-carousel .category-button.single-agent:hover {
+            background-color: #c8e6c9; /* 略深的绿色悬停状态 */
+            transform: translateY(-2px);
+        }
+
+        .spatial-carousel .category-button.single-agent.active {
+            background-color: #4caf50; /* 激活状态绿色背景 */
+            color: white;
+        }
+
+        /* Multi-agent task buttons (blue) */
+        .spatial-carousel .category-button.multi-agent {
+            background-color: #e3f2fd; /* 浅蓝色 */
+            border: 2px solid #2196f3; /* 蓝色边框 */
+            border-radius: 25px;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .spatial-carousel .category-button.multi-agent:hover {
+            background-color: #bbdefb; /* 略深的蓝色悬停状态 */
+            transform: translateY(-2px);
+        }
+
+        .spatial-carousel .category-button.multi-agent.active {
+            background-color: #2196f3; /* 激活状态蓝色背景 */
+            color: white;
+        }
+
+        .spatial-carousel .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .spatial-carousel .content-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .spatial-carousel .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .spatial-carousel .question-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .spatial-carousel .question {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .spatial-carousel .answer {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .spatial-carousel .question-type {
+            font-style: italic;
+            color: #666;
+        }
+
+        .spatial-carousel .image-container {
+            margin: 0 auto;
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .spatial-carousel .image-container img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            display: block;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .spatial-carousel .main-container {
+                flex-direction: column;
+            }
+
+            .spatial-carousel .button-container {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .spatial-carousel .category-button {
+                width: auto;
+            }
+
+            .spatial-carousel .content-area {
+                max-width: 100%;
+            }
+        }
+
+        /* Additional styles for better image presentation */
+        .result-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .result-image:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #007bff;
+            transition: transform 0.2s ease;
+        }
+
+        .insight-box:hover {
+            transform: translateX(5px);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #007bff, transparent);
+            margin: 3rem 0;
+        }
+    </style>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://github.com/ZJU-REAL">
+        <span class="icon">
+            <i class="fab fa-github"></i>
+        </span>
+        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <!-- 导航项将在这里动态加载 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<script>
+    window.HELP_IMPROVE_VIDEOJS = false;
+
+    async function loadNavItems() {
+      try {
+        const response = await fetch('https://zju-real.github.io/paper-meta-info/meta.csv');
+        const csvText = await response.text();
+
+        // 简单的CSV解析
+        const rows = csvText.split('\n')
+          .map(row => row.trim())
+          .filter(row => row) // 移除空行
+          .map(row => {
+            const [name, url] = row.split(',').map(cell => cell.trim());
+            return { name, url };
+          });
+
+        return rows;
+      } catch (error) {
+        console.error('Error loading navigation items:', error);
+        return [];
+      }
+    }
+
+    $(document).ready(async function () {
+      // 加载导航项
+      const navItems = await loadNavItems();
+      const navDropdown = $('.navbar-dropdown');
+
+      // 清空现有的导航项
+      navDropdown.empty();
+
+      // 添加新的导航项
+      navItems.forEach(item => {
+        const navItem = $('<a></a>')
+          .addClass('navbar-item')
+          .attr('href', item.url)
+          .text(item.name);
+        navDropdown.append(navItem);
+      });
+
+      // carousel初始化代码
+      var options = {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        loop: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+      }
+
+      var carousels = bulmaCarousel.attach('.carousel', options);
+      bulmaSlider.attach();
+    });
+  </script>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+                <span class="author-block">
+                  <a href="mailto:wang.zixuan@zju.edu.cn" target="_blank">Zixuan Wang</a><sup>1*</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:lidingm@std.uestc.edu.cn" target="_blank">Dingming Li</a><sup>1*</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:hongxing.li@hhu.edu.com" target="_blank">Hongxing Li</a><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  Shuo Chen<sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  Yuchen Yan<sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  Wenqi Zhang<sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="mailto:syl@zju.edu.cn" target="_blank">Yongliang Shen</a><sup>1†</sup>,
+                </span>
+                <span class="author-block">
+                  Weiming Lu<sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  Jun Xiao<sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  Yueting Zhuang<sup>1</sup>
+                </span>
+              </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>Zhejiang University</span>
+                    <br>
+                    <span class="author-block">Preprint. Under review.</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution, <sup>†</sup>Corresponding Author</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- PDF link -->
+                      <span class="link-block">
+                        <a href="static/pdfs/__ICLR_Template___OmniEmbodied__A_Comprehensive_Benchmark_for_Embodied_Multi_Agent_System.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/ZJU-REAL/OmniEmbodied" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link (placeholder for future submission) -->
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark" style="opacity: 0.6; cursor: not-allowed;">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming Soon)</span>
+                  </a>
+                </span>
+
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Teaser image-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <img src="static/images/main.png" alt="OmniEAR Framework Overview" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" />
+        </div>
+        <p style="font-size: 1.1em; line-height: 1.6;">
+            <b>OmniEAR</b> presents a comprehensive framework for evaluating agent reasoning in embodied tasks. Unlike existing benchmarks that provide predefined tool sets or explicit collaboration directives, OmniEAR requires agents to dynamically acquire capabilities and autonomously determine coordination strategies based on task demands. Through text-based environment representation, we model continuous physical properties and complex spatial relationships across 1,500 scenarios spanning household and industrial domains, revealing fundamental gaps in current language models' embodied reasoning abilities.</p>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser image -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Large language models excel at abstract reasoning but their capacity for embodied agent reasoning remains largely unexplored. We present <b>OmniEAR</b>, a comprehensive framework for evaluating how language models reason about physical interactions, tool usage, and multi-agent coordination in embodied tasks. Unlike existing benchmarks that provide predefined tool sets or explicit collaboration directives, OmniEAR requires agents to dynamically acquire capabilities and autonomously determine coordination strategies based on task demands. Through text-based environment representation, we model continuous physical properties and complex spatial relationships across 1,500 scenarios spanning household and industrial domains.
+          </p>
+          <p>
+            Our systematic evaluation reveals severe performance degradation when models must reason from constraints: while achieving 85-96% success with explicit instructions, performance drops to 56-85% for tool reasoning and 63-85% for implicit collaboration, with compound tasks showing over 50% failure rates. Surprisingly, complete environmental information degrades coordination performance, indicating models cannot filter task-relevant constraints. Fine-tuning improves single-agent tasks dramatically (0.6% to 76.3%) but yields minimal multi-agent gains (1.5% to 5.5%), exposing fundamental architectural limitations.
+          </p>
+          <p>
+            These findings demonstrate that embodied reasoning poses fundamentally different challenges than current models can address, establishing OmniEAR as a rigorous benchmark for evaluating and advancing embodied AI systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3 has-text-centered">Framework Overview</h2>
+          <div style="text-align: center; margin: 2rem 0;">
+              <img src="static/images/data_generation.png" alt="OmniEAR Data Generation Pipeline" style="max-width: 85%; height: auto; border-radius: 8px; box-shadow: 0 3px 12px rgba(0,0,0,0.1);" />
+          </div>
+          <div class="content has-text-justified" style="font-size: 1.05em; line-height: 1.7;">
+              <p>
+                  <b>OmniEAR</b> employs a comprehensive four-stage automated benchmark generation pipeline that combines large language models with rule-based validation to create diverse, physically consistent scenarios. The framework comprises: (a) <b>Scene Generation</b> from internet corpus with semantic seeds, (b) <b>Task Generation</b> with skill sampling across seven categories, (c) <b>Evaluation Logic Extraction</b> for automated assessment, and (d) <b>Expert Trajectory Generation</b> with human validation.
+              </p>
+              <p>
+                  Our EAR-Bench contains <b>1,500 scenarios</b> with <b>64K objects</b> and <b>6K attribute types</b>, spanning diverse domains from household to industrial settings. The balanced task distribution covers single-agent tasks (Direct Command, Tool Use, Attribute Reasoning, Compound Reasoning) and multi-agent collaboration tasks (Explicit, Implicit, and Compound Collaboration), enabling systematic evaluation of embodied reasoning capabilities across increasing cognitive complexity levels.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="hero is-small spatial-carousel" style="background-color: #fafafa; padding: 3rem 0;">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 2rem;">Benchmark Task Categories</h2>
+        <div class="main-container">
+            <!-- Category Navigation Buttons -->
+            <div class="button-container">
+                <button class="category-button single-agent" onclick="showSpatialCategory('Direct Command')">Direct Command</button>
+                <button class="category-button single-agent" onclick="showSpatialCategory('Tool Use')">Tool Use</button>
+                <button class="category-button single-agent" onclick="showSpatialCategory('Attribute Reasoning')">Attribute Reasoning</button>
+                <button class="category-button single-agent" onclick="showSpatialCategory('Compound Reasoning')">Compound Reasoning</button>
+                <button class="category-button multi-agent" onclick="showSpatialCategory('Explicit Collaboration')">Explicit Collaboration</button>
+                <button class="category-button multi-agent" onclick="showSpatialCategory('Implicit Collaboration')">Implicit Collaboration</button>
+                <button class="category-button multi-agent" onclick="showSpatialCategory('Compound Collaboration')">Compound Collaboration</button>
+            </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Direct Command Section -->
+            <div id="spatial-Direct Command-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Place the red cup on the kitchen table.</div>
+                        <div class="answer"><b>Task Type:</b> Direct Command (L1 - Basic)<br><b>Description:</b> Straightforward instruction following requiring basic object manipulation and spatial understanding.</div>
+                        <div class="question-type">Single-Agent Task - Basic Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool Use Section -->
+            <div id="spatial-Tool Use-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Clean the dirty table in the living room.</div>
+                        <div class="answer"><b>Task Type:</b> Tool Use (L2 - Intermediate)<br><b>Description:</b> Requires recognizing capability gaps, locating appropriate cleaning tools, and dynamically expanding action capabilities through tool acquisition. Agents must identify that cleaning actions are unavailable in their base action set and acquire the necessary tools.</div>
+                        <div class="question-type">Single-Agent Task - Intermediate Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attribute Reasoning Section -->
+            <div id="spatial-Attribute Reasoning-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Move the heaviest box to the storage room.</div>
+                        <div class="answer"><b>Task Type:</b> Attribute Reasoning (L2 - Intermediate)<br><b>Description:</b> Requires comparing continuous physical properties (weight) across multiple objects to identify the correct target for manipulation. Agents must solve optimization problems over object attributes.</div>
+                        <div class="question-type">Single-Agent Task - Intermediate Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compound Reasoning Section -->
+            <div id="spatial-Compound Reasoning-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Clean the heaviest table in the room.</div>
+                        <div class="answer"><b>Task Type:</b> Compound Reasoning (L3 - Advanced)<br><b>Description:</b> Integrates multiple challenges including attribute comparison, tool acquisition, and multi-step planning. Requires simultaneous reasoning about object properties and capability requirements.</div>
+                        <div class="question-type">Single-Agent Task - Advanced Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explicit Collaboration Section -->
+            <div id="spatial-Explicit Collaboration-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Agent A and Agent B cooperate to move the heavy dining table.</div>
+                        <div class="answer"><b>Task Type:</b> Explicit Collaboration (L1 - Basic)<br><b>Description:</b> Clear coordination directives provided, testing fundamental multi-agent synchronization and joint action execution. Agents receive explicit instructions about collaboration requirements.</div>
+                        <div class="question-type">Multi-Agent Task - Basic Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implicit Collaboration Section -->
+            <div id="spatial-Implicit Collaboration-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Move the piano to the music room.</div>
+                        <div class="answer"><b>Task Type:</b> Implicit Collaboration (L2 - Intermediate)<br><b>Description:</b> No explicit coordination instructions. Agents must autonomously recognize when tasks exceed individual capabilities and initiate collaborative effort based on physical constraints.</div>
+                        <div class="question-type">Multi-Agent Task - Intermediate Level</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compound Collaboration Section -->
+            <div id="spatial-Compound Collaboration-section" class="content-section">
+                <div class="content-wrapper">
+                    <div class="question-container">
+                        <div class="question">Task: Cooperatively repair the malfunctioning television.</div>
+                        <div class="answer"><b>Task Type:</b> Compound Collaboration (L3 - Advanced)<br><b>Description:</b> Combines all elements including tool acquisition, capability assessment, and coordinated execution. Requires autonomous recognition of collaboration needs and complex multi-agent planning.</div>
+                        <div class="question-type">Multi-Agent Task - Advanced Level</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+<script>
+    function showSpatialCategory(category) {
+        // Hide all content sections
+        const sections = document.querySelectorAll('.spatial-carousel .content-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Deactivate all buttons
+        const buttons = document.querySelectorAll('.spatial-carousel .category-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        // Show selected content section
+        const selectedSection = document.getElementById('spatial-' + category + '-section');
+        selectedSection.classList.add('active');
+
+        // Activate selected button
+        const categoryButtons = document.querySelectorAll('.spatial-carousel .category-button');
+        categoryButtons.forEach(button => {
+            if (button.textContent.trim() === category) {
+                button.classList.add('active');
+            }
+        });
+
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        showSpatialCategory('Direct Command');
+    });
+    </script>
+</section>
+<!-- End image carousel -->
+
+
+
+
+
+<!-- Main Results Section -->
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3 has-text-centered">Main Experimental Results</h2>
+          <div style="text-align: center; margin: 2rem 0;">
+              <img src="static/images/main_table.png" alt="Main Experimental Results Table" style="max-width: 95%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" />
+          </div>
+          <div class="content has-text-justified" style="font-size: 1.05em; line-height: 1.7;">
+              <p>
+                <b>Performance across task categories:</b> Our comprehensive evaluation reveals severe performance degradation when models must reason from physical constraints rather than explicit instructions. While achieving high success rates (85-96%) on direct commands, performance drops significantly for tool reasoning (56-85%) and implicit collaboration (63-85%). Advanced reasoning models like o1-preview and DeepSeek-R1 show superior logical planning capabilities but still struggle with embodied constraint grounding.
+              </p>
+              <p>
+                <b>Key findings:</b> (1) Compound tasks show over 50% failure rates across all models, (2) Complete environmental information paradoxically degrades coordination performance, (3) Fine-tuning improves single-agent tasks dramatically (0.6% to 76.3%) but yields minimal multi-agent gains (1.5% to 5.5%), exposing fundamental architectural limitations in current language models for embodied reasoning.
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-small is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3 has-text-centered">Key Insights</h2>
+          <div class="level-set has-text-justified" style="font-size: 1.05em; line-height: 1.7;">
+              <p>
+                Our systematic evaluation reveals fundamental gaps in current language models' embodied reasoning abilities. The results demonstrate that <b>embodied reasoning poses fundamentally different challenges</b> than current models can address, requiring new architectural innovations beyond current training approaches.
+              </p>
+              <div class="columns" style="margin-top: 1.5rem;">
+                <div class="column">
+                  <div class="box" style="background-color: #f8f9fa; border-left: 4px solid #007bff;">
+                    <h4 class="title is-5">🔧 Tool Reasoning Gap</h4>
+                    <p>Performance drops from 85-96% to 56-85% when models must infer tool needs from physical constraints rather than explicit instructions.</p>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box" style="background-color: #f8f9fa; border-left: 4px solid #28a745;">
+                    <h4 class="title is-5">🤝 Collaboration Challenge</h4>
+                    <p>Implicit collaboration success falls to 63-85% compared to 88-92% with explicit coordination, revealing autonomous decision-making limitations.</p>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="box" style="background-color: #f8f9fa; border-left: 4px solid #dc3545;">
+                    <h4 class="title is-5">🧠 Information Paradox</h4>
+                    <p>Complete environmental information degrades performance, indicating models cannot filter task-relevant constraints effectively.</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section hero is-small">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3 has-text-centered">Detailed Analysis</h2>
+
+          <!-- Parameter Scaling Analysis -->
+          <div class="columns" style="margin-top: 2rem;">
+            <div class="column is-half">
+              <div style="text-align: center;">
+                <img src="static/images/exp_2_parameter_scaling.png" alt="Parameter Scaling Analysis" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);" />
+              </div>
+              <h4 class="title is-5 has-text-centered" style="margin-top: 1rem;">Parameter Scaling Effects</h4>
+              <p class="has-text-justified">Analysis of how model size affects embodied reasoning capabilities across different task complexities. Larger models show improved performance but still struggle with multi-agent coordination.</p>
+            </div>
+            <div class="column is-half">
+              <div style="text-align: center;">
+                <img src="static/images/exp_2_step_efficiency.png" alt="Step Efficiency Analysis" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);" />
+              </div>
+              <h4 class="title is-5 has-text-centered" style="margin-top: 1rem;">Step Efficiency Analysis</h4>
+              <p class="has-text-justified">Relationship between reasoning steps and task success rates. Models require more steps for complex embodied reasoning but show diminishing returns beyond optimal step counts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Additional Analysis -->
+<section class="section hero is-small is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div class="content">
+          <h2 class="title is-3 has-text-centered">Additional Analysis</h2>
+
+          <!-- Environmental Information Impact -->
+          <div style="margin: 2rem 0;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+              <img src="static/images/ae_1.png" alt="Environmental Information Impact" style="max-width: 80%; height: auto; border-radius: 8px; box-shadow: 0 3px 12px rgba(0,0,0,0.1);" />
+            </div>
+            <h4 class="title is-4 has-text-centered">Impact of Environmental Information</h4>
+            <p class="has-text-justified" style="font-size: 1.05em; line-height: 1.6;">
+              Analysis of how different levels of environmental detail affect agent performance across task categories. Surprisingly, complete environmental information paradoxically degrades coordination performance, indicating that current models cannot effectively filter task-relevant constraints from irrelevant information.
+            </p>
+          </div>
+
+          <!-- Efficiency Analysis -->
+          <div class="columns" style="margin-top: 3rem;">
+            <div class="column is-half">
+              <div style="text-align: center; margin-bottom: 1rem;">
+                <img src="static/images/ae_3_efficiency_scatter.png" alt="Efficiency Scatter Plot" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);" />
+              </div>
+              <h5 class="title is-5 has-text-centered">Efficiency vs. Performance</h5>
+              <p class="has-text-justified">Trade-off analysis between computational cost (token consumption) and task success rates across different model architectures.</p>
+            </div>
+            <div class="column is-half">
+              <div style="text-align: center; margin-bottom: 1rem;">
+                <img src="static/images/ae_3_token_consumption.png" alt="Token Consumption Analysis" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);" />
+              </div>
+              <h5 class="title is-5 has-text-centered">Token Consumption Patterns</h5>
+              <p class="has-text-justified">Analysis of computational resource usage patterns across different task complexities and model architectures in embodied reasoning scenarios.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{wang2025omniear,
+      title={OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks},
+      author={Zixuan Wang and Dingming Li and Hongxing Li and Shuo Chen and Yuchen Yan and Wenqi Zhang and Yongliang Shen and Weiming Lu and Jun Xiao and Yueting Zhuang},
+      journal={Preprint. Under review.},
+      year={2025},
+      institution={Zhejiang University},
+      url={https://github.com/ZJU-REAL/OmniEmbodied}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+
+  </body>
+  </html>

@@ -1,0 +1,235 @@
+\clearpage
+% \appendix
+\section*{Appendix}
+
+\subsection{Benchmark Statistics and Coverage}
+
+\label{sec:dataset_statics}
+
+\benchmark encompasses 1,500 scenarios with 64,057 interactive objects, providing comprehensive coverage across diverse domains and task complexities. Tables~\ref{tab:dataset_overview} through \ref{tab:domain_distribution} present detailed statistics demonstrating the scale and diversity of our benchmark.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{minipage}[t]{0.47\textwidth}
+\centering
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Count} \\
+\midrule
+Total Scenarios & 1,500 \\
+Total Task Files & 1,481 \\
+Total Task Instances & 16,592 \\
+Interactive Objects & 64,057 \\
+Spatial Nodes (Rooms) & 6,634 \\
+Average Objects per Scene & 42.7 \\
+Average Rooms per Scene & 4.4 \\
+Collaborative Agent Pairs & 1,481 \\
+\bottomrule
+\end{tabular}
+\caption{Dataset scale and composition.}
+\label{tab:dataset_overview}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Task Category} & \textbf{Count} & \textbf{\%} \\
+\midrule
+\multicolumn{3}{l}{\textit{Single-Agent (65\%)}} \\
+Direct Command & 2,684 & 16.2 \\
+Attribute Reasoning & 2,669 & 16.1 \\
+Tool Use & 2,190 & 13.2 \\
+Compound Reasoning & 2,214 & 13.3 \\
+\midrule
+\multicolumn{3}{l}{\textit{Multi-Agent (35\%)}} \\
+Explicit Collaboration & 2,160 & 13.0 \\
+Implicit Collaboration & 2,582 & 15.6 \\
+Compound Collaboration & 2,093 & 12.6 \\
+\midrule
+\textbf{Total} & \textbf{16,592} & \textbf{100} \\
+\bottomrule
+\end{tabular}
+\caption{Task category distribution.}
+\label{tab:task_distribution}
+\end{minipage}
+\end{table}
+
+\vspace{0.3cm}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{minipage}[t]{0.47\textwidth}
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Category/Material} & \textbf{Count} & \textbf{\%} \\
+\midrule
+\multicolumn{3}{l}{\textit{Object Categories}} \\
+Container & 17,632 & 27.5 \\
+Tool & 15,134 & 23.6 \\
+Appliance & 8,963 & 14.0 \\
+Furniture & 6,234 & 9.7 \\
+Consumable & 4,890 & 7.6 \\
+Others & 11,204 & 17.6 \\
+\midrule
+\multicolumn{3}{l}{\textit{Material Types (Top 10 of 1,123)}} \\
+Plastic & 13,767 & 21.5 \\
+Metal & 11,274 & 17.6 \\
+Wood & 8,263 & 12.9 \\
+Glass & 6,277 & 9.8 \\
+Fabric & 5,060 & 7.9 \\
+Ceramic & 3,843 & 6.0 \\
+Silicon & 1,794 & 2.8 \\
+Aluminum & 1,601 & 2.5 \\
+Steel & 1,153 & 1.8 \\
+Others & 11,025 & 17.2 \\
+\bottomrule
+\end{tabular}
+\caption{Object categories and material distribution.}
+\label{tab:object_materials}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.47\textwidth}
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Domain/Room Type} & \textbf{Count} & \textbf{\%} \\
+\midrule
+\multicolumn{3}{l}{\textit{Application Domains}} \\
+Laboratory & 585 & 39.0 \\
+Office & 282 & 18.8 \\
+Industrial & 173 & 11.5 \\
+Medical & 93 & 6.2 \\
+Household & 93 & 6.2 \\
+Educational & 63 & 4.2 \\
+Retail & 48 & 3.2 \\
+Service & 30 & 2.0 \\
+Entertainment & 27 & 1.8 \\
+Transportation & 23 & 1.5 \\
+Others & 83 & 5.6 \\
+\midrule
+\multicolumn{3}{l}{\textit{Room Types (Top 5)}} \\
+Laboratory & 1,876 & 28.3 \\
+Storage & 1,234 & 18.6 \\
+Workspace & 987 & 14.9 \\
+Office & 765 & 11.5 \\
+Workshop & 543 & 8.2 \\
+\bottomrule
+\end{tabular}
+\caption{Domain and spatial distribution.}
+\label{tab:domain_distribution}
+\end{minipage}
+\end{table}
+
+\paragraph{Physical Property Modeling.}
+The benchmark features exceptional attribute diversity with 6,381 distinct property types. Core physical properties are comprehensively modeled: weight (64,047 objects), material composition (35,411 objects), size dimensions (22,820 objects), color (28,034 objects), and dynamic states (17,547 objects). This rich attribute space enables sophisticated reasoning about physical constraints and object affordances.
+
+\paragraph{Action Space and Tool Ecosystem.}
+The framework supports 214 distinct action types, partitioned into basic actions (60\%) available to all agents and tool-dependent actions (40\%) requiring specific capabilities. Among the 64,057 objects, 15,134 are classified as tools (23.6\%), with 13,482 objects possessing the \texttt{provides\_abilities} attribute that enables dynamic capability extension. This design enables realistic modeling of how agents acquire new abilities through tool use.
+
+\paragraph{Cross-Domain Coverage.}
+The benchmark spans diverse application domains, with laboratory environments comprising 39.0\% of scenarios, followed by office (18.8\%), industrial (11.5\%), and medical (6.2\%) settings. This distribution reflects our emphasis on professional environments where embodied reasoning is particularly critical. Each domain presents unique challenges: laboratory settings require precise tool usage and material handling, office environments emphasize multi-agent coordination, and industrial scenarios demand reasoning about heavy equipment and safety constraints.
+
+\paragraph{Quality Assurance and Expert Trajectories.}
+All 16,592 task instances include expert demonstration trajectories averaging 8.7 steps, providing optimal solutions for comparison and learning. Each trajectory undergoes validation to ensure physical feasibility and task completion. The evaluation framework supports multi-level verification including spatial relationships (1,300 location checks), state transitions (open/closed, on/off states), and compound conditions for complex task assessment. This comprehensive validation ensures that all tasks are both challenging and solvable, maintaining benchmark integrity while achieving unprecedented scale.
+
+
+\subsection{Analysis}
+
+\paragraph{Failure Mode Analysis.}
+Systematic failure analysis reveals task-specific performance bottlenecks that vary distinctly across model scales. Tool Use failures are dominated by exploration deficits (31.2\%), where models fail to locate required tools while maintaining spatial representations. Models below 7B parameters exhibit 2.7-fold higher failure rates (84.2\% vs. 31.2\%), confirming critical scale thresholds for embodied reasoning. Compound Reasoning failures stem primarily from planning degradation (28.7\%), with models losing track of intermediate subgoals during execution.
+
+Implicit Collaboration shows distinct timing failures (35.8\%)—models either initiate collaboration prematurely or miss coordination opportunities. This failure mode exhibits no scale correlation, indicating that collaboration timing demands reasoning mechanisms absent from current architectures. These failure patterns demonstrate that task categories stress fundamentally different cognitive capabilities, necessitating targeted architectural solutions beyond universal parameter scaling.
+
+\subsection{Related Work}
+
+\begin{table*}[htbp]
+\footnotesize
+\centering
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccccc@{}}
+\toprule
+\textbf{Dataset} & \textbf{Scenes} & \textbf{Domain} & \textbf{Task Types} & \textbf{Actions} & \textbf{Action Space} & \textbf{Collab.} & \textbf{Auto Gen.} \\
+\midrule
+ALFRED & 120 & House & D & 7 & Static & --- & $\times$ \\
+PARTNR & 60 & House & D & 11 & Static & Effic. & $\checkmark$ \\
+BEHAVIOR-1K & 50 & Diverse & D,T & 6 & Static & --- & $\times$ \\
+WAH & 7 & House & D & 10 & Static & Effic. & $\times$ \\
+TDW-MAT & 6 & House & D,E & 7 & Static & Effic. & $\times$ \\
+C-WAH & 6 & House & D,E & 7 & Static & Effic. & $\times$ \\
+Overcooked & 5 & Kitchen & E,I,C & 6 & Static & Effic. & $\times$ \\
+\midrule
+\textbf{OmniEAR} & \textbf{1.5K} & \textbf{Diverse} & \textbf{D,A,T,R,E,I,C} & \textbf{218} & \textbf{Dynamic} & \textbf{Phys.} & \textbf{\checkmark} \\
+\bottomrule
+\end{tabular*}
+\caption{Comparison of embodied AI datasets and benchmarks. Task types: D (Direct Command), A (Attribute Reasoning), T (Tool Use), R (Compound Reasoning), E (Explicit Collaboration), I (Implicit Collaboration), C (Compound Collaboration). Actions: number of available action types. Collab.: collaboration mechanism (Effic. = efficiency-based, Phys. = physical necessity-driven). Auto Gen.: automated task generation capability. Our framework uniquely combines comprehensive task coverage, dynamic action spaces, physical necessity-driven collaboration, and scalable automated generation.}
+\label{tab:dataset_comparison}
+\end{table*}
+
+\label{sec:related_works}
+
+\paragraph{Embodied Intelligence Benchmarks}
+The embodied intelligence evaluation landscape has established diverse benchmark frameworks spanning navigation to complex manipulation tasks\citep{puig2023habitat,li2021igibson}.Table~\ref{tab:dataset_comparison} compares key characteristics across major embodied AI datasets.  ALFRED \citep{shridhar2020alfredbenchmarkinterpretinggrounded} provides foundational standards for instruction-following task evaluation, while BEHAVIOR-1K \citep{li2024behavior} extends coverage to 1,000 daily activity scenarios. These benchmarks effectively assess task execution capabilities, yet physical property modeling predominantly employs discrete state representations, such as binary door operations and object pickup/placement, with limited requirements for reasoning about continuous attributes including weight, hardness, and temperature. Our framework addresses this limitation by introducing continuous physical property reasoning tasks that require agents to compare object attributes and make decisions based on physical constraints.
+
+\paragraph{Embodied Tool Use}
+Tool usage evaluation in embodied AI exhibits stratified characteristics across different complexity levels. RoCo \citep{mandi2024roco} focuses on low-level manipulation skills such as grasping precision, while high-level benchmarks like PARTNR \citep{chang2024partnrbenchmarkplanningreasoning} adopt predefined tool configurations with agent action spaces fixed at task initialization. This design effectively simplifies evaluation complexity but presents limitations in assessing dynamic tool reasoning capabilities based on task requirements. Current approaches typically provide static tool sets, preventing evaluation of how agents should reason about capability gaps and tool acquisition needs. Our framework introduces dynamic tool acquisition mechanisms, requiring agents to autonomously infer tool requirements and expand their action spaces based on task demands, thereby supplementing existing evaluation dimensions.
+
+\paragraph{Multi-Agent Collaboration}
+Multi-agent embodied intelligence evaluation has emerged as a significant research direction, with related work achieving valuable progress in collaboration modeling\citep{sun2024aml,wang2024large}. PARTNR evaluates multi-agent planning capabilities through heterogeneous task design, TDW-MAT \citep{zhang2024buildingcooperativeembodiedagents} creates collaborative scenarios using load capacity constraints, and EmbodiedBench \citep{yang2025embodiedbench} focuses on task allocation and execution optimization. Existing approaches primarily model collaboration requirements through two pathways: explicit collaboration instructions that clearly specify inter-agent task division, and efficiency optimization that drives multi-agent participation to enhance task completion speed. However, real-world collaboration decisions often stem from physical constraints rather than external instructions or efficiency considerations. Our framework employs implicit collaboration design requiring agents to autonomously assess whether tasks exceed single-agent capability ranges based on physical constraints and determine collaboration strategies accordingly, transforming collaboration judgment from external instructions to constraint-driven internal reasoning processes.
+
+\subsection{Hyperparameters}
+
+\label{sec:hyperparameters}
+
+\paragraph{Supervised Fine-Tuning.}
+We performed full-parameter supervised fine-tuning on the \texttt{Qwen2.5-3B-Instruct} model to adapt it to our dataset. The training was conducted on 4x NVIDIA A100 GPUs. The effective batch size was 64, achieved through a per-device batch size of 1 and 16 gradient accumulation steps across 4 devices. Key hyperparameters for the SFT stage are summarized in Table~\ref{tab:sft_hyperparameters}.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Hyperparameter} & \textbf{Value} \\
+\midrule
+Base Model & \texttt{Qwen2.5-3B-Instruct} \\
+Fine-tuning Method & Full-parameter \\
+Effective Batch Size & 64 \\
+Learning Rate & 1.0e-5 \\
+LR Scheduler & Cosine Decay \\
+Warmup Ratio & 0.1 \\
+Training Epochs & 3 \\
+Max Sequence Length & 15,360 \\
+Precision & BF16 \\
+\bottomrule
+\end{tabular}
+\caption{Hyperparameters for Supervised Fine-Tuning.}
+\label{tab:sft_hyperparameters}
+\end{table}
+
+\paragraph{Model Inference.}
+To ensure a fair and consistent comparison, all models were evaluated using the same set of inference parameters. We utilized the vLLM engine for efficient serving, with a tensor parallel size of 4. The decoding strategy was configured to balance response quality and exploration in complex reasoning tasks. The inference settings are detailed in Table~\ref{tab:inference_hyperparameters}.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Hyperparameter} & \textbf{Value} \\
+\midrule
+Inference Engine & vLLM \\
+Tensor Parallel Size & 4 \\
+Decoding Strategy & Nucleus Sampling \\
+Temperature & 0.3 \\
+Top-p & 1.0 (Default) \\
+Max Generation Tokens & 4096 \\
+Max Model Length & 15,360 \\
+\bottomrule
+\end{tabular}
+\caption{Hyperparameters for Model Inference.}
+\label{tab:inference_hyperparameters}
+\end{table}
+
+
+\input{sections/discussion}
+\input{sections/prompts_appendix} 
