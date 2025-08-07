@@ -1,6 +1,5 @@
 # OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
-[![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
