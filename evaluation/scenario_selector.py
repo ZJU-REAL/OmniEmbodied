@@ -1,5 +1,5 @@
 """
-场景选择器 - 支持all/range/list三种选择模式
+Scenario Selector - Supports three selection modes: all/range/list
 """
 
 import os
@@ -11,36 +11,36 @@ logger = logging.getLogger(__name__)
 
 
 class ScenarioSelector:
-    """场景选择器 - 简化实现"""
+    """Scenario Selector - Simplified implementation"""
     
     @staticmethod
     def get_scenario_list(config: Dict[str, Any], scenario_selection: Dict[str, Any] = None) -> Dict[str, Any]:
         """
-        获取要评测的场景列表和任务筛选信息
+        Get list of scenarios to evaluate and task filtering information
 
         Args:
-            config: 配置文件
-            scenario_selection: 场景选择配置
+            config: Configuration file
+            scenario_selection: Scenario selection configuration
                 {
                     'mode': 'all',  # 'all', 'range', 'list'
                     'range': {'start': '00001', 'end': '00010'},
                     'list': ['00001', '00003', '00005'],
                     'task_filter': {
-                        'categories': ['direct_command', 'attribute_reasoning']  # 任务类别筛选
+                        'categories': ['direct_command', 'attribute_reasoning']  # Task category filtering
                     }
                 }
 
         Returns:
-            Dict[str, Any]: 包含场景列表和任务筛选信息
-                - 'scenarios': 场景ID列表
-                - 'task_indices': 每个场景中需要执行的任务索引
+            Dict[str, Any]: Contains scenario list and task filtering information
+                - 'scenarios': Scenario ID list
+                - 'task_indices': Task indices to execute in each scenario
         """
         if scenario_selection is None:
             scenario_selection = {'mode': 'all'}
 
         mode = scenario_selection.get('mode', 'all')
 
-        # 获取基础场景列表
+        # Get base scenario list
         if mode == 'all':
             base_scenarios = ScenarioSelector._get_all_scenarios(config)
         elif mode == 'range':
@@ -50,10 +50,10 @@ class ScenarioSelector:
             scenario_list = scenario_selection.get('list', ['00001'])
             base_scenarios = ScenarioSelector._validate_scenarios(scenario_list, config)
         else:
-            logger.warning(f"未知的场景选择模式: {mode}, 使用默认场景")
+            logger.warning(f"Unknown scenario selection mode: {mode}, using default scenario")
             base_scenarios = ['00001']
 
-        # 应用任务筛选
+        # Apply task filtering
         task_filter = scenario_selection.get('task_filter')
         if task_filter:
             filter_result = ScenarioSelector._filter_scenarios_by_tasks(base_scenarios, task_filter, config)
@@ -61,33 +61,33 @@ class ScenarioSelector:
 
         return {
             'scenarios': base_scenarios,
-            'task_indices': {}  # 空字典表示执行所有任务
+            'task_indices': {}  # Empty dict means execute all tasks
         }
     
     @staticmethod
     def _get_all_scenarios(config: Dict[str, Any]) -> List[str]:
         """
-        获取所有可用场景
+        Get all available scenarios
 
         Args:
-            config: 配置字典，使用新的数据集配置
+            config: Configuration dictionary, using new dataset configuration
 
         Raises:
-            KeyError: 配置中缺少数据集配置
-            FileNotFoundError: 场景目录不存在
+            KeyError: Missing dataset configuration in config
+            FileNotFoundError: Scenario directory does not exist
         """
-        # 使用新的数据集配置系统
+        # Use new dataset configuration system
         from config.config_manager import get_config_manager
 
-        # 获取配置管理器
+        # Get configuration manager
         config_manager = get_config_manager()
 
-        # 获取当前使用的数据集
+        # Get currently used dataset
         dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
 
-        # 获取场景目录
+        # Get scenario directory
         try:
-            # 假设config中有config_file信息，如果没有则使用默认配置
+            # Assume config contains config_file info, use default config if not available
             config_file = getattr(config, 'config_file', 'centralized_config')
             if isinstance(config, dict) and 'config_file' in config:
                 config_file = config['config_file']
@@ -98,8 +98,8 @@ class ScenarioSelector:
 
             scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
         except Exception as e:
-            logger.warning(f"无法使用新配置系统获取场景目录: {e}")
-            # 回退到旧方式
+            logger.warning(f"Unable to get scenario directory using new config system: {e}")
+            # Fall back to old method
             data_dir = config.get('data_dir', 'data')
             if not os.path.isabs(data_dir):
                 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -107,32 +107,32 @@ class ScenarioSelector:
                 data_dir = os.path.join(project_root, data_dir)
             scene_dir = os.path.join(data_dir, 'scene')
 
-        # 严格验证场景目录存在
+        # Strictly validate scenario directory exists
         if not os.path.exists(scene_dir):
-            raise FileNotFoundError(f"场景目录不存在: {scene_dir}")
+            raise FileNotFoundError(f"Scenario directory does not exist: {scene_dir}")
 
-        # 查找所有场景文件
+        # Find all scenario files
         scene_files = glob.glob(os.path.join(scene_dir, '*.json'))
         scenario_ids = []
 
         for scene_file in scene_files:
-            # 从文件名提取场景ID
+            # Extract scenario ID from filename
             filename = os.path.basename(scene_file)
             if filename.endswith('_scene.json'):
-                scenario_id = filename[:-11]  # 移除'_scene.json'后缀
+                scenario_id = filename[:-11]  # Remove '_scene.json' suffix
                 scenario_ids.append(scenario_id)
 
         if not scenario_ids:
-            raise RuntimeError(f"场景目录中没有找到任何场景文件: {scene_dir}")
+            raise RuntimeError(f"No scenario files found in scenario directory: {scene_dir}")
 
-        # 排序并返回
+        # Sort and return
         scenario_ids.sort()
-        logger.info(f"找到 {len(scenario_ids)} 个场景: {scenario_ids[:5]}{'...' if len(scenario_ids) > 5 else ''}")
+        logger.info(f"Found {len(scenario_ids)} scenarios: {scenario_ids[:5]}{'...' if len(scenario_ids) > 5 else ''}")
         return scenario_ids
     
     @staticmethod
     def _get_range_scenarios(range_config: Dict[str, str]) -> List[str]:
-        """获取范围内的场景"""
+        """Get scenarios within range"""
         start = range_config.get('start', '00001')
         end = range_config.get('end', '00001')
         
@@ -141,41 +141,41 @@ class ScenarioSelector:
             end_num = int(end)
             
             if start_num > end_num:
-                logger.warning(f"起始场景号大于结束场景号: {start} > {end}")
+                logger.warning(f"Start scenario number greater than end scenario number: {start} > {end}")
                 start_num, end_num = end_num, start_num
             
-            # 生成范围内的场景ID
+            # Generate scenario IDs within range
             scenario_ids = []
             for i in range(start_num, end_num + 1):
-                scenario_id = f"{i:05d}"  # 格式化为5位数字
+                scenario_id = f"{i:05d}"  # Format as 5-digit number
                 scenario_ids.append(scenario_id)
             
-            # 验证场景是否存在
-            # 注意：这里需要传入config，但_get_range_scenarios是静态方法，没有config访问权限
-            # 暂时使用默认的data目录，这个方法需要重构
+            # Validate if scenarios exist
+            # Note: config needs to be passed here, but _get_range_scenarios is static method without config access
+            # Temporarily use default data directory, this method needs refactoring
             default_config = {'data_dir': 'data'}
             validated_scenarios = ScenarioSelector._validate_scenarios(scenario_ids, default_config)
             
-            logger.info(f"范围场景 {start}-{end}: 找到 {len(validated_scenarios)} 个有效场景")
+            logger.info(f"Range scenarios {start}-{end}: found {len(validated_scenarios)} valid scenarios")
             return validated_scenarios
             
         except ValueError as e:
-            logger.error(f"场景范围格式错误: {range_config}, 错误: {e}")
+            logger.error(f"Invalid scenario range format: {range_config}, error: {e}")
             return ['00001']
     
     @staticmethod
     def _validate_scenarios(scenario_list: List[str], config: Dict[str, Any]) -> List[str]:
-        """验证场景ID的有效性"""
+        """Validate the validity of scenario IDs"""
         validated_scenarios = []
 
-        # 使用新的数据集配置系统
+        # Use new dataset configuration system
         from config.config_manager import get_config_manager
 
         try:
             config_manager = get_config_manager()
             dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
 
-            # 获取配置文件名
+            # Get configuration file name
             config_file = getattr(config, 'config_file', 'centralized_config')
             if isinstance(config, dict) and 'config_file' in config:
                 config_file = config['config_file']
@@ -184,8 +184,8 @@ class ScenarioSelector:
 
             scene_dir = config_manager.get_scene_dir(config_file, dataset_name)
         except Exception as e:
-            logger.warning(f"无法使用新配置系统获取场景目录: {e}")
-            # 回退到旧方式
+            logger.warning(f"Unable to get scenario directory using new config system: {e}")
+            # Fall back to old method
             data_dir = config.get('data_dir', 'data')
             if not os.path.isabs(data_dir):
                 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -198,10 +198,10 @@ class ScenarioSelector:
             if os.path.exists(scene_file):
                 validated_scenarios.append(scenario_id)
             else:
-                logger.warning(f"场景文件不存在: {scene_file}")
+                logger.warning(f"Scene file does not exist: {scene_file}")
 
         if not validated_scenarios:
-            logger.warning("没有找到有效的场景，使用默认场景")
+            logger.warning("No valid scenarios found, using default scenario")
             return ['00001']
 
         return validated_scenarios
@@ -209,26 +209,26 @@ class ScenarioSelector:
     @staticmethod
     def _filter_scenarios_by_tasks(scenarios: List[str], task_filter: Dict[str, Any], config: Dict[str, Any]) -> Dict[str, Any]:
         """
-        根据任务特征筛选场景和任务
+        Filter scenarios and tasks based on task characteristics
 
         Args:
-            scenarios: 基础场景列表
-            task_filter: 任务筛选配置
+            scenarios: Base scenario list
+            task_filter: Task filtering configuration
                 {
-                    'categories': ['direct_command', 'attribute_reasoning']  # 任务类别筛选
+                    'categories': ['direct_command', 'attribute_reasoning']  # Task category filtering
                 }
 
         Returns:
-            Dict[str, Any]: 筛选结果，包含：
-                - 'scenarios': 筛选后的场景列表
-                - 'task_indices': 每个场景中需要执行的任务索引 {scenario_id: [task_index1, task_index2, ...]}
+            Dict[str, Any]: Filtering result, containing:
+                - 'scenarios': Filtered scenario list
+                - 'task_indices': Task indices to execute in each scenario {scenario_id: [task_index1, task_index2, ...]}
         """
         import json
 
         if not task_filter:
             return {
                 'scenarios': scenarios,
-                'task_indices': {}  # 空字典表示执行所有任务
+                'task_indices': {}  # Empty dict means execute all tasks
             }
 
         filtered_scenarios = []
@@ -238,14 +238,14 @@ class ScenarioSelector:
         total_tasks_before = 0
         total_tasks_after = 0
 
-        # 使用新的数据集配置系统获取任务目录
+        # Use new dataset configuration system to get task directory
         from config.config_manager import get_config_manager
 
         try:
             config_manager = get_config_manager()
             dataset_name = config.get('dataset', {}).get('default', 'eval_multi')
 
-            # 获取配置文件名
+            # Get configuration file name
             config_file = getattr(config, 'config_file', 'centralized_config')
             if isinstance(config, dict) and 'config_file' in config:
                 config_file = config['config_file']
@@ -254,8 +254,8 @@ class ScenarioSelector:
 
             task_dir = config_manager.get_task_dir(config_file, dataset_name)
         except Exception as e:
-            logger.warning(f"无法使用新配置系统获取任务目录: {e}")
-            # 回退到旧方式
+            logger.warning(f"Unable to get task directory using new config system: {e}")
+            # Fall back to old method
             data_dir = config.get('data_dir', 'data')
             if not os.path.isabs(data_dir):
                 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -265,10 +265,10 @@ class ScenarioSelector:
 
         for scenario_id in scenarios:
             try:
-                # 加载任务文件
+                # Load task file
                 task_file = os.path.join(task_dir, f'{scenario_id}_task.json')
                 if not os.path.exists(task_file):
-                    logger.warning(f"任务文件不存在: {task_file}")
+                    logger.warning(f"Task file does not exist: {task_file}")
                     continue
 
                 with open(task_file, 'r', encoding='utf-8') as f:
@@ -277,10 +277,10 @@ class ScenarioSelector:
                 tasks = task_data.get('tasks', [])
                 total_tasks_before += len(tasks)
 
-                # 注意：由于当前数据集中所有场景都是双智能体设计，
-                # 因此移除了agent_count筛选逻辑
+                            # Note: Since all scenarios in the current dataset are designed for dual agents,
+            # agent_count filtering logic has been removed
 
-                # 检查任务类别筛选
+            # Check task category filtering
                 if categories_filter:
                     matching_task_indices = []
 
@@ -289,29 +289,29 @@ class ScenarioSelector:
                         if task_category in categories_filter:
                             matching_task_indices.append(i)
 
-                    # 如果没有匹配的任务，跳过此场景
+                    # Skip this scenario if no matching tasks
                     if not matching_task_indices:
                         continue
 
-                    # 记录需要执行的任务索引
+                    # Record task indices to execute
                     task_indices[scenario_id] = matching_task_indices
                     total_tasks_after += len(matching_task_indices)
                 else:
-                    # 如果没有类别筛选，执行所有任务
+                    # If no category filtering, execute all tasks
                     task_indices[scenario_id] = []
                     total_tasks_after += len(tasks)
 
-                # 通过所有筛选条件
+                # Passes all filtering conditions
                 filtered_scenarios.append(scenario_id)
 
             except Exception as e:
-                logger.warning(f"处理场景 {scenario_id} 时出错: {e}")
+                logger.warning(f"Error processing scenario {scenario_id}: {e}")
                 continue
 
-        logger.info(f"场景筛选结果: {len(scenarios)} -> {len(filtered_scenarios)} 个场景")
-        logger.info(f"任务筛选结果: {total_tasks_before} -> {total_tasks_after} 个任务")
+        logger.info(f"Scenario filtering result: {len(scenarios)} -> {len(filtered_scenarios)} scenarios")
+        logger.info(f"Task filtering result: {total_tasks_before} -> {total_tasks_after} tasks")
         if categories_filter:
-            logger.info(f"  类别筛选: {categories_filter}")
+            logger.info(f"  Category filtering: {categories_filter}")
 
         return {
             'scenarios': filtered_scenarios,
@@ -321,17 +321,17 @@ class ScenarioSelector:
     @staticmethod
     def parse_scenario_selection_string(scenarios_str: str) -> Dict[str, Any]:
         """
-        解析场景选择字符串
+        Parse scenario selection string
         
         Args:
-            scenarios_str: 场景选择字符串
-                - 'all': 所有场景
-                - '00001-00010': 范围场景
-                - '00001,00003,00005': 列表场景
-                - '00001': 单个场景
+            scenarios_str: Scenario selection string
+                - 'all': All scenarios
+                - '00001-00010': Range scenarios
+                - '00001,00003,00005': List scenarios
+                - '00001': Single scenario
         
         Returns:
-            Dict: 场景选择配置
+            Dict: Scenario selection configuration
         """
         if scenarios_str == 'all':
             return {'mode': 'all'}

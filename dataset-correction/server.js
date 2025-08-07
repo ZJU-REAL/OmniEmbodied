@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// 数据路径配置
+// Data path configuration
 const DATA_PATHS = {
   single: {
     csv: '../raw_output/20250723_220044_single_independent_00001_to_00800_qianduoduo_4o_wo_single/subtask_execution_log.csv',
@@ -30,7 +30,7 @@ const DATA_PATHS = {
 
 const EVALUATION_CSV = 'evaluation_results.csv';
 
-// 初始化评估结果CSV
+// Initialize evaluation results CSV
 function initEvaluationCSV() {
   if (!fs.existsSync(EVALUATION_CSV)) {
     const csvWriter = createCsvWriter({
@@ -50,7 +50,7 @@ function initEvaluationCSV() {
   }
 }
 
-// 读取失败任务
+// Read failed tasks
 async function getFailedTasks() {
   const failedTasks = [];
   
@@ -80,7 +80,7 @@ async function getFailedTasks() {
   return failedTasks;
 }
 
-// 读取评估结果
+// Read evaluation results
 async function getEvaluationResults() {
   const results = {};
   if (fs.existsSync(EVALUATION_CSV)) {
@@ -97,7 +97,7 @@ async function getEvaluationResults() {
   return results;
 }
 
-// API: 获取失败任务列表
+// API: Get failed tasks list
 app.get('/api/failed-tasks', async (req, res) => {
   try {
     const failedTasks = await getFailedTasks();
@@ -118,7 +118,7 @@ app.get('/api/failed-tasks', async (req, res) => {
   }
 });
 
-// API: 获取任务数据
+// API: Get task data
 app.get('/api/task-data/:type/:scenarioId/:taskIndex', (req, res) => {
   try {
     const { type, scenarioId, taskIndex } = req.params;
@@ -130,20 +130,20 @@ app.get('/api/task-data/:type/:scenarioId/:taskIndex', (req, res) => {
     
     const data = {};
     
-    // 读取轨迹文件 - 修正文件名格式
-    // 轨迹文件名格式: {scenarioId}_task_00001_trajectory.json (任务索引始终为00001)
+    // Read trajectory file - fix filename format
+    // Trajectory filename format: {scenarioId}_task_00001_trajectory.json (task index is always 00001)
     const trajectoryPath = path.resolve(__dirname, paths.trajectories, `${scenarioId.padStart(5, '0')}_task_00001_trajectory.json`);
     if (fs.existsSync(trajectoryPath)) {
       data.trajectory = JSON.parse(fs.readFileSync(trajectoryPath, 'utf8'));
     }
     
-    // 读取场景文件
+    // Read scene file
     const scenePath = path.resolve(__dirname, paths.scenes, `${scenarioId.padStart(5, '0')}_scene.json`);
     if (fs.existsSync(scenePath)) {
       data.scene = JSON.parse(fs.readFileSync(scenePath, 'utf8'));
     }
 
-    // 读取任务文件
+    // Read task file
     const taskPath = path.resolve(__dirname, paths.tasks, `${scenarioId.padStart(5, '0')}_task.json`);
     if (fs.existsSync(taskPath)) {
       data.task = JSON.parse(fs.readFileSync(taskPath, 'utf8'));
@@ -156,7 +156,7 @@ app.get('/api/task-data/:type/:scenarioId/:taskIndex', (req, res) => {
   }
 });
 
-// API: 获取原始数据（用于重置）
+// API: Get original data (for reset)
 app.get('/api/original-data/:type/:scenarioId/:taskIndex', (req, res) => {
   try {
     const { type, scenarioId, taskIndex } = req.params;
@@ -168,13 +168,13 @@ app.get('/api/original-data/:type/:scenarioId/:taskIndex', (req, res) => {
 
     const data = {};
 
-    // 读取场景文件
+    // Read scene file
     const scenePath = path.resolve(__dirname, paths.scenes, `${scenarioId.padStart(5, '0')}_scene.json`);
     if (fs.existsSync(scenePath)) {
       data.scene = JSON.parse(fs.readFileSync(scenePath, 'utf8'));
     }
 
-    // 读取任务文件
+    // Read task file
     const taskPath = path.resolve(__dirname, paths.tasks, `${scenarioId.padStart(5, '0')}_task.json`);
     if (fs.existsSync(taskPath)) {
       data.task = JSON.parse(fs.readFileSync(taskPath, 'utf8'));
@@ -187,7 +187,7 @@ app.get('/api/original-data/:type/:scenarioId/:taskIndex', (req, res) => {
   }
 });
 
-// API: 保存JSON文件
+// API: Save JSON file
 app.post('/api/save-json', (req, res) => {
   try {
     const { type, scenarioId, fileType, data } = req.body;
@@ -214,14 +214,14 @@ app.post('/api/save-json', (req, res) => {
     
     console.log(`Saving ${fileType} file to: ${filePath}`);
 
-    // 备份原文件
+    // Backup original file
     if (fs.existsSync(filePath)) {
       const backupPath = filePath + '.backup.' + Date.now();
       fs.copyFileSync(filePath, backupPath);
       console.log(`Backup created: ${backupPath}`);
     }
 
-    // 保存新文件
+    // Save new file
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
     console.log(`File saved successfully: ${filePath}`);
     res.json({ success: true });
@@ -231,12 +231,12 @@ app.post('/api/save-json', (req, res) => {
   }
 });
 
-// API: 保存评估结果
+// API: Save evaluation results
 app.post('/api/save-evaluation', async (req, res) => {
   try {
     const { type, scenarioId, taskIndex, taskCategory, taskDescription, evaluationResult, notes } = req.body;
     
-    // 读取现有结果
+    // Read existing results
     const existingResults = [];
     if (fs.existsSync(EVALUATION_CSV)) {
       await new Promise((resolve) => {
@@ -253,7 +253,7 @@ app.post('/api/save-evaluation', async (req, res) => {
       });
     }
     
-    // 添加新结果
+    // Add new result
     existingResults.push({
       dataset_type: type,
       scenario_id: scenarioId,
@@ -265,7 +265,7 @@ app.post('/api/save-evaluation', async (req, res) => {
       notes: notes || ''
     });
     
-    // 写入CSV
+    // Write to CSV
     const csvWriter = createCsvWriter({
       path: EVALUATION_CSV,
       header: [
@@ -288,10 +288,10 @@ app.post('/api/save-evaluation', async (req, res) => {
   }
 });
 
-// 初始化
+// Initialize
 initEvaluationCSV();
 
 app.listen(PORT, () => {
-  console.log(`数据集矫正工具启动成功！`);
-  console.log(`请访问: http://localhost:${PORT}`);
+  console.log(`Dataset Correction Tool started successfully!`);
+console.log(`Please visit: http://localhost:${PORT}`);
 });

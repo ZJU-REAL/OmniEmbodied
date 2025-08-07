@@ -1,31 +1,31 @@
-# 任务筛选功能使用指南
+# Task Filtering Feature Usage Guide
 
-## 概述
+## Overview
 
-任务筛选功能允许你根据任务类型和智能体数量来筛选评测任务，实现更精准的评测分析。该功能支持配置文件配置和命令行参数两种方式。
+The task filtering feature allows you to filter evaluation tasks based on task types and agent counts, enabling more precise evaluation analysis. This feature supports both configuration file setup and command-line parameter methods.
 
-## 支持的筛选条件
+## Supported Filtering Conditions
 
-### 1. 任务类别筛选 (categories)
+### 1. Task Category Filtering (categories)
 
-根据任务的`task_category`字段筛选：
+Filter based on the task's `task_category` field:
 
-- `direct_command` - 直接命令任务
-- `attribute_reasoning` - 属性推理任务  
-- `tool_use` - 工具使用任务
-- `spatial_reasoning` - 空间推理任务
-- `compound_reasoning` - 复合推理任务
-- `explicit_collaboration` - 显式协作任务
-- `implicit_collaboration` - 隐式协作任务
-- `compound_collaboration` - 复合协作任务
+- `direct_command` - Direct command tasks
+- `attribute_reasoning` - Attribute reasoning tasks  
+- `tool_use` - Tool usage tasks
+- `spatial_reasoning` - Spatial reasoning tasks
+- `compound_reasoning` - Compound reasoning tasks
+- `explicit_collaboration` - Explicit collaboration tasks
+- `implicit_collaboration` - Implicit collaboration tasks
+- `compound_collaboration` - Compound collaboration tasks
 
-### 2. 智能体数量筛选 (agent_count)
+### 2. Agent Count Filtering (agent_count)
 
-根据场景中的智能体数量筛选：
+Filter based on the number of agents in the scenario:
 
-- `single` - 只评测单智能体任务（agents_config长度为1）
-- `multi` - 只评测多智能体任务（agents_config长度大于1）
-- `all` - 不限制智能体数量（默认值）
+- `single` - Only evaluate single-agent tasks (agents_config length equals 1)
+- `multi` - Only evaluate multi-agent tasks (agents_config length greater than 1)
+- `all` - No agent count restriction (default value)
 
 ## 配置方法
 

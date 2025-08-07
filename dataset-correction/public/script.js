@@ -4,29 +4,29 @@ class DatasetCorrectionTool {
         this.currentIndex = 0;
         this.editors = {};
         this.currentTask = null;
-        this.originalData = {}; // 存储原始数据用于重置
+        this.originalData = {}; // Store original data for reset
         
         this.init();
     }
     
     async init() {
-        this.showStatus('正在加载数据...', 'info');
+        this.showStatus('Loading data...', 'info');
         
         try {
-            // 初始化JSON编辑器
+            // Initialize JSON editors
             this.initEditors();
             
-            // 绑定事件
+            // Bind events
             this.bindEvents();
             
-            // 加载失败任务
+            // Load failed tasks
             await this.loadFailedTasks();
             
-            // 加载第一个任务
+            // Load first task
             if (this.failedTasks.length > 0) {
                 await this.loadTask(0);
             } else {
-                this.showStatus('没有找到失败的任务', 'info');
+                this.showStatus('No failed tasks found', 'info');
             }
         } catch (error) {
             console.error('初始化失败:', error);

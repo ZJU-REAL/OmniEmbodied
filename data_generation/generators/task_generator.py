@@ -34,7 +34,7 @@ class TaskGenerator(BaseGenerator):
         super().__init__('task', config_override)
 
         # Set specific paths - use project root data directory
-        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.project_root = Path(__file__).parent.parent.parent  # Project root directory
         self.data_dir = self.project_root / 'data'
         self.scene_dir = self.data_dir / 'scene'
         self.task_dir = self.data_dir / 'task'

@@ -1,0 +1,13 @@
+python examples/single_agent_example.py \
+    --model deepseekr1 \
+    --observation-mode global \
+    --suffix deepseekr1_single_wg \
+    --parallel \
+    --config-override "parallel_evaluation.scenario_parallelism.max_parallel_scenarios=1"
+
+python examples/centralized_agent_example.py \
+    --model deepseekr1 \
+    --observation-mode global \
+    --suffix deepseekr1_multi_wg \
+    --parallel \
+    --config-override "parallel_evaluation.scenario_parallelism.max_parallel_scenarios=30"

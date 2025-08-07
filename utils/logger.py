@@ -52,106 +52,104 @@ class ColorizedFormatter(logging.Formatter):
         
         return result
 
-class ColorizedConsoleHandler(logging.StreamHandler):
-    """
-    支持颜色输出的控制台处理器
-    """
-    def __init__(self, stream=None):
-        super().__init__(stream)
-        
-    def emit(self, record):
-        # 确保严格按照级别过滤日志
-        if not self.filter(record):
-            return
-            
-        # 标记此记录需要使用颜色
-        record.use_color = True
-        super().emit(record)
 
-def setup_logger(
-    log_name: str = "embodied_agent",
-    log_level: int = logging.INFO,
+def setup_logging(
+    name: str,
+    level: str = "INFO",
     log_file: Optional[str] = None,
-    log_to_console: bool = True,
-    file_log_level: Optional[int] = None,
-    console_log_level: Optional[int] = None,
-    propagate_to_root: bool = True
+    console_output: bool = True,
+    format_style: str = "simple",
+    enable_colors: bool = True
 ) -> logging.Logger:
     """
     设置日志记录器
     
     Args:
-        log_name: 日志记录器名称
-        log_level: 默认日志级别
-        log_file: 日志文件路径，可选
-        log_to_console: 是否输出到控制台
-        file_log_level: 文件日志级别，默认与log_level相同
-        console_log_level: 控制台日志级别，默认与log_level相同
-        propagate_to_root: 是否将日志级别传播到根logger，默认为True
-        
+        name: 记录器名称
+        level: 日志级别 (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+        log_file: 日志文件路径，如果为None则不写入文件
+        console_output: 是否输出到控制台
+        format_style: 格式样式 ("simple", "detailed", "debug")
+        enable_colors: 是否启用颜色（仅影响控制台输出）
+    
     Returns:
-        logging.Logger: 设置好的日志记录器
+        配置好的Logger对象
     """
-    logger = logging.getLogger(log_name)
+    # 获取日志级别
+    numeric_level = getattr(logging, level.upper(), logging.INFO)
     
-    # 设置根日志级别，确保所有处理器都能正确过滤
-    if log_level < logging.DEBUG:
-        logger.setLevel(logging.DEBUG)  # 确保不会低于DEBUG
-    else:
-        logger.setLevel(log_level)
+    # 创建logger
+    logger = logging.getLogger(name)
+    logger.setLevel(numeric_level)
     
-    # 设置根logger的级别，以便传播到所有子logger
-    if propagate_to_root:
-        root_logger = logging.getLogger()
-        if log_level < logging.DEBUG:
-            root_logger.setLevel(logging.DEBUG)
-        else:
-            root_logger.setLevel(log_level)
-    
-    # 清除现有的处理器
+    # 清除已有的处理器
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
     
-    # 基本格式
-    base_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    # 调试格式 - 包含文件名和行号
-    debug_fmt = '%(asctime)s - %(name)s - %(levelname)s - [%(location)s] - %(message)s'
+    # 定义格式
+    formats = {
+        "simple": "%(asctime)s [%(levelname)s] %(message)s",
+        "detailed": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        "debug": "%(asctime)s [%(levelname)s] %(name)s (%(location)s): %(message)s"
+    }
     
-    # 添加文件处理器
-    if log_file:
-        # 确保目录存在
-        log_dir = os.path.dirname(os.path.abspath(log_file))
-        if log_dir:
-            os.makedirs(log_dir, exist_ok=True)
-            
-        file_handler = logging.FileHandler(log_file, encoding='utf-8')
-        # 确保设置正确的文件日志级别
-        actual_file_level = file_log_level if file_log_level is not None else log_level
-        file_handler.setLevel(actual_file_level)
-        
-        # 针对不同级别使用不同格式
-        if actual_file_level <= logging.DEBUG:
-            file_formatter = ColorizedFormatter(debug_fmt, datefmt='%Y-%m-%d %H:%M:%S', use_colors=False, is_debug_format=True)
-        else:
-            file_formatter = logging.Formatter(base_fmt, datefmt='%Y-%m-%d %H:%M:%S')
-            
-        file_handler.setFormatter(file_formatter)
-        logger.addHandler(file_handler)
+    log_format = formats.get(format_style, formats["simple"])
+    date_format = "%H:%M:%S"
     
-    # 添加控制台处理器
-    if log_to_console:
-        console_handler = ColorizedConsoleHandler(sys.stdout)
-        # 确保设置正确的控制台日志级别
-        actual_console_level = console_log_level if console_log_level is not None else log_level
-        console_handler.setLevel(actual_console_level)
+    # 控制台处理器
+    if console_output:
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setLevel(numeric_level)
         
-        # 针对不同级别使用不同格式
-        if actual_console_level <= logging.DEBUG:
-            console_formatter = ColorizedFormatter(debug_fmt, datefmt='%Y-%m-%d %H:%M:%S', is_debug_format=True)
-        else:
-            console_formatter = ColorizedFormatter(base_fmt, datefmt='%Y-%m-%d %H:%M:%S')
-            
+        # 为控制台处理器创建格式化器
+        console_formatter = ColorizedFormatter(
+            log_format, date_format, 
+            use_colors=enable_colors,
+            is_debug_format=(format_style == "debug")
+        )
         console_handler.setFormatter(console_formatter)
+        
+        # 添加一个过滤器来标记是否应该使用颜色
+        def add_color_flag(record):
+            record.use_color = True
+            return True
+        console_handler.addFilter(add_color_flag)
+        
         logger.addHandler(console_handler)
     
-    return logger 
+    # 文件处理器
+    if log_file:
+        # 确保日志目录存在
+        os.makedirs(os.path.dirname(log_file), exist_ok=True)
+        
+        file_handler = logging.FileHandler(log_file, encoding='utf-8')
+        file_handler.setLevel(numeric_level)
+        
+        # 文件处理器不使用颜色
+        file_formatter = ColorizedFormatter(
+            log_format, date_format,
+            use_colors=False,
+            is_debug_format=(format_style == "debug")
+        )
+        file_handler.setFormatter(file_formatter)
+        
+        logger.addHandler(file_handler)
+    
+    return logger
+
+
+def get_logger(name: str) -> logging.Logger:
+    """
+    Get a logger with the specified name.
+    
+    Args:
+        name: Name of the logger
+        
+    Returns:
+        Logger instance
+    """
+    return logging.getLogger(name)
+
+
+# 创建默认logger
+default_logger = setup_logging("default") 

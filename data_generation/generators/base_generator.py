@@ -56,15 +56,15 @@ class BaseGenerator(ABC):
         }
         
         # Output paths - always use project root data directory
-        self.project_root = Path(__file__).parent.parent.parent  # 项目根目录
+        self.project_root = Path(__file__).parent.parent.parent  # Project root directory
         self.output_dir = self.project_root / 'data' / generator_type
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
     def _load_config(self, config_override: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Load and merge configuration."""
         try:
-            # 直接从配置文件加载
-            project_root = Path(__file__).parent.parent.parent  # 项目根目录
+            # Load directly from configuration file
+            project_root = Path(__file__).parent.parent.parent  # Project root directory
             config_path = project_root / "config" / "data_generation" / f"{self.generator_type}_gen_config.yaml"
 
             if not config_path.exists():
@@ -73,7 +73,7 @@ class BaseGenerator(ABC):
             with open(config_path, 'r', encoding='utf-8') as f:
                 config = yaml.safe_load(f)
 
-            # 应用默认值
+            # Apply default values
             defaults = {
                 'thread_num': 4,
                 'temperature': 0.7,

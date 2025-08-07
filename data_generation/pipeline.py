@@ -87,8 +87,8 @@ class Pipeline:
     def _load_pipeline_config(self) -> Dict[str, Any]:
         """Load pipeline configuration."""
         try:
-            # 直接从配置文件加载
-            project_root = Path(__file__).parent.parent  # 项目根目录
+                    # Load directly from configuration file
+        project_root = Path(__file__).parent.parent  # Project root directory
             config_path = project_root / "config" / "data_generation" / "pipeline.yaml"
 
             if not config_path.exists():
@@ -546,7 +546,7 @@ def main():
 
     # Load configuration for default values
     try:
-        project_root = Path(__file__).parent.parent  # 项目根目录
+        project_root = Path(__file__).parent.parent  # Project root directory
         config_path = project_root / "config" / "data_generation" / "pipeline.yaml"
 
         with open(config_path, 'r', encoding='utf-8') as f:

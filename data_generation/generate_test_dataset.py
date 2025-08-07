@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-测试数据集生成器
-从源数据集中提取指定类型的任务，生成独立的测试集
+Test dataset generator
+Extract tasks of specified types from source dataset to generate independent test sets
 """
 
 import os
@@ -18,12 +18,12 @@ from tqdm import tqdm
 
 
 class TestDatasetGenerator:
-    """测试数据集生成器"""
+    """Test dataset generator"""
     
     def __init__(self, config_path: str = None):
-        """初始化生成器"""
+        """Initialize generator"""
         if config_path is None:
-            # 默认配置文件路径
+            # Default configuration file path
             project_root = Path(__file__).parent.parent
             config_path = project_root / "config" / "data_generation" / "test_dataset_config.yaml"
         
@@ -31,27 +31,27 @@ class TestDatasetGenerator:
         self.project_root = Path(__file__).parent.parent
         self.validate_config()
         
-        # 任务计数器
+        # Task counters
         self.task_counters = Counter()
         self.generated_files = 0
         
-        # 操作系统检测
+        # Operating system detection
         self.os_type = platform.system().lower()
         self.supports_symlinks = self.os_type in ['linux', 'darwin'] or (
             self.os_type == 'windows' and self._check_windows_symlink_support()
         )
     
     def _check_windows_symlink_support(self) -> bool:
-        """检查Windows是否支持符号链接"""
+        """Check if Windows supports symbolic links"""
         try:
-            # 尝试创建一个测试符号链接
+            # Try to create a test symbolic link
             test_file = Path("test_symlink_check.tmp")
             test_link = Path("test_symlink_check_link.tmp")
             
             test_file.touch()
             os.symlink(test_file, test_link)
             
-            # 清理测试文件
+            # Clean up test files
             test_link.unlink()
             test_file.unlink()
             return True

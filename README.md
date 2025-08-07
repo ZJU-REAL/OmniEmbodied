@@ -1,754 +1,252 @@
-# Embodied Agent Framework
+# OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
-A Large Language Model (LLM) based agent framework for controlling agents in text-based embodied task simulators to execute various tasks. Supports three modes: single agent, centralized multi-agent, and decentralized multi-agent.
+[![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://github.com/ZJU-REAL/OmniEmbodied)
+[![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Project Overview
+**Authors:** Zixuan Wang¹*, Dingming Li¹*, Hongxing Li¹, Shuo Chen¹, Yuchen Yan¹, Wenqi Zhang¹, Yongliang Shen¹†, Weiming Lu¹, Jun Xiao¹, Yueting Zhuang¹
 
-This framework provides a powerful runtime environment for LLM-based embodied agents, seamlessly integrating with text-based embodied task simulators. Main features include:
+¹Zhejiang University  
+*Equal contribution, †Corresponding author
 
-- **Multiple Interaction Modes**: Choose different agent collaboration approaches based on task complexity
-- **Unified LLM Interface**: Support for multiple LLM providers, including local deployment and API services
-- **Dynamic Prompt System**: Prompts separated from code, supporting variable injection and template management
-- **Flexible Configuration Management**: Centralized configuration using YAML files
-- **Simulator Bridge Layer**: Simplify simulator interactions with natural language description capabilities
+---
 
-## Feature Highlights
+## Abstract
 
-- **Multiple Agent Modes**:
-  - Single Agent: Complete tasks independently with chain-of-thought reasoning support
-  - Centralized Multi-Agent: One central LLM coordinates multiple execution agents with collaborative actions
-  - Decentralized Multi-Agent: Multiple agents with their own LLMs collaborate with personalized configurations
-- **Advanced Prompt System**:
-  - Configuration file management of prompt templates with dynamic variable injection
-  - Detailed proximity relationships and action command guidelines
-  - Chain-of-Thought reasoning support
-- **Flexible LLM Support**: Support for multiple LLM providers (OpenAI, Azure OpenAI, vLLM, etc.)
-- **Intelligent Environment Perception**:
-  - Natural language environment description functionality
-  - Multi-level environment information (full/room/brief)
-  - Dynamic object state tracking
-- **Comprehensive Configuration System**: Use YAML files to manage configurations for different modes with log level control
-- **Powerful Communication Mechanism**: Support for inter-agent messaging, broadcasting, and negotiation
-- **Enhanced Execution Control**:
-  - History management and failure retry mechanisms
-  - Simulator bridge layer to simplify interactions
-  - Action state tracking and feedback
-- **Extensible Architecture**: Easy to implement different agent strategies and collaboration modes
+Large language models excel at abstract reasoning but their capacity for embodied agent reasoning remains largely unexplored. We present **OmniEAR**, a comprehensive framework for evaluating how language models reason about physical interactions, tool usage, and multi-agent coordination in embodied tasks. Unlike existing benchmarks that provide predefined tool sets or explicit collaboration directives, OmniEAR requires agents to dynamically acquire capabilities and autonomously determine coordination strategies based on task demands. Through text-based environment representation, we model continuous physical properties and complex spatial relationships across **1,500 scenarios** spanning household and industrial domains.
 
-## Installation
+Our systematic evaluation reveals severe performance degradation when models must reason from constraints: while achieving **85-96% success** with explicit instructions, performance drops to **56-85%** for tool reasoning and **63-85%** for implicit collaboration, with compound tasks showing **over 50% failure rates**. Surprisingly, complete environmental information degrades coordination performance, indicating models cannot filter task-relevant constraints. Fine-tuning improves single-agent tasks dramatically (0.6% to 76.3%) but yields minimal multi-agent gains (1.5% to 5.5%), exposing fundamental architectural limitations.
 
-### Prerequisites
+![Framework Overview](pages/static/images/main.png)
 
-- **Python**: 3.7 or higher (tested on 3.8, 3.9, 3.10, 3.11)
-- **Operating System**: Windows, macOS, or Linux
-- **Memory**: At least 512MB RAM recommended
-- **Storage**: Approximately 100MB for the framework and dependencies
+*Figure 1: Overview of the OmniEAR framework comprising three integrated components: **OmniSimulator** (left) uses structured text representation to model environments with objects, agents, and spatial relationships; **EAR-Bench** (right) presents our comprehensive evaluation matrix spanning single-agent and multi-agent tasks.*
 
-### Quick Installation
+---
+
+## 🎯 Key Contributions
+
+1. **Novel Evaluation Framework**: We introduce OmniEAR, the first framework to evaluate embodied reasoning through scenarios requiring agents to understand how physical properties determine actions, capabilities, and coordination needs.
+
+2. **Comprehensive Benchmark**: EAR-Bench provides 1,500 scenarios with continuous physical properties and dynamic capabilities, supported by OmniSimulator and an automated generation pipeline.
+
+3. **Fundamental Insights**: We provide empirical evidence that current language models lack core embodied reasoning capabilities, with performance degrading over 60% when moving from explicit instructions to embodied reasoning.
+
+---
+
+## 📊 Benchmark Statistics
+
+![Data Generation Pipeline](pages/static/images/data_generation.png)
+
+*Figure 2: OmniEAR automated benchmark generation and evaluation framework showing the four-stage pipeline and comprehensive statistics.*
+
+### EAR-Bench Composition
+- **1,500** diverse scenarios across household and industrial domains
+- **64K** objects with detailed physical properties  
+- **6K** attribute types including weight, temperature, material composition
+- **7** task categories spanning single-agent and multi-agent scenarios
+
+### Task Categories
+
+**Single-Agent Tasks:**
+- **Direct Command** (L1): Basic instruction following
+- **Attribute Reasoning** (L2): Continuous property comparison and inference  
+- **Tool Use** (L2): Dynamic capability acquisition through tool manipulation
+- **Compound Reasoning** (L3): Integrated multi-step planning with multiple challenges
+
+**Multi-Agent Tasks:**
+- **Explicit Collaboration** (L1): Clear coordination directives
+- **Implicit Collaboration** (L2): Autonomous coordination need recognition
+- **Compound Collaboration** (L3): Complex multi-agent scenarios requiring tool use and coordination
+
+---
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-# Clone repository
-git clone <repository-url>
-cd OmniEmbodied
-
-# Create virtual environment (recommended)
-conda create -n omniembodied python=3.9
-conda activate omniembodied
-# Or using venv: python -m venv omniembodied && source omniembodied/bin/activate
-
-# Install OmniSimulator (third-party library)
-cd OmniSimulator
+git clone https://github.com/ZJU-REAL/OmniEmbodied.git
+cd OmniEmbodied/OmniSimulator
 pip install -e .
 cd ..
-
-# Install framework dependencies
 pip install -r requirements.txt
 ```
 
-### Development Installation
+### Configuration
 
-For development and testing:
-
-```bash
-# Install development dependencies
-pip install -r requirements-dev.txt
-```
-
-### Verification
-
-Test that everything is installed correctly:
-
-```bash
-python -c "
-import yaml, pandas, openai, json_repair, pytest
-from OmniSimulator import SimulationEngine, ActionStatus
-print('✅ All dependencies installed successfully!')
-"
-```
-
-### Environment Configuration
-
-Set appropriate API keys based on your LLM provider:
-
-```bash
-# OpenAI
-export OPENAI_API_KEY="your_openai_api_key"
-
-# Azure OpenAI (if using Azure)
-export AZURE_OPENAI_API_KEY="your_azure_api_key"
-export AZURE_OPENAI_RESOURCE="your_resource_name"
-export AZURE_OPENAI_DEPLOYMENT="your_deployment_id"
-```
-
-Or create a `.env` file in the project root:
-
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-### Running Examples
-
-Test the installation by running example scripts:
-
-```bash
-# Test configuration-based evaluation
-python examples/config_based_evaluation.py --help
-
-# Test single agent example
-python examples/single_agent_example.py --help
-
-# Test centralized example
-python examples/centralized_example.py --help
-```
-
-### Troubleshooting
-
-**Common Issues:**
-
-1. **Import Errors**: Make sure you've installed OmniSimulator first, then the framework dependencies.
-2. **Configuration File Not Found**: This is normal for first-time setup. Default configurations will be created automatically.
-3. **API Key Errors**: Set your OpenAI API key as described in the Environment Configuration section.
-4. **Path Issues**: Make sure you're running scripts from the project root directory.
-
-For detailed installation instructions, see [INSTALL.md](INSTALL.md).
-
-### Dependencies
-
-The framework requires the following core dependencies:
-
-- **OmniSimulator**: Embodied AI simulation engine (installed as third-party library)
-- **pyyaml**: YAML configuration file parsing
-- **pandas**: Data processing and analysis
-- **openai**: OpenAI API client for LLM integration
-- **json-repair**: JSON format repair and validation
-- **pytest**: Testing framework
-
-All dependencies are automatically installed when you run `pip install -r requirements.txt`.
-
-## Usage
-
-### Single Agent Mode
-
-```python
-from modes.single_agent.llm_agent import LLMAgent
-from config.config_manager import ConfigManager
-from utils.simulator_bridge import SimulatorBridge
-
-# Step 1: Load configuration
-config_manager = ConfigManager()
-llm_config = config_manager.get_config("llm_config")
-agent_config = config_manager.get_config("single_agent_config")
-
-# Step 2: Initialize simulator bridge
-bridge = SimulatorBridge()
-bridge.initialize_with_task('data/default/default_task.json')
-
-# Output task information
-task_description = bridge.get_task_description()
-print(f"Task: {task_description}")
-
-# Step 3: Create LLM agent
-agent_id = "agent_1"
-agent = LLMAgent(bridge, agent_id, agent_config)
-
-# Step 4: Execute task
-status, message, result = agent.step()
-print(f"Execution result: {message}")
-
-# Get agent state
-state = agent.get_state()
-inventory = [item.get("name") for item in state.get("inventory", [])]
-print(f"Current inventory: {inventory}")
-```
-
-### Centralized Multi-Agent Mode
-
-```python
-from modes.centralized.coordinator import Coordinator
-from modes.centralized.worker_agent import WorkerAgent
-from config.config_manager import ConfigManager
-from utils.simulator_bridge import SimulatorBridge
-
-# Initialize simulator bridge
-bridge = SimulatorBridge()
-bridge.initialize_with_task('data/default/default_task.json')
-
-# Load configuration
-config_manager = ConfigManager()
-centralized_config = config_manager.get_config('centralized_config')
-
-# Create coordinator
-coordinator = Coordinator(bridge, 'coordinator', centralized_config.get('coordinator'))
-
-# Create worker agent
-worker = WorkerAgent(bridge, 'worker_1', centralized_config.get('worker_agents'))
-coordinator.add_worker(worker)
-
-# Set task
-coordinator.set_task("Find the kitchen, open the refrigerator, take out an apple")
-
-# Execute one coordination step
-status, message, results = coordinator.step()
-```
-
-### Decentralized Multi-Agent Mode
-
-```python
-from modes.decentralized.autonomous_agent import AutonomousAgent
-from modes.decentralized.communication import CommunicationManager
-from config.config_manager import ConfigManager
-from utils.simulator_bridge import SimulatorBridge
-
-# Initialize simulator bridge
-bridge = SimulatorBridge()
-bridge.initialize_with_task('data/default/default_task.json')
-
-# Create communication manager
-comm_manager = CommunicationManager()
-comm_manager.start_processing()
-
-# Load configuration
-config_manager = ConfigManager()
-decentralized_config = config_manager.get_config('decentralized_config')
-
-# Create autonomous agents
-agent1 = AutonomousAgent(bridge, 'agent_1', decentralized_config.get('autonomous_agent'),
-                       comm_manager=comm_manager)
-agent2 = AutonomousAgent(bridge, 'agent_2', decentralized_config.get('autonomous_agent'),
-                       comm_manager=comm_manager)
-
-# Register with communication manager
-comm_manager.register_agent('agent_1', agent1, agent1.receive_message)
-comm_manager.register_agent('agent_2', agent2, agent2.receive_message)
-
-# Set tasks
-agent1.set_task("Explore the house, find the kitchen, and inform agent_2")
-agent2.set_task("Wait for agent_1 to find the kitchen, then open the refrigerator and take out an apple")
-
-# Execute steps
-agent1.step()
-agent2.step()
-```
-
-### Using Simulator Bridge to Simplify Interactions
-
-```python
-from utils.simulator_bridge import SimulatorBridge
-
-# Initialize simulator bridge
-bridge = SimulatorBridge()
-
-# Initialize with task file
-bridge.initialize_with_task('data/default/default_task.json')
-
-# Get task information
-task_description = bridge.get_task_description()
-agents_config = bridge.get_agents_config()
-
-# Get scene information
-rooms = bridge.get_rooms()
-for room in rooms:
-    objects = bridge.get_objects_in_room(room['id'])
-
-# Find objects
-red_objects = bridge.find_objects_by_property('color', 'red')
-heavy_objects = bridge.find_objects_by_property('weight', lambda w: w > 10)
-
-# Use natural language description functionality
-agent_id = "agent_1"
-agent_description = bridge.describe_agent_natural_language(agent_id)
-print(f"Agent description: {agent_description}")
-
-# Describe room
-room_id = "kitchen"
-room_description = bridge.describe_room_natural_language(room_id)
-print(f"Room description: {room_description}")
-
-# Describe entire environment
-env_description = bridge.describe_environment_natural_language()
-print(f"Environment description: {env_description}")
-```
-
-## Configuration System
-
-### LLM Configuration
-
-Configure LLM providers in `config/defaults/llm_config.yaml`:
+Before running experiments, configure your LLM API key in `config/baseline/llm_config.yaml`:
 
 ```yaml
-# LLM inference mode settings
-mode: "api"  # Options: "api" or "vllm"
-
-# API call configuration
 api:
-  provider: "openai"  # Options: "openai" or "custom"
-
-  # Using OpenAI
-  openai:
-    model: "gpt-3.5-turbo"
-    api_key: "sk-..."  # Best to use environment variable OPENAI_API_KEY
-    temperature: 0.7
-    max_tokens: 1000
-
-  # Using custom endpoint (e.g., DeepSeek, Qwen, etc.)
-  custom:
-    model: "deepseek-chat"
-    api_key: "sk-..."  # Or use environment variable CUSTOM_LLM_API_KEY
-    endpoint: "https://api.deepseek.com"
-    temperature: 0.1
-    max_tokens: 4096
-
-# VLLM local inference configuration
-vllm:
-  model_path: "/path/to/model"  # Local model path
-  temperature: 0.1
-  max_tokens: 4096
-  tensor_parallel_size: 1
-  gpu_memory_utilization: 0.9
-
-# LLM parameter configuration
-parameters:
-  # Whether to send complete conversation history to LLM
-  send_history: false  # true=send complete history, false=send only summary
+  provider: "deepseekv3"  # Choose your provider
+  providers:
+    deepseekv3:
+      api_key: "your-api-key-here"  # Replace with your actual API key
 ```
 
-### Agent Configuration
+### Running Experiments
 
-Agent configurations for various modes are located in the `config/defaults/` directory:
-- `single_agent_config.yaml`: Single agent configuration
-- `centralized_config.yaml`: Centralized multi-agent configuration
-- `decentralized_config.yaml`: Decentralized multi-agent configuration
-
-## Prompt System
-
-The framework uses configuration files to manage prompt templates, separating prompts from code for easy modification and maintenance. The prompt configuration file is located at `config/defaults/prompts_config.yaml`.
-
-### Prompt Configuration Structure
-
-Prompt configurations are organized by different modes (single agent, centralized, decentralized):
-
-```yaml
-# Single agent mode prompts
-single_agent:
-  system: |
-    # System prompt
-  task_template: |
-    # Task prompt template with variable substitution support
-
-# Centralized multi-agent mode prompts
-centralized:
-  coordinator_system: |
-    # Coordinator system prompt
-  coordinator_template: |
-    # Coordinator task prompt template
-
-# Decentralized multi-agent mode prompts
-decentralized:
-  autonomous_system: |
-    # Autonomous agent system prompt template
-  autonomous_template: |
-    # Autonomous agent task prompt template
+```bash
+# Run basic evaluation
+bash scripts/deepseekv3-wo.sh
 ```
 
-### Using Prompt Manager
+**Note**: For scripts ending with `-wg.sh` (with global observation), you need to:
+1. Set the runtime parameter `--global` when running
+2. Configure `global_observation: true` in `config/simulator/simulator_config.yaml`
 
-The framework provides a `PromptManager` class for loading and formatting prompt templates:
+---
 
-```python
-from utils.prompt_manager import PromptManager
+## 📈 Main Results
 
-# Create prompt manager
-prompt_manager = PromptManager("prompts_config")
+![Main Results Table](pages/static/images/main_table.png)
 
-# Get prompt template
-system_prompt = prompt_manager.get_prompt_template("single_agent", "system")
+*Figure 3: Performance comparison across all evaluated models showing systematic degradation from explicit instructions to constraint-based reasoning.*
 
-# Format prompt template
-formatted_prompt = prompt_manager.get_formatted_prompt(
-    "single_agent",
-    "task_template",
-    task_description="Find the kitchen, open the refrigerator, take out an apple",
-    current_location="living room",
-    nearby_objects="table, sofa, TV",
-    inventory="none"
-)
-```
+### Key Findings
 
-### Environment Information Injection
+1. **Performance Degradation**: All models show substantial performance drops when reasoning must emerge from physical constraints rather than explicit instructions.
 
-The prompt system automatically injects environment descriptions into prompts through the `{environment_description}` placeholder:
+2. **Scale Effects**: Larger models (GPT-4o, Gemini-2.5-Flash) achieve better performance but still struggle with compound reasoning tasks.
 
-```yaml
-# In prompts_config.yaml
-single_agent:
-  task_template: |
-    {environment_description}
+3. **Reasoning Specialization**: Chain-of-thought reasoning models (Deepseek-R1, QwQ-32B) excel at logical planning but fail to ground physical constraints effectively.
 
-    Current task:
-    {task_description}
+4. **Fine-tuning Limitations**: Supervised fine-tuning dramatically improves single-agent performance (0.6% → 76.3%) but shows minimal multi-agent gains (1.5% → 5.5%).
 
-    Action history:
-    {history_summary}
-```
+![Performance Analysis](pages/static/images/exp_1.png)
 
-The detail level of environment descriptions is controlled by configuration files, ensuring LLMs receive appropriate environmental context information.
+*Figure 4: Detailed performance analysis across task categories and model architectures.*
 
-### Dynamic Action Injection
+---
 
-The `{dynamic_actions_description}` in system prompts automatically injects the list of currently available actions:
+## 🏗️ Framework Architecture
 
-```yaml
-single_agent:
-  system: |
-    You are an agent executing tasks in a text-based embodied environment.
+### OmniSimulator
+- **Text-based Environment Modeling**: Efficient simulation through graph representation
+- **Dynamic Capability System**: Tool-dependent action binding and unbinding
+- **Emergent Collaboration**: Physics-constrained multi-agent interactions
 
-    {dynamic_actions_description}
+### Automated Generation Pipeline
+- **Neural-Symbolic Hybrid**: LLM creativity with rule-based validation
+- **Physical Consistency**: Automated verification of scenario feasibility
+- **Diverse Domains**: Scenarios spanning household, industrial, and specialized environments
 
-    Please choose appropriate actions based on the current environment state.
-```
+### Evaluation Framework
+- **Systematic Assessment**: Standardized protocols across all models
+- **Multiple Metrics**: Success rate, step efficiency, reasoning quality
+- **Statistical Reliability**: Three independent runs with confidence intervals
 
-### Custom Prompts
+---
 
-To customize prompts, simply modify the corresponding templates in the `config/defaults/prompts_config.yaml` file without modifying code. This makes prompt tuning simpler and more flexible.
-
-## Architecture Design
+## 📚 Documentation & Resources
 
 ### Core Components
-
-- `BaseAgent`: Base class for all agents, providing basic functionality
-- `ConfigManager`: Manages YAML configuration files
-- `PromptManager`: Manages prompt templates
-- `SimulatorBridge`: Simplifies interactions with simulator
-- `LLMFactory`: Creates different LLM instances based on configuration
-
-### Agent Modes
-
-- `single_agent`: Single agent implementation
-- `centralized`: Centralized multi-agent implementation
-- `decentralized`: Decentralized multi-agent implementation
-
-### Directory Structure
-
 ```
 OmniEmbodied/
-├── OmniSimulator/          # Third-party simulation library
-│   ├── setup.py            # Library installation configuration
-│   ├── __init__.py         # Main library interface
-│   ├── core/               # Core simulation components
-│   ├── action/             # Action system
-│   ├── agent/              # Agent system
-│   ├── environment/        # Environment management
-│   └── utils/              # Simulation utilities
-├── core/                   # Framework core components
-│   ├── base_agent.py       # Base agent abstract class
-│   ├── agent_manager.py    # Agent manager
-│   └── agent_factory.py    # Agent factory functions
-├── modes/                  # Different mode implementations
-│   ├── single_agent/       # Single agent mode
-│   │   └── llm_agent.py    # LLM-based agent
-│   ├── centralized/        # Centralized multi-agent
-│   │   ├── coordinator.py  # Central coordinator
-│   │   ├── worker_agent.py # Execution agent
-│   │   └── planner.py      # Task planning component
-│   └── decentralized/      # Decentralized multi-agent
-│       ├── autonomous_agent.py # Autonomous agent
-│       ├── communication.py    # Inter-agent communication
-│       └── negotiation.py      # Negotiation mechanism
-├── llm/                    # LLM interfaces
-│   ├── base_llm.py         # LLM base class
-│   ├── llm_factory.py      # LLM factory functions
-│   ├── api_llm.py          # API-based LLM implementation
-│   └── vllm_llm.py         # Local vLLM implementation
-├── config/                 # Configuration system
-│   ├── config_manager.py   # Configuration manager
-│   └── defaults/           # Default configuration files
-├── utils/                  # Framework utility functions
-│   ├── logger.py           # Logging utilities
-│   ├── simulator_bridge.py # Simulator bridge
-│   ├── prompt_manager.py   # Prompt management
-│   ├── data_loader.py      # Data loading utilities
-│   └── task_evaluator.py   # Task evaluation utilities
-├── data/                   # Data files
-│   ├── scene/              # Scene definitions
-│   ├── task/               # Task definitions
-│   └── clue/               # Task clues
-├── examples/               # Example scripts
-├── requirements.txt        # Core dependencies
-├── requirements-dev.txt    # Development dependencies
-├── INSTALL.md             # Installation guide
-└── README.md              # This file
+├── OmniSimulator/          # Environment simulation engine
+├── evaluation/             # Benchmark evaluation framework
+├── data_generation/        # Automated scenario generation
+├── modes/                  # Agent implementations
+├── llm/                    # LLM integrations
+├── config/                 # Configuration management
+└── examples/               # Usage examples and tutorials
 ```
 
-## Example Scripts
-
-The project includes multiple example scripts to help you get started quickly:
-
-- `examples/single_agent_example.py`: Single agent example
-- `examples/centralized_example.py`: Centralized multi-agent example
-- `examples/decentralized_example.py`: Decentralized multi-agent example
-- `examples/simulator_bridge_demo.py`: Simulator bridge usage example
-
-## Advanced Features
-
-### Natural Language Environment Description
-
-The simulator bridge layer (`SimulatorBridge`) provides powerful natural language description functionality to help agents better understand the environment:
-
-```python
-# Get natural language descriptions
-bridge = SimulatorBridge()
-bridge.initialize_with_task('data/default/default_task.json')
-
-# Describe agent state
-agent_desc = bridge.describe_agent_natural_language("agent_1")
-
-# Describe specific room
-kitchen_desc = bridge.describe_room_natural_language("kitchen")
-
-# Describe entire environment
-env_desc = bridge.describe_environment_natural_language(
-    sim_config={
-        "nlp_show_object_properties": True,  # Show object properties
-        "nlp_only_show_discovered": False    # Show all content, not just discovered
-    }
-)
-```
-
-These descriptions can be used as part of prompts to help LLMs better understand and reason about environmental situations.
-
-### Task File Initialization
-
-The framework supports using task files to initialize simulation environments, which is the most recommended initialization method:
-
-```python
-from utils.simulator_bridge import SimulatorBridge
-
-# Initialize simulator bridge
-bridge = SimulatorBridge()
-
-# Initialize with task file
-task_file = "data/default/default_task.json"
-success = bridge.initialize_with_task(task_file)
-
-if success:
-    # Task initialization successful
-    task_description = bridge.get_task_description()
-    print(f"Task: {task_description}")
-
-    # Get agent information configured in task
-    agents_config = bridge.get_agents_config()
-    print(f"Task configured {len(agents_config)} agents")
-else:
-    print("Task initialization failed")
-```
-
-Task files contain scene settings, agent configurations, and task objectives, allowing you to quickly set up a complete simulation environment.
-
-### Inter-Agent Communication
-
-Decentralized multi-agent mode supports inter-agent communication. Agents can use the following command formats:
-- `MSG<ReceiverID>: <Message Content>` - Send message to specific agent
-- `BROADCAST: <Message Content>` - Broadcast message to all agents
-
-### Personalized Agent Configuration
-
-Decentralized mode supports configuring personality and skills for each agent:
-
+### Configuration Example
 ```yaml
-decentralized:
-  autonomous_agent:
-    personality: "cooperative, efficient, cautious"
-    skills: ["exploration", "interaction", "analysis"]
-    use_cot: true  # Enable chain-of-thought reasoning
-    max_chat_history: 10
+# Evaluation configuration
+evaluation:
+  model_name: "gpt-4o"
+  task_categories: ["tool_use", "implicit_collaboration"]
+  num_scenarios: 100
+  max_steps: 50
+
+# Agent configuration  
+agent_config:
+  agent_class: "modes.single_agent.llm_agent.LLMAgent"
+  max_history: 20
+  temperature: 0.1
+
+# Environment configuration
+simulator_config:
+  partial_observability: true
+  dynamic_capabilities: true
+  physics_constraints: true
 ```
 
-### Environment Description Configuration
+---
 
-The framework supports flexible environment description configuration, directly affecting the completeness of room information injected into prompts:
+## 🔬 Experimental Analysis
 
-```yaml
-env_description:
-  detail_level: "full"  # full/room/brief - Control room information scope
-  show_object_properties: true  # Whether to show detailed object properties
-  only_show_discovered: false   # Whether to show only discovered content
+### Ablation Studies
+
+![Ablation Results](pages/static/images/ae_1.png)
+
+*Figure 5: Ablation study results showing the impact of different framework components.*
+
+### Efficiency Analysis
+
+![Efficiency Analysis](pages/static/images/exp_2_step_efficiency.png)
+
+*Figure 6: Step efficiency analysis across different model scales and task complexities.*
+
+### Parameter Scaling Effects
+
+![Parameter Scaling](pages/static/images/exp_2_parameter_scaling.png)
+
+*Figure 7: Performance scaling with model parameter count across different task categories.*
+
+---
+
+## 📖 Citation
+
+If you use OmniEAR in your research, please cite our paper:
+
+```bibtex
+@inproceedings{wang2024omniear,
+  title={OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks},
+  author={Wang, Zixuan and Li, Dingming and Li, Hongxing and Chen, Shuo and Yan, Yuchen and Zhang, Wenqi and Shen, Yongliang and Lu, Weiming and Xiao, Jun and Zhuang, Yueting},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  year={2026}
+}
 ```
 
-#### Detail Level Description
+---
 
-- **`detail_level: "full"`** - Complete environment description
-  - Shows information for **all rooms**
-  - Includes environment overview, room details, and agent status
-  - Suitable for tasks requiring global planning
+## 🤝 Contributing
 
-- **`detail_level: "room"`** - Current room description (default)
-  - Shows only information for **the room the agent is currently in**
-  - Reduces prompt length, suitable for local operation tasks
+We welcome contributions to improve OmniEAR! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 
-- **`detail_level: "brief"`** - Brief description
-  - Shows only agent's own state
-  - Minimal environment information
+- Adding new task categories
+- Extending OmniSimulator capabilities  
+- Implementing new evaluation metrics
+- Contributing new scenarios to EAR-Bench
 
-#### Object Information Control
-
-- **`show_object_properties: true`** - Show detailed object properties (size, weight, brand, etc.)
-- **`only_show_discovered: false`** - Show all objects, including unexplored ones
-- **`only_show_discovered: true`** - Show only discovered objects (more realistic for exploration scenarios)
-
-#### Configuration Examples
-
-```yaml
-# Omniscient perspective configuration - suitable for planning tasks
-env_description:
-  detail_level: "full"
-  show_object_properties: true
-  only_show_discovered: false
-
-# Exploration mode configuration - suitable for exploration tasks
-env_description:
-  detail_level: "room"
-  show_object_properties: true
-  only_show_discovered: true
-
-# Lightweight mode configuration - suitable for simple tasks
-env_description:
-  detail_level: "brief"
-  show_object_properties: false
-  only_show_discovered: true
+### Development Setup
+```bash
+git clone https://github.com/ZJU-REAL/OmniEmbodied.git
+cd OmniEmbodied
+pip install -e .
+pip install -r requirements-dev.txt
+pytest tests/
 ```
 
-### Custom Agent Behavior
+---
 
-You can implement custom agent behavior by inheriting from base classes:
+## 📄 License
 
-```python
-from core.base_agent import BaseAgent
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-class MyCustomAgent(BaseAgent):
-    def __init__(self, simulator, agent_id, config=None):
-        super().__init__(simulator, agent_id, config)
-        # Custom initialization code
+## 🆘 Support
 
-    def decide_action(self):
-        # Custom decision logic
-        return "GOTO kitchen"
-```
+- **GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
+- **Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
+- **Documentation**: [Complete API documentation](docs/)
+- **Email**: wang.zixuan@zju.edu.cn
 
-## Environment Variables
+---
 
-- `OPENAI_API_KEY` - OpenAI API key
-- `AZURE_OPENAI_API_KEY` - Azure OpenAI API key
-- `AZURE_OPENAI_RESOURCE` - Azure OpenAI resource name
-- `AZURE_OPENAI_DEPLOYMENT` - Azure OpenAI deployment ID
+## 🌟 Acknowledgments
 
-## Frequently Asked Questions
-
-### How to Switch LLM Providers?
-
-Modify the `provider` field in `config/defaults/llm_config.yaml` to switch LLM providers.
-
-### How to Add New LLM Implementation?
-
-1. Create a new LLM implementation class in the `llm` directory, inheriting from `BaseLLM`
-2. Add corresponding instantiation code in `llm_factory.py`
-3. Add new provider configuration in the configuration file
-
-### How to Optimize Prompts?
-
-Directly edit prompt templates in the `config/defaults/prompts_config.yaml` file without modifying code. The prompt system supports:
-- Dynamic variable injection (such as task descriptions, environment states, history records)
-- Chain-of-thought reasoning prompts
-- Dedicated prompt templates for different modes
-
-### How to Configure History Message Sending?
-
-The framework supports two ways of passing historical information, configured through `parameters.send_history` in `config/defaults/llm_config.yaml`:
-
-**Method 1: Send Complete Conversation History (`send_history: true`)**
-- LLM can see complete conversation context, including all historical user inputs and assistant replies
-- Advantages: More accurate understanding, better context coherence
-- Disadvantages: Consumes more tokens, may exceed model context length limits
-- Use cases: Short conversations, tasks requiring precise context understanding
-
-**Method 2: Send History Summary (`send_history: false`, default)**
-- Only sends system messages and latest user messages, historical information passed through `history_summary` in prompts
-- Advantages: Saves tokens, avoids context length issues, better performance
-- Disadvantages: May lose some historical details
-- Use cases: Long conversations, limited token budget, most task scenarios
-
-```yaml
-# Configure in llm_config.yaml
-parameters:
-  send_history: false  # Recommended setting
-```
-
-### How to Debug Agent Behavior?
-
-1. Adjust log level to DEBUG: Set `logging.level: debug` in configuration file
-2. Use environment description functionality to view agent's perceived environment state
-3. Review execution history to analyze decision-making process
-4. Utilize chain-of-thought reasoning functionality to understand agent's reasoning process
-5. Enable `send_history: true` to see if LLM needs more historical context
-
-## Changelog
-
-### v1.2.0 (Latest Version)
-
-**Major Feature Enhancements**
-- 🚀 **Prompt System Refactoring**: Comprehensive optimization of prompt configuration with detailed proximity relationships and action guidelines
-- 🧠 **Chain-of-Thought Reasoning Support**: All mode agents now support Chain-of-Thought reasoning
-- 🌍 **Enhanced Environment Perception**: New multi-level environment description functionality (full/room/brief)
-- 🤖 **Personalized Agents**: Decentralized mode supports personality and skill configuration
-- 📊 **Improved Logging System**: Support for debug-level logging for easier troubleshooting
-
-**Code Improvements**
-- Optimized `BaseAgent` class with enhanced history management and state retrieval
-- Improved example scripts with more detailed error handling and debugging information
-- Enhanced `PromptManager` class with dynamic environment description injection support
-- Improved centralized coordinator's collaborative action support
-- Optimized decentralized agent communication and decision-making mechanisms
-
-**Configuration Optimizations**
-- Simplified prompt configuration file structure
-- Added environment description detail level control
-- Support for chain-of-thought reasoning toggle configuration
-- Optimized log level configuration
-
-## Contributing Guide
-
-Welcome to contribute code, report issues, or make suggestions! Please follow these steps:
-
-1. Fork this repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add some amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Submit Pull Request
-
-## License
-
-This project is licensed under the MIT License - see LICENSE file for details
-
-## Acknowledgments
-
-- Thanks to all contributors and users
-- This project is built on various open source tools and libraries
+OmniEAR builds upon foundational research in embodied AI, multi-agent systems, and language model evaluation. We thank the research community for their contributions to understanding the challenges of embodied intelligence. Special thanks to the anonymous reviewers for their valuable feedback in improving this work.
