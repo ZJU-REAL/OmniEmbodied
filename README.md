@@ -1,18 +1,24 @@
 <div align="center">
-     <img src="pages/static/images/icon.jpeg" height="100">
-</div>
+     <h1> OmniEAR </h1> 
+     <img src="pages/static/images/icon.jpeg" height="150">
 
-# OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
+<h3><a href="https://arxiv.org/abs/2508.05614">Benchmarking Agent Reasoning in Embodied Tasks</a></h3>
+
+[Zixuan Wang]()<sup>1</sup>, &nbsp; [Dingming Li]()<sup>1</sup>, &nbsp; [Hongxing Li]()<sup>1</sup>, &nbsp; [Shuo Chen]()<sup>1</sup>, &nbsp; [Yuchen Yan]()<sup>1</sup>, &nbsp; [Wenqi Zhang]()<sup>1</sup>, <br> [Yongliang Shen]()<sup>1</sup>, &nbsp; [Weiming Lu]()<sup>1</sup>, &nbsp;  [Jun Xiao]()<sup>1</sup>, &nbsp;  [Yueting Zhuang]()<sup>1</sup>
+
+<sup>1</sup>[Zhejiang University, China](https://www.zju.edu.cn/english/)
+
+<br>
+
 
 [![arXiv](https://img.shields.io/badge/arXiv-2508.05614-b31b1b.svg)](https://arxiv.org/abs/2508.05614)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 
-**Authors:** Zixuan Wang¹*, Dingming Li¹*, Hongxing Li¹, Shuo Chen¹, Yuchen Yan¹, Wenqi Zhang¹, Yongliang Shen¹†, Weiming Lu¹, Jun Xiao¹, Yueting Zhuang¹
+<br>
 
-¹Zhejiang University  
-*Equal contribution, †Corresponding author
+</div>
 
 **🔗 Quick Links:**
 - **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
@@ -96,7 +102,8 @@ Our systematic evaluation reveals severe performance degradation when models mus
 - **Application Domains**: Laboratory (39.0%), Office (18.8%), Industrial (11.5%), Medical (6.2%), Household (6.2%), Educational (4.2%), Retail (3.2%), Service (2.0%), Entertainment (1.8%), Transportation (1.5%)
 - **Room Types**: Laboratory (28.3%), Storage (18.6%), Workspace (14.9%), Office (11.5%), Workshop (8.2%)
 
-📁 **Dataset Access**: 
+#### Dataset Access
+
 - **EAR-Bench Dataset**: The complete evaluation dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
 - **Expert Trajectory SFT Dataset**: High-quality expert demonstration trajectories for supervised fine-tuning (1,982 samples) are hosted on [🤗 HuggingFace](https://huggingface.co/datasets/wangzx1210/OmniEAR). Download using:
   ```bash
