@@ -1,6 +1,5 @@
 # OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
-[![Paper](https://img.shields.io/badge/Paper-AAAI%202026-red.svg)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -204,7 +203,19 @@ The documentation includes:
 
 ## 📖 Citation
 
-Citation information will be available upon publication.
+If you use OmniEAR in your research, please cite our paper:
+
+```bibtex
+@misc{wang2025omniearbenchmarkingagentreasoning,
+      title={OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks}, 
+      author={Zixuan Wang and Dingming Li and Hongxing Li and Shuo Chen and Yuchen Yan and Wenqi Zhang and Yongliang Shen and Weiming Lu and Jun Xiao and Yueting Zhuang},
+      year={2025},
+      eprint={2508.05614},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2508.05614}, 
+}
+```
 
 ---
 
