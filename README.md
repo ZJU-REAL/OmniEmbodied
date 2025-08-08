@@ -13,6 +13,7 @@
 - **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
 - **[📖 Documentation](https://omniembodied.readthedocs.io/en/latest/)** - Installation guides, API reference, and tutorials
 - **[📊 Dataset](data/)** - EAR-Bench evaluation dataset with 1,500 scenarios
+- **[🤗 Expert Trajectories](https://huggingface.co/datasets/wangzx1210/OmniEAR)** - SFT expert trajectories for model fine-tuning (1,982 samples)
 
 ---
 
@@ -54,7 +55,13 @@ Our systematic evaluation reveals severe performance degradation when models mus
 - **6K** attribute types including weight, temperature, material composition
 - **7** task categories spanning single-agent and multi-agent scenarios
 
-📁 **Dataset Access**: The complete EAR-Bench dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
+📁 **Dataset Access**: 
+- **EAR-Bench Dataset**: The complete evaluation dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
+- **Expert Trajectory SFT Dataset**: High-quality expert demonstration trajectories for supervised fine-tuning (1,982 samples) are hosted on [🤗 HuggingFace](https://huggingface.co/datasets/wangzx1210/OmniEAR). Download using:
+  ```bash
+  cd data/expert_trajectory_sft/
+  python download_expert_data.py
+  ```
 
 ### Task Categories
 
