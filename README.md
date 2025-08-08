@@ -1,4 +1,4 @@
-# OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
+# <img src="pages/static/images/icon.jpeg" alt="OmniEAR Logo" height="32" style="vertical-align: middle;"> OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
 [![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -12,6 +12,7 @@
 **🔗 Quick Links:**
 - **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
 - **[📖 Documentation](https://omniembodied.readthedocs.io/en/latest/)** - Installation guides, API reference, and tutorials
+- **[📊 Dataset](data/)** - EAR-Bench evaluation dataset with 1,500 scenarios
 
 ---
 
@@ -52,6 +53,8 @@ Our systematic evaluation reveals severe performance degradation when models mus
 - **64K** objects with detailed physical properties  
 - **6K** attribute types including weight, temperature, material composition
 - **7** task categories spanning single-agent and multi-agent scenarios
+
+📁 **Dataset Access**: The complete EAR-Bench dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
 
 ### Task Categories
 
