@@ -1,8 +1,9 @@
 # <img src="pages/static/images/icon.jpeg" alt="OmniEAR Logo" height="32" style="vertical-align: middle;"> OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
 
-[![GitHub](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
+[![arXiv](https://img.shields.io/badge/arXiv-2508.05614-b31b1b.svg)](https://arxiv.org/abs/2508.05614)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Stars](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 
 **Authors:** Zixuan Wang¹*, Dingming Li¹*, Hongxing Li¹, Shuo Chen¹, Yuchen Yan¹, Wenqi Zhang¹, Yongliang Shen¹†, Weiming Lu¹, Jun Xiao¹, Yueting Zhuang¹
 
@@ -11,6 +12,7 @@
 
 **🔗 Quick Links:**
 - **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
+- **[📄 arXiv Paper](https://arxiv.org/abs/2508.05614)** - Complete research paper with methodology and results
 - **[📖 Documentation](https://omniembodied.readthedocs.io/en/latest/)** - Installation guides, API reference, and tutorials
 - **[📊 Dataset](data/)** - EAR-Bench evaluation dataset with 1,500 scenarios
 - **[🤗 Expert Trajectories](https://huggingface.co/datasets/wangzx1210/OmniEAR)** - SFT expert trajectories for model fine-tuning (1,982 samples)
