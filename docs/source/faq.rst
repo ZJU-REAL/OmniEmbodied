@@ -288,7 +288,7 @@ If your question isn't answered here:
 
 1. Check the :doc:`troubleshooting` guide for detailed solutions
 2. Search existing issues on `GitHub <https://github.com/ZJU-REAL/OmniEmbodied/issues>`_
-3. Ask in `GitHub Discussions <https://github.com/ZJU-REAL/OmniEmbodied/discussions>`_
+3. Ask in `GitHub Issues <https://github.com/ZJU-REAL/OmniEmbodied/issues>`_
 4. Create a new issue with a clear description of your problem
 
 We welcome all questions and feedback from the community! 

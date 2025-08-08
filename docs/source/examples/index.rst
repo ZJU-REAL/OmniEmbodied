@@ -308,7 +308,7 @@ We welcome community contributions of examples! To contribute:
 
 **Sharing Examples:**
 
-- Post in GitHub Discussions
+- Post in GitHub Issues
 - Include in pull requests
 - Share in research papers
 - Use in educational materials
@@ -328,7 +328,7 @@ Getting Help with Examples
 1. Read the code comments carefully
 2. Try modifying parameters to see effects
 3. Use interactive debugging (``import pdb; pdb.set_trace()``)
-4. Ask questions in GitHub Discussions
+4. Ask questions in GitHub Issues
 
 **Requesting new examples:**
 

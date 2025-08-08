@@ -347,7 +347,7 @@ Community Guidelines
 
 **Community Support**:
 
-- Help answer questions in discussions
+- Help answer questions in issues
 - Review pull requests from other contributors
 - Share knowledge and best practices
 - Mentor new contributors
@@ -361,7 +361,7 @@ Ready to contribute? Here's what to do next:
 2. **Read Contributing Guide** - Review :doc:`contributing` for detailed guidelines
 3. **Understand Architecture** - Study :doc:`architecture` to understand the system
 4. **Pick an Issue** - Find a good first issue on GitHub to work on
-5. **Join the Community** - Participate in discussions and code reviews
+5. **Join the Community** - Participate in issues and code reviews
 
 For specific development tasks:
 

@@ -566,7 +566,7 @@ Getting Help
 - Check this troubleshooting guide first
 - Search existing GitHub issues
 - Create new issue with detailed information
-- Ask in GitHub Discussions for usage questions
+- Ask in GitHub Issues for usage questions
 
 **Creating effective bug reports:**
 

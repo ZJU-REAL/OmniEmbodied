@@ -99,7 +99,7 @@ For questions about licensing, contact us through:
 
 - GitHub Issues for technical questions
 - Email (to be provided) for licensing inquiries
-- GitHub Discussions for general questions
+- GitHub Issues for general questions
 
 Disclaimer
 ----------

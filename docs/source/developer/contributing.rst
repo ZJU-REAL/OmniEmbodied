@@ -95,7 +95,7 @@ Getting Help
 
 - Check existing issues for similar problems
 - Open a new issue for bugs or feature requests
-- Use GitHub Discussions for questions
+- Use GitHub Issues for questions
 - Contact maintainers: wang.zixuan@zju.edu.cn
 
 Thank You

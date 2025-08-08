@@ -186,7 +186,7 @@ Community and Support
 ---------------------
 
 - **Issues**: Report bugs and request features on our `GitHub Issues <https://github.com/ZJU-REAL/OmniEmbodied/issues>`_
-- **Discussions**: Join the conversation in `GitHub Discussions <https://github.com/ZJU-REAL/OmniEmbodied/discussions>`_
+- **Community**: Join discussions and get help from the community
 - **Contributing**: See our :doc:`developer/contributing` guide
 
 Indices and Tables
