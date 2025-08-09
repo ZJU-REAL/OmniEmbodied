@@ -1,0 +1,31 @@
+name: Sync README to Hugging Face
+
+on:
+  push:
+    branches: ["main"]
+    paths: 
+      - "data/expert_trajectory_sft/README.md"
+  workflow_dispatch:
+
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Hugging Face CLI
+      run: |
+        pip install huggingface_hub
+
+    - name: Sync README to Hugging Face
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        HF_REPO_ID: ${{ secrets.HF_REPO_ID }}
+      run: |
+        echo "🚀 Syncing README to $HF_REPO_ID"
+        huggingface-cli upload $HF_REPO_ID data/expert_trajectory_sft/README.md README.md --commit-message "Update README from GitHub commit ${{ github.sha }}"
+        echo "✅ Successfully synced README to Hugging Face"
+        echo "📊 Dataset URL: https://huggingface.co/datasets/$HF_REPO_ID" 
