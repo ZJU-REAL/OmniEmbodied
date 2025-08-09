@@ -1,14 +1,24 @@
-# <img src="pages/static/images/icon.jpeg" alt="OmniEAR Logo" height="32" style="vertical-align: middle;"> OmniEAR: Benchmarking Agent Reasoning in Embodied Tasks
+<div align="center">
+     <h1> OmniEAR </h1> 
+     <img src="pages/static/images/icon.jpeg" height="150">
+
+<h3><a href="https://arxiv.org/abs/2508.05614">Benchmarking Agent Reasoning in Embodied Tasks</a></h3>
+
+[Zixuan Wang]()<sup>1</sup>, &nbsp; [Dingming Li]()<sup>1</sup>, &nbsp; [Hongxing Li]()<sup>1</sup>, &nbsp; [Shuo Chen]()<sup>1</sup>, &nbsp; [Yuchen Yan]()<sup>1</sup>, &nbsp; [Wenqi Zhang]()<sup>1</sup>, <br> [Yongliang Shen]()<sup>1</sup>, &nbsp; [Weiming Lu]()<sup>1</sup>, &nbsp;  [Jun Xiao]()<sup>1</sup>, &nbsp;  [Yueting Zhuang]()<sup>1</sup>
+
+<sup>1</sup>[Zhejiang University, China](https://www.zju.edu.cn/english/)
+
+<br>
+
 
 [![arXiv](https://img.shields.io/badge/arXiv-2508.05614-b31b1b.svg)](https://arxiv.org/abs/2508.05614)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Stars](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
 
-**Authors:** Zixuan Wang¹*, Dingming Li¹*, Hongxing Li¹, Shuo Chen¹, Yuchen Yan¹, Wenqi Zhang¹, Yongliang Shen¹†, Weiming Lu¹, Jun Xiao¹, Yueting Zhuang¹
+<br>
 
-¹Zhejiang University  
-*Equal contribution, †Corresponding author
+</div>
 
 **🔗 Quick Links:**
 - **[🌐 Project Homepage](https://zju-real.github.io/OmniEmbodied/)** - Interactive demos, detailed analysis, and visual results
@@ -17,7 +27,6 @@
 - **[📊 Dataset](data/)** - EAR-Bench evaluation dataset with 1,500 scenarios
 - **[🤗 Expert Trajectories](https://huggingface.co/datasets/wangzx1210/OmniEAR)** - SFT expert trajectories for model fine-tuning (1,982 samples)
 
----
 
 ## Abstract
 
@@ -31,8 +40,6 @@ Our systematic evaluation reveals severe performance degradation when models mus
 
 *Figure 1: Overview of the OmniEAR framework comprising three integrated components: **OmniSimulator** (left) uses structured text representation to model environments with objects, agents, and spatial relationships; **EAR-Bench** (right) presents our comprehensive evaluation matrix spanning single-agent and multi-agent tasks.*
 
----
-
 ## 🎯 Key Contributions
 
 1. **Novel Evaluation Framework**: We introduce OmniEAR, the first framework to evaluate embodied reasoning through scenarios requiring agents to understand how physical properties determine actions, capabilities, and coordination needs.
@@ -41,7 +48,6 @@ Our systematic evaluation reveals severe performance degradation when models mus
 
 3. **Fundamental Insights**: We provide empirical evidence that current language models lack core embodied reasoning capabilities, with performance degrading over 60% when moving from explicit instructions to embodied reasoning.
 
----
 
 ## 📊 Benchmark Statistics
 
@@ -51,19 +57,6 @@ Our systematic evaluation reveals severe performance degradation when models mus
 
 *Figure 2: OmniEAR automated benchmark generation and evaluation framework showing the four-stage pipeline and comprehensive statistics.*
 
-### EAR-Bench Composition
-- **1,500** diverse scenarios across household and industrial domains
-- **64K** objects with detailed physical properties  
-- **6K** attribute types including weight, temperature, material composition
-- **7** task categories spanning single-agent and multi-agent scenarios
-
-📁 **Dataset Access**: 
-- **EAR-Bench Dataset**: The complete evaluation dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
-- **Expert Trajectory SFT Dataset**: High-quality expert demonstration trajectories for supervised fine-tuning (1,982 samples) are hosted on [🤗 HuggingFace](https://huggingface.co/datasets/wangzx1210/OmniEAR). Download using:
-  ```bash
-  cd data/expert_trajectory_sft/
-  python download_expert_data.py
-  ```
 
 ### Task Categories
 
@@ -78,7 +71,45 @@ Our systematic evaluation reveals severe performance degradation when models mus
 - **Implicit Collaboration** (L2): Autonomous coordination need recognition
 - **Compound Collaboration** (L3): Complex multi-agent scenarios requiring tool use and coordination
 
----
+
+### EAR-Bench Composition
+- **1,500** diverse scenarios across household and industrial domains
+- **64,057** interactive objects with detailed physical properties  
+- **6,634** spatial nodes (rooms) with an average of 4.4 rooms per scene
+- **1,481** unique task files generating **16,592** task instances
+- **7** task categories spanning single-agent (65%) and multi-agent (35%) scenarios
+- **1,123** distinct material types modeling realistic physical interactions
+
+### Detailed Dataset Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total Scenarios | 1,500 |
+| Total Task Files | 1,481 |
+| Total Task Instances | 16,592 |
+| Interactive Objects | 64,057 |
+| Spatial Nodes (Rooms) | 6,634 |
+| Average Objects per Scene | 42.7 |
+| Average Rooms per Scene | 4.4 |
+| Collaborative Agent Pairs | 1,481 |
+
+
+#### Object Categories and Materials
+- **Object Distribution**: Container (27.5%), Tool (23.6%), Appliance (14.0%), Furniture (9.7%), Consumable (7.6%), Others (17.6%)
+- **Top Materials** (out of 1,123 types): Plastic (21.5%), Metal (17.6%), Wood (12.9%), Glass (9.8%), Fabric (7.9%), Ceramic (6.0%)
+
+#### Domain Coverage
+- **Application Domains**: Laboratory (39.0%), Office (18.8%), Industrial (11.5%), Medical (6.2%), Household (6.2%), Educational (4.2%), Retail (3.2%), Service (2.0%), Entertainment (1.8%), Transportation (1.5%)
+- **Room Types**: Laboratory (28.3%), Storage (18.6%), Workspace (14.9%), Office (11.5%), Workshop (8.2%)
+
+#### Dataset Access
+
+- **EAR-Bench Dataset**: The complete evaluation dataset is available in the [`data/`](data/) directory, including task definitions, scene configurations, and evaluation metrics.
+- **Expert Trajectory SFT Dataset**: High-quality expert demonstration trajectories for supervised fine-tuning (1,982 samples) are hosted on [🤗 HuggingFace](https://huggingface.co/datasets/wangzx1210/OmniEAR). Download using:
+  ```bash
+  cd data/expert_trajectory_sft/
+  python download_expert_data.py
+  ```
 
 ## 🚀 Quick Start
 
@@ -115,8 +146,6 @@ bash scripts/deepseekv3-wo.sh
 1. Set the runtime parameter `--global` when running
 2. Configure `global_observation: true` in `config/simulator/simulator_config.yaml`
 
----
-
 ## 📚 Documentation & Resources
 
 ### Complete Documentation
@@ -136,7 +165,6 @@ The documentation includes:
 - **⚙️ Configuration**: Template files in `config/` for different setups
 - **📊 Analysis**: Results visualization with `examples/results_analysis.ipynb`
 
----
 
 ## 📈 Main Results
 
@@ -162,8 +190,6 @@ The documentation includes:
 
 *Figure 4: Detailed performance analysis across task categories and model architectures.*
 
----
-
 ## 🏗️ Framework Architecture
 
 ### OmniSimulator
@@ -181,9 +207,7 @@ The documentation includes:
 - **Multiple Metrics**: Success rate, step efficiency, reasoning quality
 - **Statistical Reliability**: Three independent runs with confidence intervals
 
----
-
-
+<!-- 
 
 ## 🔬 Experimental Analysis
 
@@ -209,9 +233,8 @@ The documentation includes:
   <img src="pages/static/images/exp_2_parameter_scaling.png" alt="Parameter Scaling" width="600"/>
 </p>
 
-*Figure 7: Performance scaling with model parameter count across different task categories.*
+*Figure 7: Performance scaling with model parameter count across different task categories.* -->
 
----
 
 ## 📖 Citation
 
@@ -228,23 +251,6 @@ If you use OmniEAR in your research, please cite our paper:
       url={https://arxiv.org/abs/2508.05614}, 
 }
 ```
-
----
-
-
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- **🐛 GitHub Issues**: [Report bugs and feature requests](https://github.com/ZJU-REAL/OmniEmbodied/issues)
-- **💬 Discussions**: [Join community discussions](https://github.com/ZJU-REAL/OmniEmbodied/discussions)
-- **📧 Email**: wang.zixuan@zju.edu.cn
-
----
-
 ## 🌟 Acknowledgments
 
-OmniEAR builds upon foundational research in embodied AI, multi-agent systems, and language model evaluation. We thank the research community for their contributions to understanding the challenges of embodied intelligence. Special thanks to the anonymous reviewers for their valuable feedback in improving this work.
+OmniEAR builds upon foundational research in embodied AI, multi-agent systems, and language model evaluation. We thank the research community for their contributions to understanding the challenges of embodied intelligence. Special thanks to the anonymous reviewers for their valuable feedback in improving this work. If you have any questions or suggestions, please feel free to email to `wang.zixuan@zju.edu.cn`.
