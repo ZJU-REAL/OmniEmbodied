@@ -4,17 +4,16 @@
 
 <h3><a href="https://arxiv.org/abs/2508.05614">Benchmarking Agent Reasoning in Embodied Tasks</a></h3>
 
-[Zixuan Wang]()<sup>1</sup>, &nbsp; [Dingming Li]()<sup>1</sup>, &nbsp; [Hongxing Li]()<sup>1</sup>, &nbsp; [Shuo Chen]()<sup>1</sup>, &nbsp; [Yuchen Yan]()<sup>1</sup>, &nbsp; [Wenqi Zhang]()<sup>1</sup>, <br> [Yongliang Shen]()<sup>1</sup>, &nbsp; [Weiming Lu]()<sup>1</sup>, &nbsp;  [Jun Xiao]()<sup>1</sup>, &nbsp;  [Yueting Zhuang]()<sup>1</sup>
+[Zixuan Wang](https://github.com/ZixuanWang1210)<sup>1</sup>, &nbsp; [Dingming Li](https://github.com/lidingm)<sup>1</sup>, &nbsp; Hongxing Li<sup>1</sup>, &nbsp; Shuo Chen<sup>1</sup>, &nbsp; [Yuchen Yan](https://github.com/yanyc428)<sup>1</sup>, &nbsp; [Wenqi Zhang](https://github.com/zwq2018)<sup>1</sup>, <br> [Yongliang Shen](https://github.com/tricktreat)<sup>1</sup>, &nbsp; Weiming Lu<sup>1</sup>, &nbsp;  Jun Xiao<sup>1</sup>, &nbsp;  Yueting Zhuang<sup>1</sup>
 
 <sup>1</sup>[Zhejiang University, China](https://www.zju.edu.cn/english/)
 
 <br>
 
 
-[![arXiv](https://img.shields.io/badge/arXiv-2508.05614-b31b1b.svg)](https://arxiv.org/abs/2508.05614)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Stars](https://img.shields.io/github/stars/ZJU-REAL/OmniEmbodied?style=social)](https://github.com/ZJU-REAL/OmniEmbodied)
+[![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2508.05614)
+[![alphaXiv](https://img.shields.io/badge/discussion-A42C25?style=for-the-badge&logo=arxiv&logoColor=white&color=blue)](https://www.alphaxiv.org/abs/2508.05614) 
+[![Github](https://img.shields.io/badge/OmniEmbodied-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ZJU-REAL/OmniEmbodied)
 
 <br>
 
